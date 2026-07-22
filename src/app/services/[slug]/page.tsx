@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { TopBar } from "@/components/layout/TopBar";
+import { SiteNavigation } from "@/components/layout/SiteNavigation";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { FloatingCta } from "@/components/layout/FloatingCta";
+import { BackToTop } from "@/components/layout/BackToTop";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { ServiceOverview } from "@/components/services/ServiceOverview";
@@ -43,11 +49,15 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   }
 
   return (
-    <main>
+    <div className="min-h-screen bg-slate-50">
+      <TopBar />
+      <SiteNavigation />
+      <main>
       <ServiceHero service={service} />
 
       <section className="py-20">
         <Container>
+          <Breadcrumb items={[{ label: "Dịch vụ", href: "/services" }, { label: service.title }]} />
           <div className="grid gap-10 lg:grid-cols-[1.6fr_0.8fr]">
             <div className="space-y-16">
               <ServiceOverview service={service} />
@@ -91,6 +101,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </section>
 
       <ServiceCTA />
-    </main>
+      </main>
+      <SiteFooter />
+      <FloatingCta />
+      <BackToTop />
+    </div>
   );
 }

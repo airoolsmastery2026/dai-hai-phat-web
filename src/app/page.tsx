@@ -1,12 +1,13 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
+import { BackToTop } from "@/components/layout/BackToTop";
+import { FloatingCta } from "@/components/layout/FloatingCta";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteNavigation } from "@/components/layout/SiteNavigation";
 import { TopBar } from "@/components/layout/TopBar";
 import { ArticlesSection } from "@/components/sections/ArticlesSection";
 import { FaqSection } from "@/components/sections/FaqSection";
-import { FloatingActions } from "@/components/sections/FloatingActions";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
@@ -21,7 +22,7 @@ export default function DaiHaiPhatModernPlatform() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 antialiased">
       <TopBar />
-      <SiteHeader />
+      <SiteNavigation />
       <main id="main-content">
         <HeroSection />
         <Suspense fallback={null}>
@@ -37,7 +38,8 @@ export default function DaiHaiPhatModernPlatform() {
         <ContactSection />
       </main>
       <SiteFooter />
-      <FloatingActions />
+      <FloatingCta />
+      <BackToTop />
     </div>
   );
 }

@@ -3,6 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { TopBar } from "@/components/layout/TopBar";
+import { SiteNavigation } from "@/components/layout/SiteNavigation";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { FloatingCta } from "@/components/layout/FloatingCta";
+import { BackToTop } from "@/components/layout/BackToTop";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
@@ -39,7 +45,10 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
   }
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50">
+      <TopBar />
+      <SiteNavigation />
+      <main>
       <section className="bg-slate-950 py-24 text-white">
         <Container>
           <Link href="/blog" className="text-sm font-semibold text-orange-300 hover:underline">
@@ -53,6 +62,7 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
 
       <section className="py-20">
         <Container className="space-y-10">
+          <Breadcrumb items={[{ label: "Blog", href: "/blog" }, { label: article.title }]} />
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className="relative h-80">
               <Image src={article.image} alt={article.title} fill className="object-cover" />
@@ -86,6 +96,10 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
           </div>
         </Container>
       </section>
-    </main>
+      </main>
+      <SiteFooter />
+      <FloatingCta />
+      <BackToTop />
+    </div>
   );
 }
