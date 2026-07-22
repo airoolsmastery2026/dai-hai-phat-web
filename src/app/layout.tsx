@@ -1,20 +1,18 @@
-import React from "react";
+import type { Metadata } from 'next';
+import './globals.css';
 
-export const metadata = {
-  title: "CÔNG TY TNHH CƠ KHÍ XÂY DỰNG ĐẠI HẢI PHÁT",
-  description: "Giải pháp Cơ khí - Kết cấu thép - Gia công CNC toàn diện.",
+export const metadata: Metadata = {
+  title: 'ĐẠI HẢI PHÁT | Cơ khí, xây dựng, nội thất',
+  description: 'Website doanh nghiệp Đại Hải Phát: giới thiệu năng lực, dịch vụ, dự án và liên hệ báo giá.',
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="vi">
-      <head>
-        <script src="https://cdn.tailwindcss.com"></script>
-      </head>
+    <html lang='vi'>
       <body>{children}</body>
     </html>
   );
