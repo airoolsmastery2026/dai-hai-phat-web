@@ -1,4 +1,4 @@
-
+import "./globals.css";
 "use client";
 
 import React, { useState } from "react";
