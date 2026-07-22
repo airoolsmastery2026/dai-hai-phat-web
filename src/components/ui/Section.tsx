@@ -6,5 +6,5 @@ interface SectionProps {
 }
 
 export function Section({ children, className = "" }: SectionProps) {
-  return <section className={className}>{children}</section>;
+  return <section className={`scroll-mt-24 ${className}`.trim()}>{children}</section>;
 }

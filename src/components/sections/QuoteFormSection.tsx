@@ -4,6 +4,7 @@ import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { useState } from "react";
 
 import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card";
 
 export function QuoteFormSection() {
   const [formLoading, setFormLoading] = useState(false);
@@ -19,9 +20,9 @@ export function QuoteFormSection() {
   };
 
   return (
-    <section id="bao-gia" className="bg-[#07111f] py-24 text-white">
+    <section id="bao-gia" className="bg-[var(--color-surface-dark)] py-24 text-white">
       <Container>
-        <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur md:p-12">
+        <Card className="mx-auto max-w-4xl border-white/10 bg-white/10 p-8 shadow-[var(--shadow-lg)] backdrop-blur md:p-12" tone="default">
           <div className="mb-8 max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#FF5722]">Request a quote</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Start a project with a technical consultation tailored to your scope.</h2>
@@ -60,7 +61,7 @@ export function QuoteFormSection() {
               </button>
             </form>
           )}
-        </div>
+        </Card>
       </Container>
     </section>
   );
