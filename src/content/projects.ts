@@ -1,0 +1,156 @@
+import type { ProjectItem } from "@/types/content";
+
+export const PROJECTS: ProjectItem[] = [
+  {
+    id: 1,
+    slug: "thi-cong-vach-ngan-composite-cao-cap",
+    title: "Thi công vách ngăn composite cao cấp",
+    category: "Composite",
+    location: "Long An",
+    year: "2024",
+    client: "Công ty TNHH Tân Phúc",
+    description: "Dự án triển khai hệ thống vách ngăn composite và tấm ốp nội thất cho trung tâm thương mại, giúp tối ưu không gian và nâng cao hiệu quả thẩm mỹ.",
+    challenge: "Không gian có bề mặt nhiều góc, cần xử lý khe hở, chống ẩm và đồng bộ màu sắc với kiến trúc hiện đại.",
+    solution: "Tích hợp tấm composite cao cấp, hệ thống khung nhôm và quy trình cắt chính xác để hoàn thiện toàn bộ mặt dựng trong thời gian ngắn.",
+    workflow: [
+      { title: "Khảo sát và đo đạc", description: "Đo đạc thực tế, xác định kích thước và điều kiện môi trường thi công." },
+      { title: "Gia công chi tiết", description: "Cắt, định hình và xử lý bề mặt theo bản vẽ kỹ thuật." },
+      { title: "Lắp dựng và hoàn thiện", description: "Lắp đặt tấm composite, kiểm tra độ phẳng và hoàn tất lớp phủ." },
+    ],
+    materials: ["Composite chống ẩm", "Khung nhôm", "Keo chuyên dụng", "Phụ kiện inox"],
+    gallery: [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+    ],
+    beforeImages: ["https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80"],
+    afterImages: ["https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80"],
+    statistics: [
+      { label: "Diện tích hoàn thiện", value: "280m²" },
+      { label: "Thời gian thi công", value: "14 ngày" },
+      { label: "Tỷ lệ đúng tiến độ", value: "100%" },
+    ],
+    testimonial: {
+      quote: "Đội ngũ triển khai rất chuyên nghiệp, đúng tiến độ và bảo đảm chất lượng bề mặt sau lắp dựng.",
+      author: "Ông Minh Đức",
+      role: "Giám đốc vận hành",
+    },
+    faq: [
+      { question: "Dự án có cần thiết kế riêng không?", answer: "Có, chúng tôi phối hợp đo đạc và tư vấn để tối ưu chi tiết phù hợp không gian thực tế." },
+    ],
+    seo: {
+      title: "Thi công vách ngăn composite cao cấp tại Đại Hải Phát",
+      description: "Tư vấn và thi công vách ngăn composite, ốp tường và mặt dựng nội thất đạt chuẩn thẩm mỹ và kỹ thuật.",
+      keywords: ["vách ngăn composite", "thi công nội thất", "ốp composite"],
+      canonical: "/projects/thi-cong-vach-ngan-composite-cao-cap",
+    },
+    schema: {
+      "@type": "CreativeWork",
+      name: "Thi công vách ngăn composite cao cấp",
+      description: "Dự án thi công vách ngăn composite cao cấp cho không gian thương mại.",
+    },
+    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+    summary: "Được triển khai theo quy trình sản xuất và thi công tối ưu theo từng nhu cầu khách hàng.",
+  },
+  {
+    id: 2,
+    slug: "khung-thep-cua-cong-cong-nghiep",
+    title: "Khung thép và cửa cổng công nghiệp",
+    category: "Kết cấu thép",
+    location: "Bình Dương",
+    year: "2023",
+    client: "Công ty Cổ phần Sài Gòn Steel",
+    description: "Thi công hệ thống khung thép, cửa cổng và các cấu kiện gia công CNC cho nhà xưởng vận hành liên tục.",
+    challenge: "Công trình cần chịu tải trọng lớn, bền với điều kiện môi trường ẩm và có yêu cầu tiến độ chặt chẽ.",
+    solution: "Áp dụng bản vẽ kết cấu chuẩn, gia công chi tiết CNC và lắp dựng theo đúng thông số chịu lực để tối ưu độ bền và tốc độ thực hiện.",
+    workflow: [
+      { title: "Thiết kế kết cấu", description: "Lập sơ đồ, kích thước và tính toán chịu lực cho hệ thống thép." },
+      { title: "Gia công CNC", description: "Cắt, hàn và xử lý bề mặt cho từng chi tiết." },
+      { title: "Lắp dựng", description: "Lắp đặt tại công trình và kiểm tra độ thẳng, chắc chắn." },
+    ],
+    materials: ["Thép hộp", "Cửa cổng tự động", "Sơn tĩnh điện", "Bu lông chuẩn"],
+    gallery: [
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
+    ],
+    beforeImages: ["https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"],
+    afterImages: ["https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"],
+    statistics: [
+      { label: "Khối lượng thép", value: "180 tấn" },
+      { label: "Cửa cổng", value: "6 cánh" },
+      { label: "Thời gian lắp dựng", value: "21 ngày" },
+    ],
+    testimonial: {
+      quote: "Kết cấu đạt chuẩn kỹ thuật, bền và đúng tiến độ trong điều kiện thời tiết khắc nghiệt.",
+      author: "Anh Hùng",
+      role: "Quản đốc dự án",
+    },
+    faq: [
+      { question: "Có hỗ trợ bảo trì sau thi công không?", answer: "Có, chúng tôi cung cấp hỗ trợ kiểm tra và bảo trì định kỳ sau khi bàn giao." },
+    ],
+    seo: {
+      title: "Thi công khung thép và cửa cổng công nghiệp",
+      description: "Gia công và dựng khung thép, cửa cổng công nghiệp đạt yêu cầu kỹ thuật và tiến độ.",
+      keywords: ["kết cấu thép", "cửa cổng công nghiệp", "gia công CNC"],
+      canonical: "/projects/khung-thep-cua-cong-cong-nghiep",
+    },
+    schema: {
+      "@type": "CreativeWork",
+      name: "Khung thép và cửa cổng công nghiệp",
+      description: "Dự án kết cấu thép và cửa cổng công nghiệp.",
+    },
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
+    summary: "Phù hợp cho nhà xưởng, công trình vận hành và các yêu cầu kỹ thuật nặng.",
+  },
+  {
+    id: 3,
+    slug: "noi-that-phong-ngu-mdf-melamine",
+    title: "Nội thất phòng ngủ MDF melamine",
+    category: "Nội thất",
+    location: "Đồng Nai",
+    year: "2022",
+    client: "Gia đình anh Thanh",
+    description: "Thiết kế và triển khai nội thất phòng ngủ bằng MDF lõi xanh phủ melamine với hệ thống tủ, giường và kệ tích hợp.",
+    challenge: "Không gian nhỏ, cần tối ưu lưu trữ nhưng vẫn giữ được vẻ ngoài hiện đại, nhẹ và sang trọng.",
+    solution: "Tối ưu bố cục, gia công từng chi tiết theo kích thước thực tế và lựa chọn vật liệu bền, chống ẩm.",
+    workflow: [
+      { title: "Tư vấn thiết kế", description: "Lựa chọn phong cách, vật liệu và bố cục phù hợp với tiện ích sử dụng." },
+      { title: "Gia công", description: "Cắt CNC, sơn phủ và lắp ráp chi tiết theo bản vẽ." },
+      { title: "Hoàn thiện", description: "Lắp đặt nội thất và kiểm tra tính thẩm mỹ, sử dụng." },
+    ],
+    materials: ["MDF lõi xanh", "Melamine", "Phụ kiện bản lề", "Gỗ veneer"],
+    gallery: [
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+    ],
+    beforeImages: ["https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"],
+    afterImages: ["https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80"],
+    statistics: [
+      { label: "Tổng chi tiết", value: "42 bộ" },
+      { label: "Tủ lưu trữ", value: "10 đơn vị" },
+      { label: "Hoàn thiện", value: "100%" },
+    ],
+    testimonial: {
+      quote: "Không gian phòng ngủ trở nên gọn gàng, hiện đại và tối ưu sử dụng hơn rất nhiều.",
+      author: "Chị Hạnh",
+      role: "Khách hàng",
+    },
+    faq: [
+      { question: "Có thể thay đổi màu sắc sau khi thi công không?", answer: "Có thể phối hợp đổi màu và bố cục trước khi sản xuất để phù hợp phong cách sử dụng." },
+    ],
+    seo: {
+      title: "Thi công nội thất phòng ngủ MDF melamine",
+      description: "Thiết kế và thi công nội thất phòng ngủ MDF melamine theo phong cách hiện đại và tối ưu không gian.",
+      keywords: ["nội thất phòng ngủ", "MDF melamine", "tủ giường"],
+      canonical: "/projects/noi-that-phong-ngu-mdf-melamine",
+    },
+    schema: {
+      "@type": "CreativeWork",
+      name: "Nội thất phòng ngủ MDF melamine",
+      description: "Dự án thiết kế và thi công nội thất phòng ngủ MDF melamine.",
+    },
+    image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+    summary: "Kết hợp thiết kế khách hàng, gia công cơ khí và hoàn thiện bề mặt theo tiêu chuẩn cao.",
+  },
+];
+
+export const FEATURED_PROJECTS = PROJECTS;
