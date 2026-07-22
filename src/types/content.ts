@@ -94,6 +94,7 @@ export interface ProjectItem {
   solution: string;
   workflow: ProjectWorkflowStep[];
   materials: string[];
+  technologies: string[];
   gallery: string[];
   beforeImages: string[];
   afterImages: string[];

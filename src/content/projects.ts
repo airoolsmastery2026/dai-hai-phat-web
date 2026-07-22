@@ -18,6 +18,7 @@ export const PROJECTS: ProjectItem[] = [
       { title: "Lắp dựng và hoàn thiện", description: "Lắp đặt tấm composite, kiểm tra độ phẳng và hoàn tất lớp phủ." },
     ],
     materials: ["Composite chống ẩm", "Khung nhôm", "Keo chuyên dụng", "Phụ kiện inox"],
+    technologies: ["Thiết kế bản vẽ 3D", "Gia công CNC", "Lắp dựng theo tiêu chuẩn", "Kiểm tra chất lượng 360°"],
     gallery: [
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
@@ -68,6 +69,7 @@ export const PROJECTS: ProjectItem[] = [
       { title: "Lắp dựng", description: "Lắp đặt tại công trình và kiểm tra độ thẳng, chắc chắn." },
     ],
     materials: ["Thép hộp", "Cửa cổng tự động", "Sơn tĩnh điện", "Bu lông chuẩn"],
+    technologies: ["Thiết kế kết cấu", "CNC gia công", "Hàn và xử lý bề mặt", "Lắp dựng theo đúng tải trọng"],
     gallery: [
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
@@ -118,6 +120,7 @@ export const PROJECTS: ProjectItem[] = [
       { title: "Hoàn thiện", description: "Lắp đặt nội thất và kiểm tra tính thẩm mỹ, sử dụng." },
     ],
     materials: ["MDF lõi xanh", "Melamine", "Phụ kiện bản lề", "Gỗ veneer"],
+    technologies: ["Thiết kế tối ưu không gian", "Gia công CNC", "Phủ melamine cao cấp", "Lắp dựng tinh tế"],
     gallery: [
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
