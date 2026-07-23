@@ -9,7 +9,7 @@ const features = [
   "Bảo hành và hỗ trợ sau bàn giao",
 ];
 
-export default function AboutSection() {
+export function AboutSection() {
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
