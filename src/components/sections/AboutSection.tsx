@@ -1,29 +1,74 @@
-import { Container } from "@/components/ui/Container";
-import { COMPANY_STATS } from "@/content/company";
+import { CheckCircle2 } from "lucide-react";
 
-export function AboutSection() {
+const features = [
+  "Xưởng sản xuất trực tiếp - không qua trung gian",
+  "Thiết kế theo yêu cầu, tối ưu công năng",
+  "Vật liệu chính hãng, nguồn gốc rõ ràng",
+  "Báo giá minh bạch trước khi thi công",
+  "Đội ngũ thi công nhiều năm kinh nghiệm",
+  "Bảo hành và hỗ trợ sau bàn giao",
+];
+
+export default function AboutSection() {
   return (
-    <section id="about" className="border-b border-slate-200 bg-white py-20 lg:py-24">
-      <Container className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">Về chúng tôi</p>
-          <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            Đơn vị thi công thực tế, làm việc đúng phương án và bàn giao đúng cam kết.
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-slate-600">
-            Đại Hải Phát triển khai các công trình với quy trình rõ ràng, kiểm soát tiến độ và sự phối hợp chặt chẽ giữa thi công, vận hành và bảo trì.
-          </p>
+    <section className="py-24 bg-white">
+      <div className="container mx-auto px-6">
+
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          <div>
+
+            <span className="uppercase tracking-[4px] text-[#d6a449] font-semibold">
+              Về Đại Hải Phát
+            </span>
+
+            <h2 className="text-4xl font-bold mt-5 text-gray-900 leading-tight">
+              Thiết kế • Sản xuất • Thi công
+              <br />
+              Nội thất & Cơ khí dân dụng
+            </h2>
+
+            <p className="mt-6 text-gray-600 leading-8">
+              Đại Hải Phát chuyên thiết kế, sản xuất và thi công nội thất
+              nhà phố, căn hộ, biệt thự, văn phòng, cửa hàng cùng các hạng
+              mục cơ khí dân dụng như cửa sắt, mái che, lan can, cầu thang,
+              hàng rào và các sản phẩm theo yêu cầu.
+            </p>
+
+            <p className="mt-6 text-gray-600 leading-8">
+              Chúng tôi sở hữu xưởng sản xuất riêng, trực tiếp thi công,
+              kiểm soát chất lượng từ bản vẽ đến khi hoàn thiện công trình.
+            </p>
+
+          </div>
+
+          <div className="grid gap-5">
+
+            {features.map((item) => (
+
+              <div
+                key={item}
+                className="flex items-start gap-4 p-5 rounded-xl bg-gray-50 hover:bg-[#fff8ec] transition"
+              >
+
+                <CheckCircle2
+                  className="text-[#d6a449] mt-1"
+                  size={22}
+                />
+
+                <span className="text-gray-700 leading-7">
+                  {item}
+                </span>
+
+              </div>
+
+            ))}
+
+          </div>
+
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {COMPANY_STATS.map((stat) => (
-            <div key={stat.label} className="rounded-[16px] border border-slate-200 bg-slate-50 p-6">
-              <p className="text-3xl font-semibold text-slate-900">{stat.value}</p>
-              <p className="mt-2 text-sm font-medium uppercase tracking-[0.2em] text-slate-600">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </Container>
+      </div>
     </section>
   );
 }
