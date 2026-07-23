@@ -2,12 +2,14 @@ import { Mail, MapPin, PhoneCall, MessageCircle } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { COMPANY_CONFIG } from "@/content/company";
+import { HOME_CONTACT_CONTENT } from "@/content/home";
 
 const getMapEmbedUrl = ({ lat, lng }: { lat: number; lng: number }) =>
   `https://maps.google.com/maps?q=${lat},${lng}&z=16&output=embed`;
 
 export function ContactSection() {
   const mapEmbedUrl = getMapEmbedUrl(COMPANY_CONFIG.coordinates);
+  const { eyebrow, title, description, nameLabel, phoneLabel, messageLabel, submitLabel, namePlaceholder, phonePlaceholder, messagePlaceholder } = HOME_CONTACT_CONTENT;
 
   return (
     <section id="contact" className="bg-slate-50 py-20 lg:py-24">
@@ -61,28 +63,28 @@ export function ContactSection() {
         </div>
 
         <div className="rounded-[20px] border border-slate-200 bg-white p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">Contact</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">{eyebrow}</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            Gửi yêu cầu thi công hoặc báo giá cho công trình của bạn.
+            {title}
           </h2>
           <p className="mt-4 text-lg leading-8 text-slate-600">
-            Chia sẻ thông tin về quy mô, thời gian và nhu cầu để nhận phản hồi nhanh từ đội ngũ kỹ thuật.
+            {description}
           </p>
           <form className="mt-8 space-y-4">
             <div>
-              <label htmlFor="contact-name" className="mb-2 block text-sm font-semibold text-slate-700">Họ và tên</label>
-              <input id="contact-name" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="Nguyễn Văn A" />
+              <label htmlFor="contact-name" className="mb-2 block text-sm font-semibold text-slate-700">{nameLabel}</label>
+              <input id="contact-name" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder={namePlaceholder} />
             </div>
             <div>
-              <label htmlFor="contact-phone" className="mb-2 block text-sm font-semibold text-slate-700">Số điện thoại</label>
-              <input id="contact-phone" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="0987 654 321" />
+              <label htmlFor="contact-phone" className="mb-2 block text-sm font-semibold text-slate-700">{phoneLabel}</label>
+              <input id="contact-phone" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder={phonePlaceholder} />
             </div>
             <div>
-              <label htmlFor="contact-message" className="mb-2 block text-sm font-semibold text-slate-700">Tin nhắn</label>
-              <textarea id="contact-message" className="min-h-[140px] w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="Mô tả công trình, nhu cầu và thời gian thực hiện..." />
+              <label htmlFor="contact-message" className="mb-2 block text-sm font-semibold text-slate-700">{messageLabel}</label>
+              <textarea id="contact-message" className="min-h-[140px] w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder={messagePlaceholder} />
             </div>
             <button type="button" className="w-full rounded-full bg-[#FF5722] px-4 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">
-              Gửi yêu cầu
+              {submitLabel}
             </button>
           </form>
         </div>

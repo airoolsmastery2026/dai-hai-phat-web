@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
 
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import type { ProjectItem } from "@/types/content";
@@ -89,13 +88,13 @@ export function ProjectExplorer({ projects }: { projects: ProjectItem[] }) {
           Không tìm thấy dự án phù hợp với bộ lọc hiện tại.
         </div>
       ) : (
-        <motion.div layout className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {pagedProjects.map((project, index) => (
-            <motion.div key={project.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: index * 0.05 }}>
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {pagedProjects.map((project) => (
+            <div key={project.slug}>
               <ProjectCard project={project} />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       )}
 
       {totalPages > 1 ? (

@@ -1,17 +1,21 @@
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
+import { HOME_SERVICES_SECTION } from "@/content/home";
 import { SERVICES } from "@/content/services";
 
 export function ServicesSection() {
+  const { eyebrow, title, intro } = HOME_SERVICES_SECTION;
+
   return (
     <section id="services" className="border-b border-slate-200 bg-white py-20 lg:py-24">
       <Container>
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">Services</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">{eyebrow}</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            Thi công thực tế, vận hành bền vững và quản lý chất lượng chặt chẽ.
+            {title}
           </h2>
+          {intro ? <p className="mt-4 text-lg leading-8 text-slate-600">{intro}</p> : null}
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">

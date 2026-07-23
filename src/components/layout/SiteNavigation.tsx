@@ -5,14 +5,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 import { COMPANY_CONFIG } from "@/content/company";
-
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Projects", href: "/projects" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+import { NAV_ITEMS } from "@/content/navigation";
 
 export function SiteNavigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -31,7 +24,7 @@ export function SiteNavigation() {
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <Link key={item.href} href={item.href} className="text-sm font-medium text-slate-700 transition hover:text-[#FF5722]">
               {item.label}
             </Link>
@@ -66,7 +59,7 @@ export function SiteNavigation() {
             </div>
 
             <div className="mt-6 space-y-2">
-              {navItems.map((item) => (
+              {NAV_ITEMS.map((item) => (
                 <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="block rounded-lg border border-slate-200 px-4 py-3 text-sm font-medium text-slate-700">
                   {item.label}
                 </Link>

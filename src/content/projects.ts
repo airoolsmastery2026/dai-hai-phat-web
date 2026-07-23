@@ -9,9 +9,9 @@ export const PROJECTS: ProjectItem[] = [
     location: "Long An",
     year: "2024",
     client: "Công ty TNHH Tân Phúc",
-    description: "Dự án triển khai hệ thống vách ngăn composite và tấm ốp nội thất cho trung tâm thương mại, giúp tối ưu không gian và nâng cao hiệu quả thẩm mỹ.",
-    challenge: "Không gian có bề mặt nhiều góc, cần xử lý khe hở, chống ẩm và đồng bộ màu sắc với kiến trúc hiện đại.",
-    solution: "Tích hợp tấm composite cao cấp, hệ thống khung nhôm và quy trình cắt chính xác để hoàn thiện toàn bộ mặt dựng trong thời gian ngắn.",
+    description: "Triển khai hệ thống vách ngăn và ốp composite cho không gian thương mại, giữ được sự đồng bộ về hình thức và độ bền trong sử dụng.",
+    challenge: "Không gian có nhiều góc và cần xử lý khe hở, độ ẩm và màu sắc đồng bộ với kiến trúc hiện có.",
+    solution: "Áp dụng tấm composite phù hợp, khung nhôm chính xác và quy trình lắp đặt chặt chẽ để hoàn thiện toàn bộ mặt dựng đúng tiến độ.",
     workflow: [
       { title: "Khảo sát và đo đạc", description: "Đo đạc thực tế, xác định kích thước và điều kiện môi trường thi công." },
       { title: "Gia công chi tiết", description: "Cắt, định hình và xử lý bề mặt theo bản vẽ kỹ thuật." },
@@ -31,7 +31,7 @@ export const PROJECTS: ProjectItem[] = [
       { label: "Tỷ lệ đúng tiến độ", value: "100%" },
     ],
     testimonial: {
-      quote: "Đội ngũ triển khai rất chuyên nghiệp, đúng tiến độ và bảo đảm chất lượng bề mặt sau lắp dựng.",
+      quote: "Đội ngũ triển khai làm việc đúng tiến độ và tạo ra bề mặt hoàn thiện khá tốt.",
       author: "Ông Minh Đức",
       role: "Giám đốc vận hành",
     },
@@ -39,8 +39,8 @@ export const PROJECTS: ProjectItem[] = [
       { question: "Dự án có cần thiết kế riêng không?", answer: "Có, chúng tôi phối hợp đo đạc và tư vấn để tối ưu chi tiết phù hợp không gian thực tế." },
     ],
     seo: {
-      title: "Thi công vách ngăn composite cao cấp tại Đại Hải Phát",
-      description: "Tư vấn và thi công vách ngăn composite, ốp tường và mặt dựng nội thất đạt chuẩn thẩm mỹ và kỹ thuật.",
+      title: "Thi công vách ngăn composite cao cấp",
+      description: "Tư vấn và thi công vách ngăn composite, ốp tường và mặt dựng nội thất với kết quả đồng bộ và bền bỉ.",
       keywords: ["vách ngăn composite", "thi công nội thất", "ốp composite"],
       canonical: "/projects/thi-cong-vach-ngan-composite-cao-cap",
     },
@@ -50,7 +50,7 @@ export const PROJECTS: ProjectItem[] = [
       description: "Dự án thi công vách ngăn composite cao cấp cho không gian thương mại.",
     },
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
-    summary: "Được triển khai theo quy trình sản xuất và thi công tối ưu theo từng nhu cầu khách hàng.",
+    summary: "Dự án được triển khai theo phương án cụ thể, đúng kích thước và phù hợp với điều kiện thực tế của công trình.",
   },
   {
     id: 2,
@@ -60,9 +60,9 @@ export const PROJECTS: ProjectItem[] = [
     location: "Bình Dương",
     year: "2023",
     client: "Công ty Cổ phần Sài Gòn Steel",
-    description: "Thi công hệ thống khung thép, cửa cổng và các cấu kiện gia công CNC cho nhà xưởng vận hành liên tục.",
-    challenge: "Công trình cần chịu tải trọng lớn, bền với điều kiện môi trường ẩm và có yêu cầu tiến độ chặt chẽ.",
-    solution: "Áp dụng bản vẽ kết cấu chuẩn, gia công chi tiết CNC và lắp dựng theo đúng thông số chịu lực để tối ưu độ bền và tốc độ thực hiện.",
+    description: "Thi công khung thép, cửa cổng và cấu kiện gia công cho nhà xưởng vận hành liên tục, với hệ thống bền và ổn định.",
+    challenge: "Công trình cần chịu tải trọng lớn, chịu ảnh hưởng điều kiện môi trường ẩm và có yêu cầu tiến độ chặt chẽ.",
+    solution: "Áp dụng bản vẽ kết cấu chuẩn, gia công chi tiết CNC và lắp dựng đúng thông số chịu lực để tối ưu độ bền và tốc độ thực hiện.",
     workflow: [
       { title: "Thiết kế kết cấu", description: "Lập sơ đồ, kích thước và tính toán chịu lực cho hệ thống thép." },
       { title: "Gia công CNC", description: "Cắt, hàn và xử lý bề mặt cho từng chi tiết." },
@@ -91,7 +91,7 @@ export const PROJECTS: ProjectItem[] = [
     ],
     seo: {
       title: "Thi công khung thép và cửa cổng công nghiệp",
-      description: "Gia công và dựng khung thép, cửa cổng công nghiệp đạt yêu cầu kỹ thuật và tiến độ.",
+      description: "Gia công và dựng khung thép, cửa cổng công nghiệp đạt yêu cầu kỹ thuật và tiến độ rõ ràng.",
       keywords: ["kết cấu thép", "cửa cổng công nghiệp", "gia công CNC"],
       canonical: "/projects/khung-thep-cua-cong-cong-nghiep",
     },
@@ -101,7 +101,7 @@ export const PROJECTS: ProjectItem[] = [
       description: "Dự án kết cấu thép và cửa cổng công nghiệp.",
     },
     image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
-    summary: "Phù hợp cho nhà xưởng, công trình vận hành và các yêu cầu kỹ thuật nặng.",
+    summary: "Phù hợp cho nhà xưởng, công trình vận hành và các yêu cầu kỹ thuật với tiêu chuẩn rõ ràng.",
   },
   {
     id: 3,
@@ -111,8 +111,8 @@ export const PROJECTS: ProjectItem[] = [
     location: "Đồng Nai",
     year: "2022",
     client: "Gia đình anh Thanh",
-    description: "Thiết kế và triển khai nội thất phòng ngủ bằng MDF lõi xanh phủ melamine với hệ thống tủ, giường và kệ tích hợp.",
-    challenge: "Không gian nhỏ, cần tối ưu lưu trữ nhưng vẫn giữ được vẻ ngoài hiện đại, nhẹ và sang trọng.",
+    description: "Thiết kế và triển khai nội thất phòng ngủ bằng MDF lõi xanh phủ melamine, tối ưu lưu trữ mà vẫn giữ vẻ hiện đại.",
+    challenge: "Không gian nhỏ cần tối ưu lưu trữ nhưng vẫn giữ được vẻ ngoài nhẹ và sang trọng.",
     solution: "Tối ưu bố cục, gia công từng chi tiết theo kích thước thực tế và lựa chọn vật liệu bền, chống ẩm.",
     workflow: [
       { title: "Tư vấn thiết kế", description: "Lựa chọn phong cách, vật liệu và bố cục phù hợp với tiện ích sử dụng." },
@@ -152,7 +152,7 @@ export const PROJECTS: ProjectItem[] = [
       description: "Dự án thiết kế và thi công nội thất phòng ngủ MDF melamine.",
     },
     image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
-    summary: "Kết hợp thiết kế khách hàng, gia công cơ khí và hoàn thiện bề mặt theo tiêu chuẩn cao.",
+    summary: "Kết hợp thiết kế thực tế, gia công cẩn thận và hoàn thiện bề mặt theo tiêu chuẩn rõ ràng.",
   },
 ];
 

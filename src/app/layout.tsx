@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import React from "react";
 
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -8,6 +9,11 @@ import { FEATURED_PROJECTS } from "@/content/projects";
 import { SERVICES } from "@/content/services";
 
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
+});
 
 const title = "CÔNG TY TNHH CƠ KHÍ XÂY DỰNG ĐẠI HẢI PHÁT";
 const description = "Đại Hải Phát cung cấp giải pháp nội thất công nghiệp, vật liệu composite và kết cấu thép với quy trình thiết kế, sản xuất và thi công chuyên nghiệp.";
@@ -121,7 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="vi">
-      <body className="min-h-screen bg-slate-50">
+      <body className={`${inter.className} min-h-screen bg-slate-50`}>
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-slate-900">
           Bỏ qua nội dung chính
         </a>

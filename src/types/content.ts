@@ -132,6 +132,45 @@ export interface TestimonialItem {
   description: string;
 }
 
+export interface HomeHeroContent {
+  eyebrow: string;
+  title: string;
+  highlights: string[];
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  imageAlt: string;
+}
+
+export interface HomeSectionContent {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+export interface HomeAboutContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  badge: string;
+}
+
+export interface HomeContactContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  nameLabel: string;
+  phoneLabel: string;
+  messageLabel: string;
+  submitLabel: string;
+  namePlaceholder: string;
+  phonePlaceholder: string;
+  messagePlaceholder: string;
+}
+
 export interface NavigationItem {
   label: string;
   href: string;

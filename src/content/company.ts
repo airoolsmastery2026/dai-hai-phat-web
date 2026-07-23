@@ -21,8 +21,8 @@ export const COMPANY_CONFIG: CompanyConfig = {
 };
 
 export const COMPANY_STATS: StatItem[] = [
-  { label: "Năm Kinh Nghiệm", value: "15+" },
-  { label: "Dự Án Đã Thi Công", value: "850+" },
-  { label: "Mẫu Thiết Kế 3D", value: "1,200+" },
-  { label: "Mức Độ Hài Lòng", value: "99%" },
+  { label: "Kinh nghiệm", value: "15+ năm" },
+  { label: "Phạm vi", value: "Công trình dân dụng và công nghiệp" },
+  { label: "Đối tác", value: "Tin cậy trong từng giai đoạn" },
+  { label: "Hỗ trợ", value: "Bàn giao và kiểm tra sau thi công" },
 ];
