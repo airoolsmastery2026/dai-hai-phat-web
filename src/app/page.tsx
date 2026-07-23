@@ -8,7 +8,7 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 antialiased">
+    <div className="min-h-screen bg-white font-sans text-slate-800 antialiased">
       <SiteNavigation />
       <main id="main-content">
         <HeroSection />
