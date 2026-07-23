@@ -4,25 +4,24 @@
 
 :root {
   color-scheme: light;
-  --color-primary: #ff5722;
-  --color-primary-hover: #ea4b0f;
-  --color-background: #f8f7f3;
+  --color-primary: #f97316;
+  --color-primary-hover: #ea580c;
+  --color-background: #ffffff;
   --color-surface: #ffffff;
-  --color-surface-muted: #f5f3ee;
-  --color-surface-dark: #07111f;
+  --color-surface-muted: #f8fafc;
+  --color-surface-dark: #0f172a;
   --color-text: #0f172a;
   --color-text-muted: #475569;
-  --color-border: #e5e7eb;
-  --color-accent: #2563eb;
-  --radius-sm: 0.75rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
-  --radius-xl: 2rem;
+  --color-border: #e2e8f0;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
   --shadow-sm: 0 10px 30px rgba(15, 23, 42, 0.06);
   --shadow-md: 0 20px 45px rgba(15, 23, 42, 0.1);
   --shadow-lg: 0 30px 70px rgba(15, 23, 42, 0.16);
   --font-sans: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --font-heading: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
@@ -30,19 +29,19 @@ html {
 }
 
 body {
-  line-height: 1.6;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   margin: 0;
   min-height: 100vh;
   background: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-sans);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(255, 87, 34, 0.2);
+  background: rgba(249, 115, 22, 0.2);
   color: #0f172a;
 }
 
