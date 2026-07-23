@@ -1,36 +1,97 @@
 import Image from "next/image";
 
-import { Container } from "@/components/ui/Container";
-import { FEATURED_PROJECTS } from "@/content/projects";
+const projects = [
+  {
+    title: "Tủ bếp Acrylic hiện đại",
+    image: "/images/kitchen-01.jpg",
+    category: "Nội thất",
+  },
+  {
+    title: "Phòng ngủ MDF chống ẩm",
+    image: "/images/bedroom-01.jpg",
+    category: "Nội thất",
+  },
+  {
+    title: "Tủ quần áo cánh kính",
+    image: "/images/wardrobe-01.jpg",
+    category: "Nội thất",
+  },
+  {
+    title: "Kệ TV phòng khách",
+    image: "/images/tv-01.jpg",
+    category: "Nội thất",
+  },
+  {
+    title: "Mái che Polycarbonate",
+    image: "/images/canopy-01.jpg",
+    category: "Cơ khí dân dụng",
+  },
+  {
+    title: "Thi công cửa sắt",
+    image: "/images/steel-door.jpg",
+    category: "Cơ khí dân dụng",
+  },
+];
 
-export function ProjectsSection() {
+export default function ProjectsSection() {
   return (
-    <section id="projects" className="border-b border-slate-200 bg-slate-50 py-20 lg:py-24">
-      <Container>
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">Dự án</p>
-          <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            Các công trình đã được triển khai thực tế, đúng tiến độ và có thể kiểm chứng tại hiện trường.
+    <section className="py-24 bg-gray-50">
+      <div className="container mx-auto px-6">
+
+        <div className="text-center mb-16">
+          <span className="text-[#d6a449] font-semibold uppercase tracking-widest">
+            Công trình tiêu biểu
+          </span>
+
+          <h2 className="text-4xl font-bold mt-4 text-gray-900">
+            Dự án đã hoàn thành
           </h2>
+
+          <p className="mt-4 text-gray-600 max-w-3xl mx-auto">
+            Hình ảnh thực tế các công trình nội thất và cơ khí dân dụng
+            do Đại Hải Phát trực tiếp thiết kế, sản xuất và thi công.
+          </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {FEATURED_PROJECTS.slice(0, 6).map((project) => (
-            <article key={project.slug} className="overflow-hidden rounded-[16px] border border-slate-200 bg-white">
-              <div className="relative h-56">
-                <Image src={project.image} alt={project.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {projects.map((item, index) => (
+
+            <div
+              key={index}
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition"
+            >
+
+              <div className="relative h-72">
+
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
+
               </div>
+
               <div className="p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#FF5722]">{project.category}</p>
-                <h3 className="mt-2 text-xl font-semibold text-slate-900">{project.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  {project.location} • {project.year}
-                </p>
+
+                <span className="text-sm text-[#d6a449] font-semibold">
+                  {item.category}
+                </span>
+
+                <h3 className="mt-2 text-xl font-bold">
+                  {item.title}
+                </h3>
+
               </div>
-            </article>
+
+            </div>
+
           ))}
+
         </div>
-      </Container>
+
+      </div>
     </section>
   );
 }
