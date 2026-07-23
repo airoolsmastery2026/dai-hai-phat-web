@@ -1,26 +1,18 @@
-import { ShieldCheck } from "lucide-react";
-
 import { Container } from "@/components/ui/Container";
 import { COMPANY_STATS } from "@/content/company";
-import { HOME_ABOUT_CONTENT } from "@/content/home";
 
 export function AboutSection() {
-  const { eyebrow, title, description, badge } = HOME_ABOUT_CONTENT;
-
   return (
     <section id="about" className="border-b border-slate-200 bg-white py-20 lg:py-24">
       <Container className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">{eyebrow}</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">Về chúng tôi</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            {title}
+            Đơn vị thi công thực tế, làm việc đúng phương án và bàn giao đúng cam kết.
           </h2>
           <p className="mt-6 text-lg leading-8 text-slate-600">
-            {description}
+            Đại Hải Phát triển khai các công trình với quy trình rõ ràng, kiểm soát tiến độ và sự phối hợp chặt chẽ giữa thi công, vận hành và bảo trì.
           </p>
-          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700">
-            <ShieldCheck className="h-4 w-4 text-[#FF5722]" /> {badge}
-          </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">

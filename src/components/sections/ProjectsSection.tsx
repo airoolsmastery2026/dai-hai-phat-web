@@ -1,29 +1,17 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import { HOME_PROJECTS_SECTION } from "@/content/home";
 import { FEATURED_PROJECTS } from "@/content/projects";
 
 export function ProjectsSection() {
-  const { eyebrow, title, intro, ctaLabel, ctaHref } = HOME_PROJECTS_SECTION;
-
   return (
     <section id="projects" className="border-b border-slate-200 bg-slate-50 py-20 lg:py-24">
       <Container>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">{eyebrow}</p>
-            <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-              {title}
-            </h2>
-            {intro ? <p className="mt-4 text-lg leading-8 text-slate-600">{intro}</p> : null}
-          </div>
-          {ctaLabel && ctaHref ? (
-            <a href={ctaHref} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 transition hover:text-[#FF5722]">
-              {ctaLabel} <ArrowRight className="h-4 w-4" />
-            </a>
-          ) : null}
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">Dự án</p>
+          <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            Các công trình đã được triển khai thực tế, đúng tiến độ và có thể kiểm chứng tại hiện trường.
+          </h2>
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -38,9 +26,6 @@ export function ProjectsSection() {
                 <p className="mt-3 text-sm leading-7 text-slate-600">
                   {project.location} • {project.year}
                 </p>
-                <a href={`/projects/${project.slug}`} className="mt-5 inline-flex text-sm font-semibold text-slate-700 transition hover:text-[#FF5722]">
-                  View Details
-                </a>
               </div>
             </article>
           ))}

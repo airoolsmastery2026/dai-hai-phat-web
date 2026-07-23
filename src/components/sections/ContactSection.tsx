@@ -1,19 +1,17 @@
-import { Mail, MapPin, PhoneCall, MessageCircle } from "lucide-react";
+import { Mail, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { COMPANY_CONFIG } from "@/content/company";
-import { HOME_CONTACT_CONTENT } from "@/content/home";
 
 const getMapEmbedUrl = ({ lat, lng }: { lat: number; lng: number }) =>
   `https://maps.google.com/maps?q=${lat},${lng}&z=16&output=embed`;
 
 export function ContactSection() {
   const mapEmbedUrl = getMapEmbedUrl(COMPANY_CONFIG.coordinates);
-  const { eyebrow, title, description, nameLabel, phoneLabel, messageLabel, submitLabel, namePlaceholder, phonePlaceholder, messagePlaceholder } = HOME_CONTACT_CONTENT;
 
   return (
     <section id="contact" className="bg-slate-50 py-20 lg:py-24">
-      <Container className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+      <Container className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="overflow-hidden rounded-[20px] border border-slate-200 bg-white">
           <div className="h-[300px] w-full">
             <iframe title="Đại Hải Phát location" src={mapEmbedUrl} width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" />
@@ -63,28 +61,25 @@ export function ContactSection() {
         </div>
 
         <div className="rounded-[20px] border border-slate-200 bg-white p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">{eyebrow}</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">Liên hệ</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            {title}
+            Gửi thông tin công trình để nhận tư vấn thực tế và báo giá sơ bộ.
           </h2>
-          <p className="mt-4 text-lg leading-8 text-slate-600">
-            {description}
-          </p>
           <form className="mt-8 space-y-4">
             <div>
-              <label htmlFor="contact-name" className="mb-2 block text-sm font-semibold text-slate-700">{nameLabel}</label>
-              <input id="contact-name" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder={namePlaceholder} />
+              <label htmlFor="contact-name" className="mb-2 block text-sm font-semibold text-slate-700">Họ và tên</label>
+              <input id="contact-name" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="Nguyễn Văn A" />
             </div>
             <div>
-              <label htmlFor="contact-phone" className="mb-2 block text-sm font-semibold text-slate-700">{phoneLabel}</label>
-              <input id="contact-phone" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder={phonePlaceholder} />
+              <label htmlFor="contact-phone" className="mb-2 block text-sm font-semibold text-slate-700">Số điện thoại</label>
+              <input id="contact-phone" className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="0785 505 518" />
             </div>
             <div>
-              <label htmlFor="contact-message" className="mb-2 block text-sm font-semibold text-slate-700">{messageLabel}</label>
-              <textarea id="contact-message" className="min-h-[140px] w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder={messagePlaceholder} />
+              <label htmlFor="contact-message" className="mb-2 block text-sm font-semibold text-slate-700">Thông tin công trình</label>
+              <textarea id="contact-message" className="min-h-[140px] w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="Mô tả nhu cầu, quy mô và thời gian cần triển khai" />
             </div>
             <button type="button" className="w-full rounded-full bg-[#FF5722] px-4 py-3 text-sm font-semibold text-white transition hover:bg-orange-600">
-              {submitLabel}
+              Gửi yêu cầu
             </button>
           </form>
         </div>
