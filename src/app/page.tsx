@@ -1,23 +1,34 @@
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteNavigation } from "@/components/layout/SiteNavigation";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+
+import { HeroSection } from "@/components/sections/HeroSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-800 antialiased">
+    <div className="min-h-screen bg-white text-slate-900">
+
       <SiteNavigation />
-      <main id="main-content">
+
+      <main>
+
         <HeroSection />
+
         <ServicesSection />
+
         <ProjectsSection />
+
         <AboutSection />
+
         <ContactSection />
+
       </main>
+
       <SiteFooter />
+
     </div>
   );
 }
