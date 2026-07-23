@@ -1,36 +1,64 @@
-const title = "CÔNG TY TNHH CƠ KHÍ XÂY DỰNG ĐẠI HẢI PHÁT";
-const description =
-  "Đại Hải Phát chuyên thi công kết cấu thép, nhà xưởng, mái che và gia công cơ khí cho công trình dân dụng và công nghiệp.";
+import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+import React from "react";
+
+const inter = Inter({
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
+});
+
+const SITE_NAME =
+  "CÔNG TY TNHH CƠ KHÍ XÂY DỰNG ĐẠI HẢI PHÁT";
+
+const DESCRIPTION =
+  "Đại Hải Phát chuyên thiết kế, gia công và thi công Nội thất - Cơ khí dân dụng: tủ bếp, phòng ngủ, tủ quần áo, kệ TV, mái che, cổng, lan can, cầu thang và các sản phẩm theo yêu cầu.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(COMPANY_CONFIG.websiteUrl),
+  metadataBase: new URL("https://daihaiphat.vn"),
+
   title: {
-    default: title,
-    template: `%s | ${title}`,
+    default: SITE_NAME,
+    template: "%s | Đại Hải Phát",
   },
-  description,
+
+  description: DESCRIPTION,
+
   keywords: [
-    "cơ khí xây dựng",
-    "kết cấu thép",
-    "nhà xưởng",
-    "mái che",
-    "gia công cơ khí",
+    "Nội thất",
+    "Nội thất gỗ",
+    "Tủ bếp",
+    "Tủ quần áo",
+    "Phòng ngủ",
+    "Kệ TV",
+    "Mái che",
+    "Lan can",
+    "Cầu thang",
+    "Cổng sắt",
+    "Cơ khí dân dụng",
+    "Gia công theo yêu cầu",
     "Đại Hải Phát",
   ],
-  alternates: { canonical: "/" },
+
   openGraph: {
-    title,
-    description,
     type: "website",
     locale: "vi_VN",
-    url: COMPANY_CONFIG.websiteUrl,
-    siteName: title,
+
+    title: SITE_NAME,
+
+    description: DESCRIPTION,
+
+    siteName: SITE_NAME,
   },
+
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
+
+    title: SITE_NAME,
+
+    description: DESCRIPTION,
   },
+
   robots: {
     index: true,
     follow: true,
@@ -38,5 +66,23 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#111827",
 };
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="vi">
+
+      <body className={inter.className}>
+
+        {children}
+
+      </body>
+
+    </html>
+  );
+}
