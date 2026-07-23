@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function HeroSection() {}
+export function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden">
 
