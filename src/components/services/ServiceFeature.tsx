@@ -1,5 +1,3 @@
-"use client";
-
 import { Zap } from "lucide-react";
 
 import type { ServiceFeature as ServiceFeatureType } from "@/types/content";
