@@ -106,6 +106,85 @@ test("blocks cost ranges until dimensions and material are confirmed", () => {
   assert.equal(complete.prices[0].reference.range.max, 5000000);
 });
 
+test("treats assisted measurement and unresolved material as missing pricing inputs", () => {
+  const evidence = catalog.buildProposalEvidence({
+    service: "Mái che",
+    category: "Mái vòm polycarbonate",
+    material: "Cần kỹ sư xác định",
+    dimensions: "Cần khảo sát đo đạc",
+  });
+
+  assert.equal(evidence.canShowCostRange, false);
+  assert.deepEqual(evidence.prices[0].missing, ["kích thước", "vật liệu"]);
+});
+
+test("does not return a cost range for a confirmed but mismatched material", () => {
+  const matching = catalog.buildProposalEvidence({
+    service: "Mái che",
+    category: "Mái vòm polycarbonate",
+    material: "Sắt hoặc thép",
+    dimensions: "5 m × 6 m",
+  });
+  const missingCategory = catalog.buildProposalEvidence({
+    service: "Mái che",
+    material: "Sắt hoặc thép",
+    dimensions: "5 m × 6 m",
+  });
+  const mismatched = catalog.buildProposalEvidence({
+    service: "Mái che",
+    category: "Mái vòm polycarbonate",
+    material: "MFC An Cường chống ẩm",
+    dimensions: "5 m × 6 m",
+  });
+
+  assert.equal(matching.canShowCostRange, true);
+  assert.equal(missingCategory.canShowCostRange, false);
+  assert.ok(
+    missingCategory.prices.every((match) =>
+      match.missing.includes("hạng mục chi tiết"),
+    ),
+  );
+  assert.equal(mismatched.canShowCostRange, false);
+  assert.equal(mismatched.prices.length, 0);
+});
+
+test("validates public evidence requests and returns a bounded safe payload", () => {
+  const query = catalog.parseProposalEvidenceRequest({
+    service: "Cửa cổng",
+    material: "Sắt hoặc thép",
+    style: "Hiện đại",
+    projectType: "Nhà phố",
+    dimensions: "rộng 4 m × cao 2,6 m",
+    keywords: ["Độ bền"],
+    limit: 3,
+  });
+  const evidence = catalog.buildProposalEvidenceResponse(query);
+
+  assert.ok(evidence.images.length > 0);
+  assert.ok(evidence.images.length <= 3);
+  assert.ok(evidence.images.every((item) => item.image.url.startsWith("/images/")));
+  assert.ok(evidence.images.every((item) => item.thumbnail.url.startsWith("/images/")));
+  assert.ok(evidence.images.every((item) => !("original" in item)));
+  assert.ok(evidence.materials.length <= 6);
+
+  assert.throws(
+    () => catalog.parseProposalEvidenceRequest({ service: "Cửa cổng", limit: 100 }),
+    /Giới hạn kết quả/,
+  );
+  assert.throws(
+    () => catalog.parseProposalEvidenceRequest({ service: "" }),
+    /Thiếu trường service/,
+  );
+  assert.throws(
+    () =>
+      catalog.parseProposalEvidenceRequest({
+        service: "Cửa cổng",
+        keywords: ["hợp lệ", "\u0000không hợp lệ"],
+      }),
+    /Từ khóa tìm kiếm/,
+  );
+});
+
 test("keeps supplier screenshots out of Proposal pricing by default", () => {
   const defaultMatches = catalog.findPriceReferences({
     service: "Mái che",

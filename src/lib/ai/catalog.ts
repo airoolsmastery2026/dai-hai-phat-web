@@ -112,6 +112,63 @@ export interface ProposalEvidence {
   pricingRule: string;
 }
 
+export interface ProposalEvidenceRequest {
+  service: string;
+  category?: string;
+  material?: string;
+  style?: string;
+  projectType?: string;
+  dimensions?: string;
+  keywords?: string[];
+  limit?: number;
+}
+
+export interface ProposalEvidenceImage {
+  id: string;
+  title: string;
+  alt: string;
+  caption: string;
+  category: string;
+  material?: string;
+  style?: string;
+  projectType?: string;
+  image: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  thumbnail: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  blurDataUrl: string;
+}
+
+export interface ProposalEvidencePrice {
+  id: string;
+  material: string;
+  unit: string;
+  min: number;
+  max: number;
+  conditions: string[];
+}
+
+export interface ProposalEvidenceResponse {
+  images: ProposalEvidenceImage[];
+  materials: string[];
+  prices: ProposalEvidencePrice[];
+  canShowCostRange: boolean;
+  pricingRule: string;
+}
+
+export class ProposalEvidenceValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ProposalEvidenceValidationError";
+  }
+}
+
 const assetCatalog = galleryData as unknown as AssetCatalog;
 const priceCatalog = pricingData as unknown as PricingCatalog;
 
@@ -128,6 +185,9 @@ const ALIASES: Record<string, string> = {
   factory: "gia cong tai xuong",
   material: "vat lieu",
   materials: "vat lieu",
+  "sat hoac thep": "kim loai",
+  "go hoac mdf": "mdf",
+  "nhom kinh": "nhom",
 };
 
 function normalize(value?: string): string {
@@ -146,6 +206,75 @@ function normalize(value?: string): string {
 function boundedLimit(value: number | undefined, fallback: number): number {
   if (!Number.isFinite(value)) return fallback;
   return Math.max(1, Math.min(Math.trunc(value ?? fallback), 20));
+}
+
+function readRequestText(
+  record: Record<string, unknown>,
+  field: keyof ProposalEvidenceRequest,
+  required = false,
+): string | undefined {
+  const value = record[field];
+  if (value === undefined || value === null || value === "") {
+    if (required) {
+      throw new ProposalEvidenceValidationError(`Thiếu trường ${field}.`);
+    }
+    return undefined;
+  }
+  if (typeof value !== "string") {
+    throw new ProposalEvidenceValidationError(`Trường ${field} không đúng định dạng.`);
+  }
+  const normalized = value.trim();
+  if (!normalized || normalized.length > 120 || /[\u0000-\u001f\u007f]/.test(normalized)) {
+    throw new ProposalEvidenceValidationError(`Trường ${field} không hợp lệ.`);
+  }
+  return normalized;
+}
+
+export function parseProposalEvidenceRequest(value: unknown): ProposalEvidenceRequest {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    throw new ProposalEvidenceValidationError("Dữ liệu yêu cầu không hợp lệ.");
+  }
+
+  const record = value as Record<string, unknown>;
+  const rawKeywords = record.keywords;
+  if (
+    rawKeywords !== undefined &&
+    (!Array.isArray(rawKeywords) ||
+      rawKeywords.length > 5 ||
+      rawKeywords.some(
+        (keyword) =>
+          typeof keyword !== "string" ||
+          !keyword.trim() ||
+          keyword.trim().length > 80 ||
+          /[\u0000-\u001f\u007f]/.test(keyword),
+      ))
+  ) {
+    throw new ProposalEvidenceValidationError("Từ khóa tìm kiếm không hợp lệ.");
+  }
+
+  const rawLimit = record.limit;
+  if (
+    rawLimit !== undefined &&
+    (typeof rawLimit !== "number" ||
+      !Number.isInteger(rawLimit) ||
+      rawLimit < 1 ||
+      rawLimit > 10)
+  ) {
+    throw new ProposalEvidenceValidationError("Giới hạn kết quả không hợp lệ.");
+  }
+
+  return {
+    service: readRequestText(record, "service", true) as string,
+    category: readRequestText(record, "category"),
+    material: readRequestText(record, "material"),
+    style: readRequestText(record, "style"),
+    projectType: readRequestText(record, "projectType"),
+    dimensions: readRequestText(record, "dimensions"),
+    keywords: Array.isArray(rawKeywords)
+      ? rawKeywords.map((keyword) => (keyword as string).trim())
+      : undefined,
+    limit: rawLimit as number | undefined,
+  };
 }
 
 function fieldScore(
@@ -233,6 +362,14 @@ export function findPriceReferences(
   query: PriceSearchQuery,
 ): PriceSearchMatch[] {
   const normalizedMaterial = normalize(query.material);
+  const hasConfirmedCategory = Boolean(normalize(query.category));
+  const hasConfirmedMaterial =
+    Boolean(normalizedMaterial) &&
+    normalizedMaterial !== normalize("Cần kỹ sư xác định");
+  const hasConfirmedDimensions =
+    Boolean(query.dimensions?.trim()) &&
+    query.dimensions !== "Cần khảo sát đo đạc" &&
+    /\d/.test(query.dimensions ?? "");
 
   return priceCatalog.items
     .filter(
@@ -240,14 +377,29 @@ export function findPriceReferences(
         query.includeRevalidationRequired ||
         reference.eligibleForProposal !== false,
     )
+    .filter(
+      (reference) =>
+        fieldScore(query.service, reference.service, 1, 1) > 0,
+    )
+    .filter(
+      (reference) =>
+        !hasConfirmedCategory ||
+        fieldScore(query.category, reference.category, 1, 1) > 0,
+    )
+    .filter(
+      (reference) =>
+        !hasConfirmedMaterial ||
+        fieldScore(query.material, reference.material, 1, 1) > 0,
+    )
     .map((reference) => {
       const score =
         fieldScore(query.service, reference.service, 80, 45) +
         fieldScore(query.category, reference.category, 60, 30) +
         fieldScore(query.material, reference.material, 30, 15);
       const missing = [
-        !query.dimensions?.trim() && "kích thước",
-        !normalizedMaterial && "vật liệu",
+        !hasConfirmedCategory && "hạng mục chi tiết",
+        !hasConfirmedDimensions && "kích thước",
+        !hasConfirmedMaterial && "vật liệu",
       ].filter((value): value is string => Boolean(value));
       return {
         score,
@@ -290,5 +442,65 @@ export function buildProposalEvidence(
     prices,
     canShowCostRange: prices.some((match) => match.readyForRange),
     pricingRule: priceCatalog.rules.message,
+  };
+}
+
+export function buildProposalEvidenceResponse(
+  query: ProposalEvidenceRequest,
+): ProposalEvidenceResponse {
+  const evidence = buildProposalEvidence(query);
+  const images = evidence.images
+    .filter(
+      ({ asset }) =>
+        asset.image.publicUrl?.startsWith("/images/") &&
+        asset.thumbnail.publicUrl?.startsWith("/images/"),
+    )
+    .map(({ asset }) => ({
+      id: asset.id,
+      title: asset.title,
+      alt: asset.alt,
+      caption: asset.caption,
+      category: asset.category,
+      material: asset.material,
+      style: asset.style,
+      projectType: asset.projectType,
+      image: {
+        url: asset.image.publicUrl as string,
+        width: asset.image.width,
+        height: asset.image.height,
+      },
+      thumbnail: {
+        url: asset.thumbnail.publicUrl as string,
+        width: asset.thumbnail.width,
+        height: asset.thumbnail.height,
+      },
+      blurDataUrl: asset.blurDataUrl,
+    }));
+  const prices = evidence.prices
+    .filter(({ readyForRange }) => readyForRange)
+    .slice(0, 2)
+    .map(({ reference }) => ({
+      id: reference.id,
+      material: reference.material,
+      unit: reference.unit,
+      min: reference.range.min,
+      max: reference.range.max,
+      conditions: reference.referenceConditions?.slice(0, 4) ?? [],
+    }));
+  const materials = Array.from(
+    new Set(
+      [
+        ...images.map((image) => image.material),
+        ...evidence.prices.map(({ reference }) => reference.material),
+      ].filter((material): material is string => Boolean(material)),
+    ),
+  ).slice(0, 6);
+
+  return {
+    images,
+    materials,
+    prices,
+    canShowCostRange: prices.length > 0,
+    pricingRule: evidence.pricingRule,
   };
 }

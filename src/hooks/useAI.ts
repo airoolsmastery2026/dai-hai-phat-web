@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from "react";
 
 import {
   answerConversation,
@@ -10,6 +16,10 @@ import {
   type ConversationSession,
   type StoredImage,
 } from "@/lib/ai";
+import type {
+  ProposalEvidenceRequest,
+  ProposalEvidenceResponse,
+} from "@/lib/ai/catalog";
 
 const STORAGE_KEY = "dhp-ai-sales-engine-v1";
 const IMAGE_DATABASE = "dhp-ai-sales-engine-images-v1";
@@ -17,6 +27,18 @@ const IMAGE_STORE = "session-images";
 const serverSession = createAIConversation();
 const listeners = new Set<() => void>();
 let clientSession: ConversationSession | null = null;
+
+interface EvidenceResult {
+  key: string;
+  revision: number;
+  data: ProposalEvidenceResponse | null;
+  error: string | null;
+}
+
+interface EvidenceApiResponse {
+  evidence?: ProposalEvidenceResponse;
+  error?: string;
+}
 
 function readClientSession(): ConversationSession {
   if (clientSession) return clientSession;
@@ -111,6 +133,88 @@ export function useAI() {
   const session = useSyncExternalStore(subscribe, readClientSession, () => serverSession);
   const [error, setError] = useState<string | null>(null);
   const [isProcessingImages, setIsProcessingImages] = useState(false);
+  const [evidenceRevision, setEvidenceRevision] = useState(0);
+  const [evidenceResult, setEvidenceResult] = useState<EvidenceResult | null>(null);
+
+  const evidenceQuery = useMemo<ProposalEvidenceRequest | null>(() => {
+    if (
+      !session.visitedStates.includes("SIMILAR_PROJECT_SEARCH") ||
+      !session.memory.service
+    ) {
+      return null;
+    }
+
+    return {
+      service: session.memory.service,
+      material: session.memory.material,
+      style: session.memory.style,
+      projectType: session.memory.projectType,
+      dimensions: session.memory.dimensions,
+      keywords: session.memory.priority ? [session.memory.priority] : undefined,
+      limit: 6,
+    };
+  }, [
+    session.memory.dimensions,
+    session.memory.material,
+    session.memory.priority,
+    session.memory.projectType,
+    session.memory.service,
+    session.memory.style,
+    session.visitedStates,
+  ]);
+  const evidenceKey = useMemo(
+    () => (evidenceQuery ? JSON.stringify(evidenceQuery) : null),
+    [evidenceQuery],
+  );
+
+  useEffect(() => {
+    if (!evidenceKey || !evidenceQuery) return;
+
+    const controller = new AbortController();
+    let active = true;
+
+    const loadEvidence = async () => {
+      try {
+        const response = await fetch("/api/ai/proposal-evidence", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          cache: "no-store",
+          body: evidenceKey,
+          signal: controller.signal,
+        });
+        const payload = (await response.json()) as EvidenceApiResponse;
+        if (!response.ok || !payload.evidence) {
+          throw new Error(payload.error || "Không thể đối chiếu Knowledge Base.");
+        }
+        if (active) {
+          setEvidenceResult({
+            key: evidenceKey,
+            revision: evidenceRevision,
+            data: payload.evidence,
+            error: null,
+          });
+        }
+      } catch (caughtError) {
+        if (!active || controller.signal.aborted) return;
+        setEvidenceResult({
+          key: evidenceKey,
+          revision: evidenceRevision,
+          data: null,
+          error:
+            caughtError instanceof Error
+              ? caughtError.message
+              : "Không thể đối chiếu Knowledge Base.",
+        });
+      }
+    };
+
+    void loadEvidence();
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [evidenceKey, evidenceQuery, evidenceRevision]);
 
   const commitAnswer = useCallback((value: string | StoredImage[]) => {
     setError(null);
@@ -161,15 +265,36 @@ export function useAI() {
     });
   }, []);
 
+  const retryEvidence = useCallback(() => {
+    setEvidenceRevision((revision) => revision + 1);
+  }, []);
+
   const question = useMemo(() => getConversationQuestion(session), [session]);
+  const evidenceIsCurrent =
+    Boolean(evidenceKey) &&
+    evidenceResult?.key === evidenceKey &&
+    evidenceResult.revision === evidenceRevision;
+  const evidenceStatus: "idle" | "loading" | "ready" | "empty" | "error" = !evidenceKey
+    ? "idle"
+    : !evidenceIsCurrent
+      ? "loading"
+      : evidenceResult?.error
+        ? "error"
+        : evidenceResult?.data?.images.length
+          ? "ready"
+          : "empty";
 
   return {
     session,
     question,
     error,
     isProcessingImages,
+    evidence: evidenceIsCurrent ? evidenceResult?.data ?? null : null,
+    evidenceError: evidenceIsCurrent ? evidenceResult?.error ?? null : null,
+    evidenceStatus,
     answer: commitAnswer,
     addImages,
+    retryEvidence,
     reset,
   };
 }

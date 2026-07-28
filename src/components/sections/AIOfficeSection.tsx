@@ -7,14 +7,17 @@ import {
   Gauge,
   ImagePlus,
   MemoryStick,
+  RefreshCw,
   RotateCcw,
   ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
+import Image from "next/image";
 import type { FormEvent, ReactNode } from "react";
 
 import { useAI } from "@/hooks/useAI";
 import { getStateLabel, type ConversationQuestion, type ConversationSession } from "@/lib/ai";
+import type { ProposalEvidenceResponse } from "@/lib/ai/catalog";
 
 const AUTO_COMPLETE_BY_FIELD: Partial<Record<ConversationQuestion["field"], string>> = {
   name: "name",
@@ -25,7 +28,19 @@ const AUTO_COMPLETE_BY_FIELD: Partial<Record<ConversationQuestion["field"], stri
 };
 
 export function AIOfficeSection() {
-  const { session, question, error, isProcessingImages, answer, addImages, reset } = useAI();
+  const {
+    session,
+    question,
+    error,
+    isProcessingImages,
+    evidence,
+    evidenceError,
+    evidenceStatus,
+    answer,
+    addImages,
+    retryEvidence,
+    reset,
+  } = useAI();
 
   return (
     <section
@@ -58,6 +73,12 @@ export function AIOfficeSection() {
           />
           <EngineeringWorkspace session={session} />
         </div>
+        <ProposalEvidencePanel
+          evidence={evidence}
+          error={evidenceError}
+          status={evidenceStatus}
+          onRetry={retryEvidence}
+        />
       </div>
     </section>
   );
@@ -370,4 +391,186 @@ function StatusCard({
       {children}
     </section>
   );
+}
+
+type EvidenceStatus = "idle" | "loading" | "ready" | "empty" | "error";
+
+function ProposalEvidencePanel({
+  evidence,
+  error,
+  status,
+  onRetry,
+}: {
+  evidence: ProposalEvidenceResponse | null;
+  error: string | null;
+  status: EvidenceStatus;
+  onRetry: () => void;
+}) {
+  if (status === "idle") return null;
+
+  if (status === "loading") {
+    return (
+      <section
+        className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <p className="font-bold text-[var(--color-primary-soft-text)]">
+          Đang đối chiếu công trình và dữ liệu vật liệu đã xác minh…
+        </p>
+        <p className="mt-[var(--space-control)] text-sm text-[var(--color-text-dark-muted)]">
+          Kết quả được lấy theo hạng mục, phong cách, vật liệu và loại công trình trong hồ sơ.
+        </p>
+      </section>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <section
+        className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-danger)] bg-[var(--color-danger-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]"
+        role="alert"
+      >
+        <h3 className="font-bold">Chưa thể đối chiếu Knowledge Base.</h3>
+        <p className="mt-[var(--space-control)] text-sm text-[var(--color-danger-text)]">
+          {error || "Kết nối dữ liệu bị gián đoạn."}
+        </p>
+        <button
+          type="button"
+          onClick={onRetry}
+          className="mt-[var(--space-stack)] flex min-h-[var(--control-min-size)] items-center gap-[var(--space-control)] rounded-[var(--radius-md)] border border-[var(--color-danger)] px-[var(--space-stack)] font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+        >
+          <RefreshCw className="h-4 w-4" aria-hidden="true" />
+          Đối chiếu lại
+        </button>
+      </section>
+    );
+  }
+
+  if (status === "empty" || !evidence) {
+    return (
+      <section
+        className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]"
+        aria-live="polite"
+      >
+        <h3 className="font-bold">Chưa có công trình đã xác minh phù hợp.</h3>
+        <p className="mt-[var(--space-control)] text-sm text-[var(--color-text-dark-muted)]">
+          Hồ sơ vẫn được giữ nguyên để kỹ sư đối chiếu trực tiếp khi khảo sát.
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <section
+      className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]"
+      aria-labelledby="proposal-evidence-title"
+    >
+      <div className="flex flex-col gap-[var(--space-control)] sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+            Proposal Evidence
+          </p>
+          <h3 id="proposal-evidence-title" className="mt-[var(--space-control)] text-2xl font-bold">
+            {evidence.images.length} công trình phù hợp nhất
+          </h3>
+        </div>
+        <p className="text-sm text-[var(--color-text-dark-muted)]">
+          Chỉ dùng ảnh và metadata có nguồn đã xác minh
+        </p>
+      </div>
+
+      <div className="mt-[var(--space-card-lg)] grid gap-[var(--space-stack)] sm:grid-cols-2 lg:grid-cols-3">
+        {evidence.images.map((item) => (
+          <article
+            key={item.id}
+            className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-muted)]"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src={item.thumbnail.url}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                placeholder="blur"
+                blurDataURL={item.blurDataUrl}
+                className="object-cover transition-transform duration-300 hover:scale-[1.02]"
+              />
+            </div>
+            <div className="p-[var(--space-stack)]">
+              <h4 className="font-bold">{item.title}</h4>
+              <p className="mt-[var(--space-control)] line-clamp-2 text-sm leading-6 text-[var(--color-text-dark-muted)]">
+                {item.caption}
+              </p>
+              {item.material ? (
+                <p className="mt-[var(--space-control)] text-xs font-semibold text-[var(--color-primary-soft-text)]">
+                  {item.material}
+                </p>
+              ) : null}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {evidence.materials.length ? (
+        <div className="mt-[var(--space-card-lg)]">
+          <h4 className="font-bold">Vật liệu đã đối chiếu</h4>
+          <ul className="mt-[var(--space-control)] flex flex-wrap gap-[var(--space-control)]">
+            {evidence.materials.map((material) => (
+              <li
+                key={material}
+                className="rounded-full border border-[var(--color-border-dark)] px-[var(--space-stack)] py-2 text-sm text-[var(--color-text-dark-muted)]"
+              >
+                {material}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      <div className="mt-[var(--space-card-lg)] border-t border-[var(--color-border-dark)] pt-[var(--space-card-lg)]">
+        <h4 className="font-bold">Khoảng chi phí tham chiếu</h4>
+        {evidence.canShowCostRange ? (
+          <div className="mt-[var(--space-stack)] grid gap-[var(--space-stack)] md:grid-cols-2">
+            {evidence.prices.map((price) => (
+              <article
+                key={price.id}
+                className="rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]"
+              >
+                <p className="font-bold">{price.material}</p>
+                <p className="mt-[var(--space-control)] text-xl font-black text-[var(--color-primary-soft-text)]">
+                  {formatCurrency(price.min)} – {formatCurrency(price.max)}
+                  <span className="ml-1 text-sm font-semibold text-[var(--color-text-dark-muted)]">
+                    / {price.unit}
+                  </span>
+                </p>
+                {price.conditions.length ? (
+                  <ul className="mt-[var(--space-control)] space-y-1 text-xs text-[var(--color-text-dark-muted)]">
+                    {price.conditions.map((condition) => (
+                      <li key={condition}>• {condition}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+            {evidence.pricingRule}
+          </p>
+        )}
+        <p className="mt-[var(--space-control)] text-xs text-[var(--color-text-dark-subtle)]">
+          Đây là khoảng tham chiếu từ dữ liệu đã xác minh, không phải báo giá chính thức.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function formatCurrency(value: number): string {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    maximumFractionDigits: 0,
+  }).format(value);
 }
