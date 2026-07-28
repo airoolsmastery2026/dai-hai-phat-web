@@ -26,7 +26,6 @@ import {
   CERTIFICATES,
   FACTORY_TIMELINE,
   STATISTICS,
-  GALLERY_IMAGES,
 } from "@/content/factory";
 import { PROJECTS } from "@/content/projects";
 import { SERVICES } from "@/content/services";

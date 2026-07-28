@@ -8,7 +8,7 @@ export function FactoryWorkflow({ data }: { data: typeof WORKFLOW }) {
       <p className="mt-3 max-w-2xl text-base text-slate-600">Từ khảo sát đến bàn giao sản phẩm, mỗi bước được kiểm soát chặt chẽ.</p>
 
       <div className="mt-10 space-y-4">
-        {data.map((step, index) => (
+        {data.map((step) => (
           <div key={step.step} className="grid gap-6 rounded-2xl border border-slate-200 bg-gradient-to-r from-slate-50 to-white p-6 md:grid-cols-[120px_1fr_180px]">
             <div className="flex items-start">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#FF5722] font-semibold text-white">
