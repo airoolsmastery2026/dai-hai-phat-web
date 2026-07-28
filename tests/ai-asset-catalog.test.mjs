@@ -228,6 +228,52 @@ test("validates public evidence requests and returns a bounded safe payload", ()
   );
 });
 
+test("paginates and filters the verified gallery without exposing non-project assets", () => {
+  const firstQuery = catalog.parseVerifiedGalleryRequest(
+    new URLSearchParams("limit=12"),
+  );
+  const firstPage = catalog.listVerifiedGallery(firstQuery);
+  const secondPage = catalog.listVerifiedGallery(
+    catalog.parseVerifiedGalleryRequest(
+      new URLSearchParams(`limit=12&cursor=${firstPage.nextCursor}`),
+    ),
+  );
+  const gates = catalog.listVerifiedGallery(
+    catalog.parseVerifiedGalleryRequest(
+      new URLSearchParams("service=C%E1%BB%ADa+c%E1%BB%95ng&limit=12"),
+    ),
+  );
+  const searched = catalog.listVerifiedGallery(
+    catalog.parseVerifiedGalleryRequest(
+      new URLSearchParams("search=ph%C3%B2ng+ng%E1%BB%A7&limit=6"),
+    ),
+  );
+
+  assert.equal(firstPage.items.length, 12);
+  assert.ok(firstPage.total > firstPage.items.length);
+  assert.equal(firstPage.nextCursor, "12");
+  assert.equal(
+    firstPage.items.some((item) =>
+      secondPage.items.some((nextItem) => nextItem.id === item.id),
+    ),
+    false,
+  );
+  assert.equal(gates.total, 3);
+  assert.ok(gates.items.every((item) => item.service === "Cửa cổng"));
+  assert.ok(searched.items.length > 0);
+  assert.ok(firstPage.filters.categories.length > 0);
+  assert.ok(firstPage.items.every((item) => item.thumbnail.url.startsWith("/images/")));
+  assert.ok(firstPage.items.every((item) => !("source" in item)));
+
+  assert.throws(
+    () =>
+      catalog.parseVerifiedGalleryRequest(
+        new URLSearchParams("limit=100&cursor=-1"),
+      ),
+    /Phân trang/,
+  );
+});
+
 test("keeps supplier screenshots out of Proposal pricing by default", () => {
   const defaultMatches = catalog.findPriceReferences({
     service: "Mái che",

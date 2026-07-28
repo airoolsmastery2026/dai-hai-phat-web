@@ -162,6 +162,50 @@ export interface ProposalEvidenceResponse {
   pricingRule: string;
 }
 
+export interface VerifiedGalleryRequest {
+  search?: string;
+  service?: string;
+  category?: string;
+  material?: string;
+  style?: string;
+  projectType?: string;
+  cursor?: number;
+  limit: number;
+}
+
+export interface VerifiedGalleryItem {
+  id: string;
+  title: string;
+  alt: string;
+  caption: string;
+  service?: string;
+  category: string;
+  material?: string;
+  style?: string;
+  projectType?: string;
+  thumbnail: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  blurDataUrl: string;
+}
+
+export interface VerifiedGalleryFilters {
+  services: string[];
+  categories: string[];
+  materials: string[];
+  styles: string[];
+  projectTypes: string[];
+}
+
+export interface VerifiedGalleryResponse {
+  items: VerifiedGalleryItem[];
+  total: number;
+  nextCursor: string | null;
+  filters: VerifiedGalleryFilters;
+}
+
 export class ProposalEvidenceValidationError extends Error {
   constructor(message: string) {
     super(message);
@@ -274,6 +318,48 @@ export function parseProposalEvidenceRequest(value: unknown): ProposalEvidenceRe
       ? rawKeywords.map((keyword) => (keyword as string).trim())
       : undefined,
     limit: rawLimit as number | undefined,
+  };
+}
+
+function readGalleryParameter(
+  searchParams: URLSearchParams,
+  field: Exclude<keyof VerifiedGalleryRequest, "cursor" | "limit">,
+): string | undefined {
+  const value = searchParams.get(field)?.trim();
+  if (!value) return undefined;
+  if (value.length > 120 || /[\u0000-\u001f\u007f]/.test(value)) {
+    throw new ProposalEvidenceValidationError(`Bộ lọc ${field} không hợp lệ.`);
+  }
+  return value;
+}
+
+export function parseVerifiedGalleryRequest(
+  searchParams: URLSearchParams,
+): VerifiedGalleryRequest {
+  const rawCursor = searchParams.get("cursor");
+  const rawLimit = searchParams.get("limit");
+  const cursor = rawCursor === null ? undefined : Number(rawCursor);
+  const limit = rawLimit === null ? 12 : Number(rawLimit);
+
+  if (
+    (cursor !== undefined &&
+      (!Number.isInteger(cursor) || cursor < 0 || cursor > 10_000)) ||
+    !Number.isInteger(limit) ||
+    limit < 1 ||
+    limit > 12
+  ) {
+    throw new ProposalEvidenceValidationError("Phân trang thư viện không hợp lệ.");
+  }
+
+  return {
+    search: readGalleryParameter(searchParams, "search"),
+    service: readGalleryParameter(searchParams, "service"),
+    category: readGalleryParameter(searchParams, "category"),
+    material: readGalleryParameter(searchParams, "material"),
+    style: readGalleryParameter(searchParams, "style"),
+    projectType: readGalleryParameter(searchParams, "projectType"),
+    cursor,
+    limit,
   };
 }
 
@@ -502,5 +588,85 @@ export function buildProposalEvidenceResponse(
     prices,
     canShowCostRange: prices.length > 0,
     pricingRule: evidence.pricingRule,
+  };
+}
+
+function uniqueSorted(values: Array<string | undefined>): string[] {
+  return Array.from(new Set(values.filter((value): value is string => Boolean(value)))).sort(
+    (left, right) => left.localeCompare(right, "vi"),
+  );
+}
+
+export function listVerifiedGallery(
+  query: VerifiedGalleryRequest,
+): VerifiedGalleryResponse {
+  const publishedProjects = assetCatalog.items
+    .filter(
+      (asset) =>
+        asset.assetType === "project" &&
+        asset.thumbnail.publicUrl?.startsWith("/images/"),
+    )
+    .sort((left, right) => left.id.localeCompare(right.id, "vi"));
+  const filters: VerifiedGalleryFilters = {
+    services: uniqueSorted(publishedProjects.map((asset) => asset.service)),
+    categories: uniqueSorted(publishedProjects.map((asset) => asset.category)),
+    materials: uniqueSorted(publishedProjects.map((asset) => asset.material)),
+    styles: uniqueSorted(publishedProjects.map((asset) => asset.style)),
+    projectTypes: uniqueSorted(publishedProjects.map((asset) => asset.projectType)),
+  };
+  const normalizedSearch = normalize(query.search);
+  const matchesFilter = (
+    expected: string | undefined,
+    actual: string | undefined,
+  ) => !expected || normalize(expected) === normalize(actual);
+  const filtered = publishedProjects.filter((asset) => {
+    if (!matchesFilter(query.service, asset.service)) return false;
+    if (!matchesFilter(query.category, asset.category)) return false;
+    if (!matchesFilter(query.material, asset.material)) return false;
+    if (!matchesFilter(query.style, asset.style)) return false;
+    if (!matchesFilter(query.projectType, asset.projectType)) return false;
+    if (!normalizedSearch) return true;
+
+    return normalize(
+      [
+        asset.title,
+        asset.alt,
+        asset.caption,
+        asset.service,
+        asset.category,
+        asset.material,
+        asset.style,
+        asset.projectType,
+        ...asset.seo.keywords,
+      ]
+        .filter(Boolean)
+        .join(" "),
+    ).includes(normalizedSearch);
+  });
+  const start = Math.min(query.cursor ?? 0, filtered.length);
+  const end = Math.min(start + query.limit, filtered.length);
+  const items = filtered.slice(start, end).map((asset) => ({
+    id: asset.id,
+    title: asset.title,
+    alt: asset.alt,
+    caption: asset.caption,
+    service: asset.service,
+    category: asset.category,
+    material: asset.material,
+    style: asset.style,
+    projectType: asset.projectType,
+    thumbnail: {
+      url: asset.thumbnail.publicUrl as string,
+      width: asset.thumbnail.width,
+      height: asset.thumbnail.height,
+    },
+    blurDataUrl: asset.blurDataUrl,
+  }));
+
+  return {
+    items,
+    total: filtered.length,
+    nextCursor: end < filtered.length ? String(end) : null,
+    filters,
   };
 }
