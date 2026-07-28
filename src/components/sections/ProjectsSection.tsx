@@ -1,96 +1,59 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const projects = [
-  {
-    title: "Tủ bếp Acrylic hiện đại",
-    image: "/images/kitchen-01.jpg",
-    category: "Nội thất",
-  },
-  {
-    title: "Phòng ngủ MDF chống ẩm",
-    image: "/images/bedroom-01.jpg",
-    category: "Nội thất",
-  },
-  {
-    title: "Tủ quần áo cánh kính",
-    image: "/images/wardrobe-01.jpg",
-    category: "Nội thất",
-  },
-  {
-    title: "Kệ TV phòng khách",
-    image: "/images/tv-01.jpg",
-    category: "Nội thất",
-  },
-  {
-    title: "Mái che Polycarbonate",
-    image: "/images/canopy-01.jpg",
-    category: "Cơ khí dân dụng",
-  },
-  {
-    title: "Thi công cửa sắt",
-    image: "/images/steel-door.jpg",
-    category: "Cơ khí dân dụng",
-  },
-];
+import { SERVICES } from "@/content/services";
 
 export function ProjectsSection() {
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="container mx-auto px-6">
-
-        <div className="text-center mb-16">
-          <span className="text-[#d6a449] font-semibold uppercase tracking-widest">
-            Công trình tiêu biểu
-          </span>
-
-          <h2 className="text-4xl font-bold mt-4 text-gray-900">
-            Dự án đã hoàn thành
+    <section id="projects" className="scroll-mt-16 bg-slate-50 py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">
+            Thư viện giải pháp
+          </p>
+          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+            Hình dung phương án trước khi khảo sát
           </h2>
-
-          <p className="mt-4 text-gray-600 max-w-3xl mx-auto">
-            Hình ảnh thực tế các công trình nội thất và cơ khí dân dụng
-            do Đại Hải Phát trực tiếp thiết kế, sản xuất và thi công.
+          <p className="mt-4 leading-7 text-slate-600">
+            Các hình ảnh hiện tại dùng để minh họa nhóm giải pháp. Hồ sơ công
+            trình thực tế sẽ chỉ được công bố sau khi doanh nghiệp xác minh nội
+            dung và quyền sử dụng.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-          {projects.map((item, index) => (
-
-            <div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition"
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {SERVICES.map((service) => (
+            <Link
+              key={service.slug}
+              href={`/services/${service.slug}`}
+              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-orange-300 hover:shadow-md"
             >
-
-              <div className="relative h-72">
-
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-200">
                 <Image
-                  src={item.image}
-                  alt={item.title}
+                  src={service.image}
+                  alt={`Hình minh họa: ${service.title}`}
                   fill
-                  className="object-cover"
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
+                  className="object-cover transition duration-300 group-hover:scale-[1.02]"
                 />
-
-              </div>
-
-              <div className="p-6">
-
-                <span className="text-sm text-[#d6a449] font-semibold">
-                  {item.category}
+                <span className="absolute left-3 top-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-white">
+                  Hình minh họa
                 </span>
-
-                <h3 className="mt-2 text-xl font-bold">
-                  {item.title}
-                </h3>
-
               </div>
-
-            </div>
-
+              <div className="p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#FF5722]">
+                  {service.subtitle}
+                </p>
+                <h3 className="mt-2 text-lg font-bold text-slate-900">
+                  {service.title}
+                </h3>
+                <p className="mt-4 text-sm font-semibold text-[#FF5722]">
+                  Xem giải pháp →
+                </p>
+              </div>
+            </Link>
           ))}
-
         </div>
-
       </div>
     </section>
   );

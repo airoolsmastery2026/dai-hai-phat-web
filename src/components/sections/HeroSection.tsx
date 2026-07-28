@@ -20,7 +20,8 @@ export function HeroSection() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-            Trả lời từng câu hỏi ngắn để AI tổng hợp yêu cầu, đề xuất vật liệu và chuẩn bị proposal sơ bộ trước khi kỹ sư khảo sát.
+            Trả lời từng câu hỏi ngắn để hệ thống ghi nhận hạng mục, vật liệu,
+            dữ liệu hiện trạng và chuẩn bị hồ sơ sơ bộ trước khi kỹ sư khảo sát.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -52,7 +53,7 @@ export function HeroSection() {
         <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl sm:p-7">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-300">Quy trình kỹ thuật số</p>
           <ol className="mt-5 space-y-4">
-            {["Chọn hạng mục cần tư vấn", "Bổ sung kích thước, ảnh và ngân sách", "Nhận proposal sơ bộ", "Đặt lịch kỹ sư khảo sát"].map((item, index) => (
+            {["Chọn hạng mục cần tư vấn", "Xác định vật liệu và dữ liệu hiện trạng", "Nhận proposal sơ bộ", "Chuyển hồ sơ cho kỹ sư khảo sát"].map((item, index) => (
               <li key={item} className="flex gap-4 rounded-2xl bg-slate-900/70 p-4">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-500 font-black">{index + 1}</span>
                 <span className="self-center font-semibold">{item}</span>
