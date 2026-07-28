@@ -25,6 +25,7 @@ import { ProjectMaterials } from "@/components/projects/ProjectMaterials";
 import { COMPANY_CONFIG } from "@/content/company";
 import { PROJECTS } from "@/content/projects";
 import { ServiceCTA } from "@/components/services/ServiceCTA";
+import { normalizeRouteSlug } from "@/lib/routing";
 
 export async function generateStaticParams() {
   return PROJECTS.map((project) => ({ slug: project.slug }));
@@ -32,7 +33,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const project = PROJECTS.find((item) => item.slug === slug);
+  const normalizedSlug = normalizeRouteSlug(slug);
+  const project = PROJECTS.find((item) => item.slug === normalizedSlug);
 
   if (!project) {
     return {};
@@ -59,7 +61,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = PROJECTS.find((item) => item.slug === slug);
+  const normalizedSlug = normalizeRouteSlug(slug);
+  const project = PROJECTS.find((item) => item.slug === normalizedSlug);
 
   if (!project) {
     notFound();

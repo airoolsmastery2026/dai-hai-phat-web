@@ -20,11 +20,11 @@ export const PROJECTS: ProjectItem[] = [
     materials: ["Composite chống ẩm", "Khung nhôm", "Keo chuyên dụng", "Phụ kiện inox"],
     technologies: ["Thiết kế bản vẽ 3D", "Gia công CNC", "Lắp dựng theo tiêu chuẩn", "Kiểm tra chất lượng 360°"],
     gallery: [
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+      "/images/interior/interior16.webp",
+      "/images/interior/interior71.webp",
     ],
-    beforeImages: ["https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80"],
-    afterImages: ["https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80"],
+    beforeImages: [],
+    afterImages: [],
     statistics: [
       { label: "Diện tích hoàn thiện", value: "280m²" },
       { label: "Thời gian thi công", value: "14 ngày" },
@@ -49,7 +49,7 @@ export const PROJECTS: ProjectItem[] = [
       name: "Thi công vách ngăn composite cao cấp",
       description: "Dự án thi công vách ngăn composite cao cấp cho không gian thương mại.",
     },
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+    image: "/images/interior/interior16.webp",
     summary: "Dự án được triển khai theo phương án cụ thể, đúng kích thước và phù hợp với điều kiện thực tế của công trình.",
   },
   {
@@ -71,11 +71,11 @@ export const PROJECTS: ProjectItem[] = [
     materials: ["Thép hộp", "Cửa cổng tự động", "Sơn tĩnh điện", "Bu lông chuẩn"],
     technologies: ["Thiết kế kết cấu", "CNC gia công", "Hàn và xử lý bề mặt", "Lắp dựng theo đúng tải trọng"],
     gallery: [
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
+      "/images/gates/gate01.webp",
+      "/images/gates/gate03.webp",
     ],
-    beforeImages: ["https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"],
-    afterImages: ["https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"],
+    beforeImages: [],
+    afterImages: [],
     statistics: [
       { label: "Khối lượng thép", value: "180 tấn" },
       { label: "Cửa cổng", value: "6 cánh" },
@@ -100,7 +100,7 @@ export const PROJECTS: ProjectItem[] = [
       name: "Khung thép và cửa cổng công nghiệp",
       description: "Dự án kết cấu thép và cửa cổng công nghiệp.",
     },
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
+    image: "/images/gates/gate01.webp",
     summary: "Phù hợp cho nhà xưởng, công trình vận hành và các yêu cầu kỹ thuật với tiêu chuẩn rõ ràng.",
   },
   {
@@ -122,11 +122,11 @@ export const PROJECTS: ProjectItem[] = [
     materials: ["MDF lõi xanh", "Melamine", "Phụ kiện bản lề", "Gỗ veneer"],
     technologies: ["Thiết kế tối ưu không gian", "Gia công CNC", "Phủ melamine cao cấp", "Lắp dựng tinh tế"],
     gallery: [
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+      "/images/interior/interior78.webp",
+      "/images/interior/interior86.webp",
     ],
-    beforeImages: ["https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"],
-    afterImages: ["https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80"],
+    beforeImages: [],
+    afterImages: [],
     statistics: [
       { label: "Tổng chi tiết", value: "42 bộ" },
       { label: "Tủ lưu trữ", value: "10 đơn vị" },
@@ -151,7 +151,7 @@ export const PROJECTS: ProjectItem[] = [
       name: "Nội thất phòng ngủ MDF melamine",
       description: "Dự án thiết kế và thi công nội thất phòng ngủ MDF melamine.",
     },
-    image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+    image: "/images/interior/interior78.webp",
     summary: "Kết hợp thiết kế thực tế, gia công cẩn thận và hoàn thiện bề mặt theo tiêu chuẩn rõ ràng.",
   },
 ];

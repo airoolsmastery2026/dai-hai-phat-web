@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import ts from "typescript";
@@ -34,6 +34,17 @@ const catalog = await import(
   `data:text/javascript;base64,${Buffer.from(transpiled.outputText).toString("base64")}`
 );
 
+async function collectFiles(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files = await Promise.all(
+    entries.map((entry) => {
+      const absolutePath = path.join(directory, entry.name);
+      return entry.isDirectory() ? collectFiles(absolutePath) : [absolutePath];
+    }),
+  );
+  return files.flat();
+}
+
 test("publishes every classified asset with original, WebP, thumbnail and metadata", async () => {
   assert.equal(gallery.schemaVersion, "1.1");
   assert.equal(gallery.total, 136);
@@ -55,6 +66,38 @@ test("publishes every classified asset with original, WebP, thumbnail and metada
         access(path.join(new URL(repository).pathname, relativePath)),
       ),
     );
+  }
+});
+
+test("keeps rendered image sources inside the verified asset catalog", async () => {
+  const sourceRoot = path.join(new URL(repository).pathname, "src");
+  const sourceFiles = (await collectFiles(sourceRoot)).filter((file) =>
+    /\.(?:ts|tsx)$/.test(file),
+  );
+  const sourceTexts = await Promise.all(sourceFiles.map((file) => readFile(file, "utf8")));
+  const nextConfig = await readFile(
+    new URL("../next.config.js", import.meta.url),
+    "utf8",
+  );
+  const combinedSource = [...sourceTexts, nextConfig].join("\n");
+  const renderedPaths = Array.from(
+    combinedSource.matchAll(/"(\/images\/[^"]+\.(?:jpe?g|png|webp))"/g),
+    (match) => match[1],
+  );
+  const verifiedPaths = new Set(
+    gallery.items.flatMap((item) =>
+      [
+        item.original.publicUrl,
+        item.image.publicUrl,
+        item.thumbnail.publicUrl,
+      ].filter(Boolean),
+    ),
+  );
+
+  assert.ok(renderedPaths.length > 0);
+  assert.equal(combinedSource.includes("images.unsplash.com"), false);
+  for (const imagePath of renderedPaths) {
+    assert.ok(verifiedPaths.has(imagePath), `Unverified image path ${imagePath}`);
   }
 });
 

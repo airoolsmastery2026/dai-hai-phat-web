@@ -20,6 +20,7 @@ import { ServiceCTA } from "@/components/services/ServiceCTA";
 import { ServiceSidebar } from "@/components/services/ServiceSidebar";
 import { SERVICES } from "@/content/services";
 import { COMPANY_CONFIG } from "@/content/company";
+import { normalizeRouteSlug } from "@/lib/routing";
 
 export async function generateStaticParams() {
   return SERVICES.map((service) => ({ slug: service.slug }));
@@ -27,7 +28,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const service = SERVICES.find((item) => item.slug === slug);
+  const normalizedSlug = normalizeRouteSlug(slug);
+  const service = SERVICES.find((item) => item.slug === normalizedSlug);
 
   if (!service) {
     return {};
@@ -42,7 +44,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = SERVICES.find((item) => item.slug === slug);
+  const normalizedSlug = normalizeRouteSlug(slug);
+  const service = SERVICES.find((item) => item.slug === normalizedSlug);
 
   if (!service) {
     notFound();

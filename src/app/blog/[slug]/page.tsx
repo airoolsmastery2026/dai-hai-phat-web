@@ -12,13 +12,20 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
+import { normalizeRouteSlug } from "@/lib/routing";
 
 export function generateStaticParams() {
   return ARTICLES.map((article) => ({ slug: article.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const article = ARTICLES.find((item) => item.slug === params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const normalizedSlug = normalizeRouteSlug(slug);
+  const article = ARTICLES.find((item) => item.slug === normalizedSlug);
 
   if (!article) {
     return { title: "Bài viết không tồn tại" };
@@ -37,8 +44,14 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function BlogDetailPage({ params }: { params: { slug: string } }) {
-  const article = ARTICLES.find((item) => item.slug === params.slug);
+export default async function BlogDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const normalizedSlug = normalizeRouteSlug(slug);
+  const article = ARTICLES.find((item) => item.slug === normalizedSlug);
 
   if (!article) {
     notFound();

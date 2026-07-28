@@ -41,32 +41,28 @@ export const SERVICES: ServiceItem[] = [
     id: 1,
     title: "Nội Thất Gỗ MDF Melamine & Cánh Kính Khung Nhôm",
     desc: "Sản xuất Giường ngủ thông minh, Tủ quần áo kịch trần, Kệ Tivi bằng gỗ MDF lõi xanh chống ẩm phủ Melamine cao cấp.",
-    image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+    image: "/images/interior/interior78.webp",
     icon: serviceIcons[1],
   },
   {
     id: 2,
     title: "Vách Tường Trang Trí, Lam Sóng & Tấm Ốp Composite",
     desc: "Thi công vách ngăn phòng, vách Tivi nhựa Composite vân đá/vân gỗ, tấm ốp tường Nano hiện đại chịu nước 100%.",
-    image:
-      "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=80",
+    image: "/images/interior/interior16.webp",
     icon: serviceIcons[2],
   },
   {
     id: 3,
     title: "Mái Che & Tấm Lợp Nhựa Đặc Composite Chịu Lực",
     desc: "Lắp đặt mái che lấy sáng, mái hiên sân thượng dùng tấm nhựa đặc Composite/Polycarbonate chống tia UV, chịu lực đập mạnh.",
-    image:
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
+    image: "/images/canopies/canopy03.webp",
     icon: serviceIcons[3],
   },
   {
     id: 4,
     title: "Kết Cấu Thép, Cửa Cổng & Gia Công Cơ Khí CNC",
     desc: "Thi công nhà xưởng, khung kèo thép tiền chế, cửa cổng kết cấu sắt sơn tĩnh điện & gia công cắt laser chính xác.",
-    image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gates/gate01.webp",
     icon: serviceIcons[4],
   },
 ];
@@ -79,8 +75,7 @@ export const ARTICLES: ArticleItem[] = [
     date: "22/07/2026",
     author: "Designer Đại Hải Phát",
     excerpt: "Ưu điểm chống cong vênh, chống mối mọt của ván MDF lõi xanh Melamine kết hợp khung nhôm định hình nhúng LED sang trọng.",
-    image:
-      "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=800&q=80",
+    image: "/images/interior/interior78.webp",
   },
   {
     id: 2,
@@ -89,8 +84,7 @@ export const ARTICLES: ArticleItem[] = [
     date: "21/07/2026",
     author: "KTS Nguyễn Văn Hùng",
     excerpt: "Kết hợp khung cơ khí chắc chắn chịu tải 500kg với bề mặt gỗ MDF phủ Melamine vân gỗ tự nhiên siêu thẩm mỹ.",
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+    image: "/images/interior/interior07.webp",
   },
   {
     id: 3,
@@ -99,8 +93,7 @@ export const ARTICLES: ArticleItem[] = [
     date: "19/07/2026",
     author: "Đội Thi Công Cơ Khí",
     excerpt: "Tấm lợp đặc nhựa Composite độ bền trên 20 năm, không mục nát, chịu mưa bão và cách nhiệt tối ưu cho giếng trời, mái hiên.",
-    image:
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+    image: "/images/canopies/canopy03.webp",
   },
   {
     id: 4,
@@ -109,8 +102,7 @@ export const ARTICLES: ArticleItem[] = [
     date: "17/07/2026",
     author: "Ban Thiết Kế ĐHP",
     excerpt: "Sự kết hợp giữa vách nhựa Composite giả đá, lam sóng PVC và kệ Tivi MDF treo tường nâng tầm không gian phòng khách.",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    image: "/images/interior/interior10.webp",
   },
 ];
 

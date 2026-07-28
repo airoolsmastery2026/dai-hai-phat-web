@@ -15,9 +15,8 @@ export function ProjectsSection() {
             Hình dung phương án trước khi khảo sát
           </h2>
           <p className="mt-4 leading-7 text-slate-600">
-            Các hình ảnh hiện tại dùng để minh họa nhóm giải pháp. Hồ sơ công
-            trình thực tế sẽ chỉ được công bố sau khi doanh nghiệp xác minh nội
-            dung và quyền sử dụng.
+            Hình ảnh được chọn từ thư viện công trình có nguồn và quyền sử dụng
+            đã xác minh của Đại Hải Phát.
           </p>
         </div>
 
@@ -37,7 +36,7 @@ export function ProjectsSection() {
                   className="object-cover transition duration-300 group-hover:scale-[1.02]"
                 />
                 <span className="absolute left-3 top-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-white">
-                  Hình minh họa
+                  Ảnh đã xác minh
                 </span>
               </div>
               <div className="p-5">
