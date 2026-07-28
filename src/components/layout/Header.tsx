@@ -3,34 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const menus = [
-  {
-    title: "Trang chủ",
-    href: "/",
-  },
-  {
-    title: "Nội thất",
-    href: "#services",
-  },
-  {
-    title: "Cơ khí",
-    href: "#services",
-  },
-  {
-    title: "Dự án",
-    href: "#projects",
-  },
-  {
-    title: "Giới thiệu",
-    href: "#about",
-  },
-  {
-    title: "Liên hệ",
-    href: "#contact",
-  },
+const menuItems = [
+  { title: "Trang chủ", href: "/" },
+  { title: "Nội thất", href: "#services" },
+  { title: "Cơ khí", href: "#services" },
+  { title: "Dự án", href: "#projects" },
+  { title: "Giới thiệu", href: "#about" },
+  { title: "Liên hệ", href: "#contact" },
 ];
 
-export function SiteNavigation() {
+export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeHash, setActiveHash] = useState("");
@@ -91,29 +73,24 @@ export function SiteNavigation() {
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="flex flex-shrink-0 flex-col">
-          <span className="text-xl font-black uppercase tracking-wide transition-colors text-slate-900">
+        <Link href="/" className="flex-shrink-0">
+          <span className="text-xl font-bold text-slate-900">
             ĐẠI HẢI PHÁT
-          </span>
-          <span className={`text-xs uppercase tracking-[0.35em] transition-colors ${
-            isScrolled ? "text-orange-500" : "text-orange-400"
-          }`}>
-            Nội thất & Cơ khí dân dụng
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-10 lg:flex">
-          {menus.map((item) => (
+        {/* Desktop Menu */}
+        <nav className="hidden gap-10 lg:flex">
+          {menuItems.map((item) => (
             <a
               key={item.title}
               href={item.href}
-              className={`text-sm font-semibold uppercase tracking-wider transition-colors ${
+              className={`text-sm font-semibold transition-colors ${
                 isMenuItemActive(item.href)
-                  ? "text-orange-500"
+                  ? "text-slate-900"
                   : isScrolled
                     ? "text-slate-600 hover:text-slate-900"
-                    : "text-slate-900 hover:text-orange-500"
+                    : "text-slate-700 hover:text-slate-900"
               }`}
             >
               {item.title}
@@ -124,13 +101,9 @@ export function SiteNavigation() {
         {/* Desktop CTA Button */}
         <a
           href="#contact"
-          className={`hidden rounded-lg px-6 py-2 text-sm font-semibold transition-all lg:inline-block ${
-            isScrolled
-              ? "bg-orange-500 text-white hover:bg-orange-600"
-              : "border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white"
-          }`}
+          className="hidden rounded-lg bg-slate-900 px-6 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 lg:inline-block"
         >
-          Báo giá
+          Nhận báo giá
         </a>
 
         {/* Mobile Hamburger Button */}
@@ -140,9 +113,7 @@ export function SiteNavigation() {
           aria-label="Toggle menu"
         >
           <svg
-            className={`h-6 w-6 transition-colors ${
-              isScrolled ? "text-slate-900" : "text-white"
-            }`}
+            className="h-6 w-6 text-slate-900"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -168,16 +139,19 @@ export function SiteNavigation() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="border-b border-slate-200 bg-white shadow-lg lg:hidden">
+        <div
+          className="absolute left-0 right-0 top-20 border-b border-slate-200 bg-white shadow-lg lg:hidden"
+          onClick={() => setIsOpen(false)}
+        >
           <nav className="space-y-2 px-6 py-6">
-            {menus.map((item) => (
+            {menuItems.map((item) => (
               <a
                 key={item.title}
                 href={item.href}
                 onClick={handleNavClick}
-                className={`block rounded-lg px-4 py-3 font-semibold uppercase tracking-wide transition-colors ${
+                className={`block rounded-lg px-4 py-3 font-semibold transition-colors ${
                   isMenuItemActive(item.href)
-                    ? "bg-orange-100 text-orange-600"
+                    ? "bg-slate-100 text-slate-900"
                     : "text-slate-700 hover:bg-slate-50"
                 }`}
               >
@@ -187,7 +161,7 @@ export function SiteNavigation() {
             <a
               href="#contact"
               onClick={handleNavClick}
-              className="mt-4 block rounded-lg bg-orange-500 px-4 py-3 text-center font-semibold uppercase text-white transition hover:bg-orange-600"
+              className="mt-4 block rounded-lg bg-slate-900 px-4 py-3 text-center font-semibold text-white transition hover:bg-slate-800"
             >
               Nhận báo giá
             </a>

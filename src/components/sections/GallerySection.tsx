@@ -1,18 +1,18 @@
 import Image from "next/image";
 
 const gallery = [
-  "/images/bedroom-01.jpg",
-  "/images/bedroom-02.jpg",
-  "/images/bedroom-03.jpg",
-  "/images/wardrobe-01.jpg",
-  "/images/wardrobe-02.jpg",
-  "/images/wardrobe-03.jpg",
-  "/images/kitchen-01.jpg",
-  "/images/kitchen-02.jpg",
-  "/images/kitchen-03.jpg",
-  "/images/livingroom-01.jpg",
-  "/images/tv-01.jpg",
-  "/images/canopy-01.jpg",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
+  "/images/placeholder.png",
 ];
 
 export default function GallerySection() {
@@ -69,3 +69,4 @@ export default function GallerySection() {
     </section>
   );
 }
+

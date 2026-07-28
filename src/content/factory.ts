@@ -245,32 +245,33 @@ export const STATISTICS = [
 export const GALLERY_IMAGES = [
   {
     category: "CNC Processing",
-    url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=900&q=80",
+    url: "/images/placeholder.png",
     title: "Gia công CNC",
   },
   {
     category: "Welding",
-    url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=900&q=80",
+    url: "/images/placeholder.png",
     title: "Hàn Robot",
   },
   {
     category: "Assembly",
-    url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=900&q=80",
+    url: "/images/placeholder.png",
     title: "Lắp ráp",
   },
   {
     category: "Coating",
-    url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=900&q=80",
+    url: "/images/placeholder.png",
     title: "Phủ sơn",
   },
   {
     category: "Quality Control",
-    url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=900&q=80",
+    url: "/images/placeholder.png",
     title: "Kiểm tra chất lượng",
   },
   {
     category: "Packaging",
-    url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=900&q=80",
+    url: "/images/placeholder.png",
     title: "Đóng gói",
   },
 ];
+

@@ -32,8 +32,8 @@ export const SERVICES: ServiceItem[] = [
       { title: "Thi công", description: "Gia công và lắp đặt đúng tiến độ và tiêu chuẩn chất lượng." },
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
+      "/images/placeholder.png",
     ],
     faq: [
       { question: "Có thể thiết kế theo phong cách riêng không?", answer: "Có, chúng tôi nhận thiết kế theo yêu cầu và tối ưu theo không gian sử dụng." },
@@ -51,10 +51,10 @@ export const SERVICES: ServiceItem[] = [
       serviceType: "Interior furniture manufacturing",
     },
     relatedProjects: [
-      { title: "Thi công vách ngăn composite cao cấp", slug: "vach-ngan-composite", category: "Composite", image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80" },
+      { title: "Thi công vách ngăn composite cao cấp", slug: "vach-ngan-composite", category: "Composite", image: "/images/placeholder.png" },
     ],
     image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
     icon: serviceIcons[1],
   },
   {
@@ -79,8 +79,8 @@ export const SERVICES: ServiceItem[] = [
       { title: "Lắp đặt", description: "Gắn cố định và kiểm tra độ phẳng, hài hòa." },
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
+      "/images/placeholder.png",
     ],
     faq: [
       { question: "Có cần chuẩn bị mặt phẳng trước khi thi công không?", answer: "Nên có mặt phẳng và thông tin kích thước trước khi triển khai để đảm bảo độ chính xác." },
@@ -97,10 +97,10 @@ export const SERVICES: ServiceItem[] = [
       serviceType: "Composite wall systems",
     },
     relatedProjects: [
-      { title: "Nội thất phòng ngủ MDF melamine", slug: "noi-that-gỗ-mdf-melamine", category: "Nội thất", image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80" },
+      { title: "Nội thất phòng ngủ MDF melamine", slug: "noi-that-gỗ-mdf-melamine", category: "Nội thất", image: "/images/placeholder.png" },
     ],
     image:
-      "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
     icon: serviceIcons[2],
   },
   {
@@ -125,8 +125,8 @@ export const SERVICES: ServiceItem[] = [
       { title: "Lắp đặt", description: "Đảm bảo kết nối chắc chắn, kín nước và thẩm mỹ." },
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
+      "/images/placeholder.png",
     ],
     faq: [
       { question: "Mái che có phù hợp cho khu vực nắng gắt không?", answer: "Có, tấm composite chống tia UV giúp giảm nhiệt và bảo vệ không gian dưới mái." },
@@ -143,10 +143,10 @@ export const SERVICES: ServiceItem[] = [
       serviceType: "Roofing systems",
     },
     relatedProjects: [
-      { title: "Khung thép và cửa cổng công nghiệp", slug: "khung-thep-cua-cong", category: "Kết cấu thép", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80" },
+      { title: "Khung thép và cửa cổng công nghiệp", slug: "khung-thep-cua-cong", category: "Kết cấu thép", image: "/images/placeholder.png" },
     ],
     image:
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
     icon: serviceIcons[3],
   },
   {
@@ -171,8 +171,8 @@ export const SERVICES: ServiceItem[] = [
       { title: "Lắp dựng", description: "Lắp đặt tại công trình và kiểm tra độ thẳng, vững chắc." },
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
+      "/images/placeholder.png",
     ],
     faq: [
       { question: "Bạn có nhận làm cửa cổng và khung thép theo kích thước riêng không?", answer: "Có, chúng tôi gia công theo bản vẽ và kích thước yêu cầu của khách hàng." },
@@ -189,10 +189,11 @@ export const SERVICES: ServiceItem[] = [
       serviceType: "Steel structure fabrication",
     },
     relatedProjects: [
-      { title: "Mái che composite chịu lực", slug: "mai-che-nhua-dac-composite", category: "Composite", image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" },
+      { title: "Mái che composite chịu lực", slug: "mai-che-nhua-dac-composite", category: "Composite", image: "/images/placeholder.png" },
     ],
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+      "/images/placeholder.png",
     icon: serviceIcons[4],
   },
 ];
+

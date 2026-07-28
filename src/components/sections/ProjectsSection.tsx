@@ -3,32 +3,32 @@ import Image from "next/image";
 const projects = [
   {
     title: "Tủ bếp Acrylic hiện đại",
-    image: "/images/kitchen-01.jpg",
+    image: "/images/placeholder.png",
     category: "Nội thất",
   },
   {
     title: "Phòng ngủ MDF chống ẩm",
-    image: "/images/bedroom-01.jpg",
+    image: "/images/placeholder.png",
     category: "Nội thất",
   },
   {
     title: "Tủ quần áo cánh kính",
-    image: "/images/wardrobe-01.jpg",
+    image: "/images/placeholder.png",
     category: "Nội thất",
   },
   {
     title: "Kệ TV phòng khách",
-    image: "/images/tv-01.jpg",
+    image: "/images/placeholder.png",
     category: "Nội thất",
   },
   {
     title: "Mái che Polycarbonate",
-    image: "/images/canopy-01.jpg",
+    image: "/images/placeholder.png",
     category: "Cơ khí dân dụng",
   },
   {
     title: "Thi công cửa sắt",
-    image: "/images/steel-door.jpg",
+    image: "/images/placeholder.png",
     category: "Cơ khí dân dụng",
   },
 ];
@@ -95,3 +95,4 @@ export function ProjectsSection() {
     </section>
   );
 }
+
