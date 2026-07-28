@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior88",
+  "title": "Vách ngăn kết hợp kệ trang trí",
+  "alt": "Hình vách ngăn kết hợp kệ trang trí trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách ngăn kết hợp kệ trang trí được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách ngăn kết hợp kệ trang trí. Mô tả đã xác minh: Tư liệu vách ngăn kết hợp kệ trang trí được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách ngăn kết hợp kệ trang trí | Đại Hải Phát",
+    "description": "Hình ảnh vách ngăn kết hợp kệ trang trí dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách ngăn kết hợp kệ trang trí"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior88.jpg",
+    "sourceRelativePath": "assets/images/interior/interior88.jpg",
+    "publicUrl": "/images/interior/interior88.jpg",
+    "bytes": 185073,
+    "sha256": "ea5ef11dc037013b934224fa0f91d16915caa822a3ec8e6d18a94bd1946c551e",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior88.webp",
+    "publicUrl": "/images/interior/interior88.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 75462,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior88.thumb.webp",
+    "publicUrl": "/images/interior/interior88.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 20296,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRn4BAABXRUJQVlA4IHIBAABQCQCdASogACsAPu1oq1AppiOiqrgMATAdiWMAuwWwJTscBK1u/CM0C0WUt8WolViAX+0niJQ9x7mRB8n/FlDohEHVk/r3695ySsx1ri0TjAFrwAD+jmETv7MfAESfy+/I0qE7i1xyIZt+Qz5aPtyLyXz56YoUaFDHQgRqypSqI/yoDANd3r4jo980iabE0rBj/IAI5guAbeyGfc+Bph6KjZmgT1T8+6/6cdlYbH8L4RtWmjwMjthVdFYqESXn0Yhi12Tq1eRHXJ9PpXS8s58/ne6nBwPtxtYdGo+tRJYCpkgAoIhZomrJegcZo/Mqa21xTccADyVAIkScqddcgyAZrZ2x3yK8g6nZ9xSN5SBmj04xFQieRVVmUMlEe+gzlQ4PEez3LwTTukM/cEe5DvO94jLB//pJc0MnTrTsjmH5IIArqAHuA+8YFpPaQBdVmD9uWh67NK8SWBhLYAmEJUGJnmSSSLxPxkkeezIdkITUAAAA"
+}

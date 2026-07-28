@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior55",
+  "title": "Giường ngủ kết hợp tủ âm tường",
+  "alt": "Hình giường ngủ kết hợp tủ âm tường trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu giường ngủ kết hợp tủ âm tường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Giường ngủ kết hợp tủ âm tường. Mô tả đã xác minh: Tư liệu giường ngủ kết hợp tủ âm tường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Giường ngủ kết hợp tủ âm tường | Đại Hải Phát",
+    "description": "Hình ảnh giường ngủ kết hợp tủ âm tường dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "giường ngủ kết hợp tủ âm tường",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior55.jpg",
+    "sourceRelativePath": "assets/images/interior/interior55.jpg",
+    "publicUrl": "/images/interior/interior55.jpg",
+    "bytes": 70857,
+    "sha256": "8cc28489f8dfc084f1d1216f3bfb05ba849d929a70c39cb568e2dd8efd41e392",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior55.webp",
+    "publicUrl": "/images/interior/interior55.webp",
+    "width": 960,
+    "height": 720,
+    "bytes": 29676,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior55.thumb.webp",
+    "publicUrl": "/images/interior/interior55.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 8544,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAAAwBgCdASogABgAPu1qrlCppaQiqAqpMB2JZwC7ABMSeQTO8SiquXsPUgmk/tZmzNe3dH/pVpCMVBFAAP371hkIaczYqzlzpDC+YSKNJkIBm8bZXs24uMlKGVaeal4DRD1sDFMd7/fQfd8mEyfjiebHqiGKHB3YzNucGKiiqc+gX/BcJWKuv0wK6dQLKsk/SvLdIWUNzJMkJOXLw9c2KKypc8xEK0dAKttIAbqj4m/OYhDJR4dvLUg9oS7JNJWRHwAAAA=="
+}

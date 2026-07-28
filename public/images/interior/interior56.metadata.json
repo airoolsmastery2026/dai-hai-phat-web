@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior56",
+  "title": "Tủ áo tông trắng",
+  "alt": "Hình tủ áo tông trắng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo tông trắng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo tông trắng. Mô tả đã xác minh: Tư liệu tủ áo tông trắng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo tông trắng | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo tông trắng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo tông trắng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior56.jpg",
+    "sourceRelativePath": "assets/images/interior/interior56.jpg",
+    "publicUrl": "/images/interior/interior56.jpg",
+    "bytes": 44203,
+    "sha256": "92fd6f9711cdb499a4bae527c4f146ea1d5fe77bc5ef7128b05f28fa11b27582",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior56.webp",
+    "publicUrl": "/images/interior/interior56.webp",
+    "width": 510,
+    "height": 824,
+    "bytes": 18992,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior56.thumb.webp",
+    "publicUrl": "/images/interior/interior56.thumb.webp",
+    "width": 480,
+    "height": 776,
+    "bytes": 12976,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRlgBAABXRUJQVlA4IEwBAADQCQCdASogADQAPu1kq1AppSOirBVcyTAdiWcAzcW7g+JBbDTqGsXZCEbSZtVHsMT5KyB8yk2Ru7FTzBBp9jrUYZnOIHlE5g8W4iS6ejaeG/WYkRFbUDAA/vT9QSz3GjnjzgGpexbW1jD5ouf/So2e3/27aq2zZn2es2WQa+EiDrNmayRresQ3/TspR5NkDZF3XEzoN1937hPJFI7CbydswuWexlmmDIAR6ES+Ksz6zeosFtuSUcrSfLLQCWkrijRwzZrAcndrqPppB+d93VqKphHwn4EV2w1Iw7YTrDOdJ+WS7DSA7vpBwLsIjDbBmuHNpISu7pYYjJCsNXetcLuEa1vSPLUxWyJqf56OZd8dxkT06LZchhSsKCCDQPcR/62CXyyrRcDX4VNLUe5hQ114uGMBp/FW3pNBJD79YA1rLx7alExk20DPwAAAAA=="
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior62",
+  "title": "Bàn trà gỗ ba tầng",
+  "alt": "Hình bàn trà gỗ ba tầng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu bàn trà gỗ ba tầng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Bàn trà gỗ ba tầng. Mô tả đã xác minh: Tư liệu bàn trà gỗ ba tầng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Bàn trà gỗ ba tầng | Đại Hải Phát",
+    "description": "Hình ảnh bàn trà gỗ ba tầng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "bàn trà gỗ ba tầng",
+      "đại hải phát",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior62.jpg",
+    "sourceRelativePath": "assets/images/interior/interior62.jpg",
+    "publicUrl": "/images/interior/interior62.jpg",
+    "bytes": 218353,
+    "sha256": "9878736376ed48da9e166aa615876c78b5dab466ca9f598f4979ec1b93cdd63d",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior62.webp",
+    "publicUrl": "/images/interior/interior62.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 110426,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior62.thumb.webp",
+    "publicUrl": "/images/interior/interior62.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 20296,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuwAAABXRUJQVlA4IOAAAACQBgCdASogABgAPu1kqU2ppaOiMAgBMB2JZQCuHy+rpQ3clWaRrgI6w6rubpVuZO5mEqYO3VqEfFO+BuC+AP2fu+fJNDSMHQe/0hiM0gQmo2dZu9ATlMZTymSMO3ImqVQ+Z3YJHDC+dZVs48gVk+QdN88ibuHYfhcoYlU+22I0CliwJXPqww1oWStCHdfztIw4qTyf4zHhkAncFC/DYIB11KF/w5UAXTdOxew8N/wmypyBuzdxUH1pV8hPMy/KFgy8pI+1EY/lpJoB0i9+fJ2v7hrNEN9DNAH5uEeKQreAAA=="
+}

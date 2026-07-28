@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior15",
+  "title": "Vách ngăn kim loại hoa văn",
+  "alt": "Hình vách ngăn kim loại hoa văn trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách ngăn kim loại hoa văn được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách ngăn kim loại hoa văn. Mô tả đã xác minh: Tư liệu vách ngăn kim loại hoa văn được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách ngăn kim loại hoa văn | Đại Hải Phát",
+    "description": "Hình ảnh vách ngăn kim loại hoa văn dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách ngăn kim loại hoa văn"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior15.jpg",
+    "sourceRelativePath": "assets/images/interior/interior15.jpg",
+    "publicUrl": "/images/interior/interior15.jpg",
+    "bytes": 300133,
+    "sha256": "259aaa9f15866a54e895467b147a0c559a626b01e62f6f8720b3307241722322",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior15.webp",
+    "publicUrl": "/images/interior/interior15.webp",
+    "width": 1280,
+    "height": 1280,
+    "bytes": 139642,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior15.thumb.webp",
+    "publicUrl": "/images/interior/interior15.thumb.webp",
+    "width": 480,
+    "height": 480,
+    "bytes": 37582,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAQBgCdASogACAAPuVgqE2pJaQiMAwBIByJaQAOmon72J4ZtbWFpmVCIRCIgynpfqOW1H/nSFYqk8AA/vUj5uvKu6N/0HdhBXJlpbzwSfeT2DRtvK/9lyrhuqs0e6pOEkOJsuQdeRmXgC5rsQHQoB3hgo4Pj/UikCcomcNhFv3CLJqyUO1x1wfDmNS1r/OhkeljIbeAwJzOBCjabOpm9mj4/IbSnqDgAAA="
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior93",
+  "title": "Cửa đi tông xám",
+  "alt": "Hình cửa đi tông xám trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu cửa đi tông xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Cửa đi tông xám. Mô tả đã xác minh: Tư liệu cửa đi tông xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Cửa đi tông xám | Đại Hải Phát",
+    "description": "Hình ảnh cửa đi tông xám dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cửa đi tông xám",
+      "đại hải phát",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior93.jpg",
+    "sourceRelativePath": "assets/images/interior/interior93.jpg",
+    "publicUrl": "/images/interior/interior93.jpg",
+    "bytes": 131306,
+    "sha256": "fe0de211c03c069a2227a80ceb9f5615e1c8a1565abb34b2bbf9734380385268",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior93.webp",
+    "publicUrl": "/images/interior/interior93.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 53252,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior93.thumb.webp",
+    "publicUrl": "/images/interior/interior93.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 15632,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRkABAABXRUJQVlA4IDQBAADwCACdASogACsAPuViqU2pJaQiMAqpIByJQBkbNn43K1eWnxQY99HIPFIoz44O/j5qQ7VykkU8Vg2UsM34BIBpI3m/kK6dha1vslgFUMJ5gAD+5Ut9KtOBi/2Ha6C1MxMdv2AoOSBvEm2eC+5dqATVytLOZt/gyYmBu4jzFqrEsrmDDNxAYPp/jziKf3am3gkC46YiLDwXN4sNN2fMSCJPXCouAPOK6d0sFdmJJi84DlqvwMj7BmIpSkqtSCHmi7h4DuC94AKdDEnrGOb2gol/O+e8APQpdvF8LS+4v1iUhZK3ud7CYLCKUhrKU0XNkVgAswKUY05cbswaUtFPMXtQa0ooPuSVo74pWQm4LDjQHuG5ETlyV+56nCIIp9EccM1/sJoUhkgrR+cQaxhhZTgmUx3gAA=="
+}

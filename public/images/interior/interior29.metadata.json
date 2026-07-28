@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior29",
+  "title": "Bàn trang điểm và gương trang trí",
+  "alt": "Hình bàn trang điểm và gương trang trí trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu bàn trang điểm và gương trang trí được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Bàn trang điểm và gương trang trí. Mô tả đã xác minh: Tư liệu bàn trang điểm và gương trang trí được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Bàn trang điểm và gương trang trí | Đại Hải Phát",
+    "description": "Hình ảnh bàn trang điểm và gương trang trí dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "bàn trang điểm và gương trang trí",
+      "đại hải phát",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior29.jpg",
+    "sourceRelativePath": "assets/images/interior/interior29.jpg",
+    "publicUrl": "/images/interior/interior29.jpg",
+    "bytes": 212864,
+    "sha256": "3f3956b74d405ef86924c179a74cb5ebcaae978bdfdcad3a437261a945163472",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior29.webp",
+    "publicUrl": "/images/interior/interior29.webp",
+    "width": 1280,
+    "height": 1066,
+    "bytes": 85320,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior29.thumb.webp",
+    "publicUrl": "/images/interior/interior29.thumb.webp",
+    "width": 480,
+    "height": 400,
+    "bytes": 17066,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRjgBAABXRUJQVlA4ICwBAADwBwCdASogABsAPu1kqU2ppaOiMAgBMB2JYwCdBvG1QbQGG75ciTIZNdmMPqp+wPJT/baeOWMMZ8yhzkg8hyKNoWK1xHptgAAA/HGZPahgzkM0ETVCVeRephKpOUr8AKoiQwh9V+arGR5zX8ugUF28+SnGj3DDT/PCbvulESrEMgKJcJuZ7IgfHL//4OoR7d0sDQx8tuwFdbPa2tOnszASPuTuHnpuj9y+D+iGsYgikclTZqTV4cLrxHhPr1nQR0ttcZ3VmvH9K8XwWpRbauJKHVRSAqaKwJBXGbiKaF6y1gjpFFv8zAWiOxnxgvkl6WYCvC0TPHamVxpUg6+D8pGtxRpCVrd2Q15WTaB4dCdRACEUHp5aFpfk19ziFUSIo4juwkW+RTLbULTtAAA="
+}

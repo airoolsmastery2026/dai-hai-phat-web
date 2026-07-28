@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior37",
+  "title": "Phòng ngủ với hệ tủ đầu giường",
+  "alt": "Hình phòng ngủ với hệ tủ đầu giường trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với hệ tủ đầu giường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với hệ tủ đầu giường. Mô tả đã xác minh: Tư liệu phòng ngủ với hệ tủ đầu giường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với hệ tủ đầu giường | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với hệ tủ đầu giường dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với hệ tủ đầu giường"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior37.jpg",
+    "sourceRelativePath": "assets/images/interior/interior37.jpg",
+    "publicUrl": "/images/interior/interior37.jpg",
+    "bytes": 102107,
+    "sha256": "5e89242ae4f2fd0d84250809ec372d60af5756e51e52c6b6e89f19f70cc063d6",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior37.webp",
+    "publicUrl": "/images/interior/interior37.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 43496,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior37.thumb.webp",
+    "publicUrl": "/images/interior/interior37.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 13354,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRl4BAABXRUJQVlA4IFIBAACwCQCdASogACsAPuVYpk2pJKOiNVgMASAciWUAxoG4MZScV77Y2u5PTeryr6E6D/92B1a4Ny5wJTxKDdmxUURPCGJ21pGIGGdgUNP5GF8GZ1ohtwx5AAD+rcFxzo0gymcBnmb5PaBjS8c+r23gpZIv4rQULGjZh0q91ujhvJUMuCUi1pcuV9x9vmF7oG5e/tQ74hY8RWZXMJ08ugv5yAxGmPlb2+kpg3EonVM/3IQUSCNoBeLZb2phNHv9E2OnsvWKiPW6GVZZz8JFHYvzmck4rJ34ziQmry9j2zekcq9bKMYp3Ch/ZVH3DM4kVtMDG/386GY4csgIcfUHFWJbTVk3+WWAvNwSyyESbNCnRY9lxxwdSqlYj5Gf35H+xHlxgw7E4qsNor6Ee5SLe82VIJdUdKnEiGbIkadyfKR2259E3IWG9RwR3zJRA0u864gRr2QAAA=="
+}

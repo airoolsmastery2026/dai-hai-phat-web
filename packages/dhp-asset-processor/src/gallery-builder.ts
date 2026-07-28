@@ -32,6 +32,7 @@ interface ValidAsset {
 
 interface CliOptions {
   configPath?: string;
+  rootDir?: string;
   inputDir?: string;
   metadataDir?: string;
   outputDir?: string;
@@ -70,6 +71,7 @@ function galleryItem(
     alt: metadata.alt,
     caption: metadata.caption,
     category: metadata.category,
+    assetType: metadata.assetType,
     material: metadata.material,
     style: metadata.style,
     projectType: metadata.projectType,
@@ -82,6 +84,8 @@ function galleryItem(
     },
     original: {
       relativePath: optimized.original.relativePath,
+      sourceRelativePath: optimized.original.sourceRelativePath,
+      publicUrl: optimized.original.publicUrl,
       bytes: optimized.original.bytes,
       sha256: optimized.original.sha256,
       format: optimized.original.format,
@@ -176,11 +180,14 @@ export async function buildGallery(
   );
 
   const gallery: GalleryIndex = {
-    schemaVersion: "1.0",
+    schemaVersion: "1.1",
     generatedAt: new Date().toISOString(),
     total: items.length,
     filters: {
       categories: unique(items.map((item) => item.category)),
+      assetTypes: unique(
+        items.map((item) => item.assetType),
+      ) as GalleryIndex["filters"]["assetTypes"],
       materials: unique(items.map((item) => item.material)),
       styles: unique(items.map((item) => item.style)),
       projectTypes: unique(items.map((item) => item.projectType)),
@@ -221,6 +228,7 @@ function parseArgs(args: string[]): CliOptions {
   for (let index = 0; index < args.length; index += 1) {
     const flag = args[index];
     if (flag === "--config") options.configPath = nextValue(args, index++, flag);
+    else if (flag === "--root") options.rootDir = nextValue(args, index++, flag);
     else if (flag === "--input") options.inputDir = nextValue(args, index++, flag);
     else if (flag === "--metadata") options.metadataDir = nextValue(args, index++, flag);
     else if (flag === "--output") options.outputDir = nextValue(args, index++, flag);
@@ -242,6 +250,7 @@ function printHelp(): void {
       "Usage: dhp-assets [options]",
       "",
       "  --config <path>    Load JSON configuration",
+      "  --root <path>      Set the repository root",
       "  --input <path>     Original image directory",
       "  --metadata <path>  Verified metadata directory",
       "  --output <path>    Generated WebP directory",
@@ -273,6 +282,7 @@ async function runCli(): Promise<void> {
   }
 
   const config = await loadConfig(cli.configPath, {
+    rootDir: cli.rootDir,
     inputDir: cli.inputDir,
     metadataDir: cli.metadataDir,
     outputDir: cli.outputDir,

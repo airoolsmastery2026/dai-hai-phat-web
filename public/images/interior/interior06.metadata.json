@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior06",
+  "title": "Bàn làm việc và tủ hồ sơ",
+  "alt": "Hình bàn làm việc và tủ hồ sơ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu bàn làm việc và tủ hồ sơ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Bàn làm việc và tủ hồ sơ. Mô tả đã xác minh: Tư liệu bàn làm việc và tủ hồ sơ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Bàn làm việc và tủ hồ sơ | Đại Hải Phát",
+    "description": "Hình ảnh bàn làm việc và tủ hồ sơ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "bàn làm việc và tủ hồ sơ",
+      "đại hải phát",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior06.jpg",
+    "sourceRelativePath": "assets/images/interior/interior06.jpg",
+    "publicUrl": "/images/interior/interior06.jpg",
+    "bytes": 78876,
+    "sha256": "13afa05636be8a5e781ca463d553848581b2ba612cb86d44b6a3f50dc4cb0cf0",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior06.webp",
+    "publicUrl": "/images/interior/interior06.webp",
+    "width": 960,
+    "height": 540,
+    "bytes": 43928,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior06.thumb.webp",
+    "publicUrl": "/images/interior/interior06.thumb.webp",
+    "width": 480,
+    "height": 270,
+    "bytes": 12070,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRtwAAABXRUJQVlA4INAAAADwBgCdASogABIAPu1krFAppSQisBgIATAdiWUAyNmx5QDajNM4hpv3K6ZX3bWnybuHKkg6GzcW4KQIKhIPiOz4AP6ukPKFfcWSEEXXaIGTUukPLpE2xWRtEhs9SE9zE4e1uxUHaT/VMbTUPuoM1zKhseL8oxd80dNybzeAcXPD1jDDviqt0rN/xRV18eedvHBNVsOJXyQTlUPRGo0VwFVnIazRh4Ck+or41P1nx+alTUsIUP48lwLk9mPGQDbQWszynXjgfjvsEDYwsHLtMbQA"
+}

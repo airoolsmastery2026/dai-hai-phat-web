@@ -77,10 +77,25 @@ export async function optimizeAsset(
 
   const relativeDirectory = path.dirname(asset.relativePath);
   const outputDirectory = path.join(config.outputDir, relativeDirectory);
-  const id = `${slugify(asset.baseName)}-${asset.sha256.slice(0, 8)}`;
-  const webpPath = path.join(outputDirectory, `${id}.webp`);
-  const thumbnailPath = path.join(outputDirectory, `${id}.thumb.webp`);
-  const metadataOutputPath = path.join(outputDirectory, `${id}.metadata.json`);
+  const stableName = slugify(asset.baseName);
+  const relativeWithoutExtension = asset.relativePath.slice(
+    0,
+    -asset.extension.length,
+  );
+  const id = slugify(relativeWithoutExtension);
+  const originalPath = path.join(
+    outputDirectory,
+    `${stableName}${asset.extension}`,
+  );
+  const webpPath = path.join(outputDirectory, `${stableName}.webp`);
+  const thumbnailPath = path.join(
+    outputDirectory,
+    `${stableName}.thumb.webp`,
+  );
+  const metadataOutputPath = path.join(
+    outputDirectory,
+    `${stableName}.metadata.json`,
+  );
   const sourceBuffer = await readFile(asset.absolutePath);
   const basePipeline = sharp(sourceBuffer, { failOn: "error" }).rotate();
   const full = await basePipeline
@@ -114,6 +129,7 @@ export async function optimizeAsset(
   if (!dryRun) {
     await mkdir(outputDirectory, { recursive: true });
     await Promise.all([
+      writeFile(originalPath, sourceBuffer),
       writeFile(webpPath, full.data),
       writeFile(thumbnailPath, thumbnail.data),
     ]);
@@ -122,8 +138,12 @@ export async function optimizeAsset(
   return {
     id,
     original: {
-      absolutePath: asset.absolutePath,
-      relativePath: toPosix(path.relative(config.rootDir, asset.absolutePath)),
+      absolutePath: originalPath,
+      relativePath: toPosix(path.relative(config.rootDir, originalPath)),
+      sourceRelativePath: toPosix(
+        path.relative(config.rootDir, asset.absolutePath),
+      ),
+      publicUrl: toPublicUrl(config.rootDir, originalPath),
       bytes: asset.bytes,
       sha256: asset.sha256,
       format: asset.extension,

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior10",
+  "title": "Vách tivi ốp đá và lam gỗ",
+  "alt": "Hình vách tivi ốp đá và lam gỗ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi ốp đá và lam gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi ốp đá và lam gỗ. Mô tả đã xác minh: Tư liệu vách tivi ốp đá và lam gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi ốp đá và lam gỗ | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi ốp đá và lam gỗ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi ốp đá và lam gỗ"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior10.jpg",
+    "sourceRelativePath": "assets/images/interior/interior10.jpg",
+    "publicUrl": "/images/interior/interior10.jpg",
+    "bytes": 167217,
+    "sha256": "1befadf2ac68e3d5eeaed6329da8546197f2a3e0fe8bcd1709b7e9192616851f",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior10.webp",
+    "publicUrl": "/images/interior/interior10.webp",
+    "width": 720,
+    "height": 960,
+    "bytes": 108802,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior10.thumb.webp",
+    "publicUrl": "/images/interior/interior10.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 41010,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRp4BAABXRUJQVlA4IJIBAADQCQCdASogACsAPu1mr0+ppaSiKqoBMB2JQBZ2etUmmgHhHsPlYg8TShV3XYRGFiqKWBzaMXB66O5YiV7PHdTjMmHGxRmQNxJcsz249iX5gnp/xKBKaPAA/uOPdXYaMoDFa762nbNysXW4rKCt8n1AWpF5RHsthpjEYMEBO/XE2CVNDq1FEFbD+6MeVzlBw2r5pt6HGAeWDxQUwxsx5sYv3uR0Q1WRLYDaDM05xEtocWCd7iYCHbOQncndHK3nT57P+hGh+6EobSYWLbBIbHiS+f5SmHj4vxvkFEyg4u4KGZkZfbArj6PuJaAKU18ODZDU5Djc0g8XVdXn8xPo4GK5PgqMS8v1/16d6JMFD0tNJvZ/8NHT3I4go8hz8wzubPAAsk4pGUDCyYd2XvEx1huzmSgtPfwKSzhD3JYi8LKdOV5Ds96vEg84ehjnfEP1izAOPeE5FaksNclTrG76x3Jfi5Vj/rAmnbF1Wwr32fBxiJVDmFVd2JVYmn6Awy6pt9weNNfxKGO9ijW5/oI99AkIAAA="
+}

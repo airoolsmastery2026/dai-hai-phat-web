@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior40",
+  "title": "Cửa đi bề mặt vân gỗ",
+  "alt": "Hình cửa đi bề mặt vân gỗ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu cửa đi bề mặt vân gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Cửa đi bề mặt vân gỗ. Mô tả đã xác minh: Tư liệu cửa đi bề mặt vân gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Cửa đi bề mặt vân gỗ | Đại Hải Phát",
+    "description": "Hình ảnh cửa đi bề mặt vân gỗ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cửa đi bề mặt vân gỗ",
+      "đại hải phát",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior40.jpg",
+    "sourceRelativePath": "assets/images/interior/interior40.jpg",
+    "publicUrl": "/images/interior/interior40.jpg",
+    "bytes": 46163,
+    "sha256": "6448d3fb6f73edb5e550d3235dd4a12b0a806398751bd286fc7c192b6384f0dc",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior40.webp",
+    "publicUrl": "/images/interior/interior40.webp",
+    "width": 587,
+    "height": 762,
+    "bytes": 16794,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior40.thumb.webp",
+    "publicUrl": "/images/interior/interior40.thumb.webp",
+    "width": 480,
+    "height": 623,
+    "bytes": 8314,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAABQBwCdASogACoAPu1gqU4ppSOiMBVdUTAdiWIAnQSUcKv1zrRE9ZzjOJGGGeCcbhIg2lA4+mOjhDYViaWfjiBuBoCwAP7x37YOQynG75Mcvwb125F7CY7ZCKZMLmZfw4Btp0D50KqV61ac+ftcMjPouxy1dISt9MxiQkZ4+6yVicOwbMGqFPGPV0CVU3LMEBJ6bWmyQvtX1We/PSwqBTcfqn4uFQptmw8tchJR5m3Bz9/enAwkPTKQNHSS2GIAAAA="
+}

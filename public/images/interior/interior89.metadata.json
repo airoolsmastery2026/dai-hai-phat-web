@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior89",
+  "title": "Giường bệt kết hợp tủ đầu giường",
+  "alt": "Hình giường bệt kết hợp tủ đầu giường trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu giường bệt kết hợp tủ đầu giường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Giường bệt kết hợp tủ đầu giường. Mô tả đã xác minh: Tư liệu giường bệt kết hợp tủ đầu giường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Giường bệt kết hợp tủ đầu giường | Đại Hải Phát",
+    "description": "Hình ảnh giường bệt kết hợp tủ đầu giường dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "giường bệt kết hợp tủ đầu giường",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior89.jpg",
+    "sourceRelativePath": "assets/images/interior/interior89.jpg",
+    "publicUrl": "/images/interior/interior89.jpg",
+    "bytes": 125601,
+    "sha256": "ec22da5e5b20a38749c70a22ca03ab15b6beced361730ddab0ef36b9786d650d",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior89.webp",
+    "publicUrl": "/images/interior/interior89.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 61912,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior89.thumb.webp",
+    "publicUrl": "/images/interior/interior89.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 17292,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRggBAABXRUJQVlA4IPwAAACwCACdASogACsAPu1uqVAppqOiqrgMATAdiWMAyNcwjfjXK9FN10oKXXqdH6Xm/evLlvkYCFIHCZ8drfZ5dkI7fLUdHs0k2UQHbuLBZOAAUEKuGWGzayCkyChgntN4xykiRElo6F/Iaiplye9xSBARqKR8MLOK9cgkUCHRBpd0tPGVvNZ2ytFmGnmWyMp+qXG/Agl0HSkxMQJWxql/fV3OIpO93Xs9GVC7XdM7eBHaJsFLGHsM1X2TS6APFNq9UpLlVrfNEofI/wLLjaZzZbtWjf0O6KQBunh46yPzsibh514ZopzkL5uKRfOiyaXibQJCtg50ow5WJj6gAAA="
+}

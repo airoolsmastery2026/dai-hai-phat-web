@@ -1,0 +1,52 @@
+{
+  "id": "gates-gate03",
+  "title": "Khung cổng CNC tại xưởng",
+  "alt": "Hình khung cổng CNC tại xưởng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu khung cổng CNC tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cửa cổng",
+  "assetType": "project",
+  "material": "Kim loại cắt CNC",
+  "style": "Hoa văn CNC",
+  "projectType": "Nhà ở",
+  "service": "Cửa cổng",
+  "prompt": "Chủ thể: Khung cổng CNC tại xưởng. Mô tả đã xác minh: Tư liệu khung cổng CNC tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cửa cổng. Dịch vụ: Cửa cổng. Vật liệu: Kim loại cắt CNC. Phong cách: Hoa văn CNC. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Khung cổng CNC tại xưởng | Đại Hải Phát",
+    "description": "Hình ảnh khung cổng CNC tại xưởng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cửa cổng",
+      "đại hải phát",
+      "khung cổng cnc tại xưởng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/gates/gate03.jpg",
+    "sourceRelativePath": "assets/images/gates/gate03.jpg",
+    "publicUrl": "/images/gates/gate03.jpg",
+    "bytes": 236597,
+    "sha256": "9872dcca4d9d81d05358dd05aceedcb6db29b53736b977ea2b341d9d3a6f3da0",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/gates/gate03.webp",
+    "publicUrl": "/images/gates/gate03.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 123434,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/gates/gate03.thumb.webp",
+    "publicUrl": "/images/gates/gate03.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 37728,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRkABAABXRUJQVlA4IDQBAACQCQCdASogACsAPuFaqE2opSQiNVgMARAcCWUAyn2vpUbatxr9ee+ka3L0gG4c7/4+u7estrA0fUrdy2ACFT92Fe+taWATRkta4QDp8eshDjDGu6IAAP7aQSnEMVfd3Ez77TSwsa1qZ3gICyAJIjDdFMrfLWnZz8utOsxF23BTK4ku0Gh/1cVLeZH9bM8xrkdmW8+dmKesws8b+6VNGP8t/khi7bu8iNX+JmF2VAMQXmpBiI6dxZzFDXGd6cjALjxGuIs44x9uTQI78qbikXYzokFDcPenUH4zQxA8ctFVkF71eycRHPTbyFKxgbxNrWqwJGvhtB0gGMHssmV1UZakSkWjfmwxAWJ9ibgyb/Byf7TCliny2uoTScThMUw3W7k5wacWSTT7MGBiw7s9LVdMTANAAA=="
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior82",
+  "title": "Phòng ngủ với giường bệt",
+  "alt": "Hình phòng ngủ với giường bệt trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với giường bệt được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với giường bệt. Mô tả đã xác minh: Tư liệu phòng ngủ với giường bệt được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với giường bệt | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với giường bệt dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với giường bệt"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior82.jpg",
+    "sourceRelativePath": "assets/images/interior/interior82.jpg",
+    "publicUrl": "/images/interior/interior82.jpg",
+    "bytes": 137282,
+    "sha256": "e0f1eb5d01b7f41f73a64a2848de66830f36dabb9e45c5fba3f7811052ef99e1",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior82.webp",
+    "publicUrl": "/images/interior/interior82.webp",
+    "width": 1280,
+    "height": 939,
+    "bytes": 63214,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior82.thumb.webp",
+    "publicUrl": "/images/interior/interior82.thumb.webp",
+    "width": 480,
+    "height": 352,
+    "bytes": 11822,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRg4BAABXRUJQVlA4IAIBAABQBwCdASogABcAPu1wsVKppiSiqAgBMB2JYgC7INC4BAWXYtjVJ9mTcu1dPWpFZ0ivWd9P6bsCLAfwtAS7sA+rEZ+QAP4Ez2YVzWAZiF9VVpRjIiVKShy87OLds2s0c96UMSgwOwDiRqy6ui59WMTXbpxvrvUux1jH+m6RCGFggRgL9OQwLY7eMYhbBdbEJrtlXjcOukKQ4bD2d8fvxovRPyyK5XK4lVpbTb2G7Ey5AJR5s7fPELxMp1lcImrGSeAqNtFjGX3KxfW/2namXRiLRMKYdmA992rbZgXRBaQ5Q09v18VAObRu7rXaf/8fxJVe00k9xj7q6plGRHAri0FpAAA="
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior45",
+  "title": "Tủ áo cánh mở tông sáng",
+  "alt": "Hình tủ áo cánh mở tông sáng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo cánh mở tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo cánh mở tông sáng. Mô tả đã xác minh: Tư liệu tủ áo cánh mở tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo cánh mở tông sáng | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo cánh mở tông sáng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo cánh mở tông sáng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior45.jpg",
+    "sourceRelativePath": "assets/images/interior/interior45.jpg",
+    "publicUrl": "/images/interior/interior45.jpg",
+    "bytes": 151665,
+    "sha256": "6d9cbb8e8a54009615657c3b77f8e48ec9402ec9a72daf0298b22012813e8496",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior45.webp",
+    "publicUrl": "/images/interior/interior45.webp",
+    "width": 944,
+    "height": 1109,
+    "bytes": 76084,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior45.thumb.webp",
+    "publicUrl": "/images/interior/interior45.thumb.webp",
+    "width": 480,
+    "height": 564,
+    "bytes": 19990,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRkQBAABXRUJQVlA4IDgBAACwCACdASogACUAPulgqE2pJaQiNVgIASAdCUAWIZ6PB2CTt+acAoPJKYj8l3faRJ2uao9dlqe5lIlpXo6eHw/iZHZcM1iDKH06t/5WsMAA/ms2PPPADhm3Lzanhq0wl+/O5l95VDRzvQ9iO7AJkq0rZaVG6/YOGNkOGBNbGl3xoB9GySJfkhh9SIw5BbDWK+Emkt4lKRUqTlszku5MoRz+YUsQECFaw04cispsT0eJHgbteZCISP0EGA5UhP3MhJ2tCQ7bLbPQZs/HnVtdL8AosVPEFct3K4R9cW5yyTxQKNf8O2pFDCRCes/lygdJi2NvC2Iti6YhQZXSF9+ws8UTa4SuCq+QZcGN78dlvwm2gOzyQLBsnxHFimwzMtvIKYVY26eXFN/Y5AOz35HH5sy8+T3DL/dxwAA="
+}

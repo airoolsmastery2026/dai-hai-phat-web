@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --test tests/ai-sales-engine.test.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "assets:build": "npm --prefix packages/dhp-asset-processor run process",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ."
   },

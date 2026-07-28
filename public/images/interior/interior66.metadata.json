@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior66",
+  "title": "Không gian lounge đã hoàn thiện",
+  "alt": "Hình không gian lounge đã hoàn thiện trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu không gian lounge đã hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Không gian lounge đã hoàn thiện. Mô tả đã xác minh: Tư liệu không gian lounge đã hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Không gian lounge đã hoàn thiện | Đại Hải Phát",
+    "description": "Hình ảnh không gian lounge đã hoàn thiện dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "không gian lounge đã hoàn thiện",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior66.jpg",
+    "sourceRelativePath": "assets/images/interior/interior66.jpg",
+    "publicUrl": "/images/interior/interior66.jpg",
+    "bytes": 186830,
+    "sha256": "aacca3f7854084260ec68bd49cdf7860f71782d899c1816415c43adfaf883ff4",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior66.webp",
+    "publicUrl": "/images/interior/interior66.webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 93530,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior66.thumb.webp",
+    "publicUrl": "/images/interior/interior66.thumb.webp",
+    "width": 480,
+    "height": 480,
+    "bytes": 35144,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRjABAABXRUJQVlA4ICQBAABwCACdASogACAAPuFWpU2opKOiN/qoARAcCWIApxuoIkE6b7G5YR0U/XVgmqNylTMyeKMd6/kxM9bE2LVswViV6a8p/ATorPNTWlswAP7u80KpSQdF+SqiUMVEDAH1Aqva5gJa3Mk8GnPoChztVNT5QddvAXqrXuS5nHfiQBbc8snQHQejReeqpEb6TZY1QZNJT4s1zoyzXyU2jvoTFwQdyLp2ouXpvWIW9h1SrYsFU1j5IbFABZd3zdZUGWMu6ZH/Dg0wE8ELbevkgiYlf+FpckmF249+46JiE9J42CBSTwLc1+URgQOWJcNBHHPjokDfm3SZnzfdoJEy4GuVkmskO+T1w8dsuePmPg46li2hBdJw6x1AvWeZsATahopH+BSkgAAA"
+}

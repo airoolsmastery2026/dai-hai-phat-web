@@ -1,7 +1,9 @@
 import type { AssetMetadata } from "./types.js";
 
 function sentence(label: string, value?: string): string | undefined {
-  return value ? `${label}: ${value}.` : undefined;
+  if (!value) return undefined;
+  const normalized = value.trim().replace(/[.!?]+$/, "");
+  return normalized ? `${label}: ${normalized}.` : undefined;
 }
 
 export function generatePrompt(metadata: AssetMetadata): string {

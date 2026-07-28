@@ -1,0 +1,53 @@
+{
+  "id": "stairs-stair04",
+  "title": "Cầu thang kính kết hợp tủ dưới gầm",
+  "alt": "Hình cầu thang kính kết hợp tủ dưới gầm trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu cầu thang kính kết hợp tủ dưới gầm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cầu thang",
+  "assetType": "project",
+  "material": "Kính, kim loại và gỗ",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Cầu thang và lan can",
+  "prompt": "Chủ thể: Cầu thang kính kết hợp tủ dưới gầm. Mô tả đã xác minh: Tư liệu cầu thang kính kết hợp tủ dưới gầm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cầu thang. Dịch vụ: Cầu thang và lan can. Vật liệu: Kính, kim loại và gỗ. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Cầu thang kính kết hợp tủ dưới gầm | Đại Hải Phát",
+    "description": "Hình ảnh cầu thang kính kết hợp tủ dưới gầm dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cầu thang",
+      "cầu thang kính kết hợp tủ dưới gầm",
+      "cầu thang và lan can",
+      "đại hải phát"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/stairs/stair04.jpg",
+    "sourceRelativePath": "assets/images/stairs/stair04.jpg",
+    "publicUrl": "/images/stairs/stair04.jpg",
+    "bytes": 212704,
+    "sha256": "950b32d20a94bae87ad0118c8e507e4e2bee7800c39fe0819d109d199792e71b",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/stairs/stair04.webp",
+    "publicUrl": "/images/stairs/stair04.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 108532,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/stairs/stair04.thumb.webp",
+    "publicUrl": "/images/stairs/stair04.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 18178,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAADwBgCdASogABgAPu1mqk2ppaQiMAgBMB2JZQDKBa/lPikz0DnyyLaGU4Km7W7Gsq5WCiaHK7p01vox/9vdn2ZgAP6yLUQ2VY4p6K526L5IyawlwNy+gGYsAQGSxvphUdSx48nH53eaoPl4J6N0vEqudXAlLzmoISqseLErjXmHJZRJ/L6h3lmqTYAUVVaAlN/r/SmmOMl2jP9haqpNvcTxPouYJVT02l/oDnZdkut5U4sb0hMqHVdFPq8+JfxY8kPh+GjIQBVcRvxRhY49snHDmBeNIasu5PRS8qQ2ZzaJm1QBBOkLVtNtMP2kq3Jjl3zWPfMfqvOWsLJg8H/U9Zj+CHu4+QAAAAA="
+}

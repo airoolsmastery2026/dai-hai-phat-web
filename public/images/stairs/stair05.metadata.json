@@ -1,0 +1,53 @@
+{
+  "id": "stairs-stair05",
+  "title": "Lắp đặt cầu thang và lan can",
+  "alt": "Hình lắp đặt cầu thang và lan can trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu lắp đặt cầu thang và lan can được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cầu thang",
+  "assetType": "project",
+  "material": "Kính, kim loại và gỗ",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Cầu thang và lan can",
+  "prompt": "Chủ thể: Lắp đặt cầu thang và lan can. Mô tả đã xác minh: Tư liệu lắp đặt cầu thang và lan can được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cầu thang. Dịch vụ: Cầu thang và lan can. Vật liệu: Kính, kim loại và gỗ. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Lắp đặt cầu thang và lan can | Đại Hải Phát",
+    "description": "Hình ảnh lắp đặt cầu thang và lan can dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cầu thang",
+      "cầu thang và lan can",
+      "đại hải phát",
+      "lắp đặt cầu thang và lan can"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/stairs/stair05.jpg",
+    "sourceRelativePath": "assets/images/stairs/stair05.jpg",
+    "publicUrl": "/images/stairs/stair05.jpg",
+    "bytes": 189071,
+    "sha256": "bc6c6330574a353af04b1eae66b46448ac4760d7232e64f24027029628f3874b",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/stairs/stair05.webp",
+    "publicUrl": "/images/stairs/stair05.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 88550,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/stairs/stair05.thumb.webp",
+    "publicUrl": "/images/stairs/stair05.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 26850,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRmABAABXRUJQVlA4IFQBAABQCQCdASogACsAPu1urlCppqQiqqgBMB2JZwDHca7xuxw6Dp4F4aQHAtgJM37MGOeUC6Dzx20MGuN6ybb79ZxUVzAanVxW1lnj2wgOjr5bSTvIAAD+8bqzqXC88dDIDa0Zdqq56w6BAue4DabhODXsSq0/HqE5LXu0pDes1iCe2zViz5iCPAZegnTZqf7d3p6SvtQ/0dEcqkM5AfT1aWAe7yz4jdXBZ8GoXHdRuV14r2+DL2KYz2XhHhr9PyJ/1bPNlZuvvZSxgnam5+jEu40AWGWIWDD2yHPHq3PhKkZFCEmoUQCNjhgLG5z1CFmUgyRuVeaNlAF1Xw0AuUcBYuM4KsSslSz9EcYkkDkIydAcGZAkmkn0EOtr8O6x9PQJX7rc8tkNWc7jxjTlJJ3qp7DRclIgcGRBHr1svsrmC9YZfzojzKvBNu52vvs+0dTCgJTYkgAA"
+}

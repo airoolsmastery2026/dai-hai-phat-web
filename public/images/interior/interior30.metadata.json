@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior30",
+  "title": "Quầy bar hoàn thiện",
+  "alt": "Hình quầy bar hoàn thiện trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu quầy bar hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Quầy bar hoàn thiện. Mô tả đã xác minh: Tư liệu quầy bar hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quầy bar hoàn thiện | Đại Hải Phát",
+    "description": "Hình ảnh quầy bar hoàn thiện dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "quầy bar hoàn thiện"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior30.jpg",
+    "sourceRelativePath": "assets/images/interior/interior30.jpg",
+    "publicUrl": "/images/interior/interior30.jpg",
+    "bytes": 225238,
+    "sha256": "45ca35367bc1e230bd75fb09324e2219a2f8e196aea76e2eaa5ed229fd69eaff",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior30.webp",
+    "publicUrl": "/images/interior/interior30.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 97560,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior30.thumb.webp",
+    "publicUrl": "/images/interior/interior30.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 29170,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRoIBAABXRUJQVlA4IHYBAABQCQCdASogACsAPu1qrFCppaQiqqgBMB2JbAC32Yu5Fd8KYNolGx3R4/0S8gG4xUlXsptyiKW2PUIhpXN5xhViCM+lTfHwInLbOYrxi5CUfiM/AAD++cI/6BQUNu6BZ6GUGJEV4yyzi7HQu4STtRQKjnetIef54KWWLkD1GRLBXmsvKqvZxcR8TyRmCpBM4GEit0iq567zuG/LBXzJ/AggWToZyu9y1pzdwRT3bc3++c8ysRslAnd1WVOCLeAVyCCVtzmb4Gz0DTKTNixns3kYuv6bCxpZ4xE3DGjWDE+VJDVYuP5VQh+ZevicH1KQv28pMM9jz/cs36BvrQ2BFt706z5ZeqUwnP8F8+yrmPY/L+EBCTT0134Pd8LCDc4tqzh5/M/2yNCpYZWDhz1xmBPfzMMjjngZt0yq7fyAZ6GqEyc0PWLXPZD1zUtLVLtr/FsaeE3qeVj0WImPYxDbpJA7EFCm9FGf5RRpR/axx+Kog3YDZgAAAA=="
+}

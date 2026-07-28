@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior03",
+  "title": "Tủ áo kết hợp kệ trưng bày",
+  "alt": "Hình tủ áo kết hợp kệ trưng bày trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo kết hợp kệ trưng bày được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo kết hợp kệ trưng bày. Mô tả đã xác minh: Tư liệu tủ áo kết hợp kệ trưng bày được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo kết hợp kệ trưng bày | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo kết hợp kệ trưng bày dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo kết hợp kệ trưng bày"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior03.jpg",
+    "sourceRelativePath": "assets/images/interior/interior03.jpg",
+    "publicUrl": "/images/interior/interior03.jpg",
+    "bytes": 137951,
+    "sha256": "0be4c8b5f1d3a17e2c328993905e85764beb21349acf586b27988af4ae85247e",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior03.webp",
+    "publicUrl": "/images/interior/interior03.webp",
+    "width": 986,
+    "height": 1280,
+    "bytes": 62368,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior03.thumb.webp",
+    "publicUrl": "/images/interior/interior03.thumb.webp",
+    "width": 480,
+    "height": 623,
+    "bytes": 15006,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRngBAABXRUJQVlA4IGwBAABwCQCdASogACoAPu1mqU2ppaQiMAgBMB2JZQDGv6/Sgte1gBVObQCLx0dIZhOQv+0/nL//5oaqKKqyS5vJ2JG77QjU3BnYJL/xcLjn2KagL8fHSWAA/lvT1j7q9npvVNjNTv934FmHxj+acZELJD+vtoMEqmJAhSijXnb+uXoY0S6XH6Kc0zPCcO7oG+LoJ/jujvfvZW4LvLJ7PbLzg6iJGcj+ItkH7W35gX8e3jj10QfRcJj6gbT3cyRQ+EpQhwBeUtdUWgh9kLClGmP4d9bOK1ksB7dUoavC1t6vQ8Rkvm7Jv5rRag0sqU00ZmI+WTs/7xSwpR71QeczRwBRPXVOJVvAdvkPyHnIY0nugntnj7JNOdEyEIyllZBDuU7G1qGhl+lw5LnVCllLP/Xbqp7tf0ZWfEOn3kKbpD+LsGuCrkmV+scO4iKSR7clEyZUV2npZ1Fi30OIa8g6egx/KuqI2XbzijPQio0eqAAA"
+}

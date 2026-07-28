@@ -19,7 +19,7 @@ type ConfigInput = Partial<
 const DEFAULT_CONFIG: Omit<AssetProcessorConfig, "rootDir"> = {
   inputDir: "assets/images",
   metadataDir: "assets/image-metadata",
-  outputDir: "public/images/generated",
+  outputDir: "public/images",
   galleryPath: "public/images/gallery.json",
   maxWidth: 1920,
   thumbnailWidth: 480,
@@ -137,7 +137,9 @@ export async function loadConfig(
     ...definedConfig(fileConfig),
     ...safeOverrides,
   };
-  const rootDir = path.resolve(initialRoot, merged.rootDir ?? ".");
+  const rootDir = safeOverrides.rootDir
+    ? initialRoot
+    : path.resolve(initialRoot, merged.rootDir ?? ".");
   const config: AssetProcessorConfig = {
     rootDir,
     inputDir: resolveInsideRoot(rootDir, merged.inputDir, "inputDir"),

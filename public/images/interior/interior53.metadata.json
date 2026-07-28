@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior53",
+  "title": "Tủ áo kết hợp bàn trang điểm",
+  "alt": "Hình tủ áo kết hợp bàn trang điểm trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo kết hợp bàn trang điểm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo kết hợp bàn trang điểm. Mô tả đã xác minh: Tư liệu tủ áo kết hợp bàn trang điểm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo kết hợp bàn trang điểm | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo kết hợp bàn trang điểm dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo kết hợp bàn trang điểm"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior53.jpg",
+    "sourceRelativePath": "assets/images/interior/interior53.jpg",
+    "publicUrl": "/images/interior/interior53.jpg",
+    "bytes": 117978,
+    "sha256": "8a87cbc2473c5e704f655b421ccda59d7452b595e8b6b8bf9c6cf1132254c11c",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior53.webp",
+    "publicUrl": "/images/interior/interior53.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 47992,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior53.thumb.webp",
+    "publicUrl": "/images/interior/interior53.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 11714,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuwAAABXRUJQVlA4IOAAAACwCACdASogACsAPu1ip02ppaOiMBqqqTAdiWcAwGR4/Nks6cY9HZRdKNyAVuf55GaUuMfLwEcXcu+wMrbCjYSoTY+6DJX7mraqgk2WHQAA/suKbG+QOVdi+6fC/d82E9yx2nhNjGKAgYmvQDyY/es1b9P7EBLL2zHJ8jw/y9q1h6oPYrY/nyJ9Xc6La4XqbTRLoteH3/PBepqYDd8SAXrF9j37lGDW7TtojZQVeO0wYV7Dcyk22YNCvxi6ep2fFSuLlZ1XKhTE2QaXZRqx6lz2vlnB/lpXZeSkt8h/g0AAAA=="
+}

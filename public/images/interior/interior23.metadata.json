@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior23",
+  "title": "Vách tivi kết hợp tủ thấp",
+  "alt": "Hình vách tivi kết hợp tủ thấp trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi kết hợp tủ thấp được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi kết hợp tủ thấp. Mô tả đã xác minh: Tư liệu vách tivi kết hợp tủ thấp được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi kết hợp tủ thấp | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi kết hợp tủ thấp dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi kết hợp tủ thấp"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior23.jpg",
+    "sourceRelativePath": "assets/images/interior/interior23.jpg",
+    "publicUrl": "/images/interior/interior23.jpg",
+    "bytes": 241437,
+    "sha256": "370ed5376602711e63b6554a7a8e589d58b1d6fa32538fa523d70a2dc40480bd",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior23.webp",
+    "publicUrl": "/images/interior/interior23.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 106478,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior23.thumb.webp",
+    "publicUrl": "/images/interior/interior23.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 19348,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRjwBAABXRUJQVlA4IDABAADwBwCdASogABgAPu1iqU2ppaOiMAgBMB2JbAC7HYCDNbYBKAzAI/43SpLnTJfB0C98HMWjhjWKZB5r3CbpA90VRkU3JRojcwAA/gguxVCi0YsZ6qQaqRrz19hEVHfkcvZT/r50/f1YTGSr41H3/dxKCjVS0z4SIUWPVkmkbmp9yu4fziG00G4/S4bo6d84bCkvpOrDpz74YHgh8S+Uidmu4QL83HVIAafM/I6GQgAq3IYyDcvW43yw4ae4d39RnmbZx0/AnsMlgQ205+w2FPUW2YsInzWb10S53BLRUrdqFhQ++X3EPLibcsXM4yTwG+eO8/MzHCn7P2RDagQ4kJJ32xOIwjMJOJ8Ii3Jhm+D2LEn7CqZrAL2Tgr9qgvZj7ZsVquplviJ21qp4iVpQn7AA"
+}

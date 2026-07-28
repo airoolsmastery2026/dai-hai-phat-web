@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior70",
+  "title": "Vách tivi ốp vân đá",
+  "alt": "Hình vách tivi ốp vân đá trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi ốp vân đá được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi ốp vân đá. Mô tả đã xác minh: Tư liệu vách tivi ốp vân đá được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi ốp vân đá | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi ốp vân đá dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi ốp vân đá"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior70.jpg",
+    "sourceRelativePath": "assets/images/interior/interior70.jpg",
+    "publicUrl": "/images/interior/interior70.jpg",
+    "bytes": 270358,
+    "sha256": "b4bec5cbf138ccd0212eca76f17718cf8e79fb18c0de6ee45c2efc0f6c72cbe4",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior70.webp",
+    "publicUrl": "/images/interior/interior70.webp",
+    "width": 962,
+    "height": 1280,
+    "bytes": 136842,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior70.thumb.webp",
+    "publicUrl": "/images/interior/interior70.thumb.webp",
+    "width": 480,
+    "height": 639,
+    "bytes": 36094,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRjoBAABXRUJQVlA4IC4BAACwCACdASogACsAPu1srVCppiQiqqgBMB2JQBS77tke2xw9aD2CWmI1G/DTCn1BaLsHgdq8XXoFMqroMcAgHAkHgZz7GnYqHapPQMTkUnAA/uqJlnTRP/SiyrBlKE41Uo1rXZGPpYoIEa7IFIeJc2JDjABUroCrzVL4f52Bh/tUrwaeGgxHQcukks72ttn1zy6ORUcsAGPb6D+8hsrMHypYYjDNLQWyOHffjlzx7kjQSL7gU8OYmhXnGXsmqegBFo1A+r7V6gL791qqZS1/uKpWG+XZfXG3COb4LGb8jva3OT3trkbI6nyOWtuEef+qqoKpQnl93Y2EvAWD1tVgLno1eVxk75uL1FhjczdMfawodh0IxTOnCScu3dh9fPfKX2TG04pfF2NOVxIzXSzAAA=="
+}

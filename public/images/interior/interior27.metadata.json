@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior27",
+  "title": "Tủ áo tông trắng và gỗ",
+  "alt": "Hình tủ áo tông trắng và gỗ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo tông trắng và gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo tông trắng và gỗ. Mô tả đã xác minh: Tư liệu tủ áo tông trắng và gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo tông trắng và gỗ | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo tông trắng và gỗ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo tông trắng và gỗ"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior27.jpg",
+    "sourceRelativePath": "assets/images/interior/interior27.jpg",
+    "publicUrl": "/images/interior/interior27.jpg",
+    "bytes": 129437,
+    "sha256": "3a2e2f0b419e3d9766138a2d1fb5249253ccd7e7eacd3f561a6b1a6b28e1aa74",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior27.webp",
+    "publicUrl": "/images/interior/interior27.webp",
+    "width": 818,
+    "height": 960,
+    "bytes": 62856,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior27.thumb.webp",
+    "publicUrl": "/images/interior/interior27.thumb.webp",
+    "width": 480,
+    "height": 563,
+    "bytes": 19796,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRk4BAABXRUJQVlA4IEIBAADwCACdASogACYAPuVao02pJKMiNVgMASAciUAVhB+/UCTOmQtqLdQWuhOtbe0W4OpxbtENy6FbJRtgQNkL617ZE/NcfArzYjgxSvut4PsAAAD+azPOuRwKJyiS5+az2hJNAGO3aJzCN1YvRz+05/dX91tSPkKNpRkmUrZ2I5HdKvYxTsPEvp9e9XrgkEbE0+ckX+ZFBNTXGoPVpqMmPjdKHu3VuvyRy+61/JdYDEGtAs4lbFAmlDSDfEo9ADapCqZn28IXVVbk5aNX603BzBSWRDTYjHszkmjmzuCxro9HBZbQFdEU2acIQkE/GaIsOGACmgPZhoStIrpb0fFf6xA5DN3Mjgzt2WQzecfeYDK7pLDN9KI63NMGZPzLB/x9rZC2x31mNNEziP8HR6qG4wV1vagT0REmrK2GXQ5xy/g5/agA"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior52",
+  "title": "Giường ngủ kết hợp bàn làm việc",
+  "alt": "Hình giường ngủ kết hợp bàn làm việc trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu giường ngủ kết hợp bàn làm việc được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Giường ngủ kết hợp bàn làm việc. Mô tả đã xác minh: Tư liệu giường ngủ kết hợp bàn làm việc được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Giường ngủ kết hợp bàn làm việc | Đại Hải Phát",
+    "description": "Hình ảnh giường ngủ kết hợp bàn làm việc dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "giường ngủ kết hợp bàn làm việc",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior52.jpg",
+    "sourceRelativePath": "assets/images/interior/interior52.jpg",
+    "publicUrl": "/images/interior/interior52.jpg",
+    "bytes": 133325,
+    "sha256": "8303ef8ecfaf93e08fca0aa909f43a715cde4c69b03e85290f3ac10f50a5540e",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior52.webp",
+    "publicUrl": "/images/interior/interior52.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 63402,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior52.thumb.webp",
+    "publicUrl": "/images/interior/interior52.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 11186,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAAAQBwCdASogABgAPu1krFAppSQisBgIATAdiWMAyU8wm6EG3AG/TyTOLCHgtXm364gAYLMlfyFwN6fIDuseJi7AAAD2V4Uqef9V0Laht6uJJYWkVFAKvubR8LZPRRgkY8YNFlM9CnKrPUmQpWkL6GJb5XlF5J3sSa5vZxrnqmXnt3zLTIwgnejkerNJv4S1Q9jomhNbvqFv6jvr5rDhivQyDZLHXh1sTLRY8SkY20jwzqDTqAlCKe63lFJsa/jVmS+H9SYbmCpGE7b1Jr/IXXkOQSOUXsjpJoBqxlAA"
+}

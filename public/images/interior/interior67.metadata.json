@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior67",
+  "title": "Quầy bar với hệ kệ treo",
+  "alt": "Hình quầy bar với hệ kệ treo trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu quầy bar với hệ kệ treo được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Quầy bar với hệ kệ treo. Mô tả đã xác minh: Tư liệu quầy bar với hệ kệ treo được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quầy bar với hệ kệ treo | Đại Hải Phát",
+    "description": "Hình ảnh quầy bar với hệ kệ treo dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "quầy bar với hệ kệ treo"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior67.jpg",
+    "sourceRelativePath": "assets/images/interior/interior67.jpg",
+    "publicUrl": "/images/interior/interior67.jpg",
+    "bytes": 148555,
+    "sha256": "aaf7ee73d9bb49df76b2efaa923db17c0ffab1a9daaf7659ee60b41995dd0abf",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior67.webp",
+    "publicUrl": "/images/interior/interior67.webp",
+    "width": 720,
+    "height": 1280,
+    "bytes": 58100,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior67.thumb.webp",
+    "publicUrl": "/images/interior/interior67.thumb.webp",
+    "width": 480,
+    "height": 853,
+    "bytes": 24072,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRqABAABXRUJQVlA4IJQBAADwCgCdASogADkAPu1opk4ppiMiLAzJMB2JagCdM7CHHWAQcvIogBWsYu3+dSgr6HolhfY8fzQWITB2pKVaaRygZwTe1kRgzP0hWJVhB0pc/wj06rC8Bz5uHEZJHIfFgoAA/vvhJrOngL9lqaE9UVO9m3oe2c8ygCzjoGkrPkL0xCzDtupIRJsRSerFXThNMHIF70HJMfTPvDVA4IaS6/YIw2JWbOl3aMqHPf5cj1kTGNOZ/Q5NBzmQbzncE/v9ThUhVyqZIxd335+omV9/LgZqzAUyd4k+vi04Ro5k7dJ3dDpcvczNS1ScrNvdODtE93UezC6fqTl2ZAn1yNV5Oj7naugeRsW3cLH6LbK1TNDPwrh8iJGop/S7c0H3tWOOPQ+ChEMnHmOmOHvoH99X1Lz6f0xmsO+juaJ+0lE5kIvJi9O4rPp5l7Jj9FcgpoM/5wFZ+ezboushi8EjmJY1Z3FEBD8H15Uhsn5TZl/VnG1fp3rJB6Px788tbHA0pD0IjDvkO+x+D+rs2NbPqjr7zJfCPi8AAA=="
+}

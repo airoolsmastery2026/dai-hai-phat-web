@@ -1,0 +1,52 @@
+{
+  "id": "canopies-canopy06",
+  "title": "Khung mái che đang hoàn thiện",
+  "alt": "Hình khung mái che đang hoàn thiện trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu khung mái che đang hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Mái che",
+  "assetType": "project",
+  "material": "Khung kim loại và tấm lấy sáng",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Mái che",
+  "prompt": "Chủ thể: Khung mái che đang hoàn thiện. Mô tả đã xác minh: Tư liệu khung mái che đang hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Mái che. Dịch vụ: Mái che. Vật liệu: Khung kim loại và tấm lấy sáng. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Khung mái che đang hoàn thiện | Đại Hải Phát",
+    "description": "Hình ảnh khung mái che đang hoàn thiện dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "khung mái che đang hoàn thiện",
+      "mái che"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/canopies/canopy06.jpg",
+    "sourceRelativePath": "assets/images/canopies/canopy06.jpg",
+    "publicUrl": "/images/canopies/canopy06.jpg",
+    "bytes": 157249,
+    "sha256": "bb0c747c604cdb996f0795a501c076b3f92da0bc615839c6087bc17489fda874",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/canopies/canopy06.webp",
+    "publicUrl": "/images/canopies/canopy06.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 66342,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/canopies/canopy06.thumb.webp",
+    "publicUrl": "/images/canopies/canopy06.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 20310,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRjYBAABXRUJQVlA4ICoBAADwCACdASogACsAPu1uslKppiSipWmZMB2JZQDB0bWlTGUjlKb7Rrb3qGMdR2722h9+5Pq416wv8u9nZbf8lhn0cgavlttL/m/Qdpg4uweHgAD2sb27moISNxtU/wban+ZJbL9zOdYgFg9TqWWjHuCzDoEjB6dAH7VBtD+8dchLSjweeCgCP+sulX/QWbMBf8Xkbw4qNKnGZebSQ/+gp8P/S7TTGFJYc2u7pgnUW/frbyVS9FVSc1CZEaI0MalPv171R+yrohtTJxECFVrElsTxMkeBsoW78t0hBEKjYfHTXL4VFdDUe3+YVJUzSAH3RVgYajgfL09HefiwLf2sw2cFVJEMJt2YODQvlqxgs4XLhfQNmr3RU9uiRfhH7mCgbJ6YE+Nom6b9xAAA"
+}

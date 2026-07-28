@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior64",
+  "title": "Tủ áo góc có kệ trang trí",
+  "alt": "Hình tủ áo góc có kệ trang trí trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo góc có kệ trang trí được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo góc có kệ trang trí. Mô tả đã xác minh: Tư liệu tủ áo góc có kệ trang trí được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo góc có kệ trang trí | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo góc có kệ trang trí dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo góc có kệ trang trí"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior64.jpg",
+    "sourceRelativePath": "assets/images/interior/interior64.jpg",
+    "publicUrl": "/images/interior/interior64.jpg",
+    "bytes": 238287,
+    "sha256": "a238a13a345ce45e1ce94b68a5ee679fab6042b7f955c0b40df4a899c9f8312c",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior64.webp",
+    "publicUrl": "/images/interior/interior64.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 120882,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior64.thumb.webp",
+    "publicUrl": "/images/interior/interior64.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 29522,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRoYBAABXRUJQVlA4IHoBAAAwCQCdASogACsAPu1qqU6ppiOiMBqoATAdiUAXZn4fQYMMbeb58BXVl/m7zjxezrjx/LCz4jksXLu9SFJuPOzAmDeK2x2qLIoGP7a8cnpx/qGAAP3wEzGKguGZ8MKBar3NtpMKTNS44koDkYNCV/BtL04XBOtCeD93dNY+b1llHtAhg5N623NNzk8hp4i+n10NGW/PR/HSDcqlJG151ewChMry7rTR2jT5ILnu+2U6j5pzkQkzTl7srbkbZDfwTD9b23O79AOL8s+em2nRHtwQuvmAHayvy3rACgMyapiihHSC9STFujtUYM1G4VjPsN39qp3Mvjqp1I769X78OU47VGGir4s2ElC2CQYUMVUsHJFlzoqLMVh6couZST65a17ug0GewbUiEXR5doal8Nacl0QX5m3tenhwfawsB/Gwt92ovyUlMwRh0nUMXMVEHyL5lQ+D3mvpmxuZFvO3gSYsOy+VhlY8I8pOxkL5IagF1nMOjcEyAoAAAAA="
+}

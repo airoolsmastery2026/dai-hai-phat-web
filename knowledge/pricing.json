@@ -1,0 +1,579 @@
+{
+  "schemaVersion": "1.0",
+  "currency": "VND",
+  "usage": "reference-range-only",
+  "updatedAt": "2026-07-28",
+  "rules": {
+    "officialQuote": false,
+    "requireConfirmedDimensions": true,
+    "requireConfirmedMaterial": true,
+    "requireSurveyForContractPrice": true,
+    "message": "Chỉ dùng làm khoảng chi phí tham khảo. Báo giá chính thức được lập sau khi xác minh kích thước, vật liệu, phụ kiện, hiện trạng và điều kiện thi công."
+  },
+  "sources": [
+    {
+      "id": "interior-quotation-01",
+      "fileName": "interior-quotation-01.jpg",
+      "sha256": "efe56c722dd4fd8df63ce58a9647a4df127039c1b44510fe739f393c89aeef39",
+      "scope": "Nội thất",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-quotation-02",
+      "fileName": "interior-quotation-02.jpg",
+      "sha256": "9cc7f7ab930fd7621141e35d176f657a3678a96dd900b1c5c947a7af05d4b77a",
+      "scope": "Nội thất",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-quotation-03",
+      "fileName": "interior-quotation-03.jpg",
+      "sha256": "daf98a8f567180fe69e60256f85d8b119a75f9952a31aa54f5abcb8461c53d7e",
+      "scope": "Nội thất",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-quotation-04",
+      "fileName": "interior-quotation-04.jpg",
+      "sha256": "26f1685fd8301386d995a0922923bf6c5569acbc7033e8a183b4fd7b5444d7ef",
+      "scope": "Nội thất",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-price-list-01",
+      "fileName": "interior-price-list-01.jpg",
+      "sha256": "74163d7cc0998b9126de3e96ab774c72f3b2c73d7bf8cf900f1c9a3170f8f059",
+      "scope": "Nội thất gỗ thịt",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-contract-01",
+      "fileName": "interior-contract-01.jpg",
+      "sha256": "6c096b080a0f0bed7f0c0965607b2120cf90f3332e31c5dd4d411d54c015ffe8",
+      "scope": "Nội thất An Cường",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-quotation-05",
+      "fileName": "interior-quotation-05.jpg",
+      "sha256": "31319adba1b17f2d2b96574a3f602fdafa08bb18128b424638a5f5e1d521b9c3",
+      "scope": "Nội thất",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-quotation-06",
+      "fileName": "interior-quotation-06.jpg",
+      "sha256": "448bf1f608293d6d2bd9c7e65b8e7510e22ea8f1183b75294a9b3f3cfc2c89b4",
+      "scope": "Nội thất",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-kitchen-estimate-01",
+      "fileName": "interior-kitchen-estimate-01.jpg",
+      "sha256": "00521c88dedcf15d8db92e21dbf0141808ab3221c339f70d9eb749ab75f050be",
+      "scope": "Tủ bếp",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-change-order-01",
+      "fileName": "interior-change-order-01.jpg",
+      "sha256": "a6e8af03a0aad291d30ee9968ca324a00a0fd47fc6868e2b78aaefc28ea21571",
+      "scope": "Tủ bếp và phụ kiện",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "interior-material-price-list-01",
+      "fileName": "interior-material-price-list-01.jpg",
+      "sha256": "2348bec2e6d6e25c309fafaa00eec5eea220a7e3834a8bfa6453e9c8eec3e897",
+      "scope": "Nội thất MFC An Cường chống ẩm",
+      "status": "user-provided-reference"
+    },
+    {
+      "id": "polycarbonate-reference-01",
+      "fileName": "polycarbonate-reference-01.jpg",
+      "sha256": "69c293c9e4125ce67e057132f2ec803c74c2ed5ac8cbbb1e5ca0a0f650e892c7",
+      "scope": "Tấm polycarbonate",
+      "status": "external-reference-requires-revalidation"
+    },
+    {
+      "id": "polycarbonate-reference-02",
+      "fileName": "polycarbonate-reference-02.jpg",
+      "sha256": "73d36bf4f7d5dc13cc9f5485d02ca5cc0918fa7ec60965a9e723850f1ca77ea1",
+      "scope": "Tấm polycarbonate",
+      "status": "external-reference-requires-revalidation"
+    },
+    {
+      "id": "polycarbonate-reference-03",
+      "fileName": "polycarbonate-reference-03.jpg",
+      "sha256": "446ab515677f1f3e09d92668adfc671b7c0a3c38ccebd4a82c449cc06b730b0c",
+      "scope": "Tấm polycarbonate",
+      "status": "external-reference-requires-revalidation"
+    },
+    {
+      "id": "custom-inox-volume-reference-01",
+      "fileName": "custom-inox-volume-reference-01.jpg",
+      "sha256": "e8a68187798e501006469b183f2100f48545ae78cdd47fbbd43275a78cbe7082",
+      "scope": "Sản phẩm inox theo số lượng",
+      "status": "conversation-reference-requires-revalidation"
+    },
+    {
+      "id": "canopy-tier-price-01",
+      "fileName": "canopy-tier-price-01.jpg",
+      "sha256": "7633afad3d64b95305e3af31e0d1adcaa77be7308595f5ebec52d03de3878293",
+      "scope": "Mái vòm polycarbonate 5 m × 6 m",
+      "status": "user-provided-reference"
+    }
+  ],
+  "items": [
+    {
+      "id": "interior-wardrobe",
+      "service": "Nội thất",
+      "category": "Tủ quần áo",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "m²",
+      "range": {
+        "min": 2650000,
+        "max": 3750000
+      },
+      "variants": [
+        {
+          "label": "Melamine",
+          "amount": 2650000
+        },
+        {
+          "label": "Laminate",
+          "amount": 3150000
+        },
+        {
+          "label": "Sơn trắng",
+          "amount": 3200000
+        },
+        {
+          "label": "Acrylic",
+          "amount": 3750000
+        }
+      ],
+      "requiredInputs": [
+        "kích thước",
+        "bề mặt hoàn thiện",
+        "phụ kiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-quotation-02",
+        "interior-quotation-03",
+        "interior-quotation-04"
+      ]
+    },
+    {
+      "id": "interior-work-desk",
+      "service": "Nội thất",
+      "category": "Bàn làm việc",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "cái",
+      "range": {
+        "min": 3300000,
+        "max": 4100000
+      },
+      "requiredInputs": [
+        "kích thước",
+        "bề mặt hoàn thiện",
+        "cấu hình hộc tủ"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01"
+      ]
+    },
+    {
+      "id": "interior-dressing-table",
+      "service": "Nội thất",
+      "category": "Bàn trang điểm",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "cái",
+      "range": {
+        "min": 3800000,
+        "max": 4400000
+      },
+      "requiredInputs": [
+        "kích thước",
+        "bề mặt hoàn thiện",
+        "gương và hệ đèn"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01"
+      ]
+    },
+    {
+      "id": "interior-bed",
+      "service": "Nội thất",
+      "category": "Giường ngủ",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "cái",
+      "range": {
+        "min": 5700000,
+        "max": 7500000
+      },
+      "variants": [
+        {
+          "label": "Giường tiêu chuẩn",
+          "amount": 5700000
+        },
+        {
+          "label": "Giường có hộc kéo Melamine",
+          "amount": 6950000
+        },
+        {
+          "label": "Giường có hộc kéo Acrylic",
+          "amount": 7500000
+        }
+      ],
+      "requiredInputs": [
+        "kích thước nệm",
+        "hộc kéo",
+        "bề mặt hoàn thiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-quotation-03",
+        "interior-quotation-04"
+      ]
+    },
+    {
+      "id": "interior-bedside-table",
+      "service": "Nội thất",
+      "category": "Tủ đầu giường",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "cái",
+      "range": {
+        "min": 1300000,
+        "max": 1600000
+      },
+      "requiredInputs": [
+        "kích thước",
+        "bề mặt hoàn thiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-quotation-02",
+        "interior-quotation-03"
+      ]
+    },
+    {
+      "id": "interior-upper-kitchen-cabinet",
+      "service": "Nội thất",
+      "category": "Tủ bếp trên",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "mét dài",
+      "range": {
+        "min": 2650000,
+        "max": 3500000
+      },
+      "requiredInputs": [
+        "chiều dài",
+        "chiều sâu",
+        "bề mặt hoàn thiện",
+        "phụ kiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-change-order-01"
+      ]
+    },
+    {
+      "id": "interior-lower-kitchen-cabinet",
+      "service": "Nội thất",
+      "category": "Tủ bếp dưới",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "mét dài",
+      "range": {
+        "min": 3300000,
+        "max": 3900000
+      },
+      "requiredInputs": [
+        "chiều dài",
+        "chiều sâu",
+        "bề mặt hoàn thiện",
+        "phụ kiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-change-order-01"
+      ]
+    },
+    {
+      "id": "interior-tv-cabinet",
+      "service": "Nội thất",
+      "category": "Kệ tivi",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "mét dài",
+      "range": {
+        "min": 1870000,
+        "max": 2250000
+      },
+      "requiredInputs": [
+        "chiều dài",
+        "bề mặt hoàn thiện",
+        "cấu hình hộc tủ"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-quotation-02",
+        "interior-quotation-03"
+      ]
+    },
+    {
+      "id": "interior-decorative-shelf",
+      "service": "Nội thất",
+      "category": "Đợt kệ trang trí",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "mét dài",
+      "range": {
+        "min": 600000,
+        "max": 900000
+      },
+      "requiredInputs": [
+        "chiều dài",
+        "bề mặt hoàn thiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01"
+      ]
+    },
+    {
+      "id": "interior-shoe-cabinet",
+      "service": "Nội thất",
+      "category": "Tủ giày",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "m²",
+      "range": {
+        "min": 2800000,
+        "max": 4000000
+      },
+      "requiredInputs": [
+        "kích thước",
+        "bề mặt hoàn thiện",
+        "phụ kiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01"
+      ]
+    },
+    {
+      "id": "interior-wall-cladding",
+      "service": "Nội thất",
+      "category": "Vách ốp tường",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "m²",
+      "range": {
+        "min": 1400000,
+        "max": 1400000
+      },
+      "requiredInputs": [
+        "diện tích",
+        "cấu tạo nền",
+        "chi tiết trang trí"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-quotation-04"
+      ]
+    },
+    {
+      "id": "interior-cnc-partition",
+      "service": "Nội thất",
+      "category": "Vách CNC",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "m²",
+      "range": {
+        "min": 2500000,
+        "max": 2500000
+      },
+      "requiredInputs": [
+        "diện tích",
+        "mẫu cắt",
+        "bề mặt hoàn thiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01"
+      ]
+    },
+    {
+      "id": "interior-lavabo-cabinet",
+      "service": "Nội thất",
+      "category": "Thùng ốp lavabo",
+      "material": "MFC An Cường chống ẩm",
+      "unit": "mét dài",
+      "range": {
+        "min": 3300000,
+        "max": 3900000
+      },
+      "requiredInputs": [
+        "chiều dài",
+        "thiết bị lavabo",
+        "bề mặt hoàn thiện"
+      ],
+      "sourceIds": [
+        "interior-material-price-list-01",
+        "interior-quotation-01"
+      ]
+    },
+    {
+      "id": "canopy-polycarbonate-system",
+      "service": "Mái che",
+      "category": "Mái vòm polycarbonate",
+      "material": "Khung kim loại và tấm polycarbonate",
+      "unit": "m²",
+      "range": {
+        "min": 2500000,
+        "max": 5000000
+      },
+      "variants": [
+        {
+          "label": "Giá rẻ",
+          "amount": 2500000
+        },
+        {
+          "label": "Phổ thông",
+          "amount": 3000000
+        },
+        {
+          "label": "Trung cấp",
+          "amount": 3500000
+        },
+        {
+          "label": "Cao cấp",
+          "amount": 4200000
+        },
+        {
+          "label": "Siêu cao cấp",
+          "amount": 5000000
+        }
+      ],
+      "referenceConditions": [
+        "Kích thước tham chiếu 5 m × 6 m, tổng diện tích 30 m²",
+        "Đơn giá tham chiếu bao gồm vật tư, nhân công và lắp đặt",
+        "Tài liệu ghi thời hạn bảo hành từ 5 đến 10 năm tùy cấp độ"
+      ],
+      "requiredInputs": [
+        "kích thước",
+        "kiểu mái",
+        "quy cách khung",
+        "độ dày tấm",
+        "điều kiện lắp đặt"
+      ],
+      "sourceIds": [
+        "canopy-tier-price-01"
+      ]
+    },
+    {
+      "id": "polycarbonate-hollow-sheet-archived",
+      "service": "Mái che",
+      "category": "Tấm polycarbonate rỗng ruột",
+      "material": "Polycarbonate",
+      "unit": "tấm 2,1 m × 5,8 m",
+      "eligibleForProposal": false,
+      "status": "requires-supplier-revalidation",
+      "range": {
+        "min": 810000,
+        "max": 2650000
+      },
+      "variants": [
+        {
+          "label": "Việt Nam 4 mm",
+          "amount": 810000
+        },
+        {
+          "label": "Việt Nam 4,5 mm",
+          "amount": 920000
+        },
+        {
+          "label": "Việt Nam 5 mm",
+          "amount": 990000
+        },
+        {
+          "label": "Taiwan 4,5 mm",
+          "amount": 1150000
+        },
+        {
+          "label": "Taiwan 8 mm",
+          "amount": 1650000
+        },
+        {
+          "label": "Taiwan 10 mm",
+          "amount": 2050000
+        },
+        {
+          "label": "Thái Lan 4 mm",
+          "amount": 990000
+        },
+        {
+          "label": "Thái Lan 4,5 mm",
+          "amount": 1190000
+        },
+        {
+          "label": "Thái Lan 5 mm",
+          "amount": 1240000
+        },
+        {
+          "label": "Thái Lan 6 mm",
+          "amount": 1540000
+        },
+        {
+          "label": "Thái Lan 10 mm",
+          "amount": 2650000
+        }
+      ],
+      "requiredInputs": [
+        "xuất xứ",
+        "độ dày",
+        "màu sắc",
+        "tồn kho và giá nhà cung cấp hiện tại"
+      ],
+      "sourceIds": [
+        "polycarbonate-reference-01",
+        "polycarbonate-reference-02",
+        "polycarbonate-reference-03"
+      ]
+    },
+    {
+      "id": "custom-inox-volume-archived",
+      "service": "Nhà xưởng",
+      "category": "Sản phẩm inox theo số lượng",
+      "material": "Inox 304",
+      "unit": "cái",
+      "eligibleForProposal": false,
+      "status": "requires-engineering-revalidation",
+      "range": {
+        "min": 78000,
+        "max": 95000
+      },
+      "variants": [
+        {
+          "label": "100–199 cái",
+          "amount": 95000
+        },
+        {
+          "label": "200–499 cái",
+          "amount": 85000
+        },
+        {
+          "label": "Từ 500 cái",
+          "amount": 78000
+        }
+      ],
+      "referenceConditions": [
+        "Chưa bao gồm VAT",
+        "Tài liệu trao đổi ghi mức không bán dưới 70.000 VND/cái"
+      ],
+      "requiredInputs": [
+        "bản vẽ kỹ thuật",
+        "quy cách inox",
+        "khối lượng",
+        "yêu cầu hoàn thiện"
+      ],
+      "sourceIds": [
+        "custom-inox-volume-reference-01"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior43",
+  "title": "Phòng ngủ với vách đầu giường",
+  "alt": "Hình phòng ngủ với vách đầu giường trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với vách đầu giường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với vách đầu giường. Mô tả đã xác minh: Tư liệu phòng ngủ với vách đầu giường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với vách đầu giường | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với vách đầu giường dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với vách đầu giường"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior43.jpg",
+    "sourceRelativePath": "assets/images/interior/interior43.jpg",
+    "publicUrl": "/images/interior/interior43.jpg",
+    "bytes": 132111,
+    "sha256": "68e106637117238199cf1e6fdb0e22cac4b1adab181852dcfc41bf70d124596e",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior43.webp",
+    "publicUrl": "/images/interior/interior43.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 65250,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior43.thumb.webp",
+    "publicUrl": "/images/interior/interior43.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 19196,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRnABAABXRUJQVlA4IGQBAAAwCQCdASogACsAPu1irFEppKQisBVYATAdiUAYgvgTU7s+plyagFQKPGrnbUzasjj5tARm1gWoEe8Xw83PvE7NzsffEdY8b2vMCHRlAl3pgjgAAP5dD3jNOexzBjmoOfUb/2BnNvFanQD16szBuQ0+VDEFbgZnKB66eCGmBlH4QEvUsMbBK1K55Y0W514K7QBVVbEI9oT+ebeoFFUAOwRBAU3TrnkCuOYU0FTpw1y+sXkP06vdGP62NTS8MLmFhxqbRYC8SeMtCk7GdrFDIdh8p3yLGs6taPfJr5VZA5jyH/7GVnTdfBflJ/cffKoTWzUSfdt+owCuH8dOBTRfZ0gdjGMKA6O62K94FU8Qyh2o87lmw9MIWSdgzxOv2ZsJ0xkhNkdnY11ksQWGsOvvfpaqWnUsCQqcnzt4Cm5J5pj4Rn9vpOhtm2Gym7DjJ/zErTZo+GMB4nBYWZtoiBDXCcTQP62AAA=="
+}

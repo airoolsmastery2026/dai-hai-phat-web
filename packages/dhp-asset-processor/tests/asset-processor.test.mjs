@@ -37,6 +37,7 @@ const verifiedMetadata = {
   alt: "Cửa cổng thép sơn tĩnh điện tại công trình nhà phố",
   caption: "Cửa cổng thép đã hoàn thiện tại công trình nhà phố.",
   category: "Cửa cổng",
+  assetType: "project",
   material: "Thép sơn tĩnh điện",
   style: "Hiện đại",
   projectType: "Nhà phố",
@@ -78,7 +79,10 @@ test("builds verified WebP, thumbnail, metadata and gallery output", async () =>
     const item = gallery.items[0];
 
     assert.equal(gallery.total, 1);
-    assert.equal(item.original.relativePath, "assets/images/cua-cong.png");
+    assert.equal(item.original.relativePath, "public/images/cua-cong.png");
+    assert.equal(item.original.sourceRelativePath, "assets/images/cua-cong.png");
+    assert.equal(item.original.publicUrl, "/images/cua-cong.png");
+    assert.equal(item.assetType, "project");
     assert.match(item.prompt, /không thêm/i);
     assert.match(item.blurDataUrl, /^data:image\/webp;base64,/);
     assert.deepEqual(item.seo.keywords, ["cửa cổng thép", "đại hải phát"]);
@@ -98,6 +102,7 @@ test("builds verified WebP, thumbnail, metadata and gallery output", async () =>
         item.image.relativePath.replace(/\.webp$/, ".metadata.json"),
       ),
     );
+    await access(path.join(root, item.original.relativePath));
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -132,6 +137,25 @@ test("rejects paths outside the configured repository root", async () => {
       /must stay inside the repository root/,
     );
   } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("resolves a relative repository root exactly once", async () => {
+  const root = await createRoot();
+  const previousWorkingDirectory = process.cwd();
+
+  try {
+    const parent = path.dirname(root);
+    process.chdir(parent);
+    const config = await loadConfig(undefined, {
+      rootDir: path.basename(root),
+    });
+
+    assert.equal(config.rootDir, root);
+    assert.equal(config.inputDir, path.join(root, "assets/images"));
+  } finally {
+    process.chdir(previousWorkingDirectory);
     await rm(root, { recursive: true, force: true });
   }
 });

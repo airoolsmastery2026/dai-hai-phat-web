@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior87",
+  "title": "Tủ bếp kết hợp đảo nhỏ",
+  "alt": "Hình tủ bếp kết hợp đảo nhỏ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ bếp kết hợp đảo nhỏ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp chống ẩm và phụ kiện",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ bếp kết hợp đảo nhỏ. Mô tả đã xác minh: Tư liệu tủ bếp kết hợp đảo nhỏ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp chống ẩm và phụ kiện. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ bếp kết hợp đảo nhỏ | Đại Hải Phát",
+    "description": "Hình ảnh tủ bếp kết hợp đảo nhỏ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ bếp kết hợp đảo nhỏ"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior87.jpg",
+    "sourceRelativePath": "assets/images/interior/interior87.jpg",
+    "publicUrl": "/images/interior/interior87.jpg",
+    "bytes": 150331,
+    "sha256": "e8e25320563dcef1d04b461662a5f3d9a000d7df898a98d7dd9629588242ea7e",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior87.webp",
+    "publicUrl": "/images/interior/interior87.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 65604,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior87.thumb.webp",
+    "publicUrl": "/images/interior/interior87.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 17470,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRlABAABXRUJQVlA4IEQBAADQCACdASogACsAPu1kqk8ppSOiMBVaqTAdiWkAFGu1WofppEid1mql3hEfI8ohL+9TFkLJipd0ML6dl6j3YHfWGRrOVUoJgvxhQaWE5HXQAOFeckQ2ejv2jzNLbJqdCluplbOa+ADjfEytrWuFEoYvX3RUUZ0Xl1bSNFl6KHqkkoD7JdaskTVJ0vPtEK2KSUgY7Pb1bK5kXDQC094QXtqGE0pCfFj6XIp44Vepya+2U2zO8qKR/0NrGR/dLroTzM8nmfx1rlKi1/qjUY6QUOsH1fVHwdyUR3OxZA2DbVRbIJyFcrNUxjKXwWm0YN6KzppdY3H5+FAz00+v04nkWxooy/bdtw1zzfg78mq+pz2HtnoXFgq1Z2M+X6vhOA+Cz56CYNYY+X6yjSQrpteVs0fZwTI4uHkRQAW1dd6oEj4WU3I4AAA="
+}

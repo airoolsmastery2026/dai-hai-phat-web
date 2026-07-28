@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior35",
+  "title": "Vách tivi đang hoàn thiện",
+  "alt": "Hình vách tivi đang hoàn thiện trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi đang hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi đang hoàn thiện. Mô tả đã xác minh: Tư liệu vách tivi đang hoàn thiện được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi đang hoàn thiện | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi đang hoàn thiện dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi đang hoàn thiện"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior35.jpg",
+    "sourceRelativePath": "assets/images/interior/interior35.jpg",
+    "publicUrl": "/images/interior/interior35.jpg",
+    "bytes": 186360,
+    "sha256": "58412cbe01c7eec39a1a721b225e907b0b940a8a5aab00cbf721e62e09d74b59",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior35.webp",
+    "publicUrl": "/images/interior/interior35.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 83678,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior35.thumb.webp",
+    "publicUrl": "/images/interior/interior35.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 23744,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRmgBAABXRUJQVlA4IFwBAABwCgCdASogACsAPu1mq04ppaQiMBVaqTAdiWMAnTO+xsTpjs474GvE1MvQ8rtGf4/pDjvAMzCsdLdGml2cfdauVrs0GIj39++Qv5ecWyiBfdUv2awGLMHsfk3YgAD+m3i15fzouYh1aR1HIKpChzkios4FjHPNsljO6Hcv7xjJrNh9qb2j6QDOB6XVRPz6228JzLXSHo+MzUyGpl6yLpUiEbp2Gjh01wSimxCaDl4/TsVJZXZTjeXZlfAtMhRJ2SbHdSXvfBsa3FyK5H9zpPbkk2cLMmZ8KGX1N1uJCV/1rxNT4hJB2CEBUSVQXssCcatvczMc4T9n5hdAN3/L+MUbnMMp7iikot74/CAVJTrrUYAaqiCOqtH43CsLFRntZ3Ghf4LU7FRJumugvXfP4GtkY2En0fRu1Vumh/hj6IJbCS0IkAuyuds9+3uQg3MjDGrB/BiHpfEzbyRIAAA="
+}

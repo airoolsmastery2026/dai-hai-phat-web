@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior33",
+  "title": "Phòng ngủ với hệ tủ cao",
+  "alt": "Hình phòng ngủ với hệ tủ cao trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với hệ tủ cao được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với hệ tủ cao. Mô tả đã xác minh: Tư liệu phòng ngủ với hệ tủ cao được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với hệ tủ cao | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với hệ tủ cao dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với hệ tủ cao"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior33.jpg",
+    "sourceRelativePath": "assets/images/interior/interior33.jpg",
+    "publicUrl": "/images/interior/interior33.jpg",
+    "bytes": 185041,
+    "sha256": "4fed1fce0f05607743fbe30cc113ec7c029d270699754f841df1acd551d15908",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior33.webp",
+    "publicUrl": "/images/interior/interior33.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 82000,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior33.thumb.webp",
+    "publicUrl": "/images/interior/interior33.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 21576,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRkIBAABXRUJQVlA4IDYBAABwCQCdASogACsAPu1qqVAppiOiqqoBMB2JQBg6NeYyW4VCMIXlpMXW+GHcoK3n58l+v5xS+yrEuFZZi2LZispcJZfi8vB/v1rILnEq+uRBcg8WHAAA+G7YrdnlSh8cAp3nCCGQhQrU65Y/SN6bcySR2KS5I1gEIMKPFXTu1rZYkEHYiYN7/6kQheNOGmhNRZBEopM96V4aetzUhrGRrH9A8QKncRGfxdzez3HgguuK1xVHCDeHjYnMJhU3S1Yc6032roYRJVusFkRAiQXKGbhnoqXu2xfM6IdhCXU95an1412nYxNKmzXnhKDW7LHlyEIcbchS9te00uT5I0bq2PPCh0xXyl1bPCyakJCWJXIhll8nXkIWUT8aW2mkY9xoB7gVizofoUZF22gvtGzcqzf8f/bRAAAA"
+}

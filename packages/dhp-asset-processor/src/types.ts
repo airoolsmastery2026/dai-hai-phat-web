@@ -40,11 +40,22 @@ export interface AssetSeo {
   keywords: string[];
 }
 
+export const ASSET_TYPES = [
+  "project",
+  "reference",
+  "technical",
+  "material",
+  "brand",
+] as const;
+
+export type AssetType = (typeof ASSET_TYPES)[number];
+
 export interface AssetMetadata {
   title: string;
   alt: string;
   caption: string;
   category: string;
+  assetType: AssetType;
   material?: string;
   style?: string;
   projectType?: string;
@@ -94,6 +105,8 @@ export interface OptimizedAsset {
   original: {
     absolutePath: string;
     relativePath: string;
+    sourceRelativePath: string;
+    publicUrl?: string;
     bytes: number;
     sha256: string;
     format: SupportedImageExtension;
@@ -110,6 +123,7 @@ export interface GalleryItem {
   alt: string;
   caption: string;
   category: string;
+  assetType: AssetType;
   material?: string;
   style?: string;
   projectType?: string;
@@ -124,11 +138,12 @@ export interface GalleryItem {
 }
 
 export interface GalleryIndex {
-  schemaVersion: "1.0";
+  schemaVersion: "1.1";
   generatedAt: string;
   total: number;
   filters: {
     categories: string[];
+    assetTypes: AssetType[];
     materials: string[];
     styles: string[];
     projectTypes: string[];

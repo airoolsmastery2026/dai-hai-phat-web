@@ -13,9 +13,9 @@
   "scripts": {
     "build": "tsc --outDir dist --rootDir src --module NodeNext --moduleResolution NodeNext --target ES2022 --strict --esModuleInterop --resolveJsonModule --skipLibCheck src/*.ts",
     "check": "tsc --noEmit --module NodeNext --moduleResolution NodeNext --target ES2022 --strict --esModuleInterop --resolveJsonModule --skipLibCheck src/*.ts",
-    "process": "npm run build --silent && node dist/gallery-builder.js",
+    "process": "npm run build --silent && node dist/gallery-builder.js --root ../..",
     "test": "npm run build --silent && node --test tests/*.test.mjs",
-    "watch": "npm run build --silent && node dist/gallery-builder.js --watch"
+    "watch": "npm run build --silent && node dist/gallery-builder.js --root ../.. --watch"
   },
   "dependencies": {
     "sharp": "^0.35.3"

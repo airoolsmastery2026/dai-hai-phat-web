@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior07",
+  "title": "Giường ngủ tích hợp hệ tủ",
+  "alt": "Hình giường ngủ tích hợp hệ tủ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu giường ngủ tích hợp hệ tủ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Giường ngủ tích hợp hệ tủ. Mô tả đã xác minh: Tư liệu giường ngủ tích hợp hệ tủ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Giường ngủ tích hợp hệ tủ | Đại Hải Phát",
+    "description": "Hình ảnh giường ngủ tích hợp hệ tủ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "giường ngủ tích hợp hệ tủ",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior07.jpg",
+    "sourceRelativePath": "assets/images/interior/interior07.jpg",
+    "publicUrl": "/images/interior/interior07.jpg",
+    "bytes": 260606,
+    "sha256": "1466e2d848058cb65b587ac4efe93c26e476eeb4872b0fba6c180df719bbfe26",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior07.webp",
+    "publicUrl": "/images/interior/interior07.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 121740,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior07.thumb.webp",
+    "publicUrl": "/images/interior/interior07.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 31542,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRrgBAABXRUJQVlA4IKwBAABwCgCdASogACsAPu1qrE8ppiQiKrgMATAdiWYAnTLwdfXV23/fNb5KdJ3GMvYz8u/bJxt+EfpRBAPn9KpAKNGsIlmb3+GJ5ZyvJzltMdhOhn7NnoJoCb/UNtWPQAD+MrEOBQuZ9IOy6gKoVw6apv/xkOn16O0AhzZeXfqYT7gbXLvZjdzxYWDixck9VOKWSirMQFK1/2TU3wLKtkEWCvwYnnB9TH5RxZkBF+P7D2nouRpRrWvpHOIwlZLk21Zrk4sZwgfbjN+pC0bjIgqLOaru9wESolhsF0KjSdDvCc0Wj29mSeBWz6jnTCfS6ddPPlAG4qSzzrXKBFTOsy/pXyFMR2B+coCp4T++OksMkXp+dx84onP0Igx4LqszH4QLr0xk/Cj90hKm3VbJ5ZBRfdwpWlsEmSJzQL1vVmTU2ObXsPHAti7dwaR/tV2wxWPmjVnSl3GwhvwuOOEzo7YFesoo0ynP7XDI7r1t+4WITYUJAesHjgum7eJH0nptX3LiG9HJHurweyyExk+c3CG8zqARm3A/d8bH+mvi/LcwDDzLWoARAVy6HSWppggAAA=="
+}

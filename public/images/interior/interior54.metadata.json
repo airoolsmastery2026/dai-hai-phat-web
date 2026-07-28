@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior54",
+  "title": "Giường ngủ và hệ tủ tông sáng",
+  "alt": "Hình giường ngủ và hệ tủ tông sáng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu giường ngủ và hệ tủ tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Giường ngủ và hệ tủ tông sáng. Mô tả đã xác minh: Tư liệu giường ngủ và hệ tủ tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Giường ngủ và hệ tủ tông sáng | Đại Hải Phát",
+    "description": "Hình ảnh giường ngủ và hệ tủ tông sáng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "giường ngủ và hệ tủ tông sáng",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior54.jpg",
+    "sourceRelativePath": "assets/images/interior/interior54.jpg",
+    "publicUrl": "/images/interior/interior54.jpg",
+    "bytes": 85306,
+    "sha256": "8b48bf349edcfa7d4f6b0855a88178a7ba06ebe36579e712505b8ab40289c99d",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior54.webp",
+    "publicUrl": "/images/interior/interior54.webp",
+    "width": 960,
+    "height": 722,
+    "bytes": 40446,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior54.thumb.webp",
+    "publicUrl": "/images/interior/interior54.thumb.webp",
+    "width": 480,
+    "height": 361,
+    "bytes": 11800,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRt4AAABXRUJQVlA4INIAAABQBgCdASogABgAPu1qrVCppaQiqAqpMB2JYwCsABLFpzcMLJl0u31fCIP9LZq/FzKLgRUYnm69wL1QYAD+lq9/JnexZ1cARYow+XRjOqNoyS2B68M6YCzqMOCtLFB0c7+JYV4zZ5eHpYQdOcDmbOSmIFc9G/oJCl0cpoCTQRJ4JTX1Lx6rLrkfw+3bSs5dG27tsuyZVbIOfVoBsOih3IRxTqWDw9HR651x5Pkz7K6XfCIQMP0LW2lhpmySKPdQO9AXz30MWDuHHzqd/eI2oUzR7AA="
+}

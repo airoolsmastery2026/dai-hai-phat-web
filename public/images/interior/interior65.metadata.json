@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior65",
+  "title": "Trần lam gỗ tại hành lang",
+  "alt": "Hình trần lam gỗ tại hành lang trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu trần lam gỗ tại hành lang được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Trần lam gỗ tại hành lang. Mô tả đã xác minh: Tư liệu trần lam gỗ tại hành lang được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Trần lam gỗ tại hành lang | Đại Hải Phát",
+    "description": "Hình ảnh trần lam gỗ tại hành lang dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "trần lam gỗ tại hành lang"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior65.jpg",
+    "sourceRelativePath": "assets/images/interior/interior65.jpg",
+    "publicUrl": "/images/interior/interior65.jpg",
+    "bytes": 125131,
+    "sha256": "aa6aac1af4505aa507ae5bc939a1da8c7bcc08259218b9b94b77025f8349bef0",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior65.webp",
+    "publicUrl": "/images/interior/interior65.webp",
+    "width": 1280,
+    "height": 580,
+    "bytes": 49316,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior65.thumb.webp",
+    "publicUrl": "/images/interior/interior65.thumb.webp",
+    "width": 480,
+    "height": 218,
+    "bytes": 6818,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABwBACdASogAA4APu1orU2ppqSiMAgBMB2JQBOgDddTYGKyxTKqvi7gdwaJgAD+9ZzaFh7LtdxESGVSby8zpmp8n2Xeo9/nD0yPeXIqpXUjVzvx0bP3L3V9exi3uWITAv4X/MK6/h3uyLG2eWz6j4AneeyNa+kL06fPPDTqwfFJYtQjbjTaz25/NEpdH8ZXG/HFIMAaAAA="
+}

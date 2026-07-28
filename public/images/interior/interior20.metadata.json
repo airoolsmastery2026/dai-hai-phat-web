@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior20",
+  "title": "Vách tivi gỗ tại công trình",
+  "alt": "Hình vách tivi gỗ tại công trình trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi gỗ tại công trình được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi gỗ tại công trình. Mô tả đã xác minh: Tư liệu vách tivi gỗ tại công trình được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi gỗ tại công trình | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi gỗ tại công trình dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi gỗ tại công trình"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior20.jpg",
+    "sourceRelativePath": "assets/images/interior/interior20.jpg",
+    "publicUrl": "/images/interior/interior20.jpg",
+    "bytes": 248773,
+    "sha256": "2aa2bf87dc9643172b3c6792e247e5c8a000cc3640625e66404291159f1781b0",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior20.webp",
+    "publicUrl": "/images/interior/interior20.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 110352,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior20.thumb.webp",
+    "publicUrl": "/images/interior/interior20.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 32734,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRoYBAABXRUJQVlA4IHoBAABQCgCdASogACsAPuFgpE2opaOiNVv4ARAcCWQArDOPRppjZaeGRq7/BFLo36oYgaA88sTVR83c4LtPUdb34MxCrM71z+5KKDURsA2Shot7TPbUHp6+HPLgPRAAAP7azIXdZLqPTuyDnyhxyqeDLs5I0AbRFyW/B7uvP+5MmtjzI+9CLwiGg8MSmTnlRvEphmz3VUVHJaLaNuIbXDxLd8v3KkI0VFsrbqbPz+INDGT17bSbLOOvlAclmk0Ml1risMkMH26diQWb2tTAnFgiKGhAQHKDrjo6x7UQ8r/Y9NrEmtUAKS7fb0zW5DATWlqlpWdUSm1VP6cjf09X47qo7yYeP5eAUZmI9UgAp4u3pvEoU9Go3leLBIqMqx9OrISoMfO6Sp9Wxvp9AMmsT5cJHUuJz9vhYL5HUCcBc9xuNhyisPswTi2tvDP4PANA3m68IRSHiZTxGUfX22tqvxXumLxml97ZicroSuRenNgdr6seNVPQrhyjiIQAAAA="
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior22",
+  "title": "Hành lang ốp gỗ",
+  "alt": "Hình hành lang ốp gỗ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu hành lang ốp gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Hành lang ốp gỗ. Mô tả đã xác minh: Tư liệu hành lang ốp gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Hành lang ốp gỗ | Đại Hải Phát",
+    "description": "Hình ảnh hành lang ốp gỗ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "hành lang ốp gỗ",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior22.jpg",
+    "sourceRelativePath": "assets/images/interior/interior22.jpg",
+    "publicUrl": "/images/interior/interior22.jpg",
+    "bytes": 148175,
+    "sha256": "349d9959ab2ba2c07340ccaf500edc177fdc7cbfa1b30f8c078d0aacf6cec6a1",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior22.webp",
+    "publicUrl": "/images/interior/interior22.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 60520,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior22.thumb.webp",
+    "publicUrl": "/images/interior/interior22.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 15452,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRlwBAABXRUJQVlA4IFABAAAwCQCdASogACsAPu1wqlEppqOiqrgKATAdiWMALuq3QBlLZ/V2vl/0ao3t9R+u9oHX8vMbegbpwDbqX3ke+VVSYdNYc2gKe0W9s06Rv6WD6JPAAPnrnFPlhKD/ocuQLSWsMYGlj9D4TcR/z2oPBpbTjwU0RRwvwB0yEmJOA//ypa9CxyAppvN3S2iPoKL9tunlgJOkrqLxp7Kee612XUK7G1PPTHhbl3S/STUQ5C38iX92iuf3mxmGQudqmHMQNm2/ugFloovSU+TYGK58y6SAY65WO0EFvUoMcIHh2T7aFH3u6NtQqtcnPZKCbjdUYAas5TZtznihqO+iwidEEXcyYgnI/PZoXI2WR4yNvYvLKq2vKk54qwBfTf8NWV19c+qA5ST1VUyl0+mgELXzXdiTtkphkthX7eJg2wRKK5M8cDG/kS14Yk/ETH/5QwhzAAA="
+}

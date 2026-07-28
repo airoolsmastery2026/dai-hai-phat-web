@@ -1,0 +1,53 @@
+{
+  "id": "factory-factory05",
+  "title": "Gia công tấm hoa văn CNC",
+  "alt": "Hình gia công tấm hoa văn CNC trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu gia công tấm hoa văn CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Gia công tại xưởng",
+  "assetType": "project",
+  "material": "Kim loại",
+  "style": "Công nghiệp",
+  "projectType": "Xưởng gia công",
+  "service": "Nhà xưởng",
+  "prompt": "Chủ thể: Gia công tấm hoa văn CNC. Mô tả đã xác minh: Tư liệu gia công tấm hoa văn CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Gia công tại xưởng. Dịch vụ: Nhà xưởng. Vật liệu: Kim loại. Phong cách: Công nghiệp. Loại công trình: Xưởng gia công. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Gia công tấm hoa văn CNC | Đại Hải Phát",
+    "description": "Hình ảnh gia công tấm hoa văn CNC dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "gia công tại xưởng",
+      "gia công tấm hoa văn cnc",
+      "nhà xưởng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/factory/factory05.jpg",
+    "sourceRelativePath": "assets/images/factory/factory05.jpg",
+    "publicUrl": "/images/factory/factory05.jpg",
+    "bytes": 249564,
+    "sha256": "86ec7ceb294a629cb03306c894e23194db65c381033c6d151c0d7476cd13eb96",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/factory/factory05.webp",
+    "publicUrl": "/images/factory/factory05.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 135330,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/factory/factory05.thumb.webp",
+    "publicUrl": "/images/factory/factory05.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 29156,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAABQBgCdASogABgAPu1gp02ppSOiMAgBMB2JQBdgtbg8Ed721MlUM1g2GCJwFhKeytmWqz2ULPSBebICAAD+7M1FsUK3bUfgu98IWu88BXxZUAdNCYZV3BXtxeEYMblaPGf5Gy6jPRyTG2UoTE/INt5hKbPBnqYUPDLqrzCLq1erNceUYmX6u5xdu/V2MWDY8zf3NdJs35gdD5/3Ok+6XDc5/XRrk/5SZ0LuXwpIUIM0Gt7WBlz4rZrdKb5Sv1iQ3p7z2zBdgsoi5oYhXALV2hR/hzrB27VT0YEPYAAA"
+}

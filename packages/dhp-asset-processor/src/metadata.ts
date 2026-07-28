@@ -6,6 +6,7 @@ import type {
   LoadedMetadata,
   ScannedAsset,
 } from "./types.js";
+import { ASSET_TYPES, type AssetType } from "./types.js";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -39,6 +40,28 @@ function readOptionalString(
 ): string | undefined {
   const value = record[field];
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function readAssetType(
+  record: Record<string, unknown>,
+  issues: AssetIssue[],
+  asset: ScannedAsset,
+): AssetType {
+  const value = record.assetType;
+  if (
+    typeof value !== "string" ||
+    !ASSET_TYPES.includes(value as AssetType)
+  ) {
+    issues.push({
+      code: "METADATA_ASSET_TYPE_REQUIRED",
+      message: `Metadata field "assetType" must be one of: ${ASSET_TYPES.join(", ")}`,
+      severity: "error",
+      assetPath: asset.relativePath,
+      metadataPath: asset.metadataPath,
+    });
+    return "reference";
+  }
+  return value as AssetType;
 }
 
 function parseMetadata(value: unknown, asset: ScannedAsset): LoadedMetadata {
@@ -113,6 +136,7 @@ function parseMetadata(value: unknown, asset: ScannedAsset): LoadedMetadata {
     alt: readRequiredString(value, "alt", issues, asset),
     caption: readRequiredString(value, "caption", issues, asset),
     category: readRequiredString(value, "category", issues, asset),
+    assetType: readAssetType(value, issues, asset),
     material: readOptionalString(value, "material"),
     style: readOptionalString(value, "style"),
     projectType: readOptionalString(value, "projectType"),

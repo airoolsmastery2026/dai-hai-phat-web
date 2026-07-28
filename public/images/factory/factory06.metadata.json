@@ -1,0 +1,53 @@
+{
+  "id": "factory-factory06",
+  "title": "Gia công khung kim loại tại công trường",
+  "alt": "Hình gia công khung kim loại tại công trường trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu gia công khung kim loại tại công trường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Gia công tại xưởng",
+  "assetType": "project",
+  "material": "Kim loại",
+  "style": "Công nghiệp",
+  "projectType": "Xưởng gia công",
+  "service": "Nhà xưởng",
+  "prompt": "Chủ thể: Gia công khung kim loại tại công trường. Mô tả đã xác minh: Tư liệu gia công khung kim loại tại công trường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Gia công tại xưởng. Dịch vụ: Nhà xưởng. Vật liệu: Kim loại. Phong cách: Công nghiệp. Loại công trình: Xưởng gia công. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Gia công khung kim loại tại công trường | Đại Hải Phát",
+    "description": "Hình ảnh gia công khung kim loại tại công trường dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "gia công khung kim loại tại công trường",
+      "gia công tại xưởng",
+      "nhà xưởng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/factory/factory06.jpg",
+    "sourceRelativePath": "assets/images/factory/factory06.jpg",
+    "publicUrl": "/images/factory/factory06.jpg",
+    "bytes": 410359,
+    "sha256": "ab7340598657227024f407ab3dd482924503b7838d9f8947e5bb55b7d700194d",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/factory/factory06.webp",
+    "publicUrl": "/images/factory/factory06.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 255100,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/factory/factory06.thumb.webp",
+    "publicUrl": "/images/factory/factory06.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 28212,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAAAQBwCdASogABgAPu1gqE2ppaOiMAgBMB2JZQDC/AnuVimNmwmuVz1gC97e77ZvhEnfAjGifMJ9HwSnG/ACLFbhAAD+uW3z8tFkxPAjS043Ce912zVKO84hV0P0rYpaGqD1LskYcqxHNebedldwURaSPykm3v2lWUVuAFnKLfB9OY1ejVV4xLJ9sec76V17CXt30g/wRZq3tldX3bUtgfoSizGGAySAJgXHmn5EyfQQar6Fvd/k0iA6Vp/eaLtg+cg2NXCQa6+NIJHvn6nOn2NDln1Pz6dGTU4dWLQA"
+}

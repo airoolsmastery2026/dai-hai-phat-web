@@ -1,0 +1,53 @@
+{
+  "id": "factory-factory04",
+  "title": "Chi tiết kim loại cắt CNC",
+  "alt": "Hình chi tiết kim loại cắt CNC trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu chi tiết kim loại cắt CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Gia công tại xưởng",
+  "assetType": "project",
+  "material": "Kim loại",
+  "style": "Công nghiệp",
+  "projectType": "Xưởng gia công",
+  "service": "Nhà xưởng",
+  "prompt": "Chủ thể: Chi tiết kim loại cắt CNC. Mô tả đã xác minh: Tư liệu chi tiết kim loại cắt CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Gia công tại xưởng. Dịch vụ: Nhà xưởng. Vật liệu: Kim loại. Phong cách: Công nghiệp. Loại công trình: Xưởng gia công. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Chi tiết kim loại cắt CNC | Đại Hải Phát",
+    "description": "Hình ảnh chi tiết kim loại cắt CNC dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "chi tiết kim loại cắt cnc",
+      "đại hải phát",
+      "gia công tại xưởng",
+      "nhà xưởng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/factory/factory04.jpg",
+    "sourceRelativePath": "assets/images/factory/factory04.jpg",
+    "publicUrl": "/images/factory/factory04.jpg",
+    "bytes": 166866,
+    "sha256": "85a8f6902074986e963672204c9c3d1ea78e456af0d3a54da47f46a6436a730b",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/factory/factory04.webp",
+    "publicUrl": "/images/factory/factory04.webp",
+    "width": 1280,
+    "height": 592,
+    "bytes": 95462,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/factory/factory04.thumb.webp",
+    "publicUrl": "/images/factory/factory04.thumb.webp",
+    "width": 480,
+    "height": 222,
+    "bytes": 15380,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACwBACdASogAA8APu1orU6ppiSiMAgBMB2JQAFgAUKCBebKYTehunZynpaJiACAAP7WFfeafA12Dsy+i0hqtiuD/if7DinxUr+oCpHwR1LOBB3xqZ3YMV6/BxgFY8j2dCRe1xc5gE6j0opUspXW9snTqUqNpkV/69v5RY/x+5mRogjqPYsloQFZY56nyA7kZ7pAVmyrPVaSVXPLFl9Nj3eUYdwMhets50YAAA=="
+}

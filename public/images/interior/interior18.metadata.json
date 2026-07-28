@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior18",
+  "title": "Giường bệt kết hợp bàn làm việc",
+  "alt": "Hình giường bệt kết hợp bàn làm việc trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu giường bệt kết hợp bàn làm việc được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Giường bệt kết hợp bàn làm việc. Mô tả đã xác minh: Tư liệu giường bệt kết hợp bàn làm việc được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Giường bệt kết hợp bàn làm việc | Đại Hải Phát",
+    "description": "Hình ảnh giường bệt kết hợp bàn làm việc dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "giường bệt kết hợp bàn làm việc",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior18.jpg",
+    "sourceRelativePath": "assets/images/interior/interior18.jpg",
+    "publicUrl": "/images/interior/interior18.jpg",
+    "bytes": 120689,
+    "sha256": "2a04208b6e2f904d82039f14c84bec89439ff10650b4978b85f189f7e7c389b0",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior18.webp",
+    "publicUrl": "/images/interior/interior18.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 41538,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior18.thumb.webp",
+    "publicUrl": "/images/interior/interior18.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 12074,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRkQBAABXRUJQVlA4IDgBAACQCACdASogACsAPu1iqk8ppSOiMBqoATAdiWgApa3cAxLKwK8YkYfKtfHsnH8ZIIWEVx/d90Fe9SyO9/gB95fQTSwZUd0tcVxPk/BagACrr+6OcL8Grh+duyxxKqhFhOzIeaCcpx5B5last1Dd4lL0HL9JyvSh22prenQekm+UNTXOtZE1B+9Fx39Ez1T+S9I1KGC/IxAlLfKBeIyo/XrhXW/mlT0fUBHJ7zGZHJ61POTgrE2fxjKQDqc3dol29OiX/eknrcVM2x6zWj85oyLinwWNA+ggFEq/8GiS3ROmzBQ+7z8XT0UnHFsTAC/qKKCCSvZ2WH9HWR0mmRfqhWE30wUHA/mO3PUpuIr1cs/Y++iC11LufgttvmuksPbMBganmYhEGHKlPRLXV4NP8X4wdzwVEvdiAAA="
+}

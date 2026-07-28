@@ -1,0 +1,53 @@
+{
+  "id": "stairs-stair01",
+  "title": "Cầu thang kính tay vịn gỗ",
+  "alt": "Hình cầu thang kính tay vịn gỗ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu cầu thang kính tay vịn gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cầu thang",
+  "assetType": "project",
+  "material": "Kính, kim loại và gỗ",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Cầu thang và lan can",
+  "prompt": "Chủ thể: Cầu thang kính tay vịn gỗ. Mô tả đã xác minh: Tư liệu cầu thang kính tay vịn gỗ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cầu thang. Dịch vụ: Cầu thang và lan can. Vật liệu: Kính, kim loại và gỗ. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Cầu thang kính tay vịn gỗ | Đại Hải Phát",
+    "description": "Hình ảnh cầu thang kính tay vịn gỗ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cầu thang",
+      "cầu thang kính tay vịn gỗ",
+      "cầu thang và lan can",
+      "đại hải phát"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/stairs/stair01.jpg",
+    "sourceRelativePath": "assets/images/stairs/stair01.jpg",
+    "publicUrl": "/images/stairs/stair01.jpg",
+    "bytes": 228505,
+    "sha256": "0adb6fe5bfd6d81de53661eaf45f63bc4468923b906b78d4fbf56af2d6f8a7e2",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/stairs/stair01.webp",
+    "publicUrl": "/images/stairs/stair01.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 120108,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/stairs/stair01.thumb.webp",
+    "publicUrl": "/images/stairs/stair01.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 29428,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRmgBAABXRUJQVlA4IFwBAAAwCQCdASogACsAPu1qrVCppaQiqqgBMB2JZQDNTbgxgVsaBO3M37ZvyP5qP2lirtq9qoZb8vogw79rF8S6DxWVUq1fHznmnPRvtQfKGErq61AgAP7zpW8kRkPCVNvgeFB0Gmi4DJzhtzyoOFUC0wusKMKptWm8jk+QLMLEyrGbDoDYMnA7B7QaS5p5qv+GObFRUUcTghmiERXtsW369R/Om9xw659M1M4R9+jahIAQVAWRIe0mFLrSeaUCaEePeJhCs54TqxP2wi/mQyenH/wQcS5BIFcxNXWBWu3lA3sYNIkWV4A5ANsXFyEHnRRNzcrycdwwpRKhgIaxpyuuVF17NnEyWErag540SWoBZEJ0YBSp51T87cRG/GEwpctci1QJEU1r3n7O9XBwp0CBbvGZZ9qgGCCNr9S53yVdyxh+Ws3qFnG+U2MnI5KdmTO2rD6/XTzacljtBkgAAAA="
+}

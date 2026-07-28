@@ -1,0 +1,53 @@
+{
+  "id": "factory-factory01",
+  "title": "Gia công khung lan can CNC tại xưởng",
+  "alt": "Hình gia công khung lan can CNC tại xưởng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu gia công khung lan can CNC tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Gia công tại xưởng",
+  "assetType": "project",
+  "material": "Kim loại",
+  "style": "Công nghiệp",
+  "projectType": "Xưởng gia công",
+  "service": "Nhà xưởng",
+  "prompt": "Chủ thể: Gia công khung lan can CNC tại xưởng. Mô tả đã xác minh: Tư liệu gia công khung lan can CNC tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Gia công tại xưởng. Dịch vụ: Nhà xưởng. Vật liệu: Kim loại. Phong cách: Công nghiệp. Loại công trình: Xưởng gia công. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Gia công khung lan can CNC tại xưởng | Đại Hải Phát",
+    "description": "Hình ảnh gia công khung lan can CNC tại xưởng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "gia công khung lan can cnc tại xưởng",
+      "gia công tại xưởng",
+      "nhà xưởng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/factory/factory01.jpg",
+    "sourceRelativePath": "assets/images/factory/factory01.jpg",
+    "publicUrl": "/images/factory/factory01.jpg",
+    "bytes": 314052,
+    "sha256": "5643e759163749ab73b6096de7838bfb5169b8b1e8d75639018310e2801d1bb8",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/factory/factory01.webp",
+    "publicUrl": "/images/factory/factory01.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 167546,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/factory/factory01.thumb.webp",
+    "publicUrl": "/images/factory/factory01.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 50920,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRpIBAABXRUJQVlA4IIYBAAAwCwCdASogACsAPu1iqU6ppSOiKqwBMB2JZQC/tvM1mZybsBlj8CtJw0MJOZJZaqb3Akn8Mue7hX0S2MBgBC0EzwzZHO1qDfaKXiItd6pLF7to+0buodhIrW+0slSofrPAAAD2ty8DCCDTvzWBVuuBpzyy56YLyQzYRfOrbe0fmFiQ/1qOjEuaPq3m5j3LCEZhNXNgKPn59DdOGS2BmNxCmqmyyidfKHEmtIEihB5GdkV8VHJe6GxHosgioOn+REkXA7g6ow/q5xTALV+SHE5lIZ8mors/ccD5lZU3NoOsfWXIE1e14AmyHmDT2RD+0oUF6oW9uGoBwa0YcRccf+pI8/0tGBTNKxqx/ml5vObDMqZlhow4eQdvbY87zRoJrJ5AdlV1K22tXI9CzDaVCwG2ZHxvsT3HN1v1jaoFHLOicQGe6DAL1CmAYDhjuldbiSrIbldNxr8MBuoTCde6zF0dvvP7oqyS+P5V/4zolwlQ0nvCfzYN3wuDe6XwI1+qoOgfzLxeoAA="
+}

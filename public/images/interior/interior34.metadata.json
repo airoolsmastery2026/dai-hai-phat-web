@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior34",
+  "title": "Tủ bếp chữ L với kính màu",
+  "alt": "Hình tủ bếp chữ L với kính màu trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ bếp chữ L với kính màu được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp chống ẩm và phụ kiện",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ bếp chữ L với kính màu. Mô tả đã xác minh: Tư liệu tủ bếp chữ L với kính màu được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp chống ẩm và phụ kiện. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ bếp chữ L với kính màu | Đại Hải Phát",
+    "description": "Hình ảnh tủ bếp chữ L với kính màu dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ bếp chữ l với kính màu"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior34.jpg",
+    "sourceRelativePath": "assets/images/interior/interior34.jpg",
+    "publicUrl": "/images/interior/interior34.jpg",
+    "bytes": 162827,
+    "sha256": "580c760376b6093de0eb039d757e2f9da13fd0f86264086eb869d1fad3b27fc1",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior34.webp",
+    "publicUrl": "/images/interior/interior34.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 87942,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior34.thumb.webp",
+    "publicUrl": "/images/interior/interior34.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 23304,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRiQBAABXRUJQVlA4IBgBAABQCgCdASogACsAPuViqk2pJaQiKq35IByJZQCvi63KwGv7OTdk8vUI6Yr3/kh1VTJgcs998YTK74LSwKkvq0NvXQt7xwKLYgBsc19Hz++eo9RYZx3VSnm1on/cAPyc58Ha8O63QuppK7M7Gkpw9dwk2bW7C0hGfKJ7iz9EjSJHEn7+TlLXreY42SHqgB1hSiIYih/KvM3n0nSlVzx96/UK/EW5Aykokbk+EZTT+yKi/4GUAfQljUacyu8JOwW0xdJOjUu/8GETkRBXAty2Va4DJX+P2S0bnFIfbSjzLgP/7S0piduvBXbLvXYfQd8S/OrnY9U7Kij7mv1gesR+fSWnbgJsI8o1P8Wox3RGZ+OHqWH1Im8xLUAA"
+}
