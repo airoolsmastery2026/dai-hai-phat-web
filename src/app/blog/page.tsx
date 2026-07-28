@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
@@ -47,25 +48,22 @@ export default function BlogPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[var(--color-background)]">
       <JsonLd data={collectionSchema} />
-      <section className="bg-slate-950 py-24 text-white">
-        <Container>
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-300">Checklist kỹ thuật</p>
-            <h1 className="mt-4 text-4xl font-semibold sm:text-5xl">Chuẩn bị đúng dữ liệu trước khi khảo sát</h1>
-            <p className="mt-6 text-lg leading-8 text-slate-300">
-              Mỗi checklist tập trung vào dữ liệu giúp kỹ sư lập phương án chính xác hơn. Thông số vật liệu và tải trọng chỉ được kết luận sau khi đối chiếu hồ sơ kỹ thuật tương ứng.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Checklist kỹ thuật"
+        title="Chuẩn bị đúng dữ liệu trước khi khảo sát"
+        description="Mỗi checklist tập trung vào dữ liệu giúp kỹ sư lập phương án chính xác hơn. Thông số vật liệu và tải trọng chỉ được kết luận sau khi đối chiếu hồ sơ kỹ thuật tương ứng."
+      />
 
-      <section className="py-20">
+      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
         <Container>
           <div className="grid gap-8 md:grid-cols-2">
             {ARTICLES.map((article) => (
-              <article key={article.id} className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+              <article
+                key={article.id}
+                className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]"
+              >
                 <div className="relative h-56">
                   <Image
                     src={article.image}
@@ -75,11 +73,20 @@ export default function BlogPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="p-8">
-                  <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#FF5722]">{article.category}</p>
-                  <h2 className="mt-3 text-2xl font-semibold text-slate-900">{article.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">{article.excerpt}</p>
-                  <Link href={`/blog/${article.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#FF5722] hover:underline">
+                <div className="p-[var(--space-8)]">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+                    {article.category}
+                  </p>
+                  <h2 className="mt-[var(--space-3)] text-2xl font-bold text-[var(--color-text)]">
+                    {article.title}
+                  </h2>
+                  <p className="mt-[var(--space-4)] text-sm leading-7 text-[var(--color-text-muted)]">
+                    {article.excerpt}
+                  </p>
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className="mt-[var(--space-6)] inline-flex min-h-11 items-center gap-[var(--space-2)] text-sm font-bold text-[var(--color-primary)] hover:underline"
+                  >
                     Đọc thêm
                   </Link>
                 </div>

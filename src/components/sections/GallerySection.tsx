@@ -17,13 +17,13 @@ const gallery = [
 
 export default function GallerySection() {
   return (
-    <section className="py-24 bg-[#fafafa]">
+    <section className="py-24 bg-[var(--color-surface-muted)]">
 
       <div className="container mx-auto px-6">
 
         <div className="text-center mb-16">
 
-          <span className="uppercase tracking-[4px] text-[#d6a449] font-semibold">
+          <span className="uppercase tracking-[4px] text-[var(--color-primary)] font-semibold">
             Hình ảnh thực tế
           </span>
 

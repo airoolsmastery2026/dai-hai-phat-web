@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { BackToTop } from "@/components/layout/BackToTop";
-import { FloatingCta } from "@/components/layout/FloatingCta";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteNavigation } from "@/components/layout/SiteNavigation";
-import { TopBar } from "@/components/layout/TopBar";
 import { VerifiedGallery } from "@/components/gallery/VerifiedGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
@@ -60,36 +55,33 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[var(--color-background)]">
       <JsonLd data={collectionSchema} />
-      <TopBar />
-      <SiteNavigation />
-      <main>
-        <section className="bg-slate-950 py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
+      <section className="bg-[var(--color-surface-dark)] py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
           <Container>
-            <p className="text-sm font-bold uppercase tracking-[0.24em] text-orange-300">
-              Verified Asset Library
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary-soft-text)]">
+              Thư viện công trình đã xác minh
             </p>
             <h1 className="mt-[var(--space-inline)] max-w-4xl text-4xl font-black leading-tight sm:text-5xl">
               Tìm công trình theo nhu cầu thực tế
             </h1>
-            <p className="mt-[var(--space-stack)] max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">
+            <p className="mt-[var(--space-stack)] max-w-3xl text-base leading-7 text-[var(--color-text-dark-muted)] sm:text-lg">
               {initialGallery.total} ảnh công trình được phân loại theo hạng mục,
               vật liệu, phong cách và loại công trình. Mỗi ảnh đều có nguồn và
               quyền sử dụng đã xác minh.
             </p>
-            <p className="mt-[var(--space-control)] max-w-3xl text-sm leading-6 text-slate-400">
+            <p className="mt-[var(--space-control)] max-w-3xl text-sm leading-6 text-[var(--color-text-dark-subtle)]">
               So sánh trước và sau chỉ được hiển thị khi có cặp ảnh cùng công
               trình được xác minh; hệ thống không tự ghép ảnh khác nguồn.
             </p>
           </Container>
-        </section>
+      </section>
 
-        <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
+      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
           <Container>
             <nav
               aria-label="Đường dẫn trang"
-              className="mb-[var(--space-stack)] text-sm text-slate-500"
+              className="mb-[var(--space-stack)] text-sm text-[var(--color-text-subtle)]"
             >
               <Link href="/" className="font-semibold hover:text-[var(--color-primary)]">
                 Trang chủ
@@ -99,11 +91,7 @@ export default function GalleryPage() {
             </nav>
             <VerifiedGallery initialGallery={initialGallery} />
           </Container>
-        </section>
-      </main>
-      <SiteFooter />
-      <FloatingCta />
-      <BackToTop />
-    </div>
+      </section>
+    </main>
   );
 }

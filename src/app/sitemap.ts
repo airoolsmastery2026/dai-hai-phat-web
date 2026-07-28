@@ -1,11 +1,13 @@
 import { MetadataRoute } from "next";
 
+import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
+import { SERVICES } from "@/content/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = COMPANY_CONFIG.websiteUrl;
 
-  return [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       changeFrequency: "weekly",
@@ -37,4 +39,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
   ];
+
+  const serviceRoutes: MetadataRoute.Sitemap = SERVICES.map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const articleRoutes: MetadataRoute.Sitemap = ARTICLES.map((article) => ({
+    url: `${baseUrl}/blog/${article.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...articleRoutes];
 }

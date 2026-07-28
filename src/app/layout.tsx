@@ -3,6 +3,11 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
 
+import { BackToTop } from "@/components/layout/BackToTop";
+import { FloatingCta } from "@/components/layout/FloatingCta";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteNavigation } from "@/components/layout/SiteNavigation";
+
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
   display: "swap",
@@ -66,7 +71,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#111827",
+  themeColor: "#0B1120",
 };
 
 export default function RootLayout({
@@ -76,13 +81,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-
       <body className={inter.className}>
-
-        {children}
-
+        <a href="#main-content" className="skip-link">
+          Bỏ qua điều hướng
+        </a>
+        <SiteNavigation />
+        <div id="main-content">{children}</div>
+        <SiteFooter />
+        <FloatingCta />
+        <BackToTop />
       </body>
-
     </html>
   );
 }

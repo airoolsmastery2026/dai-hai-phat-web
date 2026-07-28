@@ -3,11 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { TopBar } from "@/components/layout/TopBar";
-import { SiteNavigation } from "@/components/layout/SiteNavigation";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { FloatingCta } from "@/components/layout/FloatingCta";
-import { BackToTop } from "@/components/layout/BackToTop";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -80,29 +75,30 @@ export default async function BlogDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[var(--color-background)]">
       <JsonLd data={articleSchema} />
-      <TopBar />
-      <SiteNavigation />
-      <main>
-      <section className="bg-slate-950 py-24 text-white">
+      <section className="bg-[var(--color-surface-dark)] py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
         <Container>
-          <Link href="/blog" className="text-sm font-semibold text-orange-300 hover:underline">
+          <Link href="/blog" className="text-sm font-semibold text-[var(--color-primary-soft-text)] hover:underline">
             ← Quay lại blog
           </Link>
-          <p className="mt-4 text-sm font-semibold uppercase tracking-[0.35em] text-orange-300">{article.category}</p>
-          <h1 className="mt-4 max-w-4xl text-4xl font-semibold sm:text-5xl">{article.title}</h1>
-          <p className="mt-6 text-base text-slate-300">
+          <p className="mt-[var(--space-4)] text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary-soft-text)]">
+            {article.category}
+          </p>
+          <h1 className="mt-[var(--space-4)] max-w-4xl text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">
+            {article.title}
+          </h1>
+          <p className="mt-[var(--space-6)] text-base text-[var(--color-text-dark-muted)]">
             Checklist dữ liệu trước khảo sát kỹ thuật
           </p>
         </Container>
       </section>
 
-      <section className="py-20">
-        <Container className="space-y-10">
+      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
+        <Container className="space-y-[var(--space-10)]">
           <Breadcrumb items={[{ label: "Blog", href: "/blog" }, { label: article.title }]} />
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div className="relative h-80">
+          <div className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]">
+            <div className="relative aspect-[16/7]">
               <Image
                 src={article.image}
                 alt={article.title}
@@ -113,37 +109,37 @@ export default async function BlogDetailPage({
             </div>
           </div>
 
-          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-              <p className="text-sm leading-8 text-slate-700">{article.content}</p>
-              <ul className="mt-6 space-y-3">
+          <div className="grid gap-[var(--space-10)] lg:grid-cols-[1.2fr_0.8fr]">
+            <article className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-8)] shadow-[var(--shadow-sm)]">
+              <p className="text-sm leading-8 text-[var(--color-text-muted)]">
+                {article.content}
+              </p>
+              <ul className="mt-[var(--space-6)] space-y-[var(--space-3)]">
                 {article.highlights.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-slate-700">
-                    <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#FF5722]" />
+                  <li key={item} className="flex items-start gap-[var(--space-3)] text-sm text-[var(--color-text-muted)]">
+                    <span className="mt-1 h-2.5 w-2.5 rounded-[var(--radius-full)] bg-[var(--color-primary)]" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </article>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">Bạn có thể quan tâm</h2>
-              <div className="mt-6 space-y-4">
+            <aside className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-8)] shadow-[var(--shadow-sm)]">
+              <h2 className="text-xl font-bold text-[var(--color-text)]">
+                Checklist liên quan
+              </h2>
+              <div className="mt-[var(--space-6)] space-y-[var(--space-4)]">
                 {ARTICLES.filter((item) => item.slug !== article.slug).slice(0, 3).map((item) => (
-                  <Link key={item.slug} href={`/blog/${item.slug}`} className="block rounded-2xl border border-slate-200 p-4 transition-colors hover:border-[#FF5722]">
-                    <p className="text-sm font-semibold text-[#FF5722]">{item.category}</p>
-                    <p className="mt-2 text-sm font-medium text-slate-800">{item.title}</p>
+                  <Link key={item.slug} href={`/blog/${item.slug}`} className="block rounded-[var(--radius-lg)] border border-[var(--color-border)] p-[var(--space-4)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)]">
+                    <p className="text-sm font-semibold text-[var(--color-primary)]">{item.category}</p>
+                    <p className="mt-[var(--space-2)] text-sm font-medium text-[var(--color-text)]">{item.title}</p>
                   </Link>
                 ))}
               </div>
-            </div>
+            </aside>
           </div>
         </Container>
       </section>
-      </main>
-      <SiteFooter />
-      <FloatingCta />
-      <BackToTop />
-    </div>
+    </main>
   );
 }

@@ -1,33 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Container } from "@/components/ui/Container";
 import { SERVICES } from "@/content/services";
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="scroll-mt-16 bg-slate-50 py-16 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section
+      id="projects"
+      className="scroll-mt-16 bg-[var(--color-background)] py-[var(--space-section)] lg:py-[var(--space-section-lg)]"
+    >
+      <Container>
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF5722]">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
             Thư viện giải pháp
           </p>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="mt-[var(--space-3)] text-3xl font-bold text-[var(--color-text)] sm:text-4xl">
             Hình dung phương án trước khi khảo sát
           </h2>
-          <p className="mt-4 leading-7 text-slate-600">
+          <p className="mt-[var(--space-4)] leading-7 text-[var(--color-text-muted)]">
             Hình ảnh được chọn từ thư viện công trình có nguồn và quyền sử dụng
             đã xác minh của Đại Hải Phát.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-[var(--space-10)] grid gap-[var(--space-5)] sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((service) => (
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
-              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-orange-300 hover:shadow-md"
+              className="group overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] transition duration-[var(--duration-medium)] hover:-translate-y-1 hover:border-[var(--color-primary)] hover:shadow-[var(--shadow-md)]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-slate-200">
+              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-strong)]">
                 <Image
                   src={service.image}
                   alt={`Hình minh họa: ${service.title}`}
@@ -35,25 +39,25 @@ export function ProjectsSection() {
                   sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
                   className="object-cover transition duration-300 group-hover:scale-[1.02]"
                 />
-                <span className="absolute left-3 top-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-white">
+                <span className="absolute left-[var(--space-3)] top-[var(--space-3)] rounded-[var(--radius-full)] bg-[var(--color-surface-dark)]/90 px-[var(--space-3)] py-[var(--space-1)] text-xs font-semibold text-white">
                   Ảnh đã xác minh
                 </span>
               </div>
-              <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#FF5722]">
+              <div className="p-[var(--space-5)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-primary)]">
                   {service.subtitle}
                 </p>
-                <h3 className="mt-2 text-lg font-bold text-slate-900">
+                <h3 className="mt-[var(--space-2)] text-lg font-bold text-[var(--color-text)]">
                   {service.title}
                 </h3>
-                <p className="mt-4 text-sm font-semibold text-[#FF5722]">
+                <p className="mt-[var(--space-4)] text-sm font-semibold text-[var(--color-primary)]">
                   Xem giải pháp →
                 </p>
               </div>
             </Link>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

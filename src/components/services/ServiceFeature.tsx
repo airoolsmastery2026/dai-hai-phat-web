@@ -4,12 +4,16 @@ import type { ServiceFeature as ServiceFeatureType } from "@/types/content";
 
 export function ServiceFeature({ feature }: { feature: ServiceFeatureType }) {
   return (
-    <div className="group relative rounded-[1.5rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition hover:border-[#FF5722]/30 hover:shadow-md">
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-[#FF5722]">
-        <Zap className="h-5 w-5" />
+    <div className="group relative rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-6)] shadow-[var(--shadow-sm)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)]">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
+        <Zap className="h-5 w-5" aria-hidden="true" />
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-slate-900">{feature.title}</h3>
-      <p className="mt-2 text-sm leading-7 text-slate-600">{feature.description}</p>
+      <h3 className="mt-[var(--space-4)] text-lg font-bold text-[var(--color-text)]">
+        {feature.title}
+      </h3>
+      <p className="mt-[var(--space-2)] text-sm leading-7 text-[var(--color-text-muted)]">
+        {feature.description}
+      </p>
     </div>
   );
 }

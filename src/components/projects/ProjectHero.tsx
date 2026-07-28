@@ -15,7 +15,7 @@ export function ProjectHero({ project }: { project: ProjectItem }) {
             <p className="mt-4 text-lg text-slate-300">{project.category} • {project.location} • {project.year}</p>
             <p className="mt-6 text-base leading-8 text-slate-400">{project.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="#contact">Yêu cầu tư vấn</Button>
+              <Button href="/contact">Yêu cầu tư vấn</Button>
               <Button href="#faq" variant="secondary">Xem FAQ</Button>
             </div>
           </div>

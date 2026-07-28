@@ -16,6 +16,7 @@ import Image from "next/image";
 import type { FormEvent, ReactNode } from "react";
 
 import { useAI } from "@/hooks/useAI";
+import { COMPANY_CONFIG } from "@/content/company";
 import { getStateLabel, type ConversationQuestion, type ConversationSession } from "@/lib/ai";
 import type { ProposalEvidenceResponse } from "@/lib/ai/catalog";
 
@@ -50,10 +51,10 @@ export function AIOfficeSection() {
       <div className="mx-auto max-w-7xl px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
         <header className="max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-primary)]">
-            AI Digital Engineering Office
+            Hồ sơ tư vấn kỹ thuật
           </p>
           <h2 className="mt-[var(--space-inline)] text-3xl font-bold sm:text-4xl">
-            Lập hồ sơ tư vấn cùng AI Sales Engineer
+            Chuẩn bị dữ liệu khảo sát theo từng bước
           </h2>
           <p className="mt-[var(--space-stack)] leading-7 text-[var(--color-text-dark-muted)]">
             Mỗi bước thu thập đúng một dữ liệu. Khoảng chi phí và phương án kỹ thuật
@@ -111,7 +112,7 @@ function ConversationPanel({
             <Bot aria-hidden="true" />
           </span>
           <div>
-            <p className="font-bold">AI Sales Engineer Đại Hải Phát</p>
+            <p className="font-bold">Trợ lý lập hồ sơ Đại Hải Phát</p>
             <p className="text-sm text-[var(--color-primary-soft-text)]">
               {getStateLabel(session.state)}
             </p>
@@ -273,11 +274,22 @@ function CompletionState({ session }: { session: ConversationSession }) {
   return (
     <div className="mt-[var(--space-card-lg)] rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
       <ShieldCheck className="h-9 w-9 text-[var(--color-success)]" aria-hidden="true" />
-      <h3 className="mt-[var(--space-stack)] text-xl font-bold">Hồ sơ khảo sát đã hoàn tất.</h3>
+      <h3 className="mt-[var(--space-stack)] text-xl font-bold">
+        Hồ sơ trên thiết bị đã hoàn tất.
+      </h3>
       <p className="mt-[var(--space-control)] leading-6 text-[var(--color-text-dark-muted)]">
-        Hồ sơ của {session.memory.name} đã đạt {session.proposal.progress}% và sẵn sàng bàn
-        giao cho kỹ sư. Báo giá chính thức được lập sau khi xác minh hiện trạng.
+        Hồ sơ của {session.memory.name} đã đạt {session.proposal.progress}%.
+        Dữ liệu hiện chỉ được lưu trên trình duyệt này và chưa tự động gửi tới
+        kỹ sư hoặc CRM. Báo giá chính thức được lập sau khi xác minh hiện trạng.
       </p>
+      <a
+        href={COMPANY_CONFIG.socials.zalo1}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-[var(--space-stack)] inline-flex min-h-[var(--control-min-size)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-stack)] py-[var(--space-control)] font-bold text-white transition-colors hover:bg-[var(--color-primary-hover)]"
+      >
+        Gửi thông tin qua Zalo
+      </a>
     </div>
   );
 }
