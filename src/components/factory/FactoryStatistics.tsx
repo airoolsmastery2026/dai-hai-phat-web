@@ -1,8 +1,8 @@
-import { TrendingUp, Users, Cpu, CheckCircle2, Building2, Factory } from "lucide-react";
+import { TrendingUp, Users, Cpu, CheckCircle2, Building2, Factory, type LucideIcon } from "lucide-react";
 
 import type { STATISTICS } from "@/content/factory";
 
-const ICON_MAP: Record<string, any> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   "building-2": Building2,
   factory: Factory,
   users: Users,

@@ -1,102 +1,53 @@
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+
+import { COMPANY_CONFIG } from "@/content/company";
+
 export function ContactSection() {
   return (
-    <section
-      id="contact"
-      className="bg-slate-900 py-24 text-white"
-    >
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2">
-
-        <div>
-
-          <span className="text-sm font-semibold uppercase tracking-[4px] text-orange-400">
-            Liên hệ
-          </span>
-
-          <h2 className="mt-5 text-4xl font-bold leading-tight">
-            Nhận tư vấn và báo giá miễn phí
-          </h2>
-
-          <p className="mt-6 text-lg leading-8 text-slate-300">
-            Đại Hải Phát nhận khảo sát tận nơi, tư vấn giải pháp,
-            thiết kế và báo giá hoàn toàn miễn phí.
-          </p>
-
-          <div className="mt-10 space-y-6">
-
-            <div>
-              <div className="text-orange-400 font-semibold">
-                Hotline
-              </div>
-
-              <div className="text-2xl font-bold">
-                09xx xxx xxx
-              </div>
+    <section id="contact" className="scroll-mt-16 bg-white py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 rounded-3xl bg-orange-500 p-6 text-white sm:p-10 lg:grid-cols-[1fr_0.9fr] lg:p-14">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-100">Bước tiếp theo</p>
+            <h2 className="mt-3 text-3xl font-black leading-tight sm:text-4xl">Trao đổi trực tiếp với kỹ sư Đại Hải Phát</h2>
+            <p className="mt-5 max-w-xl leading-7 text-orange-50">
+              Gửi ảnh hiện trạng, kích thước dự kiến và vị trí công trình qua Zalo để đội ngũ chuẩn bị phương án trước khi khảo sát.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href={COMPANY_CONFIG.socials.zalo1} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-orange-600 hover:bg-orange-50">
+                <MessageCircle className="h-5 w-5" aria-hidden="true" /> Gửi thông tin qua Zalo
+              </a>
+              <a href={`tel:${COMPANY_CONFIG.phones[0].raw}`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/50 px-5 py-3 font-bold text-white hover:bg-white/10">
+                <Phone className="h-5 w-5" aria-hidden="true" /> {COMPANY_CONFIG.phones[0].display}
+              </a>
             </div>
-
-            <div>
-              <div className="text-orange-400 font-semibold">
-                Email
-              </div>
-
-              <div>
-                contact@daihaiphat.vn
-              </div>
-            </div>
-
-            <div>
-              <div className="text-orange-400 font-semibold">
-                Địa chỉ
-              </div>
-
-              <div>
-                TP. Hồ Chí Minh
-              </div>
-            </div>
-
           </div>
 
+          <address className="grid content-center gap-4 not-italic">
+            <ContactItem icon={Phone} label="Hotline">
+              <a href={`tel:${COMPANY_CONFIG.phones[1].raw}`}>{COMPANY_CONFIG.phones[1].display}</a>
+            </ContactItem>
+            <ContactItem icon={Mail} label="Email">
+              <a href={`mailto:${COMPANY_CONFIG.email}`}>{COMPANY_CONFIG.email}</a>
+            </ContactItem>
+            <ContactItem icon={MapPin} label="Địa chỉ">
+              <a href={COMPANY_CONFIG.googleMapsUrl} target="_blank" rel="noreferrer">{COMPANY_CONFIG.address}</a>
+            </ContactItem>
+          </address>
         </div>
-
-        <form className="rounded-2xl bg-white p-8 text-slate-900 shadow-2xl">
-
-          <h3 className="text-2xl font-bold">
-            Gửi yêu cầu
-          </h3>
-
-          <div className="mt-8 space-y-5">
-
-            <input
-              className="w-full rounded-xl border p-4"
-              placeholder="Họ và tên"
-            />
-
-            <input
-              className="w-full rounded-xl border p-4"
-              placeholder="Số điện thoại"
-            />
-
-            <input
-              className="w-full rounded-xl border p-4"
-              placeholder="Email"
-            />
-
-            <textarea
-              rows={5}
-              className="w-full rounded-xl border p-4"
-              placeholder="Nội dung cần tư vấn"
-            />
-
-            <button
-              className="w-full rounded-xl bg-orange-500 py-4 font-bold text-white transition hover:bg-orange-600"
-            >
-              GỬI YÊU CẦU
-            </button>
-
-          </div>
-
-        </form>
-
       </div>
     </section>
+  );
+}
+
+function ContactItem({ icon: Icon, label, children }: { icon: typeof Phone; label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex gap-3 rounded-2xl bg-white/10 p-4">
+      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-orange-100" aria-hidden="true" />
+      <div>
+        <p className="text-xs font-bold uppercase tracking-[0.15em] text-orange-100">{label}</p>
+        <div className="mt-1 break-words font-semibold">{children}</div>
+      </div>
+    </div>
   );
 }

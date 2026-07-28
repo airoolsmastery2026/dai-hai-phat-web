@@ -8,7 +8,7 @@ export function FactoryTimeline({ data }: { data: typeof FACTORY_TIMELINE }) {
       <p className="mt-3 max-w-2xl text-base text-slate-600">Từ thành lập đến mở rộng quy mô, Đại Hải Phát luôn nâng cao năng lực.</p>
 
       <div className="mt-10 space-y-0">
-        {data.map((item, index) => (
+        {data.map((item) => (
           <div key={item.year} className="grid gap-6 border-l-2 border-[#FF5722] py-8 pl-8 md:grid-cols-[160px_1fr]">
             <div>
               <div className="absolute -left-4 top-8 h-6 w-6 rounded-full border-4 border-white bg-[#FF5722] shadow-lg" />

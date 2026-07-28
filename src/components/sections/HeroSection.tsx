@@ -1,98 +1,69 @@
-import Image from "next/image";
+import { ArrowRight, Bot, CheckCircle2 } from "lucide-react";
+
+import { COMPANY_CONFIG } from "@/content/company";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden">
-
-      <Image
-        src="/images/hero-factory.jpg"
-        alt="Đại Hải Phát"
-        fill
-        priority
-        className="object-cover"
-      />
-
-      <div className="absolute inset-0 bg-black/60" />
-
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6">
+    <section className="relative overflow-hidden bg-slate-950 pt-16 text-white lg:pt-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(249,115,22,0.18),transparent_38%)]" />
+      <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 lg:min-h-[calc(100svh-5rem)] lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
 
         <div className="max-w-3xl">
 
-          <span className="rounded-full bg-orange-500 px-4 py-2 text-sm font-bold uppercase tracking-[0.2em] text-white">
-            Nội thất • Cơ khí dân dụng
+          <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-orange-300">
+            <Bot className="h-4 w-4" aria-hidden="true" /> AI Engineering Office 24/7
           </span>
 
-          <h1 className="mt-8 text-5xl font-black uppercase leading-tight text-white md:text-7xl">
-            Đại Hải Phát
+          <h1 className="mt-6 text-4xl font-black leading-[1.08] text-white sm:text-5xl lg:text-7xl">
+            Tư vấn cơ khí & nội thất
+            <span className="block text-orange-400">từ nhu cầu đến phương án.</span>
           </h1>
 
-          <h2 className="mt-4 text-2xl font-semibold text-orange-400 md:text-3xl">
-            Thiết kế • Gia công • Thi công trọn gói
-          </h2>
-
-          <p className="mt-8 max-w-2xl text-xl leading-9 text-gray-200">
-            Chuyên thi công nội thất theo yêu cầu, tủ bếp,
-            phòng ngủ, tủ quần áo, kệ TV cùng các hạng mục
-            cơ khí dân dụng như mái che, cầu thang, lan can,
-            cổng sắt và sản phẩm gia công theo yêu cầu.
+          <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+            Trả lời từng câu hỏi ngắn để AI tổng hợp yêu cầu, đề xuất vật liệu và chuẩn bị proposal sơ bộ trước khi kỹ sư khảo sát.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
 
             <a
-              href="#contact"
-              className="rounded-xl bg-orange-500 px-8 py-4 font-bold uppercase text-white transition hover:bg-orange-600"
+              href="#ai-office"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-orange-500 px-6 py-3 font-bold text-white transition hover:bg-orange-600"
             >
-              Nhận báo giá
+              Bắt đầu tư vấn <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </a>
 
             <a
               href="#projects"
-              className="rounded-xl border border-white px-8 py-4 font-bold uppercase text-white transition hover:bg-white hover:text-black"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/30 px-6 py-3 font-bold text-white transition hover:bg-white hover:text-slate-950"
             >
               Xem công trình
             </a>
 
           </div>
 
-          <div className="mt-20 grid grid-cols-3 gap-8">
-
-            <div>
-              <div className="text-5xl font-black text-orange-500">
-                10+
-              </div>
-
-              <p className="mt-2 text-sm uppercase tracking-widest text-white">
-                Năm kinh nghiệm
-              </p>
-            </div>
-
-            <div>
-              <div className="text-5xl font-black text-orange-500">
-                300+
-              </div>
-
-              <p className="mt-2 text-sm uppercase tracking-widest text-white">
-                Công trình
-              </p>
-            </div>
-
-            <div>
-              <div className="text-5xl font-black text-orange-500">
-                100%
-              </div>
-
-              <p className="mt-2 text-sm uppercase tracking-widest text-white">
-                Tận tâm
-              </p>
-            </div>
-
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300">
+            {["Một câu hỏi mỗi bước", "Không báo giá khi thiếu dữ liệu", "Kỹ sư xác nhận phương án"].map((item) => (
+              <span key={item} className="inline-flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-orange-400" aria-hidden="true" /> {item}
+              </span>
+            ))}
           </div>
-
         </div>
-
+        <div className="rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl sm:p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-orange-300">Quy trình kỹ thuật số</p>
+          <ol className="mt-5 space-y-4">
+            {["Chọn hạng mục cần tư vấn", "Bổ sung kích thước, ảnh và ngân sách", "Nhận proposal sơ bộ", "Đặt lịch kỹ sư khảo sát"].map((item, index) => (
+              <li key={item} className="flex gap-4 rounded-2xl bg-slate-900/70 p-4">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-500 font-black">{index + 1}</span>
+                <span className="self-center font-semibold">{item}</span>
+              </li>
+            ))}
+          </ol>
+          <a href={`tel:${COMPANY_CONFIG.phones[0].raw}`} className="mt-5 block text-center text-sm font-semibold text-slate-300">
+            Cần gấp? Gọi kỹ sư: <span className="text-white">{COMPANY_CONFIG.phones[0].display}</span>
+          </a>
+        </div>
       </div>
-
     </section>
   );
 }
