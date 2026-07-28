@@ -10,6 +10,7 @@ import { FloatingCta } from "@/components/layout/FloatingCta";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
 import { normalizeRouteSlug } from "@/lib/routing";
@@ -40,6 +41,13 @@ export async function generateMetadata({
       description: article.excerpt,
       url: `${COMPANY_CONFIG.websiteUrl}/blog/${article.slug}`,
       type: "article",
+      images: [article.image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: [article.image],
     },
   };
 }
@@ -57,8 +65,23 @@ export default async function BlogDetailPage({
     notFound();
   }
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    image: `${COMPANY_CONFIG.websiteUrl}${article.image}`,
+    mainEntityOfPage: `${COMPANY_CONFIG.websiteUrl}/blog/${article.slug}`,
+    publisher: {
+      "@type": "Organization",
+      name: COMPANY_CONFIG.name,
+      url: COMPANY_CONFIG.websiteUrl,
+    },
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
+      <JsonLd data={articleSchema} />
       <TopBar />
       <SiteNavigation />
       <main>
@@ -69,7 +92,9 @@ export default async function BlogDetailPage({
           </Link>
           <p className="mt-4 text-sm font-semibold uppercase tracking-[0.35em] text-orange-300">{article.category}</p>
           <h1 className="mt-4 max-w-4xl text-4xl font-semibold sm:text-5xl">{article.title}</h1>
-          <p className="mt-6 text-base text-slate-300">Tác giả {article.author} • {article.date}</p>
+          <p className="mt-6 text-base text-slate-300">
+            Checklist dữ liệu trước khảo sát kỹ thuật
+          </p>
         </Container>
       </section>
 
@@ -78,7 +103,13 @@ export default async function BlogDetailPage({
           <Breadcrumb items={[{ label: "Blog", href: "/blog" }, { label: article.title }]} />
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className="relative h-80">
-              <Image src={article.image} alt={article.title} fill className="object-cover" />
+              <Image
+                src={article.image}
+                alt={article.title}
+                fill
+                sizes="(max-width: 1023px) 100vw, 1200px"
+                className="object-cover"
+              />
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Calendar, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { ARTICLES } from "@/content/blog";
@@ -11,8 +11,8 @@ export function ArticlesSection() {
       <Container>
         <div className="mb-12 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-[#FF5722]">Chuyên Mục Sưu Tầm & Kỹ Thuật</span>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 md:text-4xl">BÀI VIẾT NỘI THẤT & COMPOSITE</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-[#FF5722]">Checklist kỹ thuật</span>
+            <h2 className="mt-2 text-3xl font-bold text-slate-900 md:text-4xl">DỮ LIỆU CẦN CÓ TRƯỚC KHẢO SÁT</h2>
           </div>
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-bold text-[#FF5722] hover:underline">
             Xem Tất Cả Bài Viết <ArrowRight className="h-4 w-4" />
@@ -30,7 +30,10 @@ export function ArticlesSection() {
               </div>
               <div className="flex flex-grow flex-col p-5">
                 <div className="mb-2 flex items-center gap-3 text-[11px] text-slate-500">
-                  <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {article.date}</span>
+                  <span className="flex items-center gap-1">
+                    <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
+                    Dữ liệu cần xác nhận
+                  </span>
                 </div>
                 <h3 className="mb-2 text-sm font-bold leading-snug text-slate-900 transition-colors hover:text-[#FF5722]">{article.title}</h3>
                 <p className="mb-4 flex-grow text-xs leading-relaxed text-slate-600 line-clamp-3">{article.excerpt}</p>

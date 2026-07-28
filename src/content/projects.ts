@@ -1,6 +1,6 @@
 import type { ProjectItem } from "@/types/content";
 
-export const PROJECTS: ProjectItem[] = [
+const projectDrafts: ProjectItem[] = [
   {
     id: 1,
     slug: "thi-cong-vach-ngan-composite-cao-cap",
@@ -156,4 +156,9 @@ export const PROJECTS: ProjectItem[] = [
   },
 ];
 
+export const UNVERIFIED_PROJECT_DRAFTS = {
+  publicationStatus: "unverified" as const,
+  items: projectDrafts,
+};
+export const PROJECTS: ProjectItem[] = [];
 export const FEATURED_PROJECTS = PROJECTS;

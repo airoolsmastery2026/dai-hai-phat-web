@@ -14,7 +14,6 @@ import { ServiceFeatures } from "@/components/services/ServiceFeatures";
 import { ServiceBenefits } from "@/components/services/ServiceBenefits";
 import { ServiceProcess } from "@/components/services/ServiceProcess";
 import { ServiceGallery } from "@/components/services/ServiceGallery";
-import { RelatedProjects } from "@/components/services/RelatedProjects";
 import { ServiceFAQ } from "@/components/services/ServiceFAQ";
 import { ServiceCTA } from "@/components/services/ServiceCTA";
 import { ServiceSidebar } from "@/components/services/ServiceSidebar";
@@ -79,13 +78,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   <h2 className="mt-3 text-3xl font-semibold text-slate-900">Mô hình triển khai và kết quả</h2>
                 </div>
                 <ServiceGallery images={service.gallery} title={service.title} />
-              </div>
-              <div>
-                <div className="mb-8">
-                  <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#FF5722]">Dự án liên quan</p>
-                  <h2 className="mt-3 text-3xl font-semibold text-slate-900">Các hoạt động tương tự đã triển khai</h2>
-                </div>
-                <RelatedProjects projects={service.relatedProjects} />
               </div>
               <div>
                 <div className="mb-8">

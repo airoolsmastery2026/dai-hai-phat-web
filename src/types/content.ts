@@ -43,13 +43,6 @@ export interface ServiceSeo {
   canonical: string;
 }
 
-export interface RelatedProjectRef {
-  title: string;
-  slug: string;
-  category: string;
-  image: string;
-}
-
 export interface ServiceItem {
   id: number;
   slug: string;
@@ -65,7 +58,6 @@ export interface ServiceItem {
   faq: ServiceFaqItem[];
   seo: ServiceSeo;
   schema: Record<string, unknown>;
-  relatedProjects: RelatedProjectRef[];
   image: string;
   icon: LucideIcon;
 }
@@ -112,8 +104,6 @@ export interface BlogPost {
   slug: string;
   title: string;
   category: string;
-  date: string;
-  author: string;
   excerpt: string;
   content: string;
   highlights: string[];
