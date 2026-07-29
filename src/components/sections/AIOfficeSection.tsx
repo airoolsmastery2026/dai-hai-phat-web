@@ -9,6 +9,7 @@ import {
   MemoryStick,
   RefreshCw,
   RotateCcw,
+  Share2,
   ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
@@ -26,6 +27,7 @@ import { COMPANY_CONFIG } from "@/content/company";
 import { getStateLabel, type ConversationQuestion, type ConversationSession } from "@/lib/ai";
 import type { ProjectAnalysisResponse } from "@/lib/ai/analysis";
 import type { ProposalEvidenceResponse } from "@/lib/ai/catalog";
+import { buildManualHandoffSummary } from "@/lib/ai/handoff";
 import { AI_DRAFT_RETENTION_DAYS } from "@/lib/ai/persistence";
 
 const AUTO_COMPLETE_BY_FIELD: Partial<Record<ConversationQuestion["field"], string>> = {
@@ -370,6 +372,49 @@ function CompletionState({
   onSubmit: () => void;
 }) {
   const [consent, setConsent] = useState(false);
+  const [manualShareStatus, setManualShareStatus] = useState<
+    "idle" | "sharing" | "shared" | "copied" | "error"
+  >("idle");
+  const manualSummary = buildManualHandoffSummary(session);
+
+  const copyManualSummary = async () => {
+    if (!navigator.clipboard?.writeText) {
+      throw new Error("Clipboard API unavailable");
+    }
+    await navigator.clipboard.writeText(manualSummary);
+  };
+
+  const shareManualSummary = async () => {
+    setManualShareStatus("sharing");
+    try {
+      if (typeof navigator.share === "function") {
+        await navigator.share({
+          title: "Hồ sơ tư vấn Đại Hải Phát",
+          text: manualSummary,
+        });
+        setManualShareStatus("shared");
+        return;
+      }
+
+      await copyManualSummary();
+      setManualShareStatus("copied");
+    } catch (caughtError) {
+      if (
+        caughtError instanceof DOMException &&
+        caughtError.name === "AbortError"
+      ) {
+        setManualShareStatus("idle");
+        return;
+      }
+
+      try {
+        await copyManualSummary();
+        setManualShareStatus("copied");
+      } catch {
+        setManualShareStatus("error");
+      }
+    }
+  };
 
   return (
     <div className="mt-[var(--space-card-lg)] rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
@@ -449,14 +494,69 @@ function CompletionState({
       ) : null}
 
       {status !== "success" ? (
-        <a
-          href={COMPANY_CONFIG.socials.zalo1}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-[var(--space-stack)] inline-flex min-h-[var(--control-min-size)] w-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-stack)] py-[var(--space-control)] font-bold text-[var(--color-text-inverse)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
-        >
-          Gửi thủ công qua Zalo
-        </a>
+        <div className="mt-[var(--space-stack)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] p-[var(--space-stack)]">
+          <p className="font-bold">Gửi thủ công mà không phải nhập lại</p>
+          <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+            Chia sẻ hoặc sao chép bản tóm tắt dưới đây, sau đó gửi ảnh hiện
+            trạng riêng qua Zalo. Dữ liệu chỉ rời thiết bị khi anh/chị chủ động
+            chia sẻ.
+          </p>
+          <button
+            type="button"
+            disabled={manualShareStatus === "sharing"}
+            onClick={() => void shareManualSummary()}
+            className="mt-[var(--space-stack)] inline-flex min-h-[var(--control-min-size)] w-full items-center justify-center gap-[var(--space-control)] rounded-[var(--radius-md)] border border-[var(--color-primary)] px-[var(--space-stack)] py-[var(--space-control)] font-bold text-[var(--color-text-inverse)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] disabled:cursor-wait disabled:opacity-60"
+          >
+            <Share2 className="h-5 w-5" aria-hidden="true" />
+            {manualShareStatus === "sharing"
+              ? "Đang chuẩn bị tóm tắt…"
+              : "Chia sẻ hoặc sao chép tóm tắt"}
+          </button>
+
+          {manualShareStatus === "shared" ? (
+            <p
+              className="mt-[var(--space-control)] rounded-[var(--radius-sm)] border border-[var(--color-success)] bg-[var(--color-success-soft)] p-[var(--space-control)] text-sm text-[var(--color-text)]"
+              role="status"
+            >
+              Đã hoàn tất thao tác chia sẻ.
+            </p>
+          ) : null}
+          {manualShareStatus === "copied" ? (
+            <p
+              className="mt-[var(--space-control)] rounded-[var(--radius-sm)] border border-[var(--color-success)] bg-[var(--color-success-soft)] p-[var(--space-control)] text-sm text-[var(--color-text)]"
+              role="status"
+            >
+              Đã sao chép tóm tắt. Mở Zalo và dán vào cuộc trò chuyện.
+            </p>
+          ) : null}
+          {manualShareStatus === "error" ? (
+            <p
+              className="mt-[var(--space-control)] rounded-[var(--radius-sm)] border border-[var(--color-danger)] bg-[var(--color-danger-soft)] p-[var(--space-control)] text-sm text-[var(--color-danger-text)]"
+              role="alert"
+            >
+              Trình duyệt không cho phép chia sẻ tự động. Hãy mở nội dung bên
+              dưới và sao chép thủ công.
+            </p>
+          ) : null}
+
+          <details className="mt-[var(--space-stack)] text-sm">
+            <summary className="min-h-11 cursor-pointer font-semibold text-[var(--color-text-dark-muted)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]">
+              Xem nội dung tóm tắt
+            </summary>
+            <pre className="mt-[var(--space-control)] max-h-72 overflow-auto whitespace-pre-wrap break-words rounded-[var(--radius-sm)] bg-[var(--color-surface-dark)] p-[var(--space-control)] font-sans text-xs leading-5 text-[var(--color-text-dark-muted)]">
+              {manualSummary}
+            </pre>
+          </details>
+
+          <a
+            href={COMPANY_CONFIG.socials.zalo1}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-[var(--space-stack)] inline-flex min-h-[var(--control-min-size)] w-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-stack)] py-[var(--space-control)] font-bold text-[var(--color-text-inverse)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+          >
+            Mở Zalo và gửi hồ sơ
+          </a>
+        </div>
       ) : null}
     </div>
   );
