@@ -5,7 +5,7 @@ import type { ServiceItem } from "@/types/content";
 
 export function ServiceSidebar({ service }: { service: ServiceItem }) {
   return (
-    <aside className="sticky top-24 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-8)] shadow-[var(--shadow-sm)]">
+    <aside className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-8)] shadow-[var(--shadow-sm)] lg:sticky lg:top-24">
       <h2 className="text-lg font-bold text-[var(--color-text)]">
         Thông tin dịch vụ
       </h2>
