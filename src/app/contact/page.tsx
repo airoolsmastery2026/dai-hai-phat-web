@@ -101,12 +101,12 @@ export default function ContactPage() {
               </Button>
             </div>
             <Alert
-              title="Chưa có biểu mẫu CRM trực tuyến"
+              title="Có thể lập hồ sơ trực tuyến"
               className="mt-[var(--space-8)]"
             >
-              Website hiện chưa gửi dữ liệu biểu mẫu vào hệ thống lưu trữ bền
-              vững. Vì vậy giao diện chỉ hiển thị các kênh tiếp nhận thực đang
-              hoạt động.
+              Trợ lý AI trên trang chủ giúp thu thập dữ liệu theo từng bước và
+              chỉ bàn giao hồ sơ cho đội ngũ kỹ thuật sau khi anh/chị đồng ý.
+              Zalo và hotline vẫn là kênh tiếp nhận nhanh.
             </Alert>
           </Card>
         </Container>

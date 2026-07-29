@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
-import type { FormEvent, ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 
 import { useAI } from "@/hooks/useAI";
 import { COMPANY_CONFIG } from "@/content/company";
@@ -42,10 +42,14 @@ export function AIOfficeSection() {
     analysis,
     analysisError,
     analysisStatus,
+    handoff,
+    handoffError,
+    handoffStatus,
     answer,
     addImages,
     retryEvidence,
     retryAnalysis,
+    submitHandoff,
     reset,
   } = useAI();
 
@@ -81,6 +85,10 @@ export function AIOfficeSection() {
             onAnswer={answer}
             onImages={addImages}
             onReset={reset}
+            handoff={handoff}
+            handoffError={handoffError}
+            handoffStatus={handoffStatus}
+            onSubmitHandoff={submitHandoff}
           />
           <EngineeringWorkspace session={session} />
         </div>
@@ -109,6 +117,10 @@ interface ConversationPanelProps {
   onAnswer: (value: string) => void;
   onImages: (files: FileList | null) => void;
   onReset: () => void;
+  handoff: { leadId: string; receivedAt: string } | null;
+  handoffError: string | null;
+  handoffStatus: "idle" | "submitting" | "success" | "error";
+  onSubmitHandoff: () => void;
 }
 
 function ConversationPanel({
@@ -119,6 +131,10 @@ function ConversationPanel({
   onAnswer,
   onImages,
   onReset,
+  handoff,
+  handoffError,
+  handoffStatus,
+  onSubmitHandoff,
 }: ConversationPanelProps) {
   return (
     <div className="rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]">
@@ -145,7 +161,13 @@ function ConversationPanel({
       </div>
 
       {session.state === "DONE" ? (
-        <CompletionState session={session} />
+        <CompletionState
+          session={session}
+          handoff={handoff}
+          error={handoffError}
+          status={handoffStatus}
+          onSubmit={onSubmitHandoff}
+        />
       ) : question ? (
         <div className="mt-[var(--space-card-lg)]">
           <div className="rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
@@ -286,7 +308,21 @@ function QuestionInput({
   );
 }
 
-function CompletionState({ session }: { session: ConversationSession }) {
+function CompletionState({
+  session,
+  handoff,
+  error,
+  status,
+  onSubmit,
+}: {
+  session: ConversationSession;
+  handoff: { leadId: string; receivedAt: string } | null;
+  error: string | null;
+  status: "idle" | "submitting" | "success" | "error";
+  onSubmit: () => void;
+}) {
+  const [consent, setConsent] = useState(false);
+
   return (
     <div className="mt-[var(--space-card-lg)] rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
       <ShieldCheck className="h-9 w-9 text-[var(--color-success)]" aria-hidden="true" />
@@ -295,21 +331,72 @@ function CompletionState({ session }: { session: ConversationSession }) {
       </h3>
       <p className="mt-[var(--space-control)] leading-6 text-[var(--color-text-dark-muted)]">
         Hồ sơ của {session.memory.name} đã đạt {session.proposal.progress}%.
-        Dữ liệu hiện chỉ được lưu trên trình duyệt này và chưa tự động gửi tới
-        kỹ sư hoặc CRM. Báo giá chính thức được lập sau khi xác minh hiện trạng.
+        Báo giá chính thức chỉ được lập sau khi kỹ sư xác minh hiện trạng.
       </p>
       <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-subtle)]">
-        Bản nháp dự án tự hết hạn sau {AI_DRAFT_RETENTION_DAYS} ngày. Tên, số liên
-        hệ, địa chỉ, email và Zalo không được lưu bền sau khi tải lại trang.
+        Bản nháp trên thiết bị tự hết hạn sau {AI_DRAFT_RETENTION_DAYS} ngày.
+        Ảnh gốc vẫn ở thiết bị và không được gửi qua bước bàn giao này.
       </p>
-      <a
-        href={COMPANY_CONFIG.socials.zalo1}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-[var(--space-stack)] inline-flex min-h-[var(--control-min-size)] items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-stack)] py-[var(--space-control)] font-bold text-white transition-colors hover:bg-[var(--color-primary-hover)]"
-      >
-        Gửi thông tin qua Zalo
-      </a>
+
+      {status === "success" && handoff ? (
+        <div
+          className="mt-[var(--space-stack)] rounded-[var(--radius-md)] border border-[var(--color-success)] bg-[var(--color-success-soft)] p-[var(--space-stack)] text-[var(--color-success)]"
+          role="status"
+        >
+          <p className="font-bold">Đã bàn giao hồ sơ cho đội ngũ kỹ thuật.</p>
+          <p className="mt-[var(--space-control)] text-sm">
+            Mã tiếp nhận: {handoff.leadId}
+          </p>
+        </div>
+      ) : (
+        <>
+          <label className="mt-[var(--space-stack)] flex cursor-pointer items-start gap-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(event) => setConsent(event.target.checked)}
+              className="mt-1 h-5 w-5 shrink-0 accent-[var(--color-primary)]"
+            />
+            <span>
+              Tôi đồng ý gửi thông tin liên hệ và dữ liệu dự án đã nhập cho Đại
+              Hải Phát để tư vấn, xác nhận khảo sát và quản lý hồ sơ.
+            </span>
+          </label>
+          <button
+            type="button"
+            disabled={!consent || status === "submitting"}
+            onClick={onSubmit}
+            className="mt-[var(--space-stack)] inline-flex min-h-[var(--control-min-size)] w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-stack)] py-[var(--space-control)] font-bold text-white transition-colors hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface-dark)] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {status === "submitting"
+              ? "Đang bàn giao hồ sơ…"
+              : "Bàn giao cho kỹ sư"}
+          </button>
+        </>
+      )}
+
+      {status === "error" ? (
+        <div
+          className="mt-[var(--space-stack)] rounded-[var(--radius-md)] border border-[var(--color-danger)] bg-[var(--color-danger-soft)] p-[var(--space-stack)] text-[var(--color-danger-text)]"
+          role="alert"
+        >
+          <p className="font-bold">Chưa thể bàn giao tự động.</p>
+          <p className="mt-[var(--space-control)] text-sm leading-6">
+            {error || "Hồ sơ vẫn được giữ trên thiết bị này."}
+          </p>
+        </div>
+      ) : null}
+
+      {status !== "success" ? (
+        <a
+          href={COMPANY_CONFIG.socials.zalo1}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-[var(--space-stack)] inline-flex min-h-[var(--control-min-size)] w-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-stack)] py-[var(--space-control)] font-bold text-[var(--color-text-inverse)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+        >
+          Gửi thủ công qua Zalo
+        </a>
+      ) : null}
     </div>
   );
 }

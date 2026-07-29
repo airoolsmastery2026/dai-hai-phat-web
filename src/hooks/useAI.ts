@@ -25,6 +25,10 @@ import {
   type ProjectAnalysisRequest,
   type ProjectAnalysisResponse,
 } from "@/lib/ai/analysis";
+import {
+  createCRMHandoffRequest,
+  type CRMHandoffResponse,
+} from "@/lib/ai/handoff";
 import { readAIDraft, serializeAIDraft } from "@/lib/ai/persistence";
 
 const DRAFT_STORAGE_KEY = "dhp-ai-sales-engine-draft-v1";
@@ -60,6 +64,11 @@ interface AnalysisResult {
 
 interface AnalysisApiResponse {
   analysis?: ProjectAnalysisResponse;
+  error?: string;
+}
+
+interface HandoffApiResponse {
+  handoff?: CRMHandoffResponse;
   error?: string;
 }
 
@@ -204,6 +213,11 @@ export function useAI() {
   const [evidenceResult, setEvidenceResult] = useState<EvidenceResult | null>(null);
   const [analysisRevision, setAnalysisRevision] = useState(0);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [handoffStatus, setHandoffStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [handoffError, setHandoffError] = useState<string | null>(null);
+  const [handoff, setHandoff] = useState<CRMHandoffResponse | null>(null);
 
   useEffect(() => {
     if (pendingDraftRemoval) {
@@ -434,6 +448,33 @@ export function useAI() {
   const retryAnalysis = useCallback(() => {
     setAnalysisRevision((revision) => revision + 1);
   }, []);
+  const submitHandoff = useCallback(async () => {
+    setHandoffStatus("submitting");
+    setHandoffError(null);
+    try {
+      const body = createCRMHandoffRequest(readClientSession());
+      const response = await fetch("/api/crm/handoff", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        cache: "no-store",
+        body: JSON.stringify(body),
+      });
+      const payload = (await response.json()) as HandoffApiResponse;
+      if (!response.ok || !payload.handoff) {
+        throw new Error(payload.error || "Chưa thể bàn giao hồ sơ.");
+      }
+      setHandoff(payload.handoff);
+      setHandoffStatus("success");
+    } catch (caughtError) {
+      setHandoffError(
+        caughtError instanceof Error
+          ? caughtError.message
+          : "Chưa thể bàn giao hồ sơ.",
+      );
+      setHandoffStatus("error");
+    }
+  }, []);
 
   const question = useMemo(() => getConversationQuestion(session), [session]);
   const evidenceIsCurrent =
@@ -476,6 +517,10 @@ export function useAI() {
     addImages,
     retryEvidence,
     retryAnalysis,
+    handoff,
+    handoffError,
+    handoffStatus,
+    submitHandoff,
     reset,
   };
 }
