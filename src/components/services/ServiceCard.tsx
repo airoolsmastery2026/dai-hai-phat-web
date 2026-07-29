@@ -41,6 +41,7 @@ export function ServiceCard({ service }: { service: ServiceItem }) {
         <div className="mt-auto grid gap-[var(--space-3)] pt-[var(--space-6)] sm:grid-cols-2">
           <Link
             href={aiHref}
+            aria-label={`Tư vấn ${service.title} bằng AI`}
             className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-3)] text-center text-sm font-bold text-white transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
@@ -48,6 +49,7 @@ export function ServiceCard({ service }: { service: ServiceItem }) {
           </Link>
           <Link
             href={`/services/${service.slug}`}
+            aria-label={`Xem chi tiết ${service.title}`}
             className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] py-[var(--space-3)] text-center text-sm font-bold text-[var(--color-text)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             Xem chi tiết <ArrowRight className="h-4 w-4" aria-hidden="true" />
