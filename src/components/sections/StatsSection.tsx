@@ -8,7 +8,7 @@ export function StatsSection() {
         <div className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
           {COMPANY_STATS.map((stat, idx) => (
             <div key={`${stat.label}-${idx}`} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-              <div className="mb-1 text-3xl font-extrabold text-[#FF5722] md:text-4xl">{stat.value}</div>
+              <div className="mb-1 text-3xl font-extrabold text-[var(--color-primary)] md:text-4xl">{stat.value}</div>
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-600">{stat.label}</div>
             </div>
           ))}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior02",
+  "title": "Tủ bếp chữ L tông sáng",
+  "alt": "Hình tủ bếp chữ L tông sáng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ bếp chữ L tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp chống ẩm và phụ kiện",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ bếp chữ L tông sáng. Mô tả đã xác minh: Tư liệu tủ bếp chữ L tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp chống ẩm và phụ kiện. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ bếp chữ L tông sáng | Đại Hải Phát",
+    "description": "Hình ảnh tủ bếp chữ L tông sáng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ bếp chữ l tông sáng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior02.jpg",
+    "sourceRelativePath": "assets/images/interior/interior02.jpg",
+    "publicUrl": "/images/interior/interior02.jpg",
+    "bytes": 144323,
+    "sha256": "024e1dcd04081d0674442ffbb06aa3d13d9aa82f10fc88130af8ba2910c028b9",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior02.webp",
+    "publicUrl": "/images/interior/interior02.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 66378,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior02.thumb.webp",
+    "publicUrl": "/images/interior/interior02.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 16660,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4IAwBAACQCACdASogACsAPu1orlEppaQiqrgKATAdiWcAz2mz5Voa/6Y74cYt+m3aBwnSKmGTHi/yX7kTw/3ttq5zZW8CbrxzfVY+sEk7OHbSAAD+8dNOfl+VjA4dcg6++AKOjkmBd4PEMUG5xFUxNozoxYoHbQahBFiA9Wm7N97dWiIrBoL3w6eHkVLoAepFZPmIvJTW2jjw7VD6AYO2gljou8dPidh1el8ZXB7AgV/neJCu2yiK135nwRRhojm9NR95L+DdvgkEwwK0LQvBdh46M20oai8rJx888aCWdhLo2v8VuR7DvtJKxMCG6r4xnXy+p/G53o6nVMycByKQ/+rveSm/XSu/QpHnSA7viAAA"
+}

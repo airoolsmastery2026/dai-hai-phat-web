@@ -1,0 +1,52 @@
+{
+  "id": "gates-gate04",
+  "title": "Bản vẽ bố trí tấm CNC cửa cổng",
+  "alt": "Hình bản vẽ bố trí tấm CNC cửa cổng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu bản vẽ bố trí tấm CNC cửa cổng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cửa cổng",
+  "assetType": "technical",
+  "material": "Kim loại cắt CNC",
+  "style": "Hoa văn CNC",
+  "projectType": "Nhà ở",
+  "service": "Cửa cổng",
+  "prompt": "Chủ thể: Bản vẽ bố trí tấm CNC cửa cổng. Mô tả đã xác minh: Tư liệu bản vẽ bố trí tấm CNC cửa cổng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cửa cổng. Dịch vụ: Cửa cổng. Vật liệu: Kim loại cắt CNC. Phong cách: Hoa văn CNC. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Bản vẽ bố trí tấm CNC cửa cổng | Đại Hải Phát",
+    "description": "Hình ảnh bản vẽ bố trí tấm CNC cửa cổng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "bản vẽ bố trí tấm cnc cửa cổng",
+      "cửa cổng",
+      "đại hải phát"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/gates/gate04.jpg",
+    "sourceRelativePath": "assets/images/gates/gate04.jpg",
+    "publicUrl": "/images/gates/gate04.jpg",
+    "bytes": 313089,
+    "sha256": "aafadc2e8f1441a573fdb8331e582b2fb981341e22b006e396d99968a9aaefe5",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/gates/gate04.webp",
+    "publicUrl": "/images/gates/gate04.webp",
+    "width": 1280,
+    "height": 789,
+    "bytes": 144974,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/gates/gate04.thumb.webp",
+    "publicUrl": "/images/gates/gate04.thumb.webp",
+    "width": 480,
+    "height": 296,
+    "bytes": 27956,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4IL4AAAAQBgCdASogABQAPu1qsFAppiSiqAqpMB2JaQAOcEyy3mhKE//2tagEwL/MuDGSJAl9DgUduwCOIAAA/vHasxpBXHcjC9hZkhC3jNlkM6rUSWrSo8QNcLqMfoam4yjYq/iCvFbaEm1kayiCfX2t2H6JwGc9TEb7644vS+FrEo70qBWDSqII0wgYWfd8pM+q0NEvKfuaj8YDJf9MJpPMAaWYd4V4L/Pt6XqkTRcyMPmmMSX65Ed5z/QdLgLdoAAA"
+}

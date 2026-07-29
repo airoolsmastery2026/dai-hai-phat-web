@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior49",
+  "title": "Giường bệt có ngăn chứa",
+  "alt": "Hình giường bệt có ngăn chứa trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu giường bệt có ngăn chứa được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Giường bệt có ngăn chứa. Mô tả đã xác minh: Tư liệu giường bệt có ngăn chứa được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Giường bệt có ngăn chứa | Đại Hải Phát",
+    "description": "Hình ảnh giường bệt có ngăn chứa dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "giường bệt có ngăn chứa",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior49.jpg",
+    "sourceRelativePath": "assets/images/interior/interior49.jpg",
+    "publicUrl": "/images/interior/interior49.jpg",
+    "bytes": 190733,
+    "sha256": "7d1ffb1c5e90a17bd9488f21c8b2c2b4524f720e600016ea98564ae7f5cbc3af",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior49.webp",
+    "publicUrl": "/images/interior/interior49.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 92304,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior49.thumb.webp",
+    "publicUrl": "/images/interior/interior49.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 23882,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRjgBAABXRUJQVlA4ICwBAADwCACdASogACsAPu1srFEppaQipWzJMB2JQBOmbk3tBoMJV8sHy4RjqLH3mXj/RdXepp7ERDuk1AZLqFWVVy8IV+zRL/sWEELP7F7Ade4AAAD6cNDG18tGhFKNvdOPSzmGF8pKzqPp5b7wKhcRsqch5vPcGYeaDfhG9AqjZE4P9DC2NIdFh93b3xWl8FITxzBilwAEZjwNbF+cQZv42R03pwLs+ziJZTnnIUM88gUmT3tAM1lOJSDCsmu/IcymW33l7zMc85oV6QPFqSgEV/UmonBG8dZYO0f0sEqVBw4Y4Yw8guvltMIu6HhVepzIvzAnrxw1hFJMgotipt4weonOHfhtCYEnTZNVpoovhyRythGQu9smprI9NK4sxhQuAPCjdEZlQJ8EFAYVgAA="
+}

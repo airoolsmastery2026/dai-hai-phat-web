@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior41",
+  "title": "Vách tivi bề mặt vân đá",
+  "alt": "Hình vách tivi bề mặt vân đá trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi bề mặt vân đá được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi bề mặt vân đá. Mô tả đã xác minh: Tư liệu vách tivi bề mặt vân đá được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi bề mặt vân đá | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi bề mặt vân đá dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi bề mặt vân đá"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior41.jpg",
+    "sourceRelativePath": "assets/images/interior/interior41.jpg",
+    "publicUrl": "/images/interior/interior41.jpg",
+    "bytes": 249753,
+    "sha256": "6685573687d90fc2b43686234077b18dc118e9477646aa22581e16ecc7ebc9ca",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior41.webp",
+    "publicUrl": "/images/interior/interior41.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 131722,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior41.thumb.webp",
+    "publicUrl": "/images/interior/interior41.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 27600,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRioBAABXRUJQVlA4IB4BAADwBwCdASogACsAPu1orVCppaQipWzJMB2JZwAOkrwL3Er3txId+IYEJHVl8HRuRbu3Ol5q0lLvtcAa37An/oWdxDWUzHH2FgAA/uB+GvhWlkbgP+Dmlc0Z0FtrC53BcW/XjMn1QfgqBdcJe/zWhh9koII061CdKfelB3mDpGFn3oLVznJGjA/ipfwuM2E1oHoer7XMdG4TuzQ9Z4IpSwh0YFVjYIrC7S2OgEGUg7xS7xMBMEgSGDpgSBNGEBVwY1tR/4aU1SfX+byyNHlRMavbxUJu+iOQeUvZ5QGxdYKi3WcIsOY1MpGNiYSJfi9rI2RvzZpuVbYdGIkfgEyfuPRoJojDg8X3iWnO9GGknR2BNXUeRs9ISdB2ZGsdcQAA"
+}

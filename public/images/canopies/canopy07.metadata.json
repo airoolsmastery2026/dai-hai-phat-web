@@ -1,0 +1,52 @@
+{
+  "id": "canopies-canopy07",
+  "title": "Mẫu tham khảo mái vòm lấy sáng",
+  "alt": "Hình mẫu tham khảo mái vòm lấy sáng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu mẫu tham khảo mái vòm lấy sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Mái che",
+  "assetType": "reference",
+  "material": "Khung kim loại và tấm lấy sáng",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Mái che",
+  "prompt": "Chủ thể: Mẫu tham khảo mái vòm lấy sáng. Mô tả đã xác minh: Tư liệu mẫu tham khảo mái vòm lấy sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Mái che. Dịch vụ: Mái che. Vật liệu: Khung kim loại và tấm lấy sáng. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu tham khảo mái vòm lấy sáng | Đại Hải Phát",
+    "description": "Hình ảnh mẫu tham khảo mái vòm lấy sáng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "mái che",
+      "mẫu tham khảo mái vòm lấy sáng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/canopies/canopy07.jpg",
+    "sourceRelativePath": "assets/images/canopies/canopy07.jpg",
+    "publicUrl": "/images/canopies/canopy07.jpg",
+    "bytes": 311584,
+    "sha256": "d9aebb4d23fdbc15a7c8859db21dfb55dc1be3fc6f501feebdf649799093d550",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/canopies/canopy07.webp",
+    "publicUrl": "/images/canopies/canopy07.webp",
+    "width": 1280,
+    "height": 853,
+    "bytes": 142294,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/canopies/canopy07.thumb.webp",
+    "publicUrl": "/images/canopies/canopy07.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 23028,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRtwAAABXRUJQVlA4INAAAAAwBwCdASogABUAPu1iqU2ppaQiMAgBMB2JYgC+TbD2jfXggA46WX8LSKmMxTc8a9jVBUf3zKCMKdVVdYZmo5AgtMAA/u896T/JnleauWQQ6ubO48wqL2VyeX+eZRugy0EanhBbxIBc0/A1Ik9hlS3Gn6ZVjRPI6lcCVtRL+1UqPZzNth5HO0OVHFs0j9+x//5x7kjd3k+kZeW2ASz7EbffB3jl3zimF0ESddw+zgo5x62/tek4EjVy+ssVkCLE8iTBe+W9fg+vZnK3kefJgAAA"
+}

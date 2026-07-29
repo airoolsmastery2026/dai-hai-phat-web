@@ -10,7 +10,7 @@ export function ProjectCTA() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">Đặt lịch tư vấn</p>
             <h2 className="mt-3 text-3xl font-semibold">Muốn triển khai một dự án tương tự?</h2>
           </div>
-          <Button href="#contact" variant="secondary">Liên hệ ngay</Button>
+          <Button href="/contact" variant="secondary">Liên hệ ngay</Button>
         </div>
       </Container>
     </section>

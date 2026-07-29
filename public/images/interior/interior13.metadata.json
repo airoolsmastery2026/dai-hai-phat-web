@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior13",
+  "title": "Quầy bar với hệ chiếu sáng xanh",
+  "alt": "Hình quầy bar với hệ chiếu sáng xanh trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu quầy bar với hệ chiếu sáng xanh được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Quầy bar với hệ chiếu sáng xanh. Mô tả đã xác minh: Tư liệu quầy bar với hệ chiếu sáng xanh được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quầy bar với hệ chiếu sáng xanh | Đại Hải Phát",
+    "description": "Hình ảnh quầy bar với hệ chiếu sáng xanh dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "quầy bar với hệ chiếu sáng xanh"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior13.jpg",
+    "sourceRelativePath": "assets/images/interior/interior13.jpg",
+    "publicUrl": "/images/interior/interior13.jpg",
+    "bytes": 192270,
+    "sha256": "207c94598391076f58eb33a14fdebde6412f43a22c30deb335aec7f0577f5653",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior13.webp",
+    "publicUrl": "/images/interior/interior13.webp",
+    "width": 1280,
+    "height": 720,
+    "bytes": 79854,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior13.thumb.webp",
+    "publicUrl": "/images/interior/interior13.thumb.webp",
+    "width": 480,
+    "height": 270,
+    "bytes": 15134,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAAAwBQCdASogABIAPu1kqE2ppaOiMAgBMB2JbACzgCc9ehNmrEiLrhK2vRHYVs2prOPMAAD+8N52hJ54Xi7b+haOqEuDGCRq2XS/eMfUCZj33wtcU3s5M9EsqFtCOVJV+spuhp1xj823wxi85Xvyq//xXtN0s9qEWUPYXczjRsHpfBc1z62WsV4dCbshlpJ0sqI4OYhoPuuI4Xv2NlXDDoO/Y3O4vHEJriYbWrbKDIl5LzuNgGJQVYpafwAAAA=="
+}

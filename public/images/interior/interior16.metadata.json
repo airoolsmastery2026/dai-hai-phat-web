@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior16",
+  "title": "Vách ốp trang trí hành lang",
+  "alt": "Hình vách ốp trang trí hành lang trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách ốp trang trí hành lang được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách ốp trang trí hành lang. Mô tả đã xác minh: Tư liệu vách ốp trang trí hành lang được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách ốp trang trí hành lang | Đại Hải Phát",
+    "description": "Hình ảnh vách ốp trang trí hành lang dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách ốp trang trí hành lang"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior16.jpg",
+    "sourceRelativePath": "assets/images/interior/interior16.jpg",
+    "publicUrl": "/images/interior/interior16.jpg",
+    "bytes": 323129,
+    "sha256": "2641126b90540e386937f0772a9cd24a941ade0bdb8ee661d98876b38cbe6826",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior16.webp",
+    "publicUrl": "/images/interior/interior16.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 181692,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior16.thumb.webp",
+    "publicUrl": "/images/interior/interior16.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 38504,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRn4BAABXRUJQVlA4IHIBAABwCgCdASogACsAPt1epk2opaOiNVgMARAbiWIAtvvDvQRpN3iZW2qKCMez7Yv7RPDDh5FIHhqz/Ho/Gm+/Qht7D/jIAom5HMO/dNsABnq9lfwrcSepnQLEkT+kAAD+8BmJayiJZQgXx+ERE4dt20584/kRPr71ryt5F0SQENhz1pgyvjxuTbpu4aAz07YVLaDQV5egpMx9usBzcJ3dlRHAfAJdFsigTiOpK03YDl4lS896P0ESe7ct6MUupUtXS6n/rzsfcd3JO3rn1RqOTdMZ4TjDgg52rG1M4DGVI9zKcNYkON7sRzO9ZKWvodqoHx+H7k3tt2h0UAqpYgEKDdo3yAeHK6pWu/nKQZRhPRDwiNFor23LI/47UAgPN60MHRK0TabqgCiou/M0FVFIrTlIEUUEvi4ZRpSqyZEKAlv9xKO0FQmyw7U1gZfqXmrkPAat3cSIAMLJ0u2PZaR+hqTvfPTHklypIEmVqZz2wmK5AAAA"
+}

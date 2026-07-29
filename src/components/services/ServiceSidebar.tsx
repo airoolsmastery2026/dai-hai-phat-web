@@ -5,30 +5,42 @@ import type { ServiceItem } from "@/types/content";
 
 export function ServiceSidebar({ service }: { service: ServiceItem }) {
   return (
-    <aside className="sticky top-24 rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-sm">
-      <h3 className="text-lg font-semibold text-slate-900">Thông tin dịch vụ</h3>
-      <ul className="mt-6 space-y-4">
-        <li className="flex items-start gap-3">
-          <Briefcase className="h-5 w-5 flex-shrink-0 text-[#FF5722] mt-0.5" />
+    <aside className="sticky top-24 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-8)] shadow-[var(--shadow-sm)]">
+      <h2 className="text-lg font-bold text-[var(--color-text)]">
+        Thông tin dịch vụ
+      </h2>
+      <ul className="mt-[var(--space-6)] space-y-[var(--space-4)]">
+        <li className="flex items-start gap-[var(--space-3)]">
+          <Briefcase className="mt-0.5 h-5 w-5 flex-shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
           <div className="text-sm">
-            <p className="font-semibold text-slate-900">Dịch vụ</p>
-            <p className="text-slate-600 break-all">{service.title}</p>
+            <p className="font-semibold text-[var(--color-text)]">Dịch vụ</p>
+            <p className="break-words text-[var(--color-text-muted)]">{service.title}</p>
           </div>
         </li>
 
-        <li className="flex items-start gap-3">
-          <Phone className="h-5 w-5 flex-shrink-0 text-[#FF5722] mt-0.5" />
+        <li className="flex items-start gap-[var(--space-3)]">
+          <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
           <div className="text-sm">
-            <p className="font-semibold text-slate-900">Hotline</p>
-            <p className="text-slate-600 break-all">{COMPANY_CONFIG.primaryPhone}</p>
+            <p className="font-semibold text-[var(--color-text)]">Hotline</p>
+            <a
+              href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
+              className="break-all text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+            >
+              {COMPANY_CONFIG.primaryPhone}
+            </a>
           </div>
         </li>
 
-        <li className="flex items-start gap-3">
-          <Mail className="h-5 w-5 flex-shrink-0 text-[#FF5722] mt-0.5" />
+        <li className="flex items-start gap-[var(--space-3)]">
+          <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
           <div className="text-sm">
-            <p className="font-semibold text-slate-900">Email</p>
-            <p className="text-slate-600 break-all">{COMPANY_CONFIG.email}</p>
+            <p className="font-semibold text-[var(--color-text)]">Email</p>
+            <a
+              href={`mailto:${COMPANY_CONFIG.email}`}
+              className="break-all text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+            >
+              {COMPANY_CONFIG.email}
+            </a>
           </div>
         </li>
       </ul>

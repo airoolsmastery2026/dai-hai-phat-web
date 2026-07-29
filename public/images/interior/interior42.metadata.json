@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior42",
+  "title": "Tủ áo cánh kính tông tối",
+  "alt": "Hình tủ áo cánh kính tông tối trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo cánh kính tông tối được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp và kính",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo cánh kính tông tối. Mô tả đã xác minh: Tư liệu tủ áo cánh kính tông tối được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp và kính. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo cánh kính tông tối | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo cánh kính tông tối dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo cánh kính tông tối"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior42.jpg",
+    "sourceRelativePath": "assets/images/interior/interior42.jpg",
+    "publicUrl": "/images/interior/interior42.jpg",
+    "bytes": 123258,
+    "sha256": "66f3ee671c3a4e0984ec795b50836d12f0f692202236e8092a9c00377c74d35a",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior42.webp",
+    "publicUrl": "/images/interior/interior42.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 56218,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior42.thumb.webp",
+    "publicUrl": "/images/interior/interior42.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 17110,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRmIBAABXRUJQVlA4IFYBAAAQCgCdASogACsAPuFeo02opSMiNVgMARAcCWUAwzutAmy6R7JZTR1kR81mPIKBP6QDJffXqat2tqGqo3OYpn6vBopxKn0Drh/Ba6n6YGc1tCuqXMAQJkUwqADiWlhKG9bzOzMRvIVHY/xFBhI1ji53qowc03r+9Ox8zzi5LtVibuH1y9C5pMOEleLrF3KLbFXx45oNzw8n3V9hzrI0ytAaX3HQBRx6UISDGBkR+dSP0lXP/v1greQNCzcZl3wr/4uVehAmnTA9tWvMVi27d6tmon6tt1SSnApJzfgZQEMbz3CScUAcfWUAsPbvbL6jaDO6rMBohwyVxt8l9LMnl80v2fgX9frRQuAR3KlmFXseHGqD5INNmwrE4joBBkRTLTVwvpGlZXiJQtSMiRdnQUB/AjHS6hMOSTtrsQNsstCIunWOTi387e6KOlTezJKdY3AAMMeAAAA="
+}

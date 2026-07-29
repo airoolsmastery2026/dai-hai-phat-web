@@ -1,0 +1,53 @@
+{
+  "id": "factory-factory02",
+  "title": "Hàn lắp khung cổng tại xưởng",
+  "alt": "Hình hàn lắp khung cổng tại xưởng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu hàn lắp khung cổng tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Gia công tại xưởng",
+  "assetType": "project",
+  "material": "Kim loại",
+  "style": "Công nghiệp",
+  "projectType": "Xưởng gia công",
+  "service": "Nhà xưởng",
+  "prompt": "Chủ thể: Hàn lắp khung cổng tại xưởng. Mô tả đã xác minh: Tư liệu hàn lắp khung cổng tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Gia công tại xưởng. Dịch vụ: Nhà xưởng. Vật liệu: Kim loại. Phong cách: Công nghiệp. Loại công trình: Xưởng gia công. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Hàn lắp khung cổng tại xưởng | Đại Hải Phát",
+    "description": "Hình ảnh hàn lắp khung cổng tại xưởng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "gia công tại xưởng",
+      "hàn lắp khung cổng tại xưởng",
+      "nhà xưởng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/factory/factory02.jpg",
+    "sourceRelativePath": "assets/images/factory/factory02.jpg",
+    "publicUrl": "/images/factory/factory02.jpg",
+    "bytes": 451563,
+    "sha256": "5b44288a7ff4a681b0c92252a8a6427c4f9b349de5930cf8e31944c4b66add17",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/factory/factory02.webp",
+    "publicUrl": "/images/factory/factory02.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 280402,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/factory/factory02.thumb.webp",
+    "publicUrl": "/images/factory/factory02.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 55020,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRsABAABXRUJQVlA4ILQBAACwCgCdASogACsAPtVWok2oJKMiOrmYAQAaiWQAvV7y9XM0iNVlm6UpnxEOPFnjaJZb6XALJ4isRiKckNpmTE1U/6/u/WR2m17p23wfIhzIOLBXanDQrz9e0yh+g2gAAP6J3bc3kIQiCbMpa2dfbTvP8DKWX1qloVZ116/EqyDrxDKEghmU7c/5OGgn6GbpXt55rLUnZvbxafDw+9q0Z4xCpVJH/vl1F7w3F0DL5jeBM3fyJkGj62XPmMvEyJbmWo6xyyjBfUAkFE7FHk1KlTKmpIVMjR83JKcKP0KtYSuiSPCSj/lD58BD3mIiG222UEtzK8SKg3f6IevWlDiiSAYshgS9RptjEiA4697Vzq/3yZaLd++gIQori8SxxiX9216P0FAC6mPvIE72Zk4XfcuWg3XqIF+8w5sGNsafcIhuRNq3qejXutU9Lj8ujCn2G/802pL6mw/UuPcxzx8mAiQa5zYRBX3O/r4Zq4W1ucU9MtlyYdsDdnfrOd1bf1u5jVyWs56x9TwQZjmJxQAWmKjs8yx4ywdPqwcOijh3RmQDK81Aw4sXpf5Qygkab3pR4IC1AAAA"
+}

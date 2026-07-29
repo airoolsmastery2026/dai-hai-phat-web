@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior76",
+  "title": "Phòng ngủ với tủ âm tường",
+  "alt": "Hình phòng ngủ với tủ âm tường trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với tủ âm tường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với tủ âm tường. Mô tả đã xác minh: Tư liệu phòng ngủ với tủ âm tường được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với tủ âm tường | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với tủ âm tường dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với tủ âm tường"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior76.jpg",
+    "sourceRelativePath": "assets/images/interior/interior76.jpg",
+    "publicUrl": "/images/interior/interior76.jpg",
+    "bytes": 156569,
+    "sha256": "d2acf238873a58bfd20674c5a3bc15316c0ccff265f169d9848c8b910ec870d9",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior76.webp",
+    "publicUrl": "/images/interior/interior76.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 69604,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior76.thumb.webp",
+    "publicUrl": "/images/interior/interior76.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 16498,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhYBAABXRUJQVlA4IAoBAAAQCQCdASogACsAPu1iqk4ppaOiNVQIATAdiWMAuOrofX9EFe+3oTYDFEg6IaOQ+dSHwW0Zsy+CUkb1vBDUtP4EOZJQlNsOjRYk9BUFujhu0gAA0nFxa4kzZcwrU+PWV+i7Y8ZHR04YO9lViiYyV8pXIQ13l27ZkZQY62ZozYfefe/YSIBxAvy4iV4Y144TQbBU3+1SrYiJbFXZKu1IvjUkWHy7OjAtL0SYZLb+I/ruWnlWjmtaGbrLD7hl5rvxUHjHvPnBIr5ZCjlciYgivcL+iCJaimwSsBYOcmtPbJ6j4VpZUVqPIQavGdlIAnx/JhmJUas7SY7JROoDF3QVCp93T6RhzYhP4lQoAA=="
+}

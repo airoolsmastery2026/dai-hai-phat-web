@@ -9,7 +9,7 @@ interface CardProps {
 
 export function Card({ children, className = "", tone = "default", hoverable = false }: CardProps) {
   const toneClass = tone === "muted" ? "bg-[var(--color-surface-muted)]" : "bg-[var(--color-surface)]";
-  const hoverClass = hoverable ? "transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-md)]" : "";
+  const hoverClass = hoverable ? "transition duration-[var(--duration-medium)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)]" : "";
 
   return (
     <div className={`rounded-[var(--radius-xl)] border border-[var(--color-border)] shadow-[var(--shadow-sm)] ${toneClass} ${hoverClass} ${className}`.trim()}>

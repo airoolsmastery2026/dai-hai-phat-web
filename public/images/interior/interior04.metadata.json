@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior04",
+  "title": "Quầy bar hoàn thiện hệ đèn",
+  "alt": "Hình quầy bar hoàn thiện hệ đèn trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu quầy bar hoàn thiện hệ đèn được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Quầy bar hoàn thiện hệ đèn. Mô tả đã xác minh: Tư liệu quầy bar hoàn thiện hệ đèn được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quầy bar hoàn thiện hệ đèn | Đại Hải Phát",
+    "description": "Hình ảnh quầy bar hoàn thiện hệ đèn dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "quầy bar hoàn thiện hệ đèn"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior04.jpg",
+    "sourceRelativePath": "assets/images/interior/interior04.jpg",
+    "publicUrl": "/images/interior/interior04.jpg",
+    "bytes": 158370,
+    "sha256": "0fea64813a75c901a0669369e1dd16a04d40ef74e5bb5706414741edf7c0ad5a",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior04.webp",
+    "publicUrl": "/images/interior/interior04.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 59412,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior04.thumb.webp",
+    "publicUrl": "/images/interior/interior04.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 17730,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRqABAABXRUJQVlA4IJQBAADwCQCdASogACsAPu1qr08ppiSiKqoBMB2JbACnR5QGymZdwXdOwqtcCzIhd2UdCRqHJ5xOpktfSerGwLtBLWrlLF163VL/8nSX6BICOksihhsUK2LQ86gAAP79VWHHFx7HIzUKWPUit4cS/LtBB7a36KXvWzi2rdmKjrIrYwKR02qXp8o7bGomBSoR+vaW5rXi3qs/qkCQgu8TRljICZeOoCKAjxoRQln0LEroJqYqWftRG94zs3dCOM0t7rGGKUDe4pLDwYOgv8aU19j6zJ5RgeHkx2/JqpSSrXOvxx/pA4ELTRhO2RY7HHgtzRr6W4PTntNgrSp+XbBDzcdjAdfM2HRwLnrBYDRuciDwyuzjutKWFHpEvFw8Z6vGawss5mXFYJ1eTEtAopUp/wPm8v9MFztYa1jPPsQdPvlkpGXVRfiuK8Ny4ZH//k1+B0KWSE6Rs1e+T08iyu0n/4eRHzXYyJSueTdN3+35d4gmgS/0PPxE6lu0tm+hhW2Ou41yiWhb4tY2JKx9g+MJOKpXQcV/OiAAAA=="
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior09",
+  "title": "Quầy bar phong cách công nghiệp",
+  "alt": "Hình quầy bar phong cách công nghiệp trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu quầy bar phong cách công nghiệp được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Quầy bar phong cách công nghiệp. Mô tả đã xác minh: Tư liệu quầy bar phong cách công nghiệp được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quầy bar phong cách công nghiệp | Đại Hải Phát",
+    "description": "Hình ảnh quầy bar phong cách công nghiệp dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "quầy bar phong cách công nghiệp"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior09.jpg",
+    "sourceRelativePath": "assets/images/interior/interior09.jpg",
+    "publicUrl": "/images/interior/interior09.jpg",
+    "bytes": 135670,
+    "sha256": "19b3b69b8652a5a3b3b55bb6a0ad73c8d1af6c04384d7fbe5140bc303cda2e8e",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior09.webp",
+    "publicUrl": "/images/interior/interior09.webp",
+    "width": 1280,
+    "height": 720,
+    "bytes": 56722,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior09.thumb.webp",
+    "publicUrl": "/images/interior/interior09.thumb.webp",
+    "width": 480,
+    "height": 270,
+    "bytes": 11414,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRgoBAABXRUJQVlA4IP4AAACwBgCdASogABIAPu1kqU2ppaQiMAgBMB2JbACdDXAP0AA0iUIPx1Ou9PgNK9XevJL6tqDnsLxAPHcExZSFwAD+7p2Rka+nsPXiQWvk18Kt3M7VeVrlWDrUya2dorUdSBXRjnR/Ox0IOzuPnT+kcoHvzt17/zpjSzmcpaHdvsb3JPNQaJe41DnEvlR6AtuZm4vx6Lf6M3WAJ8NqHlSmBk98VeHFdmxjFiJfMp+Xe0X+GuuPEuAjL46tLibwdMKhfTATNvqUzhQ1Fboqwee0pnChqK3OImSqG6NKD+TaroCWd2nZEvT9t9OEOKo29tT3yEZiX40IwJyZ5QkDfwKgAA=="
+}

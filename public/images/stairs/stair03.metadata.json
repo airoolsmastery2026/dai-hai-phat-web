@@ -1,0 +1,53 @@
+{
+  "id": "stairs-stair03",
+  "title": "Tủ dưới gầm cầu thang",
+  "alt": "Hình tủ dưới gầm cầu thang trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ dưới gầm cầu thang được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cầu thang",
+  "assetType": "project",
+  "material": "Kính, kim loại và gỗ",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Cầu thang và lan can",
+  "prompt": "Chủ thể: Tủ dưới gầm cầu thang. Mô tả đã xác minh: Tư liệu tủ dưới gầm cầu thang được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cầu thang. Dịch vụ: Cầu thang và lan can. Vật liệu: Kính, kim loại và gỗ. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ dưới gầm cầu thang | Đại Hải Phát",
+    "description": "Hình ảnh tủ dưới gầm cầu thang dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cầu thang",
+      "cầu thang và lan can",
+      "đại hải phát",
+      "tủ dưới gầm cầu thang"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/stairs/stair03.jpg",
+    "sourceRelativePath": "assets/images/stairs/stair03.jpg",
+    "publicUrl": "/images/stairs/stair03.jpg",
+    "bytes": 115068,
+    "sha256": "75242e5a279e6f27c388f3834811f2325c663e38a427ae5ad467ed75fc1d380f",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/stairs/stair03.webp",
+    "publicUrl": "/images/stairs/stair03.webp",
+    "width": 1276,
+    "height": 956,
+    "bytes": 59322,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/stairs/stair03.thumb.webp",
+    "publicUrl": "/images/stairs/stair03.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 10730,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRvoAAABXRUJQVlA4IO4AAABwBgCdASogABgAPu1qq1EppaOiqAqpMB2JZwAOfDuDfAqiKzwlHFV/C0SXjGqKMOENEkH7asjZIo7pwmAA/usRSd1sUnvB3KtIRHDnL4NCwDqHe2cM8IvGNTsVstSR2RjcZFfNGGEMooVSh5Ix90/4R1/JuILA5S1I94xohy6xkZ0ptNvZntIthrI/BR6oAWg1f5FDcX+RpKMT87ORWIfJ6WzNUVYq3OJdbstgm4SWGbRU80l7AeHpQG3ARf0viLSXTTDsWeb3zrQaGLjlo+8SeXi4hdEnITJ+6kTa6wPM4Oumufr+9UUtQG+7AIAA"
+}

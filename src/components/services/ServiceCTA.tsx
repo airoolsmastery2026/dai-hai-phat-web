@@ -3,21 +3,23 @@ import { Button } from "@/components/ui/Button";
 
 export function ServiceCTA() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-20 text-white">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-[#FF5722]/10 blur-3xl" />
-        <div className="absolute bottom-20 -left-40 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
-      </div>
-
+    <section className="relative overflow-hidden bg-[var(--color-surface-dark)] py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
       <Container>
-        <div className="relative flex flex-col items-start justify-between gap-8 rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-white/10 to-transparent p-12 backdrop-blur-sm md:flex-row md:items-center">
+        <div className="relative flex flex-col items-start justify-between gap-[var(--space-8)] rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-8)] md:flex-row md:items-center md:p-[var(--space-12)]">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-300">Yêu cầu báo giá</p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">Sẵn sàng triển khai giải pháp cho doanh nghiệp của bạn</h2>
-            <p className="mt-3 text-lg text-slate-300">Liên hệ với đội ngày chỉnh hôm nay để nhận báo giá và tư vấn chi tiết.</p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary-soft-text)]">
+              Bước tiếp theo
+            </p>
+            <h2 className="mt-[var(--space-4)] text-3xl font-bold leading-tight md:text-4xl">
+              Chuẩn bị dữ liệu để kỹ sư khảo sát công trình
+            </h2>
+            <p className="mt-[var(--space-3)] text-lg text-[var(--color-text-dark-muted)]">
+              Gửi hạng mục, vị trí, kích thước dự kiến và ảnh hiện trạng để đội
+              ngũ tư vấn phạm vi phù hợp.
+            </p>
           </div>
           <div className="flex-shrink-0">
-            <Button href="#contact">Yêu cầu báo giá</Button>
+            <Button href="/contact">Liên hệ kỹ sư</Button>
           </div>
         </div>
       </Container>

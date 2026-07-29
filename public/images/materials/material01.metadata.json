@@ -1,0 +1,52 @@
+{
+  "id": "materials-material01",
+  "title": "Mẫu bề mặt gỗ màu nâu",
+  "alt": "Hình mẫu bề mặt gỗ màu nâu trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu mẫu bề mặt gỗ màu nâu được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Vật liệu",
+  "assetType": "material",
+  "material": "Mẫu vật liệu thực tế",
+  "style": "Mẫu vật liệu",
+  "projectType": "Thư viện vật liệu",
+  "service": "Vật liệu",
+  "prompt": "Chủ thể: Mẫu bề mặt gỗ màu nâu. Mô tả đã xác minh: Tư liệu mẫu bề mặt gỗ màu nâu được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Vật liệu. Dịch vụ: Vật liệu. Vật liệu: Mẫu vật liệu thực tế. Phong cách: Mẫu vật liệu. Loại công trình: Thư viện vật liệu. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu bề mặt gỗ màu nâu | Đại Hải Phát",
+    "description": "Hình ảnh mẫu bề mặt gỗ màu nâu dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "mẫu bề mặt gỗ màu nâu",
+      "vật liệu"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/materials/material01.jpg",
+    "sourceRelativePath": "assets/images/materials/material01.jpg",
+    "publicUrl": "/images/materials/material01.jpg",
+    "bytes": 126824,
+    "sha256": "3380adea6a99f524c828638f3f6b2ba7f945c08eea75e9b3a49033f0b1aa6da0",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/materials/material01.webp",
+    "publicUrl": "/images/materials/material01.webp",
+    "width": 580,
+    "height": 1280,
+    "bytes": 67784,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/materials/material01.thumb.webp",
+    "publicUrl": "/images/materials/material01.thumb.webp",
+    "width": 480,
+    "height": 1059,
+    "bytes": 30068,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADQBwCdASogAEcAPu1wrlMppiOio0uJMB2JZ2dtnuCBPT392Aa3+CmsYMvH5eEO68C3wK8my9F5DSMXF66FjQaZER8+pRm1nAD+cjCts9IfQfGV3zse4B1H8YObr5cx1bwrQtIWjLP+04WEoy5I6oooUEMUdumeog5NbHbpLuIpb0kS8Td+SmzqQj/FAjmNNKGkGt+cW0QiOKgTn8+k3lFqTEwAAA=="
+}

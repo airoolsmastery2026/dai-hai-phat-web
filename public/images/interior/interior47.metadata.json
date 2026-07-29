@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior47",
+  "title": "Phòng ngủ tông trắng hồng",
+  "alt": "Hình phòng ngủ tông trắng hồng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ tông trắng hồng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ tông trắng hồng. Mô tả đã xác minh: Tư liệu phòng ngủ tông trắng hồng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ tông trắng hồng | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ tông trắng hồng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ tông trắng hồng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior47.jpg",
+    "sourceRelativePath": "assets/images/interior/interior47.jpg",
+    "publicUrl": "/images/interior/interior47.jpg",
+    "bytes": 95346,
+    "sha256": "77f1ce3a845c3598b181c1921849b41cb7d971442ae088177d4751c5923db8ae",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior47.webp",
+    "publicUrl": "/images/interior/interior47.webp",
+    "width": 960,
+    "height": 720,
+    "bytes": 47864,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior47.thumb.webp",
+    "publicUrl": "/images/interior/interior47.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 12624,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAACQBwCdASogABgAPu1mq08ppaOiKA1RMB2JYwDA4bNxl2pUPtmea39YoqZFpIjP98/y1WgOuNa1G2rdzQcNNkxVSA3JoQAA/ftPvF4MFs/eE4tTq+7vSCVEx2lrVZJzEaZgS7xEi2TL25mO/uUy4R0zALwwdJbL6zSbrjBL3GuS9cUkQKjsQeApSJUbEHV0+LRYmq53BdqIa54M/PTEK+K3LHnWOaoneH1tjakp5W2dcZ48E0nWY0PhZp8rtiiDhz6Uoz7EJEsNUb+iolbMzIS2bbsoAA=="
+}

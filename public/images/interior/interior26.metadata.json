@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior26",
+  "title": "Phòng ngủ với tủ áo kính",
+  "alt": "Hình phòng ngủ với tủ áo kính trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với tủ áo kính được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với tủ áo kính. Mô tả đã xác minh: Tư liệu phòng ngủ với tủ áo kính được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với tủ áo kính | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với tủ áo kính dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với tủ áo kính"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior26.jpg",
+    "sourceRelativePath": "assets/images/interior/interior26.jpg",
+    "publicUrl": "/images/interior/interior26.jpg",
+    "bytes": 161485,
+    "sha256": "3a06373b21b2e5013434ce322b1e49d7d16168765e3bd2102ccfab33d31f2582",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior26.webp",
+    "publicUrl": "/images/interior/interior26.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 73170,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior26.thumb.webp",
+    "publicUrl": "/images/interior/interior26.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 21998,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRlYBAABXRUJQVlA4IEoBAAAwCQCdASogACsAPu1erU2ppSSiMBqqqTAdiWIAuznAigJMeYhoCO97oyY9X7ET1bTPEDEj3b1wtjRX+7G5H4zJgCMcarxXTkmmJ9/t3ajM5YAgAP6LdQGmzvocZg7V/c82HUjjl6wYzdAJw57/r4guJgLG3W29AX1Izi8UWHNu9w02G6M02cccwdmRnvuTpoAISJ+bQ+d928qtdp8kTuHnAnBkjj8Li0IozK+1xwjRk2H3TNLA0IvXN8B3tyn7pvSXx86Q7nnBD7h+ex7kjohad5aLnfu5WkOkMwj+6bN1jDKgcjWz90pMeNYCHrbBr3P5WGkwI+xeBD5RVsUFum9uuwKw0XKyOYrpCjAfnwHXr4iXkajjJYHGlPFsV5xgIa5hlWnHnjT/SUpukk1s4XWw9FTGAyTtFmZi6Guk1wUTiDYusaso2g8RAAA="
+}

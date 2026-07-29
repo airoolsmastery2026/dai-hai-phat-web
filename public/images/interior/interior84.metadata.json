@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior84",
+  "title": "Bàn làm việc kết hợp kệ",
+  "alt": "Hình bàn làm việc kết hợp kệ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu bàn làm việc kết hợp kệ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Bàn làm việc kết hợp kệ. Mô tả đã xác minh: Tư liệu bàn làm việc kết hợp kệ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Bàn làm việc kết hợp kệ | Đại Hải Phát",
+    "description": "Hình ảnh bàn làm việc kết hợp kệ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "bàn làm việc kết hợp kệ",
+      "đại hải phát",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior84.jpg",
+    "sourceRelativePath": "assets/images/interior/interior84.jpg",
+    "publicUrl": "/images/interior/interior84.jpg",
+    "bytes": 149927,
+    "sha256": "e2ce1c156a6188d3a55750a950d75dfc341256e7a0d1ed1f7ce1209aa2b54613",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior84.webp",
+    "publicUrl": "/images/interior/interior84.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 57366,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior84.thumb.webp",
+    "publicUrl": "/images/interior/interior84.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 15252,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAACQBwCdASogACsAPt1apE2opSOiOrZoARAbiUAXyU2ANnhN3mtKDA+oJixdMesLux1ZGu4eQJGiuT3+02W6sohISf/cc0AA/vhPz8w7fPjqWEfTFNmG2XNyVOSu0CQ+rbK0a1BKCm0OaMWOiaCoSTpHXF7IHcV+KynL/Da2c3nIBclIdxI+8ewUYFSewIcdPVoTeYc9+khA6SSFKeQuZTKHMj5Bt2Bve1qbpPZ4JgCjAoI2+CHw10KZt0Yl3wfBmSskc31cJkOOYmL7NuurKm3IxbcXmt14yuzB628qSG75lX7s4QKQsyezbwhZRDUs3EudVwCsQ8ldMlGQ55bvR0Irzizd5hpmMAA="
+}

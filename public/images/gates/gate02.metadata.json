@@ -1,0 +1,52 @@
+{
+  "id": "gates-gate02",
+  "title": "Bản vẽ kỹ thuật cổng CNC",
+  "alt": "Hình bản vẽ kỹ thuật cổng CNC trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu bản vẽ kỹ thuật cổng CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cửa cổng",
+  "assetType": "technical",
+  "material": "Kim loại cắt CNC",
+  "style": "Hoa văn CNC",
+  "projectType": "Nhà ở",
+  "service": "Cửa cổng",
+  "prompt": "Chủ thể: Bản vẽ kỹ thuật cổng CNC. Mô tả đã xác minh: Tư liệu bản vẽ kỹ thuật cổng CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cửa cổng. Dịch vụ: Cửa cổng. Vật liệu: Kim loại cắt CNC. Phong cách: Hoa văn CNC. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Bản vẽ kỹ thuật cổng CNC | Đại Hải Phát",
+    "description": "Hình ảnh bản vẽ kỹ thuật cổng CNC dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "bản vẽ kỹ thuật cổng cnc",
+      "cửa cổng",
+      "đại hải phát"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/gates/gate02.jpg",
+    "sourceRelativePath": "assets/images/gates/gate02.jpg",
+    "publicUrl": "/images/gates/gate02.jpg",
+    "bytes": 289411,
+    "sha256": "388c59ac0f3348ca8877c42a84b0d9f4801db5f3c96b26d3d7b4d47915b8e120",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/gates/gate02.webp",
+    "publicUrl": "/images/gates/gate02.webp",
+    "width": 1280,
+    "height": 1024,
+    "bytes": 133880,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/gates/gate02.thumb.webp",
+    "publicUrl": "/images/gates/gate02.thumb.webp",
+    "width": 480,
+    "height": 384,
+    "bytes": 26446,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRgABAABXRUJQVlA4IPQAAADQBgCdASogABoAPu1qqU8ppiOiMBgIATAdiWkABRJ28NpjbF6Ik8jRiu7n9TM+m3Kk53yoUZpq5kucrOmvMAAA/uuxUtJBMvTf+qDtrwDzss1bkKqxyCReOiphuJAsyoTBryfPMY7fC+0k/XJlqah4izTIzUfG02UtNjD3QIkWzOmEL/orVsYEKUDfNrjHe/SXFSNeq3gzhX/BYQ/kFM/ilNq7WXz8NC5UOZWwxGOp9fngi7K0X9Qj6G49yCYuaL1bRKPWb7YFl+Q+mVK5yeYS1y1COn/TSYWRfumoeoBn2v7EJvKdPxzuwp2KQQ//ger/cAAA"
+}

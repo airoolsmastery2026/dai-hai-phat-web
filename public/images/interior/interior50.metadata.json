@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior50",
+  "title": "Tủ áo cánh lùa",
+  "alt": "Hình tủ áo cánh lùa trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo cánh lùa được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo cánh lùa. Mô tả đã xác minh: Tư liệu tủ áo cánh lùa được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo cánh lùa | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo cánh lùa dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo cánh lùa"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior50.jpg",
+    "sourceRelativePath": "assets/images/interior/interior50.jpg",
+    "publicUrl": "/images/interior/interior50.jpg",
+    "bytes": 67876,
+    "sha256": "7ee106eeb6f796b648ec5d7aadf822c2728b2057fb16ee128c243c0333e2f7b8",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior50.webp",
+    "publicUrl": "/images/interior/interior50.webp",
+    "width": 720,
+    "height": 960,
+    "bytes": 29562,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior50.thumb.webp",
+    "publicUrl": "/images/interior/interior50.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 11442,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRjgBAABXRUJQVlA4ICwBAACwCACdASogACsAPu1uqVAppqOiqqoBMB2JZwDI2bIxk+pZUyri5q5NpIhQpCIyVi4p2Y6kuQOi3CSDjuxO4otQwFjUbZDd3376+iUoNoAA/sUUf95rm8JAbu2gzOM2Bk9dfFdMRWyG9fQa/lD6agzx3dF+L69oPRfyEsR32gxgN2TNVsiAJ2s9l5vXxvfE62TVIokQM5dDv2jIvenjhMa/rMBZ4/WPbg8CLyoPQM7+pAA0RidqIOi3ncb/586kRTp8HtcmzDCCgLVwHHhKRttfvs2TNz0njL4gTix+UfEpQKdvFgegEJnpv63G+gujXf5l740gTZm45Hdg9GEy5a7xql7mBgEVn64HslFKgC1vdgbttSyjgbgsJPNuQL+MJAlUtzgZwntB4QAAAAA="
+}

@@ -6,11 +6,11 @@ export function ProjectTechStack({ technologies }: { technologies: ProjectItem["
   return (
     <section className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
       <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-50 text-[#FF5722]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-50 text-[var(--color-primary)]">
           <Cpu className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#FF5722]">Technology used</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--color-primary)]">Technology used</p>
           <h3 className="mt-1 text-2xl font-semibold text-slate-900">Công nghệ và quy trình triển khai</h3>
         </div>
       </div>

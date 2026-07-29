@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior75",
+  "title": "Không gian bar với hệ đèn thả",
+  "alt": "Hình không gian bar với hệ đèn thả trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu không gian bar với hệ đèn thả được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Không gian bar với hệ đèn thả. Mô tả đã xác minh: Tư liệu không gian bar với hệ đèn thả được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Không gian bar với hệ đèn thả | Đại Hải Phát",
+    "description": "Hình ảnh không gian bar với hệ đèn thả dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "không gian bar với hệ đèn thả",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior75.jpg",
+    "sourceRelativePath": "assets/images/interior/interior75.jpg",
+    "publicUrl": "/images/interior/interior75.jpg",
+    "bytes": 248542,
+    "sha256": "ce720a6f42ac07317621327881e92c25bece331127a9b8e38a5ea4e752ad54ea",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior75.webp",
+    "publicUrl": "/images/interior/interior75.webp",
+    "width": 1276,
+    "height": 956,
+    "bytes": 120830,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior75.thumb.webp",
+    "publicUrl": "/images/interior/interior75.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 22832,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhwBAABXRUJQVlA4IBABAAAwBwCdASogABgAPu1kqU2ppaOiMAgBMB2JQBSSP/1Kns6G89MdurdzAh6mJQTEy/4evKfVLHhb3KbGddYibMa9a3AA/uxMvtXswjUpWlAGHaYCFMmiDzK4Zxu2e4WAzi1TBYQbCPOLckSS8BomZD9Z0EfxdHAe5eiJ2OdyqEvDW/Lz31EQlBqQrElTnV39EC8/NjOa6R04wzq89mlLGJA4nvlrUCZY+3t6wPBlGVCFJief/sqWeT+1LGH6fZi2w3n7d9+TPGgZvwAr0rto8K5wsTR75/Yu1n/CfLYYKYNDzPWXzcaka9Lde3304Hg5J8u921Z/UmmjC7Ae8BLNbakuOonulPX806WfvuHkE3cAAA=="
+}

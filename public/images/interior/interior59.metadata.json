@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior59",
+  "title": "Vách tivi tại phòng khách",
+  "alt": "Hình vách tivi tại phòng khách trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi tại phòng khách được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi tại phòng khách. Mô tả đã xác minh: Tư liệu vách tivi tại phòng khách được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi tại phòng khách | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi tại phòng khách dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi tại phòng khách"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior59.jpg",
+    "sourceRelativePath": "assets/images/interior/interior59.jpg",
+    "publicUrl": "/images/interior/interior59.jpg",
+    "bytes": 232083,
+    "sha256": "96d0f5bdb98b8fb6ed48e5398974281b2c0e3f04a99daddfd1d1668f851758eb",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior59.webp",
+    "publicUrl": "/images/interior/interior59.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 105394,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior59.thumb.webp",
+    "publicUrl": "/images/interior/interior59.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 17836,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRvgAAABXRUJQVlA4IOwAAAAwBgCdASogABgAPu1mrE+ppSQiMBgIATAdiWgAuyDuhNVfZfKUQsXFxnGNNz/AnNCyHaUoSv1DUVnYAP6NLzUBToAHj8Dx9B6c0TNfbawb9MR+VECuOZUpR+C/9WWKFo8rIk5Qh4fuhaysNQzmdrV6Ud4RRzAs5AsXRCCGmX5Jo4pHREnZ6yn+nl0YwRvNOhJuKn4Vkuz8yn7OxT1VyZkE5WBaC000C6MQ/x1yv9KMIFwE324Y/iV9wKSZY4whWvfjf5E1iL312FUo1RO2VrFVTWrUDCHeRNu06M+t2MRcbLezACXLRvcHx02AAA=="
+}

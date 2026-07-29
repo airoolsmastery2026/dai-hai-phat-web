@@ -19,9 +19,10 @@ export function BackToTop() {
 
   return (
     <button
+      type="button"
       onClick={handleClick}
-      className={`fixed bottom-24 left-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-lg transition hover:bg-slate-900 hover:text-white lg:bottom-8 lg:left-auto lg:right-8 ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
-      aria-label="Back to top"
+      className={`fixed bottom-[var(--space-4)] left-[var(--space-4)] z-40 flex h-12 w-12 items-center justify-center rounded-[var(--radius-full)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] shadow-[var(--shadow-md)] transition duration-[var(--duration-fast)] hover:bg-[var(--color-surface-dark)] hover:text-white lg:bottom-[var(--space-8)] ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
+      aria-label="Về đầu trang"
     >
       <ArrowUp className="h-5 w-5" />
     </button>

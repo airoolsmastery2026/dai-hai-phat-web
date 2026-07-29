@@ -60,7 +60,7 @@ export function ProjectExplorer({ projects }: { projects: ProjectItem[] }) {
                 value={search}
                 onChange={(event) => handleSearchChange(event.target.value)}
                 placeholder="Tên dự án, khách hàng..."
-                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-[#FF5722]"
+                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-[var(--color-primary)]"
                 aria-label="Tìm kiếm dự án"
               />
             </label>
@@ -69,7 +69,7 @@ export function ProjectExplorer({ projects }: { projects: ProjectItem[] }) {
               <select
                 value={category}
                 onChange={(event) => handleCategoryChange(event.target.value)}
-                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none focus:border-[#FF5722]"
+                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none focus:border-[var(--color-primary)]"
                 aria-label="Lọc theo loại dự án"
               >
                 {categories.map((item) => (
@@ -101,7 +101,7 @@ export function ProjectExplorer({ projects }: { projects: ProjectItem[] }) {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <button
             onClick={() => setPage((current) => Math.max(1, current - 1))}
-            className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:border-[#FF5722] hover:text-[#FF5722]"
+            className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
             disabled={safePage === 1}
           >
             Trước
@@ -110,14 +110,14 @@ export function ProjectExplorer({ projects }: { projects: ProjectItem[] }) {
             <button
               key={pageNumber}
               onClick={() => setPage(pageNumber)}
-              className={`rounded-full px-4 py-2 text-sm font-medium ${safePage === pageNumber ? "bg-[#FF5722] text-white" : "border border-slate-200 text-slate-700 hover:border-[#FF5722] hover:text-[#FF5722]"}`}
+              className={`rounded-full px-4 py-2 text-sm font-medium ${safePage === pageNumber ? "bg-[var(--color-primary)] text-white" : "border border-slate-200 text-slate-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"}`}
             >
               {pageNumber}
             </button>
           ))}
           <button
             onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
-            className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:border-[#FF5722] hover:text-[#FF5722]"
+            className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
             disabled={safePage === totalPages}
           >
             Sau

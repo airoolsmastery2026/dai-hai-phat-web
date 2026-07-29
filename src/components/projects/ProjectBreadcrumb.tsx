@@ -5,13 +5,13 @@ export function ProjectBreadcrumb({ currentLabel }: { currentLabel: string }) {
     <nav aria-label="Breadcrumb" className="mb-6">
       <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
         <li>
-          <Link href="/" className="font-medium text-slate-700 hover:text-[#FF5722]">
+          <Link href="/" className="font-medium text-slate-700 hover:text-[var(--color-primary)]">
             Trang chủ
           </Link>
         </li>
         <li>/</li>
         <li>
-          <Link href="/projects" className="font-medium text-slate-700 hover:text-[#FF5722]">
+          <Link href="/projects" className="font-medium text-slate-700 hover:text-[var(--color-primary)]">
             Dự án
           </Link>
         </li>

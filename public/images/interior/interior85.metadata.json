@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior85",
+  "title": "Phòng ngủ tông xám",
+  "alt": "Hình phòng ngủ tông xám trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ tông xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ tông xám. Mô tả đã xác minh: Tư liệu phòng ngủ tông xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ tông xám | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ tông xám dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ tông xám"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior85.jpg",
+    "sourceRelativePath": "assets/images/interior/interior85.jpg",
+    "publicUrl": "/images/interior/interior85.jpg",
+    "bytes": 146004,
+    "sha256": "e41c37b0a7b41f13c9744cbe6e475b4356fd66977f1f4aee0f828356f2aaae90",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior85.webp",
+    "publicUrl": "/images/interior/interior85.webp",
+    "width": 1320,
+    "height": 810,
+    "bytes": 78942,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior85.thumb.webp",
+    "publicUrl": "/images/interior/interior85.thumb.webp",
+    "width": 480,
+    "height": 295,
+    "bytes": 14084,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAABQBgCdASogABQAPu1iqU2ppaOiMAgBMB2JYwCdAywYbM+NWRM+bH2yfNH0O/TKK8Vfdehztk9+1yoccAD+wOiHfQLUNPRA8Dg5myISQQEThcKDsPT02bmQ06Wl6tbiNSHDXkWe1jz+48SvXE+mZmdWPzUy3st4cPhzi0CW3lmLLcTYwNhOqM8ZZ/5TAMyrYewETnUD76Jrb5/NyXybIXhHwJ0GjiRnbxArKcVbkiK4Dmve3q24PBuoopOy8dRYAAA="
+}

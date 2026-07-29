@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior08",
+  "title": "Cửa đi và cửa sổ tông xám",
+  "alt": "Hình cửa đi và cửa sổ tông xám trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu cửa đi và cửa sổ tông xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Cửa đi và cửa sổ tông xám. Mô tả đã xác minh: Tư liệu cửa đi và cửa sổ tông xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Cửa đi và cửa sổ tông xám | Đại Hải Phát",
+    "description": "Hình ảnh cửa đi và cửa sổ tông xám dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cửa đi và cửa sổ tông xám",
+      "đại hải phát",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior08.jpg",
+    "sourceRelativePath": "assets/images/interior/interior08.jpg",
+    "publicUrl": "/images/interior/interior08.jpg",
+    "bytes": 144207,
+    "sha256": "17a8f9e1bb081853d4ce125e0c7c00a6b32249793fb566e022002a388f5f549b",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior08.webp",
+    "publicUrl": "/images/interior/interior08.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 64072,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior08.thumb.webp",
+    "publicUrl": "/images/interior/interior08.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 12660,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRvYAAABXRUJQVlA4IOoAAADwBgCdASogABgAPu1sq1EppiOiqAqpMB2JZwDB0a2lKZwAL40Z1svXobztRvkvnpAt6k6kcjWZib3ZkqeDat6wAPeRfr0UXVLNnUe2RpY1lOqQ9NwWYmo+VEBu3XFS0/Uy7nPLF3k+wJhDOK8wUua8vP4Wb/4guTeiRnOLpoTDzohvxXNqD6/IHiqEmoss/IWlsal4UAWig6BamaHWH+fwFyT0HK6tDRJZcq/Vzq1tq9uq2AN2k2GVDZVpOo1ee+VTfJh9z0DFjjKrB2t4wm1L1JcIoOfrLXoRUrYSfg6GUjpO5UEb7duwAAA="
+}

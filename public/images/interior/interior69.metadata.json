@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior69",
+  "title": "Tủ áo kết hợp giường ngủ",
+  "alt": "Hình tủ áo kết hợp giường ngủ trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ áo kết hợp giường ngủ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ áo kết hợp giường ngủ. Mô tả đã xác minh: Tư liệu tủ áo kết hợp giường ngủ được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ áo kết hợp giường ngủ | Đại Hải Phát",
+    "description": "Hình ảnh tủ áo kết hợp giường ngủ dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ áo kết hợp giường ngủ"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior69.jpg",
+    "sourceRelativePath": "assets/images/interior/interior69.jpg",
+    "publicUrl": "/images/interior/interior69.jpg",
+    "bytes": 136571,
+    "sha256": "b2b5f2287662d89e7c978b929a5a4edf23eacb207aca4c6e2c92837fe5964428",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior69.webp",
+    "publicUrl": "/images/interior/interior69.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 66198,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior69.thumb.webp",
+    "publicUrl": "/images/interior/interior69.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 19382,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRnIBAABXRUJQVlA4IGYBAABQCQCdASogACsAPuFcpk2opSOiNVgMARAcCWMAxkW3pVV+B4E1RipWzOi02btNNw8IG5SThEP2yCxOIVTuVL0M794xznH8y5aGg+pMAcKtxc9s4AD3W16dmP3162c75am+3s3SwIdQ/y0Q12q+g3n4XsQrIBaNeUnEH06KpmLpQIXSTkqMAbCo2N6UcqskwQA/luaAmvpREHYBL91mgU+ZLtuNiYoel/14Op71z047aG20l4Gr2Ag2uvniGnl40O3SlUQuGR22Rqcnfq8+3SP8SPYAQmdbXdAipjVgb7frF/CJ8sezqY0lMYe/R79w/EBxq0S08NUPj3iB9hS1uFHF2tHtdiHwS0+pEN6Y6DBhy2tALUo4rm7nMZRQLav09XnkR/Ue9p1Z+Suz4ESfyeCqHBuUngfSTbjof/FbelnGJNicykTUmiXx4hwofgKKNFJDfeX7bXBmeZPEvPB0rPzVg4qtwAAA"
+}

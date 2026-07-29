@@ -1,0 +1,53 @@
+{
+  "id": "factory-factory03",
+  "title": "Vận chuyển khung kim loại",
+  "alt": "Hình vận chuyển khung kim loại trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vận chuyển khung kim loại được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Gia công tại xưởng",
+  "assetType": "project",
+  "material": "Kim loại",
+  "style": "Công nghiệp",
+  "projectType": "Xưởng gia công",
+  "service": "Nhà xưởng",
+  "prompt": "Chủ thể: Vận chuyển khung kim loại. Mô tả đã xác minh: Tư liệu vận chuyển khung kim loại được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Gia công tại xưởng. Dịch vụ: Nhà xưởng. Vật liệu: Kim loại. Phong cách: Công nghiệp. Loại công trình: Xưởng gia công. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vận chuyển khung kim loại | Đại Hải Phát",
+    "description": "Hình ảnh vận chuyển khung kim loại dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "gia công tại xưởng",
+      "nhà xưởng",
+      "vận chuyển khung kim loại"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/factory/factory03.jpg",
+    "sourceRelativePath": "assets/images/factory/factory03.jpg",
+    "publicUrl": "/images/factory/factory03.jpg",
+    "bytes": 390439,
+    "sha256": "666f28fe514702cee9f68f2d965671df23b4b02e0efdc89414d272c064c2fd2b",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/factory/factory03.webp",
+    "publicUrl": "/images/factory/factory03.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 231922,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/factory/factory03.thumb.webp",
+    "publicUrl": "/images/factory/factory03.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 30140,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAAAQBwCdASogABgAPu1orlCppaQiqAqpMB2JYgDE2y/YhVpQmVVvG7h9aih1Vz9B6s1RyXYkCW9w1y5RMF/3s3ndAAD+kbZCOsSnyAj0OX30PFQ0xe+gC80PCeWIEmd+r3brp2T67OMLI+6lKeQaxDB539MavHo9nEViLDE/bUPjACq81OHAl5HTaaDGYP5o/GQzSRR+eUsileDUBjjQ5lNLU2O6PJzw3b5U0Ju62yxedjz+lWWsHjICuM3+Jz4QqSCz3URcUX4ckHIFQ8RQxie+8VRxFPcqOvNddkgkvHOT/qGWttpw04RygeOvNS0N8ZkxHU1Ckz6eh36Cy6TqvHcY7uYAAA=="
+}

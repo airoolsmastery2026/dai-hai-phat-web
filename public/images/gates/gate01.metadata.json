@@ -1,0 +1,52 @@
+{
+  "id": "gates-gate01",
+  "title": "Cổng hai cánh hoa văn CNC",
+  "alt": "Hình cổng hai cánh hoa văn CNC trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu cổng hai cánh hoa văn CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cửa cổng",
+  "assetType": "project",
+  "material": "Kim loại cắt CNC",
+  "style": "Hoa văn CNC",
+  "projectType": "Nhà ở",
+  "service": "Cửa cổng",
+  "prompt": "Chủ thể: Cổng hai cánh hoa văn CNC. Mô tả đã xác minh: Tư liệu cổng hai cánh hoa văn CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cửa cổng. Dịch vụ: Cửa cổng. Vật liệu: Kim loại cắt CNC. Phong cách: Hoa văn CNC. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Cổng hai cánh hoa văn CNC | Đại Hải Phát",
+    "description": "Hình ảnh cổng hai cánh hoa văn CNC dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cổng hai cánh hoa văn cnc",
+      "cửa cổng",
+      "đại hải phát"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/gates/gate01.jpg",
+    "sourceRelativePath": "assets/images/gates/gate01.jpg",
+    "publicUrl": "/images/gates/gate01.jpg",
+    "bytes": 270920,
+    "sha256": "2d4c87b620d25d75afc3a6d03a516894ec1421530e974aa3fc65c4dede995935",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/gates/gate01.webp",
+    "publicUrl": "/images/gates/gate01.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 124752,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/gates/gate01.thumb.webp",
+    "publicUrl": "/images/gates/gate01.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 45330,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRgABAABXRUJQVlA4IPQAAAAwCQCdASogACsAPu1urFGppiQipWzJMB2JZwAR43X5HEZjxWTGaftviy51VCgjnXzhVCz8vax1bc8euWIodY4wJx9KFp6+UeogtUybxT5XmmAAAP6orcLrZja0KA3eGCDL4s8Lb3aUfSuoVOl6h5Z9gvNVUZXy/heJ1gOkjmFKumLbPNmQEVza8mSkoKPPrnYMoK1XHeJUmkhLlKHbREzpCwaaZuY8aPDIGFkn6jNK+vuOunqUxvNTwHQBzXH/tXQ+iyYckPhS+L8Q++x/y+FIh6zYro+nQtNmrfDeP9lswsm7SbgZMX2sOR4si9GzJHvQAAAA"
+}

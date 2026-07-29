@@ -16,7 +16,7 @@ export function ProjectCard({ project }: { project: ProjectItem }) {
       <div className="p-6">
         <h3 className="text-xl font-semibold text-slate-900">{project.title}</h3>
         <p className="mt-3 text-sm leading-7 text-slate-600">{project.summary}</p>
-        <div className="mt-5 flex items-center justify-between text-sm font-semibold text-[#FF5722]">
+        <div className="mt-5 flex items-center justify-between text-sm font-semibold text-[var(--color-primary)]">
           <span>Xem chi tiết</span>
           <span aria-hidden="true">→</span>
         </div>

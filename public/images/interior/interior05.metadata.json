@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior05",
+  "title": "Vách tivi kết hợp tủ trưng bày",
+  "alt": "Hình vách tivi kết hợp tủ trưng bày trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách tivi kết hợp tủ trưng bày được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách tivi kết hợp tủ trưng bày. Mô tả đã xác minh: Tư liệu vách tivi kết hợp tủ trưng bày được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách tivi kết hợp tủ trưng bày | Đại Hải Phát",
+    "description": "Hình ảnh vách tivi kết hợp tủ trưng bày dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách tivi kết hợp tủ trưng bày"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior05.jpg",
+    "sourceRelativePath": "assets/images/interior/interior05.jpg",
+    "publicUrl": "/images/interior/interior05.jpg",
+    "bytes": 326578,
+    "sha256": "125a2eb0726c816716827c925263cc009dc3b65cabcb836302e398babec7b6ff",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior05.webp",
+    "publicUrl": "/images/interior/interior05.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 172948,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior05.thumb.webp",
+    "publicUrl": "/images/interior/interior05.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 40170,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRqABAABXRUJQVlA4IJQBAADwCQCdASogACsAPu1kqU2ppaQiMBqqqTAdiUAXyz/9S2imp4cS3W+Ogs35iFyNBP2XIKXR6nNMMceSjX3mRIeNUDtjRbR3Pxsuk9nSCaZvGfJ4XxTP0gMAAP3W+MXVyCbVGj8Lxo0FW/jOtjXzbhcr6nHwptOA3EVEXiPKoe1brmGSXXm4fZ0w3xF9pxQhIE7Mu5baVigi2OMKEUPkdhkO4Aa648DgrJOGWNwex7TnQz/Gkvpqei6IAodj88j42W4yMZpiZ05AZME0PlDBXUD+ARBlRbjEgOgZ0GJ+7Ko102d5OZit9xKjTSsvtEASKdCSX1PrhoPMLtwk2F9qLne0gE3aT8E5/F19H0VMAxtSdt44tzt5oDD9vJ60miJFD8BpW3jomlFLMqvn3R6zKH9rQkfwS4rtBnf6vvjErt5QcoJRKI0aZD6H3d6EdO2K/Y7cqlJOgdov223cpHueWVpQcBfvTj0FlBzh4Gd7EK62VLdPfc3Ifex9qeKx/M/SU2/j3ZSFa+GjvdB1H93RIyfLX+woAA=="
+}

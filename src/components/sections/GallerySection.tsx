@@ -1,29 +1,29 @@
 import Image from "next/image";
 
 const gallery = [
-  "/images/bedroom-01.jpg",
-  "/images/bedroom-02.jpg",
-  "/images/bedroom-03.jpg",
-  "/images/wardrobe-01.jpg",
-  "/images/wardrobe-02.jpg",
-  "/images/wardrobe-03.jpg",
-  "/images/kitchen-01.jpg",
-  "/images/kitchen-02.jpg",
-  "/images/kitchen-03.jpg",
-  "/images/livingroom-01.jpg",
-  "/images/tv-01.jpg",
-  "/images/canopy-01.jpg",
+  { src: "/images/interior/interior78.webp", alt: "Phòng ngủ với tủ áo cánh kính" },
+  { src: "/images/interior/interior07.webp", alt: "Giường ngủ tích hợp hệ tủ" },
+  { src: "/images/interior/interior10.webp", alt: "Vách tivi ốp đá và lam gỗ" },
+  { src: "/images/interior/interior16.webp", alt: "Vách ốp trang trí hành lang" },
+  { src: "/images/canopies/canopy03.webp", alt: "Mái che khung kim loại dọc hành lang" },
+  { src: "/images/gates/gate01.webp", alt: "Cổng hai cánh hoa văn CNC" },
+  { src: "/images/stairs/stair01.webp", alt: "Cầu thang kính tay vịn gỗ" },
+  { src: "/images/railings/railing01.webp", alt: "Lan can ban công hoa văn CNC" },
+  { src: "/images/factory/factory01.webp", alt: "Gia công khung lan can CNC tại xưởng" },
+  { src: "/images/interior/interior02.webp", alt: "Tủ bếp chữ L tông sáng" },
+  { src: "/images/interior/interior03.webp", alt: "Tủ áo kết hợp kệ trưng bày" },
+  { src: "/images/interior/interior71.webp", alt: "Vách lam gỗ trang trí" },
 ];
 
 export default function GallerySection() {
   return (
-    <section className="py-24 bg-[#fafafa]">
+    <section className="py-24 bg-[var(--color-surface-muted)]">
 
       <div className="container mx-auto px-6">
 
         <div className="text-center mb-16">
 
-          <span className="uppercase tracking-[4px] text-[#d6a449] font-semibold">
+          <span className="uppercase tracking-[4px] text-[var(--color-primary)] font-semibold">
             Hình ảnh thực tế
           </span>
 
@@ -40,18 +40,18 @@ export default function GallerySection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          {gallery.map((img) => (
+          {gallery.map((image) => (
 
             <div
-              key={img}
+              key={image.src}
               className="overflow-hidden rounded-2xl shadow-lg group"
             >
 
               <div className="relative h-[320px]">
 
                 <Image
-                  src={img}
-                  alt=""
+                  src={image.src}
+                  alt={image.alt}
                   fill
                   className="object-cover group-hover:scale-110 duration-500"
                 />

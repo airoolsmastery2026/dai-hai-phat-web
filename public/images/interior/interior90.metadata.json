@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior90",
+  "title": "Vách trang trí tại không gian lounge",
+  "alt": "Hình vách trang trí tại không gian lounge trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu vách trang trí tại không gian lounge được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Vách trang trí tại không gian lounge. Mô tả đã xác minh: Tư liệu vách trang trí tại không gian lounge được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vách trang trí tại không gian lounge | Đại Hải Phát",
+    "description": "Hình ảnh vách trang trí tại không gian lounge dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "vách trang trí tại không gian lounge"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior90.jpg",
+    "sourceRelativePath": "assets/images/interior/interior90.jpg",
+    "publicUrl": "/images/interior/interior90.jpg",
+    "bytes": 162458,
+    "sha256": "f2ed1ec113fd335baf4bc6de0f815bd3040ec53ef2c9161c1c7e6959cf465573",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior90.webp",
+    "publicUrl": "/images/interior/interior90.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 69080,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior90.thumb.webp",
+    "publicUrl": "/images/interior/interior90.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 13818,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAABwBwCdASogABgAPuFWpk2opKOiN/qoARAcCWoAtO2oJRsab16BrCxMGaMyxeQWR0QNtap3d1aov9AmbrApFuyP4nJUgAD+9DSMtz3kDogR3seqfXURa3rDHNo/wG14c8y1ErZmcZNCHL0fdA7vHZXnONLOb5/wC0Ekn66dGRJuxEahkeSLH4KLVS/dOXPDYP7H9HIUqz1op9EWXTuNZEMywjRB2JCv/Wex4N/UUkxjbTvPaumued21PDf2L583WOpBdAwy2/4irF8a/pOKgBmKzHMBUB8/UKtsMbsyoenCCvlWSfR3cXEQxrB1QRT4gAA="
+}

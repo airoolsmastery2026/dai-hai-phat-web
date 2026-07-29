@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior58",
+  "title": "Hệ tủ tông tối",
+  "alt": "Hình hệ tủ tông tối trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu hệ tủ tông tối được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Hệ tủ tông tối. Mô tả đã xác minh: Tư liệu hệ tủ tông tối được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Hệ tủ tông tối | Đại Hải Phát",
+    "description": "Hình ảnh hệ tủ tông tối dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "hệ tủ tông tối",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior58.jpg",
+    "sourceRelativePath": "assets/images/interior/interior58.jpg",
+    "publicUrl": "/images/interior/interior58.jpg",
+    "bytes": 78177,
+    "sha256": "96068a63dd76a861fc2e0f2c0495892b347a8d6bd8523982bd86d51d0ad24efb",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior58.webp",
+    "publicUrl": "/images/interior/interior58.webp",
+    "width": 720,
+    "height": 1280,
+    "bytes": 28750,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior58.thumb.webp",
+    "publicUrl": "/images/interior/interior58.thumb.webp",
+    "width": 480,
+    "height": 853,
+    "bytes": 9780,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRv4AAABXRUJQVlA4IPIAAADwCQCdASogADkAPu1srlIppaQiqBgKqTAdiUAZkxJo7QDfdJmRa2BYt4z9kXMoFfclrLoqKYbILX3GWfMtA8/Sk4jJmVcezka6n7X7ycmf5/WhZ4lAfnQAAP773LfS7xa4Hz0hZhyOZ0wTZ2ksniUVXZWmtlV7ckV14XlyUbXIbiW9FOWlPXdKI/jZCIjQpy9HRYCIcBspwuM2B4EoXX5C1Nm8ktz1eXIrhtGMLHv4W6IHUllJVzIvYdsCt4GwKjb1hEG1dfKFos47tcC5Ef8MZqIp33Z+6swdU783BvIQioo1lNZuPtKfdmas60OzsUQAAA=="
+}

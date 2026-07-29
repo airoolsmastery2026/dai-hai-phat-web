@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior28",
+  "title": "Phòng thay đồ dùng cánh kính",
+  "alt": "Hình phòng thay đồ dùng cánh kính trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng thay đồ dùng cánh kính được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp và kính",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng thay đồ dùng cánh kính. Mô tả đã xác minh: Tư liệu phòng thay đồ dùng cánh kính được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp và kính. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng thay đồ dùng cánh kính | Đại Hải Phát",
+    "description": "Hình ảnh phòng thay đồ dùng cánh kính dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng thay đồ dùng cánh kính"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior28.jpg",
+    "sourceRelativePath": "assets/images/interior/interior28.jpg",
+    "publicUrl": "/images/interior/interior28.jpg",
+    "bytes": 132800,
+    "sha256": "3a7ede1b9a8dd4eb75ec5a9591186981746ce5e6bec52c3a1f13fb686cf9ae82",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior28.webp",
+    "publicUrl": "/images/interior/interior28.webp",
+    "width": 960,
+    "height": 719,
+    "bytes": 66196,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior28.thumb.webp",
+    "publicUrl": "/images/interior/interior28.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 20928,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRgoBAABXRUJQVlA4IP4AAABQBwCdASogABgAPu1mqk2ppaQiMAgBMB2JQBWAtk40+1lBl74Uy4iTK8woncsgnjHdgi6czyHzPnCrlvi0fC26hqOAAP7QttWp+f54vCIyedMpCE3R1p9J5ld6Xs/yJzXX/Q+w51XjuSASe2La2pJEj/kZ+27h9kyFxWRwVz1oVrgE0wbP9Nqqj7p++axKObFJYzPgEBMPtir+1H9YWbGkPym1D1f+NTA0UWNAnW3hJSvL+rydh7dfCaYwjycupEuD4/c3PGdB9DppDtMvXSN7cUoC8tP7ssVDVWYaFexs+hL7m84KcRwcD3h6V64J7ZaXmc4hnW9Oz0Uo/czgAA=="
+}

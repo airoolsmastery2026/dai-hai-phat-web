@@ -1,0 +1,52 @@
+{
+  "id": "materials-material03",
+  "title": "Mẫu bề mặt gỗ màu nâu đậm",
+  "alt": "Hình mẫu bề mặt gỗ màu nâu đậm trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu mẫu bề mặt gỗ màu nâu đậm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Vật liệu",
+  "assetType": "material",
+  "material": "Mẫu vật liệu thực tế",
+  "style": "Mẫu vật liệu",
+  "projectType": "Thư viện vật liệu",
+  "service": "Vật liệu",
+  "prompt": "Chủ thể: Mẫu bề mặt gỗ màu nâu đậm. Mô tả đã xác minh: Tư liệu mẫu bề mặt gỗ màu nâu đậm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Vật liệu. Dịch vụ: Vật liệu. Vật liệu: Mẫu vật liệu thực tế. Phong cách: Mẫu vật liệu. Loại công trình: Thư viện vật liệu. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu bề mặt gỗ màu nâu đậm | Đại Hải Phát",
+    "description": "Hình ảnh mẫu bề mặt gỗ màu nâu đậm dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "mẫu bề mặt gỗ màu nâu đậm",
+      "vật liệu"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/materials/material03.jpg",
+    "sourceRelativePath": "assets/images/materials/material03.jpg",
+    "publicUrl": "/images/materials/material03.jpg",
+    "bytes": 103045,
+    "sha256": "a3378dce80b91cf503a40066442d4c79d026e645981c325b0f730ba6d291b68b",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/materials/material03.webp",
+    "publicUrl": "/images/materials/material03.webp",
+    "width": 736,
+    "height": 1303,
+    "bytes": 50756,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/materials/material03.thumb.webp",
+    "publicUrl": "/images/materials/material03.thumb.webp",
+    "width": 480,
+    "height": 850,
+    "bytes": 12724,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAwCdASogADgAPu12s1QppySjJAgBMB2JZ2paW/IESj3nsYJNSN+AAP5uP3lyfrIITdl735R6faEkziS3+ex2NDG8wU3xxXR9i7shuriRu8oAz66xxVl0lsGvz2PvSoAAAA=="
+}

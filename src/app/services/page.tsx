@@ -1,35 +1,32 @@
-import Link from "next/link";
+import type { Metadata } from "next";
 
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { SERVICES } from "@/content/services";
 import { ServiceCard } from "@/components/services/ServiceCard";
 
+export const metadata: Metadata = {
+  title: "Dịch vụ",
+  description:
+    "Dịch vụ nội thất, cửa cổng, cầu thang, lan can, mái che và gia công cơ khí theo yêu cầu tại Đại Hải Phát.",
+  alternates: { canonical: "/services" },
+};
+
 export default function ServicesPage() {
   return (
-    <main>
-      <section className="bg-slate-950 py-24 text-white">
-        <Container>
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-300">Dịch vụ chuyên nghiệp</p>
-            <h1 className="mt-4 text-4xl font-semibold sm:text-5xl">Giải pháp công nghệ và vận hành cho doanh nghiệp đang mở rộng</h1>
-            <p className="mt-6 text-lg leading-8 text-slate-300">
-              Từ thiết kế hệ thống đến triển khai vận hành, chúng tôi xây dựng nền tảng giúp doanh nghiệp tăng hiệu quả và ra quyết định nhanh hơn.
-            </p>
-          </div>
-        </Container>
-      </section>
+    <main className="min-h-screen bg-[var(--color-background)]">
+      <PageHero
+        eyebrow="Năng lực thi công"
+        title="Giải pháp nội thất và cơ khí theo từng hạng mục"
+        description="Từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt và nghiệm thu, mỗi dịch vụ đều được triển khai theo dữ liệu thực tế của công trình."
+      />
 
-      <section className="py-20">
+      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
         <Container>
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {SERVICES.map((service) => (
               <ServiceCard key={service.slug} service={service} />
             ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link href="/" className="text-sm font-semibold text-[#FF5722] hover:underline">
-              Quay về trang chủ
-            </Link>
           </div>
         </Container>
       </section>

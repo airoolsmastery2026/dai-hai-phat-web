@@ -18,7 +18,7 @@ export function AboutSection() {
 
           <div>
 
-            <span className="uppercase tracking-[4px] text-[#d6a449] font-semibold">
+            <span className="uppercase tracking-[4px] text-[var(--color-primary)] font-semibold">
               Về Đại Hải Phát
             </span>
 
@@ -48,11 +48,11 @@ export function AboutSection() {
 
               <div
                 key={item}
-                className="flex items-start gap-4 p-5 rounded-xl bg-gray-50 hover:bg-[#fff8ec] transition"
+                className="flex items-start gap-4 p-5 rounded-xl bg-gray-50 hover:bg-[var(--color-primary-soft)] transition"
               >
 
                 <CheckCircle2
-                  className="text-[#d6a449] mt-1"
+                  className="text-[var(--color-primary)] mt-1"
                   size={22}
                 />
 

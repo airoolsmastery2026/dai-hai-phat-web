@@ -14,5 +14,11 @@ export function SectionShell({ children, className = "", background = "default" 
         ? "bg-[var(--color-surface-dark)] text-white"
         : "bg-[var(--color-background)]";
 
-  return <section className={`py-20 md:py-24 ${bgClass} ${className}`.trim()}>{children}</section>;
+  return (
+    <section
+      className={`py-[var(--space-section)] lg:py-[var(--space-section-lg)] ${bgClass} ${className}`.trim()}
+    >
+      {children}
+    </section>
+  );
 }

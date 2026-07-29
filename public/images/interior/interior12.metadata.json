@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior12",
+  "title": "Hệ tủ phòng ngủ tông sáng",
+  "alt": "Hình hệ tủ phòng ngủ tông sáng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu hệ tủ phòng ngủ tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Hệ tủ phòng ngủ tông sáng. Mô tả đã xác minh: Tư liệu hệ tủ phòng ngủ tông sáng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Hệ tủ phòng ngủ tông sáng | Đại Hải Phát",
+    "description": "Hình ảnh hệ tủ phòng ngủ tông sáng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "hệ tủ phòng ngủ tông sáng",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior12.jpg",
+    "sourceRelativePath": "assets/images/interior/interior12.jpg",
+    "publicUrl": "/images/interior/interior12.jpg",
+    "bytes": 88164,
+    "sha256": "1f8b77065ccc110edc036ba2a818da93374d378052f8390fc9eb19a3334e592d",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior12.webp",
+    "publicUrl": "/images/interior/interior12.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 37918,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior12.thumb.webp",
+    "publicUrl": "/images/interior/interior12.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 11368,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhwBAABXRUJQVlA4IBABAABwCACdASogACsAPu1kqk4ppaOiKqwBMB2JZwAOm+0X4s+IosjoNL/n7Xqm6hCL+tb2LfzR0icEyimcFROYJvKgYwE1utdDbc1oECKAAP0BZ0b+LNt6N8MkgWheviavotobMXtTY9O2eVGx40dlxtyTqPm6gx/l/SB3l2cbm9aWEdkW1tlXNEzf+dg4OAlZPyr1ZDfTV8p3PovkF0/dF7C9hwLkFuCAsPWH9pv+73MZlX06bGPo/RHMhaTFvTwmq1eDH25t+P2pIMbymXfIb3815lLRg8nhf8AVanw3ZdHxMxYU81yK4ficMvFODyw1aygrc3V2OVw9DqBXON3UOHIyuDvhJOeBzpE9fll+dAAAAA=="
+}

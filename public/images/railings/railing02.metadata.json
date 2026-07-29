@@ -1,0 +1,53 @@
+{
+  "id": "railings-railing02",
+  "title": "Mẫu lan can góc hoa văn CNC",
+  "alt": "Hình mẫu lan can góc hoa văn CNC trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu mẫu lan can góc hoa văn CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Lan can",
+  "assetType": "project",
+  "material": "Kim loại cắt CNC",
+  "style": "Hoa văn CNC",
+  "projectType": "Nhà ở",
+  "service": "Cầu thang và lan can",
+  "prompt": "Chủ thể: Mẫu lan can góc hoa văn CNC. Mô tả đã xác minh: Tư liệu mẫu lan can góc hoa văn CNC được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Lan can. Dịch vụ: Cầu thang và lan can. Vật liệu: Kim loại cắt CNC. Phong cách: Hoa văn CNC. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu lan can góc hoa văn CNC | Đại Hải Phát",
+    "description": "Hình ảnh mẫu lan can góc hoa văn CNC dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cầu thang và lan can",
+      "đại hải phát",
+      "lan can",
+      "mẫu lan can góc hoa văn cnc"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/railings/railing02.jpg",
+    "sourceRelativePath": "assets/images/railings/railing02.jpg",
+    "publicUrl": "/images/railings/railing02.jpg",
+    "bytes": 154250,
+    "sha256": "3b579b8a63ff23bead81a8bc2d1de6475f26b03eac1bc496bdda93cac866c79b",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/railings/railing02.webp",
+    "publicUrl": "/images/railings/railing02.webp",
+    "width": 592,
+    "height": 1280,
+    "bytes": 84630,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/railings/railing02.thumb.webp",
+    "publicUrl": "/images/railings/railing02.thumb.webp",
+    "width": 480,
+    "height": 1038,
+    "bytes": 43892,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRmABAABXRUJQVlA4IFQBAABwDQCdASogAEUAPuFap02opSOiNnkqqRAcCWcAzNboDYhnCetQDyLxfybiotjqirFw+2O9Rmlhot7eaR5kSTevrK0wp2D0qNRbtihqnLdXy+MhXR/b9p6FdyW99BF7ksGk6TMPwuVn+h7LUmYElDF1Dod4AAD3efJbF1hLaWb4bWrxFKFsKuwjk4GBQ2X4Dts9OlxtoKCKpfDZWdDnnaL4YIEY7rpdJPEUKngfc6lqvt+Bg7cFFJRPsvpXNHV9yKMRESu0I0jAhasi10JsIhcIaHYRukYeFjPeRGbTR+xezS+UGD4LxDcf36mTDm7fLD3GdyvQlC9R5UPys2H25b+pmBTyZH3Rtm0cGvvi6yzXblyqazKZhZ4AUBWrRhVA3+KFGRZM3WsaELg1cpWZyWNgHM7oY3haKQcxCoIc7FsxQeygtCjaDV9bkE6kr4XQn3s9QAAA"
+}

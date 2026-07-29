@@ -1,0 +1,52 @@
+{
+  "id": "materials-material06",
+  "title": "Thép tấm tại xưởng",
+  "alt": "Hình thép tấm tại xưởng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu thép tấm tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Vật liệu",
+  "assetType": "material",
+  "material": "Mẫu vật liệu thực tế",
+  "style": "Mẫu vật liệu",
+  "projectType": "Thư viện vật liệu",
+  "service": "Vật liệu",
+  "prompt": "Chủ thể: Thép tấm tại xưởng. Mô tả đã xác minh: Tư liệu thép tấm tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Vật liệu. Dịch vụ: Vật liệu. Vật liệu: Mẫu vật liệu thực tế. Phong cách: Mẫu vật liệu. Loại công trình: Thư viện vật liệu. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Thép tấm tại xưởng | Đại Hải Phát",
+    "description": "Hình ảnh thép tấm tại xưởng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "thép tấm tại xưởng",
+      "vật liệu"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/materials/material06.jpg",
+    "sourceRelativePath": "assets/images/materials/material06.jpg",
+    "publicUrl": "/images/materials/material06.jpg",
+    "bytes": 597639,
+    "sha256": "b91cdd4556a5d2350040b58f01c461e65248b58087a4515dc6ac5d6e262086e5",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/materials/material06.webp",
+    "publicUrl": "/images/materials/material06.webp",
+    "width": 1280,
+    "height": 960,
+    "bytes": 385564,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/materials/material06.thumb.webp",
+    "publicUrl": "/images/materials/material06.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 40598,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuoAAABXRUJQVlA4IN4AAABQBgCdASogABgAPu1iq1AppSOisBgIATAdiWQAnTlAAH+I/GaciRe2FnUoRXIsaBrfRYVzG4PKuEuHAADd2MVVk5EXHK3kQelvXXlUwgLSGJXtdHqPIBciidGypBnVOWvF2taPnVF72BuO4AeOyJlH8j7O1LEwI3NK2RPVSh4IGONf1r6qF6TtoP/stg0R1mfxOCFagFhgpMGIqbuNPVMVgST88T12d14mv1Z/Hwq6KuSST4waXGQEY0bCnIIczoP1f3CvYmzJdmNtlRUs4N+l0X61ZFqPhV6rkrDoAAA="
+}

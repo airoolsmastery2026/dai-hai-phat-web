@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior77",
+  "title": "Quầy bar đang vận hành",
+  "alt": "Hình quầy bar đang vận hành trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu quầy bar đang vận hành được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Quầy bar đang vận hành. Mô tả đã xác minh: Tư liệu quầy bar đang vận hành được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quầy bar đang vận hành | Đại Hải Phát",
+    "description": "Hình ảnh quầy bar đang vận hành dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "quầy bar đang vận hành"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior77.jpg",
+    "sourceRelativePath": "assets/images/interior/interior77.jpg",
+    "publicUrl": "/images/interior/interior77.jpg",
+    "bytes": 249073,
+    "sha256": "d55cd57be0d48efc9ae25156467cbd00231d21c8e9f31260394f3e8f0a6ac25c",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior77.webp",
+    "publicUrl": "/images/interior/interior77.webp",
+    "width": 1280,
+    "height": 720,
+    "bytes": 118526,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior77.thumb.webp",
+    "publicUrl": "/images/interior/interior77.thumb.webp",
+    "width": 480,
+    "height": 270,
+    "bytes": 19158,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAAAQBwCdASogABIAPu1mqU2ppaOiMAgBMB2JbACpHIF/g9AEtAHYARC81uVgzzBfvwBj60OFpnnGv0g2bh/1+rDVgAD+6Qs68M3PWDV/EiOoUTxJiJ92ifzBzu7CwvJ7zfTY955ImimkWNRwk9giDpAO85eM6jgQ0FDDXOsq1V4hQ96jQdcSk6LlLeF40Y19jkV4AWBt6xHxwHGJGsfwIxgxplCaJqO+lBHSYjDpCNPYlS86YiAZZQQBpLHMC17Z4zS/RZmEP8dSuANLw7acibvqoxz8XEODOKbikAAA"
+}

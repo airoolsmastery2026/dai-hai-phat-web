@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior25",
+  "title": "Không gian lounge phong cách công nghiệp",
+  "alt": "Hình không gian lounge phong cách công nghiệp trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu không gian lounge phong cách công nghiệp được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Không gian lounge phong cách công nghiệp. Mô tả đã xác minh: Tư liệu không gian lounge phong cách công nghiệp được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp, kim loại và hệ chiếu sáng. Phong cách: Công nghiệp hiện đại. Loại công trình: Không gian thương mại. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Không gian lounge phong cách công nghiệp | Đại Hải Phát",
+    "description": "Hình ảnh không gian lounge phong cách công nghiệp dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "không gian lounge phong cách công nghiệp",
+      "nội thất"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior25.jpg",
+    "sourceRelativePath": "assets/images/interior/interior25.jpg",
+    "publicUrl": "/images/interior/interior25.jpg",
+    "bytes": 208063,
+    "sha256": "382dac4b9c6583d84c94a30478f74d2449ce645fef9e8fbe1de226193791e200",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior25.webp",
+    "publicUrl": "/images/interior/interior25.webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 102364,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior25.thumb.webp",
+    "publicUrl": "/images/interior/interior25.thumb.webp",
+    "width": 480,
+    "height": 480,
+    "bytes": 38198,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRj4BAABXRUJQVlA4IDIBAACwCACdASogACAAPu1cq04ppKQiMBgMATAdiWIAnQbxtXV0wOZQJ2+31O3Dx8j1cKtIa+5psO/2lUe0EmSC7YT8tVxz9VsTokuSO1DpqYAA/vsAsP06ZNYLI8OV/yMVzYbi9FfYWrePhHL8geneFg1ONRGki3P4prBlTbnSnePc7O1vaauOSclnVXqnhCPeBWa3FWdXcEnxnDqbvikECuf8+oJizHhVWo7/ndyh4gIxXicnOl+N10q+mIVAGGdCR2c/eUm80SRH2lwboGpZKoP+CLcKrgHlRqEOQjsHHXXrdwlWpx8nNfwqX1ou4W81CpcihfoGWcD8SuUYTjtML59tvs57+/s4MSGZCxjnCy17IvFCrAm6GaZYqGaUODeeOP6NE4NROP9U9AlLQ5JzG6DOAAA="
+}

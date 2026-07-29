@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior61",
+  "title": "Phòng ngủ với tủ áo góc",
+  "alt": "Hình phòng ngủ với tủ áo góc trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với tủ áo góc được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với tủ áo góc. Mô tả đã xác minh: Tư liệu phòng ngủ với tủ áo góc được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với tủ áo góc | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với tủ áo góc dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với tủ áo góc"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior61.jpg",
+    "sourceRelativePath": "assets/images/interior/interior61.jpg",
+    "publicUrl": "/images/interior/interior61.jpg",
+    "bytes": 105874,
+    "sha256": "97cf05473a45008f6fba40df82bb7ab2e60a7b237a32e628fae00a8966e7b747",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior61.webp",
+    "publicUrl": "/images/interior/interior61.webp",
+    "width": 960,
+    "height": 720,
+    "bytes": 55566,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior61.thumb.webp",
+    "publicUrl": "/images/interior/interior61.thumb.webp",
+    "width": 480,
+    "height": 360,
+    "bytes": 14374,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuwAAABXRUJQVlA4IOAAAAAwBwCdASogABgAPu1orE8ppiQiMBgIATAdiUAVgLbEoytdiTd+8cgHrPQfmBGgYuLRpP67C5XRar2WwVnp2+rKLiAA+Nw+XADMKIxrq2bKs3DCRyHOrNdtH2R+cEVVRFAKelO2RY5ns1T8YCNRWTRZPZMpGHdRQMCiqxpWvhRJnKKyKZwVsEM/nwsoRdbgIxZBXxc+XD3VQAel9cjXCMP3a2F2/Po0Q+PZy4kGqf/gZBXEgyAz5wme073eQiSGhHtOUq53uzGVkb7Qvv2473vRe9n79nMBTQjPos/mUuQAAA=="
+}

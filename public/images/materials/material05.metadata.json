@@ -1,0 +1,52 @@
+{
+  "id": "materials-material05",
+  "title": "Tấm kim loại tập kết tại công trình",
+  "alt": "Hình tấm kim loại tập kết tại công trình trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tấm kim loại tập kết tại công trình được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Vật liệu",
+  "assetType": "material",
+  "material": "Mẫu vật liệu thực tế",
+  "style": "Mẫu vật liệu",
+  "projectType": "Thư viện vật liệu",
+  "service": "Vật liệu",
+  "prompt": "Chủ thể: Tấm kim loại tập kết tại công trình. Mô tả đã xác minh: Tư liệu tấm kim loại tập kết tại công trình được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Vật liệu. Dịch vụ: Vật liệu. Vật liệu: Mẫu vật liệu thực tế. Phong cách: Mẫu vật liệu. Loại công trình: Thư viện vật liệu. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tấm kim loại tập kết tại công trình | Đại Hải Phát",
+    "description": "Hình ảnh tấm kim loại tập kết tại công trình dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "tấm kim loại tập kết tại công trình",
+      "vật liệu"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/materials/material05.jpg",
+    "sourceRelativePath": "assets/images/materials/material05.jpg",
+    "publicUrl": "/images/materials/material05.jpg",
+    "bytes": 177748,
+    "sha256": "adfdcf9843a61ab2b9de143c07ab088c02e8e793320725feee7fdfc0691c9c65",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/materials/material05.webp",
+    "publicUrl": "/images/materials/material05.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 85448,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/materials/material05.thumb.webp",
+    "publicUrl": "/images/materials/material05.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 23550,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAABQCACdASogACsAPu1gqU2ppaQiMBVdUTAdiWUAwZW1gl4r8a59QVAhVNdInF50WcXnoT8UjmsaRPjxW2fKpG+3Hnc4fC/IJqx5ggAA+c2pKRqWHv1Re2yIHXq4rVoSrhuytVKW4/JFhSy4Yk/bKdgbneHfS76K4CiYcbZoToGA9nJUDDG+Z/r/lVhlk4gop3g/Gu46GWwvbwFacWE2kYfs3fKzInj8OrazR02qpSmt7OBCviW7d8x/rAndyz3JraCgMaAtjCNb6BSpzVEA4TBrU1Aqx1Wz+XOYLahQHC73XDTMcYXdbc3CmM/QCuPHHmUY+FvEQN3+UD9Tv9hh9RfiiSeuNFAn9AA="
+}

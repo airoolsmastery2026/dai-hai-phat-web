@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior81",
+  "title": "Tủ trang trí và kệ tivi",
+  "alt": "Hình tủ trang trí và kệ tivi trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ trang trí và kệ tivi được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ trang trí và kệ tivi. Mô tả đã xác minh: Tư liệu tủ trang trí và kệ tivi được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp hoàn thiện bề mặt. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ trang trí và kệ tivi | Đại Hải Phát",
+    "description": "Hình ảnh tủ trang trí và kệ tivi dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ trang trí và kệ tivi"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior81.jpg",
+    "sourceRelativePath": "assets/images/interior/interior81.jpg",
+    "publicUrl": "/images/interior/interior81.jpg",
+    "bytes": 174063,
+    "sha256": "deac7439ae59d4f08c8533e88189afef879e5327e8177de812c1bba53345f6c3",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior81.webp",
+    "publicUrl": "/images/interior/interior81.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 72126,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior81.thumb.webp",
+    "publicUrl": "/images/interior/interior81.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 18696,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRlgBAABXRUJQVlA4IEwBAADQCACdASogACsAPu1mqlCppSOiqrgMATAdiWUAvKmwHGBVJRS+KMt3+p9wok/vMpUfE4VO8tvme2GykfSzsFftw74DUiEJkeji5/+tByvAAP7tWWVCVHgRop+f4ys0aV+TQP7lT6c8HY83YfOPJqRwg1avW10dYaQy4eKvi6kXYb8hK2wu1GM9riW5zcYUdtA7MzDT9fJHZP1BYB84QdgVVbylwS+oWGjkVU1a1wDX8Cby1OH0AcYZJW2QejGvj8hXHGVWj9hPBN5z3d7gnBwf5pVCXaWfeRWXQfbqRDSp0uu50twMh8PQNE6RgsI2itRtfqJ7K6Ze7cn8b52arXjKzf8p/W3GadOSaltM00TF1PY75wiAGUwY6m/jkiXqs7IsQhttQjbIakQAJm+da1BcAwTYf2B8DzrB8H2oARxaUlCh7zt6l8R4WwAAAA=="
+}

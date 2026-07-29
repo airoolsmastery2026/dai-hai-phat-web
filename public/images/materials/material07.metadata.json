@@ -1,0 +1,52 @@
+{
+  "id": "materials-material07",
+  "title": "Mẫu bề mặt gỗ màu xám",
+  "alt": "Hình mẫu bề mặt gỗ màu xám trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu mẫu bề mặt gỗ màu xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Vật liệu",
+  "assetType": "material",
+  "material": "Mẫu vật liệu thực tế",
+  "style": "Mẫu vật liệu",
+  "projectType": "Thư viện vật liệu",
+  "service": "Vật liệu",
+  "prompt": "Chủ thể: Mẫu bề mặt gỗ màu xám. Mô tả đã xác minh: Tư liệu mẫu bề mặt gỗ màu xám được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Vật liệu. Dịch vụ: Vật liệu. Vật liệu: Mẫu vật liệu thực tế. Phong cách: Mẫu vật liệu. Loại công trình: Thư viện vật liệu. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu bề mặt gỗ màu xám | Đại Hải Phát",
+    "description": "Hình ảnh mẫu bề mặt gỗ màu xám dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "mẫu bề mặt gỗ màu xám",
+      "vật liệu"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/materials/material07.jpg",
+    "sourceRelativePath": "assets/images/materials/material07.jpg",
+    "publicUrl": "/images/materials/material07.jpg",
+    "bytes": 92343,
+    "sha256": "eb48496ace64cfab5f38d5bae1326411314e06e18234b89067843f5989705297",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/materials/material07.webp",
+    "publicUrl": "/images/materials/material07.webp",
+    "width": 542,
+    "height": 960,
+    "bytes": 53752,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/materials/material07.thumb.webp",
+    "publicUrl": "/images/materials/material07.thumb.webp",
+    "width": 480,
+    "height": 850,
+    "bytes": 31942,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACwAwCdASogADkAPu12tFSppyUjJAgBMB2JaQAC0pcK6cscPxupyAD+nFBYabyTZPe3u8xc6WJPpAmcbKAAAA=="
+}

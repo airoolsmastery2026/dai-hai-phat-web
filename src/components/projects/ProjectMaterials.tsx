@@ -10,7 +10,7 @@ export function ProjectMaterials({ materials }: { materials: ProjectItem["materi
           <PackageOpen className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#FF5722]">Materials</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--color-primary)]">Materials</p>
           <h3 className="mt-1 text-2xl font-semibold text-slate-900">Vật liệu sử dụng</h3>
         </div>
       </div>

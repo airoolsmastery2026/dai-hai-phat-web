@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior32",
+  "title": "Tủ bếp tông xanh đậm",
+  "alt": "Hình tủ bếp tông xanh đậm trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu tủ bếp tông xanh đậm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp chống ẩm và phụ kiện",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Tủ bếp tông xanh đậm. Mô tả đã xác minh: Tư liệu tủ bếp tông xanh đậm được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp chống ẩm và phụ kiện. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Tủ bếp tông xanh đậm | Đại Hải Phát",
+    "description": "Hình ảnh tủ bếp tông xanh đậm dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "tủ bếp tông xanh đậm"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior32.jpg",
+    "sourceRelativePath": "assets/images/interior/interior32.jpg",
+    "publicUrl": "/images/interior/interior32.jpg",
+    "bytes": 181119,
+    "sha256": "497a7bade23ad0141ffffcc86b6e73302110f39c12a89c345eb504b95ea7a7e6",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior32.webp",
+    "publicUrl": "/images/interior/interior32.webp",
+    "width": 960,
+    "height": 1280,
+    "bytes": 90768,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior32.thumb.webp",
+    "publicUrl": "/images/interior/interior32.thumb.webp",
+    "width": 480,
+    "height": 640,
+    "bytes": 22088,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRiYBAABXRUJQVlA4IBoBAACwCACdASogACsAPu1oqE+ppiOiKrgN+TAdiWMArxGyZTZwYWP3HUivmzfvDphrDvMZv7wk9LSf1McK1LHkBW9vI7YKCIEKVYAxTBOk+EAA/lipF3siS6yC2GJKyiy0FIF/IM0dbrX6WjCoEfZhkSnCv7DJqb0WEyXfExouiObrlCUY5P2kLlUCcXuYyRVpfHXpjf/IkO3SCK+yRFUpPgFn8sWiM3FiVSKk+7zegs7OKzyXaWq9GgWNOqkHgUBJGmirF2f0omdSa+KwjDLnOFmUXAwwfHnV+rZU/MJcyFrdZQwQFl7YG50okZOmGYNNsnHTnmD2QgKEO2Y8fl7gkR66X8WFUW2EijAq43umRvjSZk3AnvpIHF4ULAA="
+}

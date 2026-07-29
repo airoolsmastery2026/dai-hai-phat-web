@@ -1,0 +1,52 @@
+{
+  "id": "gates-gate05",
+  "title": "Cổng CNC hoàn thiện tại xưởng",
+  "alt": "Hình cổng CNC hoàn thiện tại xưởng trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu cổng CNC hoàn thiện tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Cửa cổng",
+  "assetType": "project",
+  "material": "Kim loại cắt CNC",
+  "style": "Hoa văn CNC",
+  "projectType": "Nhà ở",
+  "service": "Cửa cổng",
+  "prompt": "Chủ thể: Cổng CNC hoàn thiện tại xưởng. Mô tả đã xác minh: Tư liệu cổng CNC hoàn thiện tại xưởng được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Cửa cổng. Dịch vụ: Cửa cổng. Vật liệu: Kim loại cắt CNC. Phong cách: Hoa văn CNC. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Cổng CNC hoàn thiện tại xưởng | Đại Hải Phát",
+    "description": "Hình ảnh cổng CNC hoàn thiện tại xưởng dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "cổng cnc hoàn thiện tại xưởng",
+      "cửa cổng",
+      "đại hải phát"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/gates/gate05.jpg",
+    "sourceRelativePath": "assets/images/gates/gate05.jpg",
+    "publicUrl": "/images/gates/gate05.jpg",
+    "bytes": 237872,
+    "sha256": "d51a1082b5a51c32f7b97a41e69ec35a20c791f41e57c6477df49423a9cec251",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/gates/gate05.webp",
+    "publicUrl": "/images/gates/gate05.webp",
+    "width": 1280,
+    "height": 592,
+    "bytes": 139394,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/gates/gate05.thumb.webp",
+    "publicUrl": "/images/gates/gate05.thumb.webp",
+    "width": 480,
+    "height": 222,
+    "bytes": 22322,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAADwBACdASogAA8APu1iqU2ppaOiMAgBMB2JQAHOAYi7kUj0TwE/D2btImNFoPd2/wAA/Zw0vxVApI9/pTcM1IuioZzZJuf+HmEeO5YyF1Yn8sttKesXnnseCWVkLiMxxk8GmtQTkyAJjlH4h90jsKLStU8cCz0Yru3bx7ilZw+nJ+2ETZpeJgzGFlQRJJMWEgoQEx1XFCJkHoE8WdWF3eRjrG7KMN+AAAA="
+}

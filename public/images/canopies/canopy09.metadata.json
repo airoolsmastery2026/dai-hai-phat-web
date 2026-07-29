@@ -1,0 +1,52 @@
+{
+  "id": "canopies-canopy09",
+  "title": "Mẫu tham khảo mái vòm polycarbonate",
+  "alt": "Hình mẫu tham khảo mái vòm polycarbonate trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu mẫu tham khảo mái vòm polycarbonate được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Mái che",
+  "assetType": "reference",
+  "material": "Khung kim loại và tấm lấy sáng",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Mái che",
+  "prompt": "Chủ thể: Mẫu tham khảo mái vòm polycarbonate. Mô tả đã xác minh: Tư liệu mẫu tham khảo mái vòm polycarbonate được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Mái che. Dịch vụ: Mái che. Vật liệu: Khung kim loại và tấm lấy sáng. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu tham khảo mái vòm polycarbonate | Đại Hải Phát",
+    "description": "Hình ảnh mẫu tham khảo mái vòm polycarbonate dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "mái che",
+      "mẫu tham khảo mái vòm polycarbonate"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/canopies/canopy09.jpg",
+    "sourceRelativePath": "assets/images/canopies/canopy09.jpg",
+    "publicUrl": "/images/canopies/canopy09.jpg",
+    "bytes": 327500,
+    "sha256": "f836d097a8fc74329cb080c1c983fb842c630348716684de1ed62231ce47aadf",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/canopies/canopy09.webp",
+    "publicUrl": "/images/canopies/canopy09.webp",
+    "width": 1280,
+    "height": 853,
+    "bytes": 167554,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/canopies/canopy09.thumb.webp",
+    "publicUrl": "/images/canopies/canopy09.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 27542,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRggBAABXRUJQVlA4IPwAAADwBgCdASogABUAPu1gqE2ppaOiMAgBMB2JYgCw8avlANqemXFqSzLrJll6qXXGQL4zgdwrHr/VOqg2THaTsYlQAP5+HjQOuTb19423XA8uvj3vKbyTAkbMuCNQ+EXxkddjE7KaF20ojXTsGnmXm6BS2oBw9JFE2tvVOnEda+iXM/TzAjYo9EfhGcI56tkcaW7Q133Y2IWwALb3Mr3gbdsxW3yAOq9VmcaI0ExcZ7gPxtgIyf30eHw01Juo5h3lxzfWo7hS6SHBOJqOiyMQgRcU9g6Q2hQH9ZDSsm01rRgreKTeLS1bO6CH3hH14omL3tgyryHR0o79EO9YAAA="
+}

@@ -1,0 +1,52 @@
+{
+  "id": "interior-interior83",
+  "title": "Phòng ngủ với tủ cánh kính",
+  "alt": "Hình phòng ngủ với tủ cánh kính trong thư viện Đại Hải Phát",
+  "caption": "Tư liệu phòng ngủ với tủ cánh kính được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal.",
+  "category": "Nội thất",
+  "assetType": "project",
+  "material": "Gỗ công nghiệp và kính",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Chủ thể: Phòng ngủ với tủ cánh kính. Mô tả đã xác minh: Tư liệu phòng ngủ với tủ cánh kính được chủ dự án cung cấp để đối chiếu mẫu và xây dựng Proposal. Danh mục: Nội thất. Dịch vụ: Nội thất. Vật liệu: Gỗ công nghiệp và kính. Phong cách: Hiện đại. Loại công trình: Nhà ở. Giữ đúng thông tin đã xác minh; không thêm thương hiệu, vật liệu, kích thước hoặc chi tiết công trình chưa có trong metadata. Bố cục rõ chủ thể, ánh sáng tự nhiên, màu sắc trung thực, không chèn chữ hoặc watermark.",
+  "source": {
+    "label": "Chủ dự án Đại Hải Phát",
+    "rights": "Cung cấp trực tiếp để sử dụng trong DAI HAI PHAT AI OS",
+    "verified": true
+  },
+  "seo": {
+    "title": "Phòng ngủ với tủ cánh kính | Đại Hải Phát",
+    "description": "Hình ảnh phòng ngủ với tủ cánh kính dùng cho tư vấn kỹ thuật và Proposal của Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "nội thất",
+      "phòng ngủ với tủ cánh kính"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/interior/interior83.jpg",
+    "sourceRelativePath": "assets/images/interior/interior83.jpg",
+    "publicUrl": "/images/interior/interior83.jpg",
+    "bytes": 112183,
+    "sha256": "e21a049e45a0ee5d67edfe5dd718802fbbc99fa3fcda76467e014c36c6389299",
+    "format": ".jpg"
+  },
+  "image": {
+    "relativePath": "public/images/interior/interior83.webp",
+    "publicUrl": "/images/interior/interior83.webp",
+    "width": 1280,
+    "height": 946,
+    "bytes": 44516,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/interior/interior83.thumb.webp",
+    "publicUrl": "/images/interior/interior83.thumb.webp",
+    "width": 480,
+    "height": 355,
+    "bytes": 10020,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRvYAAABXRUJQVlA4IOoAAAAwBwCdASogABgAPu1qrlCppaQiqAqpMB2JZQC7BbJcYGmBVxVev9uXTwaMmP0I8QspUDw5XeSVbE5tSDLGV0AXJIAAyohXovPBpYf2xhHKDpUDazW+AeH4GViUIR3puDWuoMuvyBSaJ4aVESLZVYw74RSe6h8MTh5ypqxh2nRj7ks56CRdl6JdZWThjYAjEL3jicTSXSahZyFYB/gjupFPmGk3WQpsB9+Qj4oxTAuwXxQaqAJrNm1jdvTq9FcNPa0ct9G1qWidjT45TaviQbDjtWv3HXEG45phelUOyJZrjEhMFlSEhyIAAAA="
+}

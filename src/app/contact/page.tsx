@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, PhoneCall } from "lucide-react";
+import { Mail, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 
+import { Alert } from "@/components/ui/Alert";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { COMPANY_CONFIG } from "@/content/company";
 
 export const metadata: Metadata = {
@@ -18,36 +22,41 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-slate-50">
-      <section className="bg-slate-950 py-24 text-white">
-        <Container>
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-300">Liên hệ</p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-semibold sm:text-5xl">Đặt lịch tư vấn hoặc gửi yêu cầu báo giá</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            Chúng tôi sẵn sàng phản hồi trong thời gian sớm nhất với thông tin thiết thực và bám sát nhu cầu của bạn.
-          </p>
-        </Container>
-      </section>
+    <main className="min-h-screen bg-[var(--color-background)]">
+      <PageHero
+        eyebrow="Liên hệ kỹ thuật"
+        title="Gửi dữ liệu hiện trạng trước khi khảo sát"
+        description="Chọn một kênh liên hệ đang hoạt động để gửi hạng mục, vị trí, kích thước dự kiến và ảnh hiện trạng cho đội ngũ Đại Hải Phát."
+      />
 
-      <section className="py-20">
+      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
         <Container className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+          <Card className="space-y-[var(--space-6)] p-[var(--space-8)]">
             <div className="flex items-start gap-3">
-              <MapPin className="mt-1 h-5 w-5 text-[#FF5722]" />
+              <MapPin className="mt-1 h-5 w-5 text-[var(--color-primary)]" />
               <div>
-                <p className="font-semibold text-slate-900">Địa chỉ</p>
-                <a href={COMPANY_CONFIG.googleMapsUrl} target="_blank" rel="noreferrer" className="mt-1 block text-sm leading-7 text-slate-600 hover:text-[#FF5722]">
+                <p className="font-semibold text-[var(--color-text)]">Địa chỉ</p>
+                <a
+                  href={COMPANY_CONFIG.googleMapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-1 block text-sm leading-7 text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+                >
                   {COMPANY_CONFIG.address}
                 </a>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <PhoneCall className="mt-1 h-5 w-5 text-[#FF5722]" />
+              <PhoneCall className="mt-1 h-5 w-5 text-[var(--color-primary)]" />
               <div>
-                <p className="font-semibold text-slate-900">Hotline</p>
-                <div className="mt-1 space-y-1 text-sm leading-7 text-slate-600">
+                <p className="font-semibold text-[var(--color-text)]">Hotline</p>
+                <div className="mt-1 space-y-1 text-sm leading-7 text-[var(--color-text-muted)]">
                   {COMPANY_CONFIG.phones.map((phone) => (
-                    <a key={phone.raw} href={`tel:${phone.raw}`} className="block hover:text-[#FF5722]">
+                    <a
+                      key={phone.raw}
+                      href={`tel:${phone.raw}`}
+                      className="block hover:text-[var(--color-primary)]"
+                    >
                       {phone.display}
                     </a>
                   ))}
@@ -55,35 +64,51 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Mail className="mt-1 h-5 w-5 text-[#FF5722]" />
+              <Mail className="mt-1 h-5 w-5 text-[var(--color-primary)]" />
               <div>
-                <p className="font-semibold text-slate-900">Email</p>
-                <a href={`mailto:${COMPANY_CONFIG.email}`} className="mt-1 block text-sm leading-7 text-slate-600 hover:text-[#FF5722]">
+                <p className="font-semibold text-[var(--color-text)]">Email</p>
+                <a
+                  href={`mailto:${COMPANY_CONFIG.email}`}
+                  className="mt-1 block text-sm leading-7 text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+                >
                   {COMPANY_CONFIG.email}
                 </a>
               </div>
             </div>
-          </div>
+          </Card>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-            <form className="space-y-5">
-              <div>
-                <label htmlFor="contact-name" className="mb-2 block text-sm font-semibold text-slate-700">Họ và tên</label>
-                <input id="contact-name" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="Nguyễn Văn A" />
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="mb-2 block text-sm font-semibold text-slate-700">Email</label>
-                <input id="contact-email" className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="name@example.com" />
-              </div>
-              <div>
-                <label htmlFor="contact-project" className="mb-2 block text-sm font-semibold text-slate-700">Yêu cầu</label>
-                <textarea id="contact-project" className="min-h-[140px] w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none focus:border-[#FF5722]" placeholder="Mô tả nhu cầu của bạn..." />
-              </div>
-              <button type="button" className="w-full rounded-2xl bg-[#FF5722] px-4 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90">
-                Gửi yêu cầu
-              </button>
-            </form>
-          </div>
+          <Card className="p-[var(--space-8)]">
+            <MessageCircle
+              className="h-8 w-8 text-[var(--color-primary)]"
+              aria-hidden="true"
+            />
+            <h2 className="mt-[var(--space-4)] text-2xl font-bold text-[var(--color-text)]">
+              Kênh tiếp nhận nhanh
+            </h2>
+            <p className="mt-[var(--space-4)] leading-7 text-[var(--color-text-muted)]">
+              Zalo phù hợp nhất để gửi ảnh và vị trí công trình. Nếu hạng mục
+              cần xử lý gấp, hãy gọi trực tiếp kỹ sư.
+            </p>
+            <div className="mt-[var(--space-6)] flex flex-col gap-[var(--space-3)] sm:flex-row">
+              <Button href={COMPANY_CONFIG.socials.zalo1} external>
+                Gửi thông tin qua Zalo
+              </Button>
+              <Button
+                href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
+                variant="ghost"
+              >
+                Gọi {COMPANY_CONFIG.phones[0].display}
+              </Button>
+            </div>
+            <Alert
+              title="Có thể lập hồ sơ trực tuyến"
+              className="mt-[var(--space-8)]"
+            >
+              Trợ lý AI trên trang chủ giúp thu thập dữ liệu theo từng bước và
+              chỉ bàn giao hồ sơ cho đội ngũ kỹ thuật sau khi anh/chị đồng ý.
+              Zalo và hotline vẫn là kênh tiếp nhận nhanh.
+            </Alert>
+          </Card>
         </Container>
       </section>
     </main>

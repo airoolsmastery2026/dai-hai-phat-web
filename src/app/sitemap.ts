@@ -1,52 +1,56 @@
 import { MetadataRoute } from "next";
 
+import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
+import { SERVICES } from "@/content/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = COMPANY_CONFIG.websiteUrl;
 
-  return [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/projects`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/gallery`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
   ];
+
+  const serviceRoutes: MetadataRoute.Sitemap = SERVICES.map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const articleRoutes: MetadataRoute.Sitemap = ARTICLES.map((article) => ({
+    url: `${baseUrl}/blog/${article.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...articleRoutes];
 }

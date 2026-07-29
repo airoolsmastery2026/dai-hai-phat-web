@@ -1,25 +1,69 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { LoaderCircle } from "lucide-react";
 
 interface ButtonProps {
   href: string;
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
+  external?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
-export function Button({ href, children, variant = "primary", className = "" }: ButtonProps) {
-  const baseClasses = "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] focus-visible:ring-offset-2";
+export function Button({
+  href,
+  children,
+  variant = "primary",
+  className = "",
+  external = false,
+  loading = false,
+  disabled = false,
+}: ButtonProps) {
+  const baseClasses =
+    "inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] px-[var(--space-6)] py-[var(--space-3)] text-sm font-bold transition-colors duration-[var(--duration-fast)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2";
   const variantClasses =
     variant === "primary"
       ? "bg-[var(--color-primary)] text-white shadow-[var(--shadow-md)] hover:bg-[var(--color-primary-hover)]"
       : variant === "secondary"
         ? "border border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
         : "border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-muted)]";
+  const classes =
+    `${baseClasses} ${variantClasses} ${disabled || loading ? "cursor-not-allowed opacity-60" : ""} ${className}`.trim();
+  const content = (
+    <>
+      {loading ? (
+        <LoaderCircle
+          className="h-4 w-4 animate-spin"
+          aria-hidden="true"
+        />
+      ) : null}
+      <span>{loading ? "Đang xử lý" : children}</span>
+    </>
+  );
+
+  if (disabled || loading) {
+    return (
+      <span
+        className={classes}
+        role="link"
+        aria-disabled="true"
+        aria-busy={loading || undefined}
+      >
+        {content}
+      </span>
+    );
+  }
 
   return (
-    <Link href={href} className={`${baseClasses} ${variantClasses} ${className}`.trim()}>
-      {children}
+    <Link
+      href={href}
+      className={classes}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+    >
+      {content}
     </Link>
   );
 }
