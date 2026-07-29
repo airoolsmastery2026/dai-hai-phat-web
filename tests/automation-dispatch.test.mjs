@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHmac } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test, { afterEach } from "node:test";
 import ts from "typescript";
@@ -78,6 +79,12 @@ test("dispatches a minimal idempotent lead event", async () => {
     request.init.headers["Idempotency-Key"],
     "session-123:lead-received",
   );
+  const timestamp = request.init.headers["X-DHP-Timestamp"];
+  const expectedSignature = `v1=${createHmac("sha256", "secret-token")
+    .update(`${timestamp}.${request.init.body}`, "utf8")
+    .digest("hex")}`;
+  assert.match(timestamp, /^\d{10}$/);
+  assert.equal(request.init.headers["X-DHP-Signature"], expectedSignature);
   assert.equal(body.event, "lead.received");
   assert.equal(body.leadId, "lead-456");
   assert.equal(body.project.imageCount, 2);
