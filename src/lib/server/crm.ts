@@ -2,6 +2,7 @@ import type {
   CRMHandoffRequest,
   CRMHandoffResponse,
 } from "@/lib/ai/handoff";
+import { createWebhookSignature } from "@/lib/server/webhook-signature";
 
 const CRM_TIMEOUT_MS = 8_000;
 
@@ -38,6 +39,11 @@ export async function deliverLeadToCRM(
   const timeout = setTimeout(() => controller.abort(), CRM_TIMEOUT_MS);
 
   try {
+    const timestamp = String(Math.floor(Date.now() / 1_000));
+    const payload = JSON.stringify({
+      ...lead,
+      receivedAt: new Date().toISOString(),
+    });
     const response = await fetch(config.url, {
       method: "POST",
       headers: {
@@ -45,11 +51,14 @@ export async function deliverLeadToCRM(
         "Content-Type": "application/json",
         "Idempotency-Key": lead.sessionId,
         "X-DHP-Request-Id": requestId,
+        "X-DHP-Signature": createWebhookSignature(
+          payload,
+          timestamp,
+          config.token,
+        ),
+        "X-DHP-Timestamp": timestamp,
       },
-      body: JSON.stringify({
-        ...lead,
-        receivedAt: new Date().toISOString(),
-      }),
+      body: payload,
       cache: "no-store",
       signal: controller.signal,
     });
@@ -57,10 +66,10 @@ export async function deliverLeadToCRM(
       throw new CRMDeliveryError("CRM từ chối hồ sơ.", "rejected");
     }
 
-    const payload = (await response.json().catch(() => null)) as unknown;
+    const responsePayload = (await response.json().catch(() => null)) as unknown;
     const record =
-      typeof payload === "object" && payload !== null
-        ? (payload as Record<string, unknown>)
+      typeof responsePayload === "object" && responsePayload !== null
+        ? (responsePayload as Record<string, unknown>)
         : {};
     const leadId =
       typeof record.leadId === "string" && record.leadId.trim()
