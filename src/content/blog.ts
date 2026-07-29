@@ -4,6 +4,7 @@ export const ARTICLES: BlogPost[] = [
   {
     id: 1,
     slug: "giai-phap-thiet-ke-tu-quan-ao-gỗ-mdf-melamine",
+    aiService: "Nội thất",
     title: "Checklist thiết kế tủ quần áo MDF và cánh kính trước khảo sát",
     category: "Nội thất lưu trữ",
     excerpt:
@@ -20,6 +21,7 @@ export const ARTICLES: BlogPost[] = [
   {
     id: 2,
     slug: "mau-giuong-ngu-khung-thep-gỗ-mdf-melamine",
+    aiService: "Nội thất",
     title: "Dữ liệu cần có trước khi thiết kế giường khung thép kết hợp MDF",
     category: "Nội thất phòng ngủ",
     excerpt:
@@ -36,6 +38,7 @@ export const ARTICLES: BlogPost[] = [
   {
     id: 3,
     slug: "thi-cong-mai-che-composite-chong-tia-uv",
+    aiService: "Mái che",
     title: "Checklist khảo sát mái che và tấm lấy sáng trước khi chọn vật liệu",
     category: "Mái che",
     excerpt:
@@ -52,6 +55,7 @@ export const ARTICLES: BlogPost[] = [
   {
     id: 4,
     slug: "trang-tri-vach-tuong-tivi-composite-lam-song",
+    aiService: "Cải tạo không gian",
     title: "Checklist bố trí vách tivi, tấm ốp và hệ dây trước thi công",
     category: "Vách trang trí",
     excerpt:
