@@ -9,6 +9,7 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
+import { dispatchLeadAutomation } from "@/lib/server/automation";
 import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
 
 export const dynamic = "force-dynamic";
@@ -72,10 +73,12 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await deliverLeadToCRM(lead, requestId);
+    const automation = await dispatchLeadAutomation(lead, result, requestId);
     console.info("DHP CRM handoff delivered", {
       requestId,
       sessionId: lead.sessionId,
       leadId: result.leadId,
+      automation: automation.status,
     });
     return jsonResponse({ requestId, handoff: result }, 201);
   } catch (error) {
