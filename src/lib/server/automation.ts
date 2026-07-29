@@ -1,9 +1,12 @@
+import { createHmac } from "node:crypto";
+
 import type {
   CRMHandoffRequest,
   CRMHandoffResponse,
 } from "@/lib/ai/handoff";
 
 const AUTOMATION_TIMEOUT_MS = 5_000;
+const SIGNATURE_VERSION = "v1";
 
 export type AutomationDispatchStatus =
   | "delivered"
@@ -14,6 +17,12 @@ export type AutomationDispatchStatus =
 
 export interface AutomationDispatchResult {
   status: AutomationDispatchStatus;
+}
+
+function signPayload(payload: string, timestamp: string, token: string): string {
+  return `${SIGNATURE_VERSION}=${createHmac("sha256", token)
+    .update(`${timestamp}.${payload}`, "utf8")
+    .digest("hex")}`;
 }
 
 function automationConfig(): { url: string; token: string } | null {
@@ -42,6 +51,17 @@ export async function dispatchLeadAutomation(
   const timeout = setTimeout(() => controller.abort(), AUTOMATION_TIMEOUT_MS);
 
   try {
+    const timestamp = String(Math.floor(Date.now() / 1_000));
+    const payload = JSON.stringify({
+      event: "lead.received",
+      occurredAt: handoff.receivedAt,
+      leadId: handoff.leadId,
+      source: lead.source,
+      project: lead.project,
+      contact: lead.contact,
+      qualification: lead.qualification,
+    });
+
     const response = await fetch(config.url, {
       method: "POST",
       headers: {
@@ -49,16 +69,10 @@ export async function dispatchLeadAutomation(
         "Content-Type": "application/json",
         "Idempotency-Key": `${lead.sessionId}:lead-received`,
         "X-DHP-Request-Id": requestId,
+        "X-DHP-Signature": signPayload(payload, timestamp, config.token),
+        "X-DHP-Timestamp": timestamp,
       },
-      body: JSON.stringify({
-        event: "lead.received",
-        occurredAt: handoff.receivedAt,
-        leadId: handoff.leadId,
-        source: lead.source,
-        project: lead.project,
-        contact: lead.contact,
-        qualification: lead.qualification,
-      }),
+      body: payload,
       cache: "no-store",
       signal: controller.signal,
     });
