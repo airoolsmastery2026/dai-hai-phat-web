@@ -8,12 +8,24 @@ const source = await readFile(
   new URL("../src/lib/server/automation.ts", import.meta.url),
   "utf8",
 );
-const transpiled = ts.transpileModule(source, {
-  compilerOptions: {
-    module: ts.ModuleKind.ESNext,
-    target: ts.ScriptTarget.ES2022,
-  },
-});
+const signatureSource = await readFile(
+  new URL("../src/lib/server/webhook-signature.ts", import.meta.url),
+  "utf8",
+);
+const compilerOptions = {
+  module: ts.ModuleKind.ESNext,
+  target: ts.ScriptTarget.ES2022,
+};
+const signatureModule = `data:text/javascript;base64,${Buffer.from(
+  ts.transpileModule(signatureSource, { compilerOptions }).outputText,
+).toString("base64")}`;
+const transpiled = ts.transpileModule(
+  source.replace(
+    '"@/lib/server/webhook-signature"',
+    JSON.stringify(signatureModule),
+  ),
+  { compilerOptions },
+);
 const automation = await import(
   `data:text/javascript;base64,${Buffer.from(transpiled.outputText).toString("base64")}`
 );
