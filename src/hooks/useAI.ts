@@ -20,6 +20,11 @@ import type {
   ProposalEvidenceRequest,
   ProposalEvidenceResponse,
 } from "@/lib/ai/catalog";
+import {
+  createProjectAnalysisRequest,
+  type ProjectAnalysisRequest,
+  type ProjectAnalysisResponse,
+} from "@/lib/ai/analysis";
 import { readAIDraft, serializeAIDraft } from "@/lib/ai/persistence";
 
 const DRAFT_STORAGE_KEY = "dhp-ai-sales-engine-draft-v1";
@@ -43,6 +48,18 @@ interface EvidenceResult {
 
 interface EvidenceApiResponse {
   evidence?: ProposalEvidenceResponse;
+  error?: string;
+}
+
+interface AnalysisResult {
+  key: string;
+  revision: number;
+  data: ProjectAnalysisResponse | null;
+  error: string | null;
+}
+
+interface AnalysisApiResponse {
+  analysis?: ProjectAnalysisResponse;
   error?: string;
 }
 
@@ -185,6 +202,8 @@ export function useAI() {
   const [isProcessingImages, setIsProcessingImages] = useState(false);
   const [evidenceRevision, setEvidenceRevision] = useState(0);
   const [evidenceResult, setEvidenceResult] = useState<EvidenceResult | null>(null);
+  const [analysisRevision, setAnalysisRevision] = useState(0);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
 
   useEffect(() => {
     if (pendingDraftRemoval) {
@@ -241,6 +260,14 @@ export function useAI() {
     () => (evidenceQuery ? JSON.stringify(evidenceQuery) : null),
     [evidenceQuery],
   );
+  const analysisQuery = useMemo<ProjectAnalysisRequest | null>(() => {
+    if (!session.visitedStates.includes("ANALYSIS")) return null;
+    return createProjectAnalysisRequest(session.memory);
+  }, [session.memory, session.visitedStates]);
+  const analysisKey = useMemo(
+    () => (analysisQuery ? JSON.stringify(analysisQuery) : null),
+    [analysisQuery],
+  );
 
   useEffect(() => {
     if (!evidenceKey || !evidenceQuery) return;
@@ -290,6 +317,57 @@ export function useAI() {
       controller.abort();
     };
   }, [evidenceKey, evidenceQuery, evidenceRevision]);
+
+  useEffect(() => {
+    if (!analysisKey || !analysisQuery) return;
+
+    const controller = new AbortController();
+    let active = true;
+
+    const loadAnalysis = async () => {
+      try {
+        const response = await fetch("/api/ai/project-analysis", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          cache: "no-store",
+          body: analysisKey,
+          signal: controller.signal,
+        });
+        const payload = (await response.json()) as AnalysisApiResponse;
+        if (!response.ok || !payload.analysis) {
+          throw new Error(
+            payload.error || "Không thể phân tích hồ sơ bằng Gemini.",
+          );
+        }
+        if (active) {
+          setAnalysisResult({
+            key: analysisKey,
+            revision: analysisRevision,
+            data: payload.analysis,
+            error: null,
+          });
+        }
+      } catch (caughtError) {
+        if (!active || controller.signal.aborted) return;
+        setAnalysisResult({
+          key: analysisKey,
+          revision: analysisRevision,
+          data: null,
+          error:
+            caughtError instanceof Error
+              ? caughtError.message
+              : "Không thể phân tích hồ sơ bằng Gemini.",
+        });
+      }
+    };
+
+    void loadAnalysis();
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [analysisKey, analysisQuery, analysisRevision]);
 
   const commitAnswer = useCallback((value: string | StoredImage[]) => {
     setError(null);
@@ -353,6 +431,9 @@ export function useAI() {
   const retryEvidence = useCallback(() => {
     setEvidenceRevision((revision) => revision + 1);
   }, []);
+  const retryAnalysis = useCallback(() => {
+    setAnalysisRevision((revision) => revision + 1);
+  }, []);
 
   const question = useMemo(() => getConversationQuestion(session), [session]);
   const evidenceIsCurrent =
@@ -368,6 +449,17 @@ export function useAI() {
         : evidenceResult?.data?.images.length
           ? "ready"
           : "empty";
+  const analysisIsCurrent =
+    Boolean(analysisKey) &&
+    analysisResult?.key === analysisKey &&
+    analysisResult.revision === analysisRevision;
+  const analysisStatus: "idle" | "loading" | "ready" | "error" = !analysisKey
+    ? "idle"
+    : !analysisIsCurrent
+      ? "loading"
+      : analysisResult?.error
+        ? "error"
+        : "ready";
 
   return {
     session,
@@ -377,9 +469,13 @@ export function useAI() {
     evidence: evidenceIsCurrent ? evidenceResult?.data ?? null : null,
     evidenceError: evidenceIsCurrent ? evidenceResult?.error ?? null : null,
     evidenceStatus,
+    analysis: analysisIsCurrent ? analysisResult?.data ?? null : null,
+    analysisError: analysisIsCurrent ? analysisResult?.error ?? null : null,
+    analysisStatus,
     answer: commitAnswer,
     addImages,
     retryEvidence,
+    retryAnalysis,
     reset,
   };
 }

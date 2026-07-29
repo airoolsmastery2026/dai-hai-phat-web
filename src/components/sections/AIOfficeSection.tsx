@@ -18,6 +18,7 @@ import type { FormEvent, ReactNode } from "react";
 import { useAI } from "@/hooks/useAI";
 import { COMPANY_CONFIG } from "@/content/company";
 import { getStateLabel, type ConversationQuestion, type ConversationSession } from "@/lib/ai";
+import type { ProjectAnalysisResponse } from "@/lib/ai/analysis";
 import type { ProposalEvidenceResponse } from "@/lib/ai/catalog";
 import { AI_DRAFT_RETENTION_DAYS } from "@/lib/ai/persistence";
 
@@ -38,9 +39,13 @@ export function AIOfficeSection() {
     evidence,
     evidenceError,
     evidenceStatus,
+    analysis,
+    analysisError,
+    analysisStatus,
     answer,
     addImages,
     retryEvidence,
+    retryAnalysis,
     reset,
   } = useAI();
 
@@ -79,6 +84,12 @@ export function AIOfficeSection() {
           />
           <EngineeringWorkspace session={session} />
         </div>
+        <ProjectAnalysisPanel
+          analysis={analysis}
+          error={analysisError}
+          status={analysisStatus}
+          onRetry={retryAnalysis}
+        />
         <ProposalEvidencePanel
           evidence={evidence}
           error={evidenceError}
@@ -410,6 +421,145 @@ function StatusCard({
         {title}
       </h3>
       {children}
+    </section>
+  );
+}
+
+type AnalysisStatus = "idle" | "loading" | "ready" | "error";
+
+function ProjectAnalysisPanel({
+  analysis,
+  error,
+  status,
+  onRetry,
+}: {
+  analysis: ProjectAnalysisResponse | null;
+  error: string | null;
+  status: AnalysisStatus;
+  onRetry: () => void;
+}) {
+  if (status === "idle") return null;
+
+  if (status === "loading") {
+    return (
+      <section
+        className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <p className="font-bold text-[var(--color-primary-soft-text)]">
+          Gemini đang phân tích dữ liệu hồ sơ đã xác nhận…
+        </p>
+        <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+          Chỉ dữ liệu dự án phi nhạy cảm và bằng chứng trong Knowledge Base được
+          gửi để tạo phân tích sơ bộ.
+        </p>
+      </section>
+    );
+  }
+
+  if (status === "error" || !analysis) {
+    return (
+      <section
+        className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-danger)] bg-[var(--color-danger-soft)] p-[var(--space-card)] text-[var(--color-danger-text)] sm:p-[var(--space-card-lg)]"
+        role="alert"
+      >
+        <h3 className="font-bold">Phân tích AI chưa khả dụng.</h3>
+        <p className="mt-[var(--space-control)] text-sm leading-6">
+          {error || "Hồ sơ vẫn được giữ nguyên để tiếp tục quy trình khảo sát."}
+        </p>
+        <button
+          type="button"
+          onClick={onRetry}
+          className="mt-[var(--space-stack)] flex min-h-[var(--control-min-size)] items-center gap-[var(--space-control)] rounded-[var(--radius-md)] border border-[var(--color-danger)] px-[var(--space-stack)] font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+        >
+          <RefreshCw className="h-4 w-4" aria-hidden="true" />
+          Phân tích lại
+        </button>
+      </section>
+    );
+  }
+
+  return (
+    <section
+      className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]"
+      aria-labelledby="project-analysis-title"
+    >
+      <div className="flex flex-col gap-[var(--space-control)] sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+            Gemini Project Analysis
+          </p>
+          <h3
+            id="project-analysis-title"
+            className="mt-[var(--space-control)] text-2xl font-bold"
+          >
+            Phân tích sơ bộ từ hồ sơ đã xác nhận
+          </h3>
+        </div>
+        <p className="text-sm text-[var(--color-text-dark-muted)]">
+          {analysis.model} · {analysis.evidenceCount} bằng chứng phù hợp
+        </p>
+      </div>
+
+      <div className="mt-[var(--space-card-lg)] grid gap-[var(--space-stack)] lg:grid-cols-2">
+        <article className="rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
+          <h4 className="font-bold">Nhận định hồ sơ</h4>
+          <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+            {analysis.summary}
+          </p>
+        </article>
+        <article className="rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
+          <h4 className="font-bold">Hướng tiếp cận đề xuất</h4>
+          <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+            {analysis.recommendation}
+          </p>
+        </article>
+      </div>
+
+      <div className="mt-[var(--space-stack)] grid gap-[var(--space-stack)] md:grid-cols-2">
+        {analysis.options.map((option) => (
+          <article
+            key={option.name}
+            className="rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] p-[var(--space-card)]"
+          >
+            <h4 className="font-bold">{option.name}</h4>
+            <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+              {option.suitableWhen}
+            </p>
+            <ul className="mt-[var(--space-control)] space-y-1 text-xs leading-5 text-[var(--color-text-dark-subtle)]">
+              {option.tradeoffs.map((tradeoff) => (
+                <li key={tradeoff}>• {tradeoff}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div className="mt-[var(--space-card-lg)] grid gap-[var(--space-stack)] lg:grid-cols-2">
+        <div>
+          <h4 className="font-bold">Kỹ sư cần xác minh tại công trình</h4>
+          <ul className="mt-[var(--space-control)] space-y-2 text-sm leading-6 text-[var(--color-text-dark-muted)]">
+            {analysis.surveyChecks.map((check) => (
+              <li key={check}>• {check}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-bold">Giới hạn của phân tích</h4>
+          <ul className="mt-[var(--space-control)] space-y-2 text-sm leading-6 text-[var(--color-text-dark-muted)]">
+            {analysis.limitations.map((limitation) => (
+              <li key={limitation}>• {limitation}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <p className="mt-[var(--space-card-lg)] border-t border-[var(--color-border-dark)] pt-[var(--space-stack)] text-xs leading-5 text-[var(--color-text-dark-subtle)]">
+        Phân tích do Gemini tạo từ dữ liệu phi nhạy cảm, không phải kết luận kỹ
+        thuật hoặc báo giá. Kỹ sư Đại Hải Phát phải khảo sát trước khi xác nhận
+        phương án.
+      </p>
     </section>
   );
 }
