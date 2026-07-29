@@ -97,6 +97,8 @@ test("dispatches a minimal idempotent lead event", async () => {
     .digest("hex")}`;
   assert.match(timestamp, /^\d{10}$/);
   assert.equal(request.init.headers["X-DHP-Signature"], expectedSignature);
+  assert.equal(body.schemaVersion, "1.0");
+  assert.equal(body.eventId, "request-2");
   assert.equal(body.event, "lead.received");
   assert.equal(body.leadId, "lead-456");
   assert.equal(body.project.imageCount, 2);

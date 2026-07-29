@@ -41,6 +41,9 @@ export async function deliverLeadToCRM(
   try {
     const timestamp = String(Math.floor(Date.now() / 1_000));
     const payload = JSON.stringify({
+      schemaVersion: "1.0",
+      eventId: requestId,
+      event: "lead.handoff",
       ...lead,
       receivedAt: new Date().toISOString(),
     });

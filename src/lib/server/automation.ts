@@ -45,6 +45,8 @@ export async function dispatchLeadAutomation(
   try {
     const timestamp = String(Math.floor(Date.now() / 1_000));
     const payload = JSON.stringify({
+      schemaVersion: "1.0",
+      eventId: requestId,
       event: "lead.received",
       occurredAt: handoff.receivedAt,
       leadId: handoff.leadId,

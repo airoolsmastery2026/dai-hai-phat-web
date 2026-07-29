@@ -73,7 +73,11 @@ test("signs the exact CRM webhook payload with a replay timestamp", async () => 
   assert.equal(request.init.headers["Idempotency-Key"], "session-123");
   assert.match(timestamp, /^\d{10}$/);
   assert.equal(request.init.headers["X-DHP-Signature"], expectedSignature);
-  assert.equal(JSON.parse(request.init.body).contact.phone, "0901 234 567");
+  const body = JSON.parse(request.init.body);
+  assert.equal(body.schemaVersion, "1.0");
+  assert.equal(body.eventId, "request-1");
+  assert.equal(body.event, "lead.handoff");
+  assert.equal(body.contact.phone, "0901 234 567");
 });
 
 test("rejects insecure CRM webhook URLs before sending data", async () => {
