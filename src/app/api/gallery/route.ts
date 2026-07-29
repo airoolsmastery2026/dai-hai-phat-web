@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import {
-  listVerifiedGallery,
   parseVerifiedGalleryRequest,
   ProposalEvidenceValidationError,
 } from "@/lib/ai/catalog";
+import { listPublicResidentialGallery } from "@/lib/ai/public-gallery";
 import {
   consumeRateLimit,
   getRequestClientKey,
@@ -46,9 +46,9 @@ export function GET(request: NextRequest) {
 
   try {
     const query = parseVerifiedGalleryRequest(request.nextUrl.searchParams);
-    const gallery = listVerifiedGallery(query);
+    const gallery = listPublicResidentialGallery(query);
 
-    console.info("DHP verified gallery generated", {
+    console.info("DHP residential gallery generated", {
       requestId,
       resultCount: gallery.items.length,
       total: gallery.total,
@@ -61,7 +61,7 @@ export function GET(request: NextRequest) {
       return jsonResponse({ error: error.message, requestId }, 400);
     }
 
-    console.error("DHP verified gallery failed", {
+    console.error("DHP residential gallery failed", {
       requestId,
       error: error instanceof Error ? error.message : "Unknown error",
     });
