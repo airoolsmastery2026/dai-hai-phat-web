@@ -1,30 +1,82 @@
 "use client";
 
-import Link from "next/link";
 import { Bot, Menu, Phone, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { COMPANY_CONFIG } from "@/content/company";
 import { NAV_ITEMS } from "@/lib/theme";
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function SiteNavigation() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavigationRef = useRef<HTMLDivElement>(null);
+
+  const closeMenu = useCallback((restoreFocus = false) => {
+    setOpen(false);
+    if (restoreFocus) {
+      requestAnimationFrame(() => menuButtonRef.current?.focus());
+    }
+  }, []);
 
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
+    if (!open) return;
+
+    const mobileNavigation = mobileNavigationRef.current;
+    const firstMenuItem = mobileNavigation?.querySelector<HTMLElement>(
+      FOCUSABLE_SELECTOR,
+    );
+    firstMenuItem?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setOpen(false);
+        event.preventDefault();
+        closeMenu(true);
+        return;
+      }
+
+      if (event.key !== "Tab" || !mobileNavigation) return;
+
+      const focusableElements = [
+        menuButtonRef.current,
+        ...Array.from(
+          mobileNavigation.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+        ),
+      ].filter((element): element is HTMLElement => Boolean(element));
+
+      if (!focusableElements.length) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
-    document.body.style.overflow = open ? "hidden" : "";
-    document.addEventListener("keydown", handleEscape);
+    const desktopMediaQuery = window.matchMedia("(min-width: 1024px)");
+    const handleDesktopChange = (event: MediaQueryListEvent) => {
+      if (event.matches) closeMenu();
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+    desktopMediaQuery.addEventListener("change", handleDesktopChange);
 
     return () => {
       document.body.style.overflow = "";
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleKeyDown);
+      desktopMediaQuery.removeEventListener("change", handleDesktopChange);
     };
-  }, [open]);
+  }, [closeMenu, open]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--color-border-dark)] bg-[var(--color-surface-dark)]/95 text-[var(--color-text-inverse)] backdrop-blur">
@@ -74,8 +126,9 @@ export function SiteNavigation() {
         </div>
 
         <button
+          ref={menuButtonRef}
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-white lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] lg:hidden"
           aria-label={open ? "Đóng menu" : "Mở menu"}
           aria-expanded={open}
           aria-controls="mobile-navigation"
@@ -85,11 +138,18 @@ export function SiteNavigation() {
         </button>
       </div>
 
-      {open && (
+      {open ? (
         <div
+          ref={mobileNavigationRef}
           id="mobile-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-navigation-title"
           className="border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] px-[var(--space-container)] pb-[var(--space-6)] lg:hidden"
         >
+          <h2 id="mobile-navigation-title" className="sr-only">
+            Điều hướng chính
+          </h2>
           <nav
             className="flex flex-col py-[var(--space-3)]"
             aria-label="Điều hướng di động"
@@ -98,8 +158,8 @@ export function SiteNavigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
-                className="flex min-h-12 items-center border-b border-[var(--color-border-dark)] text-base font-semibold text-white"
+                onClick={() => closeMenu()}
+                className="flex min-h-12 items-center border-b border-[var(--color-border-dark)] text-base font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus)]"
               >
                 {item.label}
               </Link>
@@ -108,22 +168,23 @@ export function SiteNavigation() {
           <div className="flex flex-col gap-[var(--space-3)]">
             <Link
               href="/#ai-office"
-              onClick={() => setOpen(false)}
-              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-white"
+              onClick={() => closeMenu()}
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Bot className="h-5 w-5" aria-hidden="true" />
               Bắt đầu tư vấn AI
             </Link>
             <a
               href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] font-bold text-white"
+              onClick={() => closeMenu()}
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
               Gọi {COMPANY_CONFIG.phones[0].display}
             </a>
           </div>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }
