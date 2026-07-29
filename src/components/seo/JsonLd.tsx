@@ -1,9 +1,9 @@
 interface JsonLdProps {
-  id: string;
+  id?: string;
   data: Record<string, unknown> | readonly Record<string, unknown>[];
 }
 
-export function JsonLd({ id, data }: JsonLdProps) {
+export function JsonLd({ id = "json-ld", data }: JsonLdProps) {
   const serialized = JSON.stringify(data).replace(/</g, "\\u003c");
 
   return (
