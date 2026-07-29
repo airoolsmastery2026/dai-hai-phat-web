@@ -202,3 +202,41 @@ export function createCRMHandoffRequest(
     },
   });
 }
+
+export function buildManualHandoffSummary(
+  session: ConversationSession,
+): string {
+  const handoff = createCRMHandoffRequest(session);
+  const optionalContact = [
+    handoff.contact.email ? `- Email: ${handoff.contact.email}` : null,
+    handoff.contact.zalo ? `- Zalo: ${handoff.contact.zalo}` : null,
+  ].filter((line): line is string => Boolean(line));
+
+  return [
+    "HỒ SƠ TƯ VẤN ĐẠI HẢI PHÁT",
+    `Mã hồ sơ: ${handoff.sessionId}`,
+    "",
+    "Nhu cầu dự án",
+    `- Mục tiêu: ${handoff.project.intent}`,
+    `- Hạng mục: ${handoff.project.service}`,
+    `- Loại công trình: ${handoff.project.projectType}`,
+    `- Khu vực: ${handoff.project.location}`,
+    `- Kích thước sơ bộ: ${handoff.project.dimensions}`,
+    `- Phong cách: ${handoff.project.style}`,
+    `- Vật liệu ưu tiên: ${handoff.project.material}`,
+    `- Ngân sách dự kiến: ${handoff.project.budget}`,
+    `- Thời điểm triển khai: ${handoff.project.timeline}`,
+    `- Ưu tiên chính: ${handoff.project.priority}`,
+    `- Khung khảo sát: ${handoff.project.surveyWindow}`,
+    `- Hồ sơ cần nhận: ${handoff.project.quoteRequest}`,
+    `- Ảnh hiện trạng: ${handoff.project.imageCount} ảnh (gửi riêng khi trao đổi)`,
+    "",
+    "Thông tin liên hệ",
+    `- Họ tên: ${handoff.contact.name}`,
+    `- Điện thoại: ${handoff.contact.phone}`,
+    `- Địa chỉ khảo sát: ${handoff.contact.surveyAddress}`,
+    ...optionalContact,
+    "",
+    "Lưu ý: Đây là dữ liệu khách hàng đã cung cấp. Phương án kỹ thuật và báo giá chính thức cần được kỹ sư khảo sát, xác minh.",
+  ].join("\n");
+}

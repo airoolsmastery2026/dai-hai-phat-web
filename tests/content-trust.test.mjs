@@ -173,6 +173,10 @@ test("explains CRM consent and makes privacy information reachable", async () =>
   assert.match(privacyPage, /AI_DRAFT_RETENTION_DAYS/);
   assert.match(aiOffice, /href="\/privacy"/);
   assert.match(aiOffice, /Ảnh gốc không được gửi/);
+  assert.match(aiOffice, /buildManualHandoffSummary/);
+  assert.match(aiOffice, /navigator\.share/);
+  assert.match(aiOffice, /navigator\.clipboard/);
+  assert.match(aiOffice, /Mở Zalo và gửi hồ sơ/);
   assert.match(footer, /href="\/privacy"/);
   assert.match(sitemap, /`\$\{baseUrl\}\/privacy`/);
 });
