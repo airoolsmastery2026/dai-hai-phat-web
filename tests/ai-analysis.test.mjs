@@ -186,6 +186,10 @@ test("uses the stateless current Gemini Interactions API contract", async () => 
     new URL("../src/lib/server/gemini.ts", import.meta.url),
     "utf8",
   );
+  const routeSource = await readFile(
+    new URL("../src/app/api/ai/project-analysis/route.ts", import.meta.url),
+    "utf8",
+  );
 
   assert.match(
     providerSource,
@@ -195,5 +199,11 @@ test("uses the stateless current Gemini Interactions API contract", async () => 
   assert.match(providerSource, /store: false/);
   assert.match(providerSource, /"x-goog-api-key": apiKey/);
   assert.match(providerSource, /mime_type: "application\/json"/);
+  assert.match(providerSource, /MAX_ERROR_RESPONSE_BYTES = 8 \* 1024/);
+  assert.match(providerSource, /UPSTREAM_STATUS_PATTERN/);
+  assert.match(providerSource, /upstreamHttpStatus/);
+  assert.match(providerSource, /upstreamStatus/);
+  assert.match(routeSource, /upstreamHttpStatus: error\.upstreamHttpStatus/);
+  assert.match(routeSource, /upstreamStatus: error\.upstreamStatus/);
   assert.equal(providerSource.includes("console.log(apiKey"), false);
 });

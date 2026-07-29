@@ -12,6 +12,8 @@ const GEMINI_INTERACTIONS_ENDPOINT =
 const DEFAULT_GEMINI_MODEL = "gemini-3.6-flash";
 const REQUEST_TIMEOUT_MS = 15_000;
 const MAX_RESPONSE_BYTES = 128 * 1024;
+const MAX_ERROR_RESPONSE_BYTES = 8 * 1024;
+const UPSTREAM_STATUS_PATTERN = /^[A-Z][A-Z0-9_]{0,63}$/;
 
 type GeminiFailureCode =
   | "configuration"
@@ -24,9 +26,17 @@ export class GeminiProjectAnalysisError extends Error {
   constructor(
     message: string,
     readonly code: GeminiFailureCode,
+    readonly upstreamHttpStatus: number | null = null,
+    readonly upstreamStatus: string | null = null,
   ) {
     super(message);
   }
+}
+
+interface GeminiErrorResponse {
+  error?: {
+    status?: unknown;
+  };
 }
 
 interface GeminiInteractionResponse {
@@ -38,6 +48,23 @@ interface GeminiInteractionResponse {
       text?: unknown;
     }>;
   }>;
+}
+
+async function readUpstreamStatus(response: Response): Promise<string | null> {
+  try {
+    const serialized = await response.text();
+    if (!serialized || serialized.length > MAX_ERROR_RESPONSE_BYTES) {
+      return null;
+    }
+
+    const payload = JSON.parse(serialized) as GeminiErrorResponse;
+    const status = payload.error?.status;
+    return typeof status === "string" && UPSTREAM_STATUS_PATTERN.test(status)
+      ? status
+      : null;
+  } catch {
+    return null;
+  }
 }
 
 function getGeminiModel(): string {
@@ -112,11 +139,16 @@ export async function analyzeProjectWithGemini(
     });
 
     if (!response.ok) {
+      const upstreamStatus = await readUpstreamStatus(response);
+      const rateLimited =
+        response.status === 429 || upstreamStatus === "RESOURCE_EXHAUSTED";
       throw new GeminiProjectAnalysisError(
-        response.status === 429
+        rateLimited
           ? "Gemini đang giới hạn lưu lượng."
           : "Gemini tạm thời không phản hồi.",
-        response.status === 429 ? "rate_limit" : "upstream",
+        rateLimited ? "rate_limit" : "upstream",
+        response.status,
+        upstreamStatus,
       );
     }
 
