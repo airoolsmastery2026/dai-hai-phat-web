@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -77,6 +78,14 @@ export default function AboutPage() {
           </Card>
         </Container>
       </section>
+
+      <AIConsultationCta
+        eyebrow="Bắt đầu từ dữ liệu hiện trạng"
+        title="Chuẩn bị hồ sơ trước khi kỹ sư khảo sát"
+        description="Trợ lý AI thu thập từng thông tin cần thiết và lưu bản nháp trên thiết bị. Hồ sơ chỉ được bàn giao cho Đại Hải Phát sau khi anh/chị chủ động đồng ý."
+        secondaryHref="/gallery"
+        secondaryLabel="Xem công trình đã xác minh"
+      />
     </main>
   );
 }
