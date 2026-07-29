@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { after, NextRequest, NextResponse } from "next/server";
 
 import {
   CRMHandoffValidationError,
@@ -14,6 +14,7 @@ import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+export const maxDuration = 15;
 
 const BODY_LIMIT_BYTES = 16 * 1024;
 const RATE_LIMIT_WINDOW_MS = 15 * 60_000;
@@ -73,12 +74,29 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await deliverLeadToCRM(lead, requestId);
-    const automation = await dispatchLeadAutomation(lead, result, requestId);
+
+    after(async () => {
+      try {
+        const automation = await dispatchLeadAutomation(lead, result, requestId);
+        console.info("DHP lead automation completed", {
+          requestId,
+          sessionId: lead.sessionId,
+          leadId: result.leadId,
+          automation: automation.status,
+        });
+      } catch (error) {
+        console.error("DHP lead automation failed", {
+          requestId,
+          sessionId: lead.sessionId,
+          error: error instanceof Error ? error.message : "Unknown error",
+        });
+      }
+    });
+
     console.info("DHP CRM handoff delivered", {
       requestId,
       sessionId: lead.sessionId,
       leadId: result.leadId,
-      automation: automation.status,
     });
     return jsonResponse({ requestId, handoff: result }, 201);
   } catch (error) {
