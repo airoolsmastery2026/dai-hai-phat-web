@@ -1,9 +1,16 @@
-import Script from "next/script";
-
 interface JsonLdProps {
-  data: Record<string, unknown>;
+  id?: string;
+  data: Record<string, unknown> | readonly Record<string, unknown>[];
 }
 
-export function JsonLd({ data }: JsonLdProps) {
-  return <Script id="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+export function JsonLd({ id = "json-ld", data }: JsonLdProps) {
+  const serialized = JSON.stringify(data).replace(/</g, "\\u003c");
+
+  return (
+    <script
+      id={id}
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serialized }}
+    />
+  );
 }

@@ -7,6 +7,9 @@ import { BackToTop } from "@/components/layout/BackToTop";
 import { FloatingCta } from "@/components/layout/FloatingCta";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteNavigation } from "@/components/layout/SiteNavigation";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { COMPANY_CONFIG } from "@/content/company";
+import { SERVICES } from "@/content/services";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -18,6 +21,40 @@ const SITE_NAME =
 
 const DESCRIPTION =
   "Đại Hải Phát chuyên thiết kế, gia công và thi công Nội thất - Cơ khí dân dụng: tủ bếp, phòng ngủ, tủ quần áo, kệ TV, mái che, cổng, lan can, cầu thang và các sản phẩm theo yêu cầu.";
+
+const BUSINESS_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${COMPANY_CONFIG.websiteUrl}/#organization`,
+  name: COMPANY_CONFIG.name,
+  alternateName: COMPANY_CONFIG.shortName,
+  url: COMPANY_CONFIG.websiteUrl,
+  telephone: COMPANY_CONFIG.phones[0].raw,
+  email: COMPANY_CONFIG.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: COMPANY_CONFIG.address,
+    addressCountry: "VN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: COMPANY_CONFIG.coordinates.lat,
+    longitude: COMPANY_CONFIG.coordinates.lng,
+  },
+  sameAs: [COMPANY_CONFIG.googleMapsUrl, COMPANY_CONFIG.socials.zalo1],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Dịch vụ nội thất và cơ khí dân dụng",
+    itemListElement: SERVICES.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        url: `${COMPANY_CONFIG.websiteUrl}/services/${service.slug}`,
+      },
+    })),
+  },
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://daihaiphat.vn"),
@@ -82,6 +119,7 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body className={inter.className}>
+        <JsonLd id="dhp-local-business" data={BUSINESS_JSON_LD} />
         <a href="#main-content" className="skip-link">
           Bỏ qua điều hướng
         </a>

@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { Container } from "@/components/ui/Container";
+import { ServiceBenefits } from "@/components/services/ServiceBenefits";
+import { ServiceCTA } from "@/components/services/ServiceCTA";
+import { ServiceFAQ } from "@/components/services/ServiceFAQ";
+import { ServiceFeatures } from "@/components/services/ServiceFeatures";
+import { ServiceGallery } from "@/components/services/ServiceGallery";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { ServiceOverview } from "@/components/services/ServiceOverview";
-import { ServiceFeatures } from "@/components/services/ServiceFeatures";
-import { ServiceBenefits } from "@/components/services/ServiceBenefits";
 import { ServiceProcess } from "@/components/services/ServiceProcess";
-import { ServiceGallery } from "@/components/services/ServiceGallery";
-import { ServiceFAQ } from "@/components/services/ServiceFAQ";
-import { ServiceCTA } from "@/components/services/ServiceCTA";
 import { ServiceSidebar } from "@/components/services/ServiceSidebar";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { Container } from "@/components/ui/Container";
+import { COMPANY_CONFIG } from "@/content/company";
 import { SERVICES } from "@/content/services";
 import { normalizeRouteSlug } from "@/lib/routing";
 
@@ -28,10 +30,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {};
   }
 
+  const title = service.seo.title ?? service.title;
+  const description = service.seo.description ?? service.summary;
+  const canonical = `/services/${service.slug}`;
+
   return {
-    title: service.title,
-    description: service.seo?.description ?? service.summary,
-    alternates: { canonical: `/services/${service.slug}` },
+    title,
+    description,
+    keywords: service.seo.keywords,
+    alternates: { canonical },
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: canonical,
+      images: [{ url: service.image, alt: service.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [service.image],
+    },
   };
 }
 
@@ -44,8 +64,61 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     notFound();
   }
 
+  const canonicalUrl = `${COMPANY_CONFIG.websiteUrl}/services/${service.slug}`;
+  const structuredData: Record<string, unknown>[] = [
+    {
+      "@context": "https://schema.org",
+      ...service.schema,
+      "@id": `${canonicalUrl}#service`,
+      url: canonicalUrl,
+      description: service.seo.description ?? service.summary,
+      image: new URL(service.image, COMPANY_CONFIG.websiteUrl).toString(),
+      provider: { "@id": `${COMPANY_CONFIG.websiteUrl}/#organization` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Trang chủ",
+          item: COMPANY_CONFIG.websiteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Dịch vụ",
+          item: `${COMPANY_CONFIG.websiteUrl}/services`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: service.title,
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ];
+
+  if (service.faq.length > 0) {
+    structuredData.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: service.faq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    });
+  }
+
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
+      <JsonLd id="dhp-service-structured-data" data={structuredData} />
       <ServiceHero service={service} />
 
       <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
