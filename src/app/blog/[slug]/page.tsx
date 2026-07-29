@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -140,6 +141,15 @@ export default async function BlogDetailPage({
           </div>
         </Container>
       </section>
+
+      <AIConsultationCta
+        eyebrow="Áp dụng checklist"
+        title="Đưa dữ liệu này vào hồ sơ dự án"
+        description="Trợ lý AI sẽ chọn trước đúng hạng mục và tiếp tục hỏi từng dữ liệu còn thiếu. Thông tin chỉ được bàn giao cho Đại Hải Phát sau khi anh/chị hoàn tất và đồng ý gửi hồ sơ."
+        servicePreset={article.aiService}
+        secondaryHref="/blog"
+        secondaryLabel="Xem checklist khác"
+      />
     </main>
   );
 }
