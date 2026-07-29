@@ -1,4 +1,11 @@
-import { Building2, Package2, PanelTop, Wrench, type LucideIcon } from "lucide-react";
+import {
+  Fence,
+  Landmark,
+  Package2,
+  PanelTop,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
 
 import type { ServiceItem } from "@/types/content";
 
@@ -6,7 +13,8 @@ const serviceIcons: Record<number, LucideIcon> = {
   1: Package2,
   2: PanelTop,
   3: Wrench,
-  4: Building2,
+  4: Fence,
+  5: Landmark,
 };
 
 export const SERVICES: ServiceItem[] = [
@@ -139,44 +147,87 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     id: 4,
-    slug: "ket-cau-thep-cua-cong",
-    title: "Kết cấu thép và cửa cổng công nghiệp",
-    subtitle: "Thi công theo bản vẽ",
+    slug: "cua-cong-co-khi-dan-dung",
+    title: "Cửa cổng và cơ khí dân dụng",
+    subtitle: "Gia công theo hiện trạng",
     summary:
-      "Đại Hải Phát thực hiện cửa cổng, khung thép và chi tiết cơ khí theo kích thước, cấu tạo và phương án xử lý bề mặt đã thống nhất. Tải trọng và liên kết phải được xác nhận trước khi gia công.",
+      "Đại Hải Phát thực hiện cửa cổng, hàng rào, khung bảo vệ và chi tiết cơ khí dân dụng theo kích thước, kiểu dáng và phương án xử lý bề mặt đã thống nhất.",
     fullDescription:
-      "Phương án cơ khí được lập từ hiện trạng, bản vẽ, vật liệu, tải trọng và điều kiện lắp dựng. Các thông số chưa có hồ sơ hoặc chưa đo tại công trình không được dùng để kết luận.",
-    desc: "Thi công khung thép, cửa cổng và các chi tiết cơ khí theo kích thước và tải trọng thực tế.",
+      "Phương án được lập từ hiện trạng nhà ở, nhu cầu sử dụng, kích thước, vật liệu và điều kiện lắp đặt. Các thông số chưa đo tại công trình không được dùng để kết luận.",
+    desc: "Thiết kế, gia công và lắp đặt cửa cổng cùng các chi tiết cơ khí cho nhà ở theo kích thước thực tế.",
     features: [
       { title: "Chốt kích thước", description: "Kích thước và vị trí liên kết được xác nhận trước khi gia công." },
       { title: "Chọn xử lý bề mặt", description: "Hệ sơn hoặc lớp phủ được ghi rõ theo phạm vi sử dụng." },
-      { title: "Thi công theo bản vẽ", description: "Cấu kiện được lắp và kiểm tra theo phương án đã duyệt." },
+      { title: "Lắp đặt tại nhà", description: "Sản phẩm được lắp và kiểm tra vận hành theo phương án đã duyệt." },
     ],
     benefits: ["Theo kích thước", "Liên kết xác nhận", "Bề mặt ghi rõ", "Có bước kiểm tra"],
     process: [
-      { title: "Thiết kế kết cấu", description: "Lập sơ đồ và kích thước cho hệ thống thép." },
+      { title: "Khảo sát và thiết kế", description: "Đo hiện trạng, chốt kiểu dáng và kích thước sản phẩm." },
       { title: "Gia công", description: "Cắt, hàn và xử lý bề mặt chi tiết." },
       { title: "Lắp dựng", description: "Lắp đặt tại công trình và kiểm tra độ thẳng, vững chắc." },
     ],
     gallery: [
       "/images/gates/gate01.webp",
-      "/images/factory/factory02.webp",
+      "/images/gates/gate03.webp",
     ],
     faq: [
       { question: "Bạn có nhận làm cửa cổng và khung thép theo kích thước riêng không?", answer: "Có, chúng tôi gia công theo bản vẽ và kích thước yêu cầu của khách hàng." },
     ],
     seo: {
-      title: "Dịch vụ kết cấu thép và cửa cổng công nghiệp",
-      description: "Thi công kết cấu thép, cửa cổng và chi tiết cơ khí theo bản vẽ và thông số đã xác nhận.",
-      keywords: ["kết cấu thép", "cửa cổng", "gia công cơ khí"],
-      canonical: "/services/ket-cau-thep-cua-cong",
+      title: "Dịch vụ cửa cổng và cơ khí dân dụng",
+      description: "Thiết kế, gia công và lắp đặt cửa cổng, hàng rào cùng chi tiết cơ khí cho nhà ở.",
+      keywords: ["cửa cổng nhà ở", "cơ khí dân dụng", "gia công cửa cổng"],
+      canonical: "/services/cua-cong-co-khi-dan-dung",
     },
     schema: {
       "@type": "Service",
-      name: "Kết cấu thép và cửa cổng công nghiệp",
-      serviceType: "Steel structure fabrication",
+      name: "Cửa cổng và cơ khí dân dụng",
+      serviceType: "Residential gate and metalwork",
     },
     image: "/images/gates/gate01.webp",
     icon: serviceIcons[4],
+  },
+  {
+    id: 5,
+    slug: "cau-thang-lan-can",
+    title: "Cầu thang và lan can",
+    subtitle: "Thiết kế theo hiện trạng",
+    summary:
+      "Đại Hải Phát thiết kế, gia công và lắp đặt cầu thang, tay vịn, lan can ban công theo kích thước, cao độ và nhu cầu sử dụng của từng nhà ở.",
+    fullDescription:
+      "Phương án cầu thang và lan can được lập sau khi đo hiện trạng, kiểm tra vị trí liên kết, lối đi và lựa chọn vật liệu. Kích thước chi tiết, cấu tạo chịu lực và khoảng hở an toàn phải được kỹ sư xác nhận trước khi gia công.",
+    desc: "Thi công cầu thang, tay vịn và lan can cho nhà phố, căn hộ, biệt thự theo dữ liệu hiện trạng.",
+    features: [
+      { title: "Đo hiện trạng", description: "Xác nhận cao độ, kích thước lối đi, vị trí liên kết và điều kiện lắp đặt." },
+      { title: "Chốt vật liệu", description: "Kính, kim loại, gỗ, phụ kiện và bề mặt hoàn thiện được duyệt trước khi gia công." },
+      { title: "Kiểm tra sử dụng", description: "Độ chắc chắn, tay vịn, khoảng hở và bề mặt được kiểm tra khi lắp đặt." },
+    ],
+    benefits: ["Theo hiện trạng", "Vật liệu xác nhận", "Liên kết rõ ràng", "Kiểm tra khi bàn giao"],
+    process: [
+      { title: "Khảo sát", description: "Đo cao độ, kích thước và kiểm tra vị trí liên kết tại công trình." },
+      { title: "Thiết kế và gia công", description: "Chốt cấu tạo, vật liệu rồi gia công theo bản vẽ đã duyệt." },
+      { title: "Lắp đặt", description: "Lắp tại công trình, căn chỉnh và kiểm tra trước khi bàn giao." },
+    ],
+    gallery: [
+      "/images/stairs/stair01.webp",
+      "/images/railings/railing01.webp",
+    ],
+    faq: [
+      { question: "Có thể kết hợp kính, kim loại và gỗ không?", answer: "Có thể, nhưng cấu tạo liên kết và mã vật liệu cần được chốt sau khi đo hiện trạng và duyệt mẫu." },
+      { question: "Khi nào có thể chốt kích thước gia công?", answer: "Kích thước chỉ được chốt sau khi khảo sát cao độ, lối đi và các điểm liên kết tại công trình." },
+    ],
+    seo: {
+      title: "Dịch vụ cầu thang và lan can nhà ở",
+      description: "Thiết kế, gia công và lắp đặt cầu thang, tay vịn, lan can ban công theo hiện trạng nhà ở.",
+      keywords: ["cầu thang nhà ở", "lan can ban công", "tay vịn cầu thang"],
+      canonical: "/services/cau-thang-lan-can",
+    },
+    schema: {
+      "@type": "Service",
+      name: "Cầu thang và lan can",
+      serviceType: "Residential stairs and railings",
+    },
+    image: "/images/stairs/stair01.webp",
+    icon: serviceIcons[5],
   },
 ];

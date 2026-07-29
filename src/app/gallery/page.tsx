@@ -9,12 +9,12 @@ import { listVerifiedGallery } from "@/lib/ai/catalog";
 export const metadata: Metadata = {
   title: "Thư viện công trình đã xác minh",
   description:
-    "Xem hình ảnh công trình cơ khí và nội thất của Đại Hải Phát theo hạng mục, vật liệu, phong cách và loại công trình.",
+    "Xem hình ảnh nội thất và cơ khí dân dụng của Đại Hải Phát theo hạng mục, vật liệu, phong cách và loại nhà ở.",
   alternates: { canonical: "/gallery" },
   openGraph: {
     title: "Thư viện công trình đã xác minh | Đại Hải Phát",
     description:
-      "Thư viện hình ảnh công trình có nguồn và metadata đã xác minh của Đại Hải Phát.",
+      "Thư viện hình ảnh nội thất và cơ khí dân dụng có nguồn cùng metadata đã xác minh.",
     url: "/gallery",
     type: "website",
     images: [
@@ -40,7 +40,7 @@ export default function GalleryPage() {
     "@type": "CollectionPage",
     name: "Thư viện công trình đã xác minh Đại Hải Phát",
     description:
-      "Hình ảnh công trình cơ khí và nội thất có metadata và nguồn sử dụng đã xác minh.",
+      "Hình ảnh nội thất và cơ khí dân dụng có metadata và nguồn sử dụng đã xác minh.",
     url: "https://daihaiphat.vn/gallery",
     numberOfItems: initialGallery.total,
     mainEntity: {

@@ -247,6 +247,13 @@ function normalize(value?: string): string {
   return ALIASES[normalized] ?? normalized;
 }
 
+function isCustomerFacingProject(asset: CatalogAsset): boolean {
+  return (
+    normalize(asset.service) !== "nha xuong" &&
+    normalize(asset.projectType) !== "xuong gia cong"
+  );
+}
+
 function boundedLimit(value: number | undefined, fallback: number): number {
   if (!Number.isFinite(value)) return fallback;
   return Math.max(1, Math.min(Math.trunc(value ?? fallback), 20));
@@ -422,6 +429,7 @@ export function searchProjectAssets(
     .filter(
       (asset) =>
         allowedTypes.has(asset.assetType) &&
+        isCustomerFacingProject(asset) &&
         Boolean(asset.image.publicUrl) &&
         Boolean(asset.thumbnail.publicUrl),
     )
@@ -604,6 +612,7 @@ export function listVerifiedGallery(
     .filter(
       (asset) =>
         asset.assetType === "project" &&
+        isCustomerFacingProject(asset) &&
         asset.thumbnail.publicUrl?.startsWith("/images/"),
     )
     .sort((left, right) => left.id.localeCompare(right.id, "vi"));

@@ -11,7 +11,7 @@ import { COMPANY_CONFIG } from "@/content/company";
 export const metadata: Metadata = {
   title: "Checklist chuẩn bị khảo sát",
   description:
-    "Checklist dữ liệu cần chuẩn bị trước khi khảo sát nội thất, mái che và cơ khí xây dựng tại Đại Hải Phát.",
+    "Checklist dữ liệu cần chuẩn bị trước khi khảo sát nội thất, mái che và cơ khí dân dụng tại Đại Hải Phát.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Checklist chuẩn bị khảo sát | Đại Hải Phát",

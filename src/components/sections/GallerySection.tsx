@@ -9,7 +9,7 @@ const gallery = [
   { src: "/images/gates/gate01.webp", alt: "Cổng hai cánh hoa văn CNC" },
   { src: "/images/stairs/stair01.webp", alt: "Cầu thang kính tay vịn gỗ" },
   { src: "/images/railings/railing01.webp", alt: "Lan can ban công hoa văn CNC" },
-  { src: "/images/factory/factory01.webp", alt: "Gia công khung lan can CNC tại xưởng" },
+  { src: "/images/stairs/stair02.webp", alt: "Cầu thang dân dụng kết hợp kim loại và gỗ" },
   { src: "/images/interior/interior02.webp", alt: "Tủ bếp chữ L tông sáng" },
   { src: "/images/interior/interior03.webp", alt: "Tủ áo kết hợp kệ trưng bày" },
   { src: "/images/interior/interior71.webp", alt: "Vách lam gỗ trang trí" },
@@ -32,8 +32,8 @@ export default function GallerySection() {
           </h2>
 
           <p className="mt-5 text-gray-600 max-w-3xl mx-auto">
-            Toàn bộ hình ảnh là công trình thực tế do Đại Hải Phát trực tiếp
-            thiết kế, sản xuất và thi công.
+            Hình ảnh trong thư viện đã được kiểm tra nguồn và quyền sử dụng
+            trước khi đưa vào nội dung tư vấn.
           </p>
 
         </div>

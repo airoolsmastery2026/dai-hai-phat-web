@@ -8,22 +8,22 @@ import { COMPANY_CONFIG, COMPANY_STATS } from "@/content/company";
 export const metadata: Metadata = {
   title: "Giới thiệu",
   description:
-    "Thông tin liên hệ, phạm vi dịch vụ và quy trình làm việc của Đại Hải Phát trong lĩnh vực nội thất và cơ khí xây dựng.",
+    "Phạm vi dịch vụ và quy trình làm việc của Đại Hải Phát trong lĩnh vực nội thất và cơ khí dân dụng cho nhà ở.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "Giới thiệu Đại Hải Phát",
     description:
-      "Thông tin liên hệ, phạm vi dịch vụ và quy trình làm việc của Đại Hải Phát.",
+      "Thiết kế, gia công và thi công nội thất cùng cơ khí dân dụng theo hiện trạng nhà ở.",
     url: `${COMPANY_CONFIG.websiteUrl}/about`,
     type: "website",
-    images: ["/images/factory/factory01.webp"],
+    images: ["/images/interior/interior78.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Giới thiệu Đại Hải Phát",
     description:
-      "Thông tin liên hệ, phạm vi dịch vụ và quy trình làm việc của Đại Hải Phát.",
-    images: ["/images/factory/factory01.webp"],
+      "Thiết kế, gia công và thi công nội thất cùng cơ khí dân dụng theo hiện trạng nhà ở.",
+    images: ["/images/interior/interior78.webp"],
   },
 };
 
@@ -32,8 +32,8 @@ export default function AboutPage() {
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
         eyebrow="Về Đại Hải Phát"
-        title="Nội thất và cơ khí xây dựng theo dữ liệu thực tế"
-        description="Đại Hải Phát tiếp nhận nhu cầu, khảo sát, thống nhất vật liệu và triển khai theo phạm vi đã xác nhận với khách hàng."
+        title="Nội thất và cơ khí dân dụng cho không gian sống"
+        description="Đại Hải Phát đồng hành từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt cho nhà phố, căn hộ và biệt thự."
       />
 
       <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">

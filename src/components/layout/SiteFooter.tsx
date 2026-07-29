@@ -23,8 +23,8 @@ export function SiteFooter() {
             {COMPANY_CONFIG.name}
           </h2>
           <p className="mt-[var(--space-4)] max-w-md text-sm leading-7 text-[var(--color-text-dark-subtle)]">
-            Tư vấn, thiết kế, gia công và thi công cơ khí xây dựng, nội thất theo
-            yêu cầu thực tế của từng công trình.
+            Thiết kế và thi công nội thất, cửa cổng, cầu thang, lan can, mái
+            che cùng các hạng mục cơ khí dân dụng theo hiện trạng nhà ở.
           </p>
         </div>
 
@@ -76,6 +76,9 @@ export function SiteFooter() {
           quyền.
         </p>
         <div className="flex flex-wrap gap-4">
+          <Link href="/privacy" className="transition hover:text-white">
+            Quyền riêng tư
+          </Link>
           {SERVICES.slice(0, 3).map((service) => (
             <Link key={service.slug} href={`/services/${service.slug}`} className="transition hover:text-white">
               {service.title}
