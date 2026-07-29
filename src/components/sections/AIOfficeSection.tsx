@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, type FormEvent, type ReactNode } from "react";
 
 import { useAI } from "@/hooks/useAI";
@@ -350,18 +351,31 @@ function CompletionState({
         </div>
       ) : (
         <>
-          <label className="mt-[var(--space-stack)] flex cursor-pointer items-start gap-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+          <div className="mt-[var(--space-stack)] flex items-start gap-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
             <input
+              id="crm-handoff-consent"
               type="checkbox"
               checked={consent}
               onChange={(event) => setConsent(event.target.checked)}
               className="mt-1 h-5 w-5 shrink-0 accent-[var(--color-primary)]"
             />
-            <span>
-              Tôi đồng ý gửi thông tin liên hệ và dữ liệu dự án đã nhập cho Đại
-              Hải Phát để tư vấn, xác nhận khảo sát và quản lý hồ sơ.
-            </span>
-          </label>
+            <div>
+              <label htmlFor="crm-handoff-consent" className="cursor-pointer">
+                Tôi đồng ý gửi thông tin liên hệ và dữ liệu dự án đã nhập cho
+                Đại Hải Phát để tư vấn, xác nhận khảo sát và quản lý hồ sơ.
+              </label>
+              <p className="mt-[var(--space-2)] text-xs text-[var(--color-text-dark-subtle)]">
+                Ảnh gốc không được gửi qua bước này.{" "}
+                <Link
+                  href="/privacy"
+                  className="font-semibold text-[var(--color-primary-soft-text)] underline underline-offset-4"
+                >
+                  Xem cách dữ liệu được xử lý
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
           <button
             type="button"
             disabled={!consent || status === "submitting"}

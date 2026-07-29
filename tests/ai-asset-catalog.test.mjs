@@ -262,6 +262,15 @@ test("paginates and filters the verified gallery without exposing non-project as
   assert.ok(gates.items.every((item) => item.service === "Cửa cổng"));
   assert.ok(searched.items.length > 0);
   assert.ok(firstPage.filters.categories.length > 0);
+  assert.equal(firstPage.filters.services.includes("Nhà xưởng"), false);
+  assert.equal(firstPage.filters.projectTypes.includes("Xưởng gia công"), false);
+  assert.ok(
+    firstPage.items.every(
+      (item) =>
+        item.service !== "Nhà xưởng" &&
+        item.projectType !== "Xưởng gia công",
+    ),
+  );
   assert.ok(firstPage.items.every((item) => item.thumbnail.url.startsWith("/images/")));
   assert.ok(firstPage.items.every((item) => !("source" in item)));
 

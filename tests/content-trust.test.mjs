@@ -103,3 +103,76 @@ test("removes unverified factory modules and broken related-project publication"
   );
   assert.doesNotMatch(sitemap, /`\$\{baseUrl\}\/projects`/);
 });
+
+test("positions every public discovery surface around residential interiors", async () => {
+  const paths = [
+    "../src/components/sections/HeroSection.tsx",
+    "../src/app/services/page.tsx",
+    "../src/app/about/page.tsx",
+    "../src/app/gallery/page.tsx",
+    "../public/ai-context.md",
+    "../public/company-dna.md",
+    "../public/knowledge-base.md",
+    "../public/llms.txt",
+  ];
+  const publicPositioning = (
+    await Promise.all(
+      paths.map((path) => readFile(new URL(path, import.meta.url), "utf8")),
+    )
+  ).join("\n");
+
+  assert.match(publicPositioning, /dân dụng|residential/i);
+  assert.match(publicPositioning, /nhà phố|townhouses/i);
+  assert.doesNotMatch(
+    publicPositioning,
+    /industrial furniture|steel structure fabrication|modern industrial|nhà xưởng|kết cấu thép/i,
+  );
+});
+
+test("publishes residential gates and stairs with a safe legacy redirect", async () => {
+  const services = await readFile(
+    new URL("../src/content/services.ts", import.meta.url),
+    "utf8",
+  );
+  const nextConfig = await readFile(
+    new URL("../next.config.js", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(services, /slug: "cua-cong-co-khi-dan-dung"/);
+  assert.match(services, /slug: "cau-thang-lan-can"/);
+  assert.match(services, /title: "Cầu thang và lan can"/);
+  assert.doesNotMatch(services, /slug: "ket-cau-thep-cua-cong"/);
+  assert.match(nextConfig, /source: "\/services\/ket-cau-thep-cua-cong"/);
+  assert.match(
+    nextConfig,
+    /destination: "\/services\/cua-cong-co-khi-dan-dung"/,
+  );
+  assert.match(nextConfig, /permanent: true/);
+});
+
+test("explains CRM consent and makes privacy information reachable", async () => {
+  const privacyPage = await readFile(
+    new URL("../src/app/privacy/page.tsx", import.meta.url),
+    "utf8",
+  );
+  const aiOffice = await readFile(
+    new URL("../src/components/sections/AIOfficeSection.tsx", import.meta.url),
+    "utf8",
+  );
+  const footer = await readFile(
+    new URL("../src/components/layout/SiteFooter.tsx", import.meta.url),
+    "utf8",
+  );
+  const sitemap = await readFile(
+    new URL("../src/app/sitemap.ts", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(privacyPage, /Ảnh gốc.*không gửi/s);
+  assert.match(privacyPage, /AI_DRAFT_RETENTION_DAYS/);
+  assert.match(aiOffice, /href="\/privacy"/);
+  assert.match(aiOffice, /Ảnh gốc không được gửi/);
+  assert.match(footer, /href="\/privacy"/);
+  assert.match(sitemap, /`\$\{baseUrl\}\/privacy`/);
+});

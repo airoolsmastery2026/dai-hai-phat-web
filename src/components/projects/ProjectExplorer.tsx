@@ -51,7 +51,7 @@ export function ProjectExplorer({ projects }: { projects: ProjectItem[] }) {
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-300">Portfolio layout</p>
             <h3 className="mt-3 text-3xl font-semibold">Lọc theo loại hình và khám phá từng công trình</h3>
-            <p className="mt-3 text-sm leading-7 text-slate-300">Tập hợp các dự án nội thất, composite và kết cấu thép với bố cục hiện đại, tối ưu trải nghiệm trên mọi thiết bị.</p>
+            <p className="mt-3 text-sm leading-7 text-slate-300">Tập hợp các dự án nội thất, cửa cổng, cầu thang, mái che và cải tạo không gian dân dụng, tối ưu trải nghiệm trên mọi thiết bị.</p>
           </div>
           <div className="grid gap-3 md:grid-cols-2">
             <label className="flex flex-col gap-2 text-sm font-medium text-slate-200">

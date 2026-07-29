@@ -6,13 +6,13 @@ import type {
 } from "@/types/content";
 
 export const HOME_HERO_CONTENT: HomeHeroContent = {
-  eyebrow: "Đối tác thi công cơ khí",
-  title: "Cung cấp giải pháp thi công cơ khí và xây dựng theo từng nhu cầu thực tế.",
+  eyebrow: "Nội thất & cơ khí dân dụng",
+  title: "Thiết kế và thi công không gian sống theo nhu cầu thực tế.",
   highlights: ["Thi công thực tế", "Tư vấn kỹ thuật", "Hỗ trợ sau bàn giao"],
-  primaryCtaLabel: "Yêu cầu báo giá",
-  primaryCtaHref: "#contact",
-  secondaryCtaLabel: "Xem dự án",
-  secondaryCtaHref: "/projects",
+  primaryCtaLabel: "Lập hồ sơ tư vấn",
+  primaryCtaHref: "/#ai-office",
+  secondaryCtaLabel: "Xem công trình",
+  secondaryCtaHref: "/gallery",
   imageAlt: "Đội ngũ thi công thực hiện công việc tại công trình",
 };
 
@@ -32,10 +32,10 @@ export const HOME_PROJECTS_SECTION: HomeSectionContent = {
 
 export const HOME_ABOUT_CONTENT: HomeAboutContent = {
   eyebrow: "Về Đại Hải Phát",
-  title: "Một đơn vị thi công đáng tin cậy trong môi trường làm việc thực tế.",
+  title: "Đồng hành từ khảo sát đến hoàn thiện không gian sống.",
   description:
-    "Đại Hải Phát tập trung vào việc triển khai công trình đúng phương án, đúng tiến độ và đúng tiêu chuẩn vận hành, để khách hàng yên tâm trong suốt quá trình thực hiện.",
-  badge: "Hơn 15 năm kinh nghiệm thực hiện công trình",
+    "Đại Hải Phát tập trung vào nội thất và các hạng mục cơ khí dân dụng, triển khai đúng phương án, đúng tiến độ và phù hợp với nhu cầu sử dụng của từng gia đình.",
+  badge: "Khảo sát trước khi chốt phương án",
 };
 
 export const HOME_CONTACT_CONTENT: HomeContactContent = {

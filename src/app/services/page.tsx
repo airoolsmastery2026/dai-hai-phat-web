@@ -16,9 +16,9 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
-        eyebrow="Năng lực thi công"
-        title="Giải pháp nội thất và cơ khí theo từng hạng mục"
-        description="Từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt và nghiệm thu, mỗi dịch vụ đều được triển khai theo dữ liệu thực tế của công trình."
+        eyebrow="Dịch vụ cho nhà ở"
+        title="Nội thất và cơ khí dân dụng theo từng hạng mục"
+        description="Từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt và nghiệm thu, mỗi dịch vụ đều được triển khai theo hiện trạng nhà phố, căn hộ hoặc biệt thự."
       />
 
       <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
