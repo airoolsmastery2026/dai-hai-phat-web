@@ -22,6 +22,11 @@ const SITE_NAME =
 const DESCRIPTION =
   "Đại Hải Phát chuyên thiết kế, gia công và thi công Nội thất - Cơ khí dân dụng: tủ bếp, phòng ngủ, tủ quần áo, kệ TV, mái che, cổng, lan can, cầu thang và các sản phẩm theo yêu cầu.";
 
+const DEFAULT_SOCIAL_IMAGE = {
+  url: "/images/interior/interior78.webp",
+  alt: "Nội thất dân dụng Đại Hải Phát",
+};
+
 const BUSINESS_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -85,20 +90,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "vi_VN",
-
     title: SITE_NAME,
-
     description: DESCRIPTION,
-
     siteName: SITE_NAME,
+    images: [DEFAULT_SOCIAL_IMAGE],
   },
 
   twitter: {
     card: "summary_large_image",
-
     title: SITE_NAME,
-
     description: DESCRIPTION,
+    images: [DEFAULT_SOCIAL_IMAGE.url],
   },
 
   robots: {
