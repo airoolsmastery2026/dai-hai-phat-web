@@ -110,6 +110,7 @@ export interface ProjectItem {
 export interface BlogPost {
   id: number;
   slug: string;
+  aiService: AIServicePreset;
   title: string;
   category: string;
   excerpt: string;
