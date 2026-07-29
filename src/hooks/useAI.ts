@@ -4,6 +4,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   useSyncExternalStore,
 } from "react";
@@ -35,6 +36,7 @@ const DRAFT_STORAGE_KEY = "dhp-ai-sales-engine-draft-v1";
 const LEGACY_SESSION_STORAGE_KEY = "dhp-ai-sales-engine-v1";
 const IMAGE_DATABASE = "dhp-ai-sales-engine-images-v1";
 const IMAGE_STORE = "session-images";
+const HANDOFF_TIMEOUT_MS = 20_000;
 const serverSession = createAIConversation();
 const listeners = new Set<() => void>();
 let clientSession: ConversationSession | null = null;
@@ -218,6 +220,7 @@ export function useAI() {
   >("idle");
   const [handoffError, setHandoffError] = useState<string | null>(null);
   const [handoff, setHandoff] = useState<CRMHandoffResponse | null>(null);
+  const handoffControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     if (pendingDraftRemoval) {
@@ -431,7 +434,12 @@ export function useAI() {
 
   const reset = useCallback(() => {
     const currentId = readClientSession().id;
+    handoffControllerRef.current?.abort();
+    handoffControllerRef.current = null;
     setError(null);
+    setHandoff(null);
+    setHandoffError(null);
+    setHandoffStatus("idle");
     if (!writeClientSession(createAIConversation())) {
       setError(
         "Đã khởi tạo hồ sơ mới trong phiên này nhưng trình duyệt không cho phép tự lưu.",
@@ -449,6 +457,16 @@ export function useAI() {
     setAnalysisRevision((revision) => revision + 1);
   }, []);
   const submitHandoff = useCallback(async () => {
+    if (handoffControllerRef.current) return;
+
+    const sessionId = readClientSession().id;
+    const controller = new AbortController();
+    handoffControllerRef.current = controller;
+    const timeout = window.setTimeout(
+      () => controller.abort(),
+      HANDOFF_TIMEOUT_MS,
+    );
+
     setHandoffStatus("submitting");
     setHandoffError(null);
     try {
@@ -459,20 +477,30 @@ export function useAI() {
         credentials: "same-origin",
         cache: "no-store",
         body: JSON.stringify(body),
+        signal: controller.signal,
       });
       const payload = (await response.json()) as HandoffApiResponse;
       if (!response.ok || !payload.handoff) {
         throw new Error(payload.error || "Chưa thể bàn giao hồ sơ.");
       }
+      if (readClientSession().id !== sessionId) return;
       setHandoff(payload.handoff);
       setHandoffStatus("success");
     } catch (caughtError) {
+      if (readClientSession().id !== sessionId) return;
       setHandoffError(
-        caughtError instanceof Error
-          ? caughtError.message
-          : "Chưa thể bàn giao hồ sơ.",
+        caughtError instanceof Error && caughtError.name === "AbortError"
+          ? "Kết nối phản hồi quá lâu. Hồ sơ vẫn được giữ trên thiết bị."
+          : caughtError instanceof Error
+            ? caughtError.message
+            : "Chưa thể bàn giao hồ sơ.",
       );
       setHandoffStatus("error");
+    } finally {
+      window.clearTimeout(timeout);
+      if (handoffControllerRef.current === controller) {
+        handoffControllerRef.current = null;
+      }
     }
   }, []);
 
