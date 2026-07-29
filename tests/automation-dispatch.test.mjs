@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHmac } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test, { afterEach } from "node:test";
 import ts from "typescript";
@@ -7,12 +8,24 @@ const source = await readFile(
   new URL("../src/lib/server/automation.ts", import.meta.url),
   "utf8",
 );
-const transpiled = ts.transpileModule(source, {
-  compilerOptions: {
-    module: ts.ModuleKind.ESNext,
-    target: ts.ScriptTarget.ES2022,
-  },
-});
+const signatureSource = await readFile(
+  new URL("../src/lib/server/webhook-signature.ts", import.meta.url),
+  "utf8",
+);
+const compilerOptions = {
+  module: ts.ModuleKind.ESNext,
+  target: ts.ScriptTarget.ES2022,
+};
+const signatureModule = `data:text/javascript;base64,${Buffer.from(
+  ts.transpileModule(signatureSource, { compilerOptions }).outputText,
+).toString("base64")}`;
+const transpiled = ts.transpileModule(
+  source.replace(
+    '"@/lib/server/webhook-signature"',
+    JSON.stringify(signatureModule),
+  ),
+  { compilerOptions },
+);
 const automation = await import(
   `data:text/javascript;base64,${Buffer.from(transpiled.outputText).toString("base64")}`
 );
@@ -78,6 +91,12 @@ test("dispatches a minimal idempotent lead event", async () => {
     request.init.headers["Idempotency-Key"],
     "session-123:lead-received",
   );
+  const timestamp = request.init.headers["X-DHP-Timestamp"];
+  const expectedSignature = `v1=${createHmac("sha256", "secret-token")
+    .update(`${timestamp}.${request.init.body}`, "utf8")
+    .digest("hex")}`;
+  assert.match(timestamp, /^\d{10}$/);
+  assert.equal(request.init.headers["X-DHP-Signature"], expectedSignature);
   assert.equal(body.event, "lead.received");
   assert.equal(body.leadId, "lead-456");
   assert.equal(body.project.imageCount, 2);

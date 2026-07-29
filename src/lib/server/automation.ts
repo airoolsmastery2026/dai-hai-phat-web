@@ -2,6 +2,7 @@ import type {
   CRMHandoffRequest,
   CRMHandoffResponse,
 } from "@/lib/ai/handoff";
+import { createWebhookSignature } from "@/lib/server/webhook-signature";
 
 const AUTOMATION_TIMEOUT_MS = 5_000;
 
@@ -42,6 +43,17 @@ export async function dispatchLeadAutomation(
   const timeout = setTimeout(() => controller.abort(), AUTOMATION_TIMEOUT_MS);
 
   try {
+    const timestamp = String(Math.floor(Date.now() / 1_000));
+    const payload = JSON.stringify({
+      event: "lead.received",
+      occurredAt: handoff.receivedAt,
+      leadId: handoff.leadId,
+      source: lead.source,
+      project: lead.project,
+      contact: lead.contact,
+      qualification: lead.qualification,
+    });
+
     const response = await fetch(config.url, {
       method: "POST",
       headers: {
@@ -49,16 +61,14 @@ export async function dispatchLeadAutomation(
         "Content-Type": "application/json",
         "Idempotency-Key": `${lead.sessionId}:lead-received`,
         "X-DHP-Request-Id": requestId,
+        "X-DHP-Signature": createWebhookSignature(
+          payload,
+          timestamp,
+          config.token,
+        ),
+        "X-DHP-Timestamp": timestamp,
       },
-      body: JSON.stringify({
-        event: "lead.received",
-        occurredAt: handoff.receivedAt,
-        leadId: handoff.leadId,
-        source: lead.source,
-        project: lead.project,
-        contact: lead.contact,
-        qualification: lead.qualification,
-      }),
+      body: payload,
       cache: "no-store",
       signal: controller.signal,
     });
