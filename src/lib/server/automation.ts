@@ -1,12 +1,10 @@
-import { createHmac } from "node:crypto";
-
 import type {
   CRMHandoffRequest,
   CRMHandoffResponse,
 } from "@/lib/ai/handoff";
+import { createWebhookSignature } from "@/lib/server/webhook-signature";
 
 const AUTOMATION_TIMEOUT_MS = 5_000;
-const SIGNATURE_VERSION = "v1";
 
 export type AutomationDispatchStatus =
   | "delivered"
@@ -17,12 +15,6 @@ export type AutomationDispatchStatus =
 
 export interface AutomationDispatchResult {
   status: AutomationDispatchStatus;
-}
-
-function signPayload(payload: string, timestamp: string, token: string): string {
-  return `${SIGNATURE_VERSION}=${createHmac("sha256", token)
-    .update(`${timestamp}.${payload}`, "utf8")
-    .digest("hex")}`;
 }
 
 function automationConfig(): { url: string; token: string } | null {
@@ -69,7 +61,11 @@ export async function dispatchLeadAutomation(
         "Content-Type": "application/json",
         "Idempotency-Key": `${lead.sessionId}:lead-received`,
         "X-DHP-Request-Id": requestId,
-        "X-DHP-Signature": signPayload(payload, timestamp, config.token),
+        "X-DHP-Signature": createWebhookSignature(
+          payload,
+          timestamp,
+          config.token,
+        ),
         "X-DHP-Timestamp": timestamp,
       },
       body: payload,
