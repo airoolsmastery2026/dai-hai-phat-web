@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
-import { AIOfficeSection } from "@/components/sections/AIOfficeSection";
+import { AIOfficeRouteEntry } from "@/components/sections/AIOfficeRouteEntry";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
@@ -31,12 +32,31 @@ export const metadata: Metadata = {
   },
 };
 
+function AIOfficeFallback() {
+  return (
+    <section
+      id="ai-office"
+      className="scroll-mt-16 bg-[var(--color-surface-dark)] py-[var(--space-section)] text-[var(--color-text-inverse)] lg:py-[var(--space-section-lg)]"
+      aria-label="Đang chuẩn bị trợ lý tư vấn"
+      aria-busy="true"
+    >
+      <div className="mx-auto max-w-7xl px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
+        <p className="font-bold text-[var(--color-primary-soft-text)]">
+          Đang chuẩn bị hồ sơ tư vấn kỹ thuật…
+        </p>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
       <HeroSection />
       <ServicesSection />
-      <AIOfficeSection />
+      <Suspense fallback={<AIOfficeFallback />}>
+        <AIOfficeRouteEntry />
+      </Suspense>
       <ProjectsSection />
       <ContactSection />
     </main>
