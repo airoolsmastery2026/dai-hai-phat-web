@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 
+import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -95,6 +96,14 @@ export default function BlogPage() {
           </div>
         </Container>
       </section>
+
+      <AIConsultationCta
+        eyebrow="Từ checklist đến hồ sơ"
+        title="Ghi nhận dữ liệu dự án theo từng bước"
+        description="Chọn hạng mục trong trợ lý AI để lưu kích thước, vật liệu, vị trí và nhu cầu sử dụng trước khi đội ngũ kỹ thuật xác nhận khảo sát."
+        secondaryHref="/services"
+        secondaryLabel="Xem dịch vụ"
+      />
     </main>
   );
 }
