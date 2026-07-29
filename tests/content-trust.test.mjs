@@ -176,3 +176,51 @@ test("explains CRM consent and makes privacy information reachable", async () =>
   assert.match(footer, /href="\/privacy"/);
   assert.match(sitemap, /`\$\{baseUrl\}\/privacy`/);
 });
+
+test("preserves the selected service when customers enter the AI intake", async () => {
+  const services = await readFile(
+    new URL("../src/content/services.ts", import.meta.url),
+    "utf8",
+  );
+  const serviceHero = await readFile(
+    new URL("../src/components/services/ServiceHero.tsx", import.meta.url),
+    "utf8",
+  );
+  const serviceCta = await readFile(
+    new URL("../src/components/services/ServiceCTA.tsx", import.meta.url),
+    "utf8",
+  );
+  const servicePage = await readFile(
+    new URL("../src/app/services/[slug]/page.tsx", import.meta.url),
+    "utf8",
+  );
+  const aiOffice = await readFile(
+    new URL("../src/components/sections/AIOfficeSection.tsx", import.meta.url),
+    "utf8",
+  );
+  const contactPage = await readFile(
+    new URL("../src/app/contact/page.tsx", import.meta.url),
+    "utf8",
+  );
+  const presets = Array.from(
+    services.matchAll(/aiService: "([^"]+)"/g),
+    (match) => match[1],
+  );
+  const allowedPresets = new Set([
+    "Cửa cổng",
+    "Cầu thang và lan can",
+    "Mái che",
+    "Nội thất",
+    "Cải tạo không gian",
+  ]);
+
+  assert.equal(presets.length, 5);
+  assert.ok(presets.every((preset) => allowedPresets.has(preset)));
+  assert.match(serviceHero, /encodeURIComponent\(service\.aiService\)/);
+  assert.match(serviceCta, /encodeURIComponent\(service\.aiService\)/);
+  assert.match(servicePage, /<ServiceCTA service=\{service\} \/>/);
+  assert.match(aiOffice, /new URLSearchParams\(window\.location\.search\)/);
+  assert.match(aiOffice, /question\?\.field === "intent"/);
+  assert.match(aiOffice, /answer\(servicePreset\)/);
+  assert.match(contactPage, /href="\/#ai-office"/);
+});

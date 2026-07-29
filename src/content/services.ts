@@ -21,6 +21,7 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 1,
     slug: "noi-that-gỗ-mdf-melamine",
+    aiService: "Nội thất",
     title: "Nội thất gỗ MDF và cánh kính khung nhôm",
     subtitle: "Tư vấn thiết kế thực tế",
     summary:
@@ -64,6 +65,7 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 2,
     slug: "vach-tuong-trang-tri-composite",
+    aiService: "Cải tạo không gian",
     title: "Vách ngăn và ốp composite",
     subtitle: "Giải pháp bề mặt thực tế",
     summary:
@@ -106,6 +108,7 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 3,
     slug: "mai-che-nhua-dac-composite",
+    aiService: "Mái che",
     title: "Mái che và tấm lấy sáng",
     subtitle: "Khảo sát trước khi chọn tấm",
     summary:
@@ -148,6 +151,7 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 4,
     slug: "cua-cong-co-khi-dan-dung",
+    aiService: "Cửa cổng",
     title: "Cửa cổng và cơ khí dân dụng",
     subtitle: "Gia công theo hiện trạng",
     summary:
@@ -190,6 +194,7 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 5,
     slug: "cau-thang-lan-can",
+    aiService: "Cầu thang và lan can",
     title: "Cầu thang và lan can",
     subtitle: "Thiết kế theo hiện trạng",
     summary:

@@ -43,9 +43,17 @@ export interface ServiceSeo {
   canonical: string;
 }
 
+export type AIServicePreset =
+  | "Cửa cổng"
+  | "Cầu thang và lan can"
+  | "Mái che"
+  | "Nội thất"
+  | "Cải tạo không gian";
+
 export interface ServiceItem {
   id: number;
   slug: string;
+  aiService: AIServicePreset;
   title: string;
   subtitle: string;
   summary: string;

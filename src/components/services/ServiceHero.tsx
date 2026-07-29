@@ -2,8 +2,11 @@ import Image from "next/image";
 
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import type { ServiceItem } from "@/types/content";
 
-export function ServiceHero({ service }: { service: { title: string; subtitle: string; summary: string; image: string } }) {
+export function ServiceHero({ service }: { service: ServiceItem }) {
+  const aiOfficeHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+
   return (
     <section className="relative overflow-hidden bg-[var(--color-surface-dark)] py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
       <Container>
@@ -22,7 +25,7 @@ export function ServiceHero({ service }: { service: { title: string; subtitle: s
               {service.summary}
             </p>
             <div className="mt-[var(--space-10)] flex flex-wrap gap-[var(--space-4)]">
-              <Button href="/contact">Yêu cầu báo giá</Button>
+              <Button href={aiOfficeHref}>Lập hồ sơ tư vấn</Button>
               <Button href="#faq" variant="secondary">
                 Xem câu hỏi thường gặp
               </Button>

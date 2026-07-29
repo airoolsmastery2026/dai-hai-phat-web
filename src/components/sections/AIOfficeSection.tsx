@@ -14,7 +14,12 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, type FormEvent, type ReactNode } from "react";
+import {
+  useState,
+  useSyncExternalStore,
+  type FormEvent,
+  type ReactNode,
+} from "react";
 
 import { useAI } from "@/hooks/useAI";
 import { COMPANY_CONFIG } from "@/content/company";
@@ -30,6 +35,23 @@ const AUTO_COMPLETE_BY_FIELD: Partial<Record<ConversationQuestion["field"], stri
   email: "email",
   zalo: "tel",
 };
+
+const AI_SERVICE_PRESETS = new Set([
+  "Cửa cổng",
+  "Cầu thang và lan can",
+  "Mái che",
+  "Nội thất",
+  "Cải tạo không gian",
+]);
+
+function subscribeToLocation() {
+  return () => undefined;
+}
+
+function readServicePreset(): string | null {
+  const preset = new URLSearchParams(window.location.search).get("service");
+  return preset && AI_SERVICE_PRESETS.has(preset) ? preset : null;
+}
 
 export function AIOfficeSection() {
   const {
@@ -53,6 +75,22 @@ export function AIOfficeSection() {
     submitHandoff,
     reset,
   } = useAI();
+  const servicePreset = useSyncExternalStore(
+    subscribeToLocation,
+    readServicePreset,
+    () => null,
+  );
+  const handleAnswer = (value: string) => {
+    const shouldApplyPreset =
+      question?.field === "intent" &&
+      Boolean(servicePreset) &&
+      !session.memory.service;
+
+    answer(value);
+    if (shouldApplyPreset && servicePreset) {
+      answer(servicePreset);
+    }
+  };
 
   return (
     <section
@@ -75,6 +113,15 @@ export function AIOfficeSection() {
             Bản nháp tự lưu tối đa {AI_DRAFT_RETENTION_DAYS} ngày trên thiết bị này.
             Thông tin chưa tự động gửi tới kỹ sư hoặc CRM.
           </p>
+          {servicePreset && !session.memory.service ? (
+            <p
+              className="mt-[var(--space-stack)] rounded-[var(--radius-md)] border border-[var(--color-primary)] bg-[var(--color-primary-soft)] p-[var(--space-control)] text-sm font-semibold text-[var(--color-primary-soft-text)]"
+              role="status"
+            >
+              Đã chọn trước hạng mục “{servicePreset}”. Trợ lý sẽ ghi nhận sau
+              khi anh/chị chọn mục tiêu tư vấn.
+            </p>
+          ) : null}
         </header>
 
         <div className="mt-[var(--space-section-compact)] grid gap-[var(--space-stack)] lg:grid-cols-[1.15fr_0.85fr]">
@@ -83,7 +130,7 @@ export function AIOfficeSection() {
             question={question}
             error={error}
             isProcessingImages={isProcessingImages}
-            onAnswer={answer}
+            onAnswer={handleAnswer}
             onImages={addImages}
             onReset={reset}
             handoff={handoff}

@@ -1,7 +1,10 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import type { ServiceItem } from "@/types/content";
 
-export function ServiceCTA() {
+export function ServiceCTA({ service }: { service: ServiceItem }) {
+  const aiOfficeHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+
   return (
     <section className="relative overflow-hidden bg-[var(--color-surface-dark)] py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
       <Container>
@@ -18,8 +21,11 @@ export function ServiceCTA() {
               ngũ tư vấn phạm vi phù hợp.
             </p>
           </div>
-          <div className="flex-shrink-0">
-            <Button href="/contact">Liên hệ kỹ sư</Button>
+          <div className="flex flex-shrink-0 flex-col gap-[var(--space-3)] sm:flex-row">
+            <Button href={aiOfficeHref}>Lập hồ sơ tư vấn</Button>
+            <Button href="/contact" variant="secondary">
+              Liên hệ kỹ sư
+            </Button>
           </div>
         </div>
       </Container>

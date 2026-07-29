@@ -89,7 +89,7 @@ export default function ContactPage() {
               Zalo phù hợp nhất để gửi ảnh và vị trí công trình. Nếu hạng mục
               cần xử lý gấp, hãy gọi trực tiếp kỹ sư.
             </p>
-            <div className="mt-[var(--space-6)] flex flex-col gap-[var(--space-3)] sm:flex-row">
+            <div className="mt-[var(--space-6)] flex flex-col flex-wrap gap-[var(--space-3)] sm:flex-row">
               <Button href={COMPANY_CONFIG.socials.zalo1} external>
                 Gửi thông tin qua Zalo
               </Button>
@@ -98,6 +98,9 @@ export default function ContactPage() {
                 variant="ghost"
               >
                 Gọi {COMPANY_CONFIG.phones[0].display}
+              </Button>
+              <Button href="/#ai-office" variant="ghost">
+                Lập hồ sơ với AI
               </Button>
             </div>
             <Alert

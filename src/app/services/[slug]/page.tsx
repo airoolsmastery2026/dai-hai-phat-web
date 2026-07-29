@@ -98,7 +98,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </section>
 
-      <ServiceCTA />
+      <ServiceCTA service={service} />
     </main>
   );
 }
