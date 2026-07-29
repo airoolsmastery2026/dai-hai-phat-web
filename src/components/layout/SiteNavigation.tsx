@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Phone, X } from "lucide-react";
+import { Bot, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { COMPANY_CONFIG } from "@/content/company";
@@ -65,10 +65,11 @@ export function SiteNavigation() {
             {COMPANY_CONFIG.phones[0].display}
           </a>
           <Link
-            href="/contact"
-            className="inline-flex min-h-[var(--control-min-size)] items-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-white transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
+            href="/#ai-office"
+            className="inline-flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-white transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
           >
-            Yêu cầu tư vấn
+            <Bot className="h-4 w-4" aria-hidden="true" />
+            Tư vấn AI 24/7
           </Link>
         </div>
 
@@ -104,13 +105,23 @@ export function SiteNavigation() {
               </Link>
             ))}
           </nav>
-          <a
-            href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-            className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-white"
-          >
-            <Phone className="h-5 w-5" aria-hidden="true" />
-            Gọi {COMPANY_CONFIG.phones[0].display}
-          </a>
+          <div className="flex flex-col gap-[var(--space-3)]">
+            <Link
+              href="/#ai-office"
+              onClick={() => setOpen(false)}
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-white"
+            >
+              <Bot className="h-5 w-5" aria-hidden="true" />
+              Bắt đầu tư vấn AI
+            </Link>
+            <a
+              href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] font-bold text-white"
+            >
+              <Phone className="h-5 w-5" aria-hidden="true" />
+              Gọi {COMPANY_CONFIG.phones[0].display}
+            </a>
+          </div>
         </div>
       )}
     </header>
