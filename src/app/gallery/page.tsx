@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { VerifiedGallery } from "@/components/gallery/VerifiedGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
 import { Container } from "@/components/ui/Container";
 import { listPublicResidentialGallery } from "@/lib/ai/public-gallery";
 
@@ -93,6 +94,14 @@ export default function GalleryPage() {
           <VerifiedGallery initialGallery={initialGallery} />
         </Container>
       </section>
+
+      <AIConsultationCta
+        eyebrow="Từ mẫu tham khảo đến hồ sơ thực tế"
+        title="Lập hồ sơ cho không gian của anh/chị"
+        description="Trợ lý AI sẽ ghi nhận hạng mục, loại nhà ở, kích thước dự kiến và ưu tiên sử dụng. Mẫu trong thư viện chỉ dùng để đối chiếu, không thay thế khảo sát hiện trạng."
+        secondaryHref="/services"
+        secondaryLabel="Xem phạm vi dịch vụ"
+      />
     </main>
   );
 }
