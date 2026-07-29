@@ -154,6 +154,8 @@ export async function POST(request: NextRequest) {
       console.warn("DHP Gemini project analysis unavailable", {
         requestId,
         code: error.code,
+        upstreamHttpStatus: error.upstreamHttpStatus,
+        upstreamStatus: error.upstreamStatus,
       });
       return jsonResponse(
         {
