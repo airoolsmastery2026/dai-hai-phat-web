@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, MessageCircle, PhoneCall } from "lucide-react";
+import { Bot, Mail, MapPin, PhoneCall } from "lucide-react";
 
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
@@ -8,13 +8,16 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { COMPANY_CONFIG } from "@/content/company";
 
+const CONTACT_DESCRIPTION =
+  "Lập hồ sơ tư vấn kỹ thuật với Đại Hải Phát, sau đó gửi ảnh hiện trạng qua Zalo hoặc gọi kỹ sư để xác nhận khảo sát.";
+
 export const metadata: Metadata = {
   title: "Liên hệ",
-  description: "Liên hệ Đại Hải Phát để nhận tư vấn báo giá và đặt lịch thi công.",
+  description: CONTACT_DESCRIPTION,
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Liên hệ Đại Hải Phát",
-    description: "Liên hệ Đại Hải Phát để nhận tư vấn báo giá và đặt lịch thi công.",
+    description: CONTACT_DESCRIPTION,
     url: `${COMPANY_CONFIG.websiteUrl}/contact`,
     type: "website",
   },
@@ -25,8 +28,8 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
         eyebrow="Liên hệ kỹ thuật"
-        title="Gửi dữ liệu hiện trạng trước khi khảo sát"
-        description="Chọn một kênh liên hệ đang hoạt động để gửi hạng mục, vị trí, kích thước dự kiến và ảnh hiện trạng cho đội ngũ Đại Hải Phát."
+        title="Lập hồ sơ trước khi xác nhận khảo sát"
+        description="Bắt đầu với trợ lý AI để ghi nhận hạng mục, vị trí và kích thước dự kiến. Sau đó gửi ảnh hiện trạng qua Zalo hoặc gọi kỹ sư khi cần trao đổi nhanh."
       />
 
       <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
@@ -78,20 +81,26 @@ export default function ContactPage() {
           </Card>
 
           <Card className="p-[var(--space-8)]">
-            <MessageCircle
+            <Bot
               className="h-8 w-8 text-[var(--color-primary)]"
               aria-hidden="true"
             />
             <h2 className="mt-[var(--space-4)] text-2xl font-bold text-[var(--color-text)]">
-              Kênh tiếp nhận nhanh
+              Bắt đầu hồ sơ tư vấn
             </h2>
             <p className="mt-[var(--space-4)] leading-7 text-[var(--color-text-muted)]">
-              Zalo phù hợp nhất để gửi ảnh và vị trí công trình. Nếu hạng mục
-              cần xử lý gấp, hãy gọi trực tiếp kỹ sư.
+              Trợ lý AI giúp thu thập dữ liệu theo từng bước trước khi bàn giao cho
+              đội ngũ kỹ thuật. Zalo phù hợp để gửi ảnh hiện trạng; hotline dành
+              cho trường hợp cần trao đổi ngay.
             </p>
             <div className="mt-[var(--space-6)] flex flex-col flex-wrap gap-[var(--space-3)] sm:flex-row">
-              <Button href={COMPANY_CONFIG.socials.zalo1} external>
-                Gửi thông tin qua Zalo
+              <Button href="/#ai-office">Lập hồ sơ với AI</Button>
+              <Button
+                href={COMPANY_CONFIG.socials.zalo1}
+                variant="ghost"
+                external
+              >
+                Gửi ảnh qua Zalo
               </Button>
               <Button
                 href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
@@ -99,17 +108,14 @@ export default function ContactPage() {
               >
                 Gọi {COMPANY_CONFIG.phones[0].display}
               </Button>
-              <Button href="/#ai-office" variant="ghost">
-                Lập hồ sơ với AI
-              </Button>
             </div>
             <Alert
-              title="Có thể lập hồ sơ trực tuyến"
+              title="Chỉ bàn giao khi khách hàng đồng ý"
               className="mt-[var(--space-8)]"
             >
-              Trợ lý AI trên trang chủ giúp thu thập dữ liệu theo từng bước và
-              chỉ bàn giao hồ sơ cho đội ngũ kỹ thuật sau khi anh/chị đồng ý.
-              Zalo và hotline vẫn là kênh tiếp nhận nhanh.
+              Hồ sơ AI được lưu trên thiết bị trong quá trình nhập. Thông tin chỉ
+              được gửi cho Đại Hải Phát khi anh/chị hoàn tất hồ sơ và đồng ý bàn
+              giao. Ảnh hiện trạng có thể gửi riêng qua Zalo.
             </Alert>
           </Card>
         </Container>
