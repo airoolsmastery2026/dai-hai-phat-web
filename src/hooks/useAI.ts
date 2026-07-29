@@ -20,13 +20,19 @@ import type {
   ProposalEvidenceRequest,
   ProposalEvidenceResponse,
 } from "@/lib/ai/catalog";
+import { readAIDraft, serializeAIDraft } from "@/lib/ai/persistence";
 
-const STORAGE_KEY = "dhp-ai-sales-engine-v1";
+const DRAFT_STORAGE_KEY = "dhp-ai-sales-engine-draft-v1";
+const LEGACY_SESSION_STORAGE_KEY = "dhp-ai-sales-engine-v1";
 const IMAGE_DATABASE = "dhp-ai-sales-engine-images-v1";
 const IMAGE_STORE = "session-images";
 const serverSession = createAIConversation();
 const listeners = new Set<() => void>();
 let clientSession: ConversationSession | null = null;
+let pendingDraftMigration: ConversationSession | null = null;
+let pendingDraftRemoval = false;
+let pendingImageRemovalSessionId: string | null = null;
+let browserStorageUnavailable = false;
 
 interface EvidenceResult {
   key: string;
@@ -42,7 +48,39 @@ interface EvidenceApiResponse {
 
 function readClientSession(): ConversationSession {
   if (clientSession) return clientSession;
-  clientSession = restoreAIConversation(window.sessionStorage.getItem(STORAGE_KEY));
+
+  let persistedDraft: string | null = null;
+  try {
+    persistedDraft = window.localStorage.getItem(DRAFT_STORAGE_KEY);
+  } catch {
+    browserStorageUnavailable = true;
+  }
+
+  const draft = readAIDraft(persistedDraft);
+  if (draft.status === "ready") {
+    clientSession = restoreAIConversation(JSON.stringify(draft.session));
+    return clientSession;
+  }
+  if (draft.status === "expired") {
+    pendingDraftRemoval = true;
+    pendingImageRemovalSessionId = draft.sessionId;
+  } else if (draft.status === "invalid") {
+    pendingDraftRemoval = true;
+  }
+
+  let legacySession: string | null = null;
+  try {
+    legacySession = window.sessionStorage.getItem(LEGACY_SESSION_STORAGE_KEY);
+  } catch {
+    browserStorageUnavailable = true;
+  }
+  if (legacySession) {
+    clientSession = restoreAIConversation(legacySession);
+    pendingDraftMigration = clientSession;
+    return clientSession;
+  }
+
+  clientSession = createAIConversation();
   return clientSession;
 }
 
@@ -51,10 +89,18 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
-function writeClientSession(next: ConversationSession) {
-  window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+function writeClientSession(next: ConversationSession): boolean {
+  let saved = false;
+  try {
+    window.localStorage.setItem(DRAFT_STORAGE_KEY, serializeAIDraft(next));
+    window.sessionStorage.removeItem(LEGACY_SESSION_STORAGE_KEY);
+    saved = true;
+  } catch {
+    browserStorageUnavailable = true;
+  }
   clientSession = next;
   listeners.forEach((listener) => listener());
+  return saved;
 }
 
 function requestResult<T>(request: IDBRequest<T>): Promise<T> {
@@ -131,10 +177,39 @@ async function removeSessionImages(sessionId: string) {
 
 export function useAI() {
   const session = useSyncExternalStore(subscribe, readClientSession, () => serverSession);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(() =>
+    browserStorageUnavailable
+      ? "Hồ sơ vẫn dùng được trong phiên hiện tại nhưng trình duyệt không cho phép tự lưu."
+      : null,
+  );
   const [isProcessingImages, setIsProcessingImages] = useState(false);
   const [evidenceRevision, setEvidenceRevision] = useState(0);
   const [evidenceResult, setEvidenceResult] = useState<EvidenceResult | null>(null);
+
+  useEffect(() => {
+    if (pendingDraftRemoval) {
+      try {
+        window.localStorage.removeItem(DRAFT_STORAGE_KEY);
+      } catch {
+        browserStorageUnavailable = true;
+      }
+      pendingDraftRemoval = false;
+    }
+
+    if (pendingDraftMigration) {
+      const migrated = pendingDraftMigration;
+      pendingDraftMigration = null;
+      writeClientSession(migrated);
+    }
+
+    const expiredSessionId = pendingImageRemovalSessionId;
+    pendingImageRemovalSessionId = null;
+    if (expiredSessionId) {
+      void removeSessionImages(expiredSessionId).catch(() => {
+        setError("Không thể xóa ảnh của bản nháp đã hết hạn.");
+      });
+    }
+  }, []);
 
   const evidenceQuery = useMemo<ProposalEvidenceRequest | null>(() => {
     if (
@@ -219,7 +294,14 @@ export function useAI() {
   const commitAnswer = useCallback((value: string | StoredImage[]) => {
     setError(null);
     try {
-      writeClientSession(answerConversation(readClientSession(), value));
+      const saved = writeClientSession(
+        answerConversation(readClientSession(), value),
+      );
+      if (!saved) {
+        setError(
+          "Dữ liệu đã được ghi nhận trong phiên này nhưng chưa thể tự lưu trên thiết bị.",
+        );
+      }
     } catch (caughtError) {
       setError(caughtError instanceof Error ? caughtError.message : "Không thể ghi nhận dữ liệu.");
     }
@@ -242,7 +324,11 @@ export function useAI() {
     try {
       const next = answerConversation(current, images);
       await replaceSessionImages(current.id, selectedFiles, images);
-      writeClientSession(next);
+      if (!writeClientSession(next)) {
+        setError(
+          "Ảnh đã được ghi nhận trong phiên này nhưng hồ sơ chưa thể tự lưu trên thiết bị.",
+        );
+      }
     } catch (caughtError) {
       void removeSessionImages(current.id);
       setError(caughtError instanceof Error ? caughtError.message : "Không thể ghi nhận ảnh.");
@@ -254,11 +340,10 @@ export function useAI() {
   const reset = useCallback(() => {
     const currentId = readClientSession().id;
     setError(null);
-    try {
-      writeClientSession(createAIConversation());
-    } catch {
-      setError("Không thể khởi tạo hồ sơ mới trong phiên trình duyệt.");
-      return;
+    if (!writeClientSession(createAIConversation())) {
+      setError(
+        "Đã khởi tạo hồ sơ mới trong phiên này nhưng trình duyệt không cho phép tự lưu.",
+      );
     }
     void removeSessionImages(currentId).catch(() => {
       setError("Không thể xóa dữ liệu ảnh của phiên trước.");

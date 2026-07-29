@@ -19,6 +19,7 @@ import { useAI } from "@/hooks/useAI";
 import { COMPANY_CONFIG } from "@/content/company";
 import { getStateLabel, type ConversationQuestion, type ConversationSession } from "@/lib/ai";
 import type { ProposalEvidenceResponse } from "@/lib/ai/catalog";
+import { AI_DRAFT_RETENTION_DAYS } from "@/lib/ai/persistence";
 
 const AUTO_COMPLETE_BY_FIELD: Partial<Record<ConversationQuestion["field"], string>> = {
   name: "name",
@@ -59,6 +60,10 @@ export function AIOfficeSection() {
           <p className="mt-[var(--space-stack)] leading-7 text-[var(--color-text-dark-muted)]">
             Mỗi bước thu thập đúng một dữ liệu. Khoảng chi phí và phương án kỹ thuật
             chỉ được xác nhận khi đủ dữ liệu và hoàn tất khảo sát.
+          </p>
+          <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-subtle)]">
+            Bản nháp tự lưu tối đa {AI_DRAFT_RETENTION_DAYS} ngày trên thiết bị này.
+            Thông tin chưa tự động gửi tới kỹ sư hoặc CRM.
           </p>
         </header>
 
@@ -122,7 +127,7 @@ function ConversationPanel({
           type="button"
           onClick={onReset}
           className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-[var(--color-text-dark-muted)] transition hover:text-[var(--color-text-inverse)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
-          aria-label="Bắt đầu hồ sơ mới"
+          aria-label="Xóa hồ sơ đã lưu và bắt đầu lại"
         >
           <RotateCcw className="h-5 w-5" aria-hidden="true" />
         </button>
@@ -281,6 +286,10 @@ function CompletionState({ session }: { session: ConversationSession }) {
         Hồ sơ của {session.memory.name} đã đạt {session.proposal.progress}%.
         Dữ liệu hiện chỉ được lưu trên trình duyệt này và chưa tự động gửi tới
         kỹ sư hoặc CRM. Báo giá chính thức được lập sau khi xác minh hiện trạng.
+      </p>
+      <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-subtle)]">
+        Bản nháp dự án tự hết hạn sau {AI_DRAFT_RETENTION_DAYS} ngày. Tên, số liên
+        hệ, địa chỉ, email và Zalo không được lưu bền sau khi tải lại trang.
       </p>
       <a
         href={COMPANY_CONFIG.socials.zalo1}
