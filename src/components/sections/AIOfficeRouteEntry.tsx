@@ -1,15 +1,12 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-
 import { AIOfficeControllers } from "@/components/sections/AIOfficeControllers";
 import { AIOfficeSection } from "@/components/sections/AIOfficeSection";
 import { AIServiceConflictNotice } from "@/components/sections/AIServiceConflictNotice";
-import { getAIService } from "@/lib/ai/service-domain";
+import { useAIServicePreset } from "@/hooks/useAIServicePreset";
 
 export function AIOfficeRouteEntry() {
-  const searchParams = useSearchParams();
-  const servicePreset = getAIService(searchParams.get("service"));
+  const servicePreset = useAIServicePreset();
 
   return (
     <>
