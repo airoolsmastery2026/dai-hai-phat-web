@@ -4,10 +4,14 @@ import { AIFunnelEventController } from "@/components/analytics/AIFunnelEventCon
 import { AIOfficeAccessibilityController } from "@/components/sections/AIOfficeAccessibilityController";
 import type { AIService } from "@/lib/ai/service-domain";
 
-export function AIOfficeControllers({ service }: { service?: AIService }) {
+export function AIOfficeControllers({
+  service,
+}: {
+  service: AIService | undefined;
+}) {
   return (
     <>
-      <AIFunnelEventController service={service} />
+      <AIFunnelEventController {...(service ? { service } : {})} />
       <AIOfficeAccessibilityController />
     </>
   );
