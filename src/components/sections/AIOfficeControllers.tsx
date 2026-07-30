@@ -11,7 +11,11 @@ export function AIOfficeControllers({
 }) {
   return (
     <>
-      <AIFunnelEventController {...(service ? { service } : {})} />
+      {service ? (
+        <AIFunnelEventController service={service} />
+      ) : (
+        <AIFunnelEventController />
+      )}
       <AIOfficeAccessibilityController />
     </>
   );
