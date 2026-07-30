@@ -1,4 +1,4 @@
-import { after, NextRequest, NextResponse } from "next/server";
+import { after, NextRequest } from "next/server";
 
 import {
   CRMHandoffValidationError,
@@ -9,6 +9,7 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
+import { apiJsonResponse } from "@/lib/server/api-json-response";
 import { dispatchLeadAutomation } from "@/lib/server/automation";
 import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
 import { formatSupportReference } from "@/lib/server/support-reference";
@@ -21,44 +22,19 @@ const BODY_LIMIT_BYTES = 16 * 1024;
 const RATE_LIMIT_WINDOW_MS = 15 * 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 4;
 
-function readResponseRequestId(body: unknown): string | undefined {
-  if (typeof body !== "object" || body === null || !("requestId" in body)) {
-    return undefined;
-  }
-
-  const requestId = (body as { requestId?: unknown }).requestId;
-  return typeof requestId === "string" && requestId.length <= 100
-    ? requestId
-    : undefined;
-}
-
-function jsonResponse(body: unknown, status: number, extraHeaders?: HeadersInit) {
-  const requestId = readResponseRequestId(body);
-
-  return NextResponse.json(body, {
-    status,
-    headers: {
-      "Cache-Control": "private, no-store",
-      "X-Content-Type-Options": "nosniff",
-      ...(requestId ? { "X-Request-ID": requestId } : {}),
-      ...extraHeaders,
-    },
-  });
-}
-
 export async function POST(request: NextRequest) {
   const requestId = globalThis.crypto.randomUUID();
 
   if (!isSameOriginRequest(request.headers, request.nextUrl.host)) {
-    return jsonResponse({ error: "Nguồn yêu cầu không hợp lệ.", requestId }, 403);
+    return apiJsonResponse({ error: "Nguồn yêu cầu không hợp lệ.", requestId }, 403);
   }
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
-    return jsonResponse({ error: "Content-Type không được hỗ trợ.", requestId }, 415);
+    return apiJsonResponse({ error: "Content-Type không được hỗ trợ.", requestId }, 415);
   }
 
   const declaredLength = Number(request.headers.get("content-length") ?? "0");
   if (Number.isFinite(declaredLength) && declaredLength > BODY_LIMIT_BYTES) {
-    return jsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
+    return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
   }
 
   const rateLimit = consumeRateLimit(
@@ -67,7 +43,7 @@ export async function POST(request: NextRequest) {
     { maxRequests: RATE_LIMIT_MAX_REQUESTS, windowMs: RATE_LIMIT_WINDOW_MS },
   );
   if (!rateLimit.allowed) {
-    return jsonResponse(
+    return apiJsonResponse(
       {
         error: "Quá nhiều yêu cầu bàn giao. Vui lòng thử lại sau.",
         code: "RATE_LIMITED",
@@ -81,11 +57,11 @@ export async function POST(request: NextRequest) {
   try {
     const rawBody = await request.text();
     if (new TextEncoder().encode(rawBody).byteLength > BODY_LIMIT_BYTES) {
-      return jsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
+      return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
     }
     const lead = parseCRMHandoffRequest(JSON.parse(rawBody) as unknown);
     if (lead.website) {
-      return jsonResponse({ error: "Yêu cầu không hợp lệ.", requestId }, 400);
+      return apiJsonResponse({ error: "Yêu cầu không hợp lệ.", requestId }, 400);
     }
 
     const result = await deliverLeadToCRM(lead, requestId);
@@ -113,13 +89,13 @@ export async function POST(request: NextRequest) {
       sessionId: lead.sessionId,
       leadId: result.leadId,
     });
-    return jsonResponse({ requestId, handoff: result }, 201);
+    return apiJsonResponse({ requestId, handoff: result }, 201);
   } catch (error) {
     if (
       error instanceof CRMHandoffValidationError ||
       error instanceof SyntaxError
     ) {
-      return jsonResponse(
+      return apiJsonResponse(
         {
           error:
             error instanceof CRMHandoffValidationError
@@ -135,7 +111,7 @@ export async function POST(request: NextRequest) {
         requestId,
         code: error.code,
       });
-      return jsonResponse(
+      return apiJsonResponse(
         {
           error: formatSupportReference(
             error.code === "not_configured"
@@ -154,7 +130,7 @@ export async function POST(request: NextRequest) {
       requestId,
       error: error instanceof Error ? error.message : "Unknown error",
     });
-    return jsonResponse(
+    return apiJsonResponse(
       {
         error: formatSupportReference(
           "Chưa thể bàn giao hồ sơ. Dữ liệu vẫn được giữ trên thiết bị.",

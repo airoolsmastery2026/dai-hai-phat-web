@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 import {
   parseProjectAnalysisRequest,
@@ -12,6 +12,7 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
+import { apiJsonResponse } from "@/lib/server/api-json-response";
 import {
   analyzeProjectWithGemini,
   GeminiProjectAnalysisError,
@@ -26,31 +27,6 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 6;
 
 class RequestBodyTooLargeError extends Error {}
-
-function readResponseRequestId(body: unknown): string | undefined {
-  if (typeof body !== "object" || body === null || !("requestId" in body)) {
-    return undefined;
-  }
-
-  const requestId = (body as { requestId?: unknown }).requestId;
-  return typeof requestId === "string" && requestId.length <= 100
-    ? requestId
-    : undefined;
-}
-
-function jsonResponse(body: unknown, status: number, extraHeaders?: HeadersInit) {
-  const requestId = readResponseRequestId(body);
-
-  return NextResponse.json(body, {
-    status,
-    headers: {
-      "Cache-Control": "private, no-store",
-      "X-Content-Type-Options": "nosniff",
-      ...(requestId ? { "X-Request-ID": requestId } : {}),
-      ...extraHeaders,
-    },
-  });
-}
 
 async function readLimitedBody(request: NextRequest): Promise<string> {
   if (!request.body) return "";
@@ -78,10 +54,10 @@ export async function POST(request: NextRequest) {
   const requestId = globalThis.crypto.randomUUID();
 
   if (!isSameOriginRequest(request.headers, request.nextUrl.host)) {
-    return jsonResponse({ error: "Nguồn yêu cầu không hợp lệ.", requestId }, 403);
+    return apiJsonResponse({ error: "Nguồn yêu cầu không hợp lệ.", requestId }, 403);
   }
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
-    return jsonResponse({ error: "Content-Type không được hỗ trợ.", requestId }, 415);
+    return apiJsonResponse({ error: "Content-Type không được hỗ trợ.", requestId }, 415);
   }
 
   const rateLimit = consumeRateLimit(
@@ -93,7 +69,7 @@ export async function POST(request: NextRequest) {
     },
   );
   if (!rateLimit.allowed) {
-    return jsonResponse(
+    return apiJsonResponse(
       {
         error: "Quá nhiều yêu cầu phân tích. Vui lòng thử lại sau.",
         code: "RATE_LIMITED",
@@ -106,7 +82,7 @@ export async function POST(request: NextRequest) {
 
   const declaredLength = Number(request.headers.get("content-length") ?? "0");
   if (Number.isFinite(declaredLength) && declaredLength > BODY_LIMIT_BYTES) {
-    return jsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
+    return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
   }
 
   try {
@@ -145,17 +121,17 @@ export async function POST(request: NextRequest) {
       evidenceCount: analysis.evidenceCount,
     });
 
-    return jsonResponse({ requestId, analysis }, 200);
+    return apiJsonResponse({ requestId, analysis }, 200);
   } catch (error) {
     if (error instanceof RequestBodyTooLargeError) {
-      return jsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
+      return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
     }
     if (
       error instanceof ProjectAnalysisValidationError ||
       error instanceof ProposalEvidenceValidationError ||
       error instanceof SyntaxError
     ) {
-      return jsonResponse(
+      return apiJsonResponse(
         {
           error:
             error instanceof SyntaxError
@@ -174,7 +150,7 @@ export async function POST(request: NextRequest) {
         upstreamHttpStatus: error.upstreamHttpStatus,
         upstreamStatus: error.upstreamStatus,
       });
-      return jsonResponse(
+      return apiJsonResponse(
         {
           error: formatSupportReference(
             rateLimited
@@ -194,7 +170,7 @@ export async function POST(request: NextRequest) {
       requestId,
       error: error instanceof Error ? error.message : "Unknown error",
     });
-    return jsonResponse(
+    return apiJsonResponse(
       {
         error: formatSupportReference(
           "Không thể phân tích hồ sơ lúc này. Hồ sơ vẫn được giữ nguyên.",
