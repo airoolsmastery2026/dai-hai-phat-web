@@ -2,24 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { isAIOfficeLinkIntent } from "@/lib/performance/ai-office-intent";
 import {
   getAIOfficeRootMargin,
   type NetworkLoadingHint,
 } from "@/lib/performance/ai-office-loading";
 
 const AI_OFFICE_HASH = "#ai-office";
-const AI_OFFICE_LINK_SELECTOR = 'a[href$="#ai-office"]';
 
 type NavigatorWithConnection = Navigator & {
   connection?: NetworkLoadingHint;
 };
-
-function isAIOfficeLinkIntent(event: Event): boolean {
-  return (
-    event.target instanceof Element &&
-    Boolean(event.target.closest(AI_OFFICE_LINK_SELECTOR))
-  );
-}
 
 export function useAIOfficeActivation() {
   const activationRef = useRef<HTMLDivElement>(null);
@@ -34,7 +27,7 @@ export function useAIOfficeActivation() {
       }
     };
     const activateFromIntent = (event: Event) => {
-      if (isAIOfficeLinkIntent(event)) {
+      if (isAIOfficeLinkIntent(event.target)) {
         setIsActive(true);
       }
     };
