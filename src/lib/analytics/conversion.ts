@@ -14,6 +14,12 @@ export type AnalyticsServicePreset =
 export type ConversionEventName =
   | "ai_intake_opened"
   | "service_preset_selected"
+  | "ai_step_completed"
+  | "ai_intake_completed"
+  | "handoff_consent_given"
+  | "crm_handoff_started"
+  | "crm_handoff_succeeded"
+  | "crm_handoff_failed"
   | "zalo_clicked"
   | "phone_clicked";
 
