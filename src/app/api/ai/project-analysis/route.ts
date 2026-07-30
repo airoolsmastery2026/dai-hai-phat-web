@@ -144,6 +144,7 @@ export async function POST(request: NextRequest) {
     }
     if (error instanceof GeminiProjectAnalysisError) {
       const rateLimited = error.code === "rate_limit";
+      const timedOut = error.code === "timeout";
       console.warn("DHP Gemini project analysis unavailable", {
         requestId,
         code: error.code,
@@ -155,13 +156,19 @@ export async function POST(request: NextRequest) {
           error: formatSupportReference(
             rateLimited
               ? "Dịch vụ phân tích AI đang bận. Hồ sơ vẫn được giữ nguyên."
-              : "Phân tích AI tạm thời chưa khả dụng. Hồ sơ vẫn được giữ nguyên.",
+              : timedOut
+                ? "Phân tích AI phản hồi quá lâu. Hồ sơ vẫn được giữ nguyên để anh/chị thử lại."
+                : "Phân tích AI tạm thời chưa khả dụng. Hồ sơ vẫn được giữ nguyên.",
             requestId,
           ),
-          code: rateLimited ? "RATE_LIMITED" : "AI_UNAVAILABLE",
+          code: rateLimited
+            ? "RATE_LIMITED"
+            : timedOut
+              ? "AI_TIMEOUT"
+              : "AI_UNAVAILABLE",
           requestId,
         },
-        rateLimited ? 429 : 503,
+        rateLimited ? 429 : timedOut ? 504 : 503,
         rateLimited ? { "Retry-After": "30" } : undefined,
       );
     }
