@@ -2,8 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import {
+  getAIOfficeRootMargin,
+  type NetworkLoadingHint,
+} from "@/lib/performance/ai-office-loading";
+
 const AI_OFFICE_HASH = "#ai-office";
-const AI_OFFICE_ROOT_MARGIN = "800px 0px";
+
+type NavigatorWithConnection = Navigator & {
+  connection?: NetworkLoadingHint;
+};
 
 export function useAIOfficeActivation() {
   const activationRef = useRef<HTMLDivElement>(null);
@@ -27,6 +35,7 @@ export function useAIOfficeActivation() {
       return;
     }
 
+    const connection = (navigator as NavigatorWithConnection).connection;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
@@ -34,7 +43,7 @@ export function useAIOfficeActivation() {
           observer.disconnect();
         }
       },
-      { rootMargin: AI_OFFICE_ROOT_MARGIN },
+      { rootMargin: getAIOfficeRootMargin(connection) },
     );
 
     observer.observe(target);
