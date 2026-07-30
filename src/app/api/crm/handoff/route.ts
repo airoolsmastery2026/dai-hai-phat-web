@@ -11,6 +11,7 @@ import {
 } from "@/lib/server/api-security";
 import { dispatchLeadAutomation } from "@/lib/server/automation";
 import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
+import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -122,10 +123,12 @@ export async function POST(request: NextRequest) {
       });
       return jsonResponse(
         {
-          error:
+          error: formatSupportReference(
             error.code === "not_configured"
               ? "Kênh CRM chưa được cấu hình. Hồ sơ vẫn được giữ trên thiết bị."
               : "Chưa thể bàn giao hồ sơ. Dữ liệu vẫn được giữ trên thiết bị.",
+            requestId,
+          ),
           code: "CRM_UNAVAILABLE",
           requestId,
         },
@@ -139,7 +142,10 @@ export async function POST(request: NextRequest) {
     });
     return jsonResponse(
       {
-        error: "Chưa thể bàn giao hồ sơ. Dữ liệu vẫn được giữ trên thiết bị.",
+        error: formatSupportReference(
+          "Chưa thể bàn giao hồ sơ. Dữ liệu vẫn được giữ trên thiết bị.",
+          requestId,
+        ),
         code: "CRM_UNAVAILABLE",
         requestId,
       },
