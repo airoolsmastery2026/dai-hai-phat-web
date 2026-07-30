@@ -1,6 +1,7 @@
 "use client";
 
 import { AIOfficeControllers } from "@/components/sections/AIOfficeControllers";
+import { AIOfficeErrorBoundary } from "@/components/sections/AIOfficeErrorBoundary";
 import { AIOfficeSection } from "@/components/sections/AIOfficeSection";
 import { AIServiceConflictNotice } from "@/components/sections/AIServiceConflictNotice";
 import { getAIOfficeSessionKey } from "@/lib/ai/experience";
@@ -17,7 +18,9 @@ export function AIOfficeExperience({ servicePreset }: AIOfficeExperienceProps) {
     <>
       <AIOfficeControllers service={servicePreset} />
       <AIServiceConflictNotice requestedService={servicePreset} />
-      <AIOfficeSection key={sessionKey} />
+      <AIOfficeErrorBoundary resetKey={sessionKey}>
+        <AIOfficeSection key={sessionKey} />
+      </AIOfficeErrorBoundary>
     </>
   );
 }
