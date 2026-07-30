@@ -6,14 +6,11 @@ import { AIFunnelEventController } from "@/components/analytics/AIFunnelEventCon
 import { AIOfficeAccessibilityController } from "@/components/sections/AIOfficeAccessibilityController";
 import { AIOfficeSection } from "@/components/sections/AIOfficeSection";
 import { AIServiceConflictNotice } from "@/components/sections/AIServiceConflictNotice";
-import { SERVICES } from "@/content/services";
+import { getAIService } from "@/lib/ai/service-domain";
 
 export function AIOfficeRouteEntry() {
   const searchParams = useSearchParams();
-  const requestedService = searchParams.get("service");
-  const servicePreset =
-    SERVICES.find((service) => service.aiService === requestedService)?.aiService ??
-    null;
+  const servicePreset = getAIService(searchParams.get("service"));
 
   return (
     <>

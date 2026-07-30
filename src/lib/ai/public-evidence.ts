@@ -4,19 +4,12 @@ import {
   type ProposalEvidenceRequest,
   type ProposalEvidenceResponse,
 } from "@/lib/ai/catalog";
-
-const RESIDENTIAL_AI_SERVICES = new Set([
-  "Cửa cổng",
-  "Cầu thang và lan can",
-  "Mái che",
-  "Nội thất",
-  "Cải tạo không gian",
-]);
+import { isAIService } from "@/lib/ai/service-domain";
 
 export function buildResidentialProposalEvidenceResponse(
   query: ProposalEvidenceRequest,
 ): ProposalEvidenceResponse {
-  if (!RESIDENTIAL_AI_SERVICES.has(query.service)) {
+  if (!isAIService(query.service)) {
     throw new ProposalEvidenceValidationError(
       "Hạng mục không thuộc phạm vi tư vấn dân dụng.",
     );

@@ -1,15 +1,8 @@
+import { getAIService, type AIService } from "@/lib/ai/service-domain";
+
 export const CONVERSION_EVENT_CHANNEL = "dhp:conversion";
 
-export const ANALYTICS_SERVICE_PRESETS = [
-  "Cửa cổng",
-  "Cầu thang và lan can",
-  "Mái che",
-  "Nội thất",
-  "Cải tạo không gian",
-] as const;
-
-export type AnalyticsServicePreset =
-  (typeof ANALYTICS_SERVICE_PRESETS)[number];
+export type AnalyticsServicePreset = AIService;
 
 export type ConversionEventName =
   | "ai_intake_opened"
@@ -49,7 +42,7 @@ function normalizePath(pathname: string) {
 export function getAnalyticsServicePreset(
   value: string | null,
 ): AnalyticsServicePreset | undefined {
-  return ANALYTICS_SERVICE_PRESETS.find((service) => service === value);
+  return getAIService(value) ?? undefined;
 }
 
 export function trackConversionEvent(
