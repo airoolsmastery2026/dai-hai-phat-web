@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import {
-  buildProposalEvidenceResponse,
   parseProposalEvidenceRequest,
   ProposalEvidenceValidationError,
 } from "@/lib/ai/catalog";
+import { buildResidentialProposalEvidenceResponse } from "@/lib/ai/public-evidence";
 import {
   consumeRateLimit,
   getRequestClientKey,
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
   try {
     const rawBody = await readLimitedBody(request);
     const query = parseProposalEvidenceRequest(JSON.parse(rawBody) as unknown);
-    const evidence = buildProposalEvidenceResponse(query);
+    const evidence = buildResidentialProposalEvidenceResponse(query);
 
     console.info("DHP proposal evidence generated", {
       requestId,
