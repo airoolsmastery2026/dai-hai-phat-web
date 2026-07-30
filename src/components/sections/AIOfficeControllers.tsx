@@ -7,7 +7,7 @@ import type { AIService } from "@/lib/ai/service-domain";
 export function AIOfficeControllers({
   service,
 }: {
-  service: AIService | undefined;
+  service: AIService | null;
 }) {
   return (
     <>
