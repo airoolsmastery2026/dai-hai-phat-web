@@ -16,6 +16,7 @@ import {
   analyzeProjectWithGemini,
   GeminiProjectAnalysisError,
 } from "@/lib/server/gemini";
+import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -161,9 +162,12 @@ export async function POST(request: NextRequest) {
       });
       return jsonResponse(
         {
-          error: rateLimited
-            ? "Dịch vụ phân tích AI đang bận. Hồ sơ vẫn được giữ nguyên."
-            : "Phân tích AI tạm thời chưa khả dụng. Hồ sơ vẫn được giữ nguyên.",
+          error: formatSupportReference(
+            rateLimited
+              ? "Dịch vụ phân tích AI đang bận. Hồ sơ vẫn được giữ nguyên."
+              : "Phân tích AI tạm thời chưa khả dụng. Hồ sơ vẫn được giữ nguyên.",
+            requestId,
+          ),
           code: rateLimited ? "RATE_LIMITED" : "AI_UNAVAILABLE",
           requestId,
         },
@@ -178,7 +182,10 @@ export async function POST(request: NextRequest) {
     });
     return jsonResponse(
       {
-        error: "Không thể phân tích hồ sơ lúc này. Hồ sơ vẫn được giữ nguyên.",
+        error: formatSupportReference(
+          "Không thể phân tích hồ sơ lúc này. Hồ sơ vẫn được giữ nguyên.",
+          requestId,
+        ),
         code: "AI_UNAVAILABLE",
         requestId,
       },
