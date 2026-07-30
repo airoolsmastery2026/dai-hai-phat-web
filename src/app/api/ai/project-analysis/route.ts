@@ -5,6 +5,7 @@ import {
   ProjectAnalysisValidationError,
   type ProjectEvidenceContext,
 } from "@/lib/ai/analysis";
+import { ProposalEvidenceValidationError } from "@/lib/ai/catalog";
 import { buildResidentialProposalEvidenceResponse } from "@/lib/ai/public-evidence";
 import {
   consumeRateLimit,
@@ -136,14 +137,15 @@ export async function POST(request: NextRequest) {
     }
     if (
       error instanceof ProjectAnalysisValidationError ||
+      error instanceof ProposalEvidenceValidationError ||
       error instanceof SyntaxError
     ) {
       return jsonResponse(
         {
           error:
-            error instanceof ProjectAnalysisValidationError
-              ? error.message
-              : "Dữ liệu JSON không hợp lệ.",
+            error instanceof SyntaxError
+              ? "Dữ liệu JSON không hợp lệ."
+              : error.message,
           requestId,
         },
         400,
