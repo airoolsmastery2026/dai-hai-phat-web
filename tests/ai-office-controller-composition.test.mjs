@@ -9,7 +9,8 @@ test("AI office controllers are composed behind one React boundary", async () =>
   const source = await readFile(controllersPath, "utf8");
 
   assert.match(source, /export function AIOfficeControllers/);
-  assert.match(source, /<AIFunnelEventController service=\{service\} \/>/);
+  assert.match(source, /service: AIService \| undefined/);
+  assert.match(source, /<AIFunnelEventController \{\.\.\.\(service \? \{ service \} : \{\}\)\} \/>/);
   assert.match(source, /<AIOfficeAccessibilityController \/>/);
   assert.match(source, /type \{ AIService \}/);
 });
