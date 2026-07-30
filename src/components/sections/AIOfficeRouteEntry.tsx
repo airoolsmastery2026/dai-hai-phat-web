@@ -2,8 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 
-import { AIFunnelEventController } from "@/components/analytics/AIFunnelEventController";
-import { AIOfficeAccessibilityController } from "@/components/sections/AIOfficeAccessibilityController";
+import { AIOfficeControllers } from "@/components/sections/AIOfficeControllers";
 import { AIOfficeSection } from "@/components/sections/AIOfficeSection";
 import { AIServiceConflictNotice } from "@/components/sections/AIServiceConflictNotice";
 import { getAIService } from "@/lib/ai/service-domain";
@@ -14,8 +13,7 @@ export function AIOfficeRouteEntry() {
 
   return (
     <>
-      <AIFunnelEventController service={servicePreset ?? undefined} />
-      <AIOfficeAccessibilityController />
+      <AIOfficeControllers service={servicePreset} />
       <AIServiceConflictNotice requestedService={servicePreset} />
       <AIOfficeSection key={servicePreset ?? "no-service-preset"} />
     </>
