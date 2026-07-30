@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-
+import { useAIOfficeRootEffect } from "@/hooks/useAIOfficeRootEffect";
 import {
   getAnalyticsServicePreset,
   trackConversionEvent,
@@ -13,10 +12,7 @@ const HANDOFF_SUCCESS_TEXT = "Đã bàn giao hồ sơ cho đội ngũ kỹ thu�
 const HANDOFF_ERROR_TEXT = "Chưa thể bàn giao tự động.";
 
 export function AIFunnelEventController({ service }: { service?: string }) {
-  useEffect(() => {
-    const root = document.getElementById("ai-office");
-    if (!root) return;
-
+  useAIOfficeRootEffect((root) => {
     const sourcePath = window.location.pathname;
     const analyticsService = getAnalyticsServicePreset(service ?? null);
     const emitted = new Set<ConversionEventName>();

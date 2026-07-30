@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+
+import { useAIOfficeRootEffect } from "@/hooks/useAIOfficeRootEffect";
 
 const RESET_LABEL = "Xóa hồ sơ đã lưu và bắt đầu lại";
 const INTERACTIVE_SELECTOR = [
@@ -34,10 +36,7 @@ export function AIOfficeAccessibilityController() {
   const lastQuestionRef = useRef("");
   const interactionStartedRef = useRef(false);
 
-  useEffect(() => {
-    const section = document.getElementById("ai-office");
-    if (!section) return;
-
+  useAIOfficeRootEffect((section) => {
     const markInteraction = () => {
       interactionStartedRef.current = true;
     };
