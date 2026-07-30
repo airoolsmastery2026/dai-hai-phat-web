@@ -21,6 +21,7 @@ export function AIFunnelEventController({ service }: { service?: string }) {
     const analyticsService = getAnalyticsServicePreset(service ?? null);
     const emitted = new Set<ConversionEventName>();
     let stepCount = 0;
+    let intakeCompleted = false;
 
     const emit = (name: ConversionEventName, once = true) => {
       if (once && emitted.has(name)) return;
@@ -33,9 +34,20 @@ export function AIFunnelEventController({ service }: { service?: string }) {
 
     const inspectRenderedState = () => {
       const text = root.textContent ?? "";
-      if (text.includes(COMPLETION_TEXT)) emit("ai_intake_completed");
+      if (text.includes(COMPLETION_TEXT)) {
+        intakeCompleted = true;
+        emit("ai_intake_completed");
+      }
       if (text.includes(HANDOFF_SUCCESS_TEXT)) emit("crm_handoff_succeeded");
       if (text.includes(HANDOFF_ERROR_TEXT)) emit("crm_handoff_failed");
+    };
+
+    const recordStep = () => {
+      stepCount += 1;
+      trackConversionEvent("ai_step_completed", {
+        sourcePath,
+        ...(analyticsService ? { service: analyticsService } : {}),
+      });
     };
 
     const handleClick = (event: MouseEvent) => {
@@ -55,11 +67,7 @@ export function AIFunnelEventController({ service }: { service?: string }) {
         label === "Bỏ qua" ||
         button.closest('[class*="sm:grid-cols-2"]')
       ) {
-        stepCount += 1;
-        trackConversionEvent("ai_step_completed", {
-          sourcePath,
-          ...(analyticsService ? { service: analyticsService } : {}),
-        });
+        recordStep();
       }
     };
 
@@ -73,25 +81,27 @@ export function AIFunnelEventController({ service }: { service?: string }) {
       }
 
       if (target.type === "file" && target.files?.length) {
-        stepCount += 1;
-        trackConversionEvent("ai_step_completed", {
-          sourcePath,
-          ...(analyticsService ? { service: analyticsService } : {}),
-        });
+        recordStep();
       }
+    };
+
+    const handlePageHide = (event: PageTransitionEvent) => {
+      if (event.persisted || stepCount === 0 || intakeCompleted) return;
+      emit("intake_abandoned");
     };
 
     const observer = new MutationObserver(inspectRenderedState);
     observer.observe(root, { childList: true, subtree: true, characterData: true });
     root.addEventListener("click", handleClick);
     root.addEventListener("change", handleChange);
+    window.addEventListener("pagehide", handlePageHide);
     inspectRenderedState();
 
     return () => {
       observer.disconnect();
       root.removeEventListener("click", handleClick);
       root.removeEventListener("change", handleChange);
-      void stepCount;
+      window.removeEventListener("pagehide", handlePageHide);
     };
   }, [service]);
 

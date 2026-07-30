@@ -16,6 +16,7 @@ export type ConversionEventName =
   | "service_preset_selected"
   | "ai_step_completed"
   | "ai_intake_completed"
+  | "intake_abandoned"
   | "handoff_consent_given"
   | "crm_handoff_started"
   | "crm_handoff_succeeded"
