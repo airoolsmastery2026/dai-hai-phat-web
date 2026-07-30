@@ -10,6 +10,7 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
+import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
 
@@ -123,7 +124,13 @@ export async function POST(request: NextRequest) {
       error: error instanceof Error ? error.message : "Unknown error",
     });
     return jsonResponse(
-      { error: "Không thể đối chiếu Knowledge Base lúc này.", requestId },
+      {
+        error: formatSupportReference(
+          "Không thể đối chiếu Knowledge Base lúc này.",
+          requestId,
+        ),
+        requestId,
+      },
       500,
     );
   }
