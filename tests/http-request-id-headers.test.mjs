@@ -7,15 +7,25 @@ const routes = [
   "src/app/api/ai/proposal-evidence/route.ts",
   "src/app/api/crm/handoff/route.ts",
 ];
+const helperPath = "src/lib/server/api-json-response.ts";
 
-test("AI and CRM APIs expose the response request ID as a header", async () => {
+test("AI and CRM APIs use the shared traced JSON response helper", async () => {
+  const helper = await readFile(helperPath, "utf8");
+
+  assert.match(helper, /function readResponseRequestId\(body: unknown\)/);
+  assert.match(helper, /typeof requestId === "string" && requestId\.length <= 100/);
+  assert.match(helper, /"X-Request-ID": requestId/);
+  assert.match(helper, /\.\.\.extraHeaders/);
+  assert.match(helper, /"Cache-Control": "private, no-store"/);
+  assert.match(helper, /"X-Content-Type-Options": "nosniff"/);
+
   for (const route of routes) {
     const source = await readFile(route, "utf8");
 
-    assert.match(source, /function readResponseRequestId\(body: unknown\)/);
-    assert.match(source, /typeof requestId === "string" && requestId\.length <= 100/);
-    assert.match(source, /"X-Request-ID": requestId/);
-    assert.match(source, /\.\.\.extraHeaders/);
+    assert.match(source, /import \{ apiJsonResponse \} from "@\/lib\/server\/api-json-response"/);
+    assert.match(source, /apiJsonResponse\(/);
+    assert.doesNotMatch(source, /function readResponseRequestId/);
+    assert.doesNotMatch(source, /NextResponse\.json/);
     assert.doesNotMatch(source, /request\.headers\.get\("x-request-id"\)/i);
   }
 });
