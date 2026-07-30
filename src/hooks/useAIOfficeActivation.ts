@@ -8,10 +8,18 @@ import {
 } from "@/lib/performance/ai-office-loading";
 
 const AI_OFFICE_HASH = "#ai-office";
+const AI_OFFICE_LINK_SELECTOR = 'a[href$="#ai-office"]';
 
 type NavigatorWithConnection = Navigator & {
   connection?: NetworkLoadingHint;
 };
+
+function isAIOfficeLinkIntent(event: Event): boolean {
+  return (
+    event.target instanceof Element &&
+    Boolean(event.target.closest(AI_OFFICE_LINK_SELECTOR))
+  );
+}
 
 export function useAIOfficeActivation() {
   const activationRef = useRef<HTMLDivElement>(null);
@@ -22,6 +30,11 @@ export function useAIOfficeActivation() {
 
     const activateFromHash = () => {
       if (window.location.hash === AI_OFFICE_HASH) {
+        setIsActive(true);
+      }
+    };
+    const activateFromIntent = (event: Event) => {
+      if (isAIOfficeLinkIntent(event)) {
         setIsActive(true);
       }
     };
@@ -48,10 +61,14 @@ export function useAIOfficeActivation() {
 
     observer.observe(target);
     window.addEventListener("hashchange", activateFromHash);
+    document.addEventListener("pointerdown", activateFromIntent);
+    document.addEventListener("focusin", activateFromIntent);
 
     return () => {
       observer.disconnect();
       window.removeEventListener("hashchange", activateFromHash);
+      document.removeEventListener("pointerdown", activateFromIntent);
+      document.removeEventListener("focusin", activateFromIntent);
     };
   }, [isActive]);
 
