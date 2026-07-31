@@ -39,6 +39,7 @@ test("Gemini Live panel captures PCM audio and cleans up browser resources", asy
   assert.match(source, /websocketRef\.current\?\.close/);
   assert.match(source, /inputAudioTranscription/);
   assert.match(source, /outputAudioTranscription/);
+  assert.match(source, /access_token=/);
 });
 
 test("AI Office renders voice chat inside its existing error boundary", async () => {
@@ -54,5 +55,4 @@ test("Gemini Live uses the constrained v1beta WebSocket endpoint", async () => {
 
   assert.match(source, /gemini-3\.1-flash-live-preview/);
   assert.match(source, /BidiGenerateContentConstrained/);
-  assert.match(source, /access_token/);
 });
