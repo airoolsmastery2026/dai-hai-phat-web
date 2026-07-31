@@ -100,7 +100,7 @@ test("rejects insecure CRM webhook URLs before sending data", async () => {
   assert.equal(called, false);
 });
 
-test("classifies CRM rate limits and server failures as unavailable", async () => {
+test("classifies transient CRM responses as unavailable", async () => {
   configureCRM();
 
   for (const status of [408, 425, 429, 500, 503]) {
