@@ -12,6 +12,7 @@ import { SiteNavigation } from "@/components/layout/SiteNavigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { COMPANY_CONFIG } from "@/content/company";
 import { SERVICES } from "@/content/services";
+import { getPublicRouteSlug } from "@/lib/routing";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -57,7 +58,7 @@ const BUSINESS_JSON_LD = {
       itemOffered: {
         "@type": "Service",
         name: service.title,
-        url: `${COMPANY_CONFIG.websiteUrl}/services/${service.slug}`,
+        url: `${COMPANY_CONFIG.websiteUrl}/services/${getPublicRouteSlug(service.slug)}`,
       },
     })),
   },

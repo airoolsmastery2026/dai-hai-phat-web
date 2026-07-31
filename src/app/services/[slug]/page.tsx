@@ -15,10 +15,10 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { COMPANY_CONFIG } from "@/content/company";
 import { SERVICES } from "@/content/services";
-import { normalizeRouteSlug } from "@/lib/routing";
+import { getPublicRouteSlug, normalizeRouteSlug } from "@/lib/routing";
 
 export async function generateStaticParams() {
-  return SERVICES.map((service) => ({ slug: service.slug }));
+  return SERVICES.map((service) => ({ slug: getPublicRouteSlug(service.slug) }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -32,7 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const title = service.seo.title ?? service.title;
   const description = service.seo.description ?? service.summary;
-  const canonical = `/services/${service.slug}`;
+  const publicSlug = getPublicRouteSlug(service.slug);
+  const canonical = `/services/${publicSlug}`;
 
   return {
     title,
@@ -64,7 +65,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     notFound();
   }
 
-  const canonicalUrl = `${COMPANY_CONFIG.websiteUrl}/services/${service.slug}`;
+  const publicSlug = getPublicRouteSlug(service.slug);
+  const canonicalUrl = `${COMPANY_CONFIG.websiteUrl}/services/${publicSlug}`;
   const structuredData: Record<string, unknown>[] = [
     {
       "@context": "https://schema.org",
