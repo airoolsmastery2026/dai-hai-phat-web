@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import React from "react";
 
 import { ConversionEventCapture } from "@/components/analytics/ConversionEventCapture";
+import { LeadAttributionCapture } from "@/components/analytics/LeadAttributionCapture";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { FloatingCta } from "@/components/layout/FloatingCta";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -124,6 +125,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <JsonLd id="dhp-local-business" data={BUSINESS_JSON_LD} />
         <ConversionEventCapture />
+        <LeadAttributionCapture />
         <a href="#main-content" className="skip-link">
           Bỏ qua điều hướng
         </a>
