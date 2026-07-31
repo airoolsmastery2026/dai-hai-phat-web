@@ -7,7 +7,7 @@ import { getPublicRouteSlug } from "@/lib/routing";
 const quickLinks = [
   { label: "Trang chủ", href: "/" },
   { label: "Dịch vụ", href: "/services" },
-  { label: "Dự án", href: "/projects" },
+  { label: "Công trình", href: "/gallery" },
   { label: "Giới thiệu", href: "/about" },
   { label: "Liên hệ", href: "/contact" },
 ];
