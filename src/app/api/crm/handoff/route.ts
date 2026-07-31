@@ -14,6 +14,10 @@ import { dispatchLeadAutomation } from "@/lib/server/automation";
 import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
 import { verifyPhoneWithAPILayer } from "@/lib/server/phone-verification";
 import { formatSupportReference } from "@/lib/server/support-reference";
+import {
+  ATTRIBUTION_COOKIE_NAME,
+  deserializeLeadAttribution,
+} from "@/lib/marketing/attribution";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -60,7 +64,15 @@ export async function POST(request: NextRequest) {
     if (new TextEncoder().encode(rawBody).byteLength > BODY_LIMIT_BYTES) {
       return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
     }
-    const lead = parseCRMHandoffRequest(JSON.parse(rawBody) as unknown);
+
+    const parsedLead = parseCRMHandoffRequest(JSON.parse(rawBody) as unknown);
+    const attribution = deserializeLeadAttribution(
+      request.cookies.get(ATTRIBUTION_COOKIE_NAME)?.value,
+    );
+    const lead = attribution
+      ? parseCRMHandoffRequest({ ...parsedLead, attribution })
+      : parsedLead;
+
     if (lead.website) {
       return apiJsonResponse({ error: "Yêu cầu không hợp lệ.", requestId }, 400);
     }
@@ -93,6 +105,7 @@ export async function POST(request: NextRequest) {
       sessionId: lead.sessionId,
       leadId: result.leadId,
       phoneVerification: phoneVerification.status,
+      attributionSource: lead.attribution?.utmSource ?? null,
     });
     return apiJsonResponse({ requestId, handoff: result }, 201);
   } catch (error) {
