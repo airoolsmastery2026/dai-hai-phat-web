@@ -128,6 +128,7 @@ export async function POST(request: NextRequest) {
       console.warn("DHP CRM handoff unavailable", {
         requestId,
         code: error.code,
+        upstreamStatus: error.upstreamStatus ?? null,
       });
       return apiJsonResponse(
         {

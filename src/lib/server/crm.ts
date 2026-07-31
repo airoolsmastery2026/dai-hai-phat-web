@@ -15,6 +15,7 @@ export class CRMDeliveryError extends Error {
   constructor(
     message: string,
     readonly code: "not_configured" | "timeout" | "rejected" | "unavailable",
+    readonly upstreamStatus?: number,
   ) {
     super(message);
   }
@@ -33,6 +34,18 @@ function crmConfig() {
   } catch {
     throw new CRMDeliveryError("CRM_WEBHOOK_URL không hợp lệ.", "not_configured");
   }
+}
+
+function classifyCRMResponse(status: number): CRMDeliveryError {
+  if (status === 408 || status === 425 || status === 429 || status >= 500) {
+    return new CRMDeliveryError(
+      "CRM tạm thời không khả dụng.",
+      "unavailable",
+      status,
+    );
+  }
+
+  return new CRMDeliveryError("CRM từ chối hồ sơ.", "rejected", status);
 }
 
 export async function deliverLeadToCRM(
@@ -73,7 +86,7 @@ export async function deliverLeadToCRM(
       signal: controller.signal,
     });
     if (!response.ok) {
-      throw new CRMDeliveryError("CRM từ chối hồ sơ.", "rejected");
+      throw classifyCRMResponse(response.status);
     }
 
     const responsePayload = (await response.json().catch(() => null)) as unknown;
