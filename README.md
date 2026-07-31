@@ -41,6 +41,10 @@ AI được trao quyền xử lý liên tục trong repository này:
 - Chỉ kích hoạt một vòng kiểm tra tổng trước khi merge.
 - Chỉ dừng khi có lỗi thực tế, thiếu quyền, thiếu dữ liệu bắt buộc hoặc gặp thay đổi có rủi ro cao.
 
+## Hướng dẫn AI contributor
+
+Mọi coding agent phải đọc và tuân thủ [`AGENTS.md`](./AGENTS.md) trước khi thay đổi mã nguồn.
+
 ## Quality gate
 
 Trước khi merge vào `main`, batch phải vượt qua:
