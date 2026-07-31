@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { COMPANY_CONFIG } from "@/content/company";
 import { SERVICES } from "@/content/services";
+import { getPublicRouteSlug } from "@/lib/routing";
 
 const quickLinks = [
   { label: "Trang chủ", href: "/" },
@@ -80,7 +81,11 @@ export function SiteFooter() {
             Quyền riêng tư
           </Link>
           {SERVICES.slice(0, 3).map((service) => (
-            <Link key={service.slug} href={`/services/${service.slug}`} className="transition hover:text-white">
+            <Link
+              key={service.slug}
+              href={`/services/${getPublicRouteSlug(service.slug)}`}
+              className="transition hover:text-white"
+            >
               {service.title}
             </Link>
           ))}
