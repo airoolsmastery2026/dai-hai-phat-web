@@ -74,7 +74,7 @@ test("signs the exact CRM webhook payload with a replay timestamp", async () => 
   assert.match(timestamp, /^\d{10}$/);
   assert.equal(request.init.headers["X-DHP-Signature"], expectedSignature);
   const body = JSON.parse(request.init.body);
-  assert.equal(body.schemaVersion, "1.0");
+  assert.equal(body.schemaVersion, "1.1");
   assert.equal(body.eventId, "request-1");
   assert.equal(body.event, "lead.handoff");
   assert.equal(body.contact.phone, "0901 234 567");
