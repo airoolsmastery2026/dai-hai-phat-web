@@ -6,7 +6,7 @@ const tokenRoutePath = new URL(
   "../src/app/api/ai/live-token/route.ts",
   import.meta.url,
 );
-const hookPath = new URL("../src/hooks/useGeminiLive.ts", import.meta.url);
+const hookPath = new URL("../src/hooks/useGeminiLive.js", import.meta.url);
 const panelPath = new URL(
   "../src/components/sections/GeminiLivePanel.tsx",
   import.meta.url,
