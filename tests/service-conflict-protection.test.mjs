@@ -10,8 +10,8 @@ test("protects an existing AI draft when a different service CTA is selected", a
     ),
     "utf8",
   );
-  const routeEntry = await readFile(
-    new URL("../src/components/sections/AIOfficeRouteEntry.tsx", import.meta.url),
+  const experience = await readFile(
+    new URL("../src/components/sections/AIOfficeExperience.tsx", import.meta.url),
     "utf8",
   );
 
@@ -25,7 +25,6 @@ test("protects an existing AI draft when a different service CTA is selected", a
   assert.match(notice, /role="alertdialog"/);
   assert.match(notice, /aria-modal="true"/);
   assert.match(notice, /event\.key === "Escape"/);
-  assert.match(routeEntry, /SERVICES\.find/);
-  assert.match(routeEntry, /<AIServiceConflictNotice requestedService=\{servicePreset\} \/>/);
-  assert.doesNotMatch(routeEntry, /reset\(/);
+  assert.match(experience, /<AIServiceConflictNotice requestedService=\{servicePreset\} \/>/);
+  assert.doesNotMatch(experience, /reset\(/);
 });
