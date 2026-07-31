@@ -12,6 +12,7 @@ import {
 import { apiJsonResponse } from "@/lib/server/api-json-response";
 import { dispatchLeadAutomation } from "@/lib/server/automation";
 import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
+import { verifyPhoneWithAPILayer } from "@/lib/server/phone-verification";
 import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
@@ -64,7 +65,10 @@ export async function POST(request: NextRequest) {
       return apiJsonResponse({ error: "Yêu cầu không hợp lệ.", requestId }, 400);
     }
 
-    const result = await deliverLeadToCRM(lead, requestId);
+    const phoneVerification = await verifyPhoneWithAPILayer(lead.contact.phone);
+    const result = await deliverLeadToCRM(lead, requestId, {
+      phone: phoneVerification,
+    });
 
     after(async () => {
       try {
@@ -88,6 +92,7 @@ export async function POST(request: NextRequest) {
       requestId,
       sessionId: lead.sessionId,
       leadId: result.leadId,
+      phoneVerification: phoneVerification.status,
     });
     return apiJsonResponse({ requestId, handoff: result }, 201);
   } catch (error) {
