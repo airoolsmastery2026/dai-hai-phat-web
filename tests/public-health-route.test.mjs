@@ -6,6 +6,7 @@ const source = await readFile("src/app/api/health/route.ts", "utf8");
 
 test("public health route exposes only liveness metadata", () => {
   assert.match(source, /export const runtime = "edge"/);
+  assert.match(source, /export const dynamic = "force-dynamic"/);
   assert.match(source, /export function GET\(\)/);
   assert.match(source, /export function HEAD\(\)/);
   assert.match(source, /status: "ok"/);
@@ -16,7 +17,7 @@ test("public health route exposes only liveness metadata", () => {
   assert.doesNotMatch(source, /fetch\(/);
 });
 
-test("public health route is not cacheable by intermediaries", () => {
+test("public health route is not cached by intermediaries", () => {
   assert.match(source, /max-age=0, must-revalidate/);
   assert.match(source, /X-Content-Type-Options/);
   assert.match(source, /status: 200/);
