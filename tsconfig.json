@@ -24,6 +24,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@/hooks/useAI": [
+        "src/hooks/useValidatedAI.ts"
+      ],
       "@/*": [
         "src/*"
       ]
