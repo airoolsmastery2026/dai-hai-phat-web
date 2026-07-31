@@ -32,7 +32,10 @@ export function ContactSection() {
           </div>
 
           <address className="grid content-center gap-[var(--space-4)] not-italic">
-            <ContactItem icon={Phone} label="Hotline">
+            <ContactItem icon={Phone} label="Hotline chính">
+              <a href={`tel:${COMPANY_CONFIG.phones[0].raw}`}>{COMPANY_CONFIG.phones[0].display}</a>
+            </ContactItem>
+            <ContactItem icon={Phone} label="Hotline hỗ trợ">
               <a href={`tel:${COMPANY_CONFIG.phones[1].raw}`}>{COMPANY_CONFIG.phones[1].display}</a>
             </ContactItem>
             <ContactItem icon={Mail} label="Email">
