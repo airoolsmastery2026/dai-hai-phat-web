@@ -4,13 +4,20 @@ import { Mic, MicOff, Radio, Volume2 } from "lucide-react";
 
 import { useGeminiLive } from "@/hooks/useGeminiLive";
 
-const STATUS_LABEL = {
-  idle: "Chưa kết nối",
-  connecting: "Đang kết nối…",
-  listening: "Đang nghe",
-  speaking: "Gemini đang trả lời",
-  error: "Đã ngắt kết nối",
-} as const;
+function getStatusLabel(status: string): string {
+  switch (status) {
+    case "connecting":
+      return "Đang kết nối…";
+    case "listening":
+      return "Đang nghe";
+    case "speaking":
+      return "Gemini đang trả lời";
+    case "error":
+      return "Đã ngắt kết nối";
+    default:
+      return "Chưa kết nối";
+  }
+}
 
 export function GeminiLivePanel() {
   const {
@@ -67,7 +74,7 @@ export function GeminiLivePanel() {
             className={`h-2.5 w-2.5 rounded-full ${isActive ? "animate-pulse bg-[var(--color-primary)]" : "bg-[var(--color-text-dark-subtle)]"}`}
             aria-hidden="true"
           />
-          <span className="font-semibold">{STATUS_LABEL[status]}</span>
+          <span className="font-semibold">{getStatusLabel(status)}</span>
         </div>
 
         {error ? (
