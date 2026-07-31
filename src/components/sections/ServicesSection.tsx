@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { SERVICES } from "@/content/services";
+import { getPublicRouteSlug } from "@/lib/routing";
 
 export function ServicesSection() {
   return (
@@ -27,6 +28,7 @@ export function ServicesSection() {
         <div className="mt-[var(--space-10)] grid gap-[var(--space-4)] sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.slice(0, 6).map((service) => {
             const aiHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+            const serviceHref = `/services/${getPublicRouteSlug(service.slug)}`;
 
             return (
               <article
@@ -49,7 +51,7 @@ export function ServicesSection() {
                     Tư vấn hạng mục
                   </Link>
                   <Link
-                    href={`/services/${service.slug}`}
+                    href={serviceHref}
                     aria-label={`Xem chi tiết ${service.title}`}
                     className="inline-flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
                   >

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { SERVICES } from "@/content/services";
+import { getPublicRouteSlug } from "@/lib/routing";
 
 export function ProjectsSection() {
   return (
@@ -28,7 +29,7 @@ export function ProjectsSection() {
           {SERVICES.map((service) => (
             <Link
               key={service.slug}
-              href={`/services/${service.slug}`}
+              href={`/services/${getPublicRouteSlug(service.slug)}`}
               className="group overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] transition duration-[var(--duration-medium)] hover:-translate-y-1 hover:border-[var(--color-primary)] hover:shadow-[var(--shadow-md)]"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-strong)]">
