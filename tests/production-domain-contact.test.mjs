@@ -6,6 +6,10 @@ const companySource = await readFile(
   new URL("../src/content/company.ts", import.meta.url),
   "utf8",
 );
+const layoutSource = await readFile(
+  new URL("../src/app/layout.tsx", import.meta.url),
+  "utf8",
+);
 const contactSource = await readFile(
   new URL("../src/components/sections/ContactSection.tsx", import.meta.url),
   "utf8",
@@ -17,6 +21,11 @@ test("company metadata uses the active Vercel production domain", () => {
     /websiteUrl:\s*"https:\/\/dai-hai-phat-web\.vercel\.app"/,
   );
   assert.match(companySource, /primaryPhone:\s*"0785\.505\.518"/);
+  assert.match(
+    layoutSource,
+    /metadataBase:\s*new URL\(COMPANY_CONFIG\.websiteUrl\)/,
+  );
+  assert.doesNotMatch(layoutSource, /new URL\("https:\/\/daihaiphat\.vn"\)/);
 });
 
 test("contact section distinguishes primary and support hotlines", () => {

@@ -65,7 +65,7 @@ const BUSINESS_JSON_LD = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://daihaiphat.vn"),
+  metadataBase: new URL(COMPANY_CONFIG.websiteUrl),
 
   title: {
     default: SITE_NAME,
