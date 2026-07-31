@@ -1,5 +1,7 @@
 const ATTRIBUTION_STORAGE_KEY = "dhp-lead-attribution-v1";
-const ATTRIBUTION_RETENTION_MS = 30 * 24 * 60 * 60 * 1_000;
+export const ATTRIBUTION_COOKIE_NAME = "dhp_attribution_v1";
+export const ATTRIBUTION_RETENTION_SECONDS = 30 * 24 * 60 * 60;
+const ATTRIBUTION_RETENTION_MS = ATTRIBUTION_RETENTION_SECONDS * 1_000;
 const MAX_VALUE_LENGTH = 160;
 
 const TRACKING_KEYS = [
@@ -100,4 +102,19 @@ export function captureFirstTouchAttribution(
 
 export function readLeadAttribution(storage: Storage): LeadAttribution | null {
   return readStoredAttribution(storage);
+}
+
+export function serializeLeadAttribution(attribution: LeadAttribution): string {
+  return encodeURIComponent(JSON.stringify(attribution));
+}
+
+export function deserializeLeadAttribution(value: string | undefined): LeadAttribution | null {
+  if (!value || value.length > 2_000) return null;
+  try {
+    const parsed = JSON.parse(decodeURIComponent(value)) as unknown;
+    if (!parsed || typeof parsed !== "object") return null;
+    return parsed as LeadAttribution;
+  } catch {
+    return null;
+  }
 }
