@@ -8,34 +8,44 @@ import { readAIDraft } from "@/lib/ai/persistence";
 const DRAFT_STORAGE_KEY = "dhp-ai-sales-engine-draft-v1";
 const RESET_LABEL = "Xóa hồ sơ đã lưu và bắt đầu lại";
 
+function readConflictingService(requestedService: string): string | null {
+  try {
+    const draft = readAIDraft(window.localStorage.getItem(DRAFT_STORAGE_KEY));
+    const savedService =
+      draft.status === "ready" ? draft.session.memory.service ?? null : null;
+
+    return savedService && savedService !== requestedService ? savedService : null;
+  } catch {
+    return null;
+  }
+}
+
 export function AIServiceConflictNotice({
   requestedService,
 }: {
   requestedService: string | null;
 }) {
+  if (!requestedService) return null;
+
+  return (
+    <AIServiceConflictDialog
+      key={requestedService}
+      requestedService={requestedService}
+    />
+  );
+}
+
+function AIServiceConflictDialog({
+  requestedService,
+}: {
+  requestedService: string;
+}) {
   const router = useRouter();
-  const [currentService, setCurrentService] = useState<string | null>(null);
+  const [currentService, setCurrentService] = useState<string | null>(() =>
+    readConflictingService(requestedService),
+  );
   const continueButtonRef = useRef<HTMLButtonElement>(null);
   const newDraftButtonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!requestedService) {
-      setCurrentService(null);
-      return;
-    }
-
-    try {
-      const draft = readAIDraft(window.localStorage.getItem(DRAFT_STORAGE_KEY));
-      const savedService =
-        draft.status === "ready" ? draft.session.memory.service ?? null : null;
-
-      setCurrentService(
-        savedService && savedService !== requestedService ? savedService : null,
-      );
-    } catch {
-      setCurrentService(null);
-    }
-  }, [requestedService]);
 
   useEffect(() => {
     if (!currentService) return;
@@ -68,7 +78,7 @@ export function AIServiceConflictNotice({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [currentService, router]);
 
-  if (!requestedService || !currentService) return null;
+  if (!currentService) return null;
 
   const continueCurrentDraft = () => {
     router.replace("/#ai-office", { scroll: false });
