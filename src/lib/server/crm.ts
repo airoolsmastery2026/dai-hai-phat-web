@@ -2,9 +2,14 @@ import type {
   CRMHandoffRequest,
   CRMHandoffResponse,
 } from "@/lib/ai/handoff";
+import type { PhoneVerificationResult } from "@/lib/server/phone-verification";
 import { createWebhookSignature } from "@/lib/server/webhook-signature";
 
 const CRM_TIMEOUT_MS = 8_000;
+
+export interface CRMVerificationMetadata {
+  phone: PhoneVerificationResult;
+}
 
 export class CRMDeliveryError extends Error {
   constructor(
@@ -33,6 +38,7 @@ function crmConfig() {
 export async function deliverLeadToCRM(
   lead: CRMHandoffRequest,
   requestId: string,
+  verification?: CRMVerificationMetadata,
 ): Promise<CRMHandoffResponse> {
   const config = crmConfig();
   const controller = new AbortController();
@@ -41,10 +47,11 @@ export async function deliverLeadToCRM(
   try {
     const timestamp = String(Math.floor(Date.now() / 1_000));
     const payload = JSON.stringify({
-      schemaVersion: "1.0",
+      schemaVersion: "1.1",
       eventId: requestId,
       event: "lead.handoff",
       ...lead,
+      ...(verification ? { verification } : {}),
       receivedAt: new Date().toISOString(),
     });
     const response = await fetch(config.url, {
