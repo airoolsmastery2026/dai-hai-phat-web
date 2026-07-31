@@ -52,9 +52,13 @@ afterEach(() => {
   else process.env.CRM_WEBHOOK_TOKEN = originalToken;
 });
 
-test("signs the exact CRM webhook payload with a replay timestamp", async () => {
+function configureCRM() {
   process.env.CRM_WEBHOOK_URL = "https://crm.example.com/webhooks/lead";
   process.env.CRM_WEBHOOK_TOKEN = "crm-secret";
+}
+
+test("signs the exact CRM webhook payload with a replay timestamp", async () => {
+  configureCRM();
   let request;
   globalThis.fetch = async (url, init) => {
     request = { url, init };
@@ -94,4 +98,26 @@ test("rejects insecure CRM webhook URLs before sending data", async () => {
     (error) => error.code === "not_configured",
   );
   assert.equal(called, false);
+});
+
+test("classifies CRM rate limits and server failures as unavailable", async () => {
+  configureCRM();
+
+  for (const status of [408, 425, 429, 500, 503]) {
+    globalThis.fetch = async () => new Response(null, { status });
+    await assert.rejects(
+      crm.deliverLeadToCRM(lead, `request-${status}`),
+      (error) => error.code === "unavailable" && error.upstreamStatus === status,
+    );
+  }
+});
+
+test("classifies permanent CRM client errors as rejected", async () => {
+  configureCRM();
+  globalThis.fetch = async () => new Response(null, { status: 422 });
+
+  await assert.rejects(
+    crm.deliverLeadToCRM(lead, "request-422"),
+    (error) => error.code === "rejected" && error.upstreamStatus === 422,
+  );
 });
