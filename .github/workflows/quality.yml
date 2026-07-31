@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   quality:
-    name: Lint, typecheck and build
+    name: Lint, typecheck, tests and build
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -36,7 +36,13 @@ jobs:
         run: npm run typecheck
 
       - name: Unit tests
+        id: tests
+        continue-on-error: true
         run: npm test
 
       - name: Build
         run: npm run build
+
+      - name: Enforce unit test result
+        if: always()
+        run: test "${{ steps.tests.outcome }}" = "success"

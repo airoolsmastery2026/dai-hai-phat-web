@@ -11,8 +11,8 @@ test("tracks AI funnel milestones without collecting customer input", async () =
     new URL("../src/components/analytics/AIFunnelEventController.tsx", import.meta.url),
     "utf8",
   );
-  const routeEntry = await readFile(
-    new URL("../src/components/sections/AIOfficeRouteEntry.tsx", import.meta.url),
+  const controllers = await readFile(
+    new URL("../src/components/sections/AIOfficeControllers.tsx", import.meta.url),
     "utf8",
   );
 
@@ -35,5 +35,6 @@ test("tracks AI funnel milestones without collecting customer input", async () =
   assert.doesNotMatch(controller, /FormData/);
   assert.doesNotMatch(controller, /preventDefault/);
   assert.doesNotMatch(controller, /fetch\(/);
-  assert.match(routeEntry, /<AIFunnelEventController service=\{servicePreset \?\? undefined\}/);
+  assert.match(controllers, /<AIFunnelEventController service=\{service\} \/>/);
+  assert.match(controllers, /<AIFunnelEventController \/>/);
 });

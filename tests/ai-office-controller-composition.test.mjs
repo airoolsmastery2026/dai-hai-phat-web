@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const controllersPath = "src/components/sections/AIOfficeControllers.tsx";
-const routeEntryPath = "src/components/sections/AIOfficeRouteEntry.tsx";
+const experiencePath = "src/components/sections/AIOfficeExperience.tsx";
 
 test("AI office controllers are composed behind one React boundary", async () => {
   const source = await readFile(controllersPath, "utf8");
@@ -17,12 +17,13 @@ test("AI office controllers are composed behind one React boundary", async () =>
   assert.match(source, /type \{ AIService \}/);
 });
 
-test("route entry delegates controller orchestration", async () => {
-  const source = await readFile(routeEntryPath, "utf8");
+test("AI Office experience delegates controller orchestration", async () => {
+  const source = await readFile(experiencePath, "utf8");
 
   assert.match(source, /<AIOfficeControllers service=\{servicePreset\} \/>/);
   assert.doesNotMatch(source, /AIFunnelEventController/);
   assert.doesNotMatch(source, /AIOfficeAccessibilityController/);
   assert.match(source, /<AIServiceConflictNotice requestedService=\{servicePreset\} \/>/);
-  assert.match(source, /<AIOfficeSection key=\{servicePreset \?\? "no-service-preset"\} \/>/);
+  assert.match(source, /const sessionKey = getAIOfficeSessionKey\(servicePreset\)/);
+  assert.match(source, /<AIOfficeSection key=\{sessionKey\} \/>/);
 });

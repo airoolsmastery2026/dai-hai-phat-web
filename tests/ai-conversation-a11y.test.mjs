@@ -10,8 +10,8 @@ test("announces AI questions and moves focus after interaction", async () => {
     ),
     "utf8",
   );
-  const routeEntry = await readFile(
-    new URL("../src/components/sections/AIOfficeRouteEntry.tsx", import.meta.url),
+  const controllers = await readFile(
+    new URL("../src/components/sections/AIOfficeControllers.tsx", import.meta.url),
     "utf8",
   );
 
@@ -24,5 +24,5 @@ test("announces AI questions and moves focus after interaction", async () => {
   assert.match(controller, /focus\(\{ preventScroll: true \}\)/);
   assert.match(controller, /role", "region"/);
   assert.match(controller, /Hội thoại lập hồ sơ kỹ thuật/);
-  assert.match(routeEntry, /<AIOfficeAccessibilityController \/>/);
+  assert.match(controllers, /<AIOfficeAccessibilityController \/>/);
 });

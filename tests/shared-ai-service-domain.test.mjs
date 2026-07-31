@@ -4,7 +4,7 @@ import test from "node:test";
 
 const domainPath = "src/lib/ai/service-domain.ts";
 const consumers = [
-  "src/components/sections/AIOfficeRouteEntry.tsx",
+  "src/hooks/useAIServicePreset.ts",
   "src/lib/analytics/conversion.ts",
   "src/lib/ai/public-evidence.ts",
 ];
@@ -34,12 +34,10 @@ test("AI service names have one domain source of truth", async () => {
   }
 });
 
-test("route entry no longer depends on presentation service content for validation", async () => {
-  const source = await readFile(
-    "src/components/sections/AIOfficeRouteEntry.tsx",
-    "utf8",
-  );
+test("service preset hook owns URL validation without presentation coupling", async () => {
+  const source = await readFile("src/hooks/useAIServicePreset.ts", "utf8");
 
+  assert.match(source, /useSearchParams/);
   assert.match(source, /getAIService\(searchParams\.get\("service"\)\)/);
   assert.doesNotMatch(source, /@\/content\/services/);
   assert.doesNotMatch(source, /SERVICES\.find/);

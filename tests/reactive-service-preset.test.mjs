@@ -4,20 +4,23 @@ import test from "node:test";
 
 test("reacts to service preset changes during client navigation", async () => {
   const routeEntry = await readFile(
-    new URL(
-      "../src/components/sections/AIOfficeRouteEntry.tsx",
-      import.meta.url,
-    ),
+    "src/components/sections/AIOfficeRouteEntry.tsx",
     "utf8",
   );
-  const homepage = await readFile(
-    new URL("../src/app/page.tsx", import.meta.url),
+  const presetHook = await readFile("src/hooks/useAIServicePreset.ts", "utf8");
+  const experience = await readFile(
+    "src/components/sections/AIOfficeExperience.tsx",
     "utf8",
   );
+  const homepage = await readFile("src/app/page.tsx", "utf8");
 
-  assert.match(routeEntry, /useSearchParams/);
-  assert.match(routeEntry, /searchParams\.get\("service"\)/);
-  assert.match(routeEntry, /key=\{servicePreset \?\? "no-service-preset"\}/);
+  assert.match(presetHook, /useSearchParams/);
+  assert.match(presetHook, /searchParams\.get\("service"\)/);
+  assert.match(presetHook, /getAIService/);
+  assert.match(routeEntry, /const servicePreset = useAIServicePreset\(\)/);
+  assert.match(routeEntry, /<AIOfficeExperience servicePreset=\{servicePreset\} \/>/);
+  assert.match(experience, /const sessionKey = getAIOfficeSessionKey\(servicePreset\)/);
+  assert.match(experience, /key=\{sessionKey\}/);
   assert.doesNotMatch(routeEntry, /window\.location|useSyncExternalStore/);
 
   assert.match(homepage, /import \{ Suspense \} from "react"/);
