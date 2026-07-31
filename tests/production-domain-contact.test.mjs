@@ -16,6 +16,7 @@ test("company metadata uses the active Vercel production domain", () => {
     companySource,
     /websiteUrl:\s*"https:\/\/dai-hai-phat-web\.vercel\.app"/,
   );
+  assert.match(companySource, /primaryPhone:\s*"0785\.505\.518"/);
 });
 
 test("contact section distinguishes primary and support hotlines", () => {
