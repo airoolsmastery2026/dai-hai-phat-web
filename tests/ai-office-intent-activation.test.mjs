@@ -6,16 +6,21 @@ const hookPath = new URL(
   "../src/hooks/useAIOfficeActivation.ts",
   import.meta.url,
 );
+const policyPath = new URL(
+  "../src/lib/performance/ai-office-intent.ts",
+  import.meta.url,
+);
 
 test("AI Office activates from explicit link intent", async () => {
-  const source = await readFile(hookPath, "utf8");
+  const hook = await readFile(hookPath, "utf8");
+  const policy = await readFile(policyPath, "utf8");
 
-  assert.match(source, /AI_OFFICE_LINK_SELECTOR/);
-  assert.match(source, /a\[href\$=\\"#ai-office\\"\]/);
-  assert.match(source, /isAIOfficeLinkIntent/);
-  assert.match(source, /closest\(AI_OFFICE_LINK_SELECTOR\)/);
-  assert.match(source, /document\.addEventListener\("pointerdown", activateFromIntent\)/);
-  assert.match(source, /document\.addEventListener\("focusin", activateFromIntent\)/);
+  assert.match(policy, /AI_OFFICE_LINK_SELECTOR/);
+  assert.match(policy, /a\[href\$="#ai-office"\]/);
+  assert.match(policy, /closest\(AI_OFFICE_LINK_SELECTOR\)/);
+  assert.match(hook, /isAIOfficeLinkIntent/);
+  assert.match(hook, /document\.addEventListener\("pointerdown", activateFromIntent\)/);
+  assert.match(hook, /document\.addEventListener\("focusin", activateFromIntent\)/);
 });
 
 test("AI Office intent listeners are cleaned up without changing existing activation paths", async () => {
