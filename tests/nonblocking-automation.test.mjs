@@ -8,7 +8,7 @@ test("returns the CRM handoff before lead automation completes", async () => {
     "utf8",
   );
 
-  assert.match(route, /import \{ after, NextRequest, NextResponse \} from "next\/server"/);
+  assert.match(route, /import \{ after, NextRequest \} from "next\/server"/);
   assert.match(route, /export const maxDuration = 15/);
   assert.match(
     route,
@@ -18,5 +18,5 @@ test("returns the CRM handoff before lead automation completes", async () => {
     route,
     /const automation = await dispatchLeadAutomation\(lead, result, requestId\);\n\s*console\.info\("DHP CRM handoff delivered"/,
   );
-  assert.match(route, /return jsonResponse\(\{ requestId, handoff: result \}, 201\)/);
+  assert.match(route, /return apiJsonResponse\(\{ requestId, handoff: result \}, 201\)/);
 });
