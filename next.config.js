@@ -41,6 +41,19 @@ const nextConfig = {
         destination: "/services/cua-cong-co-khi-dan-dung",
         permanent: true,
       },
+      {
+        source: "/services/noi-that-gỗ-mdf-melamine",
+        destination: "/services/noi-that-go-mdf-melamine",
+        permanent: true,
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/services/noi-that-go-mdf-melamine",
+        destination: "/services/noi-that-gỗ-mdf-melamine",
+      },
     ];
   },
 };
