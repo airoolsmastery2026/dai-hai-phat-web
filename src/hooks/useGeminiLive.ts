@@ -135,7 +135,7 @@ export function useGeminiLive() {
     const samples = pcm16ToFloat32(bytes);
     const sampleRate = readSampleRate(mimeType);
     const audioBuffer = context.createBuffer(1, samples.length, sampleRate);
-    audioBuffer.copyToChannel(samples, 0);
+    audioBuffer.getChannelData(0).set(samples);
     const source = context.createBufferSource();
     source.buffer = audioBuffer;
     source.connect(context.destination);
