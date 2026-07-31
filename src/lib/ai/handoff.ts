@@ -1,4 +1,5 @@
 import type { ConversationSession, ProjectMemory } from "@/lib/ai";
+import type { LeadAttribution } from "@/lib/marketing/attribution";
 
 const CONTROL_CHARACTERS = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/;
 
@@ -33,6 +34,7 @@ export interface CRMHandoffRequest {
     confidence: number;
     leadScore: number;
   };
+  attribution?: LeadAttribution;
   website?: string;
 }
 
@@ -81,6 +83,27 @@ function score(value: unknown, field: string): number {
     throw new CRMHandoffValidationError(`Trường ${field} không hợp lệ.`);
   }
   return value;
+}
+
+function parseAttribution(value: unknown): LeadAttribution | undefined {
+  if (value === undefined || value === null) return undefined;
+  if (!isRecord(value)) {
+    throw new CRMHandoffValidationError("Dữ liệu attribution không hợp lệ.");
+  }
+  const firstTouchAt = text(value.firstTouchAt, "attribution.firstTouchAt", 40);
+  if (Number.isNaN(Date.parse(firstTouchAt))) {
+    throw new CRMHandoffValidationError("Thời điểm attribution không hợp lệ.");
+  }
+  return {
+    firstTouchAt,
+    landingPath: text(value.landingPath, "attribution.landingPath", 300),
+    referrer: optionalText(value.referrer, "attribution.referrer", 300),
+    utmSource: optionalText(value.utmSource, "attribution.utmSource", 160),
+    utmMedium: optionalText(value.utmMedium, "attribution.utmMedium", 160),
+    utmCampaign: optionalText(value.utmCampaign, "attribution.utmCampaign", 160),
+    utmContent: optionalText(value.utmContent, "attribution.utmContent", 160),
+    utmTerm: optionalText(value.utmTerm, "attribution.utmTerm", 160),
+  };
 }
 
 export function parseCRMHandoffRequest(value: unknown): CRMHandoffRequest {
@@ -150,6 +173,7 @@ export function parseCRMHandoffRequest(value: unknown): CRMHandoffRequest {
       confidence: score(value.qualification.confidence, "qualification.confidence"),
       leadScore: score(value.qualification.leadScore, "qualification.leadScore"),
     },
+    attribution: parseAttribution(value.attribution),
     website: optionalText(value.website, "website", 120),
   };
 }
@@ -164,6 +188,7 @@ function requiredMemory(memory: ProjectMemory, field: keyof ProjectMemory): stri
 
 export function createCRMHandoffRequest(
   session: ConversationSession,
+  attribution?: LeadAttribution | null,
 ): CRMHandoffRequest {
   if (session.state !== "DONE") {
     throw new CRMHandoffValidationError("Hồ sơ chưa hoàn tất.");
@@ -200,6 +225,7 @@ export function createCRMHandoffRequest(
       confidence: session.confidence,
       leadScore: session.leadScore,
     },
+    attribution: attribution ?? undefined,
   });
 }
 
