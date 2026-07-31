@@ -14,7 +14,7 @@ test("health snapshot checks configuration without exposing secret values", () =
   assert.match(healthSource, /APILAYER_API_KEY/);
   assert.match(healthSource, /ECOSYSTEM_SERVICE_API_KEY/);
   assert.doesNotMatch(healthSource, /return env\./);
-  assert.match(healthSource, /"operational" : "degraded"/);
+  assert.match(healthSource, /\?\s*"operational"\s*:\s*"degraded"/);
 });
 
 test("health endpoint is restricted to control and monitoring services", () => {
