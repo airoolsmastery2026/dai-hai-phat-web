@@ -44,5 +44,5 @@ jobs:
         run: npm run build
 
       - name: Enforce unit test result
-        if: steps.tests.outcome != 'success'
-        run: exit 1
+        if: always()
+        run: test "${{ steps.tests.outcome }}" = "success"
