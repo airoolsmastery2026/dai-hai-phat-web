@@ -4,6 +4,7 @@ import { AIOfficeControllers } from "@/components/sections/AIOfficeControllers";
 import { AIOfficeErrorBoundary } from "@/components/sections/AIOfficeErrorBoundary";
 import { AIOfficeSection } from "@/components/sections/AIOfficeSection";
 import { AIServiceConflictNotice } from "@/components/sections/AIServiceConflictNotice";
+import { GeminiLivePanel } from "@/components/sections/GeminiLivePanel";
 import { getAIOfficeSessionKey } from "@/lib/ai/experience";
 import type { AIService } from "@/lib/ai/service-domain";
 
@@ -19,6 +20,7 @@ export function AIOfficeExperience({ servicePreset }: AIOfficeExperienceProps) {
       <AIOfficeControllers service={servicePreset} />
       <AIServiceConflictNotice requestedService={servicePreset} />
       <AIOfficeErrorBoundary resetKey={sessionKey}>
+        <GeminiLivePanel servicePreset={servicePreset} />
         <AIOfficeSection key={sessionKey} />
       </AIOfficeErrorBoundary>
     </>
