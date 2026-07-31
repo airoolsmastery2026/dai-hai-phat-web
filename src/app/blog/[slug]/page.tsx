@@ -4,9 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
-import { JsonLd } from "@/components/seo/JsonLd";
 import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
 import { normalizeRouteSlug } from "@/lib/routing";
@@ -61,23 +61,49 @@ export default async function BlogDetailPage({
     notFound();
   }
 
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    description: article.excerpt,
-    image: `${COMPANY_CONFIG.websiteUrl}${article.image}`,
-    mainEntityOfPage: `${COMPANY_CONFIG.websiteUrl}/blog/${article.slug}`,
-    publisher: {
-      "@type": "Organization",
-      name: COMPANY_CONFIG.name,
-      url: COMPANY_CONFIG.websiteUrl,
+  const canonicalUrl = `${COMPANY_CONFIG.websiteUrl}/blog/${article.slug}`;
+  const structuredData: Record<string, unknown>[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": `${canonicalUrl}#article`,
+      headline: article.title,
+      description: article.excerpt,
+      image: new URL(article.image, COMPANY_CONFIG.websiteUrl).toString(),
+      mainEntityOfPage: canonicalUrl,
+      publisher: {
+        "@id": `${COMPANY_CONFIG.websiteUrl}/#organization`,
+      },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Trang chủ",
+          item: COMPANY_CONFIG.websiteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: `${COMPANY_CONFIG.websiteUrl}/blog`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: article.title,
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ];
 
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
-      <JsonLd data={articleSchema} />
+      <JsonLd id="dhp-blog-structured-data" data={structuredData} />
       <section className="bg-[var(--color-surface-dark)] py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
         <Container>
           <Link href="/blog" className="text-sm font-semibold text-[var(--color-primary-soft-text)] hover:underline">
