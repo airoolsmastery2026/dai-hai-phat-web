@@ -22,8 +22,11 @@ test("uses one production domain and publishes only evidence-safe company facts"
   const company = await importTypeScript("../src/content/company.ts");
   const serialized = JSON.stringify(company);
 
-  assert.equal(company.COMPANY_CONFIG.websiteUrl, "https://daihaiphat.vn");
-  assert.doesNotMatch(serialized, /vercel\.app|15\+|850\+|1,200\+|99%/);
+  assert.equal(
+    company.COMPANY_CONFIG.websiteUrl,
+    "https://dai-hai-phat-web.vercel.app",
+  );
+  assert.doesNotMatch(serialized, /15\+|850\+|1,200\+|99%/);
   assert.deepEqual(
     company.COMPANY_STATS.map((item) => item.label),
     ["Bắt đầu", "Kỹ thuật", "Triển khai", "Hoàn tất"],
