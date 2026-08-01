@@ -19,9 +19,34 @@ const RATE_LIMIT_MAX_REQUESTS = 4;
 const TOKEN_REQUEST_TIMEOUT_MS = 8_000;
 const LIVE_SESSION_MINUTES = 15;
 const NEW_SESSION_WINDOW_SECONDS = 60;
+const MAX_ERROR_RESPONSE_BYTES = 8 * 1024;
+const UPSTREAM_STATUS_PATTERN = /^[A-Z][A-Z0-9_]{0,63}$/;
 
 interface GeminiAuthTokenResponse {
   name?: unknown;
+}
+
+interface GeminiAuthTokenErrorResponse {
+  error?: {
+    status?: unknown;
+  };
+}
+
+async function readUpstreamStatus(response: Response): Promise<string | null> {
+  try {
+    const serialized = await response.text();
+    if (!serialized || serialized.length > MAX_ERROR_RESPONSE_BYTES) {
+      return null;
+    }
+
+    const payload = JSON.parse(serialized) as GeminiAuthTokenErrorResponse;
+    const status = payload.error?.status;
+    return typeof status === "string" && UPSTREAM_STATUS_PATTERN.test(status)
+      ? status
+      : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -97,9 +122,11 @@ export async function POST(request: NextRequest) {
     });
 
     if (!response.ok) {
+      const upstreamStatus = await readUpstreamStatus(response);
       console.warn("DHP Gemini Live token unavailable", {
         requestId,
-        upstreamStatus: response.status,
+        upstreamHttpStatus: response.status,
+        upstreamStatus,
       });
       return apiJsonResponse(
         {

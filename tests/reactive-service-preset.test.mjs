@@ -18,14 +18,15 @@ test("reacts to service preset changes during client navigation", async () => {
   assert.match(presetHook, /searchParams\.get\("service"\)/);
   assert.match(presetHook, /getAIService/);
   assert.match(routeEntry, /const servicePreset = useAIServicePreset\(\)/);
-  assert.match(routeEntry, /<AIOfficeExperience servicePreset=\{servicePreset\} \/>/);
+  assert.match(routeEntry, /<AIOfficeExperience/);
+  assert.match(routeEntry, /servicePreset=\{servicePreset\}/);
   assert.match(experience, /const sessionKey = getAIOfficeSessionKey\(servicePreset\)/);
   assert.match(experience, /key=\{sessionKey\}/);
   assert.doesNotMatch(routeEntry, /window\.location|useSyncExternalStore/);
 
   assert.match(homepage, /import \{ Suspense \} from "react"/);
   assert.match(homepage, /<Suspense fallback=\{<AIOfficeFallback \/>\}>/);
-  assert.match(homepage, /<AIOfficeRouteEntry \/>/);
+  assert.match(homepage, /<AIOfficeRouteEntry liveVoiceEnabled=\{liveVoiceEnabled\} \/>/);
   assert.match(homepage, /id="ai-office"/);
   assert.doesNotMatch(homepage, /force-dynamic|connection\(/);
 });

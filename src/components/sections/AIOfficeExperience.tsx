@@ -10,9 +10,13 @@ import type { AIService } from "@/lib/ai/service-domain";
 
 interface AIOfficeExperienceProps {
   servicePreset: AIService | null;
+  liveVoiceEnabled: boolean;
 }
 
-export function AIOfficeExperience({ servicePreset }: AIOfficeExperienceProps) {
+export function AIOfficeExperience({
+  servicePreset,
+  liveVoiceEnabled,
+}: AIOfficeExperienceProps) {
   const sessionKey = getAIOfficeSessionKey(servicePreset);
 
   return (
@@ -20,7 +24,9 @@ export function AIOfficeExperience({ servicePreset }: AIOfficeExperienceProps) {
       <AIOfficeControllers service={servicePreset} />
       <AIServiceConflictNotice requestedService={servicePreset} />
       <AIOfficeErrorBoundary resetKey={sessionKey}>
-        <GeminiLivePanel servicePreset={servicePreset} />
+        {liveVoiceEnabled ? (
+          <GeminiLivePanel servicePreset={servicePreset} />
+        ) : null}
         <AIOfficeSection key={sessionKey} />
       </AIOfficeErrorBoundary>
     </>
