@@ -95,13 +95,12 @@ test("validates the complete bounded project payload", () => {
     analysis.parseProjectAnalysisRequest(validRequest),
     validRequest,
   );
-  assert.throws(
-    () =>
-      analysis.parseProjectAnalysisRequest({
-        ...validRequest,
-        imageCount: 0,
-      }),
-    /Số lượng ảnh/,
+  assert.deepEqual(
+    analysis.parseProjectAnalysisRequest({
+      ...validRequest,
+      imageCount: 0,
+    }),
+    { ...validRequest, imageCount: 0 },
   );
   assert.throws(
     () =>
@@ -114,6 +113,24 @@ test("validates the complete bounded project payload", () => {
   assert.throws(
     () => analysis.parseProjectAnalysisRequest({ service: "Cửa cổng" }),
     /Số lượng ảnh|Thiếu trường/,
+  );
+});
+
+test("creates a bounded analysis request when images are deferred", () => {
+  const request = analysis.createProjectAnalysisRequest({
+    ...validRequest,
+    images: [],
+    imagesDeferred: true,
+  });
+
+  assert.equal(request.imageCount, 0);
+  assert.match(
+    analysis.buildProjectAnalysisPrompt(request, {
+      projects: [],
+      materials: [],
+      pricingRule: "Cần khảo sát.",
+    }),
+    /imageCount bằng 0/,
   );
 });
 

@@ -170,6 +170,30 @@ textarea {
   }
 }
 
+@keyframes mobile-ai-attention {
+  0%,
+  45%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  12% {
+    transform: rotate(0deg) scale(1.18);
+  }
+  22% {
+    transform: rotate(-12deg) scale(1.08);
+  }
+  32% {
+    transform: rotate(12deg) scale(1.08);
+  }
+}
+
+@media (max-width: 1023px) {
+  .mobile-ai-attention {
+    transform-origin: center;
+    animation: mobile-ai-attention 1.4s var(--ease-emphasized) 1.2s 2 both;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -182,5 +206,9 @@ textarea {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .mobile-ai-attention {
+    animation: none !important;
   }
 }

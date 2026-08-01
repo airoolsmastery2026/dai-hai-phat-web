@@ -95,6 +95,25 @@ test("accepts a completed consented CRM handoff", () => {
   assert.equal(parsed.consent, true);
 });
 
+test("accepts a completed handoff with images deferred", () => {
+  const parsed = handoff.parseCRMHandoffRequest({
+    ...validLead,
+    project: { ...validLead.project, imageCount: 0 },
+  });
+
+  assert.equal(parsed.project.imageCount, 0);
+
+  const summary = handoff.buildManualHandoffSummary({
+    ...validSession,
+    memory: {
+      ...validSession.memory,
+      images: [],
+      imagesDeferred: true,
+    },
+  });
+  assert.match(summary, /Ảnh hiện trạng: Chưa có — khách sẽ bổ sung sau/);
+});
+
 test("rejects handoffs without consent or with invalid contact data", () => {
   assert.throws(() =>
     handoff.parseCRMHandoffRequest({ ...validLead, consent: false }),

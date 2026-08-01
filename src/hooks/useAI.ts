@@ -12,6 +12,7 @@ import {
 import {
   answerConversation,
   createAIConversation,
+  deferImageCollection,
   getConversationQuestion,
   restoreAIConversation,
   type ConversationSession,
@@ -432,6 +433,26 @@ export function useAI() {
     }
   }, []);
 
+  const deferImages = useCallback(() => {
+    setError(null);
+    try {
+      const saved = writeClientSession(
+        deferImageCollection(readClientSession()),
+      );
+      if (!saved) {
+        setError(
+          "Đã ghi nhận sẽ bổ sung ảnh sau trong phiên này nhưng hồ sơ chưa thể tự lưu trên thiết bị.",
+        );
+      }
+    } catch (caughtError) {
+      setError(
+        caughtError instanceof Error
+          ? caughtError.message
+          : "Không thể ghi nhận lựa chọn bổ sung ảnh sau.",
+      );
+    }
+  }, []);
+
   const reset = useCallback(() => {
     const currentId = readClientSession().id;
     handoffControllerRef.current?.abort();
@@ -543,6 +564,7 @@ export function useAI() {
     analysisStatus,
     answer: commitAnswer,
     addImages,
+    deferImages,
     retryEvidence,
     retryAnalysis,
     handoff,
