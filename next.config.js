@@ -46,6 +46,16 @@ const nextConfig = {
         destination: "/services/noi-that-go-mdf-melamine",
         permanent: true,
       },
+      {
+        source: "/blog/giai-phap-thiet-ke-tu-quan-ao-gỗ-mdf-melamine",
+        destination: "/blog/giai-phap-thiet-ke-tu-quan-ao-go-mdf-melamine",
+        permanent: true,
+      },
+      {
+        source: "/blog/mau-giuong-ngu-khung-thep-gỗ-mdf-melamine",
+        destination: "/blog/mau-giuong-ngu-khung-thep-go-mdf-melamine",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
