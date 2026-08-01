@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import ts from "typescript";
 
-const repository = new URL("../", import.meta.url);
+const repositoryRoot = fileURLToPath(new URL("../", import.meta.url));
 const gallery = JSON.parse(
   await readFile(new URL("../public/images/gallery.json", import.meta.url), "utf8"),
 );
@@ -63,14 +64,14 @@ test("publishes every classified asset with original, WebP, thumbnail and metada
         item.thumbnail.relativePath,
         item.image.relativePath.replace(/\.webp$/, ".metadata.json"),
       ].map((relativePath) =>
-        access(path.join(new URL(repository).pathname, relativePath)),
+        access(path.join(repositoryRoot, relativePath)),
       ),
     );
   }
 });
 
 test("keeps rendered image sources inside the verified asset catalog", async () => {
-  const sourceRoot = path.join(new URL(repository).pathname, "src");
+  const sourceRoot = path.join(repositoryRoot, "src");
   const sourceFiles = (await collectFiles(sourceRoot)).filter((file) =>
     /\.(?:ts|tsx)$/.test(file),
   );
