@@ -10,12 +10,12 @@ export function ContactSection() {
       className="scroll-mt-16 bg-[var(--color-surface)] py-[var(--space-section)] lg:py-[var(--space-section-lg)]"
     >
       <Container>
-        <div className="grid gap-[var(--space-10)] rounded-[var(--radius-xl)] bg-[var(--color-primary)] p-[var(--space-6)] text-white shadow-[var(--shadow-md)] sm:p-[var(--space-10)] lg:grid-cols-[1fr_0.9fr] lg:p-[var(--space-12)]">
+        <div className="grid gap-[var(--space-8)] rounded-[var(--radius-xl)] bg-[var(--color-surface-dark)] p-[var(--space-6)] text-white shadow-[var(--shadow-md)] sm:p-[var(--space-8)] lg:grid-cols-[1fr_0.9fr] lg:p-[var(--space-10)]">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-white/80">
               Bước tiếp theo
             </p>
-            <h2 className="mt-[var(--space-3)] text-3xl font-black leading-tight sm:text-4xl">
+            <h2 className="mt-[var(--space-3)] text-[length:var(--font-h2)] font-bold leading-tight">
               Trao đổi trực tiếp với kỹ sư Đại Hải Phát
             </h2>
             <p className="mt-[var(--space-5)] max-w-xl leading-7 text-white/90">

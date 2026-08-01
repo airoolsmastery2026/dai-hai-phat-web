@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
-  "generatedAt": "2026-07-28T06:19:09.740Z",
-  "total": 136,
+  "generatedAt": "2026-08-01T10:41:56.772Z",
+  "total": 148,
   "filters": {
     "categories": [
       "Cầu thang",
@@ -19,22 +19,36 @@
       "technical"
     ],
     "materials": [
+      "Đá, gỗ walnut và kim loại champagne",
       "Gỗ công nghiệp chống ẩm và phụ kiện",
       "Gỗ công nghiệp hoàn thiện bề mặt",
       "Gỗ công nghiệp và kính",
       "Gỗ công nghiệp, kim loại và hệ chiếu sáng",
+      "Gỗ công nghiệp, kính và kim loại",
+      "Gỗ walnut, kim loại ánh champagne và bề mặt khoáng",
       "Khung kim loại và tấm lấy sáng",
+      "Khung thép và tấm lấy sáng",
+      "Khung thép và tấm mái sáng",
       "Kim loại",
       "Kim loại cắt CNC",
       "Kính, kim loại và gỗ",
-      "Mẫu vật liệu thực tế"
+      "Mẫu vật liệu thực tế",
+      "Tấm ốp vân gỗ và lam composite",
+      "Tấm ốp vân gỗ và lam đứng",
+      "Thép hộp",
+      "Thép hộp hoàn thiện sơn",
+      "Thép hộp và lam màu walnut",
+      "Thép kết cấu"
     ],
     "styles": [
       "Công nghiệp",
       "Công nghiệp hiện đại",
       "Hiện đại",
+      "Hiện đại tinh gọn",
       "Hoa văn CNC",
-      "Mẫu vật liệu"
+      "Luxury hiện đại",
+      "Mẫu vật liệu",
+      "Quy trình kỹ thuật"
     ],
     "projectTypes": [
       "Không gian thương mại",
@@ -52,6 +66,59 @@
     ]
   },
   "items": [
+    {
+      "id": "brand-hero-luxury-materials-v1",
+      "title": "Không gian vật liệu luxury xanh khoáng và gỗ walnut",
+      "alt": "Không gian sáng với tường xanh khoáng nhạt, lam gỗ walnut và lan can kim loại ánh champagne",
+      "caption": "Hình nền định hướng vật liệu cho trang chủ Đại Hải Phát, tạo riêng để minh họa tinh thần nội thất và cơ khí dân dụng cao cấp.",
+      "category": "Nội thất",
+      "assetType": "reference",
+      "material": "Gỗ walnut, kim loại ánh champagne và bề mặt khoáng",
+      "style": "Luxury hiện đại",
+      "projectType": "Nhà ở",
+      "service": "Nội thất",
+      "prompt": "Không gian kiến trúc biên tập sáng, tường khoáng xanh sương nhạt, lam gỗ walnut Mỹ, lan can cầu thang kim loại champagne xước và đá ivory; không người, không chữ, không logo, chừa khoảng trống bên trái cho nội dung.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Vật liệu nội thất luxury | Đại Hải Phát",
+        "description": "Hình nền vật liệu xanh khoáng, gỗ walnut và kim loại champagne cho trải nghiệm tư vấn Đại Hải Phát.",
+        "keywords": [
+          "đại hải phát",
+          "gỗ walnut",
+          "kim loại champagne",
+          "nội thất luxury"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/brand/hero-luxury-materials-v1.png",
+        "sourceRelativePath": "assets/images/brand/hero-luxury-materials-v1.png",
+        "publicUrl": "/images/brand/hero-luxury-materials-v1.png",
+        "bytes": 1899646,
+        "sha256": "792f69bf7b2c06be72027236c17bf4d949f67c3dd9dbe83b6bfbccd35e06b0f5",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/brand/hero-luxury-materials-v1.webp",
+        "publicUrl": "/images/brand/hero-luxury-materials-v1.webp",
+        "width": 1774,
+        "height": 887,
+        "bytes": 54922,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/brand/hero-luxury-materials-v1.thumb.webp",
+        "publicUrl": "/images/brand/hero-luxury-materials-v1.thumb.webp",
+        "width": 480,
+        "height": 240,
+        "bytes": 4098,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACQBACdASogABAAPu1iqk4ppaQiMAgBMB2JQBZwDaRv8wj/vIXWSrXQbG6J4wAA/vZMGOYBJ5KDgI0GSXLU4WUm4J9pNqOCdjhi09x+a3FMzln/FlNcWM7QAAA="
+    },
     {
       "id": "canopies-canopy01",
       "title": "Khung mái che hành lang",
@@ -6824,6 +6891,578 @@
         "format": "webp"
       },
       "blurDataUrl": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACwBwCdASogABgAPu1kqU2ppaOiMAgBMB2JZwDD7vA1QbQK2FBC720mCm3dh6LRmc6mv7y4Bw0D0yoCFOv6GCwmvsOrG1BgAP7IxpceKlUPq59/Z0GpSddxHZgf5JYIZXyw6egFysuyb/u2V15yNh2QQcpOOWPICF/ccJH3WL5pJkBXATZJN8sKwxowrkUfFiZ31JAOsYbxbX0kRan1IOjF/rk9qu/dtbztMYLdbiIfurJqYz0LA/v4GQ9peG5fl1yE7z5ftnTao8jw9cgbhxK/dl/+8LshDMmBuAm33xKQhIh2GouoyJ/mIatEydvJrEcnrmwxUJMEangjs5euxCUOmWAAAA=="
+    },
+    {
+      "id": "reference-cau-thang-lan-can-walnut-champagne-v1",
+      "title": "Cầu thang đá, tay vịn walnut và lan can champagne",
+      "alt": "Cầu thang nhà ở sáng với bậc đá ivory, tay vịn walnut và lan can kim loại champagne",
+      "caption": "Mẫu thiết kế tham khảo kết hợp đá sáng, tay vịn gỗ walnut và thanh lan can kim loại hoàn thiện champagne.",
+      "category": "Cầu thang",
+      "assetType": "reference",
+      "material": "Đá, gỗ walnut và kim loại champagne",
+      "style": "Luxury hiện đại",
+      "projectType": "Nhà ở",
+      "service": "Cầu thang và lan can",
+      "prompt": "Cầu thang nhà phố với bậc đá ivory, tay vịn walnut và thanh lan can champagne, tường xanh khoáng nhạt, ảnh kiến trúc photorealistic, không người, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Mẫu cầu thang walnut và lan can champagne | Đại Hải Phát",
+        "description": "Mẫu tham khảo cầu thang đá sáng, tay vịn walnut và lan can kim loại champagne.",
+        "keywords": [
+          "cầu thang nhà phố",
+          "lan can champagne",
+          "tay vịn walnut"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/cau-thang-lan-can-walnut-champagne-v1.png",
+        "sourceRelativePath": "assets/images/reference/cau-thang-lan-can-walnut-champagne-v1.png",
+        "publicUrl": "/images/reference/cau-thang-lan-can-walnut-champagne-v1.png",
+        "bytes": 1958532,
+        "sha256": "8f6c08961052cafd7004be0beced603affafcbbb7c87a06e0bcfdb0500ecd988",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/cau-thang-lan-can-walnut-champagne-v1.webp",
+        "publicUrl": "/images/reference/cau-thang-lan-can-walnut-champagne-v1.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 76006,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/cau-thang-lan-can-walnut-champagne-v1.thumb.webp",
+        "publicUrl": "/images/reference/cau-thang-lan-can-walnut-champagne-v1.thumb.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 8788,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAQBgCdASogABIAPu1qrFEppaQiqAqpMB2JZQC90DedOB5AuleqOIuzhZS4z8I4ZOdg2a75W1kwfxAA/tKgKcCSuVZQ+pUiY1woP1wQQ7RdDyAbG/dmqe9+pmfOV2GtuCdDDHKt2k4WVoMyyMS6NOlW5kXcm6DXXr+bszaWo3VCfx+eo8dyz1F50x75rdgM6xjYsHMIV6zr2+TC7+QSF5eXQAA="
+    },
+    {
+      "id": "reference-cong-truot-khung-thep-quy-mo-lon-v1",
+      "title": "Cổng trượt khung thép quy mô lớn",
+      "alt": "Cổng trượt khung thép thanh đứng tại lối vào khu xưởng",
+      "caption": "Mẫu tham khảo kết cấu cổng trượt quy mô lớn; kích thước và liên kết phải được thiết kế theo hiện trạng cụ thể.",
+      "category": "Cửa cổng",
+      "assetType": "reference",
+      "material": "Thép hộp hoàn thiện sơn",
+      "style": "Công nghiệp hiện đại",
+      "projectType": "Xưởng gia công",
+      "service": "Cửa cổng",
+      "prompt": "Cổng trượt thép thanh đứng quy mô lớn trước khu xưởng hiện đại, kết cấu và ray thực tế, ảnh photorealistic, không người, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Mẫu cổng trượt khung thép quy mô lớn | Đại Hải Phát",
+        "description": "Mẫu tham khảo kết cấu cổng trượt khung thép cho lối vào rộng.",
+        "keywords": [
+          "cổng quy mô lớn",
+          "cổng trượt thép",
+          "khung cổng"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.png",
+        "sourceRelativePath": "assets/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.png",
+        "publicUrl": "/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.png",
+        "bytes": 2280805,
+        "sha256": "bb6928ddb3487257513ef8504f5b64e73f100d1c0ba468d75273b79849577736",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.webp",
+        "publicUrl": "/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 146892,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.thumb.webp",
+        "publicUrl": "/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 16006,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAADwBgCdASogABUAPu1qq08ppiOiMBgIATAdiWcAzF2scYDSfNFEyXP0krdV97lJt1UYLyzbp1shbTIeObhRhlmsAP7zdS3CvLMc5sANGJo9mlGaCTlQ/VPu8QrAClvxVwLRoW253TzmylAH5Ux1wEYZ22DjMuvm2LPJ1vxR2yX6nhh8nB4Tcvc2sHynPT9xozgr67M1pge82hIjvSFYAAw+FotpAwW1Jm/w+fHAiZ8goBs7NShN+CtADc4PZYrgOBAvxvW+xnIPHDyu5cLBLa8rxAAAAA=="
+    },
+    {
+      "id": "reference-cong-truot-nha-pho-walnut-v1",
+      "title": "Cổng trượt nhà phố kết hợp lam walnut",
+      "alt": "Cổng trượt nhà phố màu ghi khoáng kết hợp một mảng lam walnut",
+      "caption": "Mẫu thiết kế tham khảo cổng trượt thanh đứng, khung thép hoàn thiện ghi khoáng và điểm nhấn lam walnut.",
+      "category": "Cửa cổng",
+      "assetType": "reference",
+      "material": "Thép hộp và lam màu walnut",
+      "style": "Luxury hiện đại",
+      "projectType": "Nhà ở",
+      "service": "Cửa cổng",
+      "prompt": "Cổng trượt nhà phố Việt Nam bằng thép thanh đứng màu ghi khoáng, điểm nhấn lam walnut, mặt tiền ivory sáng, ảnh kiến trúc photorealistic, không người, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Mẫu cổng trượt nhà phố kết hợp walnut | Đại Hải Phát",
+        "description": "Mẫu tham khảo cổng trượt thép thanh đứng kết hợp lam walnut cho nhà phố.",
+        "keywords": [
+          "cổng thép",
+          "cổng trượt nhà phố",
+          "lam walnut"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/cong-truot-nha-pho-walnut-v1.png",
+        "sourceRelativePath": "assets/images/reference/cong-truot-nha-pho-walnut-v1.png",
+        "publicUrl": "/images/reference/cong-truot-nha-pho-walnut-v1.png",
+        "bytes": 2352120,
+        "sha256": "d1e96b4446eaecdfc4df33be4443b3bdfa91452b4867aacdc60062c6691097d2",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/cong-truot-nha-pho-walnut-v1.webp",
+        "publicUrl": "/images/reference/cong-truot-nha-pho-walnut-v1.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 184316,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/cong-truot-nha-pho-walnut-v1.thumb.webp",
+        "publicUrl": "/images/reference/cong-truot-nha-pho-walnut-v1.thumb.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 16540,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4ILgAAAAwBgCdASogABIAPu1mqk2ppaQiMAgBMB2JYwC85a+B4BWfW23vcc+olDU0JAT3xDLrAdd7uZpqyaLAAPui7eyox7NhoRh/IedYWqjuImJx/0ehlzmSg0TQezZd8gMgzMOLEHIG8/ZtWw+qALJRLlLCQ3HaGcybLpUsgSvLnw6oopxuxMJVXW+FZ3Gg8iVG3SiMXhajjQGfIl+nVuz5rt1EWrSk6v2d6rteIMxwRQ5YRfqXEFzIAAAA"
+    },
+    {
+      "id": "reference-gia-cong-khung-cong-thep-v1",
+      "title": "Gá lắp và hàn khung cổng thép",
+      "alt": "Kỹ thuật viên gá lắp và hàn khung cổng thép trên bàn dưỡng tại xưởng",
+      "caption": "Ảnh quy trình tham khảo cho bước gá lắp, kiểm tra đường chéo và hàn khung cổng tại xưởng.",
+      "category": "Gia công tại xưởng",
+      "assetType": "reference",
+      "material": "Thép hộp",
+      "style": "Quy trình kỹ thuật",
+      "projectType": "Xưởng gia công",
+      "service": "Cửa cổng",
+      "prompt": "Kỹ thuật viên Việt Nam hàn khung cổng thép trên bàn dưỡng, kẹp gá rõ và đồ bảo hộ đúng, photorealistic, không chữ hay logo.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Quy trình gia công khung cổng thép | Đại Hải Phát",
+        "description": "Ảnh tham khảo bước gá lắp và hàn khung cổng thép tại xưởng.",
+        "keywords": [
+          "gia công cổng",
+          "hàn khung cổng",
+          "thép hộp"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/gia-cong-khung-cong-thep-v1.png",
+        "sourceRelativePath": "assets/images/reference/gia-cong-khung-cong-thep-v1.png",
+        "publicUrl": "/images/reference/gia-cong-khung-cong-thep-v1.png",
+        "bytes": 2303198,
+        "sha256": "c3c48c05debdd5d298069d27c8ae65cada3e9de92a934183a4c133ce07adcfe0",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/gia-cong-khung-cong-thep-v1.webp",
+        "publicUrl": "/images/reference/gia-cong-khung-cong-thep-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 108048,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/gia-cong-khung-cong-thep-v1.thumb.webp",
+        "publicUrl": "/images/reference/gia-cong-khung-cong-thep-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 15370,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACQBgCdASogABUAPu1mqk2ppaQiMAgBMB2JZwDMXa42kIRac1GVmHdDlRavAL+xql8xpM13l46duvTxjWIQAP7aNlUtGXqHrRqNZTiDjwa9sCuK3U+2dUYMusxAG+dRR8vnC5Yxvbo9gD34U96jpj6BTMFdfKSF+BHGUglWVrbVXIHddrCH3b5EHvzSbbjjTuSpXmgODt8uye/IVrQAAA=="
+    },
+    {
+      "id": "reference-lap-dat-mai-che-khung-thep-v1",
+      "title": "Lắp đặt tấm mái trên khung thép",
+      "alt": "Hai kỹ thuật viên lắp tấm mái lấy sáng trên hệ khung thép nhà ở",
+      "caption": "Ảnh quy trình tham khảo cho bước căn chỉnh tấm, liên kết và an toàn khi lắp mái che.",
+      "category": "Mái che",
+      "assetType": "reference",
+      "material": "Khung thép và tấm lấy sáng",
+      "style": "Hiện đại",
+      "projectType": "Nhà ở",
+      "service": "Mái che",
+      "prompt": "Hai kỹ thuật viên có dây an toàn lắp tấm lấy sáng trên khung thép mái che nhà ở, góc chụp rõ liên kết, photorealistic, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Lắp đặt mái che khung thép | Đại Hải Phát",
+        "description": "Ảnh tham khảo quy trình lắp đặt tấm mái trên khung thép.",
+        "keywords": [
+          "khung thép",
+          "lắp mái che",
+          "tấm lấy sáng"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/lap-dat-mai-che-khung-thep-v1.png",
+        "sourceRelativePath": "assets/images/reference/lap-dat-mai-che-khung-thep-v1.png",
+        "publicUrl": "/images/reference/lap-dat-mai-che-khung-thep-v1.png",
+        "bytes": 2676869,
+        "sha256": "b3ec24a9b67de6de3357b4b134d8a979f97adcbb0d4f10e7a75298ae6a329405",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/lap-dat-mai-che-khung-thep-v1.webp",
+        "publicUrl": "/images/reference/lap-dat-mai-che-khung-thep-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 213278,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/lap-dat-mai-che-khung-thep-v1.thumb.webp",
+        "publicUrl": "/images/reference/lap-dat-mai-che-khung-thep-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 27252,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAADwBgCdASogABUAPu1mqk2ppaQiMAgBMB2JZQDDkHBcAjgNq8k2xrCQN6X+RwSlqUY3gKR19v7+4Ktxr8ds9pUAAP7KjmOpw0Bvauk0aMjFbis6nx9kSOZI09h4bMIfWEbM1y2qfbmpzNiGvVIos+c+t4em+KKV/knj3NkaaJQ4QElIiDN3L7mXPYeLloaDytAU6rGYnt79VQ1iVbwgMtZ/+kKw8Z5Ajfbiz4e2zVkgKdDyg6Gsn0+YCUysUmKGzjWgHoTVo7pSVUzCq19SRXsOIXeVoZpkmZCQ5vAxYIGC6sASug/hKS/MhGz+hGGUF+kjAHXhExDRV076+icRjWobES1cDYMNwAA="
+    },
+    {
+      "id": "reference-mai-che-khung-thep-hoan-thien-v1",
+      "title": "Mái che khung thép hoàn thiện có thoát nước",
+      "alt": "Mái che khung thép hoàn thiện tại sân nhà với tấm mái sáng và máng thoát nước",
+      "caption": "Mẫu tham khảo hệ mái che khung thép, tấm lợp sáng và tuyến thoát nước được tổ chức rõ.",
+      "category": "Mái che",
+      "assetType": "reference",
+      "material": "Khung thép và tấm mái sáng",
+      "style": "Hiện đại",
+      "projectType": "Nhà ở",
+      "service": "Mái che",
+      "prompt": "Mái che khung thép hoàn thiện ở sân nhà Việt Nam, tấm mái sáng và máng thoát nước rõ, trời sau mưa, photorealistic, không người, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Mẫu mái che khung thép hoàn thiện | Đại Hải Phát",
+        "description": "Mẫu tham khảo mái che khung thép và tổ chức thoát nước tại nhà ở.",
+        "keywords": [
+          "mái che khung thép",
+          "mái che nhà ở",
+          "thoát nước mái"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/mai-che-khung-thep-hoan-thien-v1.png",
+        "sourceRelativePath": "assets/images/reference/mai-che-khung-thep-hoan-thien-v1.png",
+        "publicUrl": "/images/reference/mai-che-khung-thep-hoan-thien-v1.png",
+        "bytes": 2416476,
+        "sha256": "86857a6c9d3f2bb0000a50e1eaaa17265cfb062c6275a5a07376607574215e37",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/mai-che-khung-thep-hoan-thien-v1.webp",
+        "publicUrl": "/images/reference/mai-che-khung-thep-hoan-thien-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 184296,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/mai-che-khung-thep-hoan-thien-v1.thumb.webp",
+        "publicUrl": "/images/reference/mai-che-khung-thep-hoan-thien-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 21440,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRggBAABXRUJQVlA4IPwAAAAQBwCdASogABUAPu1kqU2ppaQiMAgBMB2JQBlW5YMPu0IN3op21uG3HNs9TAihveOnLiEo4C+vVp7UCX85RoWWQADyoR3Pbog6/cxEUG5HjocuhcemALlQbkUSsKsM3BhomzD1xmgyaitlDabVdx1X5FOyF5ibcVOsKBeGFJfC0yMYJvUyVunKiTz694xIdXdiXvoObR4St/j5UeMsWbMGqKBH2ccPQZ8zShErVCuAj/ms3wfLkfqHGO82bXpYsKUHd95H+ynULZk0sAOFlQdw85fC77YLR/i5UTtPWClZLFRfrgrtzvy1Qv9X9BwvERzT2YQojtVFYebwAAA="
+    },
+    {
+      "id": "reference-thi-cong-op-lam-noi-that-v1",
+      "title": "Căn chỉnh tấm ốp và lam nội thất",
+      "alt": "Hai kỹ thuật viên căn chỉnh tấm ốp và lam đứng trên vách nội thất",
+      "caption": "Ảnh quy trình tham khảo cho bước kiểm tra mặt nền, cao độ và khe ghép trước khi hoàn thiện vách ốp.",
+      "category": "Nội thất",
+      "assetType": "reference",
+      "material": "Tấm ốp vân gỗ và lam composite",
+      "style": "Hiện đại",
+      "projectType": "Nhà ở",
+      "service": "Nội thất",
+      "prompt": "Hai kỹ thuật viên Việt Nam lắp tấm ốp vân gỗ và lam đứng trong căn hộ sáng, dụng cụ và khe cân chỉnh thực tế, photorealistic, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Thi công tấm ốp và lam nội thất | Đại Hải Phát",
+        "description": "Ảnh tham khảo quy trình căn chỉnh tấm ốp và lam nội thất.",
+        "keywords": [
+          "căn chỉnh vách",
+          "lam nội thất",
+          "thi công tấm ốp"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/thi-cong-op-lam-noi-that-v1.png",
+        "sourceRelativePath": "assets/images/reference/thi-cong-op-lam-noi-that-v1.png",
+        "publicUrl": "/images/reference/thi-cong-op-lam-noi-that-v1.png",
+        "bytes": 2331257,
+        "sha256": "c3935b310860a482fe0f0133279989b5675d4ab227390444b8833aacf44f2de0",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/thi-cong-op-lam-noi-that-v1.webp",
+        "publicUrl": "/images/reference/thi-cong-op-lam-noi-that-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 140202,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/thi-cong-op-lam-noi-that-v1.thumb.webp",
+        "publicUrl": "/images/reference/thi-cong-op-lam-noi-that-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 14208,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAABQBgCdASogABUAPu1ur1IppiQiqAgBMB2JQBUesZfONf6WzZF9HB13mqG+E0CiveNPekA4K9UPXFk+AAD+3M/wCgjTYmtL06eQzh9fGDSHFS+MWG7btW0vtDxcKzZ3bfOzXZRqdFDFnI9yAl0subJV3rp9KrHSnVIwoazaVyIX5ta68deadTlD4LtPRZ73emslIgH+ibiJ7C2px/SxhwPqe+yvvtcbtzSSjfAjQR3LEDN/JMyeNgRsrBR8/FAXBfYEzXvAZCo+T9bG0SomO4uDhpYAAA=="
+    },
+    {
+      "id": "reference-tu-ao-phong-ngu-go-canh-kinh-v1",
+      "title": "Tủ áo gỗ và cánh kính trong phòng ngủ",
+      "alt": "Phòng ngủ sáng với hệ tủ áo gỗ và khoang trưng bày cánh kính",
+      "caption": "Mẫu tham khảo bố trí tủ áo theo chiều cao phòng, kết hợp khoang gỗ và cánh kính có chiếu sáng.",
+      "category": "Nội thất",
+      "assetType": "reference",
+      "material": "Gỗ công nghiệp, kính và kim loại",
+      "style": "Hiện đại tinh gọn",
+      "projectType": "Nhà ở",
+      "service": "Nội thất",
+      "prompt": "Phòng ngủ nhà phố sáng với tủ áo gỗ cao sát trần và khoang cánh kính khung kim loại, ảnh kiến trúc photorealistic, không người, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Mẫu tủ áo gỗ và cánh kính | Đại Hải Phát",
+        "description": "Mẫu tham khảo tủ áo gỗ kết hợp khoang cánh kính cho phòng ngủ.",
+        "keywords": [
+          "cánh kính",
+          "nội thất phòng ngủ",
+          "tủ áo gỗ"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.png",
+        "sourceRelativePath": "assets/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.png",
+        "publicUrl": "/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.png",
+        "bytes": 2012307,
+        "sha256": "64943e721e486b9e44378cbd5c24989656475b912ed164e319f26aba8cdb9248",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.webp",
+        "publicUrl": "/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 73454,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.thumb.webp",
+        "publicUrl": "/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 7890,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAACQBgCdASogABUAPu1kqk2ppaQiMAgBMB2JQBYeNkg7A1ANN+RgL4KdpIRYcgGNeHrf1GUG0nCgrXUw+iegAMwAhYEKSH090J5yFy2juxSr96uABp3/TkbkvxNqozgka9+TlrsUo65XaCq7RRhJeQANIFqlBPGB1fi7hWsb9u7cnPDS6shAYXVIxEU5yPzhPz5zWyiOhtsxkmGAwtybk/12db3f/1rMS8EwBtRCiRJA/KYGcGoxuqSRpSoWtxtn0rAgjU8qkSmyvpaU6QkFajMZRH6lukIQ4ltUBIAA"
+    },
+    {
+      "id": "reference-vach-lam-go-khong-gian-lam-viec-v1",
+      "title": "Vách ốp và lam gỗ cho không gian làm việc",
+      "alt": "Không gian làm việc sáng với vách ốp phẳng và lam gỗ đứng",
+      "caption": "Mẫu tham khảo phối hợp tấm ốp phẳng, lam đứng và cửa ẩn trong một hệ vách đồng bộ.",
+      "category": "Nội thất",
+      "assetType": "reference",
+      "material": "Tấm ốp vân gỗ và lam đứng",
+      "style": "Hiện đại tinh gọn",
+      "projectType": "Không gian thương mại",
+      "service": "Nội thất",
+      "prompt": "Không gian làm việc cao cấp với vách ốp gỗ, lam đứng và cửa ẩn, ánh sáng tự nhiên, ảnh kiến trúc photorealistic, không người, không chữ.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Mẫu vách ốp và lam gỗ | Đại Hải Phát",
+        "description": "Mẫu tham khảo vách ốp phẳng kết hợp lam gỗ và cửa ẩn.",
+        "keywords": [
+          "cửa ẩn",
+          "lam gỗ",
+          "vách ốp gỗ"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/vach-lam-go-khong-gian-lam-viec-v1.png",
+        "sourceRelativePath": "assets/images/reference/vach-lam-go-khong-gian-lam-viec-v1.png",
+        "publicUrl": "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.png",
+        "bytes": 2042256,
+        "sha256": "cb2001baf4195757a084421590200b2d3ffae1937e6bba71e6ced9f1226490cb",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/vach-lam-go-khong-gian-lam-viec-v1.webp",
+        "publicUrl": "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 87932,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/vach-lam-go-khong-gian-lam-viec-v1.thumb.webp",
+        "publicUrl": "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 9550,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRuIAAABXRUJQVlA4INYAAABwBgCdASogABUAPu1kqk2ppaQiMAgBMB2JZQCnGa+BzlemTSyBPjH27JB2WZM4MmLTHHYb4Xmpi4HruwAA/pFFcwJi3UrqFkLko3z1p3zO2nr9CoKGnuS6Z4LY1IT3ZvxiqcjpHuOo1JAKbaRZzutlvBLNzZ0cVUpQHURch3LAIOZZoUvDoYJcpzyotzfrHbT1ap/8BaVPmLLOzzzHXUJf4OK/quDMNICRU41sqqRWdZIeQawttZTx2CYqe6XR1XzaerHfW0+hIUIDjcJ4Cj68i4ZF88AA"
+    },
+    {
+      "id": "reference-xuong-gia-cong-ket-cau-thep-v1",
+      "title": "Đo và hàn cấu kiện thép tại xưởng",
+      "alt": "Kỹ thuật viên đo và hàn cấu kiện thép trong xưởng gia công",
+      "caption": "Ảnh quy trình tham khảo cho bước đo kiểm, gá lắp và hàn cấu kiện thép theo bản vẽ.",
+      "category": "Gia công tại xưởng",
+      "assetType": "reference",
+      "material": "Thép kết cấu",
+      "style": "Quy trình kỹ thuật",
+      "projectType": "Xưởng gia công",
+      "service": "Nhà xưởng",
+      "prompt": "Kỹ thuật viên Việt Nam đo và hàn cấu kiện thép trong xưởng, đồ bảo hộ đúng, ánh sáng cuối ngày, ảnh photorealistic, không chữ hay logo.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Quy trình đo và hàn cấu kiện thép | Đại Hải Phát",
+        "description": "Ảnh tham khảo quy trình đo kiểm và hàn cấu kiện thép tại xưởng.",
+        "keywords": [
+          "đo cấu kiện",
+          "gia công thép",
+          "hàn kết cấu"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/xuong-gia-cong-ket-cau-thep-v1.png",
+        "sourceRelativePath": "assets/images/reference/xuong-gia-cong-ket-cau-thep-v1.png",
+        "publicUrl": "/images/reference/xuong-gia-cong-ket-cau-thep-v1.png",
+        "bytes": 1916531,
+        "sha256": "fa341a4ce29815fab46cf9f9fc6a23fc03a06499db49ca5bdd07ee67091f871f",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/xuong-gia-cong-ket-cau-thep-v1.webp",
+        "publicUrl": "/images/reference/xuong-gia-cong-ket-cau-thep-v1.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 109012,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/xuong-gia-cong-ket-cau-thep-v1.thumb.webp",
+        "publicUrl": "/images/reference/xuong-gia-cong-ket-cau-thep-v1.thumb.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 14204,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABQBQCdASogABIAPu1srlIppaQiqAgBMB2JZwDKed0aq+cnwWFh6myIrIfqiPBA08RfSFgA/vxIlcxHovRutEA1e380YEtouQ+EjjAcNdheV0l32sy36NWjS8uBXREE61rtVYFSa81oyT1VW4l/DPktl1kBK0yBK6IagCqTamnqlRGe2tHbXj9/98Wp63CK2m2FlTdrx+oFUMzFBNAX8XvMU8xgZWPYJwAAAA=="
+    },
+    {
+      "id": "reference-xuong-noi-that-kiem-tra-lap-rap-v1",
+      "title": "Kiểm tra lắp ráp nội thất tại xưởng",
+      "alt": "Hai kỹ thuật viên kiểm tra các tấm gỗ khi lắp ráp nội thất tại xưởng",
+      "caption": "Ảnh quy trình tham khảo cho bước kiểm tra kích thước và lắp ráp nội thất trước khi đưa tới công trình.",
+      "category": "Gia công tại xưởng",
+      "assetType": "reference",
+      "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+      "style": "Quy trình kỹ thuật",
+      "projectType": "Xưởng gia công",
+      "service": "Nội thất",
+      "prompt": "Hai kỹ thuật viên Việt Nam kiểm tra lắp ráp tấm gỗ nội thất trong xưởng sạch, dụng cụ và liên kết nhìn hợp lý, ảnh ngang photorealistic, không chữ hay logo.",
+      "source": {
+        "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+        "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+        "verified": true
+      },
+      "seo": {
+        "title": "Kiểm tra lắp ráp nội thất tại xưởng | Đại Hải Phát",
+        "description": "Ảnh quy trình tham khảo cho bước kiểm tra lắp ráp nội thất tại xưởng.",
+        "keywords": [
+          "đại hải phát",
+          "gia công nội thất",
+          "kiểm tra lắp ráp"
+        ]
+      },
+      "original": {
+        "relativePath": "public/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.png",
+        "sourceRelativePath": "assets/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.png",
+        "publicUrl": "/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.png",
+        "bytes": 2386165,
+        "sha256": "2a5fa7f5088df438937f3d99cddfc4c53fed48d5d1e78da0009f6d5ff9d9f039",
+        "format": ".png"
+      },
+      "image": {
+        "relativePath": "public/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.webp",
+        "publicUrl": "/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 147114,
+        "format": "webp"
+      },
+      "thumbnail": {
+        "relativePath": "public/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.thumb.webp",
+        "publicUrl": "/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.thumb.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 19320,
+        "format": "webp"
+      },
+      "blurDataUrl": "data:image/webp;base64,UklGRgIBAABXRUJQVlA4IPYAAADQBgCdASogABUAPu1sqk8ppiOiMBgIATAdiUAVgGXDdDDd0583OXXTxTbnHnR4riYLiwO7Ls67cCn8x+3XL2AA/s2dL8vsdoj6kv8yWIXbZj/KYeunJsgBeAZKQS5pmiUD6Q1QSfqZ5vgEv8iIkoATMh/t5z/6Ranf4jCfRAQSeH/TwQAFkEP0lS/CxHUJ0E5zHCBV8y3DTHJAnlqUVZhyVQHkLkRV0s2eMjghFAgi3LAf5J9hAEu47nu5njzJSWS4A29iIIa9wVOhnx+adMo1o4R8nATg6mkvG8TeZFTEDf9X9k+CXLoMQaW/XwWZ49rTsUUAAAA="
     },
     {
       "id": "stairs-stair01",

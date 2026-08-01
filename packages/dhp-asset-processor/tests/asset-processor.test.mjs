@@ -3,6 +3,7 @@ import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promise
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { setTimeout as delay } from "node:timers/promises";
 
 import sharp from "sharp";
 
@@ -17,6 +18,22 @@ async function createRoot() {
     mkdir(path.join(root, "assets/image-metadata"), { recursive: true }),
   ]);
   return root;
+}
+
+async function removeRoot(root) {
+  sharp.cache(false);
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      await rm(root, { recursive: true, force: true });
+      return;
+    } catch (error) {
+      const retryable = ["EBUSY", "ENOTEMPTY", "EPERM"].includes(error?.code);
+      if (!retryable || attempt === 4) {
+        throw error;
+      }
+      await delay(100 * (attempt + 1));
+    }
+  }
 }
 
 async function createImage(root, name = "cua-cong") {
@@ -104,7 +121,7 @@ test("builds verified WebP, thumbnail, metadata and gallery output", async () =>
     );
     await access(path.join(root, item.original.relativePath));
   } finally {
-    await rm(root, { recursive: true, force: true });
+    await removeRoot(root);
   }
 });
 
@@ -124,7 +141,7 @@ test("does not write a gallery when verified metadata is missing", async () => {
     );
     await assert.rejects(access(config.galleryPath));
   } finally {
-    await rm(root, { recursive: true, force: true });
+    await removeRoot(root);
   }
 });
 
@@ -137,7 +154,7 @@ test("rejects paths outside the configured repository root", async () => {
       /must stay inside the repository root/,
     );
   } finally {
-    await rm(root, { recursive: true, force: true });
+    await removeRoot(root);
   }
 });
 
@@ -156,7 +173,7 @@ test("resolves a relative repository root exactly once", async () => {
     assert.equal(config.inputDir, path.join(root, "assets/images"));
   } finally {
     process.chdir(previousWorkingDirectory);
-    await rm(root, { recursive: true, force: true });
+    await removeRoot(root);
   }
 });
 
@@ -212,6 +229,6 @@ test("rebuilds the gallery after verified metadata changes", async () => {
     assert.equal(gallery.items[0].caption, "Caption đã được cập nhật.");
   } finally {
     watcher?.close();
-    await rm(root, { recursive: true, force: true });
+    await removeRoot(root);
   }
 });

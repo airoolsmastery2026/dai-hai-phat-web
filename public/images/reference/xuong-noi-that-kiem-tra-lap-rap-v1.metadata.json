@@ -1,0 +1,52 @@
+{
+  "id": "reference-xuong-noi-that-kiem-tra-lap-rap-v1",
+  "title": "Kiểm tra lắp ráp nội thất tại xưởng",
+  "alt": "Hai kỹ thuật viên kiểm tra các tấm gỗ khi lắp ráp nội thất tại xưởng",
+  "caption": "Ảnh quy trình tham khảo cho bước kiểm tra kích thước và lắp ráp nội thất trước khi đưa tới công trình.",
+  "category": "Gia công tại xưởng",
+  "assetType": "reference",
+  "material": "Gỗ công nghiệp hoàn thiện bề mặt",
+  "style": "Quy trình kỹ thuật",
+  "projectType": "Xưởng gia công",
+  "service": "Nội thất",
+  "prompt": "Hai kỹ thuật viên Việt Nam kiểm tra lắp ráp tấm gỗ nội thất trong xưởng sạch, dụng cụ và liên kết nhìn hợp lý, ảnh ngang photorealistic, không chữ hay logo.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Kiểm tra lắp ráp nội thất tại xưởng | Đại Hải Phát",
+    "description": "Ảnh quy trình tham khảo cho bước kiểm tra lắp ráp nội thất tại xưởng.",
+    "keywords": [
+      "đại hải phát",
+      "gia công nội thất",
+      "kiểm tra lắp ráp"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.png",
+    "sourceRelativePath": "assets/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.png",
+    "publicUrl": "/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.png",
+    "bytes": 2386165,
+    "sha256": "2a5fa7f5088df438937f3d99cddfc4c53fed48d5d1e78da0009f6d5ff9d9f039",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.webp",
+    "publicUrl": "/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 147114,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.thumb.webp",
+    "publicUrl": "/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 19320,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRgIBAABXRUJQVlA4IPYAAADQBgCdASogABUAPu1sqk8ppiOiMBgIATAdiUAVgGXDdDDd0583OXXTxTbnHnR4riYLiwO7Ls67cCn8x+3XL2AA/s2dL8vsdoj6kv8yWIXbZj/KYeunJsgBeAZKQS5pmiUD6Q1QSfqZ5vgEv8iIkoATMh/t5z/6Ranf4jCfRAQSeH/TwQAFkEP0lS/CxHUJ0E5zHCBV8y3DTHJAnlqUVZhyVQHkLkRV0s2eMjghFAgi3LAf5J9hAEu47nu5njzJSWS4A29iIIa9wVOhnx+adMo1o4R8nATg6mkvG8TeZFTEDf9X9k+CXLoMQaW/XwWZ49rTsUUAAAA="
+}

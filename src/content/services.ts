@@ -41,8 +41,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Thi công", description: "Gia công, lắp đặt và kiểm tra theo phạm vi đã xác nhận." },
     ],
     gallery: [
-      "/images/interior/interior78.webp",
-      "/images/interior/interior86.webp",
+      "/images/reference/xuong-noi-that-kiem-tra-lap-rap-v1.webp",
+      "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.webp",
+      "/images/interior/interior07.webp",
     ],
     faq: [
       { question: "Có thể thiết kế theo phong cách riêng không?", answer: "Có, chúng tôi nhận thiết kế theo yêu cầu và tối ưu theo không gian sử dụng." },
@@ -59,7 +60,7 @@ export const SERVICES: ServiceItem[] = [
       name: "Nội thất gỗ MDF và cánh kính khung nhôm",
       serviceType: "Interior furniture manufacturing",
     },
-    image: "/images/interior/interior78.webp",
+    image: "/images/reference/tu-ao-phong-ngu-go-canh-kinh-v1.webp",
     icon: serviceIcons[1],
   },
   {
@@ -85,8 +86,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Lắp đặt", description: "Gắn cố định và kiểm tra độ phẳng, hài hòa." },
     ],
     gallery: [
-      "/images/interior/interior16.webp",
+      "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.webp",
       "/images/interior/interior71.webp",
+      "/images/interior/interior72.webp",
     ],
     faq: [
       { question: "Có cần kiểm tra mặt nền trước khi thi công không?", answer: "Có. Độ phẳng, độ ẩm và vị trí thiết bị phải được kiểm tra trước khi chốt cấu tạo lắp đặt." },
@@ -102,7 +104,7 @@ export const SERVICES: ServiceItem[] = [
       name: "Vách ngăn và ốp composite",
       serviceType: "Composite wall systems",
     },
-    image: "/images/interior/interior16.webp",
+    image: "/images/reference/thi-cong-op-lam-noi-that-v1.webp",
     icon: serviceIcons[2],
   },
   {
@@ -128,8 +130,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Lắp đặt", description: "Lắp theo bản vẽ và kiểm tra các điểm liên kết, thoát nước." },
     ],
     gallery: [
-      "/images/canopies/canopy03.webp",
-      "/images/canopies/canopy08.webp",
+      "/images/reference/lap-dat-mai-che-khung-thep-v1.webp",
+      "/images/canopies/canopy01.webp",
+      "/images/canopies/canopy02.webp",
     ],
     faq: [
       { question: "Khi nào xác định được loại tấm phù hợp?", answer: "Sau khảo sát và khi có hồ sơ kỹ thuật của mã tấm để đối chiếu với điều kiện sử dụng." },
@@ -145,7 +148,7 @@ export const SERVICES: ServiceItem[] = [
       name: "Mái che và tấm lấy sáng",
       serviceType: "Roofing systems",
     },
-    image: "/images/canopies/canopy03.webp",
+    image: "/images/reference/mai-che-khung-thep-hoan-thien-v1.webp",
     icon: serviceIcons[3],
   },
   {
@@ -171,8 +174,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Lắp dựng", description: "Lắp đặt tại công trình và kiểm tra độ thẳng, vững chắc." },
     ],
     gallery: [
+      "/images/reference/gia-cong-khung-cong-thep-v1.webp",
+      "/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.webp",
       "/images/gates/gate01.webp",
-      "/images/gates/gate03.webp",
     ],
     faq: [
       { question: "Bạn có nhận làm cửa cổng và khung thép theo kích thước riêng không?", answer: "Có, chúng tôi gia công theo bản vẽ và kích thước yêu cầu của khách hàng." },
@@ -188,7 +192,7 @@ export const SERVICES: ServiceItem[] = [
       name: "Cửa cổng và cơ khí dân dụng",
       serviceType: "Residential gate and metalwork",
     },
-    image: "/images/gates/gate01.webp",
+    image: "/images/reference/cong-truot-nha-pho-walnut-v1.webp",
     icon: serviceIcons[4],
   },
   {
@@ -214,8 +218,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Lắp đặt", description: "Lắp tại công trình, căn chỉnh và kiểm tra trước khi bàn giao." },
     ],
     gallery: [
-      "/images/stairs/stair01.webp",
       "/images/railings/railing01.webp",
+      "/images/stairs/stair01.webp",
+      "/images/stairs/stair02.webp",
     ],
     faq: [
       { question: "Có thể kết hợp kính, kim loại và gỗ không?", answer: "Có thể, nhưng cấu tạo liên kết và mã vật liệu cần được chốt sau khi đo hiện trạng và duyệt mẫu." },
@@ -232,7 +237,7 @@ export const SERVICES: ServiceItem[] = [
       name: "Cầu thang và lan can",
       serviceType: "Residential stairs and railings",
     },
-    image: "/images/stairs/stair01.webp",
+    image: "/images/reference/cau-thang-lan-can-walnut-champagne-v1.webp",
     icon: serviceIcons[5],
   },
 ];

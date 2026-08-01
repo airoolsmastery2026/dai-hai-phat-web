@@ -48,7 +48,7 @@ export class AIOfficeErrorBoundary extends Component<
 
     return (
       <section
-        className="bg-[var(--color-surface-dark)] py-[var(--space-section)] text-[var(--color-text-inverse)]"
+        className="ai-office-light bg-[var(--color-background)] py-[var(--space-section)] text-[var(--color-text-inverse)]"
         aria-labelledby="ai-office-error-title"
       >
         <div className="mx-auto max-w-3xl px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">

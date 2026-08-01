@@ -104,7 +104,7 @@ export default async function BlogDetailPage({
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <JsonLd id="dhp-blog-structured-data" data={structuredData} />
-      <section className="bg-[var(--color-surface-dark)] py-[var(--space-section)] text-white lg:py-[var(--space-section-lg)]">
+      <section className="border-b border-[var(--color-border)] bg-[linear-gradient(125deg,var(--color-surface)_0%,var(--color-primary-soft)_78%,var(--color-metal-soft)_100%)] py-[var(--space-12)] text-[var(--color-text)] lg:py-[var(--space-section)]">
         <Container>
           <Link href="/blog" className="text-sm font-semibold text-[var(--color-primary-soft-text)] hover:underline">
             ← Quay lại blog
@@ -112,10 +112,10 @@ export default async function BlogDetailPage({
           <p className="mt-[var(--space-4)] text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary-soft-text)]">
             {article.category}
           </p>
-          <h1 className="mt-[var(--space-4)] max-w-4xl text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">
+          <h1 className="mt-[var(--space-4)] max-w-4xl text-[length:var(--font-h1)] font-extrabold tracking-[-0.03em]">
             {article.title}
           </h1>
-          <p className="mt-[var(--space-6)] text-base text-[var(--color-text-dark-muted)]">
+          <p className="mt-[var(--space-5)] text-base text-[var(--color-text-muted)]">
             Checklist dữ liệu trước khảo sát kỹ thuật
           </p>
         </Container>

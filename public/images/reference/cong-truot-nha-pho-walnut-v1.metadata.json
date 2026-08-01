@@ -1,0 +1,52 @@
+{
+  "id": "reference-cong-truot-nha-pho-walnut-v1",
+  "title": "Cổng trượt nhà phố kết hợp lam walnut",
+  "alt": "Cổng trượt nhà phố màu ghi khoáng kết hợp một mảng lam walnut",
+  "caption": "Mẫu thiết kế tham khảo cổng trượt thanh đứng, khung thép hoàn thiện ghi khoáng và điểm nhấn lam walnut.",
+  "category": "Cửa cổng",
+  "assetType": "reference",
+  "material": "Thép hộp và lam màu walnut",
+  "style": "Luxury hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Cửa cổng",
+  "prompt": "Cổng trượt nhà phố Việt Nam bằng thép thanh đứng màu ghi khoáng, điểm nhấn lam walnut, mặt tiền ivory sáng, ảnh kiến trúc photorealistic, không người, không chữ.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu cổng trượt nhà phố kết hợp walnut | Đại Hải Phát",
+    "description": "Mẫu tham khảo cổng trượt thép thanh đứng kết hợp lam walnut cho nhà phố.",
+    "keywords": [
+      "cổng thép",
+      "cổng trượt nhà phố",
+      "lam walnut"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/cong-truot-nha-pho-walnut-v1.png",
+    "sourceRelativePath": "assets/images/reference/cong-truot-nha-pho-walnut-v1.png",
+    "publicUrl": "/images/reference/cong-truot-nha-pho-walnut-v1.png",
+    "bytes": 2352120,
+    "sha256": "d1e96b4446eaecdfc4df33be4443b3bdfa91452b4867aacdc60062c6691097d2",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/cong-truot-nha-pho-walnut-v1.webp",
+    "publicUrl": "/images/reference/cong-truot-nha-pho-walnut-v1.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 184316,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/cong-truot-nha-pho-walnut-v1.thumb.webp",
+    "publicUrl": "/images/reference/cong-truot-nha-pho-walnut-v1.thumb.webp",
+    "width": 480,
+    "height": 270,
+    "bytes": 16540,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4ILgAAAAwBgCdASogABIAPu1mqk2ppaQiMAgBMB2JYwC85a+B4BWfW23vcc+olDU0JAT3xDLrAdd7uZpqyaLAAPui7eyox7NhoRh/IedYWqjuImJx/0ehlzmSg0TQezZd8gMgzMOLEHIG8/ZtWw+qALJRLlLCQ3HaGcybLpUsgSvLnw6oopxuxMJVXW+FZ3Gg8iVG3SiMXhajjQGfIl+nVuz5rt1EWrSk6v2d6rteIMxwRQ5YRfqXEFzIAAAA"
+}

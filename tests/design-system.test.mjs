@@ -101,7 +101,8 @@ test("runtime exposes the required semantic tokens", () => {
     assert.match(css, new RegExp(`${token.replaceAll("-", "\\-")}:`));
   }
 
-  assert.match(css, /prefers-color-scheme: dark/);
+  assert.match(css, /\.ai-office-light/);
+  assert.doesNotMatch(css, /prefers-color-scheme: dark/);
   assert.match(css, /prefers-reduced-motion: reduce/);
 });
 
@@ -180,7 +181,8 @@ test("homepage conversion surfaces preserve the accessibility audit", () => {
   const aiOffice = read("src/components/sections/AIOfficeSection.tsx");
 
   assert.match(hero, /<Button href="#ai-office">/);
-  assert.match(hero, /dân dụng\{" "\}/);
+  assert.match(hero, /Nội thất &amp; cơ khí dân dụng/);
+  assert.match(hero, /hero-luxury-materials-v1\.webp/);
   assert.doesNotMatch(hero, /min-h-\[calc\(100svh/);
   assert.match(button, /touch-manipulation/);
   assert.doesNotMatch(button, /backdrop-blur/);

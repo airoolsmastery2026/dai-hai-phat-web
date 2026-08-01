@@ -1,27 +1,31 @@
 ---
 version: alpha
-name: DAI HAI PHAT Industrial Precision
-description: A calm digital engineering office for construction, interior, and mechanical consulting.
+name: DAI HAI PHAT Light Luxury Engineering
+description: A bright, refined digital engineering office for residential interior and mechanical consulting.
 colors:
-  primary: "#C2410C"
-  primary-hover: "#9A3412"
-  primary-soft: "#FFEDD5"
+  primary: "#145D60"
+  primary-hover: "#0E484B"
+  primary-soft: "#DCEEED"
   primary-on: "#FFFFFF"
-  focus: "#2563EB"
+  focus: "#176B87"
+  metal: "#9A7440"
+  metal-soft: "#F1E8D7"
+  wood: "#744833"
+  wood-soft: "#EEE1D8"
   channel-zalo: "#0068FF"
   channel-whatsapp: "#0B6B61"
-  background: "#F8FAFC"
-  surface: "#FFFFFF"
-  surface-muted: "#F1F5F9"
-  surface-strong: "#E2E8F0"
-  ink: "#0F172A"
-  ink-muted: "#475569"
-  ink-subtle: "#64748B"
-  border: "#CBD5E1"
-  dark: "#0B1120"
-  dark-surface: "#111827"
-  dark-muted: "#CBD5E1"
-  dark-subtle: "#94A3B8"
+  background: "#F3F7F6"
+  surface: "#FFFEFA"
+  surface-muted: "#EAF2F1"
+  surface-strong: "#D9E7E5"
+  ink: "#183436"
+  ink-muted: "#466164"
+  ink-subtle: "#647A7C"
+  border: "#C8DAD7"
+  dark: "#123F41"
+  dark-surface: "#1A4C4E"
+  dark-muted: "#DCEAE8"
+  dark-subtle: "#B8CECB"
   success: "#047857"
   success-soft: "#D1FAE5"
   warning: "#B45309"
@@ -31,19 +35,19 @@ colors:
 typography:
   display:
     fontFamily: Inter
-    fontSize: 3.75rem
+    fontSize: 3.65rem
     fontWeight: 800
     lineHeight: 1.05
     letterSpacing: -0.04em
   headline-lg:
     fontFamily: Inter
-    fontSize: 3rem
+    fontSize: 2.75rem
     fontWeight: 750
     lineHeight: 1.1
     letterSpacing: -0.03em
   headline-md:
     fontFamily: Inter
-    fontSize: 2.25rem
+    fontSize: 2.2rem
     fontWeight: 700
     lineHeight: 1.15
     letterSpacing: -0.02em
@@ -83,8 +87,8 @@ rounded:
   none: 0px
   sm: 6px
   md: 10px
-  lg: 16px
-  xl: 24px
+  lg: 14px
+  xl: 18px
   full: 9999px
 spacing:
   1: 4px
@@ -102,8 +106,8 @@ spacing:
   32: 128px
   control-height: 48px
   container-gutter: 24px
-  section-mobile: 64px
-  section-desktop: 96px
+  section-mobile: 56px
+  section-desktop: 80px
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
@@ -151,8 +155,8 @@ components:
     padding: 12px
     height: "{spacing.control-height}"
   button-dark:
-    backgroundColor: "{colors.dark}"
-    textColor: "{colors.primary-on}"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
     typography: "{typography.label-lg}"
     rounded: "{rounded.md}"
     padding: 12px
@@ -190,7 +194,7 @@ components:
     backgroundColor: "{colors.dark}"
     textColor: "{colors.primary-on}"
     typography: "{typography.label-lg}"
-    height: "{spacing.20}"
+    height: 72px
   panel-dark:
     backgroundColor: "{colors.dark-surface}"
     textColor: "{colors.dark-muted}"
@@ -226,8 +230,8 @@ components:
 ## Overview
 
 The product is an **AI Digital Engineering Office**, not a generic corporate
-landing page. It should feel like a calm technical workspace: precise,
-industrial, premium, minimal, and trustworthy.
+landing page. It should feel like a bright residential design studio supported
+by precise engineering: refined, calm, compact, premium, and trustworthy.
 
 The interface combines Apple-like restraint, Linear-like information density,
 Stripe-like clarity, and Vercel-like engineering discipline. It must never look
@@ -240,16 +244,18 @@ component contract. `.ai/UI_PROMPT.md` defines how coding agents consume both.
 
 ## Colors
 
-- **Primary (`#C2410C`)** is the only action color. It is reserved for the most
-  important action, progress, and verified active state.
-- **Primary hover (`#9A3412`)** is the pressed/hover state. Orange text on a
-  light surface must use one of these two dark values to retain WCAG AA.
-- **Primary soft (`#FFEDD5`)** is a quiet highlight surface, never body text.
-- **Ink (`#0F172A`)** communicates engineering weight and high legibility.
-- **Dark (`#0B1120`)** is used for navigation, technical workspaces, and
-  high-confidence hero surfaces.
-- **Background and surfaces** use cool slate neutrals. Pure white is a surface,
-  not the entire visual identity.
+- **Primary (`#145D60`)** is a deep mineral teal used for the most important
+  action, progress, and verified active state.
+- **Primary soft (`#DCEEED`)** and pale mineral surfaces create the bright,
+  calm base. They never replace readable body text.
+- **Metal (`#9A7440`)** is a restrained champagne accent for short labels,
+  dividers, and verified highlights — never a large CTA background.
+- **Wood (`#744833`)** brings walnut warmth to selected editorial headings and
+  material storytelling; it is not a generic status color.
+- **Ink (`#183436`)** communicates engineering precision without pure black.
+- **Dark (`#123F41`)** is reserved for the footer, high-confidence CTA surfaces,
+  and rare technical depth. Navigation, page heroes, and AI chat are light.
+- **Background and surfaces** use ivory and mist-blue/green neutrals.
 - Zalo and WhatsApp colors are reserved for their verified external channel
   actions and are never used as general interface accents.
 - Success, warning, and danger colors are semantic. They may not be used as
@@ -259,9 +265,8 @@ Only token values in the front matter and matching CSS variables are allowed in
 application components. Project photography is exempt from palette matching,
 but overlays and captions are not.
 
-Dark mode uses the same hierarchy: near-black foundations, raised dark
-surfaces, light text, and the warm orange action color. Dark mode is driven by
-semantic tokens rather than one-off `dark:` fixes.
+The public site has one intentional light appearance. Operating-system dark
+mode must not unexpectedly turn the consultation funnel into a heavy dark UI.
 
 ## Typography
 
@@ -287,9 +292,9 @@ targets. Do not create arbitrary type sizes in components.
 The layout is mobile-first. It uses one content container, a 4px base scale, and
 an 8px default rhythm.
 
-- Content maximum width: 1344px.
+- Content maximum width: 1216px.
 - Mobile gutters: 16px; tablet: 24px; desktop: 32px.
-- Section padding: 64px mobile and 96px desktop.
+- Section padding: 56px mobile and 80px desktop.
 - Reading width: 720px maximum.
 - Touch targets: 48px minimum; icon-only controls: 44px absolute minimum.
 - Grids collapse to one column before content becomes compressed.
@@ -328,12 +333,12 @@ image. Gradients must be subtle, token-derived, and functional.
 
 ## Shapes
 
-The shape language is engineered softness:
+The shape language is compact engineered softness:
 
 - 6px for compact details.
 - 10px for buttons and fields.
-- 16px for normal cards.
-- 24px only for major feature panels and hero media.
+- 14px for normal cards.
+- 18px only for major feature panels and hero media.
 - Full pills only for status, filters, or short badges.
 
 Do not mix four unrelated radii in one view. Icons use `lucide-react`, 1.75–2px

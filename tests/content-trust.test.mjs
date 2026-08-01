@@ -59,7 +59,7 @@ test("keeps published checklists free of unsupported authors and performance cla
   const blog = await importTypeScript("../src/content/blog.ts");
   const serialized = JSON.stringify(blog.ARTICLES);
 
-  assert.equal(blog.ARTICLES.length, 4);
+  assert.equal(blog.ARTICLES.length, 7);
   assert.ok(
     blog.ARTICLES.every(
       (article) =>

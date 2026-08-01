@@ -48,7 +48,7 @@ async function collectFiles(directory) {
 
 test("publishes every classified asset with original, WebP, thumbnail and metadata", async () => {
   assert.equal(gallery.schemaVersion, "1.1");
-  assert.equal(gallery.total, 136);
+  assert.equal(gallery.total, 148);
   assert.equal(new Set(gallery.items.map((item) => item.id)).size, gallery.total);
 
   for (const item of gallery.items) {

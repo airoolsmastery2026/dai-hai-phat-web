@@ -36,7 +36,7 @@ function AIOfficeFallback() {
   return (
     <section
       id="ai-office"
-      className="scroll-mt-16 bg-[var(--color-surface-dark)] py-[var(--space-section)] text-[var(--color-text-inverse)] lg:py-[var(--space-section-lg)]"
+      className="ai-office-light scroll-mt-16 border-y border-[var(--color-border)] bg-[var(--color-background)] py-[var(--space-section)] text-[var(--color-text-inverse)] lg:py-[var(--space-section-lg)]"
       aria-label="Đang chuẩn bị trợ lý tư vấn"
       aria-busy="true"
     >

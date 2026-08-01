@@ -1,0 +1,52 @@
+{
+  "id": "reference-cau-thang-lan-can-walnut-champagne-v1",
+  "title": "Cầu thang đá, tay vịn walnut và lan can champagne",
+  "alt": "Cầu thang nhà ở sáng với bậc đá ivory, tay vịn walnut và lan can kim loại champagne",
+  "caption": "Mẫu thiết kế tham khảo kết hợp đá sáng, tay vịn gỗ walnut và thanh lan can kim loại hoàn thiện champagne.",
+  "category": "Cầu thang",
+  "assetType": "reference",
+  "material": "Đá, gỗ walnut và kim loại champagne",
+  "style": "Luxury hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Cầu thang và lan can",
+  "prompt": "Cầu thang nhà phố với bậc đá ivory, tay vịn walnut và thanh lan can champagne, tường xanh khoáng nhạt, ảnh kiến trúc photorealistic, không người, không chữ.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu cầu thang walnut và lan can champagne | Đại Hải Phát",
+    "description": "Mẫu tham khảo cầu thang đá sáng, tay vịn walnut và lan can kim loại champagne.",
+    "keywords": [
+      "cầu thang nhà phố",
+      "lan can champagne",
+      "tay vịn walnut"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/cau-thang-lan-can-walnut-champagne-v1.png",
+    "sourceRelativePath": "assets/images/reference/cau-thang-lan-can-walnut-champagne-v1.png",
+    "publicUrl": "/images/reference/cau-thang-lan-can-walnut-champagne-v1.png",
+    "bytes": 1958532,
+    "sha256": "8f6c08961052cafd7004be0beced603affafcbbb7c87a06e0bcfdb0500ecd988",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/cau-thang-lan-can-walnut-champagne-v1.webp",
+    "publicUrl": "/images/reference/cau-thang-lan-can-walnut-champagne-v1.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 76006,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/cau-thang-lan-can-walnut-champagne-v1.thumb.webp",
+    "publicUrl": "/images/reference/cau-thang-lan-can-walnut-champagne-v1.thumb.webp",
+    "width": 480,
+    "height": 270,
+    "bytes": 8788,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAQBgCdASogABIAPu1qrFEppaQiqAqpMB2JZQC90DedOB5AuleqOIuzhZS4z8I4ZOdg2a75W1kwfxAA/tKgKcCSuVZQ+pUiY1woP1wQQ7RdDyAbG/dmqe9+pmfOV2GtuCdDDHKt2k4WVoMyyMS6NOlW5kXcm6DXXr+bszaWo3VCfx+eo8dyz1F50x75rdgM6xjYsHMIV6zr2+TC7+QSF5eXQAA="
+}

@@ -14,16 +14,16 @@ const quickLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] py-[var(--space-16)] text-[var(--color-text-dark-subtle)]">
-      <div className="mx-auto grid max-w-[var(--container-max)] gap-[var(--space-10)] px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-[var(--space-container-lg)]">
+    <footer className="border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] py-[var(--space-12)] text-[var(--color-text-dark-subtle)]">
+      <div className="mx-auto grid max-w-[var(--container-max)] gap-[var(--space-8)] px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-[var(--space-container-lg)]">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-primary-soft-text)]">
             Đại Hải Phát
           </p>
-          <h2 className="mt-[var(--space-3)] text-2xl font-bold text-white">
+          <h2 className="mt-[var(--space-3)] text-xl font-bold text-white">
             {COMPANY_CONFIG.name}
           </h2>
-          <p className="mt-[var(--space-4)] max-w-md text-sm leading-7 text-[var(--color-text-dark-subtle)]">
+          <p className="mt-[var(--space-4)] max-w-md text-sm leading-6 text-[var(--color-text-dark-subtle)]">
             Thiết kế và thi công nội thất, cửa cổng, cầu thang, lan can, mái
             che cùng các hạng mục cơ khí dân dụng theo hiện trạng nhà ở.
           </p>
@@ -71,7 +71,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="mx-auto mt-[var(--space-12)] flex max-w-[var(--container-max)] flex-col gap-[var(--space-3)] border-t border-[var(--color-border-dark)] px-[var(--space-container)] pt-[var(--space-8)] text-sm sm:px-[var(--space-container-sm)] lg:flex-row lg:items-center lg:justify-between lg:px-[var(--space-container-lg)]">
+      <div className="mx-auto mt-[var(--space-8)] flex max-w-[var(--container-max)] flex-col gap-[var(--space-3)] border-t border-[var(--color-border-dark)] px-[var(--space-container)] pt-[var(--space-6)] text-xs sm:px-[var(--space-container-sm)] lg:flex-row lg:items-center lg:justify-between lg:px-[var(--space-container-lg)]">
         <p>
           © {new Date().getFullYear()} {COMPANY_CONFIG.name}. Đã đăng ký bản
           quyền.

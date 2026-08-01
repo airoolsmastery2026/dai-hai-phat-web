@@ -108,14 +108,14 @@ export function AIOfficeSection() {
   return (
     <section
       id="ai-office"
-      className="scroll-mt-16 bg-[var(--color-surface-dark)] py-[var(--space-section-compact)] text-[var(--color-text-inverse)] lg:py-[var(--space-section-lg)]"
+      className="ai-office-light scroll-mt-16 border-y border-[var(--color-border)] bg-[radial-gradient(circle_at_10%_0%,var(--color-primary-soft),transparent_34%),linear-gradient(180deg,var(--color-surface)_0%,var(--color-background)_100%)] py-[var(--space-section-compact)] text-[var(--color-text-inverse)] lg:py-[var(--space-section)]"
     >
-      <div className="mx-auto max-w-7xl px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
+      <div className="mx-auto max-w-[var(--container-max)] px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
         <header className="max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-primary)]">
             AI tư vấn 24/7
           </p>
-          <h2 className="mt-[var(--space-inline)] text-2xl font-bold sm:text-4xl">
+          <h2 className="mt-[var(--space-inline)] text-[length:var(--font-h2)] font-bold">
             Trò chuyện cùng trợ lý Đại Hải Phát
           </h2>
           <p className="mt-[var(--space-stack)] leading-7 text-[var(--color-text-dark-muted)]">
@@ -146,7 +146,7 @@ export function AIOfficeSection() {
           ) : null}
         </header>
 
-        <div className="mt-[var(--space-stack)] grid gap-[var(--space-stack)] lg:mt-[var(--space-section-compact)] lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="mt-[var(--space-stack)] grid gap-[var(--space-stack)] lg:mt-[var(--space-8)] lg:grid-cols-[1.15fr_0.85fr]">
           <ConversationPanel
             session={session}
             question={question}
@@ -341,7 +341,7 @@ function ConversationPanel({
 
 function BotAvatar() {
   return (
-    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)]">
+    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)] shadow-[var(--shadow-sm)]">
       <Bot className="h-5 w-5" aria-hidden="true" />
     </span>
   );
@@ -350,7 +350,7 @@ function BotAvatar() {
 function AssistantBubble({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-end gap-[var(--space-control)]">
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)]">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)]">
         <Bot className="h-4 w-4" aria-hidden="true" />
       </span>
       <div className="max-w-xl rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-muted)] p-[var(--space-stack)]">
@@ -363,7 +363,7 @@ function AssistantBubble({ children }: { children: ReactNode }) {
 function UserBubble({ item }: { item: ConversationHistoryItem }) {
   return (
     <div className="flex justify-end">
-      <div className="max-w-sm rounded-[var(--radius-lg)] rounded-br-[var(--radius-sm)] bg-[var(--color-primary)] px-[var(--space-stack)] py-[var(--space-control)] text-[var(--color-text-inverse)]">
+      <div className="max-w-sm rounded-[var(--radius-lg)] rounded-br-[var(--radius-sm)] bg-[var(--color-primary)] px-[var(--space-stack)] py-[var(--space-control)] text-[var(--color-primary-contrast)]">
         <p className="text-xs font-semibold opacity-80">{item.label}</p>
         <p className="break-words text-sm font-semibold leading-6">{item.value}</p>
       </div>
@@ -502,7 +502,7 @@ function QuestionInput({
             <button
               type="submit"
               aria-label="Gửi câu trả lời"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)] transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)] transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <SendHorizontal className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -578,7 +578,7 @@ function QuestionInput({
         <button
           type="submit"
           aria-label="Gửi câu trả lời"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)] transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)] transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
         >
           <SendHorizontal className="h-5 w-5" aria-hidden="true" />
         </button>
