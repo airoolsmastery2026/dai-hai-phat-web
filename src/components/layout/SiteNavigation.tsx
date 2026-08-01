@@ -79,17 +79,17 @@ export function SiteNavigation() {
   }, [closeMenu, open]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[var(--color-border-dark)] bg-[var(--color-surface-dark)]/95 text-[var(--color-text-inverse)] backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] text-[var(--color-text-inverse)]">
       <div className="mx-auto flex h-16 max-w-[var(--container-max)] items-center justify-between px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:h-20 lg:px-[var(--space-container-lg)]">
         <Link
           href="/"
           className="flex flex-col rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           aria-label="Đại Hải Phát — Trang chủ"
         >
-          <span className="text-lg font-black uppercase tracking-wide text-white sm:text-2xl">
+          <span className="text-lg font-black uppercase tracking-wide text-[var(--color-text-inverse)] sm:text-2xl">
             ĐẠI HẢI PHÁT
           </span>
-          <span className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-primary-soft-text)] sm:text-xs">
+          <span className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-text-dark-muted)] sm:text-xs">
             AI Digital Engineering Office
           </span>
         </Link>
@@ -102,7 +102,7 @@ export function SiteNavigation() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-[var(--radius-sm)] text-sm font-semibold text-[var(--color-text-dark-muted)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              className="rounded-[var(--radius-sm)] text-sm font-bold text-[var(--color-text-inverse)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-dark-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               {item.label}
             </Link>
@@ -112,13 +112,13 @@ export function SiteNavigation() {
         <div className="hidden items-center gap-[var(--space-3)] lg:flex">
           <a
             href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-            className="inline-flex min-h-[var(--control-min-size)] items-center rounded-[var(--radius-md)] border border-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-[var(--color-primary-soft-text)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary)] hover:text-white"
+            className="inline-flex min-h-[var(--control-min-size)] items-center rounded-[var(--radius-md)] border border-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-[var(--color-text-inverse)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary)]"
           >
             {COMPANY_CONFIG.phones[0].display}
           </a>
           <Link
             href="/#ai-office"
-            className="inline-flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-white transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
+            className="inline-flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-[var(--color-text-inverse)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
             Tư vấn AI 24/7
@@ -128,7 +128,7 @@ export function SiteNavigation() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] lg:hidden"
           aria-label={open ? "Đóng menu" : "Mở menu"}
           aria-expanded={open}
           aria-controls="mobile-navigation"
@@ -159,7 +159,7 @@ export function SiteNavigation() {
                 key={item.href}
                 href={item.href}
                 onClick={() => closeMenu()}
-                className="flex min-h-12 items-center border-b border-[var(--color-border-dark)] text-base font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus)]"
+                className="flex min-h-12 items-center border-b border-[var(--color-border-dark)] text-base font-semibold text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus)]"
               >
                 {item.label}
               </Link>
@@ -169,7 +169,7 @@ export function SiteNavigation() {
             <Link
               href="/#ai-office"
               onClick={() => closeMenu()}
-              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Bot className="h-5 w-5" aria-hidden="true" />
               Bắt đầu tư vấn AI
@@ -177,7 +177,7 @@ export function SiteNavigation() {
             <a
               href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
               onClick={() => closeMenu()}
-              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] font-bold text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
               Gọi {COMPANY_CONFIG.phones[0].display}
