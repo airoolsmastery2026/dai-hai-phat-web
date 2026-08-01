@@ -222,7 +222,7 @@ function ConversationPanel({
         <div className="mt-[var(--space-card-lg)]">
           <div className="rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-              Proposal {session.proposal.progress}%
+              Tiến độ hồ sơ {session.proposal.progress}%
             </p>
             <h3 className="mt-[var(--space-control)] text-xl font-bold leading-7">
               {question.prompt}
@@ -568,32 +568,40 @@ function EngineeringWorkspace({ session }: { session: ConversationSession }) {
     { label: "Đang phân tích", complete: session.visitedStates.includes("ANALYSIS") },
     { label: "Đang tìm vật liệu", complete: Boolean(session.memory.material) },
     { label: "Đang tìm công trình", complete: session.visitedStates.includes("SIMILAR_PROJECT_SEARCH") },
-    { label: "Đang tạo Proposal", complete: session.visitedStates.includes("PROPOSAL_BUILDING") },
+    { label: "Đang tạo phương án", complete: session.visitedStates.includes("PROPOSAL_BUILDING") },
   ];
 
   return (
     <aside className="grid content-start gap-[var(--space-stack)]" aria-label="Hồ sơ kỹ thuật đang lập">
-      <StatusCard icon={ClipboardList} title="Working Timeline">
+      <StatusCard icon={ClipboardList} title="Tiến trình làm việc">
         <ol className="space-y-[var(--space-control)] text-sm">
           {timeline.map((item) => (
             <li
               key={item.label}
               className={item.complete ? "flex items-center gap-[var(--space-inline)] text-[var(--color-text-inverse)]" : "flex items-center gap-[var(--space-inline)] text-[var(--color-text-dark-subtle)]"}
             >
-              <span className={item.complete ? "flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-success)]" : "flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-surface-dark-muted)]"}>
+              <span
+                aria-hidden="true"
+                className={item.complete ? "flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-success)]" : "flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-surface-dark-muted)]"}
+              >
                 {item.complete ? <Check className="h-4 w-4" aria-hidden="true" /> : "•"}
               </span>
-              {item.label}
+              <span>
+                {item.label}
+                <span className="sr-only">
+                  {item.complete ? " - đã hoàn tất" : " - chưa hoàn tất"}
+                </span>
+              </span>
             </li>
           ))}
         </ol>
       </StatusCard>
 
       <div className="grid gap-[var(--space-stack)] sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-        <StatusCard icon={MemoryStick} title="Memory">
+        <StatusCard icon={MemoryStick} title="Dữ liệu hồ sơ">
           <MemorySummary session={session} />
         </StatusCard>
-        <StatusCard icon={Gauge} title="Confidence">
+        <StatusCard icon={Gauge} title="Độ đầy đủ">
           <p className="text-2xl font-black text-[var(--color-primary)]">{session.confidence}%</p>
           <p className="text-xs text-[var(--color-text-dark-muted)]">Độ đầy đủ dữ liệu hồ sơ</p>
           <p className="mt-[var(--space-control)] text-xs text-[var(--color-text-dark-subtle)]">
@@ -604,11 +612,11 @@ function EngineeringWorkspace({ session }: { session: ConversationSession }) {
         </StatusCard>
       </div>
 
-      <StatusCard icon={ClipboardList} title={`Proposal ${session.proposal.progress}%`}>
+      <StatusCard icon={ClipboardList} title={`Tiến độ phương án ${session.proposal.progress}%`}>
         <div
           className="h-2 overflow-hidden rounded-full bg-[var(--color-surface-dark-muted)]"
           role="progressbar"
-          aria-label="Tiến độ Proposal"
+          aria-label="Tiến độ phương án"
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={session.proposal.progress}
@@ -623,7 +631,12 @@ function EngineeringWorkspace({ session }: { session: ConversationSession }) {
         </p>
         {session.proposal.facts.length ? (
           <ul className="mt-[var(--space-control)] space-y-1 text-xs text-[var(--color-text-dark-muted)]">
-            {session.proposal.facts.slice(-4).map((fact) => <li key={fact}>✓ {fact}</li>)}
+            {session.proposal.facts.slice(-4).map((fact) => (
+              <li key={fact} className="flex items-start gap-[var(--space-2)]">
+                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--color-success)]" aria-hidden="true" />
+                <span>{fact}</span>
+              </li>
+            ))}
           </ul>
         ) : null}
         <p className="mt-[var(--space-control)] text-xs text-[var(--color-text-dark-subtle)]">
@@ -699,7 +712,7 @@ function ProjectAnalysisPanel({
           Gemini đang phân tích dữ liệu hồ sơ đã xác nhận…
         </p>
         <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
-          Chỉ dữ liệu dự án phi nhạy cảm và bằng chứng trong Knowledge Base được
+          Chỉ dữ liệu dự án phi nhạy cảm và bằng chứng trong thư viện dữ liệu được
           gửi để tạo phân tích sơ bộ.
         </p>
       </section>
@@ -736,7 +749,7 @@ function ProjectAnalysisPanel({
       <div className="flex flex-col gap-[var(--space-control)] sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-            Gemini Project Analysis
+            Gemini phân tích hồ sơ
           </p>
           <h3
             id="project-analysis-title"
@@ -850,7 +863,7 @@ function ProposalEvidencePanel({
         className="mt-[var(--space-stack)] rounded-[var(--radius-xl)] border border-[var(--color-danger)] bg-[var(--color-danger-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]"
         role="alert"
       >
-        <h3 className="font-bold">Chưa thể đối chiếu Knowledge Base.</h3>
+        <h3 className="font-bold">Chưa thể đối chiếu thư viện dữ liệu.</h3>
         <p className="mt-[var(--space-control)] text-sm text-[var(--color-danger-text)]">
           {error || "Kết nối dữ liệu bị gián đoạn."}
         </p>
@@ -888,14 +901,14 @@ function ProposalEvidencePanel({
       <div className="flex flex-col gap-[var(--space-control)] sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-            Proposal Evidence
+            Bằng chứng đã đối chiếu
           </p>
           <h3 id="proposal-evidence-title" className="mt-[var(--space-control)] text-2xl font-bold">
             {evidence.images.length} công trình phù hợp nhất
           </h3>
         </div>
         <p className="text-sm text-[var(--color-text-dark-muted)]">
-          Chỉ dùng ảnh và metadata có nguồn đã xác minh
+          Chỉ dùng ảnh và thông tin nguồn đã xác minh
         </p>
       </div>
 
