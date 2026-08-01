@@ -45,6 +45,19 @@ function isStoredAttribution(value: unknown): value is StoredAttribution {
   );
 }
 
+function toLeadAttribution(stored: StoredAttribution): LeadAttribution {
+  return {
+    firstTouchAt: stored.firstTouchAt,
+    landingPath: stored.landingPath,
+    referrer: stored.referrer,
+    utmSource: stored.utmSource,
+    utmMedium: stored.utmMedium,
+    utmCampaign: stored.utmCampaign,
+    utmContent: stored.utmContent,
+    utmTerm: stored.utmTerm,
+  };
+}
+
 function readStoredAttribution(storage: Storage, now = Date.now()): LeadAttribution | null {
   try {
     const raw = storage.getItem(ATTRIBUTION_STORAGE_KEY);
@@ -54,8 +67,7 @@ function readStoredAttribution(storage: Storage, now = Date.now()): LeadAttribut
       storage.removeItem(ATTRIBUTION_STORAGE_KEY);
       return null;
     }
-    const { expiresAt: _expiresAt, ...attribution } = parsed;
-    return attribution;
+    return toLeadAttribution(parsed);
   } catch {
     return null;
   }
@@ -93,11 +105,10 @@ export function captureFirstTouchAttribution(
   try {
     storage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify(attribution));
   } catch {
-    return attribution;
+    return toLeadAttribution(attribution);
   }
 
-  const { expiresAt: _expiresAt, ...result } = attribution;
-  return result;
+  return toLeadAttribution(attribution);
 }
 
 export function readLeadAttribution(storage: Storage): LeadAttribution | null {

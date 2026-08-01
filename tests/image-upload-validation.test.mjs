@@ -15,7 +15,9 @@ test("project images are constrained before IndexedDB storage", () => {
   assert.match(rules, /image\/webp/);
   assert.match(rules, /file\.size <= 0/);
   assert.match(wrapper, /validateProjectImageFiles\(Array\.from\(files\)\)/);
-  assert.match(wrapper, /await base\.addImages\(files\)/);
+  assert.match(wrapper, /addImages: addBaseImages/);
+  assert.match(wrapper, /await addBaseImages\(files\)/);
+  assert.match(wrapper, /\[addBaseImages\]/);
 });
 
 test("the public AI hook import resolves through the validation wrapper", () => {

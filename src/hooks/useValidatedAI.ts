@@ -7,6 +7,7 @@ import { validateProjectImageFiles } from "@/lib/ai/image-upload";
 
 export function useAI() {
   const base = useBaseAI();
+  const { addImages: addBaseImages, reset: resetBase } = base;
   const [imageValidationError, setImageValidationError] = useState<string | null>(null);
 
   const addImages = useCallback(
@@ -16,20 +17,20 @@ export function useAI() {
       try {
         validateProjectImageFiles(Array.from(files));
         setImageValidationError(null);
-        await base.addImages(files);
+        await addBaseImages(files);
       } catch (error) {
         setImageValidationError(
           error instanceof Error ? error.message : "Không thể kiểm tra ảnh hiện trạng.",
         );
       }
     },
-    [base.addImages],
+    [addBaseImages],
   );
 
   const reset = useCallback(() => {
     setImageValidationError(null);
-    base.reset();
-  }, [base.reset]);
+    resetBase();
+  }, [resetBase]);
 
   return {
     ...base,
