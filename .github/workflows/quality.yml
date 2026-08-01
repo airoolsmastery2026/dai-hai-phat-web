@@ -26,10 +26,15 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Generate audited lockfile diff
-        run: |
-          npm install --package-lock-only --ignore-scripts
-          git diff -- package-lock.json
+      - name: Generate audited lockfile
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Export audited lockfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: audited-package-lock
+          path: package-lock.json
+          retention-days: 1
 
       - name: Install dependencies
         run: npm ci
