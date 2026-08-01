@@ -11,6 +11,14 @@ test("makes the AI intake the primary global conversion path", async () => {
     new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
     "utf8",
   );
+  const backToTop = await readFile(
+    new URL("../src/components/layout/BackToTop.tsx", import.meta.url),
+    "utf8",
+  );
+  const mobileOfficeVisibility = await readFile(
+    new URL("../src/hooks/useMobileAIOfficeVisibility.ts", import.meta.url),
+    "utf8",
+  );
   const globalStyles = await readFile(
     new URL("../src/app/globals.css", import.meta.url),
     "utf8",
@@ -25,8 +33,11 @@ test("makes the AI intake the primary global conversion path", async () => {
   assert.match(floatingCta, /bg-\[var\(--color-primary\)\]/);
   assert.match(floatingCta, /mobile-ai-attention/);
   assert.match(floatingCta, /isMobileOfficeVisible/);
-  assert.match(floatingCta, /document\.getElementById\("ai-office"\)/);
   assert.match(floatingCta, /if \(isMobileOfficeVisible\) return null/);
+  assert.match(backToTop, /useMobileAIOfficeVisibility/);
+  assert.match(backToTop, /if \(isMobileOfficeVisible\) return null/);
+  assert.match(mobileOfficeVisibility, /document\.getElementById\("ai-office"\)/);
+  assert.match(mobileOfficeVisibility, /window\.innerWidth < 1024/);
   assert.match(globalStyles, /@keyframes mobile-ai-attention/);
   assert.match(globalStyles, /animation: mobile-ai-attention[^;]* 2 both/);
   assert.match(

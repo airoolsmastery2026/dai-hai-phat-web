@@ -3,8 +3,11 @@
 import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { useMobileAIOfficeVisibility } from "@/hooks/useMobileAIOfficeVisibility";
+
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
+  const isMobileOfficeVisible = useMobileAIOfficeVisibility();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400);
@@ -16,6 +19,8 @@ export function BackToTop() {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (isMobileOfficeVisible) return null;
 
   return (
     <button
