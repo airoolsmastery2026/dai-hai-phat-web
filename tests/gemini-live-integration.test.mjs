@@ -14,6 +14,11 @@ const experiencePath = new URL(
   "../src/components/sections/AIOfficeExperience.tsx",
   import.meta.url,
 );
+const routeEntryPath = new URL(
+  "../src/components/sections/AIOfficeRouteEntry.tsx",
+  import.meta.url,
+);
+const homePagePath = new URL("../src/app/page.tsx", import.meta.url);
 const configPath = new URL("../src/lib/ai/live.ts", import.meta.url);
 
 test("Gemini Live tokens stay server-side, short-lived and rate limited", async () => {
@@ -25,6 +30,8 @@ test("Gemini Live tokens stay server-side, short-lived and rate limited", async 
   assert.match(source, /LIVE_SESSION_MINUTES = 15/);
   assert.match(source, /consumeRateLimit/);
   assert.match(source, /isSameOriginRequest/);
+  assert.match(source, /upstreamHttpStatus/);
+  assert.match(source, /UPSTREAM_STATUS_PATTERN/);
   assert.doesNotMatch(source, /NEXT_PUBLIC_GEMINI/);
 });
 
@@ -40,14 +47,25 @@ test("Gemini Live panel captures PCM audio and cleans up browser resources", asy
   assert.match(source, /inputAudioTranscription/);
   assert.match(source, /outputAudioTranscription/);
   assert.match(source, /access_token=/);
+  assert.match(source, /supportRequestId/);
+  assert.match(source, /href="#ai-office"/);
+  assert.match(source, /Tiếp tục bằng chat/);
 });
 
-test("AI Office renders voice chat inside its existing error boundary", async () => {
-  const source = await readFile(experiencePath, "utf8");
+test("AI Office only renders voice chat when the server configuration is present", async () => {
+  const [source, routeEntry, homePage] = await Promise.all([
+    readFile(experiencePath, "utf8"),
+    readFile(routeEntryPath, "utf8"),
+    readFile(homePagePath, "utf8"),
+  ]);
 
   assert.match(source, /<AIOfficeErrorBoundary resetKey=\{sessionKey\}>/);
+  assert.match(source, /liveVoiceEnabled \?/);
   assert.match(source, /<GeminiLivePanel servicePreset=\{servicePreset\} \/>/);
   assert.match(source, /<AIOfficeSection key=\{sessionKey\} \/>/);
+  assert.match(routeEntry, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
+  assert.match(homePage, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
+  assert.match(homePage, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
 });
 
 test("Gemini Live uses the constrained v1beta WebSocket endpoint", async () => {

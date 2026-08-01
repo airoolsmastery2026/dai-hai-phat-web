@@ -50,12 +50,14 @@ function AIOfficeFallback() {
 }
 
 export default function HomePage() {
+  const liveVoiceEnabled = Boolean(process.env.GEMINI_API_KEY?.trim());
+
   return (
     <main className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
       <HeroSection />
       <ServicesSection />
       <Suspense fallback={<AIOfficeFallback />}>
-        <AIOfficeRouteEntry />
+        <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
       </Suspense>
       <ProjectsSection />
       <ContactSection />

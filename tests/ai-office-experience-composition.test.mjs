@@ -10,6 +10,7 @@ test("AI office experience owns the complete feature composition", async () => {
 
   assert.match(source, /interface AIOfficeExperienceProps/);
   assert.match(source, /servicePreset: AIService \| null/);
+  assert.match(source, /liveVoiceEnabled: boolean/);
   assert.match(source, /const sessionKey = getAIOfficeSessionKey\(servicePreset\)/);
   assert.match(source, /<AIOfficeControllers service=\{servicePreset\} \/>/);
   assert.match(source, /<AIServiceConflictNotice requestedService=\{servicePreset\} \/>/);
@@ -22,7 +23,9 @@ test("route entry defers and activates the AI Office experience", async () => {
   assert.match(source, /const servicePreset = useAIServicePreset\(\)/);
   assert.match(source, /useAIOfficeActivation\(\)/);
   assert.match(source, /dynamic\(/);
-  assert.match(source, /<AIOfficeExperience servicePreset=\{servicePreset\} \/>/);
+  assert.match(source, /<AIOfficeExperience/);
+  assert.match(source, /servicePreset=\{servicePreset\}/);
+  assert.match(source, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
   assert.match(source, /<AIOfficeLoadingState \/>/);
   assert.doesNotMatch(source, /AIServiceConflictNotice/);
   assert.doesNotMatch(source, /AIOfficeSection/);

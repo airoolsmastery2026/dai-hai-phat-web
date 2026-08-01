@@ -16,14 +16,23 @@ const AIOfficeExperience = dynamic(
   },
 );
 
-export function AIOfficeRouteEntry() {
+interface AIOfficeRouteEntryProps {
+  liveVoiceEnabled: boolean;
+}
+
+export function AIOfficeRouteEntry({
+  liveVoiceEnabled,
+}: AIOfficeRouteEntryProps) {
   const servicePreset = useAIServicePreset();
   const { activationRef, isActive } = useAIOfficeActivation();
 
   return (
     <div ref={activationRef}>
       {isActive ? (
-        <AIOfficeExperience servicePreset={servicePreset} />
+        <AIOfficeExperience
+          servicePreset={servicePreset}
+          liveVoiceEnabled={liveVoiceEnabled}
+        />
       ) : (
         <AIOfficeLoadingState />
       )}

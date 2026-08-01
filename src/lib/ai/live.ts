@@ -15,5 +15,6 @@ export interface GeminiLiveTokenResponse {
   model?: string;
   expiresAt?: string;
   error?: string;
+  code?: "RATE_LIMITED" | "LIVE_TIMEOUT" | "LIVE_UNAVAILABLE";
   requestId?: string;
 }

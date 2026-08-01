@@ -1,6 +1,13 @@
 "use client";
 
-import { Mic, PhoneOff, Radio, ShieldCheck, Volume2 } from "lucide-react";
+import {
+  MessageCircle,
+  Mic,
+  PhoneOff,
+  Radio,
+  ShieldCheck,
+  Volume2,
+} from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
@@ -85,6 +92,7 @@ function readAudioSampleRate(mimeType: unknown): number {
 export function GeminiLivePanel({ servicePreset }: GeminiLivePanelProps) {
   const [status, setStatus] = useState<LiveStatus>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [supportRequestId, setSupportRequestId] = useState<string | null>(null);
   const [userTranscript, setUserTranscript] = useState("");
   const [assistantTranscript, setAssistantTranscript] = useState("");
 
@@ -242,6 +250,7 @@ export function GeminiLivePanel({ servicePreset }: GeminiLivePanelProps) {
     if (status === "connecting" || status === "listening") return;
     setStatus("connecting");
     setError(null);
+    setSupportRequestId(null);
     setUserTranscript("");
     setAssistantTranscript("");
     closingRef.current = false;
@@ -269,9 +278,16 @@ export function GeminiLivePanel({ servicePreset }: GeminiLivePanelProps) {
         credentials: "same-origin",
         cache: "no-store",
       });
-      const payload = (await response.json()) as GeminiLiveTokenResponse;
+      const payload = (await response
+        .json()
+        .catch(() => ({}))) as GeminiLiveTokenResponse;
       if (!response.ok || !payload.token || !payload.model) {
-        throw new Error(payload.error || "Chưa thể mở phiên thoại trực tiếp.");
+        setSupportRequestId(payload.requestId ?? null);
+        throw new Error(
+          payload.code === "RATE_LIMITED"
+            ? "Đang có nhiều phiên thoại. Anh/chị vui lòng thử lại sau hoặc tiếp tục bằng chat."
+            : "Kết nối giọng nói đang tạm gián đoạn. Anh/chị vẫn có thể tiếp tục tư vấn bằng chat ngay bên dưới.",
+        );
       }
 
       const websocket = new WebSocket(
@@ -428,9 +444,24 @@ export function GeminiLivePanel({ servicePreset }: GeminiLivePanelProps) {
                 </p>
               )}
               {error ? (
-                <p className="mt-4 rounded-[var(--radius-md)] border border-red-400/50 bg-red-950/30 p-3 text-sm text-red-100" role="alert">
-                  {error}
-                </p>
+                <div
+                  className="mt-[var(--space-stack)] rounded-[var(--radius-md)] border border-[var(--color-danger)] bg-[var(--color-danger-soft)] p-[var(--space-control)] text-sm text-[var(--color-danger-text)]"
+                  role="alert"
+                >
+                  <p className="leading-6">{error}</p>
+                  {supportRequestId ? (
+                    <p className="mt-[var(--space-2)] text-xs opacity-80">
+                      Mã hỗ trợ: {supportRequestId}
+                    </p>
+                  ) : null}
+                  <a
+                    href="#ai-office"
+                    className="mt-[var(--space-control)] inline-flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-danger)] px-[var(--space-stack)] py-[var(--space-2)] font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                    Tiếp tục bằng chat
+                  </a>
+                </div>
               ) : null}
             </div>
           </div>
