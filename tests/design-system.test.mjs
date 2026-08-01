@@ -158,3 +158,19 @@ test("fake and duplicate surfaces stay removed", () => {
     /chưa tự động gửi tới\s+kỹ sư hoặc CRM/,
   );
 });
+
+test("homepage conversion surfaces preserve the accessibility audit", () => {
+  const hero = read("src/components/sections/HeroSection.tsx");
+  const button = read("src/components/ui/Button.tsx");
+  const aiOffice = read("src/components/sections/AIOfficeSection.tsx");
+
+  assert.match(hero, /<Button href="#ai-office">/);
+  assert.match(hero, /dân dụng\{" "\}/);
+  assert.doesNotMatch(hero, /min-h-\[calc\(100svh/);
+  assert.match(button, /touch-manipulation/);
+  assert.doesNotMatch(button, /backdrop-blur/);
+  assert.match(aiOffice, /title="Tiến trình làm việc"/);
+  assert.match(aiOffice, /title="Dữ liệu hồ sơ"/);
+  assert.match(aiOffice, /title="Độ đầy đủ"/);
+  assert.doesNotMatch(aiOffice, /title="(?:Working Timeline|Memory|Confidence)"/);
+});
