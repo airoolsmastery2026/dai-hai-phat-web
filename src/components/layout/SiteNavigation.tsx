@@ -79,30 +79,30 @@ export function SiteNavigation() {
   }, [closeMenu, open]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] text-[var(--color-text-inverse)]">
-      <div className="mx-auto flex h-16 max-w-[var(--container-max)] items-center justify-between px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:h-20 lg:px-[var(--space-container-lg)]">
+    <header className="sticky top-0 z-50 w-full border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 text-[var(--color-text)] shadow-[var(--shadow-sm)] backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[var(--container-max)] items-center justify-between px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:h-[4.5rem] lg:px-[var(--space-container-lg)]">
         <Link
           href="/"
           className="flex flex-col rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           aria-label="Đại Hải Phát — Trang chủ"
         >
-          <span className="text-lg font-black uppercase tracking-wide text-[var(--color-text-inverse)] sm:text-2xl">
+          <span className="text-lg font-black uppercase tracking-[0.04em] text-[var(--color-text)] sm:text-xl">
             ĐẠI HẢI PHÁT
           </span>
-          <span className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-text-dark-muted)] sm:text-xs">
+          <span className="text-[9px] uppercase tracking-[0.18em] text-[var(--color-metal-strong)] sm:text-[10px]">
             AI Digital Engineering Office
           </span>
         </Link>
 
         <nav
-          className="hidden items-center gap-[var(--space-8)] lg:flex"
+          className="hidden items-center gap-[var(--space-6)] lg:flex"
           aria-label="Điều hướng chính"
         >
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-[var(--radius-sm)] text-sm font-bold text-[var(--color-text-inverse)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-dark-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              className="rounded-[var(--radius-sm)] text-sm font-semibold text-[var(--color-text-muted)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               {item.label}
             </Link>
@@ -112,13 +112,13 @@ export function SiteNavigation() {
         <div className="hidden items-center gap-[var(--space-3)] lg:flex">
           <a
             href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-            className="inline-flex min-h-[var(--control-min-size)] items-center rounded-[var(--radius-md)] border border-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-[var(--color-text-inverse)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary)]"
+            className="inline-flex min-h-11 items-center rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)]"
           >
             {COMPANY_CONFIG.phones[0].display}
           </a>
           <Link
             href="/#ai-office"
-            className="inline-flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-[var(--color-text-inverse)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
+            className="inline-flex min-h-11 items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
             Tư vấn AI 24/7
@@ -128,7 +128,7 @@ export function SiteNavigation() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] lg:hidden"
           aria-label={open ? "Đóng menu" : "Mở menu"}
           aria-expanded={open}
           aria-controls="mobile-navigation"
@@ -145,7 +145,7 @@ export function SiteNavigation() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="mobile-navigation-title"
-          className="border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] px-[var(--space-container)] pb-[var(--space-6)] lg:hidden"
+          className="border-t border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-container)] pb-[var(--space-6)] shadow-[var(--shadow-md)] lg:hidden"
         >
           <h2 id="mobile-navigation-title" className="sr-only">
             Điều hướng chính
@@ -159,7 +159,7 @@ export function SiteNavigation() {
                 key={item.href}
                 href={item.href}
                 onClick={() => closeMenu()}
-                className="flex min-h-12 items-center border-b border-[var(--color-border-dark)] text-base font-semibold text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus)]"
+                className="flex min-h-12 items-center border-b border-[var(--color-border)] text-base font-semibold text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus)]"
               >
                 {item.label}
               </Link>
@@ -169,7 +169,7 @@ export function SiteNavigation() {
             <Link
               href="/#ai-office"
               onClick={() => closeMenu()}
-              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] font-bold text-[var(--color-primary-contrast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Bot className="h-5 w-5" aria-hidden="true" />
               Bắt đầu tư vấn AI
@@ -177,7 +177,7 @@ export function SiteNavigation() {
             <a
               href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
               onClick={() => closeMenu()}
-              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] font-bold text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              className="flex min-h-12 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
               Gọi {COMPANY_CONFIG.phones[0].display}

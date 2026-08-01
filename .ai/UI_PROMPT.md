@@ -35,7 +35,7 @@ Implementation rules:
 Every changed UI must:
 - work from 320px mobile through wide desktop;
 - meet WCAG AA, semantic HTML, keyboard access, and visible focus;
-- support light/dark semantic contexts;
+- support the intentional light public theme and the few tokenized deep-teal CTA/footer contexts;
 - define loading, empty, error, disabled, and success states when meaningful;
 - reserve media/loading dimensions to prevent CLS;
 - use restrained motion and honor prefers-reduced-motion;
@@ -44,8 +44,10 @@ Every changed UI must:
 Visual direction:
 Calm technical workspace. Industrial, premium, minimal, trustworthy.
 Apple restraint, Linear simplicity, Stripe clarity, Vercel engineering.
-Use one dark technical foundation, one warm orange action color, cool neutral
-surfaces, Inter typography, precise grid rhythm, and verified project media.
+Use ivory and pale mineral-blue foundations, deep teal actions, restrained
+champagne-metal details, walnut warmth, Inter typography, compact grid rhythm,
+and verified project media. Reserve deep teal surfaces for the footer and
+selected conversion moments; navigation, page heroes, and AI chat remain light.
 Never produce neon AI aesthetics, glassmorphism stacks, generic template cards,
 random gradients, excessive pills, or decorative animation.
 

@@ -1,0 +1,53 @@
+{
+  "id": "brand-hero-luxury-materials-v1",
+  "title": "Không gian vật liệu luxury xanh khoáng và gỗ walnut",
+  "alt": "Không gian sáng với tường xanh khoáng nhạt, lam gỗ walnut và lan can kim loại ánh champagne",
+  "caption": "Hình nền định hướng vật liệu cho trang chủ Đại Hải Phát, tạo riêng để minh họa tinh thần nội thất và cơ khí dân dụng cao cấp.",
+  "category": "Nội thất",
+  "assetType": "reference",
+  "material": "Gỗ walnut, kim loại ánh champagne và bề mặt khoáng",
+  "style": "Luxury hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Không gian kiến trúc biên tập sáng, tường khoáng xanh sương nhạt, lam gỗ walnut Mỹ, lan can cầu thang kim loại champagne xước và đá ivory; không người, không chữ, không logo, chừa khoảng trống bên trái cho nội dung.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Vật liệu nội thất luxury | Đại Hải Phát",
+    "description": "Hình nền vật liệu xanh khoáng, gỗ walnut và kim loại champagne cho trải nghiệm tư vấn Đại Hải Phát.",
+    "keywords": [
+      "đại hải phát",
+      "gỗ walnut",
+      "kim loại champagne",
+      "nội thất luxury"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/brand/hero-luxury-materials-v1.png",
+    "sourceRelativePath": "assets/images/brand/hero-luxury-materials-v1.png",
+    "publicUrl": "/images/brand/hero-luxury-materials-v1.png",
+    "bytes": 1899646,
+    "sha256": "792f69bf7b2c06be72027236c17bf4d949f67c3dd9dbe83b6bfbccd35e06b0f5",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/brand/hero-luxury-materials-v1.webp",
+    "publicUrl": "/images/brand/hero-luxury-materials-v1.webp",
+    "width": 1774,
+    "height": 887,
+    "bytes": 54922,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/brand/hero-luxury-materials-v1.thumb.webp",
+    "publicUrl": "/images/brand/hero-luxury-materials-v1.thumb.webp",
+    "width": 480,
+    "height": 240,
+    "bytes": 4098,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACQBACdASogABAAPu1iqk4ppaQiMAgBMB2JQBZwDaRv8wj/vIXWSrXQbG6J4wAA/vZMGOYBJ5KDgI0GSXLU4WUm4J9pNqOCdjhi09x+a3FMzln/FlNcWM7QAAA="
+}

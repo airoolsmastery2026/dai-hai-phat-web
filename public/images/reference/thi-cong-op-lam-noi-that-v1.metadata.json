@@ -1,0 +1,52 @@
+{
+  "id": "reference-thi-cong-op-lam-noi-that-v1",
+  "title": "Căn chỉnh tấm ốp và lam nội thất",
+  "alt": "Hai kỹ thuật viên căn chỉnh tấm ốp và lam đứng trên vách nội thất",
+  "caption": "Ảnh quy trình tham khảo cho bước kiểm tra mặt nền, cao độ và khe ghép trước khi hoàn thiện vách ốp.",
+  "category": "Nội thất",
+  "assetType": "reference",
+  "material": "Tấm ốp vân gỗ và lam composite",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Nội thất",
+  "prompt": "Hai kỹ thuật viên Việt Nam lắp tấm ốp vân gỗ và lam đứng trong căn hộ sáng, dụng cụ và khe cân chỉnh thực tế, photorealistic, không chữ.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Thi công tấm ốp và lam nội thất | Đại Hải Phát",
+    "description": "Ảnh tham khảo quy trình căn chỉnh tấm ốp và lam nội thất.",
+    "keywords": [
+      "căn chỉnh vách",
+      "lam nội thất",
+      "thi công tấm ốp"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/thi-cong-op-lam-noi-that-v1.png",
+    "sourceRelativePath": "assets/images/reference/thi-cong-op-lam-noi-that-v1.png",
+    "publicUrl": "/images/reference/thi-cong-op-lam-noi-that-v1.png",
+    "bytes": 2331257,
+    "sha256": "c3935b310860a482fe0f0133279989b5675d4ab227390444b8833aacf44f2de0",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/thi-cong-op-lam-noi-that-v1.webp",
+    "publicUrl": "/images/reference/thi-cong-op-lam-noi-that-v1.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 140202,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/thi-cong-op-lam-noi-that-v1.thumb.webp",
+    "publicUrl": "/images/reference/thi-cong-op-lam-noi-that-v1.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 14208,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAABQBgCdASogABUAPu1ur1IppiQiqAgBMB2JQBUesZfONf6WzZF9HB13mqG+E0CiveNPekA4K9UPXFk+AAD+3M/wCgjTYmtL06eQzh9fGDSHFS+MWG7btW0vtDxcKzZ3bfOzXZRqdFDFnI9yAl0subJV3rp9KrHSnVIwoazaVyIX5ta68deadTlD4LtPRZ73emslIgH+ibiJ7C2px/SxhwPqe+yvvtcbtzSSjfAjQR3LEDN/JMyeNgRsrBR8/FAXBfYEzXvAZCo+T9bG0SomO4uDhpYAAA=="
+}

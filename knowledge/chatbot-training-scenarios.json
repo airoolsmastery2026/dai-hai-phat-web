@@ -1,0 +1,72 @@
+[
+  {
+    "id": "new-project-natural-language",
+    "setup": [],
+    "questionId": "intent-group",
+    "message": "Tôi cần tư vấn làm lại nhà",
+    "expected": "Dự án mới"
+  },
+  {
+    "id": "price-intent-natural-language",
+    "setup": ["Dự án mới"],
+    "questionId": "intent-project",
+    "message": "Tôi muốn tham khảo chi phí trước",
+    "expected": "Hỏi giá"
+  },
+  {
+    "id": "gate-service-natural-language",
+    "setup": ["Dự án mới", "Xin tư vấn"],
+    "questionId": "service",
+    "message": "Nhà tôi muốn làm một bộ cổng sắt",
+    "expected": "Cửa cổng"
+  },
+  {
+    "id": "hcm-location-alias",
+    "setup": ["Dự án mới", "Xin tư vấn", "Cửa cổng", "Nhà phố"],
+    "questionId": "location",
+    "message": "Công trình ở Sài Gòn",
+    "expected": "TP. Hồ Chí Minh"
+  },
+  {
+    "id": "material-needs-guidance",
+    "setup": ["Dự án mới", "Xin tư vấn", "Cửa cổng", "Nhà phố", "TP. Hồ Chí Minh", "__DEFER_IMAGES__", "Cần khảo sát đo đạc", "Hiện đại"],
+    "questionId": "material",
+    "message": "Tôi chưa biết, tư vấn giúp nhé",
+    "expected": "Cần kỹ sư xác định"
+  },
+  {
+    "id": "budget-fifty-million",
+    "setup": ["Dự án mới", "Xin tư vấn", "Cửa cổng", "Nhà phố", "TP. Hồ Chí Minh", "__DEFER_IMAGES__", "Cần khảo sát đo đạc", "Hiện đại", "Sắt hoặc thép"],
+    "questionId": "budget",
+    "message": "Khoảng 50 triệu thì được",
+    "expected": "30–60 triệu"
+  },
+  {
+    "id": "budget-needs-guidance",
+    "setup": ["Dự án mới", "Xin tư vấn", "Nội thất", "Căn hộ", "TP. Hồ Chí Minh", "__DEFER_IMAGES__", "Cần khảo sát đo đạc", "Cần kỹ sư định hướng", "Gỗ hoặc MDF"],
+    "questionId": "budget",
+    "message": "Phần này tôi chưa biết, tư vấn giúp",
+    "expected": "Cần tư vấn ngân sách"
+  },
+  {
+    "id": "timeline-not-decided",
+    "setup": ["Dự án mới", "Xin tư vấn", "Nội thất", "Căn hộ", "TP. Hồ Chí Minh", "__DEFER_IMAGES__", "Cần khảo sát đo đạc", "Hiện đại", "Gỗ hoặc MDF", "60–120 triệu"],
+    "questionId": "timeline",
+    "message": "Tôi chưa chốt thời gian",
+    "expected": "Cần tư vấn tiến độ"
+  },
+  {
+    "id": "priority-ai-guidance",
+    "setup": ["Dự án mới", "Xin tư vấn", "Nội thất", "Căn hộ", "TP. Hồ Chí Minh", "__DEFER_IMAGES__", "Cần khảo sát đo đạc", "Hiện đại", "Gỗ hoặc MDF", "60–120 triệu", "Trong 1–3 tháng"],
+    "questionId": "priority",
+    "message": "Tôi chưa biết ưu tiên gì, gợi ý giúp nhé",
+    "expected": "Cần AI gợi ý"
+  },
+  {
+    "id": "ambiguous-service-stays-unconfirmed",
+    "setup": ["Dự án mới", "Xin tư vấn"],
+    "questionId": "service",
+    "message": "Công trình của tôi",
+    "expected": null
+  }
+]

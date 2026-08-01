@@ -34,7 +34,7 @@ test("keeps blog content connected to the AI intake", async () => {
     blogContent.matchAll(/aiService: "([^"]+)"/g),
     (match) => match[1],
   );
-  assert.equal(declaredPresets.length, 4);
+  assert.equal(declaredPresets.length, 7);
   declaredPresets.forEach((preset) => {
     assert.ok(VALID_PRESETS.includes(preset), `Unexpected AI preset: ${preset}`);
   });

@@ -1,0 +1,52 @@
+{
+  "id": "reference-gia-cong-khung-cong-thep-v1",
+  "title": "Gá lắp và hàn khung cổng thép",
+  "alt": "Kỹ thuật viên gá lắp và hàn khung cổng thép trên bàn dưỡng tại xưởng",
+  "caption": "Ảnh quy trình tham khảo cho bước gá lắp, kiểm tra đường chéo và hàn khung cổng tại xưởng.",
+  "category": "Gia công tại xưởng",
+  "assetType": "reference",
+  "material": "Thép hộp",
+  "style": "Quy trình kỹ thuật",
+  "projectType": "Xưởng gia công",
+  "service": "Cửa cổng",
+  "prompt": "Kỹ thuật viên Việt Nam hàn khung cổng thép trên bàn dưỡng, kẹp gá rõ và đồ bảo hộ đúng, photorealistic, không chữ hay logo.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quy trình gia công khung cổng thép | Đại Hải Phát",
+    "description": "Ảnh tham khảo bước gá lắp và hàn khung cổng thép tại xưởng.",
+    "keywords": [
+      "gia công cổng",
+      "hàn khung cổng",
+      "thép hộp"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/gia-cong-khung-cong-thep-v1.png",
+    "sourceRelativePath": "assets/images/reference/gia-cong-khung-cong-thep-v1.png",
+    "publicUrl": "/images/reference/gia-cong-khung-cong-thep-v1.png",
+    "bytes": 2303198,
+    "sha256": "c3c48c05debdd5d298069d27c8ae65cada3e9de92a934183a4c133ce07adcfe0",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/gia-cong-khung-cong-thep-v1.webp",
+    "publicUrl": "/images/reference/gia-cong-khung-cong-thep-v1.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 108048,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/gia-cong-khung-cong-thep-v1.thumb.webp",
+    "publicUrl": "/images/reference/gia-cong-khung-cong-thep-v1.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 15370,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACQBgCdASogABUAPu1mqk2ppaQiMAgBMB2JZwDMXa42kIRac1GVmHdDlRavAL+xql8xpM13l46duvTxjWIQAP7aNlUtGXqHrRqNZTiDjwa9sCuK3U+2dUYMusxAG+dRR8vnC5Yxvbo9gD34U96jpj6BTMFdfKSF+BHGUglWVrbVXIHddrCH3b5EHvzSbbjjTuSpXmgODt8uye/IVrQAAA=="
+}

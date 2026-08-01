@@ -16,7 +16,7 @@ export function ProjectsSection() {
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
             Thư viện giải pháp
           </p>
-          <h2 className="mt-[var(--space-3)] text-3xl font-bold text-[var(--color-text)] sm:text-4xl">
+          <h2 className="mt-[var(--space-3)] text-[length:var(--font-h2)] font-bold text-[var(--color-text)]">
             Hình dung phương án trước khi khảo sát
           </h2>
           <p className="mt-[var(--space-4)] leading-7 text-[var(--color-text-muted)]">
@@ -25,7 +25,7 @@ export function ProjectsSection() {
           </p>
         </div>
 
-        <div className="mt-[var(--space-10)] grid gap-[var(--space-5)] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-[var(--space-8)] grid gap-[var(--space-4)] sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((service) => (
             <Link
               key={service.slug}
@@ -41,17 +41,17 @@ export function ProjectsSection() {
                   className="object-cover transition duration-300 group-hover:scale-[1.02]"
                 />
                 <span className="absolute left-[var(--space-3)] top-[var(--space-3)] rounded-[var(--radius-full)] bg-[var(--color-surface-dark)]/90 px-[var(--space-3)] py-[var(--space-1)] text-xs font-semibold text-white">
-                  Ảnh đã xác minh
+                  Mẫu giải pháp
                 </span>
               </div>
-              <div className="p-[var(--space-5)]">
+              <div className="p-[var(--space-4)]">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-primary)]">
                   {service.subtitle}
                 </p>
-                <h3 className="mt-[var(--space-2)] text-lg font-bold text-[var(--color-text)]">
+                <h3 className="mt-[var(--space-2)] text-base font-bold leading-6 text-[var(--color-text)]">
                   {service.title}
                 </h3>
-                <p className="mt-[var(--space-4)] text-sm font-semibold text-[var(--color-primary)]">
+                <p className="mt-[var(--space-3)] text-sm font-semibold text-[var(--color-primary)]">
                   Xem giải pháp →
                 </p>
               </div>

@@ -1,0 +1,52 @@
+{
+  "id": "reference-cong-truot-khung-thep-quy-mo-lon-v1",
+  "title": "Cổng trượt khung thép quy mô lớn",
+  "alt": "Cổng trượt khung thép thanh đứng tại lối vào khu xưởng",
+  "caption": "Mẫu tham khảo kết cấu cổng trượt quy mô lớn; kích thước và liên kết phải được thiết kế theo hiện trạng cụ thể.",
+  "category": "Cửa cổng",
+  "assetType": "reference",
+  "material": "Thép hộp hoàn thiện sơn",
+  "style": "Công nghiệp hiện đại",
+  "projectType": "Xưởng gia công",
+  "service": "Cửa cổng",
+  "prompt": "Cổng trượt thép thanh đứng quy mô lớn trước khu xưởng hiện đại, kết cấu và ray thực tế, ảnh photorealistic, không người, không chữ.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu cổng trượt khung thép quy mô lớn | Đại Hải Phát",
+    "description": "Mẫu tham khảo kết cấu cổng trượt khung thép cho lối vào rộng.",
+    "keywords": [
+      "cổng quy mô lớn",
+      "cổng trượt thép",
+      "khung cổng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.png",
+    "sourceRelativePath": "assets/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.png",
+    "publicUrl": "/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.png",
+    "bytes": 2280805,
+    "sha256": "bb6928ddb3487257513ef8504f5b64e73f100d1c0ba468d75273b79849577736",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.webp",
+    "publicUrl": "/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 146892,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.thumb.webp",
+    "publicUrl": "/images/reference/cong-truot-khung-thep-quy-mo-lon-v1.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 16006,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAADwBgCdASogABUAPu1qq08ppiOiMBgIATAdiWcAzF2scYDSfNFEyXP0krdV97lJt1UYLyzbp1shbTIeObhRhlmsAP7zdS3CvLMc5sANGJo9mlGaCTlQ/VPu8QrAClvxVwLRoW253TzmylAH5Ux1wEYZ22DjMuvm2LPJ1vxR2yX6nhh8nB4Tcvc2sHynPT9xozgr67M1pge82hIjvSFYAAw+FotpAwW1Jm/w+fHAiZ8goBs7NShN+CtADc4PZYrgOBAvxvW+xnIPHDyu5cLBLa8rxAAAAA=="
+}

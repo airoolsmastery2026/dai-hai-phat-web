@@ -1,0 +1,52 @@
+{
+  "id": "reference-vach-lam-go-khong-gian-lam-viec-v1",
+  "title": "Vách ốp và lam gỗ cho không gian làm việc",
+  "alt": "Không gian làm việc sáng với vách ốp phẳng và lam gỗ đứng",
+  "caption": "Mẫu tham khảo phối hợp tấm ốp phẳng, lam đứng và cửa ẩn trong một hệ vách đồng bộ.",
+  "category": "Nội thất",
+  "assetType": "reference",
+  "material": "Tấm ốp vân gỗ và lam đứng",
+  "style": "Hiện đại tinh gọn",
+  "projectType": "Không gian thương mại",
+  "service": "Nội thất",
+  "prompt": "Không gian làm việc cao cấp với vách ốp gỗ, lam đứng và cửa ẩn, ánh sáng tự nhiên, ảnh kiến trúc photorealistic, không người, không chữ.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu vách ốp và lam gỗ | Đại Hải Phát",
+    "description": "Mẫu tham khảo vách ốp phẳng kết hợp lam gỗ và cửa ẩn.",
+    "keywords": [
+      "cửa ẩn",
+      "lam gỗ",
+      "vách ốp gỗ"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/vach-lam-go-khong-gian-lam-viec-v1.png",
+    "sourceRelativePath": "assets/images/reference/vach-lam-go-khong-gian-lam-viec-v1.png",
+    "publicUrl": "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.png",
+    "bytes": 2042256,
+    "sha256": "cb2001baf4195757a084421590200b2d3ffae1937e6bba71e6ced9f1226490cb",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/vach-lam-go-khong-gian-lam-viec-v1.webp",
+    "publicUrl": "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 87932,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/vach-lam-go-khong-gian-lam-viec-v1.thumb.webp",
+    "publicUrl": "/images/reference/vach-lam-go-khong-gian-lam-viec-v1.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 9550,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRuIAAABXRUJQVlA4INYAAABwBgCdASogABUAPu1kqk2ppaQiMAgBMB2JZQCnGa+BzlemTSyBPjH27JB2WZM4MmLTHHYb4Xmpi4HruwAA/pFFcwJi3UrqFkLko3z1p3zO2nr9CoKGnuS6Z4LY1IT3ZvxiqcjpHuOo1JAKbaRZzutlvBLNzZ0cVUpQHURch3LAIOZZoUvDoYJcpzyotzfrHbT1ap/8BaVPmLLOzzzHXUJf4OK/quDMNICRU41sqqRWdZIeQawttZTx2CYqe6XR1XzaerHfW0+hIUIDjcJ4Cj68i4ZF88AA"
+}

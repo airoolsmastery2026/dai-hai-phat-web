@@ -1,0 +1,52 @@
+{
+  "id": "reference-xuong-gia-cong-ket-cau-thep-v1",
+  "title": "Đo và hàn cấu kiện thép tại xưởng",
+  "alt": "Kỹ thuật viên đo và hàn cấu kiện thép trong xưởng gia công",
+  "caption": "Ảnh quy trình tham khảo cho bước đo kiểm, gá lắp và hàn cấu kiện thép theo bản vẽ.",
+  "category": "Gia công tại xưởng",
+  "assetType": "reference",
+  "material": "Thép kết cấu",
+  "style": "Quy trình kỹ thuật",
+  "projectType": "Xưởng gia công",
+  "service": "Nhà xưởng",
+  "prompt": "Kỹ thuật viên Việt Nam đo và hàn cấu kiện thép trong xưởng, đồ bảo hộ đúng, ánh sáng cuối ngày, ảnh photorealistic, không chữ hay logo.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Quy trình đo và hàn cấu kiện thép | Đại Hải Phát",
+    "description": "Ảnh tham khảo quy trình đo kiểm và hàn cấu kiện thép tại xưởng.",
+    "keywords": [
+      "đo cấu kiện",
+      "gia công thép",
+      "hàn kết cấu"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/xuong-gia-cong-ket-cau-thep-v1.png",
+    "sourceRelativePath": "assets/images/reference/xuong-gia-cong-ket-cau-thep-v1.png",
+    "publicUrl": "/images/reference/xuong-gia-cong-ket-cau-thep-v1.png",
+    "bytes": 1916531,
+    "sha256": "fa341a4ce29815fab46cf9f9fc6a23fc03a06499db49ca5bdd07ee67091f871f",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/xuong-gia-cong-ket-cau-thep-v1.webp",
+    "publicUrl": "/images/reference/xuong-gia-cong-ket-cau-thep-v1.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 109012,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/xuong-gia-cong-ket-cau-thep-v1.thumb.webp",
+    "publicUrl": "/images/reference/xuong-gia-cong-ket-cau-thep-v1.thumb.webp",
+    "width": 480,
+    "height": 270,
+    "bytes": 14204,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABQBQCdASogABIAPu1srlIppaQiqAgBMB2JZwDKed0aq+cnwWFh6myIrIfqiPBA08RfSFgA/vxIlcxHovRutEA1e380YEtouQ+EjjAcNdheV0l32sy36NWjS8uBXREE61rtVYFSa81oyT1VW4l/DPktl1kBK0yBK6IagCqTamnqlRGe2tHbXj9/98Wp63CK2m2FlTdrx+oFUMzFBNAX8XvMU8xgZWPYJwAAAA=="
+}

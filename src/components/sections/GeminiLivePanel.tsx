@@ -358,7 +358,7 @@ export function GeminiLivePanel({ servicePreset }: GeminiLivePanelProps) {
   return (
     <section
       aria-labelledby="gemini-live-title"
-      className="hidden bg-[var(--color-surface-dark)] pt-[var(--space-section-compact)] text-[var(--color-text-inverse)] lg:block"
+      className="hidden ai-office-light bg-[var(--color-background)] pt-[var(--space-section-compact)] text-[var(--color-text-inverse)] lg:block"
     >
       <div className="mx-auto max-w-7xl px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
         <div className="rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]">
@@ -427,7 +427,7 @@ export function GeminiLivePanel({ servicePreset }: GeminiLivePanelProps) {
               {userTranscript || assistantTranscript ? (
                 <div className="mt-4 space-y-3 text-sm leading-6">
                   {userTranscript ? (
-                    <p className="rounded-[var(--radius-md)] bg-black/15 p-3 text-[var(--color-text-dark-muted)]">
+                    <p className="rounded-[var(--radius-md)] bg-[var(--color-surface-dark-muted)] p-3 text-[var(--color-text-dark-muted)]">
                       <strong className="text-[var(--color-text-inverse)]">Bạn:</strong>{" "}
                       {userTranscript}
                     </p>

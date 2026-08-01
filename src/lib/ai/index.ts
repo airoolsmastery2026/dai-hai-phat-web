@@ -128,8 +128,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "intent-group",
     state: "WELCOME",
     field: "intentGroup",
-    prompt: "Nội dung cần Đại Hải Phát xử lý thuộc nhóm nào?",
-    supportingText: "Chọn một nhóm để xác định đúng quy trình tiếp nhận.",
+    prompt: "Chào anh/chị, hôm nay mình hỗ trợ việc gì?",
+    supportingText: "Cứ chọn ý gần nhất; mình sẽ hỏi thêm từng câu ngắn để hiểu đúng nhu cầu.",
     inputType: "choice",
     options: [
       option("Tư vấn hoặc triển khai dự án", "Dự án mới"),
@@ -142,8 +142,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "service",
     state: "SERVICE_SELECTION",
     field: "service",
-    prompt: "Hạng mục cần tư vấn là gì?",
-    supportingText: "Chọn hạng mục chính; các hạng mục phụ sẽ được ghi nhận khi khảo sát.",
+    prompt: "Anh/chị đang muốn làm hạng mục nào?",
+    supportingText: "Nếu chưa gọi đúng tên hạng mục, chọn ý gần nhất hoặc nhắn mô tả tự nhiên.",
     inputType: "choice",
     options: [
       option("Cửa cổng"),
@@ -159,8 +159,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "project-type",
     state: "PROJECT_TYPE",
     field: "projectType",
-    prompt: "Công trình thuộc loại nào?",
-    supportingText: "Loại công trình quyết định cách khảo sát và tổ chức thi công.",
+    prompt: "Không gian cần làm là nhà hay công trình nào?",
+    supportingText: "Thông tin này giúp mình gợi ý cách khảo sát phù hợp hơn.",
     inputType: "choice",
     options: [
       option("Nhà phố"),
@@ -176,8 +176,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "location",
     state: "LOCATION",
     field: "location",
-    prompt: "Công trình nằm ở khu vực nào?",
-    supportingText: "Khu vực được dùng để xác định điều kiện khảo sát và triển khai.",
+    prompt: "Công trình của anh/chị ở khu vực nào?",
+    supportingText: "Chỉ cần tỉnh hoặc thành phố ở bước này; địa chỉ cụ thể có thể cung cấp sau.",
     inputType: "choice",
     options: [
       option("TP. Hồ Chí Minh"),
@@ -203,8 +203,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "dimensions",
     state: "SIZE_COLLECTION",
     field: "dimensions",
-    prompt: "Kích thước sơ bộ của khu vực thi công là bao nhiêu?",
-    supportingText: "Ghi rõ rộng × cao × dài và đơn vị. Chọn hỗ trợ đo khi chưa có số liệu.",
+    prompt: "Anh/chị đã có kích thước sơ bộ chưa?",
+    supportingText: "Có thể nhắn rộng × cao × dài; nếu chưa đo, mình sẽ ghi chú để kỹ sư hỗ trợ.",
     inputType: "text",
     required: true,
     allowAssistedMeasurement: true,
@@ -213,8 +213,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "style",
     state: "STYLE_COLLECTION",
     field: "style",
-    prompt: "Phong cách ưu tiên là gì?",
-    supportingText: "Chọn phong cách gần nhất với kết quả mong muốn.",
+    prompt: "Anh/chị thích không gian mang cảm giác nào?",
+    supportingText: "Chọn phong cách gần nhất; nếu chưa rõ, kỹ sư sẽ định hướng từ ảnh tham khảo.",
     inputType: "choice",
     options: [
       option("Hiện đại"),
@@ -230,8 +230,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "material",
     state: "MATERIAL_COLLECTION",
     field: "material",
-    prompt: "Nhóm vật liệu đang được ưu tiên là gì?",
-    supportingText: "Lựa chọn này là dữ liệu đầu vào, chưa phải kết luận kỹ thuật.",
+    prompt: "Anh/chị đang nghiêng về vật liệu nào?",
+    supportingText: "Chưa cần quyết định ngay; phương án cuối sẽ được đối chiếu với hiện trạng.",
     inputType: "choice",
     options: [
       option("Sắt hoặc thép"),
@@ -247,16 +247,16 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "budget",
     state: "BUDGET_COLLECTION",
     field: "budget",
-    prompt: "Khoảng ngân sách dự kiến là bao nhiêu?",
-    supportingText: "Ngân sách giúp loại bỏ phương án không phù hợp; đây không phải báo giá.",
+    prompt: "Mức đầu tư nào khiến anh/chị thấy thoải mái?",
+    supportingText: "Chọn khoảng gần nhất hoặc chọn chưa xác định; đây chưa phải báo giá.",
     inputType: "choice",
     options: [
       option("Dưới 30 triệu"),
       option("30–60 triệu"),
       option("60–120 triệu"),
       option("120–250 triệu"),
-      option("250–500 triệu"),
-      option("Trên 500 triệu"),
+      option("Trên 250 triệu"),
+      option("Chưa xác định", "Cần tư vấn ngân sách"),
     ],
     required: true,
   },
@@ -264,8 +264,8 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "timeline",
     state: "TIME_COLLECTION",
     field: "timeline",
-    prompt: "Thời điểm cần triển khai là khi nào?",
-    supportingText: "Mốc thời gian được dùng để đánh giá khả năng tổ chức khảo sát và thi công.",
+    prompt: "Anh/chị mong muốn bắt đầu khi nào?",
+    supportingText: "Mốc dự kiến giúp đội ngũ chuẩn bị lịch; có thể điều chỉnh sau khi khảo sát.",
     inputType: "choice",
     options: [
       option("Trong 2 tuần"),
@@ -273,6 +273,7 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
       option("Trong 1–3 tháng"),
       option("Trong 3–6 tháng"),
       option("Sau 6 tháng"),
+      option("Chưa xác định", "Cần tư vấn tiến độ"),
     ],
     required: true,
   },
@@ -280,16 +281,16 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     id: "priority",
     state: "REQUIREMENT_COLLECTION",
     field: "priority",
-    prompt: "Yếu tố nào quan trọng nhất khi chọn phương án?",
-    supportingText: "Chỉ chọn một ưu tiên chính để kỹ sư loại bỏ phương án không phù hợp.",
+    prompt: "Điều gì quan trọng nhất với anh/chị?",
+    supportingText: "Chọn một ưu tiên chính; nếu còn phân vân, mình sẽ để AI gợi ý từ hồ sơ.",
     inputType: "choice",
     options: [
       option("Độ bền"),
       option("Thẩm mỹ"),
       option("Chi phí"),
       option("Tiến độ"),
-      option("Bảo trì"),
-      option("Bảo hành"),
+      option("Bảo trì và bảo hành"),
+      option("Nhờ AI gợi ý", "Cần AI gợi ý"),
     ],
     required: true,
   },
@@ -342,8 +343,8 @@ const INTENT_QUESTIONS: Record<string, ConversationQuestion> = {
     id: "intent-project",
     state: "WELCOME",
     field: "intent",
-    prompt: "Mục tiêu cần hoàn thành cho dự án là gì?",
-    supportingText: "Mục tiêu này quyết định mức độ dữ liệu cần thu thập cho Proposal.",
+    prompt: "Mình nên giúp anh/chị theo hướng nào trước?",
+    supportingText: "Cứ chọn điều cần nhất lúc này; hồ sơ vẫn có thể bổ sung sau.",
     inputType: "choice",
     options: [
       option("Hỏi khoảng chi phí", "Hỏi giá"),
@@ -534,6 +535,36 @@ const CHOICE_ALIASES: Readonly<Record<string, ReadonlyArray<readonly [string, st
     ["long an", "Long An"],
     ["tay ninh", "Tây Ninh"],
   ],
+  "intent-project": [
+    ["chi phi", "Hỏi giá"],
+    ["bao gia", "Hỏi giá"],
+    ["tham khao gia", "Hỏi giá"],
+    ["xem mau", "Xem mẫu"],
+    ["so sanh", "So sánh"],
+    ["khao sat", "Khảo sát"],
+    ["thi cong", "Thi công"],
+  ],
+  style: [
+    ["chua biet", "Cần kỹ sư định hướng"],
+    ["tu van giup", "Cần kỹ sư định hướng"],
+  ],
+  material: [
+    ["chua biet", "Cần kỹ sư xác định"],
+    ["tu van giup", "Cần kỹ sư xác định"],
+  ],
+  budget: [
+    ["chua biet", "Cần tư vấn ngân sách"],
+    ["khong ro", "Cần tư vấn ngân sách"],
+    ["tu van giup", "Cần tư vấn ngân sách"],
+  ],
+  timeline: [
+    ["chua biet", "Cần tư vấn tiến độ"],
+    ["chua chot", "Cần tư vấn tiến độ"],
+  ],
+  priority: [
+    ["chua biet", "Cần AI gợi ý"],
+    ["goi y giup", "Cần AI gợi ý"],
+  ],
 };
 
 function normalizeConversationText(value: string): string {
@@ -567,9 +598,7 @@ function findBudgetChoice(
           ? "60–120 triệu"
           : amountInMillions <= 250
             ? "120–250 triệu"
-            : amountInMillions <= 500
-              ? "250–500 triệu"
-              : "Trên 500 triệu";
+          : "Trên 250 triệu";
   return question.options?.some((item) => item.value === value) ? value : null;
 }
 

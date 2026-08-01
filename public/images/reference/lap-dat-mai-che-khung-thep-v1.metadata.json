@@ -1,0 +1,52 @@
+{
+  "id": "reference-lap-dat-mai-che-khung-thep-v1",
+  "title": "Lắp đặt tấm mái trên khung thép",
+  "alt": "Hai kỹ thuật viên lắp tấm mái lấy sáng trên hệ khung thép nhà ở",
+  "caption": "Ảnh quy trình tham khảo cho bước căn chỉnh tấm, liên kết và an toàn khi lắp mái che.",
+  "category": "Mái che",
+  "assetType": "reference",
+  "material": "Khung thép và tấm lấy sáng",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Mái che",
+  "prompt": "Hai kỹ thuật viên có dây an toàn lắp tấm lấy sáng trên khung thép mái che nhà ở, góc chụp rõ liên kết, photorealistic, không chữ.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Lắp đặt mái che khung thép | Đại Hải Phát",
+    "description": "Ảnh tham khảo quy trình lắp đặt tấm mái trên khung thép.",
+    "keywords": [
+      "khung thép",
+      "lắp mái che",
+      "tấm lấy sáng"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/lap-dat-mai-che-khung-thep-v1.png",
+    "sourceRelativePath": "assets/images/reference/lap-dat-mai-che-khung-thep-v1.png",
+    "publicUrl": "/images/reference/lap-dat-mai-che-khung-thep-v1.png",
+    "bytes": 2676869,
+    "sha256": "b3ec24a9b67de6de3357b4b134d8a979f97adcbb0d4f10e7a75298ae6a329405",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/lap-dat-mai-che-khung-thep-v1.webp",
+    "publicUrl": "/images/reference/lap-dat-mai-che-khung-thep-v1.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 213278,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/lap-dat-mai-che-khung-thep-v1.thumb.webp",
+    "publicUrl": "/images/reference/lap-dat-mai-che-khung-thep-v1.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 27252,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAADwBgCdASogABUAPu1mqk2ppaQiMAgBMB2JZQDDkHBcAjgNq8k2xrCQN6X+RwSlqUY3gKR19v7+4Ktxr8ds9pUAAP7KjmOpw0Bvauk0aMjFbis6nx9kSOZI09h4bMIfWEbM1y2qfbmpzNiGvVIos+c+t4em+KKV/knj3NkaaJQ4QElIiDN3L7mXPYeLloaDytAU6rGYnt79VQ1iVbwgMtZ/+kKw8Z5Ajfbiz4e2zVkgKdDyg6Gsn0+YCUysUmKGzjWgHoTVo7pSVUzCq19SRXsOIXeVoZpkmZCQ5vAxYIGC6sASug/hKS/MhGz+hGGUF+kjAHXhExDRV076+icRjWobES1cDYMNwAA="
+}

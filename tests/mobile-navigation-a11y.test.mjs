@@ -25,15 +25,15 @@ test("keeps mobile navigation keyboard accessible", async () => {
   assert.ok(closeHandlers.length >= 3, "All mobile navigation actions should close the menu");
 });
 
-test("keeps navigation text readable on its dark surface", async () => {
+test("keeps navigation text readable on its light surface", async () => {
   const navigation = await readFile(
     new URL("../src/components/layout/SiteNavigation.tsx", import.meta.url),
     "utf8",
   );
 
-  assert.match(navigation, /bg-\[var\(--color-surface-dark\)\]/);
-  assert.doesNotMatch(navigation, /bg-\[var\(--color-surface-dark\)\]\/95/);
-  assert.match(navigation, /font-black[^"]*text-\[var\(--color-text-inverse\)\]/);
-  assert.match(navigation, /font-bold text-\[var\(--color-text-inverse\)\]/);
-  assert.match(navigation, /text-\[var\(--color-text-dark-muted\)\][^"]*sm:text-xs/);
+  assert.match(navigation, /bg-\[var\(--color-surface\)\]\/95/);
+  assert.match(navigation, /font-black[^"]*text-\[var\(--color-text\)\]/);
+  assert.match(navigation, /font-semibold[^"]*text-\[var\(--color-text-muted\)\]/);
+  assert.match(navigation, /text-\[var\(--color-metal-strong\)\][^"]*sm:text-\[10px\]/);
+  assert.match(navigation, /text-\[var\(--color-primary-contrast\)\]/);
 });

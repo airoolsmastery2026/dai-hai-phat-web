@@ -1,0 +1,52 @@
+{
+  "id": "reference-mai-che-khung-thep-hoan-thien-v1",
+  "title": "Mái che khung thép hoàn thiện có thoát nước",
+  "alt": "Mái che khung thép hoàn thiện tại sân nhà với tấm mái sáng và máng thoát nước",
+  "caption": "Mẫu tham khảo hệ mái che khung thép, tấm lợp sáng và tuyến thoát nước được tổ chức rõ.",
+  "category": "Mái che",
+  "assetType": "reference",
+  "material": "Khung thép và tấm mái sáng",
+  "style": "Hiện đại",
+  "projectType": "Nhà ở",
+  "service": "Mái che",
+  "prompt": "Mái che khung thép hoàn thiện ở sân nhà Việt Nam, tấm mái sáng và máng thoát nước rõ, trời sau mưa, photorealistic, không người, không chữ.",
+  "source": {
+    "label": "Hình ảnh tạo riêng theo yêu cầu của chủ dự án Đại Hải Phát",
+    "rights": "Được tạo cho và sử dụng trong website Đại Hải Phát",
+    "verified": true
+  },
+  "seo": {
+    "title": "Mẫu mái che khung thép hoàn thiện | Đại Hải Phát",
+    "description": "Mẫu tham khảo mái che khung thép và tổ chức thoát nước tại nhà ở.",
+    "keywords": [
+      "mái che khung thép",
+      "mái che nhà ở",
+      "thoát nước mái"
+    ]
+  },
+  "original": {
+    "relativePath": "public/images/reference/mai-che-khung-thep-hoan-thien-v1.png",
+    "sourceRelativePath": "assets/images/reference/mai-che-khung-thep-hoan-thien-v1.png",
+    "publicUrl": "/images/reference/mai-che-khung-thep-hoan-thien-v1.png",
+    "bytes": 2416476,
+    "sha256": "86857a6c9d3f2bb0000a50e1eaaa17265cfb062c6275a5a07376607574215e37",
+    "format": ".png"
+  },
+  "image": {
+    "relativePath": "public/images/reference/mai-che-khung-thep-hoan-thien-v1.webp",
+    "publicUrl": "/images/reference/mai-che-khung-thep-hoan-thien-v1.webp",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 184296,
+    "format": "webp"
+  },
+  "thumbnail": {
+    "relativePath": "public/images/reference/mai-che-khung-thep-hoan-thien-v1.thumb.webp",
+    "publicUrl": "/images/reference/mai-che-khung-thep-hoan-thien-v1.thumb.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 21440,
+    "format": "webp"
+  },
+  "blurDataUrl": "data:image/webp;base64,UklGRggBAABXRUJQVlA4IPwAAAAQBwCdASogABUAPu1kqU2ppaQiMAgBMB2JQBlW5YMPu0IN3op21uG3HNs9TAihveOnLiEo4C+vVp7UCX85RoWWQADyoR3Pbog6/cxEUG5HjocuhcemALlQbkUSsKsM3BhomzD1xmgyaitlDabVdx1X5FOyF5ibcVOsKBeGFJfC0yMYJvUyVunKiTz694xIdXdiXvoObR4St/j5UeMsWbMGqKBH2ccPQZ8zShErVCuAj/ms3wfLkfqHGO82bXpYsKUHd95H+ynULZk0sAOFlQdw85fC77YLR/i5UTtPWClZLFRfrgrtzvy1Qv9X9BwvERzT2YQojtVFYebwAAA="
+}
