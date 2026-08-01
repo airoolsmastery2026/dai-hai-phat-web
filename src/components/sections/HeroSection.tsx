@@ -11,7 +11,7 @@ export function HeroSection() {
         className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-[var(--radius-full)] bg-[var(--color-primary)] opacity-[0.16] blur-3xl"
         aria-hidden="true"
       />
-      <Container className="relative grid items-center gap-[var(--space-12)] py-[var(--space-16)] sm:py-[var(--space-20)] lg:grid-cols-[1.15fr_0.85fr] lg:py-[var(--space-24)]">
+      <Container className="relative grid items-center gap-[var(--space-12)] py-[var(--space-16)] sm:py-[var(--space-20)] lg:grid-cols-[1.15fr_0.85fr] lg:py-[var(--space-8)]">
         <div className="max-w-3xl">
           <span className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-full)] border border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 px-[var(--space-3)] py-[var(--space-2)] text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-primary-soft-text)]">
             <Bot className="h-4 w-4" aria-hidden="true" /> Tư vấn nhà ở 24/7
