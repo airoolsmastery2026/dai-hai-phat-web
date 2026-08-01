@@ -26,3 +26,22 @@ test("announces AI questions and moves focus after interaction", async () => {
   assert.match(controller, /Hội thoại lập hồ sơ kỹ thuật/);
   assert.match(controllers, /<AIOfficeAccessibilityController \/>/);
 });
+
+test("mobile consultation uses one compact, accessible chat surface", async () => {
+  const office = await readFile(
+    new URL("../src/components/sections/AIOfficeSection.tsx", import.meta.url),
+    "utf8",
+  );
+  const live = await readFile(
+    new URL("../src/components/sections/GeminiLivePanel.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(office, /Trò chuyện cùng trợ lý Đại Hải Phát/);
+  assert.match(office, /Nhắn câu trả lời cho trợ lý AI/);
+  assert.match(office, /resolveConversationChoice/);
+  assert.match(office, /<MobileProjectSummary session=\{session\} \/>/);
+  assert.match(office, /group-open:rotate-180/);
+  assert.match(office, /aria-label="Gửi câu trả lời"/);
+  assert.match(live, /className="hidden[^"\n]*lg:block"/);
+});

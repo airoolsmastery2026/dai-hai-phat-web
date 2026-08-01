@@ -115,6 +115,12 @@ export interface ConversationQuestion {
   allowAssistedMeasurement?: boolean;
 }
 
+export interface ConversationHistoryItem {
+  field: MemoryField;
+  label: string;
+  value: string;
+}
+
 const option = (label: string, value = label): QuestionOption => ({ label, value });
 
 const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
@@ -453,6 +459,199 @@ const STRING_MEMORY_FIELDS: ReadonlyArray<Exclude<MemoryField, "images">> = [
   "email",
   "zalo",
 ];
+
+const CONVERSATION_HISTORY_FIELDS: ReadonlyArray<{
+  field: MemoryField;
+  label: string;
+}> = [
+  { field: "intentGroup", label: "Nhóm nhu cầu" },
+  { field: "intent", label: "Mục tiêu" },
+  { field: "service", label: "Hạng mục" },
+  { field: "projectType", label: "Công trình" },
+  { field: "location", label: "Khu vực" },
+  { field: "images", label: "Ảnh hiện trạng" },
+  { field: "dimensions", label: "Kích thước" },
+  { field: "style", label: "Phong cách" },
+  { field: "material", label: "Vật liệu" },
+  { field: "budget", label: "Ngân sách" },
+  { field: "timeline", label: "Thời gian" },
+  { field: "priority", label: "Ưu tiên" },
+  { field: "surveyWindow", label: "Lịch khảo sát" },
+  { field: "quoteRequest", label: "Hồ sơ cần nhận" },
+  { field: "name", label: "Tên liên hệ" },
+  { field: "phone", label: "Điện thoại" },
+  { field: "surveyAddress", label: "Địa chỉ khảo sát" },
+  { field: "email", label: "Email" },
+  { field: "zalo", label: "Zalo" },
+];
+
+const CONVERSATION_STOP_WORDS = new Set([
+  "anh",
+  "chi",
+  "cho",
+  "co",
+  "cong",
+  "cua",
+  "duoc",
+  "giup",
+  "la",
+  "lam",
+  "minh",
+  "muon",
+  "nha",
+  "nho",
+  "toi",
+  "tu",
+  "van",
+  "voi",
+]);
+
+const CHOICE_ALIASES: Readonly<Record<string, ReadonlyArray<readonly [string, string]>>> = {
+  "intent-group": [
+    ["tu van", "Dự án mới"],
+    ["du an moi", "Dự án mới"],
+    ["bao hanh", "Sau thi công"],
+    ["sau thi cong", "Sau thi công"],
+    ["hop tac", "Hợp tác / Khác"],
+  ],
+  service: [
+    ["lam cong", "Cửa cổng"],
+    ["cua cong", "Cửa cổng"],
+    ["bo cong", "Cửa cổng"],
+    ["cau thang", "Cầu thang và lan can"],
+    ["lan can", "Cầu thang và lan can"],
+    ["mai che", "Mái che"],
+    ["noi that", "Nội thất"],
+    ["cai tao", "Cải tạo không gian"],
+  ],
+  location: [
+    ["sai gon", "TP. Hồ Chí Minh"],
+    ["tphcm", "TP. Hồ Chí Minh"],
+    ["tp hcm", "TP. Hồ Chí Minh"],
+    ["ho chi minh", "TP. Hồ Chí Minh"],
+    ["binh duong", "Bình Dương"],
+    ["dong nai", "Đồng Nai"],
+    ["long an", "Long An"],
+    ["tay ninh", "Tây Ninh"],
+  ],
+};
+
+function normalizeConversationText(value: string): string {
+  return value
+    .toLocaleLowerCase("vi-VN")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function findBudgetChoice(
+  question: ConversationQuestion,
+  normalizedMessage: string,
+): string | null {
+  if (question.id !== "budget") return null;
+  const match = normalizedMessage.match(/(\d+(?:[.,]\d+)?)\s*(ty|trieu|tr)?\b/);
+  if (!match) return null;
+
+  let amountInMillions = Number(match[1].replace(",", "."));
+  if (!Number.isFinite(amountInMillions)) return null;
+  if (match[2] === "ty") amountInMillions *= 1_000;
+
+  const value =
+    amountInMillions < 30
+      ? "Dưới 30 triệu"
+      : amountInMillions <= 60
+        ? "30–60 triệu"
+        : amountInMillions <= 120
+          ? "60–120 triệu"
+          : amountInMillions <= 250
+            ? "120–250 triệu"
+            : amountInMillions <= 500
+              ? "250–500 triệu"
+              : "Trên 500 triệu";
+  return question.options?.some((item) => item.value === value) ? value : null;
+}
+
+export function resolveConversationChoice(
+  question: ConversationQuestion,
+  message: string,
+): string | null {
+  if (question.inputType !== "choice" || !question.options?.length) return null;
+  const normalizedMessage = normalizeConversationText(message);
+  if (!normalizedMessage) return null;
+
+  const directMatch = question.options.find((item) => {
+    const label = normalizeConversationText(item.label);
+    const value = normalizeConversationText(item.value);
+    return normalizedMessage === label || normalizedMessage === value;
+  });
+  if (directMatch) return directMatch.value;
+
+  const aliasedValue = CHOICE_ALIASES[question.id]?.find(([alias]) =>
+    normalizedMessage.includes(alias),
+  )?.[1];
+  if (
+    aliasedValue &&
+    question.options.some((item) => item.value === aliasedValue)
+  ) {
+    return aliasedValue;
+  }
+
+  const budgetChoice = findBudgetChoice(question, normalizedMessage);
+  if (budgetChoice) return budgetChoice;
+
+  const messageTokens = new Set(
+    normalizedMessage
+      .split(" ")
+      .filter((token) => token.length > 1 && !CONVERSATION_STOP_WORDS.has(token)),
+  );
+  const scored = question.options
+    .map((item) => {
+      const optionTokens = Array.from(
+        new Set(
+          normalizeConversationText(`${item.label} ${item.value}`)
+            .split(" ")
+            .filter(
+              (token) =>
+                token.length > 1 && !CONVERSATION_STOP_WORDS.has(token),
+            ),
+        ),
+      );
+      const score = optionTokens.reduce(
+        (total, token) => total + (messageTokens.has(token) ? 1 : 0),
+        0,
+      );
+      return { item, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((left, right) => right.score - left.score);
+
+  if (!scored.length || scored[0].score === scored[1]?.score) return null;
+  return scored[0].item.value;
+}
+
+export function getConversationHistory(
+  session: ConversationSession,
+): ConversationHistoryItem[] {
+  return CONVERSATION_HISTORY_FIELDS.flatMap<ConversationHistoryItem>(
+    ({ field, label }) => {
+      if (field === "images") {
+        const value = session.memory.images.length
+          ? `${session.memory.images.length} ảnh đã chọn`
+          : session.memory.imagesDeferred
+            ? "Mình sẽ bổ sung sau"
+            : null;
+        return value ? [{ field, label, value }] : [];
+      }
+
+      const value = session.memory[field];
+      return typeof value === "string" && value.trim()
+        ? [{ field, label, value: value.trim() }]
+        : [];
+    },
+  );
+}
 
 const REQUIRED_STATE_BY_FIELD: ReadonlyArray<{
   field: MemoryField;

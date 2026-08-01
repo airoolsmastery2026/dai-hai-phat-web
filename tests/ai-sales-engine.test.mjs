@@ -19,7 +19,9 @@ const {
   CONVERSATION_STATES,
   createAIConversation,
   deferImageCollection,
+  getConversationHistory,
   getConversationQuestion,
+  resolveConversationChoice,
   restoreAIConversation,
 } = engine;
 
@@ -169,6 +171,66 @@ test("lets customers continue when images will be provided later", () => {
     () => deferImageCollection(createAIConversation()),
     /bước ảnh hiện trạng/,
   );
+});
+
+test("friendly chat messages resolve only to verified choice values", () => {
+  let session = createAIConversation();
+  let question = getConversationQuestion(session);
+
+  assert.equal(
+    resolveConversationChoice(question, "Tôi muốn được tư vấn một dự án mới"),
+    "Dự án mới",
+  );
+  assert.equal(resolveConversationChoice(question, "Tôi chưa biết"), null);
+
+  session = answerConversation(session, "Dự án mới");
+  session = answerConversation(session, "Xin tư vấn");
+  question = getConversationQuestion(session);
+  assert.equal(
+    resolveConversationChoice(question, "Nhà tôi muốn làm một bộ cổng"),
+    "Cửa cổng",
+  );
+  assert.equal(resolveConversationChoice(question, "Công trình của tôi"), null);
+
+  session = answerConversation(session, "Cửa cổng");
+  question = getConversationQuestion(session);
+  assert.equal(resolveConversationChoice(question, "Nhà tôi"), null);
+
+  session = answerConversation(session, "Nhà phố");
+  question = getConversationQuestion(session);
+  assert.equal(resolveConversationChoice(question, "Công trình ở Sài Gòn"), "TP. Hồ Chí Minh");
+
+  for (const answer of [
+    "TP. Hồ Chí Minh",
+    validImages,
+    "rộng 4 m × cao 2,6 m",
+    "Hiện đại",
+    "Sắt hoặc thép",
+  ]) {
+    session = answerConversation(session, answer);
+  }
+  question = getConversationQuestion(session);
+  assert.equal(resolveConversationChoice(question, "Khoảng 50 triệu"), "30–60 triệu");
+});
+
+test("conversation history turns confirmed memory into compact chat bubbles", () => {
+  let session = createAIConversation();
+  for (const answer of collectionAnswers.slice(0, 5)) {
+    session = answerConversation(session, answer);
+  }
+  session = deferImageCollection(session);
+
+  const history = getConversationHistory(session);
+  assert.deepEqual(history.slice(0, 3), [
+    { field: "intentGroup", label: "Nhóm nhu cầu", value: "Dự án mới" },
+    { field: "intent", label: "Mục tiêu", value: "Khảo sát" },
+    { field: "service", label: "Hạng mục", value: "Cửa cổng" },
+  ]);
+  assert.deepEqual(history.at(-1), {
+    field: "images",
+    label: "Ảnh hiện trạng",
+    value: "Mình sẽ bổ sung sau",
+  });
 });
 
 test("untrusted choices and restored client state are validated", () => {

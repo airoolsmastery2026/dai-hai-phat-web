@@ -34,6 +34,7 @@ const buttons = [
 
 export function FloatingCta() {
   const [open, setOpen] = useState(false);
+  const [isMobileOfficeVisible, setIsMobileOfficeVisible] = useState(false);
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -45,6 +46,43 @@ export function FloatingCta() {
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
+
+  useEffect(() => {
+    let animationFrame: number | null = null;
+
+    const updateVisibility = () => {
+      animationFrame = null;
+      const office = document.getElementById("ai-office");
+      const bounds = office?.getBoundingClientRect();
+      const isVisible = Boolean(
+        window.innerWidth < 1024 &&
+          bounds &&
+          bounds.bottom > 0 &&
+          bounds.top < window.innerHeight,
+      );
+      setIsMobileOfficeVisible(isVisible);
+      if (isVisible) setOpen(false);
+    };
+
+    const scheduleVisibilityUpdate = () => {
+      if (animationFrame !== null) return;
+      animationFrame = window.requestAnimationFrame(updateVisibility);
+    };
+
+    updateVisibility();
+    window.addEventListener("scroll", scheduleVisibilityUpdate, { passive: true });
+    window.addEventListener("resize", scheduleVisibilityUpdate);
+    window.addEventListener("hashchange", scheduleVisibilityUpdate);
+
+    return () => {
+      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", scheduleVisibilityUpdate);
+      window.removeEventListener("resize", scheduleVisibilityUpdate);
+      window.removeEventListener("hashchange", scheduleVisibilityUpdate);
+    };
+  }, []);
+
+  if (isMobileOfficeVisible) return null;
 
   return (
     <div className="fixed bottom-[max(var(--space-4),env(safe-area-inset-bottom))] right-[var(--space-4)] z-50 lg:right-[var(--space-8)]">

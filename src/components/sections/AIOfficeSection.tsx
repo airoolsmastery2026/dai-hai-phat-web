@@ -3,6 +3,7 @@
 import {
   Bot,
   Check,
+  ChevronDown,
   ClipboardList,
   Clock3,
   Gauge,
@@ -10,6 +11,7 @@ import {
   MemoryStick,
   RefreshCw,
   RotateCcw,
+  SendHorizontal,
   Share2,
   ShieldCheck,
   type LucideIcon,
@@ -25,7 +27,14 @@ import {
 
 import { useAI } from "@/hooks/useAI";
 import { COMPANY_CONFIG } from "@/content/company";
-import { getStateLabel, type ConversationQuestion, type ConversationSession } from "@/lib/ai";
+import {
+  getConversationHistory,
+  getStateLabel,
+  resolveConversationChoice,
+  type ConversationHistoryItem,
+  type ConversationQuestion,
+  type ConversationSession,
+} from "@/lib/ai";
 import type { ProjectAnalysisResponse } from "@/lib/ai/analysis";
 import type { ProposalEvidenceResponse } from "@/lib/ai/catalog";
 import { buildManualHandoffSummary } from "@/lib/ai/handoff";
@@ -99,21 +108,30 @@ export function AIOfficeSection() {
   return (
     <section
       id="ai-office"
-      className="scroll-mt-16 bg-[var(--color-surface-dark)] py-[var(--space-section)] text-[var(--color-text-inverse)] lg:py-[var(--space-section-lg)]"
+      className="scroll-mt-16 bg-[var(--color-surface-dark)] py-[var(--space-section-compact)] text-[var(--color-text-inverse)] lg:py-[var(--space-section-lg)]"
     >
       <div className="mx-auto max-w-7xl px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
         <header className="max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-primary)]">
-            Hồ sơ tư vấn kỹ thuật
+            AI tư vấn 24/7
           </p>
-          <h2 className="mt-[var(--space-inline)] text-3xl font-bold sm:text-4xl">
-            Chuẩn bị dữ liệu khảo sát theo từng bước
+          <h2 className="mt-[var(--space-inline)] text-2xl font-bold sm:text-4xl">
+            Trò chuyện cùng trợ lý Đại Hải Phát
           </h2>
           <p className="mt-[var(--space-stack)] leading-7 text-[var(--color-text-dark-muted)]">
-            Mỗi bước thu thập đúng một dữ liệu. Khoảng chi phí và phương án kỹ thuật
-            chỉ được xác nhận khi đủ dữ liệu và hoàn tất khảo sát.
+            Cứ kể nhu cầu như đang nhắn với một người bạn. Trợ lý AI sẽ hỏi ngắn,
+            gợi ý lựa chọn phù hợp và lập hồ sơ để kỹ sư tiếp tục tư vấn.
           </p>
-          <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-subtle)]">
+          <details className="mt-[var(--space-control)] text-sm text-[var(--color-text-dark-subtle)] lg:hidden">
+            <summary className="min-h-11 cursor-pointer py-[var(--space-control)] font-semibold">
+              Cách lưu và sử dụng dữ liệu
+            </summary>
+            <p className="leading-6">
+              Bản nháp tự lưu tối đa {AI_DRAFT_RETENTION_DAYS} ngày trên thiết bị này.
+              Thông tin chỉ được gửi tới đội ngũ khi anh/chị đồng ý bàn giao hồ sơ.
+            </p>
+          </details>
+          <p className="mt-[var(--space-control)] hidden text-sm leading-6 text-[var(--color-text-dark-subtle)] lg:block">
             Bản nháp tự lưu tối đa {AI_DRAFT_RETENTION_DAYS} ngày trên thiết bị này.
             Thông tin chưa tự động gửi tới kỹ sư hoặc CRM.
           </p>
@@ -128,11 +146,14 @@ export function AIOfficeSection() {
           ) : null}
         </header>
 
-        <div className="mt-[var(--space-section-compact)] grid gap-[var(--space-stack)] lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="mt-[var(--space-stack)] grid gap-[var(--space-stack)] lg:mt-[var(--space-section-compact)] lg:grid-cols-[1.15fr_0.85fr]">
           <ConversationPanel
             session={session}
             question={question}
             error={error}
+            analysis={analysis}
+            analysisError={analysisError}
+            analysisStatus={analysisStatus}
             isProcessingImages={isProcessingImages}
             onAnswer={handleAnswer}
             onImages={addImages}
@@ -143,7 +164,10 @@ export function AIOfficeSection() {
             handoffStatus={handoffStatus}
             onSubmitHandoff={submitHandoff}
           />
-          <EngineeringWorkspace session={session} />
+          <div className="hidden lg:block">
+            <EngineeringWorkspace session={session} />
+          </div>
+          <MobileProjectSummary session={session} />
         </div>
         <ProjectAnalysisPanel
           analysis={analysis}
@@ -166,6 +190,9 @@ interface ConversationPanelProps {
   session: ConversationSession;
   question: ConversationQuestion | null;
   error: string | null;
+  analysis: ProjectAnalysisResponse | null;
+  analysisError: string | null;
+  analysisStatus: AnalysisStatus;
   isProcessingImages: boolean;
   onAnswer: (value: string) => void;
   onImages: (files: FileList | null) => void;
@@ -181,6 +208,9 @@ function ConversationPanel({
   session,
   question,
   error,
+  analysis,
+  analysisError,
+  analysisStatus,
   isProcessingImages,
   onAnswer,
   onImages,
@@ -191,24 +221,27 @@ function ConversationPanel({
   handoffStatus,
   onSubmitHandoff,
 }: ConversationPanelProps) {
+  const history = getConversationHistory(session);
+  const recentHistory = history.slice(-3);
+  const earlierHistory = history.slice(0, -3);
+
   return (
-    <div className="rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]">
+    <div className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)]">
       <div className="flex items-center justify-between gap-[var(--space-stack)]">
-        <div className="flex items-center gap-[var(--space-inline)]">
-          <span className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)]">
-            <Bot aria-hidden="true" />
-          </span>
+        <div className="flex min-w-0 items-center gap-[var(--space-inline)] p-[var(--space-stack)] sm:p-[var(--space-card)]">
+          <BotAvatar />
           <div>
-            <p className="font-bold">Trợ lý lập hồ sơ Đại Hải Phát</p>
-            <p className="text-sm text-[var(--color-primary-soft-text)]">
-              {getStateLabel(session.state)}
+            <p className="truncate font-bold">AI tư vấn Đại Hải Phát</p>
+            <p className="flex items-center gap-[var(--space-2)] text-xs text-[var(--color-text-dark-muted)]">
+              <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" aria-hidden="true" />
+              Đang hỗ trợ · {getStateLabel(session.state)}
             </p>
           </div>
         </div>
         <button
           type="button"
           onClick={onReset}
-          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-[var(--color-text-dark-muted)] transition hover:text-[var(--color-text-inverse)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+          className="mr-[var(--space-stack)] flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-dark)] text-[var(--color-text-dark-muted)] transition hover:text-[var(--color-text-inverse)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] sm:mr-[var(--space-card)]"
           aria-label="Xóa hồ sơ đã lưu và bắt đầu lại"
         >
           <RotateCcw className="h-5 w-5" aria-hidden="true" />
@@ -216,28 +249,66 @@ function ConversationPanel({
       </div>
 
       {session.state === "DONE" ? (
-        <CompletionState
-          session={session}
-          handoff={handoff}
-          error={handoffError}
-          status={handoffStatus}
-          onSubmit={onSubmitHandoff}
-        />
+        <div className="border-t border-[var(--color-border-dark)] p-[var(--space-stack)] sm:p-[var(--space-card)]">
+          <CompletionState
+            session={session}
+            handoff={handoff}
+            error={handoffError}
+            status={handoffStatus}
+            onSubmit={onSubmitHandoff}
+          />
+        </div>
       ) : question ? (
-        <div className="mt-[var(--space-card-lg)]">
-          <div className="rounded-[var(--radius-lg)] bg-[var(--color-surface-dark-muted)] p-[var(--space-card)]">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-              Tiến độ hồ sơ {session.proposal.progress}%
-            </p>
-            <h3 className="mt-[var(--space-control)] text-xl font-bold leading-7">
-              {question.prompt}
-            </h3>
-            <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
-              {question.supportingText}
-            </p>
+        <div className="border-t border-[var(--color-border-dark)] p-[var(--space-stack)] sm:p-[var(--space-card)]">
+          <div aria-label="Nội dung trò chuyện" className="space-y-[var(--space-stack)]">
+            {!history.length ? (
+              <AssistantBubble>
+                <p className="text-sm leading-6 text-[var(--color-text-dark-muted)]">
+                  Chào anh/chị! Mình sẽ hỏi từng ý thật ngắn. Anh/chị có thể gõ tự
+                  nhiên hoặc chạm vào một gợi ý có sẵn.
+                </p>
+              </AssistantBubble>
+            ) : null}
+
+            {earlierHistory.length ? (
+              <details className="rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-control)]">
+                <summary className="min-h-11 cursor-pointer py-[var(--space-control)] text-sm font-semibold text-[var(--color-text-dark-muted)]">
+                  Xem {earlierHistory.length} câu trả lời trước
+                </summary>
+                <div className="space-y-[var(--space-control)] pb-[var(--space-stack)]">
+                  {earlierHistory.map((item) => (
+                    <UserBubble key={item.field} item={item} />
+                  ))}
+                </div>
+              </details>
+            ) : null}
+
+            {recentHistory.map((item) => (
+              <UserBubble key={item.field} item={item} />
+            ))}
+
+            <ChatAnalysisMessage
+              analysis={analysis}
+              error={analysisError}
+              status={analysisStatus}
+            />
+
+            <AssistantBubble>
+              <p className="text-xs font-bold text-[var(--color-primary-soft-text)]">
+                Hồ sơ {session.proposal.progress}%
+              </p>
+              <h3 className="mt-[var(--space-control)] text-lg font-bold leading-7">
+                {history.length ? "Mình đã ghi nhận. " : ""}
+                {question.prompt}
+              </h3>
+              <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+                {question.supportingText}
+              </p>
+            </AssistantBubble>
           </div>
 
           <QuestionInput
+            key={question.id}
             question={question}
             isProcessingImages={isProcessingImages}
             onAnswer={onAnswer}
@@ -256,7 +327,7 @@ function ConversationPanel({
       ) : (
         <div
           role="alert"
-          className="mt-[var(--space-card-lg)] rounded-[var(--radius-lg)] border border-[var(--color-danger)] p-[var(--space-card)]"
+          className="m-[var(--space-stack)] rounded-[var(--radius-lg)] border border-[var(--color-danger)] p-[var(--space-card)]"
         >
           <p className="font-bold">Phiên tư vấn không thể tiếp tục.</p>
           <button type="button" onClick={onReset} className="mt-[var(--space-stack)] underline">
@@ -265,6 +336,101 @@ function ConversationPanel({
         </div>
       )}
     </div>
+  );
+}
+
+function BotAvatar() {
+  return (
+    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)]">
+      <Bot className="h-5 w-5" aria-hidden="true" />
+    </span>
+  );
+}
+
+function AssistantBubble({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex items-end gap-[var(--space-control)]">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)]">
+        <Bot className="h-4 w-4" aria-hidden="true" />
+      </span>
+      <div className="max-w-xl rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-muted)] p-[var(--space-stack)]">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function UserBubble({ item }: { item: ConversationHistoryItem }) {
+  return (
+    <div className="flex justify-end">
+      <div className="max-w-sm rounded-[var(--radius-lg)] rounded-br-[var(--radius-sm)] bg-[var(--color-primary)] px-[var(--space-stack)] py-[var(--space-control)] text-[var(--color-text-inverse)]">
+        <p className="text-xs font-semibold opacity-80">{item.label}</p>
+        <p className="break-words text-sm font-semibold leading-6">{item.value}</p>
+      </div>
+    </div>
+  );
+}
+
+function ChatAnalysisMessage({
+  analysis,
+  error,
+  status,
+}: {
+  analysis: ProjectAnalysisResponse | null;
+  error: string | null;
+  status: AnalysisStatus;
+}) {
+  if (status === "idle") return null;
+
+  if (status === "loading") {
+    return (
+      <AssistantBubble>
+        <p className="text-sm leading-6 text-[var(--color-text-dark-muted)]">
+          Mình đang đối chiếu câu trả lời để đề xuất phương án phù hợp. Anh/chị có
+          thể tiếp tục chọn lịch khảo sát trong lúc chờ.
+        </p>
+      </AssistantBubble>
+    );
+  }
+
+  if (status === "error" || !analysis) {
+    return (
+      <AssistantBubble>
+        <p className="text-sm leading-6 text-[var(--color-text-dark-muted)]">
+          Mình chưa thể tạo gợi ý AI lúc này. Hồ sơ vẫn được giữ nguyên để kỹ sư tư
+          vấn tiếp{error ? "." : ""}
+        </p>
+      </AssistantBubble>
+    );
+  }
+
+  return (
+    <AssistantBubble>
+      <p className="text-xs font-bold text-[var(--color-primary-soft-text)]">
+        Gợi ý từ Gemini
+      </p>
+      <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
+        {analysis.recommendation}
+      </p>
+      {analysis.options.length ? (
+        <ul className="mt-[var(--space-control)] space-y-[var(--space-control)]">
+          {analysis.options.slice(0, 2).map((option) => (
+            <li
+              key={option.name}
+              className="rounded-[var(--radius-md)] border border-[var(--color-border-dark)] p-[var(--space-control)] text-sm"
+            >
+              <strong>{option.name}</strong>
+              <span className="mt-[var(--space-2)] block leading-5 text-[var(--color-text-dark-muted)]">
+                {option.suitableWhen}
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      <p className="mt-[var(--space-control)] text-xs leading-5 text-[var(--color-text-dark-subtle)]">
+        Đây là gợi ý sơ bộ; kỹ sư cần khảo sát trước khi xác nhận phương án.
+      </p>
+    </AssistantBubble>
   );
 }
 
@@ -281,19 +447,76 @@ function QuestionInput({
   onImages: (files: FileList | null) => void;
   onDeferImages: () => void;
 }) {
+  const [interpretationError, setInterpretationError] = useState<string | null>(null);
+
   if (question.inputType === "choice") {
+    const handleChoiceMessage = (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      const message = String(form.get("answer") ?? "");
+      const resolvedChoice = resolveConversationChoice(question, message);
+      if (!resolvedChoice) {
+        setInterpretationError(
+          "Mình chưa chắc đã hiểu đúng. Anh/chị thử nói rõ hơn hoặc chạm một gợi ý gần nhất nhé.",
+        );
+        return;
+      }
+
+      setInterpretationError(null);
+      event.currentTarget.reset();
+      onAnswer(resolvedChoice);
+    };
+
     return (
-      <div className="mt-[var(--space-stack)] grid gap-[var(--space-control)] sm:grid-cols-2">
-        {question.options?.map((item) => (
-          <button
-            key={item.value}
-            type="button"
-            onClick={() => onAnswer(item.value)}
-            className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] px-[var(--space-stack)] py-[var(--space-control)] text-left font-semibold transition hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
-          >
-            {item.label}
-          </button>
-        ))}
+      <div className="mt-[var(--space-stack)]">
+        <p className="text-xs font-semibold text-[var(--color-text-dark-muted)]">
+          Gợi ý nhanh
+        </p>
+        <div className="mt-[var(--space-control)] flex flex-wrap gap-[var(--space-control)]">
+          {question.options?.map((item) => (
+            <button
+              key={item.value}
+              type="button"
+              onClick={() => onAnswer(item.value)}
+              className="min-h-[var(--control-min-size)] rounded-full border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] px-[var(--space-stack)] py-[var(--space-control)] text-sm font-semibold transition hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+        <form onSubmit={handleChoiceMessage} className="mt-[var(--space-stack)]">
+          <label htmlFor={`${question.id}-message`} className="sr-only">
+            Nhắn câu trả lời cho trợ lý AI
+          </label>
+          <div className="flex items-center gap-[var(--space-control)] rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-muted)] p-[var(--space-2)] focus-within:border-[var(--color-primary)] focus-within:ring-2 focus-within:ring-[var(--color-primary-soft)]">
+            <input
+              id={`${question.id}-message`}
+              name="answer"
+              type="text"
+              required
+              autoComplete="off"
+              aria-describedby={interpretationError ? `${question.id}-interpretation-error` : undefined}
+              className="min-h-11 min-w-0 flex-1 bg-transparent px-[var(--space-control)] text-[var(--color-text-inverse)] outline-none placeholder:text-[var(--color-text-dark-subtle)]"
+              placeholder="Nhắn câu trả lời của anh/chị..."
+            />
+            <button
+              type="submit"
+              aria-label="Gửi câu trả lời"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)] transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+            >
+              <SendHorizontal className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
+          {interpretationError ? (
+            <p
+              id={`${question.id}-interpretation-error`}
+              role="status"
+              className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-primary-soft-text)]"
+            >
+              {interpretationError}
+            </p>
+          ) : null}
+        </form>
       </div>
     );
   }
@@ -301,7 +524,7 @@ function QuestionInput({
   if (question.inputType === "file") {
     return (
       <div className="mt-[var(--space-stack)] grid gap-[var(--space-control)] sm:grid-cols-2">
-        <label className="flex min-h-[var(--control-min-size)] cursor-pointer items-center justify-center gap-[var(--space-inline)] rounded-[var(--radius-md)] border border-dashed border-[var(--color-primary)] bg-[var(--color-primary-soft)] px-[var(--space-stack)] py-[var(--space-card)] font-bold focus-within:ring-2 focus-within:ring-[var(--color-primary)]">
+        <label className="flex min-h-[var(--control-min-size)] cursor-pointer items-center justify-center gap-[var(--space-inline)] rounded-[var(--radius-lg)] border border-dashed border-[var(--color-primary)] bg-[var(--color-primary-soft)] px-[var(--space-stack)] py-[var(--space-stack)] font-bold focus-within:ring-2 focus-within:ring-[var(--color-primary)]">
           <ImagePlus className="h-5 w-5" aria-hidden="true" />
           {isProcessingImages ? "Đang ghi nhận ảnh" : "Chọn ảnh hiện trạng"}
           <input
@@ -317,7 +540,7 @@ function QuestionInput({
           type="button"
           disabled={isProcessingImages}
           onClick={onDeferImages}
-          className="flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-inline)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-stack)] py-[var(--space-control)] text-left font-semibold text-[var(--color-text-inverse)] transition-colors hover:border-[var(--color-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] disabled:cursor-wait disabled:opacity-60"
+          className="flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-inline)] rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] px-[var(--space-stack)] py-[var(--space-stack)] text-left font-semibold text-[var(--color-text-inverse)] transition-colors hover:border-[var(--color-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] disabled:cursor-wait disabled:opacity-60"
         >
           <Clock3 className="h-5 w-5 shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
           <span>
@@ -342,38 +565,40 @@ function QuestionInput({
       <label htmlFor={question.id} className="sr-only">
         {question.prompt}
       </label>
-      <input
-        key={question.id}
-        id={question.id}
-        name="answer"
-        type={question.inputType}
-        required={question.required}
-        autoComplete={AUTO_COMPLETE_BY_FIELD[question.field] ?? "off"}
-        className="min-h-[var(--control-min-size)] w-full rounded-[var(--radius-md)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-muted)] px-[var(--space-stack)] text-[var(--color-text-inverse)] outline-none placeholder:text-[var(--color-text-dark-subtle)] focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-soft)]"
-        placeholder={question.field === "dimensions" ? "Ví dụ: rộng 4 m × cao 2,6 m" : "Nhập thông tin"}
-      />
-      <div className="mt-[var(--space-control)] grid gap-[var(--space-control)] sm:grid-cols-2">
+      <div className="flex items-center gap-[var(--space-control)] rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-muted)] p-[var(--space-2)] focus-within:border-[var(--color-primary)] focus-within:ring-2 focus-within:ring-[var(--color-primary-soft)]">
+        <input
+          id={question.id}
+          name="answer"
+          type={question.inputType}
+          required={question.required}
+          autoComplete={AUTO_COMPLETE_BY_FIELD[question.field] ?? "off"}
+          className="min-h-11 min-w-0 flex-1 bg-transparent px-[var(--space-control)] text-[var(--color-text-inverse)] outline-none placeholder:text-[var(--color-text-dark-subtle)]"
+          placeholder={question.field === "dimensions" ? "Ví dụ: rộng 4 m × cao 2,6 m" : "Nhắn câu trả lời..."}
+        />
         <button
           type="submit"
-          className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-stack)] font-bold transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface-dark)]"
+          aria-label="Gửi câu trả lời"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-text-inverse)] transition hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
         >
-          Ghi nhận dữ liệu
+          <SendHorizontal className="h-5 w-5" aria-hidden="true" />
         </button>
+      </div>
+      <div className="mt-[var(--space-control)] flex flex-wrap gap-[var(--space-control)]">
         {question.allowAssistedMeasurement ? (
           <button
             type="button"
             onClick={() => onAnswer("Cần khảo sát đo đạc")}
-            className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-stack)] font-semibold"
+            className="min-h-[var(--control-min-size)] rounded-full border border-[var(--color-border-dark)] px-[var(--space-stack)] text-sm font-semibold"
           >
-            Cần hỗ trợ đo
+            Mình cần hỗ trợ đo
           </button>
         ) : !question.required ? (
           <button
             type="button"
             onClick={() => onAnswer("")}
-            className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-stack)] font-semibold"
+            className="min-h-[var(--control-min-size)] rounded-full border border-[var(--color-border-dark)] px-[var(--space-stack)] text-sm font-semibold"
           >
-            Bỏ qua
+            Bỏ qua bước này
           </button>
         ) : null}
       </div>
@@ -584,6 +809,48 @@ function CompletionState({
         </div>
       ) : null}
     </div>
+  );
+}
+
+function MobileProjectSummary({ session }: { session: ConversationSession }) {
+  return (
+    <details className="group rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] lg:hidden">
+      <summary className="flex min-h-[var(--control-min-size)] cursor-pointer list-none items-center justify-between gap-[var(--space-stack)] px-[var(--space-stack)] py-[var(--space-control)] marker:content-none">
+        <span>
+          <span className="block text-sm font-bold">Hồ sơ đang lập</span>
+          <span className="block text-xs text-[var(--color-text-dark-muted)]">
+            Đầy đủ {session.confidence}% · Tiến độ {session.proposal.progress}%
+          </span>
+        </span>
+        <ChevronDown
+          className="h-5 w-5 shrink-0 text-[var(--color-primary)] transition-transform group-open:rotate-180"
+          aria-hidden="true"
+        />
+      </summary>
+      <div className="border-t border-[var(--color-border-dark)] p-[var(--space-stack)]">
+        <div
+          className="h-2 overflow-hidden rounded-full bg-[var(--color-surface-dark-muted)]"
+          role="progressbar"
+          aria-label="Tiến độ phương án"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={session.proposal.progress}
+        >
+          <div
+            className="h-full rounded-full bg-[var(--color-primary)] transition-[width] duration-300"
+            style={{ width: `${session.proposal.progress}%` }}
+          />
+        </div>
+        <div className="mt-[var(--space-stack)]">
+          <MemorySummary session={session} />
+        </div>
+        <p className="mt-[var(--space-control)] text-xs leading-5 text-[var(--color-text-dark-subtle)]">
+          {session.proposal.missing.length
+            ? `Có thể bổ sung sau: ${session.proposal.missing.join(", ")}.`
+            : "Dữ liệu khách hàng đã đủ; kỹ sư vẫn cần khảo sát để xác minh kỹ thuật."}
+        </p>
+      </div>
+    </details>
   );
 }
 

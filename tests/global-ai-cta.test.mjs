@@ -24,6 +24,9 @@ test("makes the AI intake the primary global conversion path", async () => {
   assert.match(floatingCta, /onClick=\{\(\) => setOpen\(false\)\}/);
   assert.match(floatingCta, /bg-\[var\(--color-primary\)\]/);
   assert.match(floatingCta, /mobile-ai-attention/);
+  assert.match(floatingCta, /isMobileOfficeVisible/);
+  assert.match(floatingCta, /document\.getElementById\("ai-office"\)/);
+  assert.match(floatingCta, /if \(isMobileOfficeVisible\) return null/);
   assert.match(globalStyles, /@keyframes mobile-ai-attention/);
   assert.match(globalStyles, /animation: mobile-ai-attention[^;]* 2 both/);
   assert.match(
