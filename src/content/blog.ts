@@ -3,7 +3,7 @@ import type { BlogPost } from "@/types/content";
 export const ARTICLES: BlogPost[] = [
   {
     id: 1,
-    slug: "giai-phap-thiet-ke-tu-quan-ao-gỗ-mdf-melamine",
+    slug: "giai-phap-thiet-ke-tu-quan-ao-go-mdf-melamine",
     aiService: "Nội thất",
     title: "Checklist thiết kế tủ quần áo MDF và cánh kính trước khảo sát",
     category: "Nội thất lưu trữ",
@@ -20,7 +20,7 @@ export const ARTICLES: BlogPost[] = [
   },
   {
     id: 2,
-    slug: "mau-giuong-ngu-khung-thep-gỗ-mdf-melamine",
+    slug: "mau-giuong-ngu-khung-thep-go-mdf-melamine",
     aiService: "Nội thất",
     title: "Dữ liệu cần có trước khi thiết kế giường khung thép kết hợp MDF",
     category: "Nội thất phòng ngủ",
