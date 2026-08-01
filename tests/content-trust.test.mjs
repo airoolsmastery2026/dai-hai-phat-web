@@ -184,6 +184,29 @@ test("explains CRM consent and makes privacy information reachable", async () =>
   assert.match(sitemap, /`\$\{baseUrl\}\/privacy`/);
 });
 
+test("lets customers defer project photos without hiding the missing evidence", async () => {
+  const aiOffice = await readFile(
+    new URL("../src/components/sections/AIOfficeSection.tsx", import.meta.url),
+    "utf8",
+  );
+  const hook = await readFile(
+    new URL("../src/hooks/useAI.ts", import.meta.url),
+    "utf8",
+  );
+  const engine = await readFile(
+    new URL("../src/lib/ai/index.ts", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(aiOffice, /Tiếp tục, bổ sung ảnh sau/);
+  assert.match(aiOffice, /Có thể gửi qua Zalo hoặc khi kỹ sư liên hệ/);
+  assert.match(aiOffice, /onDeferImages=\{deferImages\}/);
+  assert.match(hook, /deferImageCollection/);
+  assert.match(engine, /imagesDeferred/);
+  assert.match(engine, /Ảnh hiện trạng: sẽ bổ sung sau/);
+  assert.match(engine, /proposal\.missing|REQUIRED_MEMORY/);
+});
+
 test("preserves the selected service when customers enter the AI intake", async () => {
   const services = await readFile(
     new URL("../src/content/services.ts", import.meta.url),

@@ -123,7 +123,7 @@ export function parseCRMHandoffRequest(value: unknown): CRMHandoffRequest {
   if (
     typeof imageCount !== "number" ||
     !Number.isInteger(imageCount) ||
-    imageCount < 1 ||
+    imageCount < 0 ||
     imageCount > 5
   ) {
     throw new CRMHandoffValidationError("Số lượng ảnh hiện trạng không hợp lệ.");
@@ -233,6 +233,9 @@ export function buildManualHandoffSummary(
   session: ConversationSession,
 ): string {
   const handoff = createCRMHandoffRequest(session);
+  const imageSummary = handoff.project.imageCount
+    ? `${handoff.project.imageCount} ảnh (gửi riêng khi trao đổi)`
+    : "Chưa có — khách sẽ bổ sung sau";
   const optionalContact = [
     handoff.contact.email ? `- Email: ${handoff.contact.email}` : null,
     handoff.contact.zalo ? `- Zalo: ${handoff.contact.zalo}` : null,
@@ -255,7 +258,7 @@ export function buildManualHandoffSummary(
     `- Ưu tiên chính: ${handoff.project.priority}`,
     `- Khung khảo sát: ${handoff.project.surveyWindow}`,
     `- Hồ sơ cần nhận: ${handoff.project.quoteRequest}`,
-    `- Ảnh hiện trạng: ${handoff.project.imageCount} ảnh (gửi riêng khi trao đổi)`,
+    `- Ảnh hiện trạng: ${imageSummary}`,
     "",
     "Thông tin liên hệ",
     `- Họ tên: ${handoff.contact.name}`,

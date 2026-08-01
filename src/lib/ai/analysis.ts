@@ -162,7 +162,7 @@ export function parseProjectAnalysisRequest(
   if (
     typeof imageCount !== "number" ||
     !Number.isInteger(imageCount) ||
-    imageCount < 1 ||
+    imageCount < 0 ||
     imageCount > 5
   ) {
     throw new ProjectAnalysisValidationError(
@@ -230,6 +230,7 @@ export function buildProjectAnalysisPrompt(
     "Không yêu cầu hoặc suy đoán tên, số điện thoại, email, Zalo hay địa chỉ khảo sát chi tiết.",
     "options chỉ gồm tối đa hai hướng tiếp cận có cơ sở trong dữ liệu; nếu evidence còn thiếu, nêu rõ giới hạn thay vì đoán.",
     "surveyChecks phải là các điểm kỹ sư cần đo hoặc xác minh trực tiếp tại công trình.",
+    "Khi imageCount bằng 0, phải nêu rõ ảnh hiện trạng chưa được cung cấp trong limitations và yêu cầu bổ sung ảnh hoặc xác minh khi khảo sát; không suy đoán hiện trạng.",
     "DỮ LIỆU:",
     JSON.stringify(context),
   ].join("\n");

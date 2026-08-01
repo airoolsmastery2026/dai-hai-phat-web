@@ -60,6 +60,7 @@ export interface ProjectMemory {
   projectType?: string;
   location?: string;
   images: StoredImage[];
+  imagesDeferred?: boolean;
   dimensions?: string;
   style?: string;
   material?: string;
@@ -187,9 +188,10 @@ const QUESTIONS: Partial<Record<ConversationState, ConversationQuestion>> = {
     state: "IMAGE_COLLECTION",
     field: "images",
     prompt: "Ảnh hiện trạng nào thể hiện rõ khu vực thi công?",
-    supportingText: "Tải tối đa 5 ảnh JPG, PNG hoặc WebP; mỗi ảnh không quá 10 MB.",
+    supportingText:
+      "Tải tối đa 5 ảnh JPG, PNG hoặc WebP; nếu chưa có ảnh, anh/chị có thể tiếp tục và bổ sung sau.",
     inputType: "file",
-    required: true,
+    required: false,
   },
   SIZE_COLLECTION: {
     id: "dimensions",
@@ -522,6 +524,13 @@ function hasMemoryValue(memory: ProjectMemory, field: MemoryField): boolean {
   return Array.isArray(value) ? value.length > 0 : typeof value === "string" && value.trim().length > 0;
 }
 
+function hasCollectionResponse(memory: ProjectMemory, field: MemoryField): boolean {
+  if (field === "images") {
+    return memory.images.length > 0 || memory.imagesDeferred === true;
+  }
+  return hasMemoryValue(memory, field);
+}
+
 function calculateConfidence(memory: ProjectMemory): number {
   const completed = REQUIRED_MEMORY.reduce(
     (score, item) => score + (hasMemoryValue(memory, item.field) ? 7 : 0),
@@ -569,6 +578,7 @@ function buildProposal(memory: ProjectMemory, state: ConversationState): Proposa
     memory.timeline && `Triển khai: ${memory.timeline}`,
     memory.priority && `Ưu tiên: ${memory.priority}`,
     memory.images.length > 0 && `Ảnh hiện trạng: ${memory.images.length} ảnh`,
+    memory.imagesDeferred && "Ảnh hiện trạng: sẽ bổ sung sau",
   ].filter((fact): fact is string => Boolean(fact));
 
   const missing = REQUIRED_MEMORY.filter(({ field }) => !hasMemoryValue(memory, field)).map(
@@ -613,7 +623,9 @@ function applyMemoryValue(
   field: MemoryField,
   value: string | StoredImage[],
 ): ProjectMemory {
-  if (field === "images") return { ...memory, images: value as StoredImage[] };
+  if (field === "images") {
+    return { ...memory, images: value as StoredImage[], imagesDeferred: false };
+  }
   return { ...memory, [field]: (value as string).trim() };
 }
 
@@ -640,7 +652,10 @@ function sanitizeMemory(value: Partial<ProjectMemory>): ProjectMemory {
         )
         .slice(0, 5)
     : [];
-  const sanitized: ProjectMemory = { images };
+  const sanitized: ProjectMemory = {
+    images,
+    imagesDeferred: images.length === 0 && value.imagesDeferred === true,
+  };
 
   STRING_MEMORY_FIELDS.forEach((field) => {
     const fieldValue = value[field];
@@ -666,7 +681,8 @@ function getSafeRestoredState(
   const requestedIndex = CONVERSATION_STATES.indexOf(requestedState);
   const incomplete = REQUIRED_STATE_BY_FIELD.find(
     ({ field, state }) =>
-      !hasMemoryValue(memory, field) && requestedIndex > CONVERSATION_STATES.indexOf(state),
+      !hasCollectionResponse(memory, field) &&
+      requestedIndex > CONVERSATION_STATES.indexOf(state),
   );
   if (incomplete) return incomplete.state;
   if (
@@ -804,6 +820,25 @@ export function answerConversation(
   return enrichSession(
     question.field === "intentGroup" ? withAnswer : advanceAfterAnswer(withAnswer),
   );
+}
+
+export function deferImageCollection(
+  session: ConversationSession,
+): ConversationSession {
+  const question = getConversationQuestion(session);
+  if (session.state !== "IMAGE_COLLECTION" || question?.field !== "images") {
+    throw new Error("Chỉ có thể bổ sung ảnh sau tại bước ảnh hiện trạng.");
+  }
+
+  const deferred: ConversationSession = {
+    ...session,
+    memory: {
+      ...session.memory,
+      images: [],
+      imagesDeferred: true,
+    },
+  };
+  return enrichSession(advanceAfterAnswer(deferred));
 }
 
 export function restoreAIConversation(serialized: string | null): ConversationSession {

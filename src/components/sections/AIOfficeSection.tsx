@@ -4,6 +4,7 @@ import {
   Bot,
   Check,
   ClipboardList,
+  Clock3,
   Gauge,
   ImagePlus,
   MemoryStick,
@@ -72,6 +73,7 @@ export function AIOfficeSection() {
     handoffStatus,
     answer,
     addImages,
+    deferImages,
     retryEvidence,
     retryAnalysis,
     submitHandoff,
@@ -134,6 +136,7 @@ export function AIOfficeSection() {
             isProcessingImages={isProcessingImages}
             onAnswer={handleAnswer}
             onImages={addImages}
+            onDeferImages={deferImages}
             onReset={reset}
             handoff={handoff}
             handoffError={handoffError}
@@ -166,6 +169,7 @@ interface ConversationPanelProps {
   isProcessingImages: boolean;
   onAnswer: (value: string) => void;
   onImages: (files: FileList | null) => void;
+  onDeferImages: () => void;
   onReset: () => void;
   handoff: { leadId: string; receivedAt: string } | null;
   handoffError: string | null;
@@ -180,6 +184,7 @@ function ConversationPanel({
   isProcessingImages,
   onAnswer,
   onImages,
+  onDeferImages,
   onReset,
   handoff,
   handoffError,
@@ -237,6 +242,7 @@ function ConversationPanel({
             isProcessingImages={isProcessingImages}
             onAnswer={onAnswer}
             onImages={onImages}
+            onDeferImages={onDeferImages}
           />
           {error ? (
             <p
@@ -267,11 +273,13 @@ function QuestionInput({
   isProcessingImages,
   onAnswer,
   onImages,
+  onDeferImages,
 }: {
   question: ConversationQuestion;
   isProcessingImages: boolean;
   onAnswer: (value: string) => void;
   onImages: (files: FileList | null) => void;
+  onDeferImages: () => void;
 }) {
   if (question.inputType === "choice") {
     return (
@@ -292,19 +300,34 @@ function QuestionInput({
 
   if (question.inputType === "file") {
     return (
-      <label className="mt-[var(--space-stack)] flex min-h-[var(--control-min-size)] cursor-pointer items-center justify-center gap-[var(--space-inline)] rounded-[var(--radius-md)] border border-dashed border-[var(--color-primary)] bg-[var(--color-primary-soft)] px-[var(--space-stack)] py-[var(--space-card)] font-bold focus-within:ring-2 focus-within:ring-[var(--color-primary)]">
-        <ImagePlus className="h-5 w-5" aria-hidden="true" />
-        {isProcessingImages ? "Đang ghi nhận ảnh" : "Chọn ảnh hiện trạng"}
-        <input
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-          multiple
-          required
+      <div className="mt-[var(--space-stack)] grid gap-[var(--space-control)] sm:grid-cols-2">
+        <label className="flex min-h-[var(--control-min-size)] cursor-pointer items-center justify-center gap-[var(--space-inline)] rounded-[var(--radius-md)] border border-dashed border-[var(--color-primary)] bg-[var(--color-primary-soft)] px-[var(--space-stack)] py-[var(--space-card)] font-bold focus-within:ring-2 focus-within:ring-[var(--color-primary)]">
+          <ImagePlus className="h-5 w-5" aria-hidden="true" />
+          {isProcessingImages ? "Đang ghi nhận ảnh" : "Chọn ảnh hiện trạng"}
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+            disabled={isProcessingImages}
+            className="sr-only"
+            onChange={(event) => onImages(event.target.files)}
+          />
+        </label>
+        <button
+          type="button"
           disabled={isProcessingImages}
-          className="sr-only"
-          onChange={(event) => onImages(event.target.files)}
-        />
-      </label>
+          onClick={onDeferImages}
+          className="flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-inline)] rounded-[var(--radius-md)] border border-[var(--color-border-dark)] px-[var(--space-stack)] py-[var(--space-control)] text-left font-semibold text-[var(--color-text-inverse)] transition-colors hover:border-[var(--color-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] disabled:cursor-wait disabled:opacity-60"
+        >
+          <Clock3 className="h-5 w-5 shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
+          <span>
+            <span className="block">Tiếp tục, bổ sung ảnh sau</span>
+            <span className="block text-xs font-normal text-[var(--color-text-dark-muted)]">
+              Có thể gửi qua Zalo hoặc khi kỹ sư liên hệ
+            </span>
+          </span>
+        </button>
+      </div>
     );
   }
 
@@ -428,7 +451,9 @@ function CompletionState({
       </p>
       <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-subtle)]">
         Bản nháp trên thiết bị tự hết hạn sau {AI_DRAFT_RETENTION_DAYS} ngày.
-        Ảnh gốc vẫn ở thiết bị và không được gửi qua bước bàn giao này.
+        {session.memory.images.length
+          ? " Ảnh gốc vẫn ở thiết bị và không được gửi qua bước bàn giao này."
+          : " Ảnh hiện trạng chưa được cung cấp và có thể gửi bổ sung qua Zalo hoặc khi kỹ sư liên hệ."}
       </p>
 
       {status === "success" && handoff ? (
@@ -655,6 +680,7 @@ function MemorySummary({ session }: { session: ConversationSession }) {
     session.memory.location,
     session.memory.material,
     session.memory.images.length ? `${session.memory.images.length} ảnh hiện trạng` : undefined,
+    session.memory.imagesDeferred ? "Ảnh hiện trạng: bổ sung sau" : undefined,
   ].filter((value): value is string => Boolean(value));
 
   return values.length ? (

@@ -75,7 +75,7 @@ export function FloatingCta() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="ml-auto flex h-14 w-14 items-center justify-center rounded-[var(--radius-full)] bg-[var(--color-surface-dark)] text-white shadow-[var(--shadow-lg)] transition-transform duration-[var(--duration-fast)] hover:scale-105"
+        className="ml-auto flex h-14 w-14 items-center justify-center rounded-[var(--radius-full)] bg-[var(--color-primary)] text-[var(--color-text-inverse)] shadow-[var(--shadow-lg)] ring-2 ring-[var(--color-primary-soft)] transition-transform duration-[var(--duration-fast)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface-dark)] lg:bg-[var(--color-surface-dark)] lg:ring-0"
         aria-label={open ? "Đóng tư vấn và liên hệ nhanh" : "Mở tư vấn và liên hệ nhanh"}
         aria-expanded={open}
         aria-controls="quick-contact-actions"
@@ -83,7 +83,9 @@ export function FloatingCta() {
         {open ? (
           <X className="h-6 w-6" aria-hidden="true" />
         ) : (
-          <Bot className="h-6 w-6" aria-hidden="true" />
+          <span className="mobile-ai-attention" aria-hidden="true">
+            <Bot className="h-6 w-6" />
+          </span>
         )}
       </button>
     </div>

@@ -18,6 +18,7 @@ const {
   answerConversation,
   CONVERSATION_STATES,
   createAIConversation,
+  deferImageCollection,
   getConversationQuestion,
   restoreAIConversation,
 } = engine;
@@ -123,7 +124,7 @@ test("intent routing identifies every required intent without grouping the resul
   ].sort());
 });
 
-test("invalid or missing images cannot advance the session", () => {
+test("empty or invalid image uploads cannot advance the session", () => {
   let session = createAIConversation();
   for (const answer of collectionAnswers.slice(0, 5)) {
     session = answerConversation(session, answer);
@@ -145,6 +146,29 @@ test("invalid or missing images cannot advance the session", () => {
     /không đúng định dạng/,
   );
   assert.equal(session.state, "IMAGE_COLLECTION");
+});
+
+test("lets customers continue when images will be provided later", () => {
+  let session = createAIConversation();
+  for (const answer of collectionAnswers.slice(0, 5)) {
+    session = answerConversation(session, answer);
+  }
+
+  session = deferImageCollection(session);
+
+  assert.equal(session.state, "SIZE_COLLECTION");
+  assert.equal(session.memory.imagesDeferred, true);
+  assert.deepEqual(session.memory.images, []);
+  assert.ok(session.proposal.missing.includes("ảnh hiện trạng"));
+  assert.ok(session.proposal.facts.includes("Ảnh hiện trạng: sẽ bổ sung sau"));
+
+  const restored = restoreAIConversation(JSON.stringify(session));
+  assert.equal(restored.state, "SIZE_COLLECTION");
+  assert.equal(restored.memory.imagesDeferred, true);
+  assert.throws(
+    () => deferImageCollection(createAIConversation()),
+    /bước ảnh hiện trạng/,
+  );
 });
 
 test("untrusted choices and restored client state are validated", () => {
