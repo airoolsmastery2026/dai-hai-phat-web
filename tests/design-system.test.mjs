@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative, sep } from "node:path";
 import test from "node:test";
 
 const ROOT = process.cwd();
 
 function read(path) {
-  return readFileSync(join(ROOT, path), "utf8");
+  return readFileSync(join(ROOT, path), "utf8").replaceAll("\r\n", "\n");
 }
 
 function listCodeFiles(directory) {
@@ -95,21 +95,25 @@ test("components do not reintroduce legacy literal colors or broken CTA hashes",
 
   for (const path of sourceFiles) {
     const source = readFileSync(path, "utf8");
-    const relative = path.slice(ROOT.length + 1);
+    const repositoryPath = relative(ROOT, path).split(sep).join("/");
 
-    if (relative !== "src/app/layout.tsx") {
+    if (repositoryPath !== "src/app/layout.tsx") {
       assert.doesNotMatch(
         source,
         /#[0-9a-f]{3,8}\b/i,
-        `${relative} must use semantic color tokens`,
+        `${repositoryPath} must use semantic color tokens`,
       );
     }
 
-    assert.doesNotMatch(source, /#bao-gia/, `${relative} has a missing quote anchor`);
+    assert.doesNotMatch(
+      source,
+      /#bao-gia/,
+      `${repositoryPath} has a missing quote anchor`,
+    );
     assert.doesNotMatch(
       source,
       /href=["']#contact["']/,
-      `${relative} must navigate to /contact`,
+      `${repositoryPath} must navigate to /contact`,
     );
   }
 });
