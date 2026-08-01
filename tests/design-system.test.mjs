@@ -28,6 +28,8 @@ test("design foundation has one canonical contract", () => {
     "AGENTS.md",
     "CLAUDE.md",
     "GEMINI.md",
+    "postcss.config.js",
+    "tailwind.config.js",
   ]) {
     assert.equal(existsSync(join(ROOT, path)), true, `${path} must exist`);
   }
@@ -64,6 +66,19 @@ test("design foundation has one canonical contract", () => {
   ]) {
     assert.match(uiPrompt, new RegExp(required.replaceAll(".", "\\.")));
   }
+});
+
+test("Tailwind v3 remains connected to the production CSS pipeline", () => {
+  const postcss = read("postcss.config.js");
+  const tailwind = read("tailwind.config.js");
+  const packageJson = read("package.json");
+  const cssVerifier = read("scripts/verify-built-css.mjs");
+
+  assert.match(postcss, /tailwindcss:\s*\{\}/);
+  assert.match(postcss, /autoprefixer:\s*\{\}/);
+  assert.match(tailwind, /\.\/src\/\*\*\/\*\.\{js,ts,jsx,tsx,mdx\}/);
+  assert.match(packageJson, /next build && node scripts\/verify-built-css\.mjs/);
+  assert.match(cssVerifier, /Tailwind directives were emitted without PostCSS compilation/);
 });
 
 test("runtime exposes the required semantic tokens", () => {
