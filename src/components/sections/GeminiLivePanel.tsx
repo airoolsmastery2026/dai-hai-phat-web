@@ -342,7 +342,7 @@ export function GeminiLivePanel({ servicePreset }: GeminiLivePanelProps) {
   return (
     <section
       aria-labelledby="gemini-live-title"
-      className="bg-[var(--color-surface-dark)] pt-[var(--space-section-compact)] text-[var(--color-text-inverse)]"
+      className="hidden bg-[var(--color-surface-dark)] pt-[var(--space-section-compact)] text-[var(--color-text-inverse)] lg:block"
     >
       <div className="mx-auto max-w-7xl px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
         <div className="rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] p-[var(--space-card)] sm:p-[var(--space-card-lg)]">
