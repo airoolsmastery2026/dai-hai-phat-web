@@ -9,7 +9,7 @@ test("sitemap exposes canonical routes with freshness metadata", async () => {
 
   assert.match(source, /const lastModified = new Date\(\)/);
   assert.match(source, /url: baseUrl,/);
-  assert.match(source, /\/services\/\$\{service\.slug\}/);
+  assert.match(source, /\/services\/\$\{getPublicRouteSlug\(service\.slug\)\}/);
   assert.match(source, /\/blog\/\$\{article\.slug\}/);
   assert.ok(
     (source.match(/lastModified,/g) ?? []).length >= 9,

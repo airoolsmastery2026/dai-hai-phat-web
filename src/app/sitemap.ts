@@ -3,6 +3,7 @@ import { MetadataRoute } from "next";
 import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
 import { SERVICES } from "@/content/services";
+import { getPublicRouteSlug } from "@/lib/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = COMPANY_CONFIG.websiteUrl;
@@ -54,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = SERVICES.map((service) => ({
-    url: `${baseUrl}/services/${service.slug}`,
+    url: `${baseUrl}/services/${getPublicRouteSlug(service.slug)}`,
     lastModified,
     changeFrequency: "monthly",
     priority: 0.8,
