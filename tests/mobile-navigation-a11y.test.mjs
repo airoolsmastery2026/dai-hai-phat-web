@@ -24,3 +24,16 @@ test("keeps mobile navigation keyboard accessible", async () => {
   const closeHandlers = navigation.match(/onClick=\{\(\) => closeMenu\(\)\}/g) ?? [];
   assert.ok(closeHandlers.length >= 3, "All mobile navigation actions should close the menu");
 });
+
+test("keeps navigation text readable on its dark surface", async () => {
+  const navigation = await readFile(
+    new URL("../src/components/layout/SiteNavigation.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(navigation, /bg-\[var\(--color-surface-dark\)\]/);
+  assert.doesNotMatch(navigation, /bg-\[var\(--color-surface-dark\)\]\/95/);
+  assert.match(navigation, /font-black[^"]*text-\[var\(--color-text-inverse\)\]/);
+  assert.match(navigation, /font-bold text-\[var\(--color-text-inverse\)\]/);
+  assert.match(navigation, /text-\[var\(--color-text-dark-muted\)\][^"]*sm:text-xs/);
+});
