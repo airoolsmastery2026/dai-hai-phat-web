@@ -24,6 +24,7 @@ export const NAV_ITEMS = [
   { label: "Trang chủ", href: "/" },
   { label: "Dịch vụ", href: "/services" },
   { label: "AI tư vấn", href: "/#ai-office" },
+  { label: "AI phối cảnh", href: "/cong-cu/ai-phoi-canh" },
   { label: "Công trình", href: "/gallery" },
   { label: "Checklist", href: "/blog" },
   { label: "Liên hệ", href: "/contact" },
