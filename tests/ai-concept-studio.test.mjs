@@ -14,6 +14,10 @@ const routePath = new URL(
   "../src/app/api/ai/concept/route.ts",
   import.meta.url,
 );
+const configPath = new URL(
+  "../src/lib/ai/concept-studio.ts",
+  import.meta.url,
+);
 const themePath = new URL("../src/lib/theme.ts", import.meta.url);
 
 test("AI concept studio stays inside the Đại Hải Phát website", async () => {
@@ -45,10 +49,14 @@ test("native studio accepts two source images and creates four coordinated views
 });
 
 test("AI image generation is server-side, constrained and rate limited", async () => {
-  const source = await readFile(routePath, "utf8");
+  const [source, config] = await Promise.all([
+    readFile(routePath, "utf8"),
+    readFile(configPath, "utf8"),
+  ]);
 
   assert.match(source, /process\.env\.GEMINI_API_KEY/);
-  assert.match(source, /gemini-3-pro-image/);
+  assert.match(source, /AI_CONCEPT_MODEL/);
+  assert.match(config, /gemini-3-pro-image/);
   assert.match(source, /isSameOriginRequest/);
   assert.match(source, /consumeRateLimit/);
   assert.match(source, /MAX_IMAGE_BYTES/);
