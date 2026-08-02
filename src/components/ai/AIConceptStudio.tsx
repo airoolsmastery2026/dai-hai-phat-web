@@ -10,13 +10,8 @@ import {
   UploadCloud,
   WandSparkles,
 } from "lucide-react";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type ChangeEvent,
-} from "react";
+import NextImage from "next/image";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 
 import { Alert } from "@/components/ui/Alert";
 import { Card } from "@/components/ui/Card";
@@ -37,6 +32,11 @@ interface ViewResult {
 interface GeneratedImage {
   imageBase64: string;
   mimeType: string;
+}
+
+interface SourceImage {
+  file: File;
+  previewUrl: string;
 }
 
 interface OptimizedInputs {
@@ -77,7 +77,7 @@ async function loadBrowserImage(file: File): Promise<HTMLImageElement> {
 
   try {
     return await new Promise((resolve, reject) => {
-      const image = new Image();
+      const image = new window.Image();
       image.onload = () => resolve(image);
       image.onerror = () => reject(new Error("Không thể đọc tệp ảnh."));
       image.src = objectUrl;
@@ -115,8 +115,14 @@ async function optimizeImage(file: File): Promise<File> {
   const context = canvas.getContext("2d");
   if (!context) throw new Error("Trình duyệt không hỗ trợ xử lý ảnh.");
 
-  context.fillStyle = "#ffffff";
-  context.fillRect(0, 0, width, height);
+  const surfaceColor = window
+    .getComputedStyle(document.documentElement)
+    .getPropertyValue("--color-surface")
+    .trim();
+  if (surfaceColor) {
+    context.fillStyle = surfaceColor;
+    context.fillRect(0, 0, width, height);
+  }
   context.drawImage(image, 0, 0, width, height);
 
   let blob = await canvasToBlob(canvas, INITIAL_QUALITY);
@@ -157,15 +163,20 @@ function validateSourceFile(file: File): string | null {
   return null;
 }
 
+function downloadExtension(mimeType: string): string {
+  if (mimeType === "image/jpeg") return "jpg";
+  if (mimeType === "image/webp") return "webp";
+  return "png";
+}
+
 interface ImageInputProps {
   id: string;
   node: string;
   title: string;
   description: string;
-  file: File | null;
-  previewUrl: string | null;
+  source: SourceImage | null;
   disabled: boolean;
-  onChange: (file: File | null) => void;
+  onChange: (file: File) => void;
 }
 
 function ImageInput({
@@ -173,13 +184,13 @@ function ImageInput({
   node,
   title,
   description,
-  file,
-  previewUrl,
+  source,
   disabled,
   onChange,
 }: ImageInputProps) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.files?.[0] ?? null);
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) onChange(selectedFile);
     event.target.value = "";
   };
 
@@ -198,12 +209,15 @@ function ImageInput({
       </div>
 
       <div className="p-[var(--space-4)]">
-        <div className="aspect-video overflow-hidden rounded-[var(--radius-md)] border border-dashed border-[var(--color-border-strong)] bg-[var(--color-background)]">
-          {previewUrl ? (
-            <img
-              src={previewUrl}
+        <div className="relative aspect-video overflow-hidden rounded-[var(--radius-md)] border border-dashed border-[var(--color-border-strong)] bg-[var(--color-background)]">
+          {source ? (
+            <NextImage
+              src={source.previewUrl}
               alt={`Xem trước ${title.toLowerCase()}`}
-              className="h-full w-full object-cover"
+              fill
+              unoptimized
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
             />
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-[var(--space-2)] p-[var(--space-4)] text-center text-[var(--color-text-muted)]">
@@ -218,7 +232,7 @@ function ImageInput({
           className={`mt-[var(--space-4)] inline-flex min-h-[var(--control-min-size)] w-full cursor-pointer items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-4)] py-[var(--space-3)] text-sm font-bold text-[var(--color-primary)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)] focus-within:ring-2 focus-within:ring-[var(--color-focus)] focus-within:ring-offset-2 ${disabled ? "cursor-not-allowed opacity-60" : ""}`}
         >
           <UploadCloud className="h-5 w-5" aria-hidden="true" />
-          {file ? "Đổi ảnh" : "Chọn ảnh"}
+          {source ? "Đổi ảnh" : "Chọn ảnh"}
           <input
             id={id}
             type="file"
@@ -230,7 +244,7 @@ function ImageInput({
         </label>
 
         <p className="mt-[var(--space-2)] truncate text-xs text-[var(--color-text-subtle)]">
-          {file ? file.name : "JPG, PNG hoặc WEBP · tối đa 10 MB"}
+          {source ? source.file.name : "JPG, PNG hoặc WEBP · tối đa 10 MB"}
         </p>
       </div>
     </Card>
@@ -251,10 +265,10 @@ function ResultCard({ view, result, disabled, onRun }: ResultCardProps) {
       : null;
 
   const handleDownload = () => {
-    if (!imageUrl) return;
+    if (!imageUrl || !result.mimeType) return;
     const link = document.createElement("a");
     link.href = imageUrl;
-    link.download = `dai-hai-phat-${view.id}.png`;
+    link.download = `dai-hai-phat-${view.id}.${downloadExtension(result.mimeType)}`;
     link.click();
   };
 
@@ -292,14 +306,17 @@ function ResultCard({ view, result, disabled, onRun }: ResultCardProps) {
 
       <div className="p-[var(--space-4)]">
         <div
-          className="aspect-video overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)]"
+          className="relative aspect-video overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)]"
           aria-busy={result.status === "running" || undefined}
         >
           {imageUrl ? (
-            <img
+            <NextImage
               src={imageUrl}
               alt={`${view.title} do AI tạo`}
-              className="h-full w-full object-cover"
+              fill
+              unoptimized
+              sizes="(min-width: 1280px) 50vw, 100vw"
+              className="object-cover"
             />
           ) : result.status === "running" ? (
             <div className="flex h-full flex-col items-center justify-center gap-[var(--space-3)] text-[var(--color-primary)]">
@@ -346,78 +363,59 @@ function ResultCard({ view, result, disabled, onRun }: ResultCardProps) {
 }
 
 export function AIConceptStudio({ enabled }: AIConceptStudioProps) {
-  const [siteImage, setSiteImage] = useState<File | null>(null);
-  const [referenceImage, setReferenceImage] = useState<File | null>(null);
-  const [sitePreview, setSitePreview] = useState<string | null>(null);
-  const [referencePreview, setReferencePreview] = useState<string | null>(null);
+  const [siteSource, setSiteSource] = useState<SourceImage | null>(null);
+  const [referenceSource, setReferenceSource] =
+    useState<SourceImage | null>(null);
   const [brief, setBrief] = useState("");
   const [results, setResults] = useState(createInitialResults);
   const [busy, setBusy] = useState(false);
   const [globalError, setGlobalError] = useState<string | null>(null);
   const optimizedInputsRef = useRef<OptimizedInputs | null>(null);
+  const previewUrlsRef = useRef(new Set<string>());
 
   useEffect(() => {
-    if (!siteImage) {
-      setSitePreview(null);
-      return;
-    }
+    const previewUrls = previewUrlsRef.current;
+    return () => {
+      previewUrls.forEach((url) => URL.revokeObjectURL(url));
+      previewUrls.clear();
+    };
+  }, []);
 
-    const url = URL.createObjectURL(siteImage);
-    setSitePreview(url);
-    return () => URL.revokeObjectURL(url);
-  }, [siteImage]);
-
-  useEffect(() => {
-    if (!referenceImage) {
-      setReferencePreview(null);
-      return;
-    }
-
-    const url = URL.createObjectURL(referenceImage);
-    setReferencePreview(url);
-    return () => URL.revokeObjectURL(url);
-  }, [referenceImage]);
-
-  const resetOutputs = useCallback(() => {
+  const resetOutputs = () => {
     setResults(createInitialResults());
     optimizedInputsRef.current = null;
     setGlobalError(null);
-  }, []);
-
-  const selectSiteImage = (file: File | null) => {
-    if (file) {
-      const error = validateSourceFile(file);
-      if (error) {
-        setGlobalError(error);
-        return;
-      }
-    }
-    setSiteImage(file);
-    resetOutputs();
   };
 
-  const selectReferenceImage = (file: File | null) => {
-    if (file) {
-      const error = validateSourceFile(file);
-      if (error) {
-        setGlobalError(error);
-        return;
-      }
-    }
-    setReferenceImage(file);
-    resetOutputs();
-  };
-
-  const setViewResult = (
-    view: AIConceptView,
-    nextResult: ViewResult,
+  const replaceSource = (
+    file: File,
+    current: SourceImage | null,
+    setter: (source: SourceImage) => void,
   ) => {
+    const error = validateSourceFile(file);
+    if (error) {
+      setGlobalError(error);
+      return;
+    }
+
+    if (current) {
+      URL.revokeObjectURL(current.previewUrl);
+      previewUrlsRef.current.delete(current.previewUrl);
+    }
+
+    const previewUrl = URL.createObjectURL(file);
+    previewUrlsRef.current.add(previewUrl);
+    setter({ file, previewUrl });
+    resetOutputs();
+  };
+
+  const setViewResult = (view: AIConceptView, nextResult: ViewResult) => {
     setResults((current) => ({ ...current, [view]: nextResult }));
   };
 
   const validateInputs = () => {
     if (!enabled) return "Máy chủ chưa được cấu hình Gemini API.";
-    if (!siteImage || !referenceImage) {
+    if (!siteSource || !referenceSource) {
       return "Hãy chọn đủ ảnh hiện trạng và ảnh mẫu tham khảo.";
     }
     if (brief.trim().length < 20) {
@@ -427,26 +425,26 @@ export function AIConceptStudio({ enabled }: AIConceptStudioProps) {
   };
 
   const prepareInputs = async (): Promise<OptimizedInputs> => {
-    if (!siteImage || !referenceImage) {
+    if (!siteSource || !referenceSource) {
       throw new Error("Thiếu ảnh đầu vào.");
     }
 
     const cached = optimizedInputsRef.current;
     if (
-      cached?.siteSource === siteImage &&
-      cached.referenceSource === referenceImage
+      cached?.siteSource === siteSource.file &&
+      cached.referenceSource === referenceSource.file
     ) {
       return cached;
     }
 
     const [optimizedSite, optimizedReference] = await Promise.all([
-      optimizeImage(siteImage),
-      optimizeImage(referenceImage),
+      optimizeImage(siteSource.file),
+      optimizeImage(referenceSource.file),
     ]);
 
     const prepared = {
-      siteSource: siteImage,
-      referenceSource: referenceImage,
+      siteSource: siteSource.file,
+      referenceSource: referenceSource.file,
       siteImage: optimizedSite,
       referenceImage: optimizedReference,
     };
@@ -623,20 +621,22 @@ export function AIConceptStudio({ enabled }: AIConceptStudioProps) {
             node="Node A"
             title="Ảnh hiện trạng"
             description="Ảnh mặt tiền, cổng, cầu thang, phòng hoặc khu vực cần thiết kế."
-            file={siteImage}
-            previewUrl={sitePreview}
+            source={siteSource}
             disabled={busy}
-            onChange={selectSiteImage}
+            onChange={(file) =>
+              replaceSource(file, siteSource, setSiteSource)
+            }
           />
           <ImageInput
             id="reference-image"
             node="Node B"
             title="Ảnh mẫu tham khảo"
             description="Mẫu kiểu dáng, vật liệu, màu sắc hoặc phong cách khách hàng mong muốn."
-            file={referenceImage}
-            previewUrl={referencePreview}
+            source={referenceSource}
             disabled={busy}
-            onChange={selectReferenceImage}
+            onChange={(file) =>
+              replaceSource(file, referenceSource, setReferenceSource)
+            }
           />
         </div>
       </section>
