@@ -45,7 +45,10 @@ test("concept studio stays inside the Đại Hải Phát website", async () => {
   assert.match(protectedClient, /Bản xem trước được bảo vệ/);
   assert.match(protectedClient, /COMPANY_CONFIG\.socials\.zalo1/);
   assert.match(protectedClient, /button:has\(\.lucide-download\)/);
+  assert.match(protectedClient, /img\[src\^="data:image"\]/);
   assert.match(protectedClient, /BẢN XEM TRƯỚC/);
+  assert.match(protectedClient, /Gửi hồ sơ qua Zalo để được hỗ trợ/);
+  assert.doesNotMatch(protectedClient, /do AI tạo/);
   assert.doesNotMatch(client, /labs\.google\/fx\/tools\/flow/);
   assert.doesNotMatch(client, /<iframe/);
 });
