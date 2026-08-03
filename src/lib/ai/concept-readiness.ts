@@ -38,52 +38,53 @@ export function evaluateConceptReadiness(
   const phone = normalizeVietnamPhone(profile.phone);
   const missing: string[] = [];
   const reasons: string[] = [];
-  let score = 0;
+  let rawScore = 0;
 
-  if (profile.name.trim().length >= 2) score += 10;
+  if (profile.name.trim().length >= 2) rawScore += 10;
   else missing.push("Họ và tên");
 
-  if (PHONE_PATTERN.test(phone)) score += 20;
+  if (PHONE_PATTERN.test(phone)) rawScore += 20;
   else missing.push("Số điện thoại hợp lệ");
 
-  if (profile.zalo.trim().length >= 8) score += 5;
+  if (profile.zalo.trim().length >= 8) rawScore += 5;
   else reasons.push("Chưa có thông tin Zalo để kỹ sư liên hệ nhanh.");
 
-  if (profile.projectArea.trim().length >= 5) score += 10;
+  if (profile.projectArea.trim().length >= 5) rawScore += 10;
   else missing.push("Khu vực hoặc địa chỉ công trình");
 
-  if (profile.service.trim()) score += 10;
+  if (profile.service.trim()) rawScore += 10;
   else missing.push("Hạng mục cần thực hiện");
 
-  if (profile.dimensions.trim().length >= 3) score += 10;
+  if (profile.dimensions.trim().length >= 3) rawScore += 10;
   else missing.push("Kích thước ước tính");
 
-  if (profile.budget.trim()) score += 5;
+  if (profile.budget.trim()) rawScore += 5;
   else reasons.push("Chưa có khoảng ngân sách dự kiến.");
 
-  if (profile.timeline.trim()) score += 5;
+  if (profile.timeline.trim()) rawScore += 5;
   else reasons.push("Chưa có thời gian dự kiến triển khai.");
 
   if (profile.purpose === "build" || profile.purpose === "renovate") {
-    score += 10;
+    rawScore += 10;
   } else if (profile.purpose === "reference") {
     reasons.push("Nhu cầu hiện được đánh dấu là chỉ tham khảo.");
   } else {
     missing.push("Mục đích thực hiện");
   }
 
-  if (profile.description.trim().length >= 100) score += 10;
+  if (profile.description.trim().length >= 100) rawScore += 10;
   else reasons.push("Mô tả dự án nên có ít nhất 100 ký tự.");
 
-  if (profile.hasSiteImage) score += 3;
+  if (profile.hasSiteImage) rawScore += 3;
   else missing.push("Ảnh hiện trạng");
 
-  if (profile.hasReferenceImage) score += 2;
+  if (profile.hasReferenceImage) rawScore += 2;
   else missing.push("Ảnh mẫu tham khảo");
 
-  if (profile.consent) score += 5;
+  if (profile.consent) rawScore += 5;
   else missing.push("Đồng ý gửi hồ sơ cho Đại Hải Phát");
 
+  const score = Math.min(100, rawScore);
   const hasRequiredIdentity =
     profile.name.trim().length >= 2 &&
     PHONE_PATTERN.test(phone) &&
