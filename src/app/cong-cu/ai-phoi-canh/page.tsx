@@ -4,9 +4,9 @@ import { AIConceptStudio } from "@/components/ai/AIConceptStudio";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 
-const PAGE_TITLE = "AI phối cảnh hiện trạng";
+const PAGE_TITLE = "Phối cảnh ý tưởng theo hiện trạng";
 const PAGE_DESCRIPTION =
-  "Tải ảnh hiện trạng và ảnh mẫu để Đại Hải Phát AI Studio tạo bốn góc phối cảnh đồng bộ ngay trên website.";
+  "Tải ảnh hiện trạng và ảnh mẫu để Đại Hải Phát dựng bốn góc phối cảnh đồng bộ, hỗ trợ trao đổi phương án trước khi kỹ sư khảo sát và tư vấn chi tiết.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -27,14 +27,14 @@ export default function AIConceptStudioPage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
       <PageHero
-        eyebrow="Đại Hải Phát AI Concept Studio"
-        title="Tạo phối cảnh trên chính ảnh công trình"
-        description="Công cụ chạy trực tiếp trong website: nhận ảnh hiện trạng, ảnh mẫu và yêu cầu kỹ thuật; sau đó dựng chính diện, góc trái, góc phải và chi tiết vật liệu của cùng một phương án."
+        eyebrow="Công cụ hỗ trợ lên phương án"
+        title="Dựng phối cảnh trên chính ảnh công trình"
+        description="Gửi ảnh hiện trạng, mẫu tham khảo và yêu cầu mong muốn để xem trước chính diện, góc trái, góc phải và chi tiết vật liệu của cùng một phương án trước khi trao đổi cùng kỹ sư Đại Hải Phát."
       />
 
       <section
         className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]"
-        aria-label="Công cụ tạo phối cảnh AI"
+        aria-label="Công cụ dựng phối cảnh ý tưởng"
       >
         <Container>
           <AIConceptStudio enabled={enabled} />
