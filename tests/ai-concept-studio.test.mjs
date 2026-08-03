@@ -2,6 +2,12 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import {
+  AI_CONCEPT_MODEL,
+  AI_CONCEPT_VIEWS,
+  isAIConceptView,
+} from "../src/lib/ai/concept-studio.ts";
+
 const pagePath = new URL(
   "../src/app/cong-cu/ai-phoi-canh/page.tsx",
   import.meta.url,
@@ -46,6 +52,38 @@ test("native studio accepts two source images and creates four coordinated views
   assert.match(source, /generateView\("right", inputs, baseConcept\)/);
   assert.match(source, /generateView\("detail", inputs, baseConcept\)/);
   assert.match(source, /Tạo toàn bộ 4 góc/);
+});
+
+test("AI concept view contract contains exactly four unique coordinated views", () => {
+  assert.equal(AI_CONCEPT_VIEWS.length, 4);
+
+  const ids = AI_CONCEPT_VIEWS.map((view) => view.id);
+  const nodes = AI_CONCEPT_VIEWS.map((view) => view.node);
+
+  assert.deepEqual(ids, ["front", "left", "right", "detail"]);
+  assert.deepEqual(nodes, ["C1 → D", "C2 → E", "C3 → F", "C4 → G"]);
+  assert.equal(new Set(ids).size, ids.length);
+  assert.equal(new Set(nodes).size, nodes.length);
+
+  for (const view of AI_CONCEPT_VIEWS) {
+    assert.ok(view.title.trim().length > 0);
+    assert.ok(view.description.trim().length > 0);
+  }
+});
+
+test("AI concept view guard accepts only supported view identifiers", () => {
+  for (const view of AI_CONCEPT_VIEWS) {
+    assert.equal(isAIConceptView(view.id), true);
+  }
+
+  for (const value of ["", "Front", "rear", "detail ", "C1", "__proto__"]) {
+    assert.equal(isAIConceptView(value), false, `unexpected accepted value: ${value}`);
+  }
+});
+
+test("AI concept model remains server-configured and non-public", () => {
+  assert.equal(AI_CONCEPT_MODEL, "gemini-3-pro-image");
+  assert.doesNotMatch(AI_CONCEPT_MODEL, /^NEXT_PUBLIC_/);
 });
 
 test("AI image generation is server-side, constrained and rate limited", async () => {
