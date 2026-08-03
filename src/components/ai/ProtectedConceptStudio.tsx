@@ -4,6 +4,7 @@ import { ExternalLink, LockKeyhole, ShieldCheck } from "lucide-react";
 import type { DragEvent, MouseEvent } from "react";
 
 import { AIConceptStudio } from "@/components/ai/AIConceptStudio";
+import { ConceptReadinessGate } from "@/components/ai/ConceptReadinessGate";
 import { Alert } from "@/components/ui/Alert";
 import { COMPANY_CONFIG } from "@/content/company";
 
@@ -44,8 +45,9 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
               aria-hidden="true"
             />
             <p>
-              Để nhận ảnh rõ hoặc hồ sơ được phép sử dụng, khách hàng cần cung cấp
-              đủ thông tin dự án và liên hệ Đại Hải Phát để kỹ sư kiểm tra trước.
+              Trước khi tạo hình, khách hàng cần hoàn thiện hồ sơ nhu cầu. Hồ sơ
+              chưa đạt ngưỡng sẽ được chuyển sang kỹ sư xem trước để tránh sử dụng
+              lượt tạo không đúng mục đích.
             </p>
           </div>
           <a
@@ -54,13 +56,15 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
             rel="noreferrer"
             className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
           >
-            Liên hệ Zalo để xin duyệt tải
+            Liên hệ Zalo để được hỗ trợ
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
       </Alert>
 
-      <AIConceptStudio enabled={enabled} />
+      <ConceptReadinessGate>
+        <AIConceptStudio enabled={enabled} />
+      </ConceptReadinessGate>
 
       <style jsx global>{`
         .protected-concept-studio button:has(.lucide-download) {
