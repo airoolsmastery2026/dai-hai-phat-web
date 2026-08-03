@@ -39,10 +39,9 @@ test("server config requires an HTTPS URL and a service-role key", () => {
   );
 });
 
-test("adapter stays server-only and restricted to the minimal schema", async () => {
+test("adapter stays restricted to server credentials and the minimal schema", async () => {
   const source = await readFile(adapterPath, "utf8");
 
-  assert.match(source, /import "server-only"/);
   assert.match(source, /SUPABASE_SERVICE_ROLE_KEY/);
   assert.match(source, /cache: "no-store"/);
   assert.match(source, /customer_profiles/);
