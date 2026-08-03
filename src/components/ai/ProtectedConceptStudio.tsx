@@ -34,9 +34,9 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
               aria-hidden="true"
             />
             <p>
-              Phối cảnh trên website chỉ dùng để xem và trao đổi ý tưởng. Bản xem
-              trước có watermark, không cung cấp nút tải trực tiếp và chưa phải hồ
-              sơ thiết kế hay phương án kỹ thuật đã được duyệt.
+              Hình ảnh trên website chỉ dùng để xem và trao đổi ý tưởng. Bản xem
+              trước có watermark, không cung cấp quyền tải trực tiếp và chưa phải
+              hồ sơ thiết kế hay phương án kỹ thuật đã được duyệt.
             </p>
           </div>
           <div className="flex gap-[var(--space-3)]">
@@ -45,9 +45,9 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
               aria-hidden="true"
             />
             <p>
-              Trước khi tạo hình, khách hàng cần hoàn thiện hồ sơ nhu cầu. Hồ sơ
-              chưa đạt ngưỡng sẽ được chuyển sang kỹ sư xem trước để tránh sử dụng
-              lượt tạo không đúng mục đích.
+              Trước khi hệ thống dựng bản xem trước, khách hàng cần hoàn thiện hồ
+              sơ nhu cầu. Hồ sơ chưa đủ điều kiện sẽ được chuyển để kỹ sư xem trước,
+              giúp ưu tiên đúng công trình và hạn chế lượt tạo không phù hợp.
             </p>
           </div>
           <a
@@ -56,7 +56,7 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
             rel="noreferrer"
             className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] py-[var(--space-3)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2"
           >
-            Liên hệ Zalo để được hỗ trợ
+            Gửi hồ sơ qua Zalo để được hỗ trợ
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
@@ -71,13 +71,13 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
           display: none !important;
         }
 
-        .protected-concept-studio img[alt*="do AI tạo"] {
+        .protected-concept-studio img[src^="data:image"] {
           user-select: none;
           -webkit-user-drag: none;
           filter: saturate(0.92) contrast(0.96);
         }
 
-        .protected-concept-studio div:has(> img[alt*="do AI tạo"])::after {
+        .protected-concept-studio div:has(> img[src^="data:image"])::after {
           align-items: center;
           background: repeating-linear-gradient(
             -32deg,
