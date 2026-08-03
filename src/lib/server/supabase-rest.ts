@@ -1,5 +1,3 @@
-import "server-only";
-
 interface SupabaseServerConfig {
   url: string;
   serviceRoleKey: string;
