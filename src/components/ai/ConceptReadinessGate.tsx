@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, ClipboardCheck, ExternalLink } from "lucide-react";
+import { CheckCircle2, ClipboardCheck, ExternalLink, Loader2 } from "lucide-react";
 import { useMemo, useState, type FormEvent } from "react";
 
 import { Alert } from "@/components/ui/Alert";
@@ -38,6 +38,9 @@ export function ConceptReadinessGate({ children }: ConceptReadinessGateProps) {
   const [profile, setProfile] = useState(INITIAL_PROFILE);
   const [submitted, setSubmitted] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [requestId] = useState(() => crypto.randomUUID());
   const result = useMemo(() => evaluateConceptReadiness(profile), [profile]);
 
   const update = <K extends keyof ConceptReadinessProfile>(
@@ -45,18 +48,42 @@ export function ConceptReadinessGate({ children }: ConceptReadinessGateProps) {
     value: ConceptReadinessProfile[K],
   ) => setProfile((current) => ({ ...current, [key]: value }));
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
-    setUnlocked(result.decision === "ready");
+    setSubmitError("");
+
+    if (result.decision === "needs_information") return;
+
+    setSubmitting(true);
+    try {
+      const response = await fetch("/api/project-inquiries", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...profile, requestId }),
+      });
+      const payload = (await response.json()) as { error?: string };
+      if (!response.ok) {
+        throw new Error(payload.error || "Chưa thể gửi hồ sơ.");
+      }
+      setUnlocked(result.decision === "ready");
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Chưa thể gửi hồ sơ. Vui lòng thử lại.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (unlocked) {
     return (
       <div className="space-y-[var(--space-6)]">
-        <Alert title="Hồ sơ đủ điều kiện tạo bản tham khảo" tone="success">
-          Điểm sẵn sàng {result.score}/100. Thông tin này mới là bước sàng lọc ban
-          đầu; kỹ sư Đại Hải Phát vẫn xác nhận kỹ thuật, khảo sát và báo giá.
+        <Alert title="Hồ sơ đã được lưu và đủ điều kiện" tone="success">
+          Điểm sẵn sàng {result.score}/100. Kỹ sư Đại Hải Phát đã nhận hồ sơ để
+          tiếp tục xác nhận kỹ thuật, khảo sát và báo giá khi cần.
         </Alert>
         {children}
       </div>
@@ -75,8 +102,8 @@ export function ConceptReadinessGate({ children }: ConceptReadinessGateProps) {
             Hoàn thiện hồ sơ trước khi tạo phối cảnh
           </h2>
           <p className="mt-2 text-sm leading-6 text-[var(--color-text-muted)]">
-            Đại Hải Phát dùng thông tin này để đánh giá mức độ sẵn sàng, tránh tạo
-            hình không đúng nhu cầu và ưu tiên khách hàng có dự án thực tế.
+            Thông tin được lưu thành một hồ sơ dự án và chuyển cho kỹ sư Đại Hải
+            Phát. Không cần nhập lại khi tiếp tục tư vấn.
           </p>
         </div>
       </div>
@@ -145,12 +172,14 @@ export function ConceptReadinessGate({ children }: ConceptReadinessGateProps) {
             <p className="text-sm font-bold">Điểm sẵn sàng hiện tại: {result.score}/100</p>
             <p className="text-xs text-[var(--color-text-muted)]">Từ 80 điểm và đủ thông tin bắt buộc mới mở công cụ tạo bản tham khảo.</p>
           </div>
-          <button type="submit" className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-[var(--color-primary-contrast)] hover:bg-[var(--color-primary-hover)]">
-            <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-            Kiểm tra hồ sơ
+          <button disabled={submitting} type="submit" className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-[var(--color-primary-contrast)] hover:bg-[var(--color-primary-hover)] disabled:cursor-wait disabled:opacity-60">
+            {submitting ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <CheckCircle2 className="h-4 w-4" aria-hidden="true" />}
+            {submitting ? "Đang gửi hồ sơ" : "Lưu và kiểm tra hồ sơ"}
           </button>
         </div>
       </form>
+
+      {submitError ? <Alert title="Chưa gửi được hồ sơ" tone="warning">{submitError}</Alert> : null}
 
       {submitted && result.decision === "needs_information" ? (
         <Alert title="Hồ sơ chưa đủ điều kiện" tone="warning">
@@ -158,12 +187,12 @@ export function ConceptReadinessGate({ children }: ConceptReadinessGateProps) {
         </Alert>
       ) : null}
 
-      {submitted && result.decision === "requires_review" ? (
-        <Alert title="Hồ sơ cần kỹ sư xem trước" tone="info">
+      {submitted && !submitError && !submitting && result.decision === "requires_review" ? (
+        <Alert title="Hồ sơ đã được chuyển cho kỹ sư" tone="info">
           <div className="space-y-3">
-            <p>Điểm sẵn sàng {result.score}/100. Đại Hải Phát sẽ kiểm tra nhu cầu trước khi sử dụng lượt tạo phối cảnh.</p>
+            <p>Điểm sẵn sàng {result.score}/100. Đại Hải Phát sẽ kiểm tra nhu cầu trước khi mở lượt tạo phối cảnh.</p>
             <a href={COMPANY_CONFIG.socials.zalo1} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-bold text-[var(--color-primary)]">
-              Gửi hồ sơ qua Zalo để xin duyệt
+              Trao đổi thêm qua Zalo
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
