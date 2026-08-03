@@ -13,6 +13,39 @@
 
 Không mở rộng sang các công trình cơ khí công nghiệp quy mô lớn khi chưa có yêu cầu rõ ràng.
 
+## Kiến trúc sản phẩm v1.0
+
+Phiên bản đầu tiên phải giữ kiến trúc đơn giản, dễ vận hành và chỉ gồm một luồng chính:
+
+```text
+Website Next.js
+  → AI Assistant
+  → Knowledge Base Đại Hải Phát
+  → Ước tính sơ bộ
+  → Lưu hồ sơ khách hàng
+  → Thông báo Telegram hoặc email
+  → Nhân viên tiếp nhận
+```
+
+Bốn năng lực bắt buộc của v1:
+
+1. Tư vấn đúng phạm vi cửa cổng, cầu thang, lan can, mái che, nội thất và cải tạo nhà ở.
+2. Thu thập thông tin dự án gồm kích thước, địa điểm, vật liệu, ngân sách, thời gian và hình ảnh.
+3. Chỉ đưa ước tính sơ bộ; báo giá chính thức phải được xác nhận sau khi kỹ sư kiểm tra hoặc khảo sát.
+4. Lưu hồ sơ khách hàng và chuyển tiếp cho nhân viên mà không yêu cầu khách nhập lại thông tin.
+
+## Giới hạn kiến trúc v1.0
+
+Chưa triển khai trong v1 nếu chưa có dữ liệu vận hành chứng minh nhu cầu:
+
+- Nhiều AI agent độc lập.
+- Chatwoot self-host.
+- ERP hoặc CRM quy mô lớn.
+- Workflow nhiều tầng hoặc orchestration phức tạp.
+- Package, dịch vụ hoặc abstraction không phục vụ trực tiếp cho luồng tư vấn và tiếp nhận khách hàng.
+
+Mọi module mới phải chứng minh ít nhất một trong các giá trị sau: tăng tỷ lệ chuyển đổi, giảm thời gian xử lý, tăng độ chính xác, tăng an toàn dữ liệu hoặc giảm chi phí vận hành.
+
 ## Nguyên tắc ưu tiên
 
 1. Mobile First
@@ -29,6 +62,7 @@ Không mở rộng sang các công trình cơ khí công nghiệp quy mô lớn 
 - Không thêm package hoặc file dư thừa.
 - Không hardcode dữ liệu có source of truth hiện hữu.
 - Mỗi thay đổi phải có mục tiêu sản phẩm, hiệu năng, trải nghiệm hoặc độ tin cậy cụ thể.
+- Ưu tiên mở rộng module hiện có trước khi tạo thêm hệ thống hoặc agent mới.
 
 ## Chế độ thực hiện liên tục trên GitHub
 
