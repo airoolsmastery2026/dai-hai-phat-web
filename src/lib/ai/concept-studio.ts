@@ -4,26 +4,30 @@ export const AI_CONCEPT_VIEWS = [
   {
     id: "front",
     node: "C1 → D",
-    title: "Phối cảnh chính diện",
-    description: "Góc nhìn tổng thể để kiểm tra bố cục, tỷ lệ và màu sắc.",
+    title: "Tham khảo ý tưởng · Chính diện",
+    description:
+      "Góc nhìn tham khảo để trao đổi bố cục, tỷ lệ và màu sắc trước khi kỹ sư xác nhận.",
   },
   {
     id: "left",
     node: "C2 → E",
-    title: "Phối cảnh góc trái",
-    description: "Thể hiện chiều sâu, liên kết bên trái và độ dày kết cấu.",
+    title: "Tham khảo ý tưởng · Góc trái",
+    description:
+      "Góc nhìn tham khảo về chiều sâu, liên kết bên trái và độ dày kết cấu.",
   },
   {
     id: "right",
     node: "C3 → F",
-    title: "Phối cảnh góc phải",
-    description: "Thể hiện chiều sâu, phụ kiện và liên kết bên phải.",
+    title: "Tham khảo ý tưởng · Góc phải",
+    description:
+      "Góc nhìn tham khảo về chiều sâu, phụ kiện và liên kết bên phải.",
   },
   {
     id: "detail",
     node: "C4 → G",
-    title: "Chi tiết vật liệu",
-    description: "Ảnh cận cảnh vật liệu, mối nối và cấu tạo quan trọng.",
+    title: "Tham khảo ý tưởng · Chi tiết",
+    description:
+      "Hình ảnh tham khảo về vật liệu, mối nối và cấu tạo cần kỹ sư kiểm tra.",
   },
 ] as const;
 
