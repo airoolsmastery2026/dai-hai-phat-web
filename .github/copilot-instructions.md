@@ -41,6 +41,22 @@ This repository owns:
 
 This repository does not own social platform publishing adapters or Telegram transport/runtime code unless explicitly placed here as a separately deployable control-plane package.
 
+## Copy and Content Rules
+
+For customer-facing copy, UX text, SEO metadata, service descriptions, social drafts, CTA labels, error messages, empty states, consultation flows, and concept-preview wording, read and apply:
+
+- `prompts/skills/dhp-copywriter/SKILL.md`
+
+Required behavior:
+
+- Use the approved customer-facing terms such as `Nhận tư vấn`, `Phối cảnh ý tưởng`, `Tự động tiếp nhận`, `Khách hàng cung cấp`, `Tham khảo ý tưởng`, and `Kỹ sư xác nhận`.
+- Treat generated concepts as protected reference material, not approved design or construction documentation.
+- Never invent prices, dimensions, timelines, warranties, certifications, customer reviews, completed projects, technical performance, or business results.
+- Do not present automated output as a final engineering decision.
+- Require engineer confirmation for technical feasibility, materials, structure, measurements, quotation, schedule, and construction commitments.
+- Preserve verified facts and canonical company data from the Website; do not create competing content sources.
+- Use the skill as an agent instruction asset only. Do not import the Markdown file into the production client bundle or send its full contents with every customer request.
+
 ## Publishing Integration Rules
 
 - Publishing content must be derived from canonical Website records through a dedicated DTO. Never expose React components, icon types, database internals, unpublished secrets, or private operational fields.
