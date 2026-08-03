@@ -16,6 +16,10 @@ const clientPath = new URL(
   "../src/components/ai/AIConceptStudio.tsx",
   import.meta.url,
 );
+const protectedClientPath = new URL(
+  "../src/components/ai/ProtectedConceptStudio.tsx",
+  import.meta.url,
+);
 const routePath = new URL(
   "../src/app/api/ai/concept/route.ts",
   import.meta.url,
@@ -26,17 +30,22 @@ const configPath = new URL(
 );
 const themePath = new URL("../src/lib/theme.ts", import.meta.url);
 
-test("AI concept studio stays inside the Đại Hải Phát website", async () => {
-  const [page, client, theme] = await Promise.all([
+test("concept studio stays inside the Đại Hải Phát website", async () => {
+  const [page, client, protectedClient, theme] = await Promise.all([
     readFile(pagePath, "utf8"),
     readFile(clientPath, "utf8"),
+    readFile(protectedClientPath, "utf8"),
     readFile(themePath, "utf8"),
   ]);
 
-  assert.match(page, /AIConceptStudio/);
+  assert.match(page, /ProtectedConceptStudio/);
   assert.match(page, /process\.env\.GEMINI_API_KEY/);
   assert.match(theme, /\/cong-cu\/ai-phoi-canh/);
   assert.match(client, /fetch\("\/api\/ai\/concept"/);
+  assert.match(protectedClient, /Bản xem trước được bảo vệ/);
+  assert.match(protectedClient, /COMPANY_CONFIG\.socials\.zalo1/);
+  assert.match(protectedClient, /button:has\(\.lucide-download\)/);
+  assert.match(protectedClient, /BẢN XEM TRƯỚC/);
   assert.doesNotMatch(client, /labs\.google\/fx\/tools\/flow/);
   assert.doesNotMatch(client, /<iframe/);
 });
