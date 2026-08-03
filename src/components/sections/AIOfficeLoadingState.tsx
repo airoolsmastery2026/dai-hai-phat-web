@@ -12,10 +12,10 @@ export function AIOfficeLoadingState() {
             Hồ sơ tư vấn kỹ thuật
           </p>
           <p className="mt-[var(--space-stack)] text-lg font-bold">
-            Đang chuẩn bị trợ lý Đại Hải Phát…
+            Đang chuẩn bị kênh nhận tư vấn…
           </p>
           <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
-            Khu vực tư vấn đang được tải riêng để trang chính hiển thị nhanh hơn.
+            Khu vực tiếp nhận nhu cầu đang được tải riêng để trang chính hiển thị nhanh hơn.
           </p>
         </div>
       </div>
