@@ -5,6 +5,7 @@ import { AIOfficeErrorBoundary } from "@/components/sections/AIOfficeErrorBounda
 import { AIOfficeSection } from "@/components/sections/AIOfficeSection";
 import { AIServiceConflictNotice } from "@/components/sections/AIServiceConflictNotice";
 import { GeminiLivePanel } from "@/components/sections/GeminiLivePanel";
+import { SalesEngineerAgentPanel } from "@/components/sections/SalesEngineerAgentPanel";
 import { getAIOfficeSessionKey } from "@/lib/ai/experience";
 import type { AIService } from "@/lib/ai/service-domain";
 
@@ -27,6 +28,7 @@ export function AIOfficeExperience({
         {liveVoiceEnabled ? (
           <GeminiLivePanel servicePreset={servicePreset} />
         ) : null}
+        <SalesEngineerAgentPanel />
         <AIOfficeSection key={sessionKey} />
       </AIOfficeErrorBoundary>
     </>
