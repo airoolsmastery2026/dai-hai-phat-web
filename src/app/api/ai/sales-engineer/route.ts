@@ -8,6 +8,7 @@ import {
   type SalesEngineerToolResult,
 } from "@/lib/ai/sales-engineer-agent";
 import { buildResidentialProposalEvidenceResponse } from "@/lib/ai/public-evidence";
+import { getAIService } from "@/lib/ai/service-domain";
 import {
   runSalesEngineerWithGemini,
   GeminiSalesEngineerError,
@@ -89,9 +90,10 @@ export async function POST(request: NextRequest) {
       buildNextQuestionTool(agentRequest.memory),
     ];
 
-    if (agentRequest.memory.service) {
+    const service = getAIService(agentRequest.memory.service);
+    if (service) {
       const evidence = buildResidentialProposalEvidenceResponse({
-        service: agentRequest.memory.service,
+        service,
         material: agentRequest.memory.material ?? "",
         style: agentRequest.memory.style ?? "",
         projectType: agentRequest.memory.projectType ?? "",
@@ -124,7 +126,7 @@ export async function POST(request: NextRequest) {
       requestId,
       model: agent.model,
       toolsUsed: agent.toolsUsed,
-      service: agentRequest.memory.service ?? null,
+      service: service ?? agentRequest.memory.service ?? null,
     });
 
     return apiJsonResponse({ requestId, agent }, 200);
