@@ -134,12 +134,15 @@ export async function POST(request: NextRequest) {
     if (error instanceof RequestBodyTooLargeError) {
       return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
     }
-    if (error instanceof SalesEngineerAgentValidationError || error instanceof SyntaxError) {
+    if (error instanceof SyntaxError) {
       return apiJsonResponse(
-        {
-          error: error instanceof SyntaxError ? "Dữ liệu JSON không hợp lệ." : error.message,
-          requestId,
-        },
+        { error: "Dữ liệu JSON không hợp lệ.", requestId },
+        400,
+      );
+    }
+    if (error instanceof SalesEngineerAgentValidationError) {
+      return apiJsonResponse(
+        { error: error.message, requestId },
         400,
       );
     }
