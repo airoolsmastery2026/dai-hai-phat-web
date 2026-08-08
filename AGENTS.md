@@ -6,7 +6,15 @@ The repository is the single source of truth. Inspect the current code, tests, b
 
 ## Required reading
 
-Read `README.md` before starting. For every UI change, also read these files completely:
+Read `README.md` before starting.
+
+For every non-trivial architecture, AI, API, CRM, data-flow, authentication, automation, pricing, or integration change, also read:
+
+1. `docs/ARCHITECTURE_BLUEPRINT.md`
+2. `docs/ECOSYSTEM_ARCHITECTURE.md`
+3. `docs/ECOSYSTEM_API_CONTRACTS.md`
+
+For every UI change, also read these files completely:
 
 1. `DESIGN.md`
 2. `COMPONENTS.md`
@@ -29,10 +37,12 @@ The product serves residential gates, doors, stairs, railings, awnings, interior
 ## Architecture rules
 
 - Keep Next.js, TypeScript, Tailwind CSS v3, verified content, and the current architecture.
-- Do not add packages, files, components, or abstractions without a clear need.
+- Do not add packages, files, components, abstractions, services, databases, queues, caches, proxies, or observability stacks without a demonstrated need and an architecture decision.
+- External reference architectures and diagrams are learning inputs, not permission to copy their infrastructure.
 - Reuse existing sources of truth and design tokens.
 - Never hardcode or expose secrets, tokens, API keys, or private configuration.
 - Work only inside the explicit task or current batch scope.
+- AI may propose architecture changes but must not silently introduce them.
 
 ## Senior-agent workflow
 
