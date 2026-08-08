@@ -47,9 +47,13 @@ Stop only for a real code or test error, missing access, mandatory missing data,
 3. Batch related changes together.
 4. Use `[skip ci]` on intermediate commits to avoid repeated GitHub Actions and Vercel runs.
 5. Create one final commit without `[skip ci]` when the batch is ready.
-6. Require lint, type-check, unit tests, and production build to pass.
-7. Merge only after GitHub Quality succeeds.
-8. Use squash merge to keep `main` history concise.
+6. Run OpenCodeReview before opening or finalizing the pull request. Prefer delegation mode when working inside Codex/Claude so no separate review-model key is required.
+7. Fix high-confidence `critical` and `high` findings, then rerun affected tests.
+8. Require lint, type-check, unit tests, and production build to pass.
+9. Merge only after GitHub Quality succeeds.
+10. Use squash merge to keep `main` history concise.
+
+OpenCodeReview is an additional review layer, not a replacement for lint, TypeScript, tests, security audit, or production build. See `docs/engineering/OPEN_CODE_REVIEW.md`.
 
 A Vercel `build-rate-limit` result is an infrastructure quota issue, not a code failure, when GitHub Quality has succeeded.
 
@@ -74,4 +78,4 @@ A Vercel `build-rate-limit` result is an infrastructure quota issue, not a code 
 
 ## Definition of done
 
-A batch is complete only when its scope is coherent, the diff has no unrelated changes, lint passes, type-check passes, unit tests pass, production build passes, and the pull request is squash-merged into `main`.
+A batch is complete only when its scope is coherent, the diff has no unrelated changes, OpenCodeReview has no unresolved high-confidence critical/high finding, lint passes, type-check passes, unit tests pass, production build passes, and the pull request is squash-merged into `main`.
