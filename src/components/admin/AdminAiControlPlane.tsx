@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import {
   CheckCircle2,
+  Inbox,
   Play,
   RefreshCw,
   Sparkles,
@@ -26,6 +27,18 @@ type MediaJob = {
   createdAt: string;
 };
 
+type PublishPackage = {
+  id: string;
+  jobId: string;
+  workflowId: string;
+  status: string;
+  content: string;
+  platforms: string[];
+  scheduledTime: string | null;
+  importedAt: string | null;
+  importedPostId: string | null;
+};
+
 async function api<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, { ...init, cache: 'no-store' });
   const payload: unknown = await response.json().catch(() => ({}));
@@ -38,9 +51,16 @@ async function api<T>(url: string, init?: RequestInit): Promise<T> {
   return payload as T;
 }
 
+function formatDate(value: string | null): string {
+  if (!value) return '—';
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? value : date.toLocaleString('vi-VN');
+}
+
 export default function AdminAiControlPlane() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [jobs, setJobs] = useState<MediaJob[]>([]);
+  const [packages, setPackages] = useState<PublishPackage[]>([]);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [workflowId, setWorkflowId] = useState('social-video');
@@ -51,12 +71,14 @@ export default function AdminAiControlPlane() {
     setBusy(true);
     setMessage(null);
     try {
-      const [skillResponse, jobResponse] = await Promise.all([
+      const [skillResponse, jobResponse, packageResponse] = await Promise.all([
         api<{ data: Skill[] }>('/api/ai/control-plane/skills'),
         api<{ data: MediaJob[] }>('/api/ai/control-plane/media/jobs'),
+        api<{ data: PublishPackage[] }>('/api/ai/control-plane/publish/packages'),
       ]);
       setSkills(skillResponse.data ?? []);
       setJobs(jobResponse.data ?? []);
+      setPackages(packageResponse.data ?? []);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Không thể kết nối Control Plane.');
     } finally {
@@ -113,13 +135,15 @@ export default function AdminAiControlPlane() {
     }
   };
 
+  const pendingPackages = packages.filter((item) => item.status === 'pending').length;
+
   return (
     <div className="mx-auto max-w-7xl space-y-6 px-4 py-8 md:px-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Đại Hải Phát AI OS</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Control Plane</h1>
-          <p className="mt-2 text-slate-600">Quản lý Skill Hub và luồng Media Engine từ một màn hình quản trị đã được bảo vệ.</p>
+          <p className="mt-2 text-slate-600">Quản lý Skill Hub, Media Engine và Publish Inbox từ một màn hình quản trị đã được bảo vệ.</p>
         </div>
         <button onClick={() => void refresh()} disabled={busy} className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold disabled:opacity-50">
           <RefreshCw className={`h-4 w-4 ${busy ? 'animate-spin' : ''}`} /> Làm mới
@@ -165,6 +189,34 @@ export default function AdminAiControlPlane() {
                 <button onClick={() => void jobAction(job.id, 'run')} disabled={busy || job.status === 'completed'} className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold disabled:opacity-40"><Play className="h-4 w-4" /> Chạy bước</button>
                 <button onClick={() => void jobAction(job.id, 'approve')} disabled={busy || job.status !== 'waiting_review'} className="inline-flex items-center gap-2 rounded-lg bg-emerald-700 px-3 py-2 text-sm font-semibold text-white disabled:opacity-40"><CheckCircle2 className="h-4 w-4" /> Duyệt</button>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-2"><Inbox className="h-5 w-5" /><h2 className="font-bold text-slate-950">Publish Inbox</h2></div>
+          <p className="text-xs font-semibold text-slate-500">{pendingPackages} package đang chờ BOT ĐĂNG BÀI</p>
+        </div>
+        <div className="mt-4 grid gap-3">
+          {packages.length === 0 && <p className="text-sm text-slate-500">Chưa có publish package.</p>}
+          {packages.map((item) => (
+            <div key={item.id} className="rounded-xl border border-slate-200 p-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="font-semibold text-slate-900">{item.workflowId}</p>
+                  <p className="mt-1 break-all text-xs text-slate-500">job: {item.jobId}</p>
+                </div>
+                <span className="w-fit rounded-full border border-slate-200 px-2.5 py-1 text-xs font-semibold text-slate-600">{item.status}</span>
+              </div>
+              <p className="mt-3 line-clamp-3 text-sm text-slate-700">{item.content}</p>
+              <div className="mt-3 grid gap-1 text-xs text-slate-500 sm:grid-cols-3">
+                <p>Nền tảng: {(item.platforms ?? []).join(', ') || '—'}</p>
+                <p>Lịch: {formatDate(item.scheduledTime)}</p>
+                <p>{item.importedAt ? `Đã nhập: ${formatDate(item.importedAt)}` : 'Chưa được BOT nhập'}</p>
+              </div>
+              {item.importedPostId && <p className="mt-2 break-all text-xs text-slate-500">Post ID: {item.importedPostId}</p>}
             </div>
           ))}
         </div>
