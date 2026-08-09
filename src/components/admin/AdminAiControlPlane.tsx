@@ -65,7 +65,10 @@ export default function AdminAiControlPlane() {
   }, []);
 
   useEffect(() => {
-    void refresh();
+    const timer = window.setTimeout(() => {
+      void refresh();
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [refresh]);
 
   const createJob = async (event: FormEvent) => {
