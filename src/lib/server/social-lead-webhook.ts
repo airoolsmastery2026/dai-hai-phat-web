@@ -1,6 +1,6 @@
 import {
+  getSupabaseServerConfig,
   SupabaseRestError,
-  supabaseRestRequest,
 } from "@/lib/server/supabase-rest";
 
 const CONTROL_CHARACTERS = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/;
@@ -151,30 +151,62 @@ function isUniqueViolation(error: SupabaseRestError): boolean {
   return error.details.code === "23505";
 }
 
+function safeParseJson(value: string): unknown {
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
+}
+
+async function insertSocialLead(
+  envelope: SocialLeadWebhookEnvelope,
+): Promise<SocialLeadRow[]> {
+  const config = getSupabaseServerConfig();
+  const endpoint = new URL("/rest/v1/social_leads", config.url);
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      apikey: config.serviceRoleKey,
+      authorization: `Bearer ${config.serviceRoleKey}`,
+      "content-type": "application/json",
+      prefer: "return=representation",
+    },
+    body: JSON.stringify({
+      event_id: envelope.eventId,
+      event_type: envelope.eventType,
+      occurred_at: envelope.occurredAt,
+      source_service: envelope.sourceService,
+      platform: envelope.data.platform,
+      external_lead_id: envelope.data.externalLeadId,
+      publication_id: envelope.data.publicationId ?? null,
+      source_content_id: envelope.data.sourceContentId ?? null,
+      customer_display_name: envelope.data.customer.displayName,
+      platform_user_id: envelope.data.customer.platformUserId,
+      message: envelope.data.message,
+      consent_context: envelope.data.consentContext,
+      metadata: envelope.data.metadata,
+    }),
+    cache: "no-store",
+  });
+
+  const body = await response.text();
+  const payload = body ? safeParseJson(body) : null;
+  if (!response.ok) {
+    throw new SupabaseRestError(
+      "Social lead persistence failed.",
+      response.status,
+      payload,
+    );
+  }
+  return Array.isArray(payload) ? (payload as SocialLeadRow[]) : [];
+}
+
 export async function recordSocialLead(
   envelope: SocialLeadWebhookEnvelope,
 ): Promise<{ leadId: string; receivedAt: string }> {
   try {
-    const rows = await supabaseRestRequest<SocialLeadRow[]>("social_leads", {
-      method: "POST",
-      prefer: "return=representation",
-      body: {
-        event_id: envelope.eventId,
-        event_type: envelope.eventType,
-        occurred_at: envelope.occurredAt,
-        source_service: envelope.sourceService,
-        platform: envelope.data.platform,
-        external_lead_id: envelope.data.externalLeadId,
-        publication_id: envelope.data.publicationId ?? null,
-        source_content_id: envelope.data.sourceContentId ?? null,
-        customer_display_name: envelope.data.customer.displayName,
-        platform_user_id: envelope.data.customer.platformUserId,
-        message: envelope.data.message,
-        consent_context: envelope.data.consentContext,
-        metadata: envelope.data.metadata,
-      },
-    });
-
+    const rows = await insertSocialLead(envelope);
     const row = rows[0];
     if (!row?.id) {
       throw new Error("Social lead persistence returned no row.");
