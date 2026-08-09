@@ -4,16 +4,19 @@ const SIGNATURE_VERSION = "v1";
 const DEFAULT_MAX_AGE_SECONDS = 5 * 60;
 const DEFAULT_FUTURE_SKEW_SECONDS = 60;
 
+type WebhookVerificationCode =
+  | "invalid_timestamp"
+  | "stale"
+  | "future_timestamp"
+  | "invalid_signature";
+
 export class WebhookVerificationError extends Error {
-  constructor(
-    readonly code:
-      | "invalid_timestamp"
-      | "stale"
-      | "future_timestamp"
-      | "invalid_signature",
-  ) {
+  readonly code: WebhookVerificationCode;
+
+  constructor(code: WebhookVerificationCode) {
     super(code);
     this.name = "WebhookVerificationError";
+    this.code = code;
   }
 }
 
