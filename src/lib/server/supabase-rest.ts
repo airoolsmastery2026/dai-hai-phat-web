@@ -62,11 +62,7 @@ export function getSupabaseServerConfig(
 }
 
 export async function supabaseRestRequest<T>(
-  table:
-    | "customer_profiles"
-    | "concept_quota_ledger"
-    | "project_inquiries"
-    | "social_leads",
+  table: "customer_profiles" | "concept_quota_ledger" | "project_inquiries",
   options: SupabaseRestRequestOptions = {},
   config: SupabaseServerConfig = getSupabaseServerConfig(),
 ): Promise<T> {
