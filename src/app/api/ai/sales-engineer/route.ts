@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 
 import {
   buildEstimateReadiness,
+  buildLeadHandoffQualification,
   buildNextQuestionTool,
   parseSalesEngineerAgentRequest,
   SalesEngineerAgentValidationError,
@@ -88,6 +89,7 @@ export async function POST(request: NextRequest) {
     const tools: SalesEngineerToolResult[] = [
       buildEstimateReadiness(agentRequest.memory),
       buildNextQuestionTool(agentRequest.memory),
+      buildLeadHandoffQualification(agentRequest.memory),
     ];
 
     const service = getAIService(agentRequest.memory.service);
