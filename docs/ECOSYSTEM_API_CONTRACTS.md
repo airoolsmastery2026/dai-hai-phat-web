@@ -234,6 +234,14 @@ High-risk commands require a confirmation token with a short expiry.
 
 ## Audit Events
 
+Telegram Control records operator command outcomes through the Website-owned write endpoint:
+
+```text
+POST /api/v1/audit/control-commands
+```
+
+The endpoint accepts only the authenticated `telegram-control` service. `Idempotency-Key` must equal `commandId` so command retries cannot create duplicate audit rows.
+
 Every operator command should generate:
 
 ```json
@@ -241,6 +249,7 @@ Every operator command should generate:
   "eventType": "control.command.executed",
   "commandId": "uuid",
   "operatorId": "telegram-user-id",
+  "operatorRole": "owner|admin|operator|viewer",
   "targetService": "publishing-bot",
   "command": "publishing.scheduler.pause",
   "status": "accepted|completed|failed|rejected",
