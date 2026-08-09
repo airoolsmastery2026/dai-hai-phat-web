@@ -7,7 +7,7 @@ const consolePath = new URL("../src/components/admin/AdminAiControlPlane.tsx", i
 const gatewayPath = new URL("../src/app/api/ai/control-plane/[...path]/route.ts", import.meta.url);
 const clientPath = new URL("../src/lib/dhp-control-plane.ts", import.meta.url);
 
-test("AI admin console exposes skill, media and publish inbox controls without browser secrets", async () => {
+test("AI admin console exposes skill, media readiness and publish inbox controls without browser secrets", async () => {
   const [page, panel, gateway, client] = await Promise.all([
     readFile(pagePath, "utf8"),
     readFile(consolePath, "utf8"),
@@ -18,13 +18,17 @@ test("AI admin console exposes skill, media and publish inbox controls without b
   assert.match(page, /index: false/);
   assert.match(panel, /\/api\/ai\/control-plane\/skills/);
   assert.match(panel, /\/api\/ai\/control-plane\/media\/jobs/);
+  assert.match(panel, /\/api\/ai\/control-plane\/media\/readiness/);
   assert.match(panel, /\/api\/ai\/control-plane\/publish\/packages/);
+  assert.match(panel, /Sẵn sàng Media Engine/);
+  assert.match(panel, /Video OS worker/);
+  assert.match(panel, /Còn thiếu provider/);
   assert.match(panel, /Chạy bước/);
   assert.match(panel, /Duyệt/);
   assert.match(panel, /Publish Inbox/);
   assert.match(panel, /BOT ĐĂNG BÀI/);
   assert.match(gateway, /\['skills', 'media', 'publish'\]/);
   assert.match(client, /DHP_CONTROL_PLANE_SECRET/);
-  assert.doesNotMatch(panel, /DHP_CONTROL_PLANE_SECRET|NEXT_PUBLIC_DHP/);
+  assert.doesNotMatch(panel, /DHP_CONTROL_PLANE_SECRET|DHP_OPENAI_API_KEY|DHP_RENDER_TOKEN|DHP_VOICE_TOKEN|DHP_VIDEO_TOKEN|NEXT_PUBLIC_DHP/);
   assert.doesNotMatch(gateway, /NEXT_PUBLIC_DHP/);
 });

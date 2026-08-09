@@ -39,6 +39,24 @@ type PublishPackage = {
   importedPostId: string | null;
 };
 
+type MediaReadiness = {
+  status: 'ready' | 'degraded';
+  providers: {
+    text: { configured: boolean };
+    render: { configured: boolean };
+    voice: { configured: boolean };
+    video: { configured: boolean };
+    publish: { configured: boolean; mode: 'external-adapter' | 'cloud-inbox' };
+  };
+  videoOs: {
+    queueAvailable: boolean;
+    workerVerified: boolean;
+  };
+  authorization: string;
+  persistence: string;
+  missing: string[];
+};
+
 async function api<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, { ...init, cache: 'no-store' });
   const payload: unknown = await response.json().catch(() => ({}));
@@ -57,10 +75,15 @@ function formatDate(value: string | null): string {
   return Number.isNaN(date.getTime()) ? value : date.toLocaleString('vi-VN');
 }
 
+function providerLabel(configured: boolean): string {
+  return configured ? 'Đã cấu hình' : 'Chưa cấu hình';
+}
+
 export default function AdminAiControlPlane() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [jobs, setJobs] = useState<MediaJob[]>([]);
   const [packages, setPackages] = useState<PublishPackage[]>([]);
+  const [readiness, setReadiness] = useState<MediaReadiness | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [workflowId, setWorkflowId] = useState('social-video');
@@ -71,14 +94,16 @@ export default function AdminAiControlPlane() {
     setBusy(true);
     setMessage(null);
     try {
-      const [skillResponse, jobResponse, packageResponse] = await Promise.all([
+      const [skillResponse, jobResponse, packageResponse, readinessResponse] = await Promise.all([
         api<{ data: Skill[] }>('/api/ai/control-plane/skills'),
         api<{ data: MediaJob[] }>('/api/ai/control-plane/media/jobs'),
         api<{ data: PublishPackage[] }>('/api/ai/control-plane/publish/packages'),
+        api<{ data: MediaReadiness }>('/api/ai/control-plane/media/readiness'),
       ]);
       setSkills(skillResponse.data ?? []);
       setJobs(jobResponse.data ?? []);
       setPackages(packageResponse.data ?? []);
+      setReadiness(readinessResponse.data ?? null);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Không thể kết nối Control Plane.');
     } finally {
@@ -136,6 +161,15 @@ export default function AdminAiControlPlane() {
   };
 
   const pendingPackages = packages.filter((item) => item.status === 'pending').length;
+  const readinessItems = readiness
+    ? [
+        ['Text', readiness.providers.text.configured],
+        ['Render', readiness.providers.render.configured],
+        ['Voice', readiness.providers.voice.configured],
+        ['Video', readiness.providers.video.configured],
+        ['Publish', readiness.providers.publish.configured],
+      ] as const
+    : [];
 
   return (
     <div className="mx-auto max-w-7xl space-y-6 px-4 py-8 md:px-8">
@@ -151,6 +185,38 @@ export default function AdminAiControlPlane() {
       </div>
 
       {message && <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">{message}</div>}
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h2 className="font-bold text-slate-950">Sẵn sàng Media Engine</h2>
+            <p className="mt-1 text-sm text-slate-600">Chỉ hiển thị trạng thái cấu hình; URL, token và secret không được gửi xuống trình duyệt.</p>
+          </div>
+          <span className="w-fit rounded-full border border-slate-200 px-2.5 py-1 text-xs font-semibold text-slate-600">
+            {readiness ? (readiness.status === 'ready' ? 'READY' : 'DEGRADED') : 'ĐANG KIỂM TRA'}
+          </span>
+        </div>
+        {readiness && (
+          <>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {readinessItems.map(([label, configured]) => (
+                <div key={label} className="rounded-xl border border-slate-200 p-3">
+                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{label}</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-900">{providerLabel(configured)}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 grid gap-2 text-sm text-slate-600 md:grid-cols-3">
+              <p>Publish: {readiness.providers.publish.mode === 'cloud-inbox' ? 'Cloud Inbox' : 'External adapter'}</p>
+              <p>Video OS queue: {readiness.videoOs.queueAvailable ? 'Có' : 'Không'}</p>
+              <p>Video OS worker: {readiness.videoOs.workerVerified ? 'Đã xác minh' : 'Chưa xác minh'}</p>
+            </div>
+            {readiness.missing.length > 0 && (
+              <p className="mt-3 text-sm font-semibold text-slate-700">Còn thiếu provider: {readiness.missing.join(', ')}.</p>
+            )}
+          </>
+        )}
+      </section>
 
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
