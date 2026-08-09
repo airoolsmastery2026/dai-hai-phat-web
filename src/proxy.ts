@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const ADMIN_PATH_PREFIX = "/admin";
+const CONTROL_PLANE_API_PREFIX = "/api/ai/control-plane";
 
 function unauthorized(): NextResponse {
   return new NextResponse("Yêu cầu xác thực quản trị.", {
@@ -26,9 +27,12 @@ function readBasicCredentials(value: string | null): [string, string] | null {
 }
 
 export function proxy(request: NextRequest): NextResponse {
-  if (!request.nextUrl.pathname.startsWith(ADMIN_PATH_PREFIX)) {
-    return NextResponse.next();
-  }
+  const pathname = request.nextUrl.pathname;
+  const protectedRoute =
+    pathname.startsWith(ADMIN_PATH_PREFIX) ||
+    pathname.startsWith(CONTROL_PLANE_API_PREFIX);
+
+  if (!protectedRoute) return NextResponse.next();
 
   const expectedUsername = process.env.ADMIN_USERNAME;
   const expectedPassword = process.env.ADMIN_PASSWORD;
@@ -51,10 +55,12 @@ export function proxy(request: NextRequest): NextResponse {
 
   const response = NextResponse.next();
   response.headers.set("cache-control", "no-store");
-  response.headers.set("x-robots-tag", "noindex, nofollow, noarchive");
+  if (pathname.startsWith(ADMIN_PATH_PREFIX)) {
+    response.headers.set("x-robots-tag", "noindex, nofollow, noarchive");
+  }
   return response;
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/ai/control-plane/:path*"],
 };
