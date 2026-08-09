@@ -1,6 +1,10 @@
 import { timingSafeEqual } from 'node:crypto';
 import { NextRequest } from 'next/server';
 import { requestControlPlane } from '@/lib/dhp-control-plane';
+import {
+  ADMIN_SESSION_COOKIE,
+  verifyAdminSessionValue,
+} from '@/lib/admin-session';
 
 interface RouteContext {
   params: Promise<{ path: string[] }>;
@@ -13,6 +17,9 @@ function secureEqual(left: string, right: string): boolean {
 }
 
 function authorized(request: NextRequest): boolean {
+  const session = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;
+  if (verifyAdminSessionValue(session)) return true;
+
   const expected = process.env.DHP_WEB_ADMIN_TOKEN?.trim();
   const provided = request.headers.get('x-dhp-admin-token')?.trim();
   return Boolean(expected && provided && secureEqual(expected, provided));
