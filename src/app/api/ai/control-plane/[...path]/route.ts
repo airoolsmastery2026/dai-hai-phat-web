@@ -7,7 +7,7 @@ interface RouteContext {
 
 async function forward(request: NextRequest, context: RouteContext): Promise<Response> {
   const { path } = await context.params;
-  if (!Array.isArray(path) || path.length === 0 || !['skills', 'media'].includes(path[0])) {
+  if (!Array.isArray(path) || path.length === 0 || !['skills', 'media', 'publish'].includes(path[0])) {
     return Response.json({ error: 'Unsupported Control Plane path' }, { status: 404 });
   }
 
