@@ -35,7 +35,8 @@ test("admin routes require server credentials and stay out of search indexes", a
   assert.match(proxy, /ADMIN_PASSWORD/);
   assert.match(proxy, /www-authenticate/);
   assert.match(proxy, /x-robots-tag/);
-  assert.match(proxy, /matcher: \["\/admin\/:path\*"\]/);
+  assert.match(proxy, /"\/admin\/:path\*"/);
+  assert.match(proxy, /"\/api\/ai\/control-plane\/:path\*"/);
   assert.match(page, /index: false/);
   assert.doesNotMatch(proxy, /NEXT_PUBLIC_ADMIN/);
 });
