@@ -23,7 +23,7 @@ test("keeps evidence pages connected to human consultation", async () => {
   assert.doesNotMatch(cta, /#ai-office|encodeURIComponent\(servicePreset\)|Lập hồ sơ với AI/);
 
   assert.match(gallery, /<AIConsultationCta/);
-  assert.match(gallery, /Kỹ sư sẽ kiểm tra thông tin trước khi tư vấn phương án và khảo sát/);
+  assert.match(gallery, /Kỹ sư sẽ kiểm tra trước khi tư vấn phương án và khảo sát/);
   assert.match(gallery, /secondaryHref="\/services"/);
 
   assert.match(about, /<AIConsultationCta/);
