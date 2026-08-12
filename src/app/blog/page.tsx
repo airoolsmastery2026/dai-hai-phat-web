@@ -54,10 +54,10 @@ export default function BlogPage() {
       <PageHero
         eyebrow="Checklist kỹ thuật"
         title="Chuẩn bị đúng dữ liệu trước khi khảo sát"
-        description="Các checklist giúp anh/chị chuẩn bị ảnh, kích thước và điều kiện hiện trạng trước khi kỹ sư kiểm tra phương án."
+        description="Xem nhanh ảnh, kích thước và điều kiện hiện trạng cần chuẩn bị trước khi kỹ sư kiểm tra phương án."
       />
 
-      <section className="py-[var(--space-10)] lg:py-[var(--space-section)]">
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
           <div className="grid gap-[var(--space-4)] md:grid-cols-2 xl:grid-cols-3">
             {ARTICLES.map((article) => (
@@ -65,7 +65,7 @@ export default function BlogPage() {
                 key={article.id}
                 className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]"
               >
-                <div className="relative aspect-[16/9]">
+                <div className="relative h-40 sm:h-44">
                   <Image
                     src={article.image}
                     alt={article.title}
@@ -75,18 +75,18 @@ export default function BlogPage() {
                   />
                 </div>
                 <div className="p-[var(--space-4)]">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-primary)]">
                     {article.category}
                   </p>
                   <h2 className="mt-[var(--space-2)] text-lg font-bold leading-6 text-[var(--color-text)]">
                     {article.title}
                   </h2>
-                  <p className="mt-[var(--space-2)] line-clamp-3 text-sm leading-6 text-[var(--color-text-muted)]">
+                  <p className="mt-[var(--space-2)] line-clamp-2 text-sm leading-6 text-[var(--color-text-muted)]">
                     {article.excerpt}
                   </p>
                   <Link
                     href={`/blog/${article.slug}`}
-                    className="mt-[var(--space-3)] inline-flex min-h-10 items-center text-sm font-bold text-[var(--color-primary)] hover:underline"
+                    className="mt-[var(--space-2)] inline-flex min-h-10 items-center text-sm font-bold text-[var(--color-primary)] hover:underline"
                   >
                     Xem checklist
                   </Link>
@@ -100,7 +100,7 @@ export default function BlogPage() {
       <AIConsultationCta
         eyebrow="Từ checklist đến khảo sát"
         title="Cần kỹ sư xem nhanh hiện trạng?"
-        description="Gửi hạng mục, vị trí, kích thước dự kiến và ảnh hiện trạng để đội ngũ kiểm tra thông tin trước khi hẹn khảo sát."
+        description="Gửi hạng mục, vị trí, kích thước dự kiến và ảnh hiện trạng để đội ngũ kiểm tra trước khi hẹn khảo sát."
         secondaryHref="/services"
         secondaryLabel="Xem dịch vụ"
       />
