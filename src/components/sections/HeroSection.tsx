@@ -32,25 +32,25 @@ export function HeroSection() {
         aria-hidden="true"
       />
 
-      <Container className="relative grid items-center gap-[var(--space-8)] py-[var(--space-6)] sm:py-[var(--space-10)] lg:min-h-[34rem] lg:grid-cols-[1.08fr_0.72fr] lg:gap-[var(--space-12)] lg:py-[var(--space-14)]">
+      <Container className="relative grid items-center gap-[var(--space-6)] py-[var(--space-6)] sm:py-[var(--space-8)] lg:min-h-[30rem] lg:grid-cols-[1.08fr_0.72fr] lg:gap-[var(--space-8)] lg:py-[var(--space-12)]">
         <div className="max-w-[42rem]">
           <span className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-full)] border border-[var(--color-metal)]/45 bg-[var(--color-metal-soft)]/85 px-[var(--space-3)] py-[var(--space-2)] text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-metal-strong)]">
             <HardHat className="h-4 w-4" aria-hidden="true" /> Tiếp nhận yêu cầu 24/7
           </span>
 
-          <h1 className="mt-[var(--space-4)] text-[length:var(--font-display)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[var(--color-text)]">
+          <h1 className="mt-[var(--space-3)] text-[length:var(--font-display)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[var(--color-text)]">
             Thiết kế &amp; thi công nhà ở
             <span className="mt-[var(--space-2)] block text-[var(--color-wood)]">
               gọn từ khảo sát đến hoàn thiện.
             </span>
           </h1>
 
-          <p className="mt-[var(--space-4)] max-w-xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
+          <p className="mt-[var(--space-3)] max-w-xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
             Nội thất, cửa cổng, cầu thang và mái che theo hiện trạng thực tế.
             Vật liệu và phương án được kỹ sư kiểm tra trước báo giá.
           </p>
 
-          <div className="mt-[var(--space-6)] flex flex-wrap gap-[var(--space-3)]">
+          <div className="mt-[var(--space-5)] flex flex-wrap gap-[var(--space-2)]">
             <Button href="/contact">
               Trao đổi với kỹ sư <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
@@ -59,7 +59,7 @@ export function HeroSection() {
             </Button>
           </div>
 
-          <ul className="mt-[var(--space-5)] grid gap-[var(--space-2)] text-sm text-[var(--color-text-muted)] sm:flex sm:flex-wrap sm:gap-x-[var(--space-5)]">
+          <ul className="mt-[var(--space-4)] hidden flex-wrap gap-x-[var(--space-5)] gap-y-[var(--space-2)] text-sm text-[var(--color-text-muted)] lg:flex">
             {["Khảo sát hiện trạng", "Xác nhận vật liệu", "Kỹ sư duyệt phương án"].map((item) => (
               <li key={item} className="inline-flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[var(--color-primary)]" aria-hidden="true" />
@@ -68,7 +68,7 @@ export function HeroSection() {
             ))}
           </ul>
 
-          <div className="mt-[var(--space-5)] grid grid-cols-2 gap-[var(--space-2)] rounded-[var(--radius-lg)] border border-white/70 bg-white/65 p-[var(--space-3)] backdrop-blur-sm lg:hidden">
+          <div className="mt-[var(--space-4)] grid grid-cols-2 gap-[var(--space-2)] rounded-[var(--radius-md)] border border-white/70 bg-white/65 p-[var(--space-3)] backdrop-blur-sm lg:hidden">
             {DELIVERY_STEPS.map((item, index) => (
               <div key={item} className="flex items-start gap-[var(--space-2)] text-xs font-semibold leading-5 text-[var(--color-text-muted)]">
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[10px] font-bold text-[var(--color-primary-contrast)]">
@@ -80,7 +80,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <aside className="hidden rounded-[var(--radius-xl)] border border-white/80 bg-[var(--color-surface)]/84 p-[var(--space-6)] shadow-[var(--shadow-md)] backdrop-blur-md lg:block">
+        <aside className="hidden rounded-[var(--radius-lg)] border border-white/80 bg-[var(--color-surface)]/84 p-[var(--space-5)] shadow-[var(--shadow-md)] backdrop-blur-md lg:block">
           <div className="flex items-center justify-between gap-4">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-metal-strong)]">
               Lộ trình tư vấn
@@ -89,9 +89,9 @@ export function HeroSection() {
               4 bước
             </span>
           </div>
-          <ol className="mt-[var(--space-4)] divide-y divide-[var(--color-border)]">
+          <ol className="mt-[var(--space-3)] divide-y divide-[var(--color-border)]">
             {DELIVERY_STEPS.map((item, index) => (
-              <li key={item} className="flex items-center gap-[var(--space-3)] py-[var(--space-3)] first:pt-0 last:pb-0">
+              <li key={item} className="flex items-center gap-[var(--space-3)] py-[var(--space-2)] first:pt-0 last:pb-0">
                 <span
                   aria-hidden="true"
                   className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-xs font-bold text-[var(--color-primary-contrast)]"
@@ -104,7 +104,7 @@ export function HeroSection() {
           </ol>
           <a
             href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-            className="mt-[var(--space-5)] flex min-h-12 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-metal)]/55 bg-[var(--color-metal-soft)]/75 px-[var(--space-4)] text-center text-sm font-bold text-[var(--color-metal-strong)] transition hover:bg-[var(--color-metal-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+            className="mt-[var(--space-4)] flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-metal)]/55 bg-[var(--color-metal-soft)]/75 px-[var(--space-4)] text-center text-sm font-bold text-[var(--color-metal-strong)] transition hover:bg-[var(--color-metal-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             Cần gấp? Gọi kỹ sư {COMPANY_CONFIG.phones[0].display}
           </a>
