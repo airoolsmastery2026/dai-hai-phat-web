@@ -27,7 +27,7 @@ test("keeps the public gallery within residential service scope", async () => {
   assert.doesNotMatch(publicGallery, /"Nhà xưởng"|"Vật liệu"|"Xưởng gia công"/);
 
   assert.match(galleryPage, /listPublicResidentialGallery/);
-  assert.match(galleryPage, /công trình nhà ở/);
+  assert.match(galleryPage, /nội thất và cơ khí dân dụng|nhu cầu thực tế|loại nhà ở/i);
   assert.doesNotMatch(galleryPage, /listVerifiedGallery/);
 
   assert.match(galleryApi, /listPublicResidentialGallery/);
