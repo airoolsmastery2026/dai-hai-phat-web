@@ -30,7 +30,7 @@ const configPath = new URL(
 );
 const themePath = new URL("../src/lib/theme.ts", import.meta.url);
 
-test("concept studio stays inside the Đại Hải Phát website", async () => {
+test("concept studio stays inside the Đại Hải Phát website without entering public navigation", async () => {
   const [page, client, protectedClient, theme] = await Promise.all([
     readFile(pagePath, "utf8"),
     readFile(clientPath, "utf8"),
@@ -40,7 +40,7 @@ test("concept studio stays inside the Đại Hải Phát website", async () => {
 
   assert.match(page, /ProtectedConceptStudio/);
   assert.match(page, /process\.env\.GEMINI_API_KEY/);
-  assert.match(theme, /\/cong-cu\/ai-phoi-canh/);
+  assert.doesNotMatch(theme, /\/cong-cu\/ai-phoi-canh/);
   assert.match(client, /fetch\("\/api\/ai\/concept"/);
   assert.match(protectedClient, /Bản xem trước được bảo vệ/);
   assert.match(protectedClient, /COMPANY_CONFIG\.socials\.zalo1/);
