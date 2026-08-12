@@ -35,7 +35,7 @@ export function AIConsultationCta({
             </p>
           </div>
           <div className="flex w-full flex-shrink-0 flex-col gap-[var(--space-2)] sm:w-auto sm:flex-row">
-            <Button href="/#contact" className="w-full sm:w-auto">
+            <Button href="/contact" className="w-full sm:w-auto">
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               Trao đổi với kỹ sư
             </Button>
