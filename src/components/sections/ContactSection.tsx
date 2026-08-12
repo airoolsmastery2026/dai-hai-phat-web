@@ -74,7 +74,7 @@ function ContactLine({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="flex min-h-11 items-center gap-[var(--space-3)] rounded-[var(--radius-md)] bg-white/8 px-[var(--space-3)] py-[var(--space-2)] transition hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+      className="flex min-h-11 items-center gap-[var(--space-3)] rounded-[var(--radius-md)] bg-white/10 px-[var(--space-3)] py-[var(--space-2)] transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
     >
       <Icon className="h-4 w-4 shrink-0 text-white/70" aria-hidden="true" />
       <span className="min-w-0">
