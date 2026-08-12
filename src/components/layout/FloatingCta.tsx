@@ -8,7 +8,7 @@ import { COMPANY_CONFIG } from "@/content/company";
 const buttons = [
   {
     label: "Trao đổi với kỹ sư",
-    href: "/#contact",
+    href: "/contact",
     icon: MessageCircle,
     tone: "bg-[var(--color-primary)]",
   },
