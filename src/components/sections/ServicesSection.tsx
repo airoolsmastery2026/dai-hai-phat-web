@@ -29,23 +29,34 @@ export function ServicesSection() {
           {SERVICES.slice(0, 6).map((service) => {
             const aiHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
             const serviceHref = `/services/${getPublicRouteSlug(service.slug)}`;
+            const ServiceIcon = service.icon;
 
             return (
               <article
                 key={service.id}
-                className="group flex h-full flex-col rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-4)] shadow-[var(--shadow-sm)] transition duration-[var(--duration-fast)] hover:border-[var(--color-metal)] hover:shadow-[var(--shadow-md)]"
+                className="group flex h-full flex-col rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-5)] shadow-[var(--shadow-sm)] transition duration-[var(--duration-fast)] hover:border-[var(--color-metal)] hover:shadow-[var(--shadow-md)]"
               >
-                <h3 className="text-lg font-bold text-[var(--color-text)]">
-                  {service.title}
-                </h3>
+                <div className="flex items-start gap-[var(--space-3)]">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary-soft)] text-[var(--color-primary-soft-text)]">
+                    <ServiceIcon className="size-6" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-metal-strong)]">
+                      {service.subtitle}
+                    </p>
+                    <h3 className="mt-[var(--space-1)] text-lg font-bold leading-6 text-[var(--color-text)]">
+                      {service.title}
+                    </h3>
+                  </div>
+                </div>
                 <p className="mt-[var(--space-3)] text-sm leading-6 text-[var(--color-text-muted)]">
-                  {service.summary}
+                  {service.desc}
                 </p>
                 <div className="mt-auto grid gap-[var(--space-2)] pt-[var(--space-4)]">
                   <Link
                     href={aiHref}
                     aria-label={`Tư vấn ${service.title} bằng AI`}
-                    className="inline-flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-center text-sm font-bold text-[var(--color-primary-contrast)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+                    className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-center text-sm font-bold text-[var(--color-primary-contrast)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
                   >
                     <Bot className="h-4 w-4" aria-hidden="true" />
                     Tư vấn hạng mục
@@ -53,7 +64,7 @@ export function ServicesSection() {
                   <Link
                     href={serviceHref}
                     aria-label={`Xem chi tiết ${service.title}`}
-                    className="inline-flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+                    className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
                   >
                     Xem chi tiết
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
