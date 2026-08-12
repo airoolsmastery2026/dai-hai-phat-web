@@ -28,12 +28,12 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Liên hệ kỹ thuật"
         title="Gửi hiện trạng, kỹ sư sẽ tiếp nhận"
-        description="Gửi ảnh, kích thước dự kiến và vị trí công trình qua Zalo; hoặc gọi trực tiếp khi cần trao đổi nhanh. Đội ngũ sẽ xác nhận thông tin trước khi khảo sát."
+        description="Gửi ảnh, kích thước dự kiến và vị trí qua Zalo; hoặc gọi trực tiếp khi cần trao đổi nhanh trước khảo sát."
       />
 
-      <section className="py-[var(--space-10)] lg:py-[var(--space-section)]">
-        <Container className="grid gap-[var(--space-5)] lg:grid-cols-[0.9fr_1.1fr]">
-          <Card className="space-y-[var(--space-4)] p-[var(--space-5)] sm:p-[var(--space-6)]">
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
+        <Container className="grid gap-[var(--space-4)] lg:grid-cols-[0.9fr_1.1fr]">
+          <Card className="space-y-[var(--space-3)] p-[var(--space-4)] sm:p-[var(--space-5)]">
             <ContactItem icon={MapPin} label="Địa chỉ">
               <a
                 href={COMPANY_CONFIG.googleMapsUrl}
@@ -62,15 +62,15 @@ export default function ContactPage() {
             </ContactItem>
           </Card>
 
-          <Card className="p-[var(--space-5)] sm:p-[var(--space-6)]">
-            <MessageCircle className="h-7 w-7 text-[var(--color-primary)]" aria-hidden="true" />
-            <h2 className="mt-[var(--space-3)] text-2xl font-bold text-[var(--color-text)]">
+          <Card className="p-[var(--space-4)] sm:p-[var(--space-5)]">
+            <MessageCircle className="h-6 w-6 text-[var(--color-primary)]" aria-hidden="true" />
+            <h2 className="mt-[var(--space-2)] text-xl font-bold text-[var(--color-text)]">
               Trao đổi đúng người, đúng hạng mục
             </h2>
-            <p className="mt-[var(--space-3)] max-w-2xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
-              Zalo phù hợp để gửi ảnh hiện trạng. Hotline dành cho trường hợp cần kỹ sư hoặc nhân viên tư vấn trao đổi ngay về phạm vi công việc.
+            <p className="mt-[var(--space-2)] max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">
+              Zalo phù hợp để gửi ảnh hiện trạng. Hotline dành cho trường hợp cần trao đổi ngay về phạm vi công việc.
             </p>
-            <div className="mt-[var(--space-5)] flex flex-col gap-[var(--space-2)] sm:flex-row">
+            <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-2)] sm:flex-row">
               <Button href={COMPANY_CONFIG.socials.zalo1} external>
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Gửi nhu cầu qua Zalo
@@ -80,7 +80,7 @@ export default function ContactPage() {
                 Gọi {COMPANY_CONFIG.phones[0].display}
               </Button>
             </div>
-            <p className="mt-[var(--space-4)] text-xs leading-5 text-[var(--color-text-subtle)]">
+            <p className="mt-[var(--space-3)] text-xs leading-5 text-[var(--color-text-subtle)]">
               Báo giá chính thức chỉ được lập sau khi thông tin hiện trạng và phạm vi công việc được xác nhận.
             </p>
           </Card>
@@ -100,11 +100,11 @@ function ContactItem({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-start gap-[var(--space-3)] border-b border-[var(--color-border)] pb-[var(--space-4)] last:border-b-0 last:pb-0">
-      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
+    <div className="flex items-start gap-[var(--space-3)] border-b border-[var(--color-border)] pb-[var(--space-3)] last:border-b-0 last:pb-0">
+      <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
       <div className="min-w-0">
-        <p className="font-semibold text-[var(--color-text)]">{label}</p>
-        <div className="mt-1 text-sm leading-6 text-[var(--color-text-muted)]">{children}</div>
+        <p className="text-sm font-semibold text-[var(--color-text)]">{label}</p>
+        <div className="mt-[var(--space-1)] text-sm leading-6 text-[var(--color-text-muted)]">{children}</div>
       </div>
     </div>
   );
