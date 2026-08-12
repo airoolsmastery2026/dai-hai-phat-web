@@ -34,30 +34,30 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Về Đại Hải Phát"
         title="Nội thất và cơ khí dân dụng cho không gian sống"
-        description="Đại Hải Phát đồng hành từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt cho nhà phố, căn hộ và biệt thự."
+        description="Từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt cho nhà phố, căn hộ và biệt thự."
       />
 
-      <section className="py-[var(--space-10)] lg:py-[var(--space-section)]">
-        <Container className="grid gap-[var(--space-5)] lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="p-[var(--space-5)] sm:p-[var(--space-6)]">
-            <h2 className="text-xl font-bold text-[var(--color-text)]">Phạm vi làm việc</h2>
-            <p className="mt-[var(--space-3)] text-sm leading-7 text-[var(--color-text-muted)]">
-              Nội thất, cửa cổng, cầu thang, lan can, mái che và gia công cơ khí theo yêu cầu. Phương án chỉ được chốt sau khi kích thước, vật liệu và điều kiện thi công đã được xác nhận.
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
+        <Container className="grid gap-[var(--space-4)] lg:grid-cols-[1.1fr_0.9fr]">
+          <Card className="p-[var(--space-4)] sm:p-[var(--space-5)]">
+            <h2 className="text-lg font-bold text-[var(--color-text)]">Phạm vi làm việc</h2>
+            <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)]">
+              Nội thất, cửa cổng, cầu thang, lan can, mái che và gia công cơ khí theo yêu cầu. Phương án chỉ chốt sau khi kích thước, vật liệu và điều kiện thi công được xác nhận.
             </p>
-            <p className="mt-[var(--space-3)] text-sm leading-7 text-[var(--color-text-muted)]">
+            <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)]">
               Báo giá chính thức được lập sau bước khảo sát và xác nhận phạm vi công việc.
             </p>
           </Card>
 
-          <Card className="p-[var(--space-5)] sm:p-[var(--space-6)]">
-            <h2 className="text-xl font-bold text-[var(--color-text)]">Dữ liệu vận hành</h2>
-            <div className="mt-[var(--space-4)] grid grid-cols-2 gap-[var(--space-3)]">
+          <Card className="p-[var(--space-4)] sm:p-[var(--space-5)]">
+            <h2 className="text-lg font-bold text-[var(--color-text)]">Dữ liệu vận hành</h2>
+            <div className="mt-[var(--space-3)] grid grid-cols-2 gap-[var(--space-2)]">
               {COMPANY_STATS.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-[var(--radius-md)] bg-[var(--color-surface-muted)] p-[var(--space-4)]"
+                  className="rounded-[var(--radius-md)] bg-[var(--color-surface-muted)] p-[var(--space-3)]"
                 >
-                  <p className="text-xl font-bold text-[var(--color-primary)]">{stat.value}</p>
+                  <p className="text-lg font-bold text-[var(--color-primary)]">{stat.value}</p>
                   <p className="mt-[var(--space-1)] text-xs leading-5 text-[var(--color-text-muted)]">{stat.label}</p>
                 </div>
               ))}
