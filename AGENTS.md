@@ -20,6 +20,10 @@ For every UI change, also read these files completely:
 2. `COMPONENTS.md`
 3. `.ai/UI_PROMPT.md`
 
+For every UI task that uses an external website, screenshot, competitor, or design as a reference, also read:
+
+1. `.ai/skills/reference-ui-research/SKILL.md`
+
 ## Product scope
 
 The product serves residential gates, doors, stairs, railings, awnings, interiors, and home renovation. Do not expand toward industrial mechanical works or large structural projects unless explicitly requested.
@@ -38,7 +42,7 @@ The product serves residential gates, doors, stairs, railings, awnings, interior
 
 - Keep Next.js, TypeScript, Tailwind CSS v3, verified content, and the current architecture.
 - Do not add packages, files, components, abstractions, services, databases, queues, caches, proxies, or observability stacks without a demonstrated need and an architecture decision.
-- External reference architectures and diagrams are learning inputs, not permission to copy their infrastructure.
+- External reference architectures, diagrams, websites, and designs are learning inputs, not permission to copy their infrastructure, brand, assets, source code, content, or visual identity.
 - Reuse existing sources of truth and design tokens.
 - Never hardcode or expose secrets, tokens, API keys, or private configuration.
 - Work only inside the explicit task or current batch scope.
@@ -168,6 +172,7 @@ It currently runs type-check, lint, unit tests, and production build. Run narrow
 - Reuse existing components and design tokens.
 - Prioritize speed, accessibility, clarity, one-hand usability, and conversion.
 - Avoid effects that reduce performance or distract from the customer journey.
+- When using an external reference, extract reusable UX/UI patterns and translate them into DHP-native tokens/components; do not target pixel parity or copy protected brand expression.
 
 ## Verification before completion
 
