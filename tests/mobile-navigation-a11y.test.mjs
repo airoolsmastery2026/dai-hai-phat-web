@@ -19,7 +19,10 @@ test("keeps mobile navigation keyboard accessible", async () => {
   assert.match(navigation, /role="dialog"/);
   assert.match(navigation, /aria-modal="true"/);
   assert.match(navigation, /aria-labelledby="mobile-navigation-title"/);
-  assert.match(navigation, /window\.matchMedia\("\(min-width: 1024px\)"\)/);
+  assert.match(navigation, /window\.matchMedia\("\(min-width: 1280px\)"\)/);
+  assert.match(navigation, /className="hidden items-center gap-\[var\(--space-6\)\] xl:flex"/);
+  assert.match(navigation, /focus-visible:ring-\[var\(--color-focus\)\] xl:hidden/);
+  assert.match(navigation, /shadow-\[var\(--shadow-md\)\] xl:hidden/);
 
   const closeHandlers = navigation.match(/onClick=\{\(\) => closeMenu\(\)\}/g) ?? [];
   assert.ok(closeHandlers.length >= 3, "All mobile navigation actions should close the menu");
