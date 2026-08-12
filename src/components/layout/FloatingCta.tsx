@@ -4,7 +4,6 @@ import { MessageCircle, Phone, Send, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { COMPANY_CONFIG } from "@/content/company";
-import { useMobileAIOfficeVisibility } from "@/hooks/useMobileAIOfficeVisibility";
 
 const buttons = [
   {
@@ -29,7 +28,6 @@ const buttons = [
 
 export function FloatingCta() {
   const [open, setOpen] = useState(false);
-  const isMobileOfficeVisible = useMobileAIOfficeVisibility();
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -41,8 +39,6 @@ export function FloatingCta() {
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
-
-  if (isMobileOfficeVisible) return null;
 
   return (
     <div className="fixed bottom-[max(var(--space-4),env(safe-area-inset-bottom))] right-[var(--space-4)] z-50 lg:right-[var(--space-8)]">
