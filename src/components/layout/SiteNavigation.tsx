@@ -89,7 +89,7 @@ export function SiteNavigation() {
           <span className="text-base font-black uppercase tracking-[0.04em] text-[var(--color-text)] sm:text-lg">
             ĐẠI HẢI PHÁT
           </span>
-          <span className="text-[8px] font-semibold uppercase tracking-[0.16em] text-[var(--color-metal-strong)] sm:text-[9px]">
+          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-metal-strong)] sm:text-[10px]">
             Văn phòng kỹ thuật số
           </span>
         </Link>
@@ -117,7 +117,7 @@ export function SiteNavigation() {
             {COMPANY_CONFIG.phones[0].display}
           </a>
           <Link
-            href="/#contact"
+            href="/contact"
             className="inline-flex min-h-11 items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
@@ -167,7 +167,7 @@ export function SiteNavigation() {
           </nav>
           <div className="grid grid-cols-2 gap-[var(--space-2)] pt-[var(--space-2)]">
             <Link
-              href="/#contact"
+              href="/contact"
               onClick={() => closeMenu()}
               className="flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-3)] text-center text-sm font-bold text-[var(--color-primary-contrast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
