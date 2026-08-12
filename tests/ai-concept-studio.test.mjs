@@ -12,6 +12,10 @@ const pagePath = new URL(
   "../src/app/cong-cu/ai-phoi-canh/page.tsx",
   import.meta.url,
 );
+const toolsIndexPath = new URL(
+  "../src/app/cong-cu/page.tsx",
+  import.meta.url,
+);
 const clientPath = new URL(
   "../src/components/ai/AIConceptStudio.tsx",
   import.meta.url,
@@ -29,6 +33,12 @@ const configPath = new URL(
   import.meta.url,
 );
 const themePath = new URL("../src/lib/theme.ts", import.meta.url);
+
+test("tools index forwards visitors to the available concept studio", async () => {
+  const toolsIndex = await readFile(toolsIndexPath, "utf8");
+
+  assert.match(toolsIndex, /redirect\("\/cong-cu\/ai-phoi-canh"\)/);
+});
 
 test("concept studio stays inside the Đại Hải Phát website without entering public navigation", async () => {
   const [page, client, protectedClient, theme] = await Promise.all([
