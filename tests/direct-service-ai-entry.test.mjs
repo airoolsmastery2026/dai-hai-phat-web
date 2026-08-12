@@ -23,4 +23,7 @@ test("lets customers start the AI intake directly from service cards", async () 
   assert.doesNotMatch(serviceCard, /return \(\s*<Link[\s\S]*<Link/);
   assert.match(serviceCard, /Xem chi tiết/);
   assert.match(homepageServices, /Bắt đầu hồ sơ tư vấn ngay/);
+  assert.match(homepageServices, /const ServiceIcon = service\.icon/);
+  assert.match(homepageServices, /<ServiceIcon/);
+  assert.match(homepageServices, /min-h-\[var\(--control-min-size\)\]/);
 });
