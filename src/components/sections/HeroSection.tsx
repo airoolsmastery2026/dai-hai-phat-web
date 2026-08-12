@@ -35,7 +35,7 @@ export function HeroSection() {
       <Container className="relative grid items-center gap-[var(--space-8)] py-[var(--space-6)] sm:py-[var(--space-10)] lg:min-h-[34rem] lg:grid-cols-[1.08fr_0.72fr] lg:gap-[var(--space-12)] lg:py-[var(--space-14)]">
         <div className="max-w-[42rem]">
           <span className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-full)] border border-[var(--color-metal)]/45 bg-[var(--color-metal-soft)]/85 px-[var(--space-3)] py-[var(--space-2)] text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-metal-strong)]">
-            <HardHat className="h-4 w-4" aria-hidden="true" /> Tư vấn nhà ở 24/7
+            <HardHat className="h-4 w-4" aria-hidden="true" /> Tiếp nhận yêu cầu 24/7
           </span>
 
           <h1 className="mt-[var(--space-4)] text-[length:var(--font-display)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[var(--color-text)]">
