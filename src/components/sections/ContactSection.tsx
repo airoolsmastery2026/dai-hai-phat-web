@@ -1,4 +1,5 @@
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, MapPin, MessageCircle, Phone } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { COMPANY_CONFIG } from "@/content/company";
@@ -10,18 +11,21 @@ export function ContactSection() {
       className="scroll-mt-16 bg-[var(--color-surface)] py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]"
     >
       <Container>
-        <div className="grid gap-[var(--space-4)] rounded-[var(--radius-lg)] bg-[var(--color-surface-dark)] p-[var(--space-4)] text-white shadow-[var(--shadow-md)] sm:p-[var(--space-5)] lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:p-[var(--space-6)]">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/75">
-              Cần tư vấn?
-            </p>
-            <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold leading-tight">
-              Gửi hiện trạng, kỹ sư sẽ tiếp nhận
-            </h2>
-            <p className="mt-[var(--space-2)] max-w-xl text-sm leading-6 text-white/80 sm:text-base">
-              Chỉ cần ảnh, kích thước dự kiến và vị trí công trình. Đội ngũ sẽ liên hệ để xác nhận trước khảo sát.
-            </p>
-            <div className="mt-[var(--space-4)] grid gap-[var(--space-2)] sm:flex">
+        <div className="rounded-[var(--radius-lg)] bg-[var(--color-surface-dark)] p-[var(--space-4)] text-white shadow-[var(--shadow-md)] sm:p-[var(--space-5)] lg:p-[var(--space-6)]">
+          <div className="flex flex-col gap-[var(--space-4)] lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/75">
+                Cần tư vấn?
+              </p>
+              <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold leading-tight">
+                Gửi hiện trạng, kỹ sư sẽ tiếp nhận
+              </h2>
+              <p className="mt-[var(--space-2)] text-sm leading-6 text-white/80 sm:text-base">
+                Gửi ảnh, kích thước dự kiến và vị trí công trình để đội ngũ xác nhận trước khảo sát.
+              </p>
+            </div>
+
+            <div className="grid gap-[var(--space-2)] sm:grid-cols-2 lg:flex lg:flex-shrink-0">
               <a
                 href={COMPANY_CONFIG.socials.zalo1}
                 target="_blank"
@@ -39,51 +43,24 @@ export function ContactSection() {
             </div>
           </div>
 
-          <address className="grid gap-[var(--space-2)] not-italic sm:grid-cols-2 lg:grid-cols-1">
-            <ContactLine icon={Phone} label="Hotline chính" href={`tel:${COMPANY_CONFIG.phones[0].raw}`}>
-              {COMPANY_CONFIG.phones[0].display}
-            </ContactLine>
-            <ContactLine icon={Phone} label="Hotline hỗ trợ" href={`tel:${COMPANY_CONFIG.phones[1].raw}`}>
-              {COMPANY_CONFIG.phones[1].display}
-            </ContactLine>
-            <ContactLine icon={Mail} label="Email" href={`mailto:${COMPANY_CONFIG.email}`}>
-              {COMPANY_CONFIG.email}
-            </ContactLine>
-            <ContactLine icon={MapPin} label="Địa chỉ" href={COMPANY_CONFIG.googleMapsUrl} external>
-              {COMPANY_CONFIG.address}
-            </ContactLine>
-          </address>
+          <div className="mt-[var(--space-4)] flex flex-wrap items-center gap-x-[var(--space-4)] gap-y-[var(--space-2)] border-t border-white/15 pt-[var(--space-3)] text-sm text-white/70">
+            <a
+              href={COMPANY_CONFIG.googleMapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-[var(--space-2)] transition hover:text-white"
+            >
+              <MapPin className="h-4 w-4" aria-hidden="true" /> Xem vị trí
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-[var(--space-2)] font-semibold text-white transition hover:text-[var(--color-primary-soft-text)]"
+            >
+              Đầy đủ thông tin liên hệ <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </Container>
     </section>
-  );
-}
-
-function ContactLine({
-  icon: Icon,
-  label,
-  href,
-  external = false,
-  children,
-}: {
-  icon: typeof Phone;
-  label: string;
-  href: string;
-  external?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer" : undefined}
-      className="flex min-h-11 items-center gap-[var(--space-3)] rounded-[var(--radius-md)] bg-white/10 px-[var(--space-3)] py-[var(--space-2)] transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-    >
-      <Icon className="h-4 w-4 shrink-0 text-white/70" aria-hidden="true" />
-      <span className="min-w-0">
-        <span className="block text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">{label}</span>
-        <span className="block break-words text-sm font-semibold text-white">{children}</span>
-      </span>
-    </a>
   );
 }
