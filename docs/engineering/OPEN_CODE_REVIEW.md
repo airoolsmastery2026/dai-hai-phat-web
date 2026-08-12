@@ -34,6 +34,15 @@ npm run build
 
 When using an agent plugin, request: review the branch against `main`, fix high-confidence issues, then rerun affected tests.
 
+## Base freshness and dependency audit
+
+Quality decisions must be based on the pull request merged with the current `main`, not on an old workflow result from an earlier base revision.
+
+- If `main` changes materially while a pull request is open, trigger a fresh Quality run before merge.
+- A previous `npm audit` failure is not waived. Re-run the gate after dependency fixes land on `main` and verify the current merge result.
+- Do not disable or lower the `npm audit --audit-level=high` threshold just to make a stale pull request green.
+- If the current merge result still reports a high-severity dependency issue, fix or explicitly replace the affected dependency before merge.
+
 ## Decision rules
 
 - `critical` / `high` with high confidence: fix before merge unless evidence proves it is a false positive.
