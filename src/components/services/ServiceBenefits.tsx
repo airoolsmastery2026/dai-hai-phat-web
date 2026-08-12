@@ -14,28 +14,26 @@ export function ServiceBenefits({ benefits }: { benefits: ServiceItem["benefits"
   }
 
   return (
-    <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-8)] shadow-[var(--shadow-sm)] md:p-[var(--space-10)]">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+    <section className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-4)] sm:p-[var(--space-5)]" aria-labelledby="service-benefits-title">
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
         Lợi ích chính
       </p>
-      <div className="mt-[var(--space-8)] grid gap-[var(--space-4)] md:grid-cols-2">
+      <h2 id="service-benefits-title" className="mt-[var(--space-2)] text-xl font-bold text-[var(--color-text)]">
+        Giá trị cần giữ khi chốt phương án
+      </h2>
+      <ul className="mt-[var(--space-3)] grid gap-x-[var(--space-5)] gap-y-[var(--space-2)] md:grid-cols-2">
         {benefits.map((benefit) => (
-          <div
-            key={benefit}
-            className="flex items-start gap-[var(--space-4)] rounded-[var(--radius-lg)] bg-[var(--color-surface)] p-[var(--space-5)] shadow-[var(--shadow-sm)]"
-          >
-            <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-[var(--radius-full)] bg-[var(--color-success-soft)]">
-              <CheckCircle2
-                className="h-5 w-5 text-[var(--color-success)]"
-                aria-hidden="true"
-              />
-            </div>
-            <p className="text-sm font-medium text-[var(--color-text-muted)]">
+          <li key={benefit} className="flex items-start gap-[var(--space-2)] py-[var(--space-1)]">
+            <CheckCircle2
+              className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-success)]"
+              aria-hidden="true"
+            />
+            <span className="text-sm leading-6 text-[var(--color-text-muted)]">
               {benefit}
-            </p>
-          </div>
+            </span>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 }
