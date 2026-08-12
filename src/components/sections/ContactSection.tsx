@@ -7,10 +7,10 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-16 bg-[var(--color-surface)] py-[var(--space-10)] lg:py-[var(--space-section)]"
+      className="scroll-mt-16 bg-[var(--color-surface)] py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]"
     >
       <Container>
-        <div className="grid gap-[var(--space-6)] rounded-[var(--radius-xl)] bg-[var(--color-surface-dark)] p-[var(--space-5)] text-white shadow-[var(--shadow-md)] sm:p-[var(--space-6)] lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:p-[var(--space-8)]">
+        <div className="grid gap-[var(--space-4)] rounded-[var(--radius-lg)] bg-[var(--color-surface-dark)] p-[var(--space-4)] text-white shadow-[var(--shadow-md)] sm:p-[var(--space-5)] lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:p-[var(--space-6)]">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/75">
               Cần tư vấn?
@@ -18,10 +18,10 @@ export function ContactSection() {
             <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold leading-tight">
               Gửi hiện trạng, kỹ sư sẽ tiếp nhận
             </h2>
-            <p className="mt-[var(--space-3)] max-w-xl text-sm leading-6 text-white/80 sm:text-base">
-              Chỉ cần ảnh, kích thước dự kiến và vị trí công trình. Đội ngũ sẽ liên hệ để xác nhận trước khi khảo sát.
+            <p className="mt-[var(--space-2)] max-w-xl text-sm leading-6 text-white/80 sm:text-base">
+              Chỉ cần ảnh, kích thước dự kiến và vị trí công trình. Đội ngũ sẽ liên hệ để xác nhận trước khảo sát.
             </p>
-            <div className="mt-[var(--space-5)] grid gap-[var(--space-2)] sm:flex">
+            <div className="mt-[var(--space-4)] grid gap-[var(--space-2)] sm:flex">
               <a
                 href={COMPANY_CONFIG.socials.zalo1}
                 target="_blank"
