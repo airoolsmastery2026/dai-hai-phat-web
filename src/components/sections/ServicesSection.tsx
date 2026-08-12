@@ -36,21 +36,27 @@ export function ServicesSection() {
         <div className="mt-[var(--space-5)] grid gap-[var(--space-3)] sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.slice(0, 4).map((service) => {
             const serviceHref = `/services/${getPublicRouteSlug(service.slug)}`;
+            const ServiceIcon = service.icon;
 
             return (
               <Link
                 key={service.id}
                 href={serviceHref}
                 aria-label={`Xem chi tiết ${service.title}`}
-                className="group flex h-full flex-col rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-4)] shadow-[var(--shadow-sm)] transition duration-[var(--duration-fast)] hover:-translate-y-0.5 hover:border-[var(--color-metal)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+                className="group flex min-h-[var(--control-min-size)] h-full flex-col rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-4)] shadow-[var(--shadow-sm)] transition duration-[var(--duration-fast)] hover:-translate-y-0.5 hover:border-[var(--color-metal)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
               >
-                <h3 className="text-base font-bold leading-6 text-[var(--color-text)]">
-                  {service.title}
-                </h3>
+                <div className="flex items-start gap-[var(--space-3)]">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary-soft)] text-[var(--color-primary-soft-text)]">
+                    <ServiceIcon className="size-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="pt-[var(--space-2)] text-base font-bold leading-6 text-[var(--color-text)]">
+                    {service.title}
+                  </h3>
+                </div>
                 <p className="mt-[var(--space-2)] line-clamp-2 text-sm leading-6 text-[var(--color-text-muted)]">
                   {service.summary}
                 </p>
-                <span className="mt-auto inline-flex items-center gap-[var(--space-2)] pt-[var(--space-3)] text-sm font-bold text-[var(--color-primary)]">
+                <span className="mt-auto inline-flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] pt-[var(--space-3)] text-sm font-bold text-[var(--color-primary)]">
                   Xem hạng mục
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                 </span>

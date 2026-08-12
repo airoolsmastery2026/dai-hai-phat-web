@@ -14,6 +14,9 @@ test("keeps service cards compact and routes consultation to engineers", async (
 
   assert.match(homepageServices, /href="\/contact"/);
   assert.match(homepageServices, /Nhờ kỹ sư tư vấn/);
+  assert.match(homepageServices, /const ServiceIcon = service\.icon/);
+  assert.match(homepageServices, /<ServiceIcon/);
+  assert.match(homepageServices, /min-h-\[var\(--control-min-size\)\]/);
   assert.doesNotMatch(homepageServices, /#ai-office|encodeURIComponent\(service\.aiService\)|Tư vấn AI/i);
 
   assert.match(serviceCard, /<article/);
