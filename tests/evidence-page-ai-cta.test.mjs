@@ -27,6 +27,9 @@ test("keeps evidence pages connected to human consultation", async () => {
   assert.match(gallery, /secondaryHref="\/services"/);
 
   assert.match(about, /<AIConsultationCta/);
-  assert.match(about, /chủ động đồng ý/);
+  assert.match(
+    about,
+    /Đội ngũ Đại Hải Phát sẽ kiểm tra thông tin và liên hệ để xác nhận bước tiếp theo/,
+  );
   assert.match(about, /secondaryHref="\/gallery"/);
 });
