@@ -52,7 +52,7 @@ test("Gemini Live panel captures PCM audio and cleans up browser resources", asy
   assert.match(source, /Tiếp tục bằng chat/);
 });
 
-test("AI Office only renders voice chat when the server configuration is present", async () => {
+test("AI Office voice integration remains available internally but is not mounted on the homepage", async () => {
   const [source, routeEntry, homePage] = await Promise.all([
     readFile(experiencePath, "utf8"),
     readFile(routeEntryPath, "utf8"),
@@ -64,8 +64,7 @@ test("AI Office only renders voice chat when the server configuration is present
   assert.match(source, /<GeminiLivePanel servicePreset=\{servicePreset\} \/>/);
   assert.match(source, /<AIOfficeSection key=\{sessionKey\} \/>/);
   assert.match(routeEntry, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
-  assert.match(homePage, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
-  assert.match(homePage, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
+  assert.doesNotMatch(homePage, /AIOfficeRouteEntry|liveVoiceEnabled|process\.env\.GEMINI_API_KEY|id="ai-office"/);
 });
 
 test("Gemini Live uses the constrained v1beta WebSocket endpoint", async () => {
