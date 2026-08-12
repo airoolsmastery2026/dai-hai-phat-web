@@ -25,7 +25,7 @@ export function ServicesSection() {
             </p>
           </div>
           <Link
-            href="/#contact"
+            href="/contact"
             className="inline-flex min-h-11 w-fit items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary)] transition-colors hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
