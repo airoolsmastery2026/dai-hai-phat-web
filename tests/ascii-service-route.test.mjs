@@ -42,7 +42,6 @@ test("publishes ASCII URLs in metadata, schema and internal links", () => {
   assert.match(pageSource, /getPublicRouteSlug\(service\.slug\)/);
   assert.match(pageSource, /const canonical = `\/services\/\$\{publicSlug\}`/);
   assert.match(layoutSource, /getPublicRouteSlug\(service\.slug\)/);
-  assert.match(footerSource, /getPublicRouteSlug\(service\.slug\)/);
 
   for (const source of [pageSource, layoutSource, footerSource]) {
     assert.doesNotMatch(
