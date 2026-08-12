@@ -14,7 +14,7 @@ async function readSkill() {
 test("DHP copywriter skill has a portable metadata contract", async () => {
   const source = await readSkill();
 
-  assert.match(source, /^---\nname: dhp-copywriter\n/m);
+  assert.match(source, /^---\r?\nname: dhp-copywriter\r?\n/m);
   assert.match(source, /description:/);
   assert.match(source, /version: "1\.0\.0"/);
 });

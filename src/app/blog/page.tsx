@@ -1,11 +1,11 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 
+import { JsonLd } from "@/components/seo/JsonLd";
 import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
-import { JsonLd } from "@/components/seo/JsonLd";
 import { ARTICLES } from "@/content/blog";
 import { COMPANY_CONFIG } from "@/content/company";
 
@@ -54,18 +54,18 @@ export default function BlogPage() {
       <PageHero
         eyebrow="Checklist kỹ thuật"
         title="Chuẩn bị đúng dữ liệu trước khi khảo sát"
-        description="Mỗi checklist tập trung vào dữ liệu giúp kỹ sư lập phương án chính xác hơn. Thông số vật liệu và tải trọng chỉ được kết luận sau khi đối chiếu hồ sơ kỹ thuật tương ứng."
+        description="Xem nhanh ảnh, kích thước và điều kiện hiện trạng cần chuẩn bị trước khi kỹ sư kiểm tra phương án."
       />
 
-      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
-          <div className="grid gap-[var(--space-5)] md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-[var(--space-4)] md:grid-cols-2 xl:grid-cols-3">
             {ARTICLES.map((article) => (
               <article
                 key={article.id}
-                className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]"
+                className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]"
               >
-                <div className="relative aspect-[16/10]">
+                <div className="relative h-40 sm:h-44">
                   <Image
                     src={article.image}
                     alt={article.title}
@@ -74,21 +74,21 @@ export default function BlogPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="p-[var(--space-5)]">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+                <div className="p-[var(--space-4)]">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-primary)]">
                     {article.category}
                   </p>
-                  <h2 className="mt-[var(--space-3)] text-xl font-bold leading-7 text-[var(--color-text)]">
+                  <h2 className="mt-[var(--space-2)] text-lg font-bold leading-6 text-[var(--color-text)]">
                     {article.title}
                   </h2>
-                  <p className="mt-[var(--space-3)] text-sm leading-6 text-[var(--color-text-muted)]">
+                  <p className="mt-[var(--space-2)] line-clamp-2 text-sm leading-6 text-[var(--color-text-muted)]">
                     {article.excerpt}
                   </p>
                   <Link
                     href={`/blog/${article.slug}`}
-                    className="mt-[var(--space-4)] inline-flex min-h-11 items-center gap-[var(--space-2)] text-sm font-bold text-[var(--color-primary)] hover:underline"
+                    className="mt-[var(--space-2)] inline-flex min-h-10 items-center text-sm font-bold text-[var(--color-primary)] hover:underline"
                   >
-                    Đọc thêm
+                    Xem checklist
                   </Link>
                 </div>
               </article>
@@ -98,9 +98,9 @@ export default function BlogPage() {
       </section>
 
       <AIConsultationCta
-        eyebrow="Từ checklist đến hồ sơ"
-        title="Ghi nhận dữ liệu dự án theo từng bước"
-        description="Chọn hạng mục trong trợ lý AI để lưu kích thước, vật liệu, vị trí và nhu cầu sử dụng trước khi đội ngũ kỹ thuật xác nhận khảo sát."
+        eyebrow="Từ checklist đến khảo sát"
+        title="Cần kỹ sư xem nhanh hiện trạng?"
+        description="Gửi hạng mục, vị trí, kích thước dự kiến và ảnh hiện trạng để đội ngũ kiểm tra trước khi hẹn khảo sát."
         secondaryHref="/services"
         secondaryLabel="Xem dịch vụ"
       />

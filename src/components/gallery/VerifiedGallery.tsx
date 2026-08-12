@@ -4,7 +4,6 @@ import { Filter, RefreshCw, Search } from "lucide-react";
 import Image from "next/image";
 import {
   useCallback,
-  useEffect,
   useRef,
   useState,
   type FormEvent,
@@ -19,17 +18,18 @@ interface GalleryApiResponse {
   error?: string;
 }
 
+const PAGE_SIZE = "6";
+
 export function VerifiedGallery({
   initialGallery,
 }: {
   initialGallery: VerifiedGalleryResponse;
 }) {
   const [gallery, setGallery] = useState(initialGallery);
-  const [activeQuery, setActiveQuery] = useState("limit=12");
+  const [activeQuery, setActiveQuery] = useState(`limit=${PAGE_SIZE}`);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  const sentinelRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef(false);
 
   const loadGallery = useCallback(async (query: string, append: boolean) => {
@@ -76,26 +76,12 @@ export function VerifiedGallery({
     void loadGallery(params.toString(), true);
   }, [activeQuery, gallery.nextCursor, isLoading, loadGallery]);
 
-  useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel || !gallery.nextCursor) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) loadMore();
-      },
-      { rootMargin: "240px 0px" },
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, [gallery.nextCursor, loadMore]);
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (loadingRef.current) return;
 
     const form = new FormData(event.currentTarget);
-    const params = new URLSearchParams({ limit: "12" });
+    const params = new URLSearchParams({ limit: PAGE_SIZE });
 
     ["search", "service", "category", "material", "style", "projectType"].forEach(
       (field) => {
@@ -111,7 +97,7 @@ export function VerifiedGallery({
 
   const resetFilters = () => {
     formRef.current?.reset();
-    const query = "limit=12";
+    const query = `limit=${PAGE_SIZE}`;
     setActiveQuery(query);
     void loadGallery(query, false);
   };
@@ -121,10 +107,10 @@ export function VerifiedGallery({
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-card)] shadow-[var(--shadow-sm)] sm:p-[var(--space-card-lg)]"
+        className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-4)] shadow-[var(--shadow-sm)] sm:p-[var(--space-5)]"
         aria-label="Bộ lọc thư viện công trình"
       >
-        <div className="grid gap-[var(--space-stack)] lg:grid-cols-[2fr_1fr_1fr]">
+        <div className="grid gap-[var(--space-3)] lg:grid-cols-[2fr_1fr_1fr]">
           <label className="grid gap-[var(--space-2)] text-sm font-semibold text-[var(--color-text)]">
             Tìm công trình
             <span className="relative">
@@ -136,7 +122,7 @@ export function VerifiedGallery({
                 name="search"
                 type="search"
                 maxLength={120}
-                placeholder="Ví dụ: phòng ngủ, cửa cổng, mái che"
+                placeholder="Phòng ngủ, cửa cổng, mái che…"
                 className="min-h-[var(--control-min-size)] w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] py-[var(--space-3)] pl-[var(--space-12)] pr-[var(--space-4)] font-normal text-[var(--color-text)] outline-none focus:border-[var(--color-focus)] focus:ring-2 focus:ring-[var(--color-primary-soft)]"
               />
             </span>
@@ -153,64 +139,69 @@ export function VerifiedGallery({
           />
         </div>
 
-        <div className="mt-[var(--space-stack)] grid gap-[var(--space-stack)] sm:grid-cols-2 lg:grid-cols-3">
-          <GallerySelect
-            name="material"
-            label="Vật liệu"
-            options={gallery.filters.materials}
-          />
-          <GallerySelect
-            name="style"
-            label="Phong cách"
-            options={gallery.filters.styles}
-          />
-          <GallerySelect
-            name="projectType"
-            label="Loại công trình"
-            options={gallery.filters.projectTypes}
-          />
-        </div>
+        <details className="mt-[var(--space-3)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)] px-[var(--space-3)] py-[var(--space-2)]">
+          <summary className="cursor-pointer text-sm font-bold text-[var(--color-primary)]">
+            Bộ lọc nâng cao
+          </summary>
+          <div className="mt-[var(--space-3)] grid gap-[var(--space-3)] sm:grid-cols-2 lg:grid-cols-3">
+            <GallerySelect
+              name="material"
+              label="Vật liệu"
+              options={gallery.filters.materials}
+            />
+            <GallerySelect
+              name="style"
+              label="Phong cách"
+              options={gallery.filters.styles}
+            />
+            <GallerySelect
+              name="projectType"
+              label="Loại công trình"
+              options={gallery.filters.projectTypes}
+            />
+          </div>
+        </details>
 
-        <div className="mt-[var(--space-stack)] grid gap-[var(--space-control)] sm:grid-cols-2">
+        <div className="mt-[var(--space-3)] grid gap-[var(--space-2)] sm:grid-cols-2">
           <button
             type="submit"
             disabled={isLoading}
-            className="flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-stack)] font-bold text-white transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-70"
+            className="flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] font-bold text-white transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-70"
           >
             <Filter className="h-4 w-4" aria-hidden="true" />
-            {isLoading ? "Đang đối chiếu công trình…" : "Lọc công trình"}
+            {isLoading ? "Đang lọc…" : "Lọc công trình"}
           </button>
           <button
             type="button"
             disabled={isLoading}
             onClick={resetFilters}
-            className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-stack)] font-semibold text-[var(--color-text-muted)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] disabled:cursor-wait disabled:opacity-70"
+            className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-4)] font-semibold text-[var(--color-text-muted)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] disabled:cursor-wait disabled:opacity-70"
           >
             Xóa bộ lọc
           </button>
         </div>
       </form>
 
-      <div className="mt-[var(--space-card-lg)] flex items-end justify-between gap-[var(--space-stack)]">
+      <div className="mt-[var(--space-5)] flex items-end justify-between gap-[var(--space-3)]">
         <div aria-live="polite">
           <p className="text-sm font-semibold text-[var(--color-primary)]">
-            {gallery.total} ảnh có metadata xác minh
+            {gallery.total} ảnh đã xác minh
           </p>
-          <h2 className="mt-[var(--space-2)] text-2xl font-bold text-[var(--color-text)] sm:text-3xl">
+          <h2 className="mt-[var(--space-1)] text-xl font-bold text-[var(--color-text)] sm:text-2xl">
             Công trình phù hợp
           </h2>
         </div>
         <p className="hidden text-sm text-[var(--color-text-subtle)] sm:block">
-          Đang hiển thị {gallery.items.length}/{gallery.total}
+          {gallery.items.length}/{gallery.total} ảnh
         </p>
       </div>
 
       {isLoading ? (
         <p
           role="status"
-          className="mt-[var(--space-control)] text-sm font-semibold text-[var(--color-text-muted)]"
+          className="mt-[var(--space-3)] text-sm font-semibold text-[var(--color-text-muted)]"
         >
-          Đang đối chiếu metadata và tải ảnh phù hợp…
+          Đang tải ảnh phù hợp…
         </p>
       ) : null}
 
@@ -218,13 +209,13 @@ export function VerifiedGallery({
         <Alert
           tone="error"
           title="Không thể cập nhật thư viện"
-          className="mt-[var(--space-stack)]"
+          className="mt-[var(--space-3)]"
         >
           <p>{error}</p>
           <button
             type="button"
             onClick={() => void loadGallery(activeQuery, false)}
-            className="mt-[var(--space-stack)] flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-danger)] px-[var(--space-stack)] font-semibold"
+            className="mt-[var(--space-3)] flex min-h-[var(--control-min-size)] items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-danger)] px-[var(--space-4)] font-semibold"
           >
             <RefreshCw className="h-4 w-4" aria-hidden="true" />
             Tải lại
@@ -233,13 +224,13 @@ export function VerifiedGallery({
       ) : null}
 
       {gallery.items.length ? (
-        <div className="mt-[var(--space-stack)] grid gap-[var(--space-stack)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-[var(--space-3)] grid gap-[var(--space-3)] sm:grid-cols-2 lg:grid-cols-3">
           {gallery.items.map((item) => (
             <article
               key={item.id}
               className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-muted)]">
+              <div className="relative aspect-[16/10] overflow-hidden bg-[var(--color-surface-muted)]">
                 <Image
                   src={item.thumbnail.url}
                   alt={item.alt}
@@ -250,51 +241,42 @@ export function VerifiedGallery({
                   className="object-cover transition-transform duration-[var(--duration-slow)] hover:scale-[1.02]"
                 />
               </div>
-              <div className="p-[var(--space-card)]">
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-primary)]">
+              <div className="p-[var(--space-4)]">
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-primary)]">
                   {item.service || item.category}
                 </p>
-                <h3 className="mt-[var(--space-2)] text-lg font-bold text-[var(--color-text)]">
+                <h3 className="mt-[var(--space-2)] text-base font-bold leading-6 text-[var(--color-text)]">
                   {item.title}
                 </h3>
-                <p className="mt-[var(--space-2)] line-clamp-2 text-sm leading-6 text-[var(--color-text-muted)]">
+                <p className="mt-[var(--space-1)] line-clamp-2 text-sm leading-6 text-[var(--color-text-muted)]">
                   {item.caption}
                 </p>
-                <dl className="mt-[var(--space-control)] grid gap-[var(--space-1)] text-xs text-[var(--color-text-subtle)]">
-                  {item.material ? (
-                    <div>
-                      <dt className="inline font-semibold text-[var(--color-text)]">Vật liệu: </dt>
-                      <dd className="inline">{item.material}</dd>
-                    </div>
-                  ) : null}
-                  {item.style ? (
-                    <div>
-                      <dt className="inline font-semibold text-[var(--color-text)]">Phong cách: </dt>
-                      <dd className="inline">{item.style}</dd>
-                    </div>
-                  ) : null}
-                </dl>
+                {item.material || item.style ? (
+                  <p className="mt-[var(--space-2)] line-clamp-1 text-xs text-[var(--color-text-subtle)]">
+                    {[item.material, item.style].filter(Boolean).join(" · ")}
+                  </p>
+                ) : null}
               </div>
             </article>
           ))}
         </div>
       ) : !isLoading ? (
         <EmptyState
-          className="mt-[var(--space-stack)]"
+          className="mt-[var(--space-3)]"
           title="Chưa có công trình phù hợp"
           description="Thay đổi bộ lọc để đối chiếu nhóm công trình khác."
         />
       ) : null}
 
-      <div ref={sentinelRef} className="mt-[var(--space-card-lg)] text-center">
+      <div className="mt-[var(--space-5)] text-center">
         {gallery.nextCursor ? (
           <button
             type="button"
             onClick={loadMore}
             disabled={isLoading}
-            className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-card-lg)] font-bold text-[var(--color-text)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] disabled:cursor-wait disabled:opacity-70"
+            className="min-h-[var(--control-min-size)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-5)] font-bold text-[var(--color-text)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] disabled:cursor-wait disabled:opacity-70"
           >
-            {isLoading ? "Đang nạp công trình đã xác minh…" : "Xem thêm công trình"}
+            {isLoading ? "Đang nạp…" : "Xem thêm công trình"}
           </button>
         ) : gallery.items.length ? (
           <p className="text-sm text-[var(--color-text-subtle)]">

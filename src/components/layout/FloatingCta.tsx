@@ -1,16 +1,15 @@
 "use client";
 
-import { Bot, Phone, Send, X } from "lucide-react";
+import { MessageCircle, Phone, Send, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { COMPANY_CONFIG } from "@/content/company";
-import { useMobileAIOfficeVisibility } from "@/hooks/useMobileAIOfficeVisibility";
 
 const buttons = [
   {
-    label: "Tư vấn AI 24/7",
-    href: "/#ai-office",
-    icon: Bot,
+    label: "Trao đổi với kỹ sư",
+    href: "/contact",
+    icon: MessageCircle,
     tone: "bg-[var(--color-primary)]",
   },
   {
@@ -25,17 +24,10 @@ const buttons = [
     icon: Send,
     tone: "bg-[var(--color-channel-zalo)]",
   },
-  {
-    label: "Trang liên hệ",
-    href: "/contact",
-    icon: Send,
-    tone: "bg-[var(--color-surface-dark)]",
-  },
 ];
 
 export function FloatingCta() {
   const [open, setOpen] = useState(false);
-  const isMobileOfficeVisible = useMobileAIOfficeVisibility();
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -47,8 +39,6 @@ export function FloatingCta() {
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
-
-  if (isMobileOfficeVisible) return null;
 
   return (
     <div className="fixed bottom-[max(var(--space-4),env(safe-area-inset-bottom))] right-[var(--space-4)] z-50 lg:right-[var(--space-8)]">
@@ -79,17 +69,15 @@ export function FloatingCta() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="ml-auto flex h-14 w-14 items-center justify-center rounded-[var(--radius-full)] bg-[var(--color-primary)] text-[var(--color-text-inverse)] shadow-[var(--shadow-lg)] ring-2 ring-[var(--color-primary-soft)] transition-transform duration-[var(--duration-fast)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface-dark)] lg:bg-[var(--color-surface-dark)] lg:ring-0"
-        aria-label={open ? "Đóng tư vấn và liên hệ nhanh" : "Mở tư vấn và liên hệ nhanh"}
+        className="ml-auto flex h-12 w-12 items-center justify-center rounded-[var(--radius-full)] bg-[var(--color-primary)] text-[var(--color-text-inverse)] shadow-[var(--shadow-lg)] ring-2 ring-[var(--color-primary-soft)] transition-transform duration-[var(--duration-fast)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface-dark)] lg:h-14 lg:w-14 lg:bg-[var(--color-surface-dark)] lg:ring-0"
+        aria-label={open ? "Đóng liên hệ nhanh" : "Mở liên hệ với kỹ sư"}
         aria-expanded={open}
         aria-controls="quick-contact-actions"
       >
         {open ? (
-          <X className="h-6 w-6" aria-hidden="true" />
+          <X className="h-5 w-5" aria-hidden="true" />
         ) : (
-          <span className="mobile-ai-attention" aria-hidden="true">
-            <Bot className="h-6 w-6" />
-          </span>
+          <MessageCircle className="h-5 w-5" aria-hidden="true" />
         )}
       </button>
     </div>

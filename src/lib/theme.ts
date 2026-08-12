@@ -23,8 +23,6 @@ export const theme = {
 export const NAV_ITEMS = [
   { label: "Trang chủ", href: "/" },
   { label: "Dịch vụ", href: "/services" },
-  { label: "Nhận tư vấn", href: "/#ai-office" },
-  { label: "Phối cảnh ý tưởng", href: "/cong-cu/ai-phoi-canh" },
   { label: "Công trình", href: "/gallery" },
   { label: "Checklist", href: "/blog" },
   { label: "Liên hệ", href: "/contact" },

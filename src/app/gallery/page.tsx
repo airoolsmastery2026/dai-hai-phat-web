@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
-  const initialGallery = listPublicResidentialGallery({ limit: 12 });
+  const initialGallery = listPublicResidentialGallery({ limit: 6 });
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -58,49 +58,42 @@ export default function GalleryPage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <JsonLd data={collectionSchema} />
-      <section className="border-b border-[var(--color-border)] bg-[linear-gradient(125deg,var(--color-surface)_0%,var(--color-primary-soft)_78%,var(--color-metal-soft)_100%)] py-[var(--space-12)] text-[var(--color-text)] lg:py-[var(--space-section)]">
+      <section className="border-b border-[var(--color-border)] bg-[linear-gradient(125deg,var(--color-surface)_0%,var(--color-primary-soft)_78%,var(--color-metal-soft)_100%)] py-[var(--space-8)] text-[var(--color-text)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-metal-strong)]">
-            Thư viện công trình đã xác minh
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-metal-strong)]">
+            Công trình đã xác minh
           </p>
-          <h1 className="mt-[var(--space-inline)] max-w-4xl text-[length:var(--font-h1)] font-extrabold leading-tight">
-            Tìm công trình theo nhu cầu thực tế
+          <h1 className="mt-[var(--space-3)] max-w-4xl text-[length:var(--font-h1)] font-extrabold leading-tight">
+            Tìm mẫu phù hợp với nhu cầu thực tế
           </h1>
-          <p className="mt-[var(--space-stack)] max-w-3xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
-            {initialGallery.total} ảnh công trình nhà ở được phân loại theo hạng
-            mục, vật liệu và phong cách. Mỗi ảnh đều có nguồn và quyền sử dụng đã
-            xác minh.
-          </p>
-          <p className="mt-[var(--space-control)] max-w-3xl text-sm leading-6 text-[var(--color-text-subtle)]">
-            Dữ liệu xưởng, vật liệu tham chiếu và công trình ngoài phạm vi dân dụng
-            vẫn được giữ trong Knowledge Base nhưng không xuất hiện trong thư viện
-            khách hàng.
+          <p className="mt-[var(--space-3)] max-w-3xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
+            {initialGallery.total} ảnh được phân loại theo hạng mục, vật liệu và phong cách để đối chiếu nhanh trước khi trao đổi với kỹ sư.
           </p>
         </Container>
       </section>
 
-      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
           <nav
             aria-label="Đường dẫn trang"
-            className="mb-[var(--space-stack)] text-sm text-[var(--color-text-subtle)]"
+            className="mb-[var(--space-3)] text-sm text-[var(--color-text-subtle)]"
           >
             <Link href="/" className="font-semibold hover:text-[var(--color-primary)]">
               Trang chủ
             </Link>
             <span aria-hidden="true"> / </span>
-            <span aria-current="page">Thư viện công trình</span>
+            <span aria-current="page">Công trình</span>
           </nav>
           <VerifiedGallery initialGallery={initialGallery} />
         </Container>
       </section>
 
       <AIConsultationCta
-        eyebrow="Từ mẫu tham khảo đến hồ sơ thực tế"
-        title="Lập hồ sơ cho không gian của anh/chị"
-        description="Trợ lý AI sẽ ghi nhận hạng mục, loại nhà ở, kích thước dự kiến và ưu tiên sử dụng. Mẫu trong thư viện chỉ dùng để đối chiếu, không thay thế khảo sát hiện trạng."
+        eyebrow="Từ mẫu tham khảo đến công trình thực tế"
+        title="Cần phương án phù hợp với nhà của anh/chị?"
+        description="Gửi hạng mục, kích thước dự kiến và ảnh hiện trạng. Kỹ sư sẽ kiểm tra trước khi tư vấn phương án và khảo sát."
         secondaryHref="/services"
-        secondaryLabel="Xem phạm vi dịch vụ"
+        secondaryLabel="Xem dịch vụ"
       />
     </main>
   );

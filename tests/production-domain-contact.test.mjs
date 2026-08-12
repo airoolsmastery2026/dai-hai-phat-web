@@ -10,8 +10,12 @@ const layoutSource = await readFile(
   new URL("../src/app/layout.tsx", import.meta.url),
   "utf8",
 );
-const contactSource = await readFile(
+const contactSectionSource = await readFile(
   new URL("../src/components/sections/ContactSection.tsx", import.meta.url),
+  "utf8",
+);
+const contactPageSource = await readFile(
+  new URL("../src/app/contact/page.tsx", import.meta.url),
   "utf8",
 );
 
@@ -28,9 +32,13 @@ test("company metadata uses the active Vercel production domain", () => {
   assert.doesNotMatch(layoutSource, /new URL\("https:\/\/daihaiphat\.vn"\)/);
 });
 
-test("contact section distinguishes primary and support hotlines", () => {
-  assert.match(contactSource, /label="Hotline chính"/);
-  assert.match(contactSource, /label="Hotline hỗ trợ"/);
-  assert.match(contactSource, /COMPANY_CONFIG\.phones\[0\]/);
-  assert.match(contactSource, /COMPANY_CONFIG\.phones\[1\]/);
+test("homepage keeps one primary hotline while the contact page preserves all phone numbers", () => {
+  assert.match(contactSectionSource, /COMPANY_CONFIG\.phones\[0\]/);
+  assert.doesNotMatch(contactSectionSource, /COMPANY_CONFIG\.phones\[1\]/);
+  assert.match(contactSectionSource, /href="\/contact"/);
+  assert.match(contactSectionSource, /Đầy đủ thông tin liên hệ/);
+
+  assert.match(contactPageSource, /COMPANY_CONFIG\.phones\.map/);
+  assert.match(contactPageSource, /phone\.raw/);
+  assert.match(contactPageSource, /phone\.display/);
 });

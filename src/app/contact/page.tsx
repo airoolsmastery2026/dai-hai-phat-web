@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Bot, Mail, MapPin, PhoneCall } from "lucide-react";
+import { Mail, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 
-import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -9,7 +8,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { COMPANY_CONFIG } from "@/content/company";
 
 const CONTACT_DESCRIPTION =
-  "Lập hồ sơ tư vấn kỹ thuật với Đại Hải Phát, sau đó gửi ảnh hiện trạng qua Zalo hoặc gọi kỹ sư để xác nhận khảo sát.";
+  "Gửi nhu cầu, ảnh hiện trạng và kích thước dự kiến cho Đại Hải Phát để kỹ sư tiếp nhận và xác nhận bước khảo sát tiếp theo.";
 
 export const metadata: Metadata = {
   title: "Liên hệ",
@@ -28,98 +27,85 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
         eyebrow="Liên hệ kỹ thuật"
-        title="Lập hồ sơ trước khi xác nhận khảo sát"
-        description="Bắt đầu với trợ lý AI để ghi nhận hạng mục, vị trí và kích thước dự kiến. Sau đó gửi ảnh hiện trạng qua Zalo hoặc gọi kỹ sư khi cần trao đổi nhanh."
+        title="Gửi hiện trạng, kỹ sư sẽ tiếp nhận"
+        description="Gửi ảnh, kích thước dự kiến và vị trí qua Zalo; hoặc gọi trực tiếp khi cần trao đổi nhanh trước khảo sát."
       />
 
-      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
-        <Container className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <Card className="space-y-[var(--space-6)] p-[var(--space-8)]">
-            <div className="flex items-start gap-3">
-              <MapPin className="mt-1 h-5 w-5 text-[var(--color-primary)]" />
-              <div>
-                <p className="font-semibold text-[var(--color-text)]">Địa chỉ</p>
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
+        <Container className="grid gap-[var(--space-4)] lg:grid-cols-[0.9fr_1.1fr]">
+          <Card className="space-y-[var(--space-3)] p-[var(--space-4)] sm:p-[var(--space-5)]">
+            <ContactItem icon={MapPin} label="Địa chỉ">
+              <a
+                href={COMPANY_CONFIG.googleMapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-[var(--color-primary)]"
+              >
+                {COMPANY_CONFIG.address}
+              </a>
+            </ContactItem>
+            <ContactItem icon={PhoneCall} label="Hotline">
+              {COMPANY_CONFIG.phones.map((phone) => (
                 <a
-                  href={COMPANY_CONFIG.googleMapsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-1 block text-sm leading-7 text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+                  key={phone.raw}
+                  href={`tel:${phone.raw}`}
+                  className="mr-[var(--space-3)] inline-block hover:text-[var(--color-primary)]"
                 >
-                  {COMPANY_CONFIG.address}
+                  {phone.display}
                 </a>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <PhoneCall className="mt-1 h-5 w-5 text-[var(--color-primary)]" />
-              <div>
-                <p className="font-semibold text-[var(--color-text)]">Hotline</p>
-                <div className="mt-1 space-y-1 text-sm leading-7 text-[var(--color-text-muted)]">
-                  {COMPANY_CONFIG.phones.map((phone) => (
-                    <a
-                      key={phone.raw}
-                      href={`tel:${phone.raw}`}
-                      className="block hover:text-[var(--color-primary)]"
-                    >
-                      {phone.display}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Mail className="mt-1 h-5 w-5 text-[var(--color-primary)]" />
-              <div>
-                <p className="font-semibold text-[var(--color-text)]">Email</p>
-                <a
-                  href={`mailto:${COMPANY_CONFIG.email}`}
-                  className="mt-1 block text-sm leading-7 text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
-                >
-                  {COMPANY_CONFIG.email}
-                </a>
-              </div>
-            </div>
+              ))}
+            </ContactItem>
+            <ContactItem icon={Mail} label="Email">
+              <a href={`mailto:${COMPANY_CONFIG.email}`} className="break-all hover:text-[var(--color-primary)]">
+                {COMPANY_CONFIG.email}
+              </a>
+            </ContactItem>
           </Card>
 
-          <Card className="p-[var(--space-8)]">
-            <Bot
-              className="h-8 w-8 text-[var(--color-primary)]"
-              aria-hidden="true"
-            />
-            <h2 className="mt-[var(--space-4)] text-2xl font-bold text-[var(--color-text)]">
-              Bắt đầu hồ sơ tư vấn
+          <Card className="p-[var(--space-4)] sm:p-[var(--space-5)]">
+            <MessageCircle className="h-6 w-6 text-[var(--color-primary)]" aria-hidden="true" />
+            <h2 className="mt-[var(--space-2)] text-xl font-bold text-[var(--color-text)]">
+              Trao đổi đúng người, đúng hạng mục
             </h2>
-            <p className="mt-[var(--space-4)] leading-7 text-[var(--color-text-muted)]">
-              Trợ lý AI giúp thu thập dữ liệu theo từng bước trước khi bàn giao cho
-              đội ngũ kỹ thuật. Zalo phù hợp để gửi ảnh hiện trạng; hotline dành
-              cho trường hợp cần trao đổi ngay.
+            <p className="mt-[var(--space-2)] max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">
+              Zalo phù hợp để gửi ảnh hiện trạng. Hotline dành cho trường hợp cần trao đổi ngay về phạm vi công việc.
             </p>
-            <div className="mt-[var(--space-6)] flex flex-col flex-wrap gap-[var(--space-3)] sm:flex-row">
-              <Button href="/#ai-office">Lập hồ sơ với AI</Button>
-              <Button
-                href={COMPANY_CONFIG.socials.zalo1}
-                variant="ghost"
-                external
-              >
-                Gửi ảnh qua Zalo
+            <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-2)] sm:flex-row">
+              <Button href={COMPANY_CONFIG.socials.zalo1} external>
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                Gửi nhu cầu qua Zalo
               </Button>
-              <Button
-                href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-                variant="ghost"
-              >
+              <Button href={`tel:${COMPANY_CONFIG.phones[0].raw}`} variant="secondary">
+                <PhoneCall className="h-4 w-4" aria-hidden="true" />
                 Gọi {COMPANY_CONFIG.phones[0].display}
               </Button>
             </div>
-            <Alert
-              title="Chỉ bàn giao khi khách hàng đồng ý"
-              className="mt-[var(--space-8)]"
-            >
-              Hồ sơ AI được lưu trên thiết bị trong quá trình nhập. Thông tin chỉ
-              được gửi cho Đại Hải Phát khi anh/chị hoàn tất hồ sơ và đồng ý bàn
-              giao. Ảnh hiện trạng có thể gửi riêng qua Zalo.
-            </Alert>
+            <p className="mt-[var(--space-3)] text-xs leading-5 text-[var(--color-text-subtle)]">
+              Báo giá chính thức chỉ được lập sau khi thông tin hiện trạng và phạm vi công việc được xác nhận.
+            </p>
           </Card>
         </Container>
       </section>
     </main>
+  );
+}
+
+function ContactItem({
+  icon: Icon,
+  label,
+  children,
+}: {
+  icon: typeof MapPin;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-start gap-[var(--space-3)] border-b border-[var(--color-border)] pb-[var(--space-3)] last:border-b-0 last:pb-0">
+      <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
+      <div className="min-w-0">
+        <p className="text-sm font-semibold text-[var(--color-text)]">{label}</p>
+        <div className="mt-[var(--space-1)] text-sm leading-6 text-[var(--color-text-muted)]">{children}</div>
+      </div>
+    </div>
   );
 }

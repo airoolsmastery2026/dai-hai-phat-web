@@ -12,6 +12,10 @@ const pagePath = new URL(
   "../src/app/cong-cu/ai-phoi-canh/page.tsx",
   import.meta.url,
 );
+const toolsIndexPath = new URL(
+  "../src/app/cong-cu/page.tsx",
+  import.meta.url,
+);
 const clientPath = new URL(
   "../src/components/ai/AIConceptStudio.tsx",
   import.meta.url,
@@ -30,7 +34,13 @@ const configPath = new URL(
 );
 const themePath = new URL("../src/lib/theme.ts", import.meta.url);
 
-test("concept studio stays inside the Đại Hải Phát website", async () => {
+test("tools index forwards visitors to the available concept studio", async () => {
+  const toolsIndex = await readFile(toolsIndexPath, "utf8");
+
+  assert.match(toolsIndex, /redirect\("\/cong-cu\/ai-phoi-canh"\)/);
+});
+
+test("concept studio stays inside the Đại Hải Phát website without entering public navigation", async () => {
   const [page, client, protectedClient, theme] = await Promise.all([
     readFile(pagePath, "utf8"),
     readFile(clientPath, "utf8"),
@@ -40,7 +50,7 @@ test("concept studio stays inside the Đại Hải Phát website", async () => {
 
   assert.match(page, /ProtectedConceptStudio/);
   assert.match(page, /process\.env\.GEMINI_API_KEY/);
-  assert.match(theme, /\/cong-cu\/ai-phoi-canh/);
+  assert.doesNotMatch(theme, /\/cong-cu\/ai-phoi-canh/);
   assert.match(client, /fetch\("\/api\/ai\/concept"/);
   assert.match(protectedClient, /Bản xem trước được bảo vệ/);
   assert.match(protectedClient, /COMPANY_CONFIG\.socials\.zalo1/);

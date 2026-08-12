@@ -34,44 +34,31 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Về Đại Hải Phát"
         title="Nội thất và cơ khí dân dụng cho không gian sống"
-        description="Đại Hải Phát đồng hành từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt cho nhà phố, căn hộ và biệt thự."
+        description="Từ tiếp nhận nhu cầu, khảo sát và chọn vật liệu đến gia công, lắp đặt cho nhà phố, căn hộ và biệt thự."
       />
 
-      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
-        <Container className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="p-[var(--space-8)]">
-            <h2 className="text-2xl font-bold text-[var(--color-text)]">
-              Phạm vi làm việc
-            </h2>
-            <p className="mt-[var(--space-4)] text-sm leading-8 text-[var(--color-text-muted)]">
-              Đại Hải Phát tiếp nhận các hạng mục nội thất, cửa cổng, cầu
-              thang, lan can, mái che và gia công cơ khí theo yêu cầu. Phương
-              án chỉ được chốt sau khi có kích thước, vật liệu và điều kiện thi
-              công cần thiết.
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
+        <Container className="grid gap-[var(--space-4)] lg:grid-cols-[1.1fr_0.9fr]">
+          <Card className="p-[var(--space-4)] sm:p-[var(--space-5)]">
+            <h2 className="text-lg font-bold text-[var(--color-text)]">Phạm vi làm việc</h2>
+            <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)]">
+              Nội thất, cửa cổng, cầu thang, lan can, mái che và gia công cơ khí theo yêu cầu. Phương án chỉ chốt sau khi kích thước, vật liệu và điều kiện thi công được xác nhận.
             </p>
-            <p className="mt-[var(--space-4)] text-sm leading-8 text-[var(--color-text-muted)]">
-              Hình ảnh công trình được công bố qua thư viện có metadata và
-              quyền sử dụng đã xác minh. Giá chính thức chỉ được lập sau bước
-              khảo sát và xác nhận phạm vi.
+            <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)]">
+              Báo giá chính thức được lập sau bước khảo sát và xác nhận phạm vi công việc.
             </p>
           </Card>
 
-          <Card className="p-[var(--space-8)]">
-            <h2 className="text-2xl font-bold text-[var(--color-text)]">
-              Dữ liệu vận hành
-            </h2>
-            <div className="mt-[var(--space-6)] grid gap-[var(--space-5)] sm:grid-cols-2">
+          <Card className="p-[var(--space-4)] sm:p-[var(--space-5)]">
+            <h2 className="text-lg font-bold text-[var(--color-text)]">Dữ liệu vận hành</h2>
+            <div className="mt-[var(--space-3)] grid grid-cols-2 gap-[var(--space-2)]">
               {COMPANY_STATS.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-[var(--radius-md)] bg-[var(--color-surface-muted)] p-[var(--space-5)]"
+                  className="rounded-[var(--radius-md)] bg-[var(--color-surface-muted)] p-[var(--space-3)]"
                 >
-                  <p className="text-2xl font-bold text-[var(--color-primary)]">
-                    {stat.value}
-                  </p>
-                  <p className="mt-[var(--space-2)] text-sm text-[var(--color-text-muted)]">
-                    {stat.label}
-                  </p>
+                  <p className="text-lg font-bold text-[var(--color-primary)]">{stat.value}</p>
+                  <p className="mt-[var(--space-1)] text-xs leading-5 text-[var(--color-text-muted)]">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -80,11 +67,11 @@ export default function AboutPage() {
       </section>
 
       <AIConsultationCta
-        eyebrow="Bắt đầu từ dữ liệu hiện trạng"
-        title="Chuẩn bị hồ sơ trước khi kỹ sư khảo sát"
-        description="Trợ lý AI thu thập từng thông tin cần thiết và lưu bản nháp trên thiết bị. Hồ sơ chỉ được bàn giao cho Đại Hải Phát sau khi anh/chị chủ động đồng ý."
+        eyebrow="Bắt đầu từ hiện trạng"
+        title="Chuẩn bị thông tin trước khi kỹ sư khảo sát"
+        description="Gửi hạng mục, vị trí, kích thước dự kiến và ảnh hiện trạng. Đội ngũ Đại Hải Phát sẽ kiểm tra thông tin và liên hệ để xác nhận bước tiếp theo."
         secondaryHref="/gallery"
-        secondaryLabel="Xem công trình đã xác minh"
+        secondaryLabel="Xem công trình"
       />
     </main>
   );
