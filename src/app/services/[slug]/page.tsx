@@ -123,50 +123,65 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <JsonLd id="dhp-service-structured-data" data={structuredData} />
       <ServiceHero service={service} />
 
-      <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
           <Breadcrumb items={[{ label: "Dịch vụ", href: "/services" }, { label: service.title }]} />
-          <div className="grid gap-[var(--space-10)] lg:grid-cols-[1.6fr_0.8fr]">
-            <div className="space-y-[var(--space-16)]">
+          <div className="mt-[var(--space-5)] grid gap-[var(--space-6)] lg:grid-cols-[1.65fr_0.7fr] lg:gap-[var(--space-8)]">
+            <div className="space-y-[var(--space-8)] sm:space-y-[var(--space-10)]">
               <ServiceOverview service={service} />
-              <ServiceFeatures features={service.features} />
+
+              <section aria-labelledby="service-features-title">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
+                  Điểm chính
+                </p>
+                <h2 id="service-features-title" className="mt-[var(--space-2)] text-2xl font-bold text-[var(--color-text)]">
+                  Cấu tạo và phạm vi cần lưu ý
+                </h2>
+                <div className="mt-[var(--space-4)]">
+                  <ServiceFeatures features={service.features} />
+                </div>
+              </section>
+
               <ServiceBenefits benefits={service.benefits} />
-              <div>
-                <div className="mb-[var(--space-8)]">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                    Quy trình thực hiện
-                  </p>
-                  <h2 className="mt-[var(--space-3)] text-3xl font-bold text-[var(--color-text)]">
-                    Cách chúng tôi làm việc để bảo đảm hiệu quả
-                  </h2>
+
+              <section aria-labelledby="service-process-title">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
+                  Quy trình
+                </p>
+                <h2 id="service-process-title" className="mt-[var(--space-2)] text-2xl font-bold text-[var(--color-text)]">
+                  Từ hiện trạng đến thi công
+                </h2>
+                <div className="mt-[var(--space-4)]">
+                  <ServiceProcess steps={service.process} />
                 </div>
-                <ServiceProcess steps={service.process} />
-              </div>
-              <div>
-                <div className="mb-[var(--space-8)]">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                    Hình ảnh thực tế
-                  </p>
-                  <h2 className="mt-[var(--space-3)] text-3xl font-bold text-[var(--color-text)]">
-                    Dữ liệu hình ảnh đã được xác minh
-                  </h2>
+              </section>
+
+              <section aria-labelledby="service-gallery-title">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
+                  Hình ảnh
+                </p>
+                <h2 id="service-gallery-title" className="mt-[var(--space-2)] text-2xl font-bold text-[var(--color-text)]">
+                  Mẫu đã được xác minh
+                </h2>
+                <div className="mt-[var(--space-4)]">
+                  <ServiceGallery images={service.gallery} title={service.title} />
                 </div>
-                <ServiceGallery images={service.gallery} title={service.title} />
-              </div>
-              <div id="faq" className="scroll-mt-24">
-                <div className="mb-[var(--space-8)]">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-                    Câu hỏi thường gặp
-                  </p>
-                  <h2 className="mt-[var(--space-3)] text-3xl font-bold text-[var(--color-text)]">
-                    Những câu hỏi cần làm rõ trước khi khảo sát
-                  </h2>
+              </section>
+
+              <section id="faq" className="scroll-mt-20" aria-labelledby="service-faq-title">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
+                  Câu hỏi thường gặp
+                </p>
+                <h2 id="service-faq-title" className="mt-[var(--space-2)] text-2xl font-bold text-[var(--color-text)]">
+                  Cần làm rõ trước khảo sát
+                </h2>
+                <div className="mt-[var(--space-4)]">
+                  <ServiceFAQ items={service.faq} />
                 </div>
-                <ServiceFAQ items={service.faq} />
-              </div>
+              </section>
             </div>
 
-            <div className="lg:pl-4">
+            <div className="hidden lg:block lg:pl-[var(--space-2)]">
               <ServiceSidebar service={service} />
             </div>
           </div>
