@@ -40,8 +40,11 @@ export function ContactSection() {
           </div>
 
           <address className="grid gap-[var(--space-2)] not-italic sm:grid-cols-2 lg:grid-cols-1">
-            <ContactLine icon={Phone} label="Hotline" href={`tel:${COMPANY_CONFIG.phones[0].raw}`}>
+            <ContactLine icon={Phone} label="Hotline chính" href={`tel:${COMPANY_CONFIG.phones[0].raw}`}>
               {COMPANY_CONFIG.phones[0].display}
+            </ContactLine>
+            <ContactLine icon={Phone} label="Hotline hỗ trợ" href={`tel:${COMPANY_CONFIG.phones[1].raw}`}>
+              {COMPANY_CONFIG.phones[1].display}
             </ContactLine>
             <ContactLine icon={Mail} label="Email" href={`mailto:${COMPANY_CONFIG.email}`}>
               {COMPANY_CONFIG.email}
