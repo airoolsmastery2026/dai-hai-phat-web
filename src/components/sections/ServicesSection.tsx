@@ -9,18 +9,18 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="border-b border-[var(--color-border)] bg-[var(--color-surface)] py-[var(--space-10)] lg:py-[var(--space-section)]"
+      className="border-b border-[var(--color-border)] bg-[var(--color-surface)] py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]"
     >
       <Container>
         <div className="flex flex-col gap-[var(--space-4)] lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
               Hạng mục chính
             </p>
             <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold leading-tight text-[var(--color-text)]">
               Chọn đúng nhu cầu, xem nhanh giải pháp
             </h2>
-            <p className="mt-[var(--space-3)] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
+            <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
               Phạm vi rõ ràng, vật liệu dễ đối chiếu và có kỹ sư tiếp nhận khi cần khảo sát.
             </p>
           </div>
@@ -33,7 +33,7 @@ export function ServicesSection() {
           </Link>
         </div>
 
-        <div className="mt-[var(--space-6)] grid gap-[var(--space-3)] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-[var(--space-5)] grid gap-[var(--space-3)] sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.slice(0, 4).map((service) => {
             const serviceHref = `/services/${getPublicRouteSlug(service.slug)}`;
 
@@ -59,7 +59,7 @@ export function ServicesSection() {
           })}
         </div>
 
-        <div className="mt-[var(--space-5)] text-center">
+        <div className="mt-[var(--space-4)] text-center">
           <Link
             href="/services"
             className="inline-flex min-h-11 items-center gap-[var(--space-2)] rounded-[var(--radius-md)] px-[var(--space-4)] text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
