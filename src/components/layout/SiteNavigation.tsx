@@ -62,7 +62,7 @@ export function SiteNavigation() {
       }
     };
 
-    const desktopMediaQuery = window.matchMedia("(min-width: 1024px)");
+    const desktopMediaQuery = window.matchMedia("(min-width: 1280px)");
     const handleDesktopChange = (event: MediaQueryListEvent) => {
       if (event.matches) closeMenu();
     };
@@ -95,7 +95,7 @@ export function SiteNavigation() {
         </Link>
 
         <nav
-          className="hidden items-center gap-[var(--space-6)] lg:flex"
+          className="hidden items-center gap-[var(--space-6)] xl:flex"
           aria-label="Điều hướng chính"
         >
           {NAV_ITEMS.map((item) => (
@@ -109,7 +109,7 @@ export function SiteNavigation() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-[var(--space-3)] lg:flex">
+        <div className="hidden items-center gap-[var(--space-3)] xl:flex">
           <a
             href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
             className="inline-flex min-h-11 items-center rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)]"
@@ -128,7 +128,7 @@ export function SiteNavigation() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] xl:hidden"
           aria-label={open ? "Đóng menu" : "Mở menu"}
           aria-expanded={open}
           aria-controls="mobile-navigation"
@@ -145,7 +145,7 @@ export function SiteNavigation() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="mobile-navigation-title"
-          className="border-t border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-container)] pb-[var(--space-6)] shadow-[var(--shadow-md)] lg:hidden"
+          className="border-t border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-container)] pb-[var(--space-6)] shadow-[var(--shadow-md)] xl:hidden"
         >
           <h2 id="mobile-navigation-title" className="sr-only">
             Điều hướng chính
