@@ -126,7 +126,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
           <Breadcrumb items={[{ label: "Dịch vụ", href: "/services" }, { label: service.title }]} />
-          <div className="mt-[var(--space-5)] grid gap-[var(--space-6)] lg:grid-cols-[1.65fr_0.7fr] lg:gap-[var(--space-8)]">
+          <div className="grid gap-[var(--space-6)] lg:grid-cols-[1.65fr_0.7fr] lg:gap-[var(--space-8)]">
             <div className="space-y-[var(--space-8)] sm:space-y-[var(--space-10)]">
               <ServiceOverview service={service} />
 
