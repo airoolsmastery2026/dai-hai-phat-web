@@ -51,7 +51,7 @@ export function HeroSection() {
           </p>
 
           <div className="mt-[var(--space-6)] flex flex-wrap gap-[var(--space-3)]">
-            <Button href="#contact">
+            <Button href="/contact">
               Trao đổi với kỹ sư <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
             <Button href="/gallery" variant="secondary">
