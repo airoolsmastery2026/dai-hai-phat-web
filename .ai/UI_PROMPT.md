@@ -10,12 +10,16 @@ Before editing:
 2. Read COMPONENTS.md completely.
 3. Read the target route, its current components, and its data source.
 4. Search for an existing primitive or composition before creating a component.
+5. If the task includes an external website, screenshot, design, or competitor
+   reference, read .ai/skills/reference-ui-research/SKILL.md and produce the
+   adaptation matrix before coding.
 
 Authority:
 - Repository code and verified content are the source of truth.
 - DESIGN.md owns visual tokens and Visual DNA.
 - COMPONENTS.md owns component behavior and state contracts.
 - The current task owns scope. Do not modify files outside that scope.
+- External references are research evidence only and have the lowest authority.
 
 Implementation rules:
 - Keep Next.js, TypeScript, Tailwind CSS v3, and the current architecture.
@@ -28,6 +32,8 @@ Implementation rules:
 - Use verified local assets and truthful Vietnamese content.
 - Do not invent projects, statistics, testimonials, prices, AI results, lead
   submissions, loading delays, or CRM handoffs.
+- Do not copy another brand's logo, copy, project media, source code, CSS/JS
+  bundle, font, or proprietary asset into DHP to imitate a reference.
 - Do not add a dependency unless the task cannot be completed safely with the
   current stack and the reason is documented.
 - Do not redesign architecture or create a duplicate component.
@@ -60,6 +66,27 @@ Before finishing:
 6. Fix every issue introduced by the change.
 7. Report files changed, reasons, user benefits, remaining risks, and the next
    smallest improvement.
+```
+
+## Reference-site mode
+
+When the task includes a reference URL, competitor site, screenshot, or design:
+
+```text
+Do not clone the reference.
+Use .ai/skills/reference-ui-research/SKILL.md.
+
+First identify the DHP customer problem. Then inspect the reference for reusable
+patterns such as hierarchy, responsive behavior, interaction model, content
+density, CTA placement, and component decomposition.
+
+For every candidate pattern, decide Keep / Adapt / Reject and map accepted ideas
+to existing DHP tokens, components, truthful content, accessibility rules, and
+performance constraints. Foreign visual values and brand assets are not a new
+source of truth.
+
+The completion target is a DHP-native improvement that solves the stated
+problem, not pixel parity with the reference.
 ```
 
 For a focused sprint, append only:
