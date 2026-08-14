@@ -27,6 +27,16 @@ Website Next.js
   → Nhân viên tiếp nhận
 ```
 
+### Protected core invariant — Public AI Chatbot
+
+Trợ lý AI/chatbot công khai là **năng lực cốt lõi bắt buộc và là điểm vào chính của DHP-AIOS**, không phải block marketing tùy chọn.
+
+- Homepage phải luôn mount luồng AI consultation thực tại `#ai-office`.
+- Header/điểm chuyển đổi chính phải luôn có đường vào trực tiếp tới chatbot.
+- Các hạng mục dịch vụ phải có thể truyền `service` preset vào AI intake để không mất ngữ cảnh.
+- Có thể tối ưu copy, layout, lazy-loading và hiệu năng, nhưng không được xóa, ẩn, thay thế chatbot bằng `/contact`, hoặc chỉ giữ engine nội bộ mà làm mất public entry.
+- Mọi thay đổi có nguy cơ làm mất public chatbot phải bị regression test chặn và chỉ được thực hiện khi chủ sở hữu sản phẩm yêu cầu rõ ràng.
+
 Bốn năng lực bắt buộc của v1:
 
 1. Tư vấn đúng phạm vi cửa cổng, cầu thang, lan can, mái che, nội thất và cải tạo nhà ở.
