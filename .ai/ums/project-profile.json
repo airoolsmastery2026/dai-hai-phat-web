@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0",
+  "id": "dai-hai-phat-ai-os",
+  "name": "Dai Hai Phat AI OS",
+  "priority": "P0",
+  "capabilities": [
+    "project.inspect",
+    "publishing.health",
+    "publishing.queue",
+    "publishing.job.get",
+    "publishing.tokens.status",
+    "publishing.analytics",
+    "publishing.job.create",
+    "publishing.scheduler.pause",
+    "publishing.scheduler.resume",
+    "publishing.job.retry"
+  ],
+  "adapters": [
+    "dhp-publishing"
+  ],
+  "riskPolicy": {
+    "defaultMode": "preview",
+    "requireApprovalFor": [
+      "external_write",
+      "destructive"
+    ],
+    "deniedCapabilities": [
+      "publishing.database.write",
+      "publishing.direct.publish",
+      "publishing.job.delete"
+    ]
+  },
+  "pilot": {
+    "enabled": true,
+    "allowExternalWrites": false,
+    "defaultTask": {
+      "capability": "publishing.health",
+      "mode": "preview"
+    },
+    "successCriteria": [
+      "profile-contract-valid",
+      "adapter-route-resolved",
+      "preview-produces-no-external-effect",
+      "write-task-requires-explicit-approval",
+      "idempotency-prevents-duplicate-execution",
+      "audit-trail-complete"
+    ]
+  }
+}
