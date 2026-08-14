@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("keeps service cards compact and routes consultation to engineers", async () => {
+test("keeps compact service cards connected to the AI intake with service context", async () => {
   const homepageServices = await readFile(
     new URL("../src/components/sections/ServicesSection.tsx", import.meta.url),
     "utf8",
@@ -12,16 +12,17 @@ test("keeps service cards compact and routes consultation to engineers", async (
     "utf8",
   );
 
-  assert.match(homepageServices, /href="\/contact"/);
-  assert.match(homepageServices, /Nhờ kỹ sư tư vấn/);
+  assert.match(homepageServices, /href="\/#ai-office"/);
+  assert.match(homepageServices, /Mở trợ lý AI/);
+  assert.match(homepageServices, /encodeURIComponent\(service\.aiService\)/);
+  assert.match(homepageServices, /#ai-office/);
   assert.match(homepageServices, /const ServiceIcon = service\.icon/);
-  assert.match(homepageServices, /<ServiceIcon/);
   assert.match(homepageServices, /min-h-\[var\(--control-min-size\)\]/);
-  assert.doesNotMatch(homepageServices, /#ai-office|encodeURIComponent\(service\.aiService\)|Tư vấn AI/i);
 
   assert.match(serviceCard, /<article/);
   assert.match(serviceCard, /getPublicRouteSlug\(service\.slug\)/);
+  assert.match(serviceCard, /encodeURIComponent\(service\.aiService\)/);
+  assert.match(serviceCard, /#ai-office/);
+  assert.match(serviceCard, /Tư vấn hạng mục/);
   assert.match(serviceCard, /Xem chi tiết/);
-  assert.doesNotMatch(serviceCard, /#ai-office|aiHref|encodeURIComponent\(service\.aiService\)|Bot|bằng AI/i);
-  assert.doesNotMatch(serviceCard, /grid[^\n]*sm:grid-cols-2/);
 });
