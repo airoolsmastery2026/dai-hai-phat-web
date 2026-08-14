@@ -5,6 +5,8 @@ import { Container } from "@/components/ui/Container";
 import type { ServiceItem } from "@/types/content";
 
 export function ServiceHero({ service }: { service: ServiceItem }) {
+  const aiOfficeHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+
   return (
     <section className="relative overflow-hidden border-b border-[var(--color-border)] bg-[linear-gradient(125deg,var(--color-surface)_0%,var(--color-primary-soft)_78%,var(--color-metal-soft)_100%)] py-[var(--space-8)] text-[var(--color-text)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
       <Container>
@@ -23,7 +25,7 @@ export function ServiceHero({ service }: { service: ServiceItem }) {
               {service.summary}
             </p>
             <div className="mt-[var(--space-4)] flex flex-wrap gap-[var(--space-2)]">
-              <Button href="/contact">Trao đổi với kỹ sư</Button>
+              <Button href={aiOfficeHref}>Tư vấn ngay với trợ lý AI</Button>
               <Button href="#faq" variant="secondary">
                 Xem câu hỏi thường gặp
               </Button>
