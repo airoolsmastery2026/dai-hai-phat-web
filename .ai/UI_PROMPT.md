@@ -10,7 +10,9 @@ Before editing:
 2. Read COMPONENTS.md completely.
 3. Read the target route, its current components, and its data source.
 4. Search for an existing primitive or composition before creating a component.
-5. If the task includes an external website, screenshot, design, or competitor
+5. For non-trivial design, redesign, audit, responsive, or motion work, read
+   .ai/skills/design-engineering/SKILL.md and load only the current phase.
+6. If the task includes an external website, screenshot, design, or competitor
    reference, read .ai/skills/reference-ui-research/SKILL.md and produce the
    adaptation matrix before coding.
 

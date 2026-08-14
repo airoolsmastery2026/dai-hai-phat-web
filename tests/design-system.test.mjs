@@ -68,6 +68,47 @@ test("design foundation has one canonical contract", () => {
   }
 });
 
+test("design engineering uses progressive routing beneath project authority", () => {
+  const routerPaths = [
+    ".ai/skills/design-engineering/SKILL.md",
+    ".ai/skills/design-engineering/references/foundation.md",
+    ".ai/skills/design-engineering/references/design-intelligence.md",
+    ".ai/skills/design-engineering/references/taste.md",
+    ".ai/skills/design-engineering/references/audit.md",
+    ".ai/skills/design-engineering/references/motion.md",
+  ];
+
+  for (const path of routerPaths) {
+    assert.equal(existsSync(join(ROOT, path)), true, `${path} must exist`);
+  }
+
+  const start = read(".ai/START.md");
+  const router = read(".ai/skills/design-engineering/SKILL.md");
+  const agents = read("AGENTS.md");
+  const uiPrompt = read(".ai/UI_PROMPT.md");
+
+  assert.match(start, /verified repository content, code, and tests[\s\S]*> DESIGN\.md/);
+  assert.match(router, /Do not read every reference up front/);
+
+  const phases = [
+    "Foundation",
+    "Design intelligence",
+    "Taste",
+    "Implementation",
+    "Audit",
+    "Motion",
+  ];
+  let previousIndex = -1;
+  for (const phase of phases) {
+    const currentIndex = router.indexOf(phase);
+    assert.ok(currentIndex > previousIndex, `${phase} must follow the previous phase`);
+    previousIndex = currentIndex;
+  }
+
+  assert.match(agents, /\.ai\/skills\/design-engineering\/SKILL\.md/);
+  assert.match(uiPrompt, /\.ai\/skills\/design-engineering\/SKILL\.md/);
+});
+
 test("Tailwind v3 remains connected to the production CSS pipeline", () => {
   const postcss = read("postcss.config.js");
   const tailwind = read("tailwind.config.js");
@@ -184,6 +225,8 @@ test("homepage conversion surfaces preserve accessibility and the public AI Offi
   assert.match(hero, /<Button href="#ai-office">/);
   assert.match(hero, /Thiết kế &amp; thi công nhà ở/);
   assert.match(hero, /hero-luxury-materials-v1\.webp/);
+  assert.match(hero, /alt="Bộ mẫu vật liệu nội thất và hoàn thiện nhà ở Đại Hải Phát"/);
+  assert.doesNotMatch(hero, /backdrop-blur|rgb\(/);
   assert.doesNotMatch(hero, /min-h-\[calc\(100svh/);
   assert.match(home, /AIOfficeRouteEntry/);
   assert.match(home, /AIOfficeFallback/);
