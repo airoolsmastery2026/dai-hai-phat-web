@@ -20,6 +20,15 @@ For every UI change, also read these files completely:
 2. `COMPONENTS.md`
 3. `.ai/UI_PROMPT.md`
 
+For every non-trivial UI design, redesign, design audit, responsive refinement,
+or motion task, also read:
+
+1. `.ai/skills/design-engineering/SKILL.md`
+
+Follow its progressive route and load only the reference required for the
+current phase. Project rules, `DESIGN.md`, and `COMPONENTS.md` remain higher
+authority than external design guidance.
+
 For every UI task that uses an external website, screenshot, competitor, or design as a reference, also read:
 
 1. `.ai/skills/reference-ui-research/SKILL.md`

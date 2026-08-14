@@ -1,9 +1,8 @@
-import { ArrowRight, Bot, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Bot } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { COMPANY_CONFIG } from "@/content/company";
 
 const DELIVERY_STEPS = [
   "Chọn hạng mục",
@@ -14,27 +13,15 @@ const DELIVERY_STEPS = [
 
 export function HeroSection() {
   return (
-    <section className="relative isolate overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-surface)]">
-      <Image
-        src="/images/brand/hero-luxury-materials-v1.webp"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="-z-20 object-cover object-[72%_center]"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(255_254_250/0.99)_0%,rgb(243_247_246/0.96)_48%,rgb(243_247_246/0.7)_76%,rgb(243_247_246/0.38)_100%)]"
-        aria-hidden="true"
-      />
+    <section className="relative overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-surface)]">
       <div
         className="metallic-rule pointer-events-none absolute inset-x-0 bottom-0 h-px"
         aria-hidden="true"
       />
 
-      <Container className="relative grid items-center gap-[var(--space-6)] py-[var(--space-6)] sm:py-[var(--space-8)] lg:min-h-[30rem] lg:grid-cols-[1.08fr_0.72fr] lg:gap-[var(--space-8)] lg:py-[var(--space-12)]">
+      <Container className="relative grid items-center gap-[var(--space-6)] py-[var(--space-6)] sm:py-[var(--space-8)] lg:min-h-[30rem] lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.75fr)] lg:gap-[var(--space-8)] lg:py-[var(--space-12)]">
         <div className="max-w-[42rem]">
-          <span className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-full)] border border-[var(--color-metal)]/45 bg-[var(--color-metal-soft)]/85 px-[var(--space-3)] py-[var(--space-2)] text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-metal-strong)]">
+          <span className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-full)] border border-[var(--color-metal)] bg-[var(--color-metal-soft)] px-[var(--space-3)] py-[var(--space-2)] text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-metal-strong)]">
             <Bot className="h-4 w-4" aria-hidden="true" /> Trợ lý AI tư vấn 24/7
           </span>
 
@@ -50,7 +37,7 @@ export function HeroSection() {
             Trợ lý AI tiếp nhận nhu cầu ngay, sau đó kỹ sư kiểm tra phương án trước báo giá.
           </p>
 
-          <div className="mt-[var(--space-5)] flex flex-wrap gap-[var(--space-2)]">
+          <div className="mt-[var(--space-5)] grid gap-[var(--space-2)] sm:flex sm:flex-wrap">
             <Button href="#ai-office">
               Trò chuyện với trợ lý AI <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
@@ -58,57 +45,42 @@ export function HeroSection() {
               Xem công trình
             </Button>
           </div>
-
-          <ul className="mt-[var(--space-4)] hidden flex-wrap gap-x-[var(--space-5)] gap-y-[var(--space-2)] text-sm text-[var(--color-text-muted)] lg:flex">
-            {["Tiếp nhận 24/7", "Ghi nhớ hồ sơ", "Kỹ sư duyệt phương án"].map((item) => (
-              <li key={item} className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-[var(--color-primary)]" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-[var(--space-4)] grid grid-cols-2 gap-[var(--space-2)] rounded-[var(--radius-md)] border border-white/70 bg-white/65 p-[var(--space-3)] backdrop-blur-sm lg:hidden">
-            {DELIVERY_STEPS.map((item, index) => (
-              <div key={item} className="flex items-start gap-[var(--space-2)] text-xs font-semibold leading-5 text-[var(--color-text-muted)]">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[10px] font-bold text-[var(--color-primary-contrast)]">
-                  {index + 1}
-                </span>
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <aside className="hidden rounded-[var(--radius-lg)] border border-white/80 bg-[var(--color-surface)]/84 p-[var(--space-5)] shadow-[var(--shadow-md)] backdrop-blur-md lg:block">
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-metal-strong)]">
-              Lộ trình tư vấn
-            </p>
-            <span className="rounded-full bg-[var(--color-primary-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-primary-soft-text)]">
-              4 bước
-            </span>
+        <figure className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] shadow-[var(--shadow-sm)]">
+          <div className="relative aspect-[16/10] lg:aspect-[4/3]">
+            <Image
+              src="/images/brand/hero-luxury-materials-v1.webp"
+              alt="Bộ mẫu vật liệu nội thất và hoàn thiện nhà ở Đại Hải Phát"
+              fill
+              priority
+              sizes="(max-width: 1023px) 100vw, 38vw"
+              className="object-cover object-[72%_center]"
+            />
           </div>
-          <ol className="mt-[var(--space-3)] divide-y divide-[var(--color-border)]">
-            {DELIVERY_STEPS.map((item, index) => (
-              <li key={item} className="flex items-center gap-[var(--space-3)] py-[var(--space-2)] first:pt-0 last:pb-0">
-                <span
-                  aria-hidden="true"
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-xs font-bold text-[var(--color-primary-contrast)]"
-                >
-                  {index + 1}
-                </span>
-                <span className="text-sm font-semibold text-[var(--color-text)]">{item}</span>
-              </li>
-            ))}
-          </ol>
-          <a
-            href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-            className="mt-[var(--space-4)] flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-metal)]/55 bg-[var(--color-metal-soft)]/75 px-[var(--space-4)] text-center text-sm font-bold text-[var(--color-metal-strong)] transition hover:bg-[var(--color-metal-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
-          >
-            Cần gấp? Gọi kỹ sư {COMPANY_CONFIG.phones[0].display}
-          </a>
-        </aside>
+          <figcaption className="flex flex-col gap-[var(--space-1)] border-t border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-4)] py-[var(--space-3)] sm:flex-row sm:items-center sm:justify-between sm:gap-[var(--space-4)]">
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-metal-strong)]">
+              Vật liệu &amp; hoàn thiện
+            </span>
+            <span className="text-sm text-[var(--color-text-muted)]">
+              Gỗ, đá và kim loại trong cùng một không gian
+            </span>
+          </figcaption>
+        </figure>
+
+        <ol className="grid gap-[var(--space-3)] border-t border-[var(--color-border)] pt-[var(--space-4)] sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+          {DELIVERY_STEPS.map((item, index) => (
+            <li key={item} className="flex items-start gap-[var(--space-3)] text-sm font-semibold leading-6 text-[var(--color-text-muted)]">
+              <span
+                aria-hidden="true"
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-full)] bg-[var(--color-primary)] text-xs font-bold text-[var(--color-primary-contrast)]"
+              >
+                {index + 1}
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ol>
       </Container>
     </section>
   );
