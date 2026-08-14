@@ -175,19 +175,22 @@ test("fake and duplicate surfaces stay removed", () => {
   );
 });
 
-test("homepage conversion surfaces preserve the accessibility audit", () => {
+test("homepage conversion surfaces preserve accessibility and the public AI Office", () => {
   const hero = read("src/components/sections/HeroSection.tsx");
   const home = read("src/app/page.tsx");
   const button = read("src/components/ui/Button.tsx");
   const aiOffice = read("src/components/sections/AIOfficeSection.tsx");
 
-  assert.match(hero, /<Button href="\/contact">/);
+  assert.match(hero, /<Button href="#ai-office">/);
   assert.match(hero, /Thiết kế &amp; thi công nhà ở/);
   assert.match(hero, /hero-luxury-materials-v1\.webp/);
-  assert.doesNotMatch(hero, /#ai-office|min-h-\[calc\(100svh/);
-  assert.doesNotMatch(home, /AIOfficeRouteEntry|AIOfficeExperience|id="ai-office"/);
+  assert.doesNotMatch(hero, /min-h-\[calc\(100svh/);
+  assert.match(home, /AIOfficeRouteEntry/);
+  assert.match(home, /AIOfficeFallback/);
+  assert.match(home, /id="ai-office"/);
   assert.match(button, /touch-manipulation/);
   assert.doesNotMatch(button, /backdrop-blur/);
+  assert.match(aiOffice, /id="ai-office"/);
   assert.match(aiOffice, /title="Tiến trình làm việc"/);
   assert.match(aiOffice, /title="Dữ liệu hồ sơ"/);
   assert.match(aiOffice, /title="Độ đầy đủ"/);

@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, HardHat } from "lucide-react";
+import { ArrowRight, Bot, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
@@ -35,7 +35,7 @@ export function HeroSection() {
       <Container className="relative grid items-center gap-[var(--space-6)] py-[var(--space-6)] sm:py-[var(--space-8)] lg:min-h-[30rem] lg:grid-cols-[1.08fr_0.72fr] lg:gap-[var(--space-8)] lg:py-[var(--space-12)]">
         <div className="max-w-[42rem]">
           <span className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-full)] border border-[var(--color-metal)]/45 bg-[var(--color-metal-soft)]/85 px-[var(--space-3)] py-[var(--space-2)] text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-metal-strong)]">
-            <HardHat className="h-4 w-4" aria-hidden="true" /> Tiếp nhận yêu cầu 24/7
+            <Bot className="h-4 w-4" aria-hidden="true" /> Trợ lý AI tư vấn 24/7
           </span>
 
           <h1 className="mt-[var(--space-3)] text-[length:var(--font-display)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[var(--color-text)]">
@@ -47,12 +47,12 @@ export function HeroSection() {
 
           <p className="mt-[var(--space-3)] max-w-xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
             Nội thất, cửa cổng, cầu thang và mái che theo hiện trạng thực tế.
-            Vật liệu và phương án được kỹ sư kiểm tra trước báo giá.
+            Trợ lý AI tiếp nhận nhu cầu ngay, sau đó kỹ sư kiểm tra phương án trước báo giá.
           </p>
 
           <div className="mt-[var(--space-5)] flex flex-wrap gap-[var(--space-2)]">
-            <Button href="/contact">
-              Trao đổi với kỹ sư <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <Button href="#ai-office">
+              Trò chuyện với trợ lý AI <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
             <Button href="/gallery" variant="secondary">
               Xem công trình
@@ -60,7 +60,7 @@ export function HeroSection() {
           </div>
 
           <ul className="mt-[var(--space-4)] hidden flex-wrap gap-x-[var(--space-5)] gap-y-[var(--space-2)] text-sm text-[var(--color-text-muted)] lg:flex">
-            {["Khảo sát hiện trạng", "Xác nhận vật liệu", "Kỹ sư duyệt phương án"].map((item) => (
+            {["Tiếp nhận 24/7", "Ghi nhớ hồ sơ", "Kỹ sư duyệt phương án"].map((item) => (
               <li key={item} className="inline-flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[var(--color-primary)]" aria-hidden="true" />
                 {item}
