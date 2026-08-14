@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
+import { AIOfficeRouteEntry } from "@/components/sections/AIOfficeRouteEntry";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
@@ -30,11 +32,33 @@ export const metadata: Metadata = {
   },
 };
 
+function AIOfficeFallback() {
+  return (
+    <section
+      id="ai-office"
+      className="ai-office-light scroll-mt-16 border-y border-[var(--color-border)] bg-[var(--color-background)] py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]"
+      aria-label="Đang chuẩn bị trợ lý AI Đại Hải Phát"
+      aria-busy="true"
+    >
+      <div className="mx-auto max-w-[var(--container-max)] px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
+        <p className="font-bold text-[var(--color-primary)]">
+          Đang mở trợ lý AI Đại Hải Phát…
+        </p>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
+  const liveVoiceEnabled = Boolean(process.env.GEMINI_API_KEY?.trim());
+
   return (
     <main className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
       <HeroSection />
       <ServicesSection />
+      <Suspense fallback={<AIOfficeFallback />}>
+        <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
+      </Suspense>
       <ProjectsSection />
       <ContactSection />
     </main>
