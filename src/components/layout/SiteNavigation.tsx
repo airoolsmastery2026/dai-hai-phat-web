@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, MessageCircle, Phone, X } from "lucide-react";
+import { Bot, Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -117,11 +117,11 @@ export function SiteNavigation() {
             {COMPANY_CONFIG.phones[0].display}
           </a>
           <Link
-            href="/contact"
+            href="/#ai-office"
             className="inline-flex min-h-11 items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
           >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Trao đổi với kỹ sư
+            <Bot className="h-4 w-4" aria-hidden="true" />
+            Trợ lý AI 24/7
           </Link>
         </div>
 
@@ -150,10 +150,7 @@ export function SiteNavigation() {
           <h2 id="mobile-navigation-title" className="sr-only">
             Điều hướng chính
           </h2>
-          <nav
-            className="flex flex-col py-[var(--space-2)]"
-            aria-label="Điều hướng di động"
-          >
+          <nav className="flex flex-col py-[var(--space-2)]" aria-label="Điều hướng di động">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
@@ -167,12 +164,12 @@ export function SiteNavigation() {
           </nav>
           <div className="grid grid-cols-2 gap-[var(--space-2)] pt-[var(--space-2)]">
             <Link
-              href="/contact"
+              href="/#ai-office"
               onClick={() => closeMenu()}
               className="flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-3)] text-center text-sm font-bold text-[var(--color-primary-contrast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              Tư vấn kỹ sư
+              <Bot className="h-4 w-4" aria-hidden="true" />
+              Trợ lý AI
             </Link>
             <a
               href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
