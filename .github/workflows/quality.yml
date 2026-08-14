@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - fix/restore-public-ai-chatbot
 
 concurrency:
   group: quality-${{ github.workflow }}-${{ github.ref }}
