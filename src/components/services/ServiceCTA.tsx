@@ -1,10 +1,12 @@
-import { MessageCircle } from "lucide-react";
+import { Bot } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import type { ServiceItem } from "@/types/content";
 
 export function ServiceCTA({ service }: { service: ServiceItem }) {
+  const aiHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+
   return (
     <section className="relative overflow-hidden bg-[var(--color-surface-dark)] py-[var(--space-8)] text-white lg:py-[var(--space-10)]">
       <Container>
@@ -14,15 +16,15 @@ export function ServiceCTA({ service }: { service: ServiceItem }) {
               Bước tiếp theo
             </p>
             <h2 className="mt-[var(--space-2)] text-xl font-bold leading-tight sm:text-2xl">
-              Trao đổi hạng mục {service.title.toLowerCase()} với kỹ sư
+              Lập hồ sơ {service.title.toLowerCase()} với trợ lý AI
             </h2>
             <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
-              Chuẩn bị vị trí, kích thước dự kiến và ảnh hiện trạng để xác nhận phạm vi trước khảo sát.
+              Gửi vị trí, kích thước dự kiến, ảnh hiện trạng và nhu cầu. Trợ lý giữ ngữ cảnh để kỹ sư tiếp tục xác minh mà không phải hỏi lại từ đầu.
             </p>
           </div>
-          <Button href="/contact" className="w-full flex-shrink-0 sm:w-auto">
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Trao đổi với kỹ sư
+          <Button href={aiHref} className="w-full flex-shrink-0 sm:w-auto">
+            <Bot className="h-4 w-4" aria-hidden="true" />
+            Mở trợ lý AI
           </Button>
         </div>
       </Container>
