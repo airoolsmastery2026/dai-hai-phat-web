@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import { Bot } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -18,7 +18,12 @@ export function AIConsultationCta({
   description,
   secondaryHref,
   secondaryLabel,
+  servicePreset,
 }: AIConsultationCtaProps) {
+  const aiHref = servicePreset
+    ? `/?service=${encodeURIComponent(servicePreset)}#ai-office`
+    : "/#ai-office";
+
   return (
     <section className="bg-[var(--color-surface-dark)] py-[var(--space-8)] text-white lg:py-[var(--space-10)]">
       <Container>
@@ -35,9 +40,9 @@ export function AIConsultationCta({
             </p>
           </div>
           <div className="flex w-full flex-shrink-0 flex-col gap-[var(--space-2)] sm:w-auto sm:flex-row">
-            <Button href="/contact" className="w-full sm:w-auto">
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              Trao đổi với kỹ sư
+            <Button href={aiHref} className="w-full sm:w-auto">
+              <Bot className="h-4 w-4" aria-hidden="true" />
+              Bắt đầu với trợ lý AI
             </Button>
             <Button
               href={secondaryHref}
