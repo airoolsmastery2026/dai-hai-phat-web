@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("keeps reactive service presets internal after homepage simplification", async () => {
+test("keeps reactive service presets connected to the public AI intake", async () => {
   const routeEntry = await readFile(
     "src/components/sections/AIOfficeRouteEntry.tsx",
     "utf8",
@@ -24,7 +24,9 @@ test("keeps reactive service presets internal after homepage simplification", as
   assert.match(experience, /key=\{sessionKey\}/);
   assert.doesNotMatch(routeEntry, /window\.location|useSyncExternalStore/);
 
-  assert.doesNotMatch(homepage, /import \{ Suspense \} from "react"/);
-  assert.doesNotMatch(homepage, /AIOfficeFallback|AIOfficeRouteEntry|id="ai-office"/);
+  assert.match(homepage, /import \{ Suspense \} from "react"/);
+  assert.match(homepage, /AIOfficeFallback/);
+  assert.match(homepage, /AIOfficeRouteEntry/);
+  assert.match(homepage, /id="ai-office"/);
   assert.doesNotMatch(homepage, /force-dynamic|connection\(/);
 });
