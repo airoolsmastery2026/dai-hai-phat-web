@@ -36,6 +36,7 @@ Trợ lý AI/chatbot công khai là **năng lực cốt lõi bắt buộc và l�
 - Các hạng mục dịch vụ phải có thể truyền `service` preset vào AI intake để không mất ngữ cảnh.
 - Có thể tối ưu copy, layout, lazy-loading và hiệu năng, nhưng không được xóa, ẩn, thay thế chatbot bằng `/contact`, hoặc chỉ giữ engine nội bộ mà làm mất public entry.
 - Mọi thay đổi có nguy cơ làm mất public chatbot phải bị regression test chặn và chỉ được thực hiện khi chủ sở hữu sản phẩm yêu cầu rõ ràng.
+- Mọi thay đổi vị trí, entry point hoặc composition của chatbot phải vượt qua audit, lint, typecheck, unit tests, production build và kiểm tra public preview trước khi merge.
 
 Bốn năng lực bắt buộc của v1:
 
