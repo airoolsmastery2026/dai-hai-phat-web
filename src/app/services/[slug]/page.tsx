@@ -1,14 +1,17 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ServiceBenefits } from "@/components/services/ServiceBenefits";
-import { ServiceCTA } from "@/components/services/ServiceCTA";
-import { ServiceFAQ } from "@/components/services/ServiceFAQ";
-import { ServiceFeatures } from "@/components/services/ServiceFeatures";
-import { ServiceGallery } from "@/components/services/ServiceGallery";
-import { ServiceHero } from "@/components/services/ServiceHero";
-import { ServiceOverview } from "@/components/services/ServiceOverview";
-import { ServiceProcess } from "@/components/services/ServiceProcess";
-import { ServiceSidebar } from "@/components/services/ServiceSidebar";
+import {
+  ServiceBenefits,
+  ServiceCTA,
+  ServiceFAQ,
+  ServiceFeatures,
+  ServiceGallery,
+  ServiceHero,
+  ServiceOverview,
+  ServiceProcess,
+  ServiceSidebar,
+} from "@/components/services";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
@@ -20,7 +23,7 @@ export async function generateStaticParams() {
   return SERVICES.map((service) => ({ slug: getPublicRouteSlug(service.slug) }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const normalizedSlug = normalizeRouteSlug(slug);
   const service = SERVICES.find((item) => item.slug === normalizedSlug);
@@ -40,14 +43,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords: service.seo.keywords,
     alternates: { canonical },
     openGraph: {
-      type: "website" as const,
+      type: "website",
       title,
       description,
       url: canonical,
       images: [{ url: service.image, alt: service.title }],
     },
     twitter: {
-      card: "summary_large_image" as const,
+      card: "summary_large_image",
       title,
       description,
       images: [service.image],
