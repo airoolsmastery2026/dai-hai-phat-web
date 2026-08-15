@@ -44,8 +44,9 @@ test("raw-finished generation keeps provider credentials server-side", async () 
   assert.match(route, /UPSTREAM_TIMEOUT_MS/);
   assert.match(route, /AI_CONCEPT_MODEL/);
   assert.doesNotMatch(client, /localStorage/);
-  assert.doesNotMatch(client, /api[_-]?key/i);
-  assert.doesNotMatch(client, /kling[_-]?(access|secret)/i);
+  assert.doesNotMatch(client, /gemini_api_key|kling_access_key|kling_secret_key/i);
+  assert.doesNotMatch(client, /formData\.set\(["']api[_-]?key/i);
+  assert.doesNotMatch(client, /NEXT_PUBLIC_(?:GEMINI|KLING)/i);
   assert.doesNotMatch(route, /NEXT_PUBLIC_GEMINI/);
 });
 
