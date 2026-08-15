@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ServiceBenefits } from "@/components/services/ServiceBenefits";
-import { ServiceCTA } from "@/components/services/ServiceCTA";
-import { ServiceFAQ } from "@/components/services/ServiceFAQ";
-import { ServiceFeatures } from "@/components/services/ServiceFeatures";
-import { ServiceGallery } from "@/components/services/ServiceGallery";
-import { ServiceHero } from "@/components/services/ServiceHero";
-import { ServiceOverview } from "@/components/services/ServiceOverview";
-import { ServiceProcess } from "@/components/services/ServiceProcess";
-import { ServiceSidebar } from "@/components/services/ServiceSidebar";
+import {
+  ServiceBenefits,
+  ServiceCTA,
+  ServiceFAQ,
+  ServiceFeatures,
+  ServiceGallery,
+  ServiceHero,
+  ServiceOverview,
+  ServiceProcess,
+  ServiceSidebar,
+} from "@/components/services";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";

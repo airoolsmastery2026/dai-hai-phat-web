@@ -7,6 +7,10 @@ test("keeps reactive service presets connected to the public AI intake", async (
     "src/components/sections/AIOfficeRouteEntry.tsx",
     "utf8",
   );
+  const loadingState = await readFile(
+    "src/components/sections/AIOfficeLoadingState.tsx",
+    "utf8",
+  );
   const presetHook = await readFile("src/hooks/useAIServicePreset.ts", "utf8");
   const experience = await readFile(
     "src/components/sections/AIOfficeExperience.tsx",
@@ -20,13 +24,14 @@ test("keeps reactive service presets connected to the public AI intake", async (
   assert.match(routeEntry, /const servicePreset = useAIServicePreset\(\)/);
   assert.match(routeEntry, /<AIOfficeExperience/);
   assert.match(routeEntry, /servicePreset=\{servicePreset\}/);
+  assert.match(routeEntry, /AIOfficeLoadingState/);
   assert.match(experience, /const sessionKey = getAIOfficeSessionKey\(servicePreset\)/);
   assert.match(experience, /key=\{sessionKey\}/);
   assert.doesNotMatch(routeEntry, /window\.location|useSyncExternalStore/);
 
   assert.match(homepage, /import \{ Suspense \} from "react"/);
-  assert.match(homepage, /AIOfficeFallback/);
+  assert.match(homepage, /AIOfficeLoadingState/);
   assert.match(homepage, /AIOfficeRouteEntry/);
-  assert.match(homepage, /id="ai-office"/);
+  assert.match(loadingState, /id="ai-office"/);
   assert.doesNotMatch(homepage, /force-dynamic|connection\(/);
 });
