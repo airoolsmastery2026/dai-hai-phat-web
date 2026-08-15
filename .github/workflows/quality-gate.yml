@@ -26,7 +26,18 @@ jobs:
           sentrux --version
 
       - name: Architecture governance
-        run: npm run architecture:check
+        shell: bash
+        run: |
+          set +e
+          output="$(npm run architecture:check 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -ne 0 ]; then
+            message="$(printf '%s' "$output" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g' | cut -c1-4000)"
+            echo "::error title=Sentrux architecture governance::$message"
+            exit "$status"
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
