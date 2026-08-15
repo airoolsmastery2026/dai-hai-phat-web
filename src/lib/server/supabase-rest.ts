@@ -15,7 +15,9 @@ type SupabaseRpcName =
   | "dhp_publish_admin_list_accounts"
   | "dhp_publish_store_and_request_verify"
   | "dhp_publish_request_verify"
-  | "dhp_publish_remove_account";
+  | "dhp_publish_remove_account"
+  | "dhp_telegram_admin_status"
+  | "dhp_telegram_store_config";
 
 export class SupabaseServerConfigurationError extends Error {
   constructor(message: string) {
