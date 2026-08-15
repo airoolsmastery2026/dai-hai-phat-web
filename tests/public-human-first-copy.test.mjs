@@ -21,15 +21,15 @@ test("public homepage keeps human trust language while exposing the AI assistant
   assert.match(sources.navigation, /Văn phòng kỹ thuật số/);
   assert.match(sources.navigation, /Trợ lý AI 24\/7/);
   assert.match(sources.navigation, /href="\/#ai-office"/);
-  assert.match(sources.hero, /Trợ lý AI tư vấn 24\/7/);
-  assert.match(sources.hero, /Trò chuyện với trợ lý AI/);
+  assert.match(sources.hero, /AI tiếp nhận nhu cầu 24\/7/);
+  assert.match(sources.hero, /Bắt đầu tư vấn AI/);
   assert.match(sources.services, /Mở trợ lý AI/);
   assert.match(sources.page, /AIOfficeRouteEntry/);
   assert.match(sources.page, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
   assert.match(sources.contact, /kỹ sư sẽ tiếp nhận/);
 });
 
-test("homepage keeps the compact hierarchy with AI Office between services and project proof", async () => {
+test("homepage keeps the AI-first compact hierarchy before services and project proof", async () => {
   const sources = Object.fromEntries(
     await Promise.all(
       Object.entries(files).map(async ([name, path]) => [name, await readFile(path, "utf8")]),
@@ -38,8 +38,8 @@ test("homepage keeps the compact hierarchy with AI Office between services and p
 
   const orderedComponents = [
     "<HeroSection />",
-    "<ServicesSection />",
     "<AIOfficeRouteEntry",
+    "<ServicesSection />",
     "<ProjectsSection />",
     "<ContactSection />",
   ];
