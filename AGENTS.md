@@ -64,6 +64,31 @@ Approved provider posture:
 - A provider claim such as "free", "unlimited", or "zero-token" is not an architectural assumption. Verify current terms before relying on it operationally.
 - Provider lock-in is prohibited at the contributor layer. Plans/specs should describe required capability and observable behavior rather than requiring a named model unless the task explicitly depends on that provider.
 
+### Free-only execution mode
+
+When the project or operator requests a free-only path, the coding-agent router must treat zero-cost execution as a hard constraint rather than a preference.
+
+Routing order:
+
+1. currently valid provider trial/free quota already available to the operator
+2. currently valid free quota from another approved coding provider
+3. local model/runtime when it can perform the task safely and adequately
+4. stop provider execution and continue with non-metered repository work where possible
+
+Free-only invariants:
+
+- `PAID_API_AUTO_USE = false`
+- `AUTO_TOP_UP = false`
+- `METERED_FALLBACK = false`
+- `FREE_QUOTA_FIRST = true`
+- `LOCAL_FALLBACK_ALLOWED = true`
+- a depleted or expired free quota must never trigger automatic billing, subscription purchase, prepaid-balance use, or a paid API fallback
+- do not configure a general prepaid/balance endpoint as a fallback for a free-only workflow
+- free trials are temporary capabilities, not permanent infrastructure assumptions; verify expiry and remaining quota before assigning long-running work
+- when a free provider cannot complete the task within its available quota, split the task, switch to another verified zero-cost provider, use a capable local runtime, or stop that provider path without incurring cost
+- provider selection must remain capability-based: planning, implementation, debugging, review, and verification may use different zero-cost providers while preserving one repository workflow and one source of truth
+- all free-only providers remain subject to the same security, review, and `npm run quality` requirements
+
 ## Senior-agent workflow
 
 For non-trivial changes, use the combined Superpowers + Skills For Real Engineers workflow. The goal is disciplined execution, not ceremony.
