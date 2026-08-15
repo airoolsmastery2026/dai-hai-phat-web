@@ -18,6 +18,10 @@ const routeEntryPath = new URL(
   "../src/components/sections/AIOfficeRouteEntry.tsx",
   import.meta.url,
 );
+const loadingStatePath = new URL(
+  "../src/components/sections/AIOfficeLoadingState.tsx",
+  import.meta.url,
+);
 const homePagePath = new URL("../src/app/page.tsx", import.meta.url);
 const configPath = new URL("../src/lib/ai/live.ts", import.meta.url);
 
@@ -53,9 +57,10 @@ test("Gemini Live panel captures PCM audio and cleans up browser resources", asy
 });
 
 test("AI Office voice integration is mounted on the public homepage when configured", async () => {
-  const [source, routeEntry, homePage] = await Promise.all([
+  const [source, routeEntry, loadingState, homePage] = await Promise.all([
     readFile(experiencePath, "utf8"),
     readFile(routeEntryPath, "utf8"),
+    readFile(loadingStatePath, "utf8"),
     readFile(homePagePath, "utf8"),
   ]);
 
@@ -64,10 +69,11 @@ test("AI Office voice integration is mounted on the public homepage when configu
   assert.match(source, /<GeminiLivePanel servicePreset=\{servicePreset\} \/>/);
   assert.match(source, /<AIOfficeSection key=\{sessionKey\} \/>/);
   assert.match(routeEntry, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
+  assert.match(routeEntry, /AIOfficeLoadingState/);
   assert.match(homePage, /AIOfficeRouteEntry/);
   assert.match(homePage, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
   assert.match(homePage, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
-  assert.match(homePage, /id="ai-office"/);
+  assert.match(loadingState, /id="ai-office"/);
 });
 
 test("Gemini Live uses the constrained v1beta WebSocket endpoint", async () => {
