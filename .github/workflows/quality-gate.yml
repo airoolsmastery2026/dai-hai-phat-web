@@ -18,6 +18,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install Sentrux v0.5.7
+        run: |
+          curl -fsSL -o /usr/local/bin/sentrux \
+            https://github.com/sentrux/sentrux/releases/download/v0.5.7/sentrux-linux-x86_64
+          sudo chmod +x /usr/local/bin/sentrux
+          sentrux --version
+
+      - name: Architecture governance
+        run: npm run architecture:check
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
