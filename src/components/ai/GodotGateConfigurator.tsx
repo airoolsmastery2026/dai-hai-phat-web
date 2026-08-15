@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 type GateSelection = {
@@ -28,7 +29,7 @@ export function GodotGateConfigurator({ configuratorUrl }: Props) {
   const aiHref = useMemo(() => {
     const params = new URLSearchParams({ service: "cua-cong" });
     if (selection) params.set("configurator", JSON.stringify(selection));
-    return `/#ai-office?${params.toString()}`;
+    return `/?${params.toString()}#ai-office`;
   }, [selection]);
 
   useEffect(() => {
@@ -54,12 +55,12 @@ export function GodotGateConfigurator({ configuratorUrl }: Props) {
         <p className="mt-[var(--space-3)] text-[var(--color-text-muted)]">
           Bản Godot chạy độc lập và chỉ được tải khi có Web export URL. Website vẫn hoạt động bình thường, không kéo engine 3D vào bundle chính.
         </p>
-        <a
-          href="/#ai-office?service=cua-cong"
+        <Link
+          href="/?service=cua-cong#ai-office"
           className="mt-[var(--space-5)] inline-flex min-h-11 items-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] font-semibold text-white"
         >
           Tư vấn cửa cổng với AI
-        </a>
+        </Link>
       </div>
     );
   }
@@ -92,12 +93,12 @@ export function GodotGateConfigurator({ configuratorUrl }: Props) {
             Đã nhận cấu hình từ 3D. Tiếp tục với AI để lập hồ sơ tư vấn.
           </p>
         )}
-        <a
+        <Link
           href={aiHref}
           className="mt-[var(--space-4)] inline-flex min-h-11 items-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] font-semibold text-white"
         >
           Gửi cấu hình cho AI Đại Hải Phát
-        </a>
+        </Link>
       </div>
     </div>
   );
