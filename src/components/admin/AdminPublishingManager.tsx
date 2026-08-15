@@ -54,7 +54,10 @@ export function AdminPublishingManager() {
     }
   }, []);
 
-  useEffect(() => { void refresh(); }, [refresh]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => { void refresh(); }, 0);
+    return () => window.clearTimeout(timer);
+  }, [refresh]);
 
   async function mutate(config: PlatformConfig, method: "PUT" | "POST" | "DELETE") {
     setBusy(config.id);
