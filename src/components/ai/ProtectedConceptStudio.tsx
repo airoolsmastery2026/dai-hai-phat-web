@@ -5,6 +5,7 @@ import type { DragEvent, MouseEvent } from "react";
 
 import { AIConceptStudio } from "@/components/ai/AIConceptStudio";
 import { ConceptReadinessGate } from "@/components/ai/ConceptReadinessGate";
+import { RawFinishedRevealStudio } from "@/components/ai/RawFinishedRevealStudio";
 import { Alert } from "@/components/ui/Alert";
 import { COMPANY_CONFIG } from "@/content/company";
 
@@ -63,7 +64,10 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
       </Alert>
 
       <ConceptReadinessGate>
-        <AIConceptStudio enabled={enabled} />
+        <div className="space-y-[var(--space-section)]">
+          <AIConceptStudio enabled={enabled} />
+          <RawFinishedRevealStudio enabled={enabled} />
+        </div>
       </ConceptReadinessGate>
 
       <style jsx global>{`
