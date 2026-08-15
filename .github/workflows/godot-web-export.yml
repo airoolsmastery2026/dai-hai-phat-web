@@ -37,14 +37,14 @@ jobs:
 
       - name: Install export templates
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/
-          mv "/root/.local/share/godot/export_templates/${GODOT_VERSION}.stable" \
-            "~/.local/share/godot/export_templates/${GODOT_VERSION}.stable" 2>/dev/null || true
-          if [ ! -d "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable" ]; then
-            mkdir -p "$HOME/.local/share/godot/export_templates"
-            cp -a "/root/.local/share/godot/export_templates/${GODOT_VERSION}.stable" \
-              "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$HOME/.local/share/godot/export_templates"
+
+          if [ ! -d "$TEMPLATE_DIR" ]; then
+            mv "/root/.local/share/godot/export_templates/${GODOT_VERSION}.stable" "$TEMPLATE_DIR"
           fi
+
+          test -d "$TEMPLATE_DIR"
 
       - name: Export Web build
         run: |
