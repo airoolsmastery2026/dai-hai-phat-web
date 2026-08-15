@@ -4,6 +4,7 @@ import test from "node:test";
 
 import {
   AI_CONCEPT_MODEL,
+  AI_CONCEPT_PRESENTATION_TRANSFORM,
   AI_CONCEPT_VIEWS,
   isAIConceptView,
 } from "../src/lib/ai/concept-studio.ts";
@@ -106,6 +107,22 @@ test("AI concept view guard accepts only supported view identifiers", () => {
 test("AI concept model remains server-configured and non-public", () => {
   assert.equal(AI_CONCEPT_MODEL, "gemini-3-pro-image");
   assert.doesNotMatch(AI_CONCEPT_MODEL, /^NEXT_PUBLIC_/);
+});
+
+test("architectural presentation transform keeps geometry locked across drawing and render", async () => {
+  assert.equal(AI_CONCEPT_PRESENTATION_TRANSFORM.id, "technical-line-to-photoreal");
+  assert.equal(AI_CONCEPT_PRESENTATION_TRANSFORM.durationSeconds, 5);
+  assert.equal(AI_CONCEPT_PRESENTATION_TRANSFORM.cameraMotion, "slow-push-in");
+  assert.match(AI_CONCEPT_PRESENTATION_TRANSFORM.technicalDrawingPrompt, /giữ nguyên/i);
+  assert.match(AI_CONCEPT_PRESENTATION_TRANSFORM.technicalDrawingPrompt, /nét/i);
+  assert.match(AI_CONCEPT_PRESENTATION_TRANSFORM.videoPrompt, /5 giây/i);
+  assert.match(AI_CONCEPT_PRESENTATION_TRANSFORM.videoPrompt, /góc máy/i);
+
+  const route = await readFile(routePath, "utf8");
+  assert.match(route, /AI_CONCEPT_PRESENTATION_TRANSFORM/);
+  assert.match(route, /presentationGuide: AI_CONCEPT_PRESENTATION_TRANSFORM/);
+  assert.match(route, /đường chân trời/i);
+  assert.match(route, /đường tụ/i);
 });
 
 test("AI image generation is server-side, constrained and rate limited", async () => {
