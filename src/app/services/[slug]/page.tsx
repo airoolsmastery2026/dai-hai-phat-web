@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ServiceBenefits } from "@/components/services/ServiceBenefits";
@@ -21,7 +20,7 @@ export async function generateStaticParams() {
   return SERVICES.map((service) => ({ slug: getPublicRouteSlug(service.slug) }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const normalizedSlug = normalizeRouteSlug(slug);
   const service = SERVICES.find((item) => item.slug === normalizedSlug);
@@ -41,14 +40,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords: service.seo.keywords,
     alternates: { canonical },
     openGraph: {
-      type: "website",
+      type: "website" as const,
       title,
       description,
       url: canonical,
       images: [{ url: service.image, alt: service.title }],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary_large_image" as const,
       title,
       description,
       images: [service.image],
