@@ -15,6 +15,7 @@ var gate_root: Node3D
 var width_label: Label
 var height_label: Label
 var slat_label: Label
+var send_status_label: Label
 
 
 func _ready() -> void:
@@ -61,7 +62,7 @@ func _build_ui() -> void:
 
     var panel := PanelContainer.new()
     panel.position = Vector2(24, 24)
-    panel.size = Vector2(340, 320)
+    panel.size = Vector2(360, 390)
     canvas.add_child(panel)
 
     var margin := MarginContainer.new()
@@ -115,10 +116,19 @@ func _build_ui() -> void:
     slat_slider.value_changed.connect(_on_slat_count_changed)
     stack.add_child(slat_slider)
 
+    var send := Button.new()
+    send.text = "Gửi cấu hình sang AI"
+    send.pressed.connect(_send_configuration)
+    stack.add_child(send)
+
     var reset := Button.new()
     reset.text = "Khôi phục cấu hình mẫu"
     reset.pressed.connect(_reset_configuration)
     stack.add_child(reset)
+
+    send_status_label = Label.new()
+    send_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+    stack.add_child(send_status_label)
 
     _refresh_labels()
 
@@ -179,6 +189,24 @@ func _refresh_labels() -> void:
     slat_label.text = "Số nan mô phỏng: %d" % slat_count
 
 
+func _send_configuration() -> void:
+    if not OS.has_feature("web"):
+        send_status_label.text = "Chức năng gửi sang AI hoạt động trong bản Web export."
+        return
+
+    var payload := {
+        "width": snapped(gate_width, 0.1),
+        "height": snapped(gate_height, 0.1),
+        "slatCount": slat_count,
+        "material": "steel-box-section",
+        "color": "powder-coated"
+    }
+    var payload_json := JSON.stringify(payload)
+    var browser_script := "window.parent.postMessage({type:'dhp:gate-selection',payload:%s}, '*');" % payload_json
+    JavaScriptBridge.eval(browser_script)
+    send_status_label.text = "Đã gửi cấu hình. Tiếp tục với AI Đại Hải Phát ở bên dưới."
+
+
 func _on_width_changed(value: float) -> void:
     gate_width = value
     _refresh_labels()
@@ -201,5 +229,6 @@ func _reset_configuration() -> void:
     gate_width = 4.0
     gate_height = 2.2
     slat_count = 12
+    send_status_label.text = ""
     _refresh_labels()
     _rebuild_gate()

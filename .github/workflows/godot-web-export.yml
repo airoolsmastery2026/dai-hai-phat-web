@@ -1,0 +1,86 @@
+name: Godot Web Export
+
+on:
+  pull_request:
+    paths:
+      - "prototypes/godot-gate-configurator/**"
+      - ".github/workflows/godot-web-export.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "prototypes/godot-gate-configurator/**"
+      - ".github/workflows/godot-web-export.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: godot-web-export-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: "4.6.3"
+  PROJECT_PATH: prototypes/godot-gate-configurator
+
+jobs:
+  export-web:
+    name: Export Godot Web
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:4.6.3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install export templates
+        run: |
+          TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$HOME/.local/share/godot/export_templates"
+
+          if [ ! -d "$TEMPLATE_DIR" ]; then
+            mv "/root/.local/share/godot/export_templates/${GODOT_VERSION}.stable" "$TEMPLATE_DIR"
+          fi
+
+          test -d "$TEMPLATE_DIR"
+
+      - name: Export Web build
+        run: |
+          rm -rf build/web
+          mkdir -p build/web
+          EXPORT_DIR="$(readlink -f build)"
+          cd "$PROJECT_PATH"
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+          test -s "$EXPORT_DIR/web/index.html"
+          test -s "$EXPORT_DIR/web/index.wasm"
+          test -s "$EXPORT_DIR/web/index.pck"
+
+      - name: Upload Web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dhp-godot-gate-web
+          path: build/web
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Publish into Next.js public assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          rm -rf public/godot/gate-configurator
+          mkdir -p public/godot/gate-configurator
+          cp -a build/web/. public/godot/gate-configurator/
+
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f public/godot/gate-configurator
+
+          if git diff --cached --quiet; then
+            echo "Godot Web export is already current."
+            exit 0
+          fi
+
+          git commit -m "build: refresh Godot gate Web export"
+          git push origin HEAD:main

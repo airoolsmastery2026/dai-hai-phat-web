@@ -18,6 +18,7 @@ This prototype is visualization-only.
 - simulated vertical slat count: 6–24
 - procedural 3D frame and slats
 - Web export preset using Godot compatibility renderer
+- browser handoff button emitting `dhp:gate-selection` to the parent Website
 
 ## Local run
 
@@ -40,9 +41,25 @@ godot --headless \
   prototypes/godot-gate-configurator/build/web/index.html
 ```
 
+## Automated production export
+
+`.github/workflows/godot-web-export.yml` validates the Godot 4.6.3 Web export on pull requests. After the source is merged to `main`, the same workflow publishes the generated files into:
+
+```text
+public/godot/gate-configurator/
+```
+
+Vercel then serves the export on the same Website origin at:
+
+```text
+/godot/gate-configurator/index.html
+```
+
+The Next.js route `/cong-cu/cau-hinh-cong-3d` uses that same-origin path by default. `NEXT_PUBLIC_GODOT_GATE_CONFIGURATOR_URL` remains an optional override for a separately hosted export.
+
 ## Intended production contract
 
-The eventual Website → configurator payload should be bounded and versioned, for example:
+The Website → configurator payload should remain bounded and versioned, for example:
 
 ```json
 {
@@ -63,9 +80,7 @@ The configurator may return customer-selected visualization state. It must not c
 
 ## Next production slice
 
-1. Website-owned typed visualization contract.
-2. Product/material/style mapping from canonical Website data.
-3. Static Web export hosted as a lazy-loaded capability artifact.
-4. Next.js adapter that launches the configurator only on explicit customer interaction.
-5. Convert selected configuration back into AI intake/lead context.
-6. Mobile performance budget and accessibility fallback for devices that cannot run the 3D experience reliably.
+1. Product/material/style mapping from canonical Website data.
+2. Validate the same-origin Web export on Vercel production.
+3. Convert selected configuration into richer AI intake/lead context.
+4. Add mobile performance budget and accessibility fallback for devices that cannot run the 3D experience reliably.
