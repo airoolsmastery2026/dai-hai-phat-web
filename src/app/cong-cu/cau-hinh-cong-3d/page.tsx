@@ -7,6 +7,7 @@ import { PageHero } from "@/components/ui/PageHero";
 const PAGE_TITLE = "Cấu hình cửa cổng 3D";
 const PAGE_DESCRIPTION =
   "Thử kích thước và kiểu nan cửa cổng trong bộ cấu hình 3D Đại Hải Phát trước khi chuyển phương án sang AI tư vấn và kỹ sư xác nhận.";
+const DEFAULT_CONFIGURATOR_URL = "/godot/gate-configurator/index.html";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
 };
 
 export default function GateConfiguratorPage() {
-  const configuratorUrl = process.env.NEXT_PUBLIC_GODOT_GATE_CONFIGURATOR_URL?.trim();
+  const configuratorUrl =
+    process.env.NEXT_PUBLIC_GODOT_GATE_CONFIGURATOR_URL?.trim() ||
+    DEFAULT_CONFIGURATOR_URL;
 
   return (
     <main className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
