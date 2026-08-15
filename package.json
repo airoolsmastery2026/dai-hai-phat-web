@@ -9,6 +9,7 @@
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "test:unit": "node --experimental-strip-types --test tests/*.test.mjs",
     "quality": "npm run typecheck && npm run lint && npm run test && npm run build",
+    "architecture:check": "sentrux check .",
     "assets:build": "npm --prefix packages/dhp-asset-processor run process",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ."
