@@ -108,62 +108,154 @@ export function ConceptReadinessGate({ children }: ConceptReadinessGateProps) {
         </div>
       </div>
 
-      <form className="mt-6 space-y-6" onSubmit={handleSubmit}>
+      <form className="mt-6 space-y-6" onSubmit={handleSubmit} autoComplete="on">
         <div className="grid gap-4 md:grid-cols-2">
           <label className="text-sm font-semibold">Họ và tên
-            <input className={INPUT_CLASS} value={profile.name} onChange={(e) => update("name", e.target.value)} required />
+            <input
+              className={INPUT_CLASS}
+              name="name"
+              autoComplete="name"
+              maxLength={120}
+              value={profile.name}
+              onChange={(e) => update("name", e.target.value)}
+              required
+            />
           </label>
           <label className="text-sm font-semibold">Số điện thoại
-            <input className={INPUT_CLASS} inputMode="tel" value={profile.phone} onChange={(e) => update("phone", e.target.value)} required />
+            <input
+              className={INPUT_CLASS}
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              maxLength={30}
+              value={profile.phone}
+              onChange={(e) => update("phone", e.target.value)}
+              required
+            />
           </label>
           <label className="text-sm font-semibold">Zalo
-            <input className={INPUT_CLASS} inputMode="tel" value={profile.zalo} onChange={(e) => update("zalo", e.target.value)} />
+            <input
+              className={INPUT_CLASS}
+              name="zalo"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              maxLength={30}
+              value={profile.zalo}
+              onChange={(e) => update("zalo", e.target.value)}
+            />
           </label>
           <label className="text-sm font-semibold">Khu vực hoặc địa chỉ công trình
-            <input className={INPUT_CLASS} value={profile.projectArea} onChange={(e) => update("projectArea", e.target.value)} required />
+            <input
+              className={INPUT_CLASS}
+              name="projectArea"
+              autoComplete="street-address"
+              maxLength={200}
+              value={profile.projectArea}
+              onChange={(e) => update("projectArea", e.target.value)}
+              required
+            />
           </label>
           <label className="text-sm font-semibold">Hạng mục cần thực hiện
-            <select className={INPUT_CLASS} value={profile.service} onChange={(e) => update("service", e.target.value)} required>
+            <select
+              className={INPUT_CLASS}
+              name="service"
+              value={profile.service}
+              onChange={(e) => update("service", e.target.value)}
+              required
+            >
               <option value="">Chọn hạng mục</option>
               <option>Cửa cổng</option><option>Cầu thang và lan can</option><option>Mái che</option><option>Nội thất</option><option>Cải tạo không gian</option>
             </select>
           </label>
           <label className="text-sm font-semibold">Kích thước ước tính
-            <input className={INPUT_CLASS} value={profile.dimensions} onChange={(e) => update("dimensions", e.target.value)} placeholder="Ví dụ: rộng 3,6 m, cao 2,4 m" required />
+            <input
+              className={INPUT_CLASS}
+              name="dimensions"
+              maxLength={160}
+              value={profile.dimensions}
+              onChange={(e) => update("dimensions", e.target.value)}
+              placeholder="Ví dụ: rộng 3,6 m, cao 2,4 m"
+              required
+            />
           </label>
           <label className="text-sm font-semibold">Khoảng ngân sách
-            <select className={INPUT_CLASS} value={profile.budget} onChange={(e) => update("budget", e.target.value)}>
+            <select
+              className={INPUT_CLASS}
+              name="budget"
+              value={profile.budget}
+              onChange={(e) => update("budget", e.target.value)}
+            >
               <option value="">Chưa xác định</option><option>Dưới 20 triệu</option><option>20–50 triệu</option><option>50–100 triệu</option><option>Trên 100 triệu</option>
             </select>
           </label>
           <label className="text-sm font-semibold">Thời gian dự kiến
-            <select className={INPUT_CLASS} value={profile.timeline} onChange={(e) => update("timeline", e.target.value)}>
+            <select
+              className={INPUT_CLASS}
+              name="timeline"
+              value={profile.timeline}
+              onChange={(e) => update("timeline", e.target.value)}
+            >
               <option value="">Chưa xác định</option><option>Trong 1 tháng</option><option>1–3 tháng</option><option>3–6 tháng</option><option>Trên 6 tháng</option>
             </select>
           </label>
           <label className="text-sm font-semibold md:col-span-2">Mục đích
-            <select className={INPUT_CLASS} value={profile.purpose} onChange={(e) => update("purpose", e.target.value as ConceptReadinessProfile["purpose"])} required>
+            <select
+              className={INPUT_CLASS}
+              name="purpose"
+              value={profile.purpose}
+              onChange={(e) => update("purpose", e.target.value as ConceptReadinessProfile["purpose"])}
+              required
+            >
               <option value="">Chọn mục đích</option><option value="build">Đang xây mới</option><option value="renovate">Đang cải tạo</option><option value="reference">Chỉ tham khảo ý tưởng</option>
             </select>
           </label>
           <label className="text-sm font-semibold md:col-span-2">Mô tả nhu cầu
-            <textarea className={INPUT_CLASS} rows={5} value={profile.description} onChange={(e) => update("description", e.target.value)} placeholder="Mô tả hiện trạng, vật liệu, màu sắc, phần cần giữ nguyên và yêu cầu mong muốn..." required />
+            <textarea
+              className={INPUT_CLASS}
+              name="description"
+              rows={5}
+              minLength={10}
+              maxLength={2000}
+              value={profile.description}
+              onChange={(e) => update("description", e.target.value)}
+              placeholder="Mô tả hiện trạng, vật liệu, màu sắc, phần cần giữ nguyên và yêu cầu mong muốn..."
+              required
+            />
           </label>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="flex items-start gap-3 rounded-[var(--radius-md)] border border-[var(--color-border)] p-4 text-sm">
-            <input type="checkbox" checked={profile.hasSiteImage} onChange={(e) => update("hasSiteImage", e.target.checked)} />
+            <input
+              name="hasSiteImage"
+              type="checkbox"
+              checked={profile.hasSiteImage}
+              onChange={(e) => update("hasSiteImage", e.target.checked)}
+            />
             Tôi đã chuẩn bị ảnh hiện trạng thật của công trình.
           </label>
           <label className="flex items-start gap-3 rounded-[var(--radius-md)] border border-[var(--color-border)] p-4 text-sm">
-            <input type="checkbox" checked={profile.hasReferenceImage} onChange={(e) => update("hasReferenceImage", e.target.checked)} />
+            <input
+              name="hasReferenceImage"
+              type="checkbox"
+              checked={profile.hasReferenceImage}
+              onChange={(e) => update("hasReferenceImage", e.target.checked)}
+            />
             Tôi đã chuẩn bị ảnh mẫu hoặc phong cách tham khảo.
           </label>
         </div>
 
         <label className="flex items-start gap-3 text-sm leading-6">
-          <input className="mt-1" type="checkbox" checked={profile.consent} onChange={(e) => update("consent", e.target.checked)} required />
+          <input
+            className="mt-1"
+            name="consent"
+            type="checkbox"
+            checked={profile.consent}
+            onChange={(e) => update("consent", e.target.checked)}
+            required
+          />
           Tôi đồng ý gửi hồ sơ này cho Đại Hải Phát để kỹ sư xem xét và liên hệ tư vấn.
         </label>
 
