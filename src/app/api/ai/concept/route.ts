@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 
 import {
   AI_CONCEPT_MODEL,
+  AI_CONCEPT_PRESENTATION_TRANSFORM,
   type AIConceptView,
   isAIConceptView,
 } from "@/lib/ai/concept-studio";
@@ -103,6 +104,7 @@ ${VIEW_INSTRUCTIONS[view]}
 YÊU CẦU BẮT BUỘC:
 - Chỉ tạo một ảnh phối cảnh 16:9.
 - Giữ nguyên phối cảnh máy ảnh, tường, cột, nền, trần, cửa, cửa sổ và các phần hiện trạng không được yêu cầu thay đổi.
+- Khóa đường chân trời, đường tụ, crop và tỷ lệ không gian của góc đang dựng để ảnh có thể dùng làm keyframe cuối cho chuyển cảnh trình bày kiến trúc mà không bị camera drift hoặc biến dạng hình học.
 - Chuyển mẫu tham khảo thành một phương án phù hợp với tỷ lệ và điều kiện thực tế của ảnh hiện trạng; không sao chép mù quáng.
 - Hạng mục phải có tỷ lệ hợp lý, vật liệu thực tế, kết cấu có thể thi công và phù hợp công trình dân dụng tại Việt Nam.
 - Giữ đúng một phương án xuyên suốt: cùng kiểu dáng, vật liệu, màu sắc, số khoang, hoa văn, phụ kiện và logic kết cấu.
@@ -324,6 +326,7 @@ export async function POST(request: NextRequest) {
         mimeType: imagePart.inlineData.mimeType,
         model: AI_CONCEPT_MODEL,
         view: viewValue,
+        presentationGuide: AI_CONCEPT_PRESENTATION_TRANSFORM,
         requestId,
       },
       200,
