@@ -21,11 +21,13 @@ test("optional capabilities stay behind the single server-side Control Plane bou
     readFile(envPath, "utf8"),
   ]);
 
-  assert.match(proxy, /capabilities/);
-  assert.match(capabilityGateway, /requestControlPlane/);
+  assert.match(proxy, /requestCapabilityGateway/);
+  assert.match(capabilityGateway, /requestCapabilityGateway/);
   assert.match(capabilityGateway, /\/v1\/capabilities\//);
   assert.match(client, /DHP_CONTROL_PLANE_URL/);
   assert.match(client, /DHP_CONTROL_PLANE_SECRET/);
+  assert.match(client, /dhp-capability-gateway/);
+  assert.match(env, /DHP_CAPABILITY_GATEWAY_URL=/);
   assert.doesNotMatch(client, /NEXT_PUBLIC_DHP/);
 
   assert.doesNotMatch(
@@ -51,7 +53,9 @@ test("capability IDs describe business capabilities instead of providers", async
     "analytics",
     "internal-tools",
     "content",
+    "platform-services",
     "external-data",
+    "oss-discovery",
   ]) {
     assert.match(capabilityGateway, new RegExp(`"${capability}"`));
   }
