@@ -160,6 +160,16 @@ textarea {
   background: linear-gradient(90deg, transparent, var(--color-metal), transparent);
 }
 
+.hero-surface-overlay {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-surface) 99%, transparent) 0%,
+    color-mix(in srgb, var(--color-background) 96%, transparent) 48%,
+    color-mix(in srgb, var(--color-background) 70%, transparent) 76%,
+    color-mix(in srgb, var(--color-background) 38%, transparent) 100%
+  );
+}
+
 .ai-office-light {
   --color-surface-dark: #f5f9f8;
   --color-surface-dark-muted: #e8f1f0;
