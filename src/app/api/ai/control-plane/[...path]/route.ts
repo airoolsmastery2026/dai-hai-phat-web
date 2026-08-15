@@ -1,5 +1,8 @@
 import { NextRequest } from 'next/server';
-import { requestControlPlane } from '@/lib/dhp-control-plane';
+import {
+  requestCapabilityGateway,
+  requestControlPlane,
+} from '@/lib/dhp-control-plane';
 
 interface RouteContext {
   params: Promise<{ path: string[] }>;
@@ -19,7 +22,9 @@ async function forward(request: NextRequest, context: RouteContext): Promise<Res
   const body = method === 'GET' || method === 'HEAD' ? undefined : await request.text();
 
   try {
-    const upstream = await requestControlPlane(target, { method, body });
+    const upstream = path[0] === 'capabilities'
+      ? await requestCapabilityGateway(target, { method, body })
+      : await requestControlPlane(target, { method, body });
     const text = await upstream.text();
     return new Response(text, {
       status: upstream.status,
