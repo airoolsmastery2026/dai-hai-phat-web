@@ -48,6 +48,22 @@ The product serves residential gates, doors, stairs, railings, awnings, interior
 - Work only inside the explicit task or current batch scope.
 - AI may propose architecture changes but must not silently introduce them.
 
+## Coding model/provider policy
+
+AI coding agents are execution backends, not architectural authorities. The repository workflow, contracts, tests, and review rules remain authoritative regardless of which model or coding environment executes the task.
+
+Approved provider posture:
+
+- Codex/ChatGPT, Claude Code, Gemini CLI, Z.ai/GLM-5.2/ZCode, OpenCode, and local model runtimes may be used when available and appropriate.
+- Z.ai/GLM-5.2/ZCode is an optional high-capability coding provider; it does not replace the repository workflow or become a production dependency merely by being used for development.
+- Do not introduce provider-specific business logic, source-of-truth documents, or duplicated workflows solely to accommodate one coding model.
+- Do not automatically activate a paid API, paid credit path, or metered provider on behalf of the project. Paid-provider usage requires an already configured operator-owned entitlement or an explicit project decision.
+- Prefer existing/free quota or operator-provided subscriptions when they satisfy the task; local execution may be used as a fallback where practical.
+- Never commit provider API keys, session tokens, browser credentials, subscription data, or private endpoints.
+- Switching coding providers must not change acceptance criteria, code-review requirements, security rules, or the canonical `npm run quality` gate.
+- A provider claim such as "free", "unlimited", or "zero-token" is not an architectural assumption. Verify current terms before relying on it operationally.
+- Provider lock-in is prohibited at the contributor layer. Plans/specs should describe required capability and observable behavior rather than requiring a named model unless the task explicitly depends on that provider.
+
 ## Senior-agent workflow
 
 For non-trivial changes, use the combined Superpowers + Skills For Real Engineers workflow. The goal is disciplined execution, not ceremony.
