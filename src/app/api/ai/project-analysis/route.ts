@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
           error:
             error instanceof SyntaxError
               ? "Dữ liệu JSON không hợp lệ."
-              : error.message,
+              : (error as Error).message,
           requestId,
         },
         400,
