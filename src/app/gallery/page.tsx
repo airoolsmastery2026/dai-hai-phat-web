@@ -5,6 +5,7 @@ import { VerifiedGallery } from "@/components/gallery/VerifiedGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
 import { Container } from "@/components/ui/Container";
+import { COMPANY_CONFIG } from "@/content/company";
 import { listPublicResidentialGallery } from "@/lib/ai/public-gallery";
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export default function GalleryPage() {
     name: "Thư viện công trình đã xác minh Đại Hải Phát",
     description:
       "Hình ảnh nội thất và cơ khí dân dụng cho nhà ở có metadata và nguồn sử dụng đã xác minh.",
-    url: "https://daihaiphat.vn/gallery",
+    url: `${COMPANY_CONFIG.websiteUrl}/gallery`,
     numberOfItems: initialGallery.total,
     mainEntity: {
       "@type": "ItemList",
@@ -50,7 +51,7 @@ export default function GalleryPage() {
         "@type": "ListItem",
         position: index + 1,
         name: item.title,
-        image: `https://daihaiphat.vn${item.thumbnail.url}`,
+        image: `${COMPANY_CONFIG.websiteUrl}${item.thumbnail.url}`,
       })),
     },
   };
