@@ -24,7 +24,7 @@ export function HeroSection() {
         className="-z-20 object-cover object-[72%_center]"
       />
       <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(255_254_250/0.99)_0%,rgb(243_247_246/0.96)_48%,rgb(243_247_246/0.7)_76%,rgb(243_247_246/0.38)_100%)]"
+        className="hero-surface-overlay pointer-events-none absolute inset-0 -z-10"
         aria-hidden="true"
       />
       <div
@@ -68,7 +68,7 @@ export function HeroSection() {
             ))}
           </ul>
 
-          <div className="mt-[var(--space-4)] grid grid-cols-2 gap-[var(--space-2)] rounded-[var(--radius-md)] border border-white/70 bg-white/65 p-[var(--space-3)] backdrop-blur-sm lg:hidden">
+          <div className="mt-[var(--space-4)] grid grid-cols-2 gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] lg:hidden">
             {DELIVERY_STEPS.map((item, index) => (
               <div key={item} className="flex items-start gap-[var(--space-2)] text-xs font-semibold leading-5 text-[var(--color-text-muted)]">
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[10px] font-bold text-[var(--color-primary-contrast)]">
@@ -80,7 +80,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <aside className="hidden rounded-[var(--radius-lg)] border border-white/80 bg-[var(--color-surface)]/84 p-[var(--space-5)] shadow-[var(--shadow-md)] backdrop-blur-md lg:block">
+        <aside className="hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-5)] shadow-[var(--shadow-md)] lg:block">
           <div className="flex items-center justify-between gap-4">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-metal-strong)]">
               Lộ trình tư vấn
