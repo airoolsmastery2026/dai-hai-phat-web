@@ -10,6 +10,7 @@ export const PUBLISHING_PLATFORMS = [
 ] as const;
 
 export type PublishingPlatform = (typeof PUBLISHING_PLATFORMS)[number];
+export type TelegramControlRole = "viewer" | "operator" | "admin" | "owner";
 
 export interface PublishingAccountStatus {
   platform: PublishingPlatform;
@@ -19,6 +20,12 @@ export interface PublishingAccountStatus {
   verification_error_code: string | null;
   last_verified_at: string | null;
   updated_at: string;
+}
+
+export interface TelegramControlStatus {
+  botConfigured: boolean;
+  webhookSecretConfigured: boolean;
+  operators: Array<{ operatorId: string; role: TelegramControlRole; enabled: boolean }>;
 }
 
 const PROJECT_ID = "dai-hai-phat-web";
@@ -57,6 +64,24 @@ export function sanitizePublishingCredentials(
     output[field] = value;
   }
   return output;
+}
+
+export function sanitizeTelegramControlConfig(input: unknown): {
+  botToken: string;
+  operatorId: string;
+  role: TelegramControlRole;
+} {
+  if (!input || typeof input !== "object" || Array.isArray(input)) {
+    throw new Error("Telegram config không hợp lệ.");
+  }
+  const record = input as Record<string, unknown>;
+  const botToken = typeof record.botToken === "string" ? record.botToken.trim() : "";
+  const operatorId = typeof record.operatorId === "string" ? record.operatorId.trim() : "";
+  const role = typeof record.role === "string" ? record.role.trim().toLowerCase() : "owner";
+  if (botToken.length < 20 || botToken.length > 512) throw new Error("Bot Token không hợp lệ.");
+  if (!/^\d{4,20}$/.test(operatorId)) throw new Error("Telegram Operator ID phải là mã số hợp lệ.");
+  if (!["viewer", "operator", "admin", "owner"].includes(role)) throw new Error("Telegram role không hợp lệ.");
+  return { botToken, operatorId, role: role as TelegramControlRole };
 }
 
 export async function listPublishingAccounts(): Promise<PublishingAccountStatus[]> {
@@ -98,5 +123,30 @@ export async function disconnectPublishingAccount(
   await supabaseRpcRequest<null>("dhp_publish_remove_account", {
     p_project_id: PROJECT_ID,
     p_platform: platform,
+  });
+}
+
+export async function getTelegramControlStatus(): Promise<TelegramControlStatus> {
+  const status = await supabaseRpcRequest<TelegramControlStatus>(
+    "dhp_telegram_admin_status",
+    { p_project_id: PROJECT_ID },
+  );
+  return {
+    botConfigured: status?.botConfigured === true,
+    webhookSecretConfigured: status?.webhookSecretConfigured === true,
+    operators: Array.isArray(status?.operators) ? status.operators : [],
+  };
+}
+
+export async function storeTelegramControlConfig(input: {
+  botToken: string;
+  operatorId: string;
+  role: TelegramControlRole;
+}): Promise<void> {
+  await supabaseRpcRequest<null>("dhp_telegram_store_config", {
+    p_project_id: PROJECT_ID,
+    p_bot_token: input.botToken,
+    p_operator_id: input.operatorId,
+    p_role: input.role,
   });
 }
