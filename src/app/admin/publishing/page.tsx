@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { AdminPublishingManager } from "@/components/admin/AdminPublishingManager";
+import { AdminTelegramControl } from "@/components/admin/AdminTelegramControl";
 
 export const metadata: Metadata = {
   title: "Publishing Accounts | Đại Hải Phát",
@@ -8,5 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPublishingPage() {
-  return <AdminPublishingManager />;
+  return (
+    <>
+      <AdminPublishingManager />
+      <div className="mx-auto -mt-2 max-w-7xl px-4 pb-8 md:px-8">
+        <AdminTelegramControl />
+      </div>
+    </>
+  );
 }
