@@ -55,10 +55,10 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
       <HeroSection />
-      <ServicesSection />
       <Suspense fallback={<AIOfficeFallback />}>
         <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
       </Suspense>
+      <ServicesSection />
       <ProjectsSection />
       <ContactSection />
     </main>
