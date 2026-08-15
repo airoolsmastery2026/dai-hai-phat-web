@@ -27,7 +27,10 @@ test("AI admin console exposes skill, media readiness and publish inbox controls
   assert.match(panel, /Duyệt/);
   assert.match(panel, /Publish Inbox/);
   assert.match(panel, /BOT ĐĂNG BÀI/);
-  assert.match(gateway, /\['skills', 'media', 'publish'\]/);
+  assert.match(gateway, /'skills'/);
+  assert.match(gateway, /'media'/);
+  assert.match(gateway, /'publish'/);
+  assert.match(gateway, /'capabilities'/);
   assert.match(client, /DHP_CONTROL_PLANE_SECRET/);
   assert.doesNotMatch(panel, /DHP_CONTROL_PLANE_SECRET|DHP_OPENAI_API_KEY|DHP_RENDER_TOKEN|DHP_VOICE_TOKEN|DHP_VIDEO_TOKEN|NEXT_PUBLIC_DHP/);
   assert.doesNotMatch(gateway, /NEXT_PUBLIC_DHP/);

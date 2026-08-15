@@ -16,11 +16,33 @@ function timeoutMs(): number {
   return parsed;
 }
 
-export async function requestControlPlane(
+function normalizeBaseUrl(value: string): string {
+  return value.replace(/\/$/, '');
+}
+
+function capabilityGatewayBaseUrl(): string {
+  const explicit = process.env.DHP_CAPABILITY_GATEWAY_URL?.trim();
+  if (explicit) return normalizeBaseUrl(explicit);
+
+  const controlPlaneUrl = new URL(requiredEnv('DHP_CONTROL_PLANE_URL'));
+  if (!controlPlaneUrl.pathname.match(/\/dhp-control-plane-cloud\/?$/)) {
+    throw new Error('DHP_CAPABILITY_GATEWAY_URL is not configured');
+  }
+
+  controlPlaneUrl.pathname = controlPlaneUrl.pathname.replace(
+    /\/dhp-control-plane-cloud\/?$/,
+    '/dhp-capability-gateway',
+  );
+  controlPlaneUrl.search = '';
+  controlPlaneUrl.hash = '';
+  return normalizeBaseUrl(controlPlaneUrl.toString());
+}
+
+async function requestDhpService(
+  baseUrl: string,
   path: string,
-  init: RequestInit = {},
+  init: RequestInit,
 ): Promise<Response> {
-  const baseUrl = requiredEnv('DHP_CONTROL_PLANE_URL').replace(/\/$/, '');
   const keyId = requiredEnv('DHP_CONTROL_PLANE_KEY_ID');
   const secret = requiredEnv('DHP_CONTROL_PLANE_SECRET');
   const safePath = path.startsWith('/') ? path : `/${path}`;
@@ -31,10 +53,24 @@ export async function requestControlPlane(
     headers.set('content-type', 'application/json');
   }
 
-  return fetch(`${baseUrl}${safePath}`, {
+  return fetch(`${normalizeBaseUrl(baseUrl)}${safePath}`, {
     ...init,
     headers,
     cache: 'no-store',
     signal: AbortSignal.timeout(timeoutMs()),
   });
+}
+
+export function requestControlPlane(
+  path: string,
+  init: RequestInit = {},
+): Promise<Response> {
+  return requestDhpService(requiredEnv('DHP_CONTROL_PLANE_URL'), path, init);
+}
+
+export function requestCapabilityGateway(
+  path: string,
+  init: RequestInit = {},
+): Promise<Response> {
+  return requestDhpService(capabilityGatewayBaseUrl(), path, init);
 }
