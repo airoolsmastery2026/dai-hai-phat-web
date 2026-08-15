@@ -1,4 +1,4 @@
-import { requestControlPlane } from "@/lib/dhp-control-plane";
+import { requestCapabilityGateway } from "@/lib/dhp-control-plane";
 
 export const DHP_CAPABILITY_IDS = [
   "agent-runtime",
@@ -10,7 +10,9 @@ export const DHP_CAPABILITY_IDS = [
   "analytics",
   "internal-tools",
   "content",
+  "platform-services",
   "external-data",
+  "oss-discovery",
 ] as const;
 
 export type DhpCapabilityId = (typeof DHP_CAPABILITY_IDS)[number];
@@ -51,5 +53,5 @@ export function requestDhpCapability(
   operation: readonly string[] = [],
   init: RequestInit = {},
 ): Promise<Response> {
-  return requestControlPlane(buildCapabilityPath(capability, operation), init);
+  return requestCapabilityGateway(buildCapabilityPath(capability, operation), init);
 }
