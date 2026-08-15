@@ -1,0 +1,9 @@
+# DHP-AIOS architectural guardrails enforced by Sentrux.
+# Keep the initial policy conservative enough to surface regressions without
+# redefining the existing Next.js architecture.
+
+[constraints]
+max_cycles = 0
+max_coupling = "D"
+max_cc = 50
+no_god_files = true
