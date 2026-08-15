@@ -57,6 +57,8 @@ Vercel then serves the export on the same Website origin at:
 
 The Next.js route `/cong-cu/cau-hinh-cong-3d` uses that same-origin path by default. `NEXT_PUBLIC_GODOT_GATE_CONFIGURATOR_URL` remains an optional override for a separately hosted export.
 
+The production export workflow is intentionally path-scoped to this prototype and its workflow definition, so generated static assets do not recursively trigger another Godot export.
+
 ## Intended production contract
 
 The Website → configurator payload should remain bounded and versioned, for example:
