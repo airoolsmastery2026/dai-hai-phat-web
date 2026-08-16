@@ -25,10 +25,12 @@ test("APILayer phone verification remains server-side and resilient", async () =
   assert.doesNotMatch(source, /NEXT_PUBLIC_APILAYER/);
 });
 
-test("CRM handoff verifies phone without blocking lead delivery", async () => {
+test("CRM handoff blocks a phone explicitly rejected by the verification provider", async () => {
   const source = await readFile(routePath, "utf8");
 
   assert.match(source, /verifyPhoneWithAPILayer\(lead\.contact\.phone\)/);
+  assert.match(source, /phoneVerification\.status === "invalid"/);
+  assert.match(source, /code: "PHONE_INVALID"/);
   assert.match(source, /deliverLeadToCRM\(lead, requestId, \{/);
   assert.match(source, /phone: phoneVerification/);
   assert.match(source, /phoneVerification: phoneVerification\.status/);
