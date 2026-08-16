@@ -148,26 +148,26 @@ export function HeroSection() {
             </ul>
           </div>
 
-          <aside className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark)]/95 text-white shadow-[var(--shadow-lg)] backdrop-blur-md">
-            <div className="flex items-center justify-between gap-4 border-b border-white/15 px-[var(--space-4)] py-[var(--space-3)] sm:px-[var(--space-5)]">
+          <aside className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark)]/95 text-[var(--color-text)] shadow-[var(--shadow-lg)] backdrop-blur-md">
+            <div className="flex items-center justify-between gap-4 border-b border-[var(--color-border)]/60 px-[var(--space-4)] py-[var(--space-3)] sm:px-[var(--space-5)]">
               <div>
-                <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/90">
+                <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
                   <Radio className="h-4 w-4" aria-hidden="true" /> Live workflow
                 </p>
-                <p className="mt-1 text-sm font-black text-white">Luồng xử lý đang chạy</p>
+                <p className="mt-1 text-sm font-black text-[var(--color-text)]">Luồng xử lý đang chạy</p>
               </div>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-black text-white">
+              <span className="rounded-full bg-[var(--color-primary-soft)]/80 px-3 py-1 text-[11px] font-black text-[var(--color-primary)]">
                 ONLINE
               </span>
             </div>
 
             <div className="p-[var(--space-4)] sm:p-[var(--space-5)]">
-              <div className="rounded-[var(--radius-lg)] border border-white/15 bg-white/10 p-[var(--space-4)]" aria-live="polite">
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/85">
+              <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)]/60 bg-white/10 p-[var(--space-4)]" aria-live="polite">
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-primary)]">
                   Đang xử lý
                 </p>
-                <p className="mt-2 text-base font-black text-white">{activeScene.label}</p>
-                <p className="mt-1 text-xs leading-5 text-white/90">{activeScene.detail}</p>
+                <p className="mt-2 text-base font-black text-[var(--color-text)]">{activeScene.label}</p>
+                <p className="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">{activeScene.detail}</p>
               </div>
 
               <div className="mt-[var(--space-3)] flex gap-2" aria-label="Trạng thái hero">
@@ -177,7 +177,7 @@ export function HeroSection() {
                     type="button"
                     onClick={() => setSceneIndex(index)}
                     className={`h-1.5 flex-1 rounded-full transition-colors ${
-                      sceneIndex === index ? "bg-white" : "bg-white/25"
+                      sceneIndex === index ? "bg-[var(--color-primary)]" : "bg-[var(--color-text-muted)]/25"
                     }`}
                     aria-label={`Hiển thị trạng thái ${index + 1}: ${scene.label}`}
                     aria-pressed={sceneIndex === index}
@@ -192,12 +192,12 @@ export function HeroSection() {
                     <li
                       key={item}
                       className={`flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-xs font-semibold transition-colors duration-500 ${
-                        active ? "bg-white/12 text-white" : "text-white/85"
+                        active ? "bg-[var(--color-primary-soft)]/65 text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"
                       }`}
                     >
                       <span
                         className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-black ${
-                          active ? "bg-white text-[var(--color-surface-dark)]" : "bg-white/10 text-white/85"
+                          active ? "bg-[var(--color-primary)] text-white" : "bg-white/30 text-[var(--color-text-muted)]"
                         }`}
                       >
                         {index + 1}
@@ -210,7 +210,7 @@ export function HeroSection() {
 
               <a
                 href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-                className="mt-[var(--space-4)] flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border border-white/20 bg-white/10 px-[var(--space-4)] text-center text-sm font-bold text-white transition hover:bg-white/15"
+                className="mt-[var(--space-4)] flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)]/70 bg-white/15 px-[var(--space-4)] text-center text-sm font-bold text-[var(--color-primary)] transition hover:bg-white/25"
               >
                 Cần gấp? Gọi kỹ sư {COMPANY_CONFIG.phones[0].display}
               </a>
