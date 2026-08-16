@@ -6,7 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 
 const PAGE_TITLE = "Cấu hình cửa cổng 3D";
 const PAGE_DESCRIPTION =
-  "Thử kích thước và kiểu nan cửa cổng trong bộ cấu hình 3D Đại Hải Phát trước khi chuyển phương án sang AI tư vấn và kỹ sư xác nhận.";
+  "Thử kích thước và kiểu nan cửa cổng trong bộ cấu hình 3D Đại Hải Phát trước khi chuyển phương án sang trợ lý tư vấn và kỹ sư xác nhận.";
 const DEFAULT_CONFIGURATOR_URL = "/godot/gate-configurator/index.html";
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default function GateConfiguratorPage() {
       <PageHero
         eyebrow="3D tương tác · Kỹ sư xác nhận"
         title="Thử phương án cửa cổng trước khi khảo sát"
-        description="Điều chỉnh phương án trực quan trong Godot rồi chuyển cấu hình sang AI Đại Hải Phát. Công cụ không thay thế khảo sát, thiết kế kỹ thuật hoặc báo giá chính thức."
+        description="Điều chỉnh phương án trực quan trong Godot rồi chuyển cấu hình sang trợ lý tư vấn Đại Hải Phát. Công cụ không thay thế khảo sát, thiết kế kỹ thuật hoặc báo giá chính thức."
       />
 
       <section className="py-[var(--space-section)] lg:py-[var(--space-section-lg)]">
