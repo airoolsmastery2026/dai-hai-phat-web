@@ -43,7 +43,7 @@ export function ServiceCard({ service }: { service: ServiceItem }) {
         <div className="mt-auto grid gap-[var(--space-2)] pt-[var(--space-3)]">
           <Link
             href={aiHref}
-            aria-label={`Tư vấn ${service.title} với trợ lý AI`}
+            aria-label={`Tư vấn ${service.title} với trợ lý trực tuyến`}
             className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-center text-sm font-bold text-[var(--color-primary-contrast)] transition-colors hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
