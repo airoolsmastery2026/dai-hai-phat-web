@@ -4,15 +4,15 @@ import type {
 } from "@/lib/ai/analysis";
 
 const CONTROL_CHARACTERS = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/;
-const ACCENTED_LATIN = /[\u00c0-\u024f\u1ea0-\u1ef9]/u;
+const ACCENTED_LATIN = /[\u00c0-\u024f\u1ea0-\u1ef9]/;
 const FORBIDDEN_OUTPUT =
   /(?:```|^\s*(?:#{1,6}|[-*•>])\s+|(?:^|\s)(?:json\s+schema|system\s+prompt|developer\s+message|assistant\s+message|prompt\s+injection|language\s+model|mô\s+hình\s+ngôn\s+ngữ|gemini)(?:\s|[.,;:!?]|$)|https?:\/\/|www\.)/i;
 const ROBOTIC_ACKNOWLEDGEMENT =
   /^(?:đã ghi nhận|tôi đã ghi nhận|thông tin (?:đã|vừa) được ghi nhận)\b/i;
 const GENERIC_OPTION_NAME =
   /^(?:a|b|1|2|option\s*\d+|phương\s+án\s*\d+)$/i;
-const TERMINAL_PUNCTUATION = /[.!?…]$/u;
-const SENTENCE_BOUNDARY = /[.!?…]+(?=\s|$)/gu;
+const TERMINAL_PUNCTUATION = /[.!?…]$/;
+const SENTENCE_BOUNDARY = /[.!?…]+(?=\s|$)/g;
 
 export class ProjectAnalysisLanguageQualityError extends Error {}
 
