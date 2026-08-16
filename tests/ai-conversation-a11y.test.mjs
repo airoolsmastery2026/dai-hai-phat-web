@@ -60,8 +60,11 @@ test("floating consultation keeps mobile boundaries and customer-safe handoff co
     "utf8",
   );
 
-  assert.match(floating, /w-screen max-w-\[100vw\]/);
-  assert.match(floating, /overflow-x-hidden/);
+  assert.doesNotMatch(floating, /\bw-screen\b/);
+  assert.match(floating, /w-full max-w-full/);
+  assert.match(floating, /max-h-\[100dvh\]/);
+  assert.match(floating, /safe-area-inset-bottom/);
+  assert.match(floating, /overflow-hidden/);
   assert.match(floating, /min-w-0 flex-1/);
   assert.match(floating, /break-words/);
 

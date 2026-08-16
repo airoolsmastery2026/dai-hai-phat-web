@@ -1,15 +1,16 @@
 "use client";
 
-import { Bot, CheckCircle2, ImagePlus, RotateCcw, SendHorizontal } from "lucide-react";
+import { Bot, CheckCircle2, ImagePlus, RotateCcw } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 
+import { AIChatAnswerComposer } from "@/components/ai/AIChatAnswerComposer";
 import { useAI } from "@/hooks/useAI";
 import {
   getConversationHistory,
   getStateLabel,
-  resolveConversationChoice,
 } from "@/lib/ai";
+import type { ConversationHistoryItem } from "@/lib/ai";
 
 interface AIChatDrawerPanelProps {
   servicePreset?: string | null;
@@ -17,6 +18,39 @@ interface AIChatDrawerPanelProps {
 
 function humanizePublicCopy(value: string): string {
   return value.replace(/\bAI\b/g, "trợ lý");
+}
+
+function displayHistoryValue(item: ConversationHistoryItem): string {
+  if (item.field === "phone" || item.field === "zalo") {
+    const digits = item.value.replace(/\D/g, "");
+    return digits.length >= 7
+      ? `${digits.slice(0, 3)}••••${digits.slice(-3)}`
+      : "Đã ghi nhận";
+  }
+  if (item.field === "email") {
+    const [local, domain] = item.value.split("@");
+    if (local && domain) return `${local.slice(0, 2)}•••@${domain}`;
+  }
+  return item.value;
+}
+
+function acknowledgement(item: ConversationHistoryItem | undefined): string | null {
+  if (!item) return null;
+  if (item.field === "dimensions") {
+    return item.value === "Cần khảo sát đo đạc"
+      ? "Được, tôi ghi nhận là chưa có kích thước. Kỹ sư sẽ cần đo lại khi khảo sát."
+      : "Tôi đã ghi kích thước này là số liệu sơ bộ; kỹ sư sẽ kiểm tra lại trước khi chốt phương án.";
+  }
+  if (item.field === "phone" || item.field === "email" || item.field === "zalo") {
+    return "Thông tin liên hệ vừa nhập đã qua kiểm tra định dạng. Quyền sở hữu chỉ được xem là đã xác minh khi dịch vụ xác minh xác nhận.";
+  }
+  if (item.field === "surveyAddress") {
+    return "Địa chỉ đã đủ cấu trúc để lập yêu cầu khảo sát; đội ngũ sẽ xác nhận lại trước khi đến công trình.";
+  }
+  if (item.field === "service") {
+    return `Đã rõ hạng mục ${item.value.toLowerCase()}. Tôi sẽ hỏi tiếp các dữ liệu ảnh hưởng trực tiếp đến khảo sát và phương án.`;
+  }
+  return null;
 }
 
 export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelProps) {
@@ -36,10 +70,9 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
     handoffStatus,
     submitHandoff,
   } = useAI();
-  const [draft, setDraft] = useState("");
-  const [inputError, setInputError] = useState<string | null>(null);
   const [handoffConsent, setHandoffConsent] = useState(false);
   const history = useMemo(() => getConversationHistory(session).slice(-6), [session]);
+  const contextualAcknowledgement = acknowledgement(history.at(-1));
 
   useEffect(() => {
     if (
@@ -53,49 +86,23 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
   }, [answer, question, servicePreset, session.memory.service]);
 
   const handleReset = () => {
-    setDraft("");
-    setInputError(null);
     setHandoffConsent(false);
     reset();
   };
 
-  const submitText = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!question) return;
-
-    const value = draft.trim();
-    if (!value && question.required) return;
-
-    if (question.inputType === "choice") {
-      const resolved = resolveConversationChoice(question, value);
-      if (!resolved) {
-        setInputError("Chọn một gợi ý bên trên hoặc mô tả ngắn theo cách của bạn.");
-        return;
-      }
-      answer(resolved);
-    } else {
-      answer(value);
-    }
-    setDraft("");
-    setInputError(null);
-  };
-
   if (session.state === "DONE") {
     return (
-      <div className="flex h-full flex-col bg-[var(--color-background)] text-[var(--color-text)]">
-        <div className="flex-1 overflow-y-auto p-[var(--space-4)] sm:p-[var(--space-5)]">
-          <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-4)] shadow-[var(--shadow-sm)] sm:p-[var(--space-5)]">
+      <div className="flex h-full min-h-0 min-w-0 w-full flex-col overflow-hidden bg-[var(--color-background)] text-[var(--color-text)]">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-[var(--space-4)] sm:p-[var(--space-5)]">
+          <div className="min-w-0 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-4)] shadow-[var(--shadow-sm)] sm:p-[var(--space-5)]">
             <CheckCircle2 className="h-8 w-8 text-[var(--color-success)]" aria-hidden="true" />
-            <h2 className="mt-[var(--space-3)] text-xl font-black">Hồ sơ của bạn đã sẵn sàng</h2>
-            <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)]">
+            <h2 className="mt-[var(--space-3)] break-words text-xl font-black">Hồ sơ của bạn đã sẵn sàng</h2>
+            <p className="mt-[var(--space-2)] break-words text-sm leading-6 text-[var(--color-text-muted)] [overflow-wrap:anywhere]">
               Thông tin đang được lưu trên thiết bị. Chỉ khi bạn chọn gửi, đội ngũ kỹ thuật mới tiếp nhận để liên hệ và xác nhận bước tiếp theo.
             </p>
 
             {handoff ? (
-              <div
-                className="mt-[var(--space-4)] rounded-[var(--radius-md)] border border-[var(--color-success)] bg-[var(--color-success-soft)] p-[var(--space-3)] text-sm text-[var(--color-success)]"
-                role="status"
-              >
+              <div className="mt-[var(--space-4)] rounded-[var(--radius-md)] border border-[var(--color-success)] bg-[var(--color-success-soft)] p-[var(--space-3)] text-sm text-[var(--color-success)]" role="status">
                 <p className="font-bold">Hồ sơ đã được gửi tới đội ngũ kỹ thuật.</p>
                 <p className="mt-1 leading-5">Đại Hải Phát sẽ liên hệ để xác nhận bước tiếp theo.</p>
               </div>
@@ -108,7 +115,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
                     onChange={(event) => setHandoffConsent(event.target.checked)}
                     className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--color-primary)]"
                   />
-                  <span>
+                  <span className="min-w-0 break-words [overflow-wrap:anywhere]">
                     Tôi đồng ý gửi thông tin liên hệ và dữ liệu dự án đã nhập cho Đại Hải Phát để tư vấn kỹ thuật. {" "}
                     <Link href="/privacy" className="font-bold text-[var(--color-primary)] underline underline-offset-2">
                       Xem cách dữ liệu được xử lý
@@ -127,22 +134,13 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
             )}
 
             {handoffError ? (
-              <div
-                className="mt-[var(--space-3)] rounded-[var(--radius-md)] border border-[var(--color-warning)] bg-[var(--color-warning-soft)] p-[var(--space-3)] text-sm leading-6 text-[var(--color-text)]"
-                role="alert"
-              >
+              <div className="mt-[var(--space-3)] rounded-[var(--radius-md)] border border-[var(--color-warning)] bg-[var(--color-warning-soft)] p-[var(--space-3)] text-sm leading-6 text-[var(--color-text)]" role="alert">
                 <p className="font-bold">Kênh gửi tự động đang tạm gián đoạn.</p>
-                <p className="mt-1 text-[var(--color-text-muted)]">
-                  Hồ sơ vẫn được giữ trên thiết bị. Bạn có thể dùng Zalo hoặc gọi kỹ sư ở thanh phía dưới để tiếp tục ngay.
-                </p>
+                <p className="mt-1 text-[var(--color-text-muted)]">Hồ sơ vẫn được giữ trên thiết bị. Bạn có thể dùng Zalo hoặc gọi kỹ sư ở thanh phía dưới để tiếp tục ngay.</p>
               </div>
             ) : null}
 
-            <button
-              type="button"
-              onClick={handleReset}
-              className="mt-[var(--space-3)] min-h-11 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] text-sm font-bold"
-            >
+            <button type="button" onClick={handleReset} className="mt-[var(--space-3)] min-h-11 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] text-sm font-bold">
               Bắt đầu yêu cầu mới
             </button>
           </div>
@@ -152,51 +150,43 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
   }
 
   return (
-    <div className="flex h-full min-h-0 flex-col bg-[var(--color-background)] text-[var(--color-text)]">
-      <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-4)] py-[var(--space-3)]">
-        <div className="flex items-center justify-between gap-[var(--space-3)]">
-          <div className="min-w-0">
-            <p className="flex items-center gap-2 text-sm font-black">
-              <span className="h-2 w-2 rounded-full bg-[var(--color-success)] motion-safe:animate-pulse" aria-hidden="true" />
-              Đại Hải Phát đang sẵn sàng hỗ trợ
+    <div className="flex h-full min-h-0 min-w-0 w-full max-w-full flex-col overflow-hidden bg-[var(--color-background)] text-[var(--color-text)]">
+      <div className="shrink-0 border-b border-[var(--color-border)] bg-[var(--color-surface)] px-[var(--space-4)] py-[var(--space-3)]">
+        <div className="flex min-w-0 items-center justify-between gap-[var(--space-3)]">
+          <div className="min-w-0 flex-1">
+            <p className="flex min-w-0 items-center gap-2 text-sm font-black">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-success)] motion-safe:animate-pulse" aria-hidden="true" />
+              <span className="min-w-0 break-words">Đại Hải Phát đang sẵn sàng hỗ trợ</span>
             </p>
             <p className="mt-1 truncate text-xs text-[var(--color-text-muted)]">
               {humanizePublicCopy(getStateLabel(session.state))} · Hồ sơ {session.proposal.progress}%
             </p>
           </div>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] text-[var(--color-text-muted)]"
-            aria-label="Bắt đầu lại hồ sơ tư vấn"
-          >
+          <button type="button" onClick={handleReset} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] text-[var(--color-text-muted)]" aria-label="Bắt đầu lại hồ sơ tư vấn">
             <RotateCcw className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
         <div className="mt-[var(--space-3)] h-1.5 overflow-hidden rounded-full bg-[var(--color-surface-muted)]">
-          <div
-            className="h-full rounded-full bg-[var(--color-primary)] transition-[width] duration-500"
-            style={{ width: `${session.proposal.progress}%` }}
-          />
+          <div className="h-full rounded-full bg-[var(--color-primary)] transition-[width] duration-500" style={{ width: `${session.proposal.progress}%` }} />
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-[var(--space-4)] py-[var(--space-4)] sm:px-[var(--space-5)]" aria-live="polite">
+      <div className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-[var(--space-4)] py-[var(--space-4)] sm:px-[var(--space-5)]" aria-live="polite">
         {!history.length ? (
-          <AssistantMessage>
-            Chào bạn! Hãy kể ngắn gọn nhu cầu. Tôi sẽ hỏi từng bước để lập hồ sơ cho kỹ sư.
-          </AssistantMessage>
+          <AssistantMessage>Chào bạn! Hãy kể ngắn gọn nhu cầu. Tôi sẽ hỏi từng bước và chỉ ghi nhận dữ liệu vượt qua kiểm tra chất lượng.</AssistantMessage>
         ) : null}
 
-        <div className="space-y-[var(--space-3)]">
+        <div className="min-w-0 space-y-[var(--space-3)]">
           {history.map((item) => (
-            <div key={item.field} className="flex justify-end">
-              <div className="max-w-[84%] rounded-[var(--radius-lg)] rounded-br-[var(--radius-sm)] bg-[var(--color-primary)] px-[var(--space-3)] py-[var(--space-2)] text-sm text-[var(--color-primary-contrast)]">
-                <p className="text-[11px] font-semibold opacity-75">{humanizePublicCopy(item.label)}</p>
-                <p className="mt-0.5 font-semibold leading-5">{humanizePublicCopy(item.value)}</p>
+            <div key={item.field} className="flex min-w-0 justify-end">
+              <div className="min-w-0 max-w-[84%] rounded-[var(--radius-lg)] rounded-br-[var(--radius-sm)] bg-[var(--color-primary)] px-[var(--space-3)] py-[var(--space-2)] text-sm text-[var(--color-primary-contrast)]">
+                <p className="break-words text-[11px] font-semibold opacity-75 [overflow-wrap:anywhere]">{humanizePublicCopy(item.label)}</p>
+                <p className="mt-0.5 break-words font-semibold leading-5 [overflow-wrap:anywhere]">{humanizePublicCopy(displayHistoryValue(item))}</p>
               </div>
             </div>
           ))}
+
+          {contextualAcknowledgement ? <AssistantMessage>{contextualAcknowledgement}</AssistantMessage> : null}
 
           {analysisStatus === "loading" ? (
             <AssistantMessage>Đang đối chiếu hồ sơ và dữ liệu dự án…</AssistantMessage>
@@ -205,13 +195,13 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
           ) : null}
 
           {question ? (
-            <div className="flex items-end gap-[var(--space-2)]">
+            <div className="flex min-w-0 items-end gap-[var(--space-2)]">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)]">
                 <Bot className="h-4 w-4" aria-hidden="true" />
               </span>
-              <div className="max-w-[86%] rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] shadow-[var(--shadow-sm)]">
-                <p className="text-sm font-bold leading-6">{humanizePublicCopy(question.prompt)}</p>
-                <p className="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">{humanizePublicCopy(question.supportingText)}</p>
+              <div className="min-w-0 max-w-[86%] rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] shadow-[var(--shadow-sm)]">
+                <p className="break-words text-sm font-bold leading-6 [overflow-wrap:anywhere]">{humanizePublicCopy(question.prompt)}</p>
+                <p className="mt-1 break-words text-xs leading-5 text-[var(--color-text-muted)] [overflow-wrap:anywhere]">{humanizePublicCopy(question.supportingText)}</p>
               </div>
             </div>
           ) : null}
@@ -219,83 +209,24 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
       </div>
 
       {question ? (
-        <div className="border-t border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] sm:p-[var(--space-4)]">
-          {question.inputType === "choice" && question.options?.length ? (
-            <div className="mb-[var(--space-3)] flex max-h-32 flex-wrap gap-2 overflow-y-auto">
-              {question.options.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => {
-                    answer(option.value);
-                    setDraft("");
-                    setInputError(null);
-                  }}
-                  className="min-h-9 rounded-full border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-1.5 text-xs font-semibold transition hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
-                >
-                  {humanizePublicCopy(option.label)}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
+        <div className="min-w-0 shrink-0 border-t border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] sm:p-[var(--space-4)]">
           {question.inputType === "file" ? (
-            <div className="grid gap-2 sm:grid-cols-2">
-              <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-primary)] px-4 text-sm font-bold text-[var(--color-primary-contrast)]">
-                <ImagePlus className="h-4 w-4" aria-hidden="true" />
-                {isProcessingImages ? "Đang xử lý…" : "Gửi ảnh hiện trạng"}
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp"
-                  multiple
-                  className="sr-only"
-                  disabled={isProcessingImages}
-                  onChange={(event) => void addImages(event.currentTarget.files)}
-                />
-              </label>
-              <button
-                type="button"
-                onClick={deferImages}
-                className="min-h-11 rounded-[var(--radius-md)] border border-[var(--color-border)] px-4 text-sm font-bold"
-              >
-                Bổ sung ảnh sau
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={submitText} className="flex items-end gap-2">
-              <label htmlFor="ai-drawer-answer" className="sr-only">Câu trả lời</label>
-              <input
-                id="ai-drawer-answer"
-                type={question.inputType === "tel" || question.inputType === "email" ? question.inputType : "text"}
-                value={draft}
-                onChange={(event) => setDraft(event.target.value)}
-                placeholder={question.inputType === "choice" ? "Hoặc gõ câu trả lời…" : "Nhập câu trả lời…"}
-                className="min-h-11 min-w-0 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-soft)]"
-              />
-              <button
-                type="submit"
-                aria-label="Gửi câu trả lời"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)]"
-              >
-                <SendHorizontal className="h-4 w-4" aria-hidden="true" />
-              </button>
-              {!question.required && question.inputType !== "choice" ? (
-                <button
-                  type="button"
-                  onClick={() => answer("")}
-                  className="min-h-11 rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 text-xs font-bold"
-                >
-                  Bỏ qua
+            <>
+              <div className="grid min-w-0 gap-2 sm:grid-cols-2">
+                <label className="flex min-h-11 min-w-0 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-primary)] px-4 text-sm font-bold text-[var(--color-primary-contrast)]">
+                  <ImagePlus className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span className="break-words text-center">{isProcessingImages ? "Đang xử lý…" : "Gửi ảnh hiện trạng"}</span>
+                  <input type="file" accept="image/jpeg,image/png,image/webp" multiple className="sr-only" disabled={isProcessingImages} onChange={(event) => void addImages(event.currentTarget.files)} />
+                </label>
+                <button type="button" onClick={deferImages} className="min-h-11 min-w-0 rounded-[var(--radius-md)] border border-[var(--color-border)] px-4 text-sm font-bold">
+                  Bổ sung ảnh sau
                 </button>
-              ) : null}
-            </form>
+              </div>
+              {error ? <p className="mt-2 break-words text-xs leading-5 text-[var(--color-danger-text)] [overflow-wrap:anywhere]" role="alert">{humanizePublicCopy(error)}</p> : null}
+            </>
+          ) : (
+            <AIChatAnswerComposer question={question} engineError={error} onAnswer={answer} />
           )}
-
-          {inputError || error ? (
-            <p className="mt-2 text-xs leading-5 text-[var(--color-danger-text)]" role="alert">
-              {humanizePublicCopy(inputError || error || "")}
-            </p>
-          ) : null}
         </div>
       ) : null}
     </div>
@@ -304,11 +235,11 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
 
 function AssistantMessage({ children }: { children: string }) {
   return (
-    <div className="mb-[var(--space-3)] flex items-end gap-[var(--space-2)]">
+    <div className="mb-[var(--space-3)] flex min-w-0 items-end gap-[var(--space-2)]">
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)]">
         <Bot className="h-4 w-4" aria-hidden="true" />
       </span>
-      <p className="max-w-[86%] rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] text-sm leading-6 shadow-[var(--shadow-sm)]">
+      <p className="min-w-0 max-w-[86%] break-words rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] text-sm leading-6 shadow-[var(--shadow-sm)] [overflow-wrap:anywhere]">
         {humanizePublicCopy(children)}
       </p>
     </div>

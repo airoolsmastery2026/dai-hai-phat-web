@@ -2,6 +2,26 @@ import type { ConversationSession, ProjectMemory } from "@/lib/ai";
 import type { LeadAttribution } from "@/lib/marketing/attribution";
 
 const CONTROL_CHARACTERS = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/;
+const ADDRESS_KEYWORDS = [
+  "duong",
+  "phuong",
+  "xa",
+  "quan",
+  "huyen",
+  "thanh pho",
+  "tp",
+  "tinh",
+  "khu pho",
+  "ap",
+  "thon",
+  "hem",
+  "ngo",
+  "lo",
+  "to",
+  "block",
+  "chung cu",
+  "du an",
+];
 
 export interface CRMHandoffRequest {
   sessionId: string;
@@ -85,6 +105,45 @@ function score(value: unknown, field: string): number {
   return value;
 }
 
+function normalizeAscii(value: string): string {
+  return value
+    .toLocaleLowerCase("vi-VN")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function isPlausibleName(value: string): boolean {
+  if (value.length < 2 || !/^[A-Za-zÀ-ỹĐđ][A-Za-zÀ-ỹĐđ\s'.-]*$/.test(value)) return false;
+  const ascii = normalizeAscii(value);
+  if (!/[aeiouy]/.test(ascii)) return false;
+  if (["test", "demo", "fake", "asdf", "qwerty", "abc", "xxx"].includes(ascii)) return false;
+  if (!ascii.includes(" ")) {
+    const runs = ascii.match(/[bcdfghjklmnpqrstvwxz]{3,}/g) ?? [];
+    if (runs.some((run) => !/^(?:ngh|sch|chr|str|thr)$/.test(run))) return false;
+  }
+  return true;
+}
+
+function isVietnamMobile(value: string): boolean {
+  if (!/^\+?[\d .()-]+$/.test(value)) return false;
+  let digits = value.replace(/\D/g, "");
+  if (digits.startsWith("84") && digits.length === 11) digits = `0${digits.slice(2)}`;
+  return /^0[35789]\d{8}$/.test(digits);
+}
+
+function isPlausibleSurveyAddress(value: string): boolean {
+  if (value.length < 12 || !/\d/.test(value)) return false;
+  const normalized = normalizeAscii(value);
+  const words = normalized.split(" ").filter(Boolean);
+  if (words.length < 4) return false;
+  return ADDRESS_KEYWORDS.some((keyword) =>
+    new RegExp(`(?:^| )${keyword.replace(/ /g, "\\s+")}(?: |$)`).test(normalized),
+  );
+}
+
 function parseAttribution(value: unknown): LeadAttribution | undefined {
   if (value === undefined || value === null) return undefined;
   if (!isRecord(value)) {
@@ -129,13 +188,29 @@ export function parseCRMHandoffRequest(value: unknown): CRMHandoffRequest {
     throw new CRMHandoffValidationError("Số lượng ảnh hiện trạng không hợp lệ.");
   }
 
-  const phone = text(value.contact.phone, "contact.phone", 24);
-  if (!/^\+?\d[\d .-]{7,14}\d$/.test(phone)) {
-    throw new CRMHandoffValidationError("Số điện thoại không hợp lệ.");
+  const name = text(value.contact.name, "contact.name", 100);
+  if (!isPlausibleName(name)) {
+    throw new CRMHandoffValidationError("Tên liên hệ chưa đủ tin cậy để bàn giao.");
   }
+
+  const phone = text(value.contact.phone, "contact.phone", 24);
+  if (!isVietnamMobile(phone)) {
+    throw new CRMHandoffValidationError("Số điện thoại Việt Nam không hợp lệ.");
+  }
+
+  const surveyAddress = text(value.contact.surveyAddress, "contact.surveyAddress", 300);
+  if (!isPlausibleSurveyAddress(surveyAddress)) {
+    throw new CRMHandoffValidationError("Địa chỉ khảo sát chưa đủ rõ để bàn giao.");
+  }
+
   const email = optionalText(value.contact.email, "contact.email", 254);
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     throw new CRMHandoffValidationError("Email không hợp lệ.");
+  }
+
+  const zalo = optionalText(value.contact.zalo, "contact.zalo", 24);
+  if (zalo && !isVietnamMobile(zalo)) {
+    throw new CRMHandoffValidationError("Số Zalo không hợp lệ.");
   }
 
   return {
@@ -159,15 +234,11 @@ export function parseCRMHandoffRequest(value: unknown): CRMHandoffRequest {
       quoteRequest: text(value.project.quoteRequest, "project.quoteRequest", 100),
     },
     contact: {
-      name: text(value.contact.name, "contact.name", 100),
+      name,
       phone,
-      surveyAddress: text(
-        value.contact.surveyAddress,
-        "contact.surveyAddress",
-        300,
-      ),
+      surveyAddress,
       email,
-      zalo: optionalText(value.contact.zalo, "contact.zalo", 24),
+      zalo,
     },
     qualification: {
       confidence: score(value.qualification.confidence, "qualification.confidence"),
