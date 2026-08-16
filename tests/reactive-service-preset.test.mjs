@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("keeps reactive service presets connected to the public AI intake", async () => {
+test("keeps reactive service presets connected to the public consultation flow", async () => {
   const routeEntry = await readFile(
     "src/components/sections/AIOfficeRouteEntry.tsx",
     "utf8",
@@ -16,7 +16,7 @@ test("keeps reactive service presets connected to the public AI intake", async (
     "src/components/sections/AIOfficeExperience.tsx",
     "utf8",
   );
-  const homepage = await readFile("src/app/page.tsx", "utf8");
+  const consultationPage = await readFile("src/app/ai-tu-van/page.tsx", "utf8");
 
   assert.match(presetHook, /useSearchParams/);
   assert.match(presetHook, /searchParams\.get\("service"\)/);
@@ -29,9 +29,9 @@ test("keeps reactive service presets connected to the public AI intake", async (
   assert.match(experience, /key=\{sessionKey\}/);
   assert.doesNotMatch(routeEntry, /window\.location|useSyncExternalStore/);
 
-  assert.match(homepage, /import \{ Suspense \} from "react"/);
-  assert.match(homepage, /AIOfficeLoadingState/);
-  assert.match(homepage, /AIOfficeRouteEntry/);
+  assert.match(consultationPage, /import \{ Suspense \} from "react"/);
+  assert.match(consultationPage, /AIOfficeLoadingState/);
+  assert.match(consultationPage, /AIOfficeRouteEntry/);
   assert.match(loadingState, /id="ai-office"/);
-  assert.doesNotMatch(homepage, /force-dynamic|connection\(/);
+  assert.doesNotMatch(consultationPage, /force-dynamic|connection\(/);
 });
