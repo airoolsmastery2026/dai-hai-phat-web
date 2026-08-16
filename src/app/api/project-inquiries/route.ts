@@ -6,7 +6,10 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
-import { persistProjectInquiryRecord } from "@/lib/server/project-inquiries";
+import {
+  persistProjectInquiryRecord,
+  type ProjectInquiryRecord,
+} from "@/lib/server/project-inquiries";
 
 const RATE_LIMIT = { maxRequests: 5, windowMs: 10 * 60 * 1000 };
 const ALLOWED_SERVICES = new Set([
@@ -147,7 +150,11 @@ export async function POST(request: NextRequest) {
 
   const readiness = evaluateConceptReadiness(inquiry);
   const requestId = inquiry.requestId || crypto.randomUUID();
-  const record = {
+  const readinessDecision: ProjectInquiryRecord["readiness_decision"] =
+    readiness.decision === "needs_information"
+      ? "not_ready"
+      : "ready_for_follow_up";
+  const record: ProjectInquiryRecord = {
     request_id: requestId,
     full_name: inquiry.name,
     phone: inquiry.phone,
@@ -162,7 +169,8 @@ export async function POST(request: NextRequest) {
     has_site_image: inquiry.hasSiteImage,
     has_reference_image: inquiry.hasReferenceImage,
     readiness_score: readiness.score,
-    readiness_decision: readiness.decision,
+    readiness_decision: readinessDecision,
+    readiness_missing: readiness.missing,
     consented_at: new Date().toISOString(),
   };
 
