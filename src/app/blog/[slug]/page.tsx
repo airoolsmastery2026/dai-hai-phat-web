@@ -171,7 +171,7 @@ export default async function BlogDetailPage({
       <AIConsultationCta
         eyebrow="Áp dụng checklist"
         title="Đưa dữ liệu này vào hồ sơ dự án"
-        description="Trợ lý AI sẽ chọn trước đúng hạng mục và tiếp tục hỏi từng dữ liệu còn thiếu. Thông tin chỉ được bàn giao cho Đại Hải Phát sau khi anh/chị hoàn tất và đồng ý gửi hồ sơ."
+        description="Trợ lý tư vấn sẽ chọn trước đúng hạng mục và tiếp tục hỏi từng dữ liệu còn thiếu. Thông tin chỉ được bàn giao cho Đại Hải Phát sau khi anh/chị hoàn tất và đồng ý gửi hồ sơ."
         servicePreset={article.aiService}
         secondaryHref="/blog"
         secondaryLabel="Xem checklist khác"
