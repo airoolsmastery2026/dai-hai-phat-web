@@ -88,7 +88,7 @@ export default function ContactPage() {
             </p>
             <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-2)] sm:flex-row">
               <Button href="/ai-tu-van?ai=1">
-                Tư vấn AI trước
+                Tư vấn trực tuyến trước
               </Button>
               <Button href="/bao-gia" variant="secondary">
                 Chuẩn bị báo giá
