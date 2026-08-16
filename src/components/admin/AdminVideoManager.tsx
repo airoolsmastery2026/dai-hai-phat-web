@@ -173,7 +173,7 @@ export function AdminVideoManager() {
                 value={posterUrl}
                 onChange={(event) => setPosterUrl(event.target.value)}
                 inputMode="url"
-                placeholder="/images/projects/...webp"
+                placeholder="Đường dẫn ảnh bìa đã được duyệt"
                 className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 px-3 text-sm"
               />
             </label>
