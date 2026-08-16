@@ -13,7 +13,6 @@ import { apiJsonResponse } from "@/lib/server/api-json-response";
 import { dispatchLeadAutomation } from "@/lib/server/automation";
 import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
 import { verifyPhoneWithAPILayer } from "@/lib/server/phone-verification";
-import { formatSupportReference } from "@/lib/server/support-reference";
 import {
   ATTRIBUTION_COOKIE_NAME,
   deserializeLeadAttribution,
@@ -34,7 +33,7 @@ export async function POST(request: NextRequest) {
     return apiJsonResponse({ error: "Nguồn yêu cầu không hợp lệ.", requestId }, 403);
   }
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
-    return apiJsonResponse({ error: "Content-Type không được hỗ trợ.", requestId }, 415);
+    return apiJsonResponse({ error: "Định dạng yêu cầu không được hỗ trợ.", requestId }, 415);
   }
 
   const declaredLength = Number(request.headers.get("content-length") ?? "0");
@@ -50,7 +49,7 @@ export async function POST(request: NextRequest) {
   if (!rateLimit.allowed) {
     return apiJsonResponse(
       {
-        error: "Quá nhiều yêu cầu bàn giao. Vui lòng thử lại sau.",
+        error: "Bạn vừa gửi nhiều lần. Vui lòng thử lại sau ít phút.",
         code: "RATE_LIMITED",
         requestId,
       },
@@ -117,8 +116,8 @@ export async function POST(request: NextRequest) {
         {
           error:
             error instanceof CRMHandoffValidationError
-              ? error.message
-              : "Dữ liệu JSON không hợp lệ.",
+              ? "Một số thông tin chưa hợp lệ. Vui lòng kiểm tra lại hồ sơ trước khi gửi."
+              : "Dữ liệu gửi đi chưa hợp lệ. Vui lòng thử lại.",
           requestId,
         },
         400,
@@ -132,12 +131,8 @@ export async function POST(request: NextRequest) {
       });
       return apiJsonResponse(
         {
-          error: formatSupportReference(
-            error.code === "not_configured"
-              ? "Kênh CRM chưa được cấu hình. Hồ sơ vẫn được giữ trên thiết bị."
-              : "Chưa thể bàn giao hồ sơ. Dữ liệu vẫn được giữ trên thiết bị.",
-            requestId,
-          ),
+          error:
+            "Kênh gửi tự động đang tạm gián đoạn. Hồ sơ vẫn được giữ trên thiết bị; bạn có thể tiếp tục qua Zalo hoặc gọi kỹ sư.",
           code: "CRM_UNAVAILABLE",
           requestId,
         },
@@ -151,10 +146,8 @@ export async function POST(request: NextRequest) {
     });
     return apiJsonResponse(
       {
-        error: formatSupportReference(
-          "Chưa thể bàn giao hồ sơ. Dữ liệu vẫn được giữ trên thiết bị.",
-          requestId,
-        ),
+        error:
+          "Hiện chưa thể gửi hồ sơ tự động. Hồ sơ vẫn được giữ trên thiết bị; bạn có thể tiếp tục qua Zalo hoặc gọi kỹ sư.",
         code: "CRM_UNAVAILABLE",
         requestId,
       },
