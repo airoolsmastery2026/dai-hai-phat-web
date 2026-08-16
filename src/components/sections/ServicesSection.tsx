@@ -21,7 +21,7 @@ export function ServicesSection() {
               Chọn đúng nhu cầu, bắt đầu tư vấn ngay
             </h2>
             <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
-              Trợ lý AI ghi nhận nhu cầu theo từng hạng mục, giữ ngữ cảnh hồ sơ và chuyển tiếp để kỹ sư xác minh khi cần.
+              Trợ lý tư vấn ghi nhận nhu cầu theo từng hạng mục, giữ ngữ cảnh hồ sơ và chuyển tiếp để kỹ sư xác minh khi cần.
             </p>
           </div>
           <Link
@@ -29,7 +29,7 @@ export function ServicesSection() {
             className="inline-flex min-h-11 w-fit items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary)] transition-colors hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
-            Mở trợ lý AI
+            Mở trợ lý tư vấn
           </Link>
         </div>
 
@@ -58,7 +58,7 @@ export function ServicesSection() {
                 <div className="mt-auto grid gap-[var(--space-2)] pt-[var(--space-3)]">
                   <Link
                     href={aiHref}
-                    aria-label={`Tư vấn ${service.title} với trợ lý AI`}
+                    aria-label={`Tư vấn ${service.title} với trợ lý trực tuyến`}
                     className="inline-flex min-h-[var(--control-min-size)] items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-center text-sm font-bold text-[var(--color-primary-contrast)] transition-colors hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
                   >
                     <Bot className="h-4 w-4" aria-hidden="true" />
