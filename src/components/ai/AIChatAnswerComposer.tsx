@@ -15,6 +15,11 @@ interface AIChatAnswerComposerProps {
   onAnswer: (value: string) => void;
 }
 
+interface ContactValidationResponse {
+  valid?: boolean;
+  message?: string;
+}
+
 function publicCopy(value: string): string {
   return value.replace(/\bAI\b/g, "trợ lý");
 }
@@ -27,6 +32,40 @@ function getAutocomplete(question: ConversationQuestion): string {
   return "off";
 }
 
+function needsServerContactCheck(question: ConversationQuestion): boolean {
+  return question.field === "phone" || question.field === "email" || question.field === "zalo";
+}
+
+async function validateContactOnServer(
+  question: ConversationQuestion,
+  value: string,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  if (!needsServerContactCheck(question)) return { ok: true };
+
+  try {
+    const response = await fetch("/api/validation/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+      body: JSON.stringify({ field: question.field, value }),
+    });
+    const payload = (await response.json()) as ContactValidationResponse;
+
+    if (payload.valid === false || response.status === 422) {
+      return {
+        ok: false,
+        error: payload.message || "Thông tin liên hệ không vượt qua bước kiểm tra. Vui lòng kiểm tra lại.",
+      };
+    }
+
+    // External verification is an additional signal, not the only gate. A provider
+    // outage must not convert format-valid data into a false "verified" claim.
+    return { ok: true };
+  } catch {
+    return { ok: true };
+  }
+}
+
 export function AIChatAnswerComposer({
   question,
   engineError = null,
@@ -34,10 +73,11 @@ export function AIChatAnswerComposer({
 }: AIChatAnswerComposerProps) {
   const [draft, setDraft] = useState("");
   const [inputError, setInputError] = useState<string | null>(null);
-  const [formatNote, setFormatNote] = useState<string | null>(null);
+  const [isChecking, setIsChecking] = useState(false);
 
-  const submitText = (event: FormEvent<HTMLFormElement>) => {
+  const submitText = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isChecking) return;
 
     let candidate = draft.trim();
     if (question.inputType === "choice") {
@@ -52,14 +92,20 @@ export function AIChatAnswerComposer({
     const validation = validateCustomerAnswer(question, candidate);
     if (!validation.ok) {
       setInputError(validation.error);
-      setFormatNote(null);
+      return;
+    }
+
+    setIsChecking(true);
+    const serverValidation = await validateContactOnServer(question, validation.value);
+    setIsChecking(false);
+    if (!serverValidation.ok) {
+      setInputError(serverValidation.error);
       return;
     }
 
     onAnswer(validation.value);
     setDraft("");
     setInputError(null);
-    setFormatNote(validation.note ?? null);
   };
 
   const selectChoice = (value: string) => {
@@ -71,14 +117,12 @@ export function AIChatAnswerComposer({
     onAnswer(validation.value);
     setDraft("");
     setInputError(null);
-    setFormatNote(null);
   };
 
   const skip = () => {
     onAnswer("");
     setDraft("");
     setInputError(null);
-    setFormatNote(null);
   };
 
   return (
@@ -108,20 +152,21 @@ export function AIChatAnswerComposer({
             autoComplete={getAutocomplete(question)}
             autoCapitalize={question.field === "name" || question.field === "surveyAddress" ? "words" : "sentences"}
             value={draft}
+            disabled={isChecking}
             onChange={(event) => {
               setDraft(event.target.value);
               if (inputError) setInputError(null);
-              if (formatNote) setFormatNote(null);
             }}
             aria-invalid={Boolean(inputError || engineError)}
-            aria-describedby={inputError || engineError || formatNote ? "ai-drawer-answer-feedback" : undefined}
+            aria-describedby={inputError || engineError || isChecking ? "ai-drawer-answer-feedback" : undefined}
             placeholder={question.inputType === "choice" ? "Hoặc mô tả rõ hơn…" : "Nhập câu trả lời…"}
-            className="min-h-11 min-w-0 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-base outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-soft)] sm:text-sm"
+            className="min-h-11 min-w-0 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-base outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-soft)] disabled:opacity-70 sm:text-sm"
           />
           <button
             type="submit"
+            disabled={isChecking}
             aria-label="Kiểm tra và gửi câu trả lời"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)]"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] text-[var(--color-primary-contrast)] disabled:cursor-wait disabled:opacity-60"
           >
             <SendHorizontal className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -131,26 +176,29 @@ export function AIChatAnswerComposer({
           <button
             type="button"
             onClick={skip}
-            className="mt-2 min-h-10 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 text-xs font-bold text-[var(--color-text-muted)]"
+            disabled={isChecking}
+            className="mt-2 min-h-10 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 text-xs font-bold text-[var(--color-text-muted)] disabled:opacity-60"
           >
             Bỏ qua bước này
           </button>
         ) : null}
       </form>
 
-      {inputError || engineError || formatNote ? (
+      {inputError || engineError || isChecking ? (
         <p
           id="ai-drawer-answer-feedback"
           className={`mt-2 break-words text-xs leading-5 [overflow-wrap:anywhere] ${inputError || engineError ? "text-[var(--color-danger-text)]" : "text-[var(--color-text-muted)]"}`}
           role={inputError || engineError ? "alert" : "status"}
         >
-          {publicCopy(inputError || engineError || formatNote || "")}
+          {isChecking && !inputError && !engineError
+            ? "Đang kiểm tra thông tin trước khi ghi nhận…"
+            : publicCopy(inputError || engineError || "")}
         </p>
       ) : null}
 
-      {question.field === "phone" || question.field === "email" || question.field === "zalo" ? (
+      {needsServerContactCheck(question) ? (
         <p className="mt-1 text-[11px] leading-4 text-[var(--color-text-muted)]">
-          Hệ thống kiểm tra định dạng trước khi ghi nhận. “Đã xác minh” chỉ được dùng khi dịch vụ xác minh thực sự xác nhận.
+          Định dạng được kiểm tra tại thiết bị và server. Dịch vụ ngoài chỉ bổ sung tín hiệu hợp lệ; quyền sở hữu vẫn cần OTP hoặc xác nhận liên hệ thực tế.
         </p>
       ) : null}
     </div>
