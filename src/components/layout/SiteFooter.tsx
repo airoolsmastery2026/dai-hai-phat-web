@@ -17,7 +17,7 @@ export function SiteFooter() {
             Nội thất &amp; cơ khí dân dụng
           </h2>
           <p className="mt-[var(--space-1)] max-w-md text-sm leading-6 text-[var(--color-text-dark-subtle)]">
-            Thiết kế và thi công theo hiện trạng nhà ở, có AI tiếp nhận nhu cầu và kỹ sư kiểm tra phương án trước báo giá.
+            Thiết kế và thi công theo hiện trạng nhà ở, có kênh tư vấn tiếp nhận nhu cầu 24/7 và kỹ sư kiểm tra phương án trước báo giá.
           </p>
         </div>
 
