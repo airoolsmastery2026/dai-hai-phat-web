@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Bot, FileText, ImageIcon, MessageSquareText, Ruler, Sparkles } from "lucide-react";
-import { Suspense } from "react";
 
-import { AIOfficeRouteEntry } from "@/components/sections/AIOfficeRouteEntry";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -42,8 +40,6 @@ const capabilities = [
 ] as const;
 
 export default function AITuVanPage() {
-  const liveVoiceEnabled = Boolean(process.env.GEMINI_API_KEY?.trim());
-
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
@@ -56,9 +52,9 @@ export default function AITuVanPage() {
         highlights={["Tiếp nhận 24/7", "Phân tích ảnh & hồ sơ", "Chuyển kỹ sư xác nhận"]}
         actions={
           <>
-            <Button href="#ai-office">
+            <Button href="/ai-tu-van?ai=1">
               <Bot className="h-4 w-4" aria-hidden="true" />
-              Bắt đầu tư vấn AI
+              Mở chat AI
             </Button>
             <Button href="/bao-gia" variant="secondary">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
@@ -68,7 +64,7 @@ export default function AITuVanPage() {
         }
       />
 
-      <section className="border-b border-[var(--color-border)] py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
+      <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
           <div className="grid gap-[var(--space-4)] md:grid-cols-2 xl:grid-cols-4">
             {capabilities.map(({ icon: Icon, title, description }) => (
@@ -87,20 +83,16 @@ export default function AITuVanPage() {
             ))}
           </div>
 
-          <p className="mt-[var(--space-5)] max-w-3xl text-xs leading-5 text-[var(--color-text-muted)]">
-            AI hỗ trợ thu thập và sắp xếp thông tin. Kích thước, vật liệu, biện pháp thi công và giá trị hợp đồng được kỹ sư Đại Hải Phát xác nhận trước khi chốt.
-          </p>
+          <div className="mt-[var(--space-6)] flex flex-col gap-[var(--space-3)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-5)] sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">
+              AI hỗ trợ thu thập và sắp xếp thông tin. Kích thước, vật liệu, biện pháp thi công và giá trị hợp đồng vẫn được kỹ sư Đại Hải Phát xác nhận trước khi chốt.
+            </p>
+            <Button href="/ai-tu-van?ai=1" className="shrink-0">
+              <Bot className="h-4 w-4" aria-hidden="true" />
+              Bắt đầu trò chuyện
+            </Button>
+          </div>
         </Container>
-      </section>
-
-      <section id="ai-office" className="scroll-mt-20">
-        <Suspense
-          fallback={
-            <div className="min-h-[720px] bg-[var(--color-background)]" aria-label="Đang chuẩn bị trợ lý AI" />
-          }
-        >
-          <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
-        </Suspense>
       </section>
     </main>
   );
