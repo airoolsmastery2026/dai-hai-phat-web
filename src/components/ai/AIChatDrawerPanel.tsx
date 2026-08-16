@@ -117,7 +117,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
           <div className="min-w-0">
             <p className="flex items-center gap-2 text-sm font-black">
               <span className="h-2 w-2 rounded-full bg-[var(--color-success)] motion-safe:animate-pulse" aria-hidden="true" />
-              AI Đại Hải Phát đang trực tuyến
+              Đại Hải Phát đang sẵn sàng hỗ trợ
             </p>
             <p className="mt-1 truncate text-xs text-[var(--color-text-muted)]">
               {getStateLabel(session.state)} · Hồ sơ {session.proposal.progress}%
@@ -158,7 +158,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
           ))}
 
           {analysisStatus === "loading" ? (
-            <AssistantMessage>AI đang đối chiếu hồ sơ và dữ liệu dự án…</AssistantMessage>
+            <AssistantMessage>Đang đối chiếu hồ sơ và dữ liệu dự án…</AssistantMessage>
           ) : analysisStatus === "ready" && analysis ? (
             <AssistantMessage>{analysis.recommendation}</AssistantMessage>
           ) : null}
