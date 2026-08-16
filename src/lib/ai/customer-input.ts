@@ -89,6 +89,13 @@ function looksLikeKeyboardNoise(value: string): boolean {
   });
 }
 
+function looksLikeSuspiciousSingleName(value: string): boolean {
+  const normalized = normalizeAscii(value);
+  if (!normalized || normalized.includes(" ")) return false;
+  const runs = normalized.match(/[bcdfghjklmnpqrstvwxz]{3,}/g) ?? [];
+  return runs.some((run) => !/^(?:ngh|sch|chr|str|thr)$/.test(run));
+}
+
 function validateName(value: string): CustomerInputValidation {
   const normalized = collapseWhitespace(value);
   if (normalized.length < 2 || normalized.length > 80) {
@@ -101,7 +108,8 @@ function validateName(value: string): CustomerInputValidation {
   if (
     containsObviousPlaceholder(normalized) ||
     !/[aeiouy]/.test(ascii) ||
-    looksLikeKeyboardNoise(normalized)
+    looksLikeKeyboardNoise(normalized) ||
+    looksLikeSuspiciousSingleName(normalized)
   ) {
     return { ok: false, error: "Tên này có vẻ chưa phải thông tin liên hệ thực tế. Vui lòng kiểm tra và nhập lại." };
   }
