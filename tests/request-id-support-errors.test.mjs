@@ -27,8 +27,9 @@ test("evidence failures include a support reference", () => {
 test("CRM failures keep tracing IDs separate from customer-facing errors", () => {
   assert.doesNotMatch(crmHandoff, /formatSupportReference/);
   assert.match(crmHandoff, /requestId/);
-  assert.match(crmHandoff, /Kênh gửi tự động đang tạm gián đoạn/);
+  assert.match(crmHandoff, /Kênh tiếp nhận hồ sơ đang tạm gián đoạn/);
   assert.match(crmHandoff, /Hồ sơ vẫn được giữ trên thiết bị/);
+  assert.match(crmHandoff, /HANDOFF_UNAVAILABLE/);
   assert.doesNotMatch(crmHandoff, /Kênh CRM chưa được cấu hình/);
   assert.doesNotMatch(crmHandoff, /Mã hỗ trợ:/);
 });

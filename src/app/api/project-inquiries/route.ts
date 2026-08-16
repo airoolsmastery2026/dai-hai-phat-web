@@ -6,7 +6,10 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
-import { supabaseRestRequest } from "@/lib/server/supabase-rest";
+import {
+  persistProjectInquiryRecord,
+  type ProjectInquiryRecord,
+} from "@/lib/server/project-inquiries";
 
 const RATE_LIMIT = { maxRequests: 5, windowMs: 10 * 60 * 1000 };
 const ALLOWED_SERVICES = new Set([
@@ -16,24 +19,32 @@ const ALLOWED_SERVICES = new Set([
   "Nội thất",
   "Cải tạo không gian",
 ]);
+const INQUIRY_PURPOSES = ["build", "renovate", "reference"] as const;
+type InquiryPurpose = (typeof INQUIRY_PURPOSES)[number];
 
 interface InquiryPayload extends ConceptReadinessProfile {
   requestId?: string;
 }
 
+type ValidInquiryPayload = Omit<InquiryPayload, "purpose"> & {
+  purpose: InquiryPurpose;
+};
+
 function clean(value: unknown, maxLength: number): string {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
-function parsePayload(value: unknown): InquiryPayload | null {
+function isInquiryPurpose(value: string): value is InquiryPurpose {
+  return INQUIRY_PURPOSES.some((purpose) => purpose === value);
+}
+
+function parsePayload(value: unknown): ValidInquiryPayload | null {
   if (!value || typeof value !== "object") return null;
   const input = value as Record<string, unknown>;
   const purpose = clean(input.purpose, 20);
-  if (!(["build", "renovate", "reference"] as const).includes(purpose as never)) {
-    return null;
-  }
+  if (!isInquiryPurpose(purpose)) return null;
 
-  const payload: InquiryPayload = {
+  const payload: ValidInquiryPayload = {
     requestId: clean(input.requestId, 100),
     name: clean(input.name, 120),
     phone: clean(input.phone, 30),
@@ -43,7 +54,7 @@ function parsePayload(value: unknown): InquiryPayload | null {
     dimensions: clean(input.dimensions, 160),
     budget: clean(input.budget, 80),
     timeline: clean(input.timeline, 80),
-    purpose: purpose as InquiryPayload["purpose"],
+    purpose,
     description: clean(input.description, 2_000),
     hasSiteImage: input.hasSiteImage === true,
     hasReferenceImage: input.hasReferenceImage === true,
@@ -67,7 +78,7 @@ function parsePayload(value: unknown): InquiryPayload | null {
 }
 
 async function notifyTelegram(
-  inquiry: InquiryPayload,
+  inquiry: ValidInquiryPayload,
   score: number,
   decision: string,
 ): Promise<void> {
@@ -139,7 +150,11 @@ export async function POST(request: NextRequest) {
 
   const readiness = evaluateConceptReadiness(inquiry);
   const requestId = inquiry.requestId || crypto.randomUUID();
-  const record = {
+  const readinessDecision: ProjectInquiryRecord["readiness_decision"] =
+    readiness.decision === "needs_information"
+      ? "not_ready"
+      : "ready_for_follow_up";
+  const record: ProjectInquiryRecord = {
     request_id: requestId,
     full_name: inquiry.name,
     phone: inquiry.phone,
@@ -154,15 +169,14 @@ export async function POST(request: NextRequest) {
     has_site_image: inquiry.hasSiteImage,
     has_reference_image: inquiry.hasReferenceImage,
     readiness_score: readiness.score,
-    readiness_decision: readiness.decision,
+    readiness_decision: readinessDecision,
+    readiness_missing: readiness.missing,
     consented_at: new Date().toISOString(),
   };
 
   try {
-    await supabaseRestRequest("project_inquiries", {
-      method: "POST",
-      body: record,
-      prefer: "return=minimal,resolution=ignore-duplicates",
+    await persistProjectInquiryRecord(record, {
+      duplicateStrategy: "ignore",
       signal: AbortSignal.timeout(8_000),
     });
 

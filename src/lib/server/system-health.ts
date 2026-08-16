@@ -8,6 +8,7 @@ export interface SystemHealthSnapshot {
   services: {
     website: "operational";
     ai: ConfigurationState;
+    leadStore: ConfigurationState;
     crm: ConfigurationState;
     phoneVerification: ConfigurationState;
     ecosystemApi: ConfigurationState;
@@ -35,6 +36,23 @@ function configuredHttpsWebhook(
   }
 }
 
+function configuredSupabase(
+  url: string | undefined,
+  serviceRoleKey: string | undefined,
+): ConfigurationState {
+  const normalizedUrl = url?.trim();
+  const normalizedKey = serviceRoleKey?.trim();
+  if (!normalizedUrl || !normalizedKey) return "not-configured";
+
+  try {
+    return new URL(normalizedUrl).protocol === "https:"
+      ? "configured"
+      : "not-configured";
+  } catch {
+    return "not-configured";
+  }
+}
+
 export function createSystemHealthSnapshot(
   env: NodeJS.ProcessEnv = process.env,
   now = new Date(),
@@ -42,15 +60,21 @@ export function createSystemHealthSnapshot(
   const services = {
     website: "operational" as const,
     ai: configured(env.GEMINI_API_KEY),
+    leadStore: configuredSupabase(
+      env.SUPABASE_URL,
+      env.SUPABASE_SERVICE_ROLE_KEY,
+    ),
     crm: configuredHttpsWebhook(env.CRM_WEBHOOK_URL, env.CRM_WEBHOOK_TOKEN),
     phoneVerification: configured(env.APILAYER_API_KEY),
     ecosystemApi: configured(env.ECOSYSTEM_SERVICE_API_KEY),
   };
+  const handoffReady =
+    services.leadStore === "configured" || services.crm === "configured";
 
   return {
     state:
       services.ai === "configured" &&
-      services.crm === "configured" &&
+      handoffReady &&
       services.phoneVerification === "configured"
         ? "operational"
         : "degraded",
