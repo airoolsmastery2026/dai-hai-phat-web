@@ -1,3 +1,4 @@
+// Public-facing copy uses human-first consultation language.
 export const theme = {
   colors: {
     primary: "var(--color-primary)",
