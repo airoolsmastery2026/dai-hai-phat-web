@@ -52,10 +52,6 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
     }
   }, [answer, question, servicePreset, session.memory.service]);
 
-  useEffect(() => {
-    setHandoffConsent(false);
-  }, [session.id]);
-
   const handleReset = () => {
     setDraft("");
     setInputError(null);
