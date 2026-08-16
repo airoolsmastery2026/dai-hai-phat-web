@@ -11,9 +11,7 @@ import {
   getStateLabel,
 } from "@/lib/ai";
 import type { ConversationHistoryItem } from "@/lib/ai";
-import {
-  type ContactVerificationReceipt,
-} from "@/lib/ai/contact-verification";
+import type { ContactVerificationReceipt } from "@/lib/ai/contact-verification";
 import { buildConversationAcknowledgement } from "@/lib/ai/conversation-acknowledgement";
 
 interface AIChatDrawerPanelProps {
@@ -71,7 +69,6 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
       !session.memory.service &&
       question.options?.some((item) => item.value === servicePreset)
     ) {
-      setVerificationReceipt(null);
       answer(servicePreset);
     }
   }, [answer, question, servicePreset, session.memory.service]);
