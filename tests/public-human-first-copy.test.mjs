@@ -11,7 +11,7 @@ const files = {
   contact: new URL("../src/components/sections/ContactSection.tsx", import.meta.url),
 };
 
-test("public homepage keeps human trust language while exposing the AI assistant as a core capability", async () => {
+test("public homepage keeps human trust language and routes consultation to its own surface", async () => {
   const sources = Object.fromEntries(
     await Promise.all(
       Object.entries(files).map(async ([name, path]) => [name, await readFile(path, "utf8")]),
@@ -19,17 +19,26 @@ test("public homepage keeps human trust language while exposing the AI assistant
   );
 
   assert.match(sources.navigation, /Văn phòng kỹ thuật số/);
-  assert.match(sources.navigation, /Trợ lý AI 24\/7/);
-  assert.match(sources.navigation, /href="\/#ai-office"/);
-  assert.match(sources.hero, /AI tiếp nhận nhu cầu 24\/7/);
-  assert.match(sources.hero, /Bắt đầu tư vấn AI/);
-  assert.match(sources.services, /Mở trợ lý AI/);
-  assert.match(sources.page, /AIOfficeRouteEntry/);
-  assert.match(sources.page, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
+  assert.match(sources.navigation, /Tư vấn ngay/);
+  assert.match(sources.navigation, /href="\/ai-tu-van\?ai=1"/);
+  assert.match(sources.hero, /Văn phòng kỹ thuật số 24\/7/);
+  assert.match(sources.hero, /Mở chat ngay/);
+  assert.match(sources.services, /Chọn nhanh hạng mục bạn quan tâm/);
+  assert.match(sources.services, /service-ticker-track/);
+  assert.doesNotMatch(sources.page, /AIOfficeRouteEntry|GEMINI_API_KEY/);
   assert.match(sources.contact, /kỹ sư sẽ tiếp nhận/);
+
+  const publicCopy = [
+    sources.navigation,
+    sources.hero,
+    sources.services,
+    sources.projects,
+    sources.contact,
+  ].join("\n");
+  assert.doesNotMatch(publicCopy, />[^<]*(?:Trợ lý AI|Chat AI|Tư vấn AI|AI tiếp nhận)[^<]*</i);
 });
 
-test("homepage keeps the AI-first compact hierarchy before services and project proof", async () => {
+test("homepage keeps a compact human-first hierarchy before project proof", async () => {
   const sources = Object.fromEntries(
     await Promise.all(
       Object.entries(files).map(async ([name, path]) => [name, await readFile(path, "utf8")]),
@@ -38,7 +47,6 @@ test("homepage keeps the AI-first compact hierarchy before services and project 
 
   const orderedComponents = [
     "<HeroSection />",
-    "<AIOfficeRouteEntry",
     "<ServicesSection />",
     "<ProjectsSection />",
     "<ContactSection />",
@@ -59,8 +67,10 @@ test("homepage keeps the AI-first compact hierarchy before services and project 
     );
   }
 
-  assert.match(sources.hero, /lg:min-h-\[30rem\]/);
+  assert.match(sources.hero, /lg:min-h-\[24rem\]/);
   assert.match(sources.services, /SERVICES\.slice\(0, 4\)/);
+  assert.match(sources.services, /grid-cols-2/);
+  assert.match(sources.services, /lg:grid-cols-4/);
   assert.match(sources.projects, /SERVICES\.slice\(0, 4\)/);
   assert.doesNotMatch(sources.contact, /COMPANY_CONFIG\.phones\[1\]/);
 });
