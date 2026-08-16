@@ -88,7 +88,7 @@ export function FloatingCta() {
   return (
     <>
       {open ? (
-        <div className="fixed inset-0 z-[90] overflow-hidden bg-black/45 backdrop-blur-[2px]">
+        <div className="fixed inset-0 z-[90] h-[100dvh] max-h-[100dvh] w-full max-w-full overflow-x-hidden overflow-y-hidden overscroll-none bg-black/45 backdrop-blur-[2px]">
           <button
             type="button"
             className="absolute inset-0 cursor-default"
@@ -99,7 +99,7 @@ export function FloatingCta() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="ai-chat-drawer-title"
-            className="absolute inset-x-0 bottom-0 z-10 box-border flex h-[min(88dvh,760px)] max-h-[100dvh] w-full max-w-full flex-col overflow-hidden rounded-t-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] sm:inset-y-0 sm:left-auto sm:right-0 sm:h-full sm:max-h-none sm:w-full sm:max-w-[28rem] sm:rounded-none sm:border-y-0 sm:border-r-0"
+            className="absolute inset-x-0 bottom-0 z-10 box-border flex h-[min(88dvh,760px)] max-h-[100dvh] min-w-0 w-full max-w-[100vw] touch-pan-y flex-col overflow-x-hidden overflow-y-hidden rounded-t-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] sm:inset-y-0 sm:left-auto sm:right-0 sm:h-full sm:max-h-none sm:w-full sm:max-w-[28rem] sm:rounded-none sm:border-y-0 sm:border-r-0"
           >
             <header className="flex min-w-0 shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border)] bg-[var(--color-surface-dark)] px-4 py-3 text-white">
               <div className="min-w-0 flex-1">
@@ -126,7 +126,7 @@ export function FloatingCta() {
               <AIChatDrawerPanel servicePreset={servicePreset} />
             </div>
 
-            <footer className="grid min-w-0 shrink-0 grid-cols-2 gap-2 border-t border-[var(--color-border)] bg-[var(--color-surface)] px-3 pt-3 pb-[max(var(--space-3),env(safe-area-inset-bottom))]">
+            <footer className="grid min-w-0 shrink-0 grid-cols-2 gap-2 border-t border-[var(--color-border)] bg-[var(--color-surface)] pl-[max(var(--space-3),env(safe-area-inset-left))] pr-[max(var(--space-3),env(safe-area-inset-right))] pt-3 pb-[max(var(--space-3),env(safe-area-inset-bottom))]">
               <a
                 href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
                 className="flex min-h-10 min-w-0 items-center justify-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] px-2 text-xs font-bold text-[var(--color-text)]"
@@ -151,7 +151,7 @@ export function FloatingCta() {
       <button
         type="button"
         onClick={openDrawer}
-        className="fixed bottom-[max(var(--space-4),env(safe-area-inset-bottom))] right-[var(--space-4)] z-50 flex min-h-12 items-center gap-2 rounded-full bg-[var(--color-primary)] px-4 text-sm font-black text-[var(--color-primary-contrast)] shadow-[var(--shadow-lg)] ring-2 ring-[var(--color-primary-soft)] transition-transform duration-[var(--duration-fast)] hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 sm:right-[var(--space-6)] lg:bottom-[var(--space-8)] lg:right-[var(--space-8)]"
+        className="fixed bottom-[max(var(--space-4),env(safe-area-inset-bottom))] right-[max(var(--space-4),env(safe-area-inset-right))] z-50 flex min-h-12 items-center gap-2 rounded-full bg-[var(--color-primary)] px-4 text-sm font-black text-[var(--color-primary-contrast)] shadow-[var(--shadow-lg)] ring-2 ring-[var(--color-primary-soft)] transition-transform duration-[var(--duration-fast)] hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 sm:right-[var(--space-6)] lg:bottom-[var(--space-8)] lg:right-[var(--space-8)]"
         aria-label="Mở trợ lý tư vấn Đại Hải Phát"
       >
         <Bot className="h-5 w-5" aria-hidden="true" />
