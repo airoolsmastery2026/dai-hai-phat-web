@@ -36,7 +36,7 @@ async function withTimeout<T>(promise: Promise<T>): Promise<T> {
 function isMissingDnsRecord(error: unknown): boolean {
   if (!error || typeof error !== "object") return false;
   const code = "code" in error ? String((error as { code?: unknown }).code ?? "") : "";
-  return code === "ENODATA" || code === "ENOTFOUND" || code === "ESERVFAIL";
+  return code === "ENODATA" || code === "ENOTFOUND";
 }
 
 export async function verifyEmailDomain(email: string): Promise<EmailDomainVerificationResult> {
