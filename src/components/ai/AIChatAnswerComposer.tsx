@@ -60,6 +60,15 @@ function isContactVerificationLevel(
   return value === "format_only" || value === "network_valid" || value === "domain_valid";
 }
 
+function isReceiptCompatible(
+  field: "phone" | "email" | "zalo",
+  verification: ContactVerificationLevel,
+): boolean {
+  if (verification === "format_only") return true;
+  if (field === "email") return verification === "domain_valid";
+  return verification === "network_valid";
+}
+
 async function validateContactOnServer(
   question: ConversationQuestion,
   value: string,
@@ -87,7 +96,8 @@ async function validateContactOnServer(
     if (
       !response.ok ||
       payload.valid !== true ||
-      !isContactVerificationLevel(payload.verification)
+      !isContactVerificationLevel(payload.verification) ||
+      !isReceiptCompatible(question.field, payload.verification)
     ) {
       return {
         ok: false,
