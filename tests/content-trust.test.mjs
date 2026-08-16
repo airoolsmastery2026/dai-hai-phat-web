@@ -207,7 +207,7 @@ test("lets customers defer project photos without hiding the missing evidence", 
   assert.match(engine, /proposal\.missing|REQUIRED_MEMORY/);
 });
 
-test("preserves selected service context when customers enter the public AI intake", async () => {
+test("preserves selected service context when customers enter the public consultation flow", async () => {
   const services = await readFile(
     new URL("../src/content/services.ts", import.meta.url),
     "utf8",
@@ -247,9 +247,9 @@ test("preserves selected service context when customers enter the public AI inta
   assert.equal(presets.length, 5);
   assert.ok(presets.every((preset) => allowedPresets.has(preset)));
   assert.match(serviceHero, /encodeURIComponent\(service\.aiService\)/);
-  assert.match(serviceHero, /#ai-office/);
+  assert.match(serviceHero, /\/ai-tu-van\?service=/);
   assert.match(serviceCta, /encodeURIComponent\(service\.aiService\)/);
-  assert.match(serviceCta, /#ai-office/);
+  assert.match(serviceCta, /\/ai-tu-van\?service=/);
   assert.match(servicePage, /<ServiceCTA service=\{service\} \/>/);
   assert.match(aiOffice, /new URLSearchParams\(window\.location\.search\)/);
   assert.match(aiOffice, /question\?\.field === "intent"/);
