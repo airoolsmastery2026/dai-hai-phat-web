@@ -14,7 +14,7 @@ test("keeps the contact page human-first and evidence safe", async () => {
   assert.ok(zaloCta >= 0, "Zalo CTA must be present");
   assert.ok(phoneCta > zaloCta, "Hotline must remain available after Zalo");
   assert.match(contactPage, /Liên hệ kỹ thuật/);
-  assert.match(contactPage, /Gửi hiện trạng, kỹ sư sẽ tiếp nhận/);
+  assert.match(contactPage, /Gửi hiện trạng — trao đổi trực tiếp với đúng người/);
   assert.match(contactPage, /Báo giá chính thức chỉ được lập/);
   assert.match(contactPage, /CONTACT_DESCRIPTION/);
   assert.doesNotMatch(contactPage, /#ai-office|Lập hồ sơ với AI|Tư vấn AI/i);
