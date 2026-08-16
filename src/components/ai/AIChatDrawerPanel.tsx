@@ -8,7 +8,6 @@ import {
   getConversationHistory,
   getStateLabel,
   resolveConversationChoice,
-  type ConversationQuestion,
 } from "@/lib/ai";
 
 interface AIChatDrawerPanelProps {
