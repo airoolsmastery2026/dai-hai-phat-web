@@ -6,13 +6,18 @@ const footerSource = await readFile(
   new URL("../src/components/layout/SiteFooter.tsx", import.meta.url),
   "utf8",
 );
+const themeSource = await readFile(
+  new URL("../src/lib/theme.ts", import.meta.url),
+  "utf8",
+);
 const projectsSource = await readFile(
   new URL("../src/app/projects/page.tsx", import.meta.url),
   "utf8",
 );
 
-test("footer links directly to the canonical gallery route", () => {
-  assert.match(footerSource, /label:\s*"Công trình",\s*href:\s*"\/gallery"/);
+test("footer links directly to the canonical gallery route through shared navigation", () => {
+  assert.match(footerSource, /NAV_ITEMS/);
+  assert.match(themeSource, /label:\s*"Dự án",\s*href:\s*"\/gallery"/);
   assert.doesNotMatch(footerSource, /href:\s*"\/projects"/);
 });
 
