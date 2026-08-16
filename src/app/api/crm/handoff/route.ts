@@ -15,6 +15,10 @@ import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
 import { verifyEmailDomain } from "@/lib/server/email-domain-verification";
 import { verifyPhoneWithAPILayer } from "@/lib/server/phone-verification";
 import {
+  persistProjectInquiry,
+  ProjectInquiryDeliveryError,
+} from "@/lib/server/project-inquiries";
+import {
   ATTRIBUTION_COOKIE_NAME,
   deserializeLeadAttribution,
 } from "@/lib/marketing/attribution";
@@ -116,11 +120,79 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await deliverLeadToCRM(lead, requestId, {
-      phone: phoneVerification,
-    });
+    let result;
+    let acceptedBy: "inquiry-store" | "crm" = "inquiry-store";
+
+    try {
+      result = await persistProjectInquiry(lead);
+      console.info("DHP project inquiry stored", {
+        requestId,
+        sessionId: lead.sessionId,
+        leadId: result.leadId,
+      });
+    } catch (storageError) {
+      const storageDetails =
+        storageError instanceof ProjectInquiryDeliveryError
+          ? {
+              code: storageError.code,
+              upstreamStatus: storageError.upstreamStatus ?? null,
+            }
+          : { code: "unknown", upstreamStatus: null };
+      console.warn("DHP project inquiry store unavailable", {
+        requestId,
+        ...storageDetails,
+      });
+
+      try {
+        result = await deliverLeadToCRM(lead, requestId, {
+          phone: phoneVerification,
+        });
+        acceptedBy = "crm";
+      } catch (crmError) {
+        const crmDetails =
+          crmError instanceof CRMDeliveryError
+            ? {
+                code: crmError.code,
+                upstreamStatus: crmError.upstreamStatus ?? null,
+              }
+            : { code: "unknown", upstreamStatus: null };
+        console.warn("DHP handoff channels unavailable", {
+          requestId,
+          storage: storageDetails,
+          crm: crmDetails,
+        });
+        return apiJsonResponse(
+          {
+            error:
+              "Kênh tiếp nhận hồ sơ đang tạm gián đoạn. Hồ sơ vẫn được giữ trên thiết bị; bạn có thể tiếp tục qua Zalo hoặc gọi kỹ sư.",
+            code: "HANDOFF_UNAVAILABLE",
+            requestId,
+          },
+          503,
+        );
+      }
+    }
 
     after(async () => {
+      if (acceptedBy === "inquiry-store") {
+        try {
+          const crm = await deliverLeadToCRM(lead, requestId, {
+            phone: phoneVerification,
+          });
+          console.info("DHP CRM sync completed", {
+            requestId,
+            sessionId: lead.sessionId,
+            leadId: crm.leadId,
+          });
+        } catch (error) {
+          console.warn("DHP CRM sync skipped or failed", {
+            requestId,
+            sessionId: lead.sessionId,
+            code: error instanceof CRMDeliveryError ? error.code : "unknown",
+          });
+        }
+      }
+
       try {
         const automation = await dispatchLeadAutomation(lead, result, requestId);
         console.info("DHP lead automation completed", {
@@ -138,10 +210,11 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    console.info("DHP CRM handoff delivered", {
+    console.info("DHP handoff accepted", {
       requestId,
       sessionId: lead.sessionId,
       leadId: result.leadId,
+      acceptedBy,
       phoneVerification: phoneVerification.status,
       emailDomainVerification: emailVerification?.status ?? "not_provided",
       attributionSource: lead.attribution?.utmSource ?? null,
@@ -163,24 +236,8 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
-    if (error instanceof CRMDeliveryError) {
-      console.warn("DHP CRM handoff unavailable", {
-        requestId,
-        code: error.code,
-        upstreamStatus: error.upstreamStatus ?? null,
-      });
-      return apiJsonResponse(
-        {
-          error:
-            "Kênh gửi tự động đang tạm gián đoạn. Hồ sơ vẫn được giữ trên thiết bị; bạn có thể tiếp tục qua Zalo hoặc gọi kỹ sư.",
-          code: "CRM_UNAVAILABLE",
-          requestId,
-        },
-        503,
-      );
-    }
 
-    console.error("DHP CRM handoff failed", {
+    console.error("DHP handoff failed", {
       requestId,
       error: error instanceof Error ? error.message : "Unknown error",
     });
@@ -188,7 +245,7 @@ export async function POST(request: NextRequest) {
       {
         error:
           "Hiện chưa thể gửi hồ sơ tự động. Hồ sơ vẫn được giữ trên thiết bị; bạn có thể tiếp tục qua Zalo hoặc gọi kỹ sư.",
-        code: "CRM_UNAVAILABLE",
+        code: "HANDOFF_UNAVAILABLE",
         requestId,
       },
       500,
