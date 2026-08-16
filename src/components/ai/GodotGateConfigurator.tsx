@@ -26,10 +26,10 @@ export function GodotGateConfigurator({ configuratorUrl }: Props) {
   const [selection, setSelection] = useState<GateSelection | null>(null);
   const [loaded, setLoaded] = useState(false);
 
-  const aiHref = useMemo(() => {
-    const params = new URLSearchParams({ service: "cua-cong" });
+  const consultationHref = useMemo(() => {
+    const params = new URLSearchParams({ service: "cua-cong", ai: "1" });
     if (selection) params.set("configurator", JSON.stringify(selection));
-    return `/?${params.toString()}#ai-office`;
+    return `/ai-tu-van?${params.toString()}`;
   }, [selection]);
 
   useEffect(() => {
@@ -56,10 +56,10 @@ export function GodotGateConfigurator({ configuratorUrl }: Props) {
           Bản Godot chạy độc lập và chỉ được tải khi có Web export URL. Website vẫn hoạt động bình thường, không kéo engine 3D vào bundle chính.
         </p>
         <Link
-          href="/?service=cua-cong#ai-office"
+          href="/ai-tu-van?service=cua-cong&ai=1"
           className="mt-[var(--space-5)] inline-flex min-h-11 items-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] font-semibold text-white"
         >
-          Tư vấn cửa cổng với AI
+          Tư vấn cửa cổng
         </Link>
       </div>
     );
@@ -90,14 +90,14 @@ export function GodotGateConfigurator({ configuratorUrl }: Props) {
         </p>
         {selection && (
           <p className="mt-[var(--space-3)] font-medium text-[var(--color-text)]">
-            Đã nhận cấu hình từ 3D. Tiếp tục với AI để lập hồ sơ tư vấn.
+            Đã nhận cấu hình từ 3D. Tiếp tục với trợ lý tư vấn để lập hồ sơ.
           </p>
         )}
         <Link
-          href={aiHref}
+          href={consultationHref}
           className="mt-[var(--space-4)] inline-flex min-h-11 items-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-5)] font-semibold text-white"
         >
-          Gửi cấu hình cho AI Đại Hải Phát
+          Gửi cấu hình để được tư vấn
         </Link>
       </div>
     </div>
