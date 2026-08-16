@@ -169,7 +169,7 @@ export function SiteNavigation() {
               className="flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-3)] text-center text-sm font-bold text-[var(--color-primary-contrast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Bot className="h-4 w-4" aria-hidden="true" />
-              Trợ lý AI
+              Trợ lý tư vấn
             </Link>
             <a
               href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
