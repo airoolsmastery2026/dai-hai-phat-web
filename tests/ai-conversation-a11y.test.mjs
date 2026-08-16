@@ -78,5 +78,6 @@ test("floating consultation keeps mobile boundaries and customer-safe handoff co
   assert.doesNotMatch(crmRoute, /formatSupportReference/);
   assert.doesNotMatch(crmRoute, /Mã hỗ trợ:/);
   assert.doesNotMatch(crmRoute, /Kênh CRM chưa được cấu hình/);
-  assert.match(crmRoute, /Kênh gửi tự động đang tạm gián đoạn/);
+  assert.match(crmRoute, /Kênh tiếp nhận hồ sơ đang tạm gián đoạn/);
+  assert.match(crmRoute, /HANDOFF_UNAVAILABLE/);
 });
