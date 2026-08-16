@@ -37,6 +37,7 @@ Trợ lý AI/chatbot công khai là **năng lực cốt lõi bắt buộc và l�
 - Dữ liệu khách hàng chỉ được ghi nhận khi vượt qua quality gate phù hợp với từng trường. Tên, số điện thoại, email, địa chỉ khảo sát, kích thước và nội dung tự do không được phép đi tiếp chỉ vì đủ số ký tự.
 - `Đúng định dạng` không đồng nghĩa với `đã xác minh`. Không được tuyên bố số điện thoại hoặc email đã xác minh quyền sở hữu nếu chưa có dịch vụ xác minh thực sự trả kết quả thành công.
 - Phone, email và Zalo phải được kiểm tra lại qua server trước khi chat ghi nhận; kết quả từ provider/DNS có thể chặn dữ liệu bị xác nhận là invalid, nhưng lỗi dịch vụ ngoài chỉ được ghi là chưa xác minh chứ không được suy diễn thành hợp lệ hoặc không hợp lệ.
+- Nếu chính endpoint/lớp validation server lỗi, timeout hoặc trả phản hồi không hợp lệ thì chat phải fail-closed và giữ khách ở bước hiện tại; không được biến lỗi hệ thống thành `ok: true`. Chỉ khi validation server hoạt động và provider/DNS trả trạng thái chưa xác minh mới được ghi là đúng định dạng nhưng chưa xác minh.
 - CRM handoff phải kiểm tra lại dữ liệu quan trọng ở boundary server để phiên cũ hoặc dữ liệu localStorage không thể bỏ qua quality gate phía client.
 - Chat drawer phải mobile-first: không dùng layout có thể vượt chiều rộng viewport, phải hỗ trợ `dvh`, safe-area, nội dung dài và bàn phím iOS mà không tạo horizontal overflow.
 - Có thể tối ưu copy, layout, lazy-loading và hiệu năng, nhưng không được xóa, ẩn hoặc thay thế chatbot bằng kênh liên hệ thụ động.
