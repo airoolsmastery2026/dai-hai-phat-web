@@ -4,7 +4,10 @@ import { Bot, CheckCircle2, ImagePlus, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { AIChatAnswerComposer } from "@/components/ai/AIChatAnswerComposer";
+import {
+  AIChatAnswerComposer,
+  type ContactVerificationReceipt,
+} from "@/components/ai/AIChatAnswerComposer";
 import { useAI } from "@/hooks/useAI";
 import {
   getConversationHistory,
@@ -34,8 +37,37 @@ function displayHistoryValue(item: ConversationHistoryItem): string {
   return item.value;
 }
 
-function acknowledgement(item: ConversationHistoryItem | undefined): string | null {
+function contactVerificationAcknowledgement(
+  receipt: ContactVerificationReceipt,
+): string {
+  if (receipt.verification === "network_valid") {
+    return receipt.field === "zalo"
+      ? "Số dùng cho Zalo đã được dịch vụ kiểm tra mạng công nhận là số hợp lệ. Điều này chưa chứng minh số thuộc về người nhập; quyền sở hữu vẫn cần OTP hoặc xác nhận liên hệ thực tế."
+      : "Số điện thoại đã được dịch vụ kiểm tra mạng công nhận là số hợp lệ. Điều này chưa chứng minh số thuộc về người nhập; quyền sở hữu vẫn cần OTP hoặc xác nhận liên hệ thực tế.";
+  }
+
+  if (receipt.verification === "domain_valid") {
+    return "Tên miền email có khả năng nhận thư và đã vượt qua kiểm tra server. Hộp thư cụ thể vẫn chưa được xác minh là thuộc về người nhập nếu chưa có bước xác nhận riêng.";
+  }
+
+  return receipt.field === "email"
+    ? "Email đã đúng định dạng và vượt qua kiểm tra server, nhưng DNS chưa xác nhận được tên miền lúc này. Hộp thư chưa được xác minh quyền sở hữu."
+    : `${receipt.field === "zalo" ? "Số dùng cho Zalo" : "Số điện thoại"} đã đúng định dạng và vượt qua kiểm tra server, nhưng dịch vụ mạng chưa xác nhận được lúc này. Quyền sở hữu số chưa được xác minh.`;
+}
+
+function acknowledgement(
+  item: ConversationHistoryItem | undefined,
+  receipt: ContactVerificationReceipt | null,
+): string | null {
   if (!item) return null;
+
+  if (
+    receipt &&
+    (item.field === "phone" || item.field === "email" || item.field === "zalo") &&
+    receipt.field === item.field
+  ) {
+    return contactVerificationAcknowledgement(receipt);
+  }
 
   switch (item.field) {
     case "intentGroup":
@@ -70,9 +102,9 @@ function acknowledgement(item: ConversationHistoryItem | undefined): string | nu
       return "Tên liên hệ đã qua kiểm tra chất lượng văn bản. Tôi chỉ dùng thông tin này để lập hồ sơ và xưng hô khi bàn giao.";
     case "phone":
     case "zalo":
-      return "Số liên hệ đã qua kiểm tra định dạng ở thiết bị và server, đồng thời đối chiếu mạng khi dịch vụ khả dụng. Quyền sở hữu số vẫn cần OTP hoặc xác nhận liên hệ thực tế.";
+      return "Số liên hệ đã qua kiểm tra định dạng ở thiết bị và server. Trạng thái mạng của lần kiểm tra gần nhất không còn trong bộ nhớ giao diện, vì vậy hệ thống không suy diễn là đã xác minh; quyền sở hữu vẫn cần OTP hoặc xác nhận thực tế.";
     case "email":
-      return "Email đã qua kiểm tra định dạng ở thiết bị và server; tên miền được đối chiếu khả năng nhận thư khi DNS khả dụng. Hộp thư chưa được coi là thuộc về người nhập nếu chưa có bước xác nhận riêng.";
+      return "Email đã qua kiểm tra định dạng ở thiết bị và server. Trạng thái DNS của lần kiểm tra gần nhất không còn trong bộ nhớ giao diện, vì vậy hệ thống không suy diễn hộp thư đã được xác minh.";
     case "surveyAddress":
       return "Địa chỉ đã đủ cấu trúc để lập yêu cầu khảo sát. Đội ngũ vẫn phải xác nhận lại vị trí trước khi di chuyển tới công trình.";
     default:
@@ -98,8 +130,13 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
     submitHandoff,
   } = useAI();
   const [handoffConsent, setHandoffConsent] = useState(false);
+  const [verificationReceipt, setVerificationReceipt] =
+    useState<ContactVerificationReceipt | null>(null);
   const history = useMemo(() => getConversationHistory(session).slice(-6), [session]);
-  const contextualAcknowledgement = acknowledgement(history.at(-1));
+  const contextualAcknowledgement = acknowledgement(
+    history.at(-1),
+    verificationReceipt,
+  );
 
   useEffect(() => {
     if (
@@ -108,12 +145,22 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
       !session.memory.service &&
       question.options?.some((item) => item.value === servicePreset)
     ) {
+      setVerificationReceipt(null);
       answer(servicePreset);
     }
   }, [answer, question, servicePreset, session.memory.service]);
 
+  const handleAnswer = (
+    value: string,
+    receipt: ContactVerificationReceipt | null = null,
+  ) => {
+    setVerificationReceipt(receipt);
+    answer(value);
+  };
+
   const handleReset = () => {
     setHandoffConsent(false);
+    setVerificationReceipt(null);
     reset();
   };
 
@@ -252,7 +299,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
               {error ? <p className="mt-2 break-words text-xs leading-5 text-[var(--color-danger-text)] [overflow-wrap:anywhere]" role="alert">{humanizePublicCopy(error)}</p> : null}
             </>
           ) : (
-            <AIChatAnswerComposer question={question} engineError={error} onAnswer={answer} />
+            <AIChatAnswerComposer question={question} engineError={error} onAnswer={handleAnswer} />
           )}
         </div>
       ) : null}
