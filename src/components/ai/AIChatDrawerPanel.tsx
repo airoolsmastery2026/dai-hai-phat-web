@@ -15,6 +15,10 @@ interface AIChatDrawerPanelProps {
   servicePreset?: string | null;
 }
 
+function humanizePublicCopy(value: string): string {
+  return value.replace(/\bAI\b/g, "trợ lý");
+}
+
 export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelProps) {
   const {
     session,
@@ -94,7 +98,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
             )}
             {handoffError ? (
               <p className="mt-[var(--space-3)] text-sm text-[var(--color-danger-text)]" role="alert">
-                {handoffError}
+                {humanizePublicCopy(handoffError)}
               </p>
             ) : null}
             <button
@@ -120,7 +124,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
               Đại Hải Phát đang sẵn sàng hỗ trợ
             </p>
             <p className="mt-1 truncate text-xs text-[var(--color-text-muted)]">
-              {getStateLabel(session.state)} · Hồ sơ {session.proposal.progress}%
+              {humanizePublicCopy(getStateLabel(session.state))} · Hồ sơ {session.proposal.progress}%
             </p>
           </div>
           <button
@@ -151,8 +155,8 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
           {history.map((item) => (
             <div key={item.field} className="flex justify-end">
               <div className="max-w-[84%] rounded-[var(--radius-lg)] rounded-br-[var(--radius-sm)] bg-[var(--color-primary)] px-[var(--space-3)] py-[var(--space-2)] text-sm text-[var(--color-primary-contrast)]">
-                <p className="text-[11px] font-semibold opacity-75">{item.label}</p>
-                <p className="mt-0.5 font-semibold leading-5">{item.value}</p>
+                <p className="text-[11px] font-semibold opacity-75">{humanizePublicCopy(item.label)}</p>
+                <p className="mt-0.5 font-semibold leading-5">{humanizePublicCopy(item.value)}</p>
               </div>
             </div>
           ))}
@@ -160,7 +164,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
           {analysisStatus === "loading" ? (
             <AssistantMessage>Đang đối chiếu hồ sơ và dữ liệu dự án…</AssistantMessage>
           ) : analysisStatus === "ready" && analysis ? (
-            <AssistantMessage>{analysis.recommendation}</AssistantMessage>
+            <AssistantMessage>{humanizePublicCopy(analysis.recommendation)}</AssistantMessage>
           ) : null}
 
           {question ? (
@@ -169,8 +173,8 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
                 <Bot className="h-4 w-4" aria-hidden="true" />
               </span>
               <div className="max-w-[86%] rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] shadow-[var(--shadow-sm)]">
-                <p className="text-sm font-bold leading-6">{question.prompt}</p>
-                <p className="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">{question.supportingText}</p>
+                <p className="text-sm font-bold leading-6">{humanizePublicCopy(question.prompt)}</p>
+                <p className="mt-1 text-xs leading-5 text-[var(--color-text-muted)]">{humanizePublicCopy(question.supportingText)}</p>
               </div>
             </div>
           ) : null}
@@ -192,7 +196,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
                   }}
                   className="min-h-9 rounded-full border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-1.5 text-xs font-semibold transition hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
                 >
-                  {option.label}
+                  {humanizePublicCopy(option.label)}
                 </button>
               ))}
             </div>
@@ -252,7 +256,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
 
           {inputError || error ? (
             <p className="mt-2 text-xs leading-5 text-[var(--color-danger-text)]" role="alert">
-              {inputError || error}
+              {humanizePublicCopy(inputError || error || "")}
             </p>
           ) : null}
         </div>
@@ -268,7 +272,7 @@ function AssistantMessage({ children }: { children: string }) {
         <Bot className="h-4 w-4" aria-hidden="true" />
       </span>
       <p className="max-w-[86%] rounded-[var(--radius-lg)] rounded-bl-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-3)] text-sm leading-6 shadow-[var(--shadow-sm)]">
-        {children}
+        {humanizePublicCopy(children)}
       </p>
     </div>
   );
