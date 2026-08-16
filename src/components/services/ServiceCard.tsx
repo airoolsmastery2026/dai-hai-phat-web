@@ -7,7 +7,7 @@ import type { ServiceItem } from "@/types/content";
 
 export function ServiceCard({ service }: { service: ServiceItem }) {
   const serviceHref = `/services/${getPublicRouteSlug(service.slug)}`;
-  const aiHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+  const aiHref = `/ai-tu-van?service=${encodeURIComponent(service.aiService)}&ai=1`;
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] transition duration-[var(--duration-medium)] hover:-translate-y-0.5 hover:border-[var(--color-primary)] hover:shadow-[var(--shadow-md)]">
