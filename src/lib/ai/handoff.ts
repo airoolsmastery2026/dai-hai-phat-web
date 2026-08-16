@@ -116,9 +116,9 @@ function normalizeAscii(value: string): string {
 }
 
 function isPlausibleName(value: string): boolean {
-  if (value.length < 2 || !/^[\p{L}\p{M}][\p{L}\p{M}\s'.-]*$/u.test(value)) return false;
+  if (value.length < 2 || !/^[A-Za-zÀ-ỹĐđ][A-Za-zÀ-ỹĐđ\s'.-]*$/.test(value)) return false;
   const ascii = normalizeAscii(value);
-  if (![...ascii].some((character) => "aeiouy".includes(character))) return false;
+  if (!/[aeiouy]/.test(ascii)) return false;
   if (["test", "demo", "fake", "asdf", "qwerty", "abc", "xxx"].includes(ascii)) return false;
   if (!ascii.includes(" ")) {
     const runs = ascii.match(/[bcdfghjklmnpqrstvwxz]{3,}/g) ?? [];
