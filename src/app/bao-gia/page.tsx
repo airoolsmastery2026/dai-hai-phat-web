@@ -48,7 +48,7 @@ const processSteps = [
   {
     number: "01",
     title: "Tiếp nhận nhu cầu",
-    description: "AI hoặc đội ngũ Đại Hải Phát ghi nhận hạng mục, mong muốn và dữ liệu bạn đang có.",
+    description: "Trợ lý tư vấn hoặc đội ngũ Đại Hải Phát ghi nhận hạng mục, mong muốn và dữ liệu bạn đang có.",
   },
   {
     number: "02",
@@ -89,7 +89,7 @@ export default function QuotePage() {
           <>
             <Button href="/ai-tu-van?ai=1">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
-              Chuẩn bị với AI
+              Chuẩn bị thông tin
             </Button>
             <Button href="/contact?intent=quote" variant="secondary">
               <FileText className="h-4 w-4" aria-hidden="true" />
@@ -170,7 +170,7 @@ export default function QuotePage() {
                 Báo giá rõ ràng trước khi thi công
               </h2>
               <p className="mt-[var(--space-3)] max-w-2xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
-                Ước tính từ AI chỉ dùng để chuẩn bị trao đổi. Báo giá chính thức được phát hành sau khi thông tin kỹ thuật cần thiết đã được xác nhận.
+                Ước tính ban đầu chỉ dùng để chuẩn bị trao đổi. Báo giá chính thức được phát hành sau khi thông tin kỹ thuật cần thiết đã được xác nhận.
               </p>
             </div>
 
