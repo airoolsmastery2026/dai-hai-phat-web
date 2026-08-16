@@ -6,6 +6,7 @@ import {
   type ProjectAnalysisResponse,
   type ProjectEvidenceContext,
 } from "@/lib/ai/analysis";
+import { assertProjectAnalysisLanguageQuality } from "@/lib/ai/analysis-output-quality";
 
 const GEMINI_INTERACTIONS_ENDPOINT =
   "https://generativelanguage.googleapis.com/v1beta/interactions";
@@ -172,7 +173,9 @@ export async function analyzeProjectWithGemini(
 
     let analysis;
     try {
-      analysis = parseProjectAnalysisOutput(readOutputText(payload));
+      analysis = assertProjectAnalysisLanguageQuality(
+        parseProjectAnalysisOutput(readOutputText(payload)),
+      );
     } catch (error) {
       if (error instanceof GeminiProjectAnalysisError) throw error;
       throw new GeminiProjectAnalysisError(
