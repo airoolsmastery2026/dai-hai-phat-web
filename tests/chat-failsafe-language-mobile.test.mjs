@@ -14,6 +14,14 @@ const panel = readFileSync(
   new URL("../src/components/ai/AIChatDrawerPanel.tsx", import.meta.url),
   "utf8",
 );
+const acknowledgements = readFileSync(
+  new URL("../src/lib/ai/conversation-acknowledgement.ts", import.meta.url),
+  "utf8",
+);
+const contactVerification = readFileSync(
+  new URL("../src/lib/ai/contact-verification.ts", import.meta.url),
+  "utf8",
+);
 const drawer = readFileSync(
   new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
   "utf8",
@@ -30,7 +38,7 @@ test("contact validation fails closed when the server gate is unavailable", () =
     route,
     /catch[\s\S]*?valid:\s*true[\s\S]*?verification:\s*"format_only"/,
   );
-  assert.match(composer, /!response\.ok \|\| payload\.valid !== true/);
+  assert.match(composer, /!response\.ok \|\|[\s\S]*?payload\.valid !== true/);
   assert.match(composer, /Không thể kiểm tra thông tin liên hệ ở phía máy chủ/);
   assert.doesNotMatch(composer, /catch\s*\{\s*return\s*\{\s*ok:\s*true/);
 });
@@ -50,14 +58,16 @@ test("customer garbage is rejected before conversation progression", () => {
 });
 
 test("assistant acknowledgements explain business meaning instead of repeating one template", () => {
-  assert.match(panel, /case "material"/);
-  assert.match(panel, /chưa phải vật liệu đã chốt/);
-  assert.match(panel, /case "budget"/);
-  assert.match(panel, /không phải báo giá/);
-  assert.match(panel, /case "timeline"/);
-  assert.match(panel, /case "priority"/);
-  assert.match(panel, /case "surveyAddress"/);
-  assert.match(panel, /Quyền sở hữu số vẫn cần OTP/);
+  assert.match(panel, /buildConversationAcknowledgement/);
+  assert.match(acknowledgements, /case "material"/);
+  assert.match(acknowledgements, /chưa phải vật liệu đã chốt/);
+  assert.match(acknowledgements, /case "budget"/);
+  assert.match(acknowledgements, /không phải báo giá/);
+  assert.match(acknowledgements, /case "timeline"/);
+  assert.match(acknowledgements, /case "priority"/);
+  assert.match(acknowledgements, /case "surveyAddress"/);
+  assert.match(acknowledgements, /getContactVerificationAcknowledgement/);
+  assert.match(contactVerification, /quyền sở hữu vẫn cần OTP/i);
 });
 
 test("iPhone drawer keeps width, dynamic viewport and non-zooming inputs guarded", () => {
