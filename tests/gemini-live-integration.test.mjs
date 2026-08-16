@@ -22,7 +22,10 @@ const loadingStatePath = new URL(
   "../src/components/sections/AIOfficeLoadingState.tsx",
   import.meta.url,
 );
-const homePagePath = new URL("../src/app/page.tsx", import.meta.url);
+const consultationPagePath = new URL(
+  "../src/app/ai-tu-van/page.tsx",
+  import.meta.url,
+);
 const configPath = new URL("../src/lib/ai/live.ts", import.meta.url);
 
 test("Gemini Live tokens stay server-side, short-lived and rate limited", async () => {
@@ -56,12 +59,12 @@ test("Gemini Live panel captures PCM audio and cleans up browser resources", asy
   assert.match(source, /Tiếp tục bằng chat/);
 });
 
-test("AI Office voice integration is mounted on the public homepage when configured", async () => {
-  const [source, routeEntry, loadingState, homePage] = await Promise.all([
+test("voice consultation is mounted on the dedicated public consultation route when configured", async () => {
+  const [source, routeEntry, loadingState, consultationPage] = await Promise.all([
     readFile(experiencePath, "utf8"),
     readFile(routeEntryPath, "utf8"),
     readFile(loadingStatePath, "utf8"),
-    readFile(homePagePath, "utf8"),
+    readFile(consultationPagePath, "utf8"),
   ]);
 
   assert.match(source, /<AIOfficeErrorBoundary resetKey=\{sessionKey\}>/);
@@ -70,9 +73,12 @@ test("AI Office voice integration is mounted on the public homepage when configu
   assert.match(source, /<AIOfficeSection key=\{sessionKey\} \/>/);
   assert.match(routeEntry, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
   assert.match(routeEntry, /AIOfficeLoadingState/);
-  assert.match(homePage, /AIOfficeRouteEntry/);
-  assert.match(homePage, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
-  assert.match(homePage, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
+  assert.match(consultationPage, /AIOfficeRouteEntry/);
+  assert.match(consultationPage, /liveVoiceEnabled=\{liveVoiceEnabled\}/);
+  assert.match(
+    consultationPage,
+    /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/,
+  );
   assert.match(loadingState, /id="ai-office"/);
 });
 
