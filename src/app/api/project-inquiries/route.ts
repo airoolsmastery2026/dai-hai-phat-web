@@ -6,7 +6,7 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
-import { supabaseRestRequest } from "@/lib/server/supabase-rest";
+import { persistProjectInquiryRecord } from "@/lib/server/project-inquiries";
 
 const RATE_LIMIT = { maxRequests: 5, windowMs: 10 * 60 * 1000 };
 const ALLOWED_SERVICES = new Set([
@@ -159,10 +159,8 @@ export async function POST(request: NextRequest) {
   };
 
   try {
-    await supabaseRestRequest("project_inquiries", {
-      method: "POST",
-      body: record,
-      prefer: "return=minimal,resolution=ignore-duplicates",
+    await persistProjectInquiryRecord(record, {
+      duplicateStrategy: "ignore",
       signal: AbortSignal.timeout(8_000),
     });
 
