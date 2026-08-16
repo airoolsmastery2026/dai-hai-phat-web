@@ -6,9 +6,9 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
-  title: "AI Tư Vấn 24/7",
+  title: "Tư vấn trực tuyến 24/7",
   description:
-    "Trợ lý AI Đại Hải Phát hỗ trợ làm rõ nhu cầu, đọc hình ảnh và hồ sơ, chuẩn bị phương án trước khảo sát và báo giá.",
+    "Trợ lý tư vấn Đại Hải Phát hỗ trợ làm rõ nhu cầu, đọc hình ảnh và hồ sơ, chuẩn bị phương án trước khảo sát và báo giá.",
   alternates: { canonical: "/ai-tu-van" },
 };
 
@@ -17,7 +17,7 @@ const capabilities = [
     icon: MessageSquareText,
     title: "Làm rõ nhu cầu",
     description:
-      "Bắt đầu từ mô tả ngắn, AI gợi ý các thông tin cần bổ sung để kỹ sư hiểu đúng hạng mục.",
+      "Bắt đầu từ mô tả ngắn, trợ lý tư vấn gợi ý các thông tin cần bổ sung để kỹ sư hiểu đúng hạng mục.",
   },
   {
     icon: ImageIcon,
@@ -43,18 +43,18 @@ export default function AITuVanPage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
-        eyebrow="AI Tư Vấn 24/7"
+        eyebrow="Tư vấn trực tuyến 24/7"
         title="Từ nhu cầu ban đầu đến hồ sơ sẵn sàng cho kỹ sư"
-        description="Trợ lý AI Đại Hải Phát giúp mô tả công việc rõ hơn, tập hợp hình ảnh và thông tin kỹ thuật, sau đó chuyển tiếp sang quy trình khảo sát và báo giá."
+        description="Trợ lý tư vấn Đại Hải Phát giúp mô tả công việc rõ hơn, tập hợp hình ảnh và thông tin kỹ thuật, sau đó chuyển tiếp sang quy trình khảo sát và báo giá."
         imageSrc="/images/brand/hero-luxury-materials-v1.webp"
-        imageAlt="Không gian vật liệu cao cấp đại diện cho trợ lý AI Đại Hải Phát"
+        imageAlt="Không gian vật liệu cao cấp đại diện cho kênh tư vấn trực tuyến Đại Hải Phát"
         imagePosition="72% center"
         highlights={["Tiếp nhận 24/7", "Phân tích ảnh & hồ sơ", "Chuyển kỹ sư xác nhận"]}
         actions={
           <>
             <Button href="/ai-tu-van?ai=1">
               <Bot className="h-4 w-4" aria-hidden="true" />
-              Mở chat AI
+              Mở trò chuyện
             </Button>
             <Button href="/bao-gia" variant="secondary">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
@@ -85,7 +85,7 @@ export default function AITuVanPage() {
 
           <div className="mt-[var(--space-6)] flex flex-col gap-[var(--space-3)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-5)] sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">
-              AI hỗ trợ thu thập và sắp xếp thông tin. Kích thước, vật liệu, biện pháp thi công và giá trị hợp đồng vẫn được kỹ sư Đại Hải Phát xác nhận trước khi chốt.
+              Hệ thống hỗ trợ thu thập và sắp xếp thông tin. Kích thước, vật liệu, biện pháp thi công và giá trị hợp đồng vẫn được kỹ sư Đại Hải Phát xác nhận trước khi chốt.
             </p>
             <Button href="/ai-tu-van?ai=1" className="shrink-0">
               <Bot className="h-4 w-4" aria-hidden="true" />
