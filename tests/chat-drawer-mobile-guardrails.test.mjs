@@ -36,8 +36,16 @@ test("long customer content cannot force horizontal overflow", () => {
   assert.match(panel, /min-w-0/);
 });
 
-test("answer composer applies the customer input quality gate before saving", () => {
+test("answer composer applies local and server quality gates before saving", () => {
   assert.match(composer, /validateCustomerAnswer\(question, candidate\)/);
   assert.match(composer, /if \(!validation\.ok\)/);
-  assert.match(composer, /onAnswer\(validation\.value\)/);
+  assert.match(
+    composer,
+    /validateContactOnServer\(question, validation\.value\)/,
+  );
+  assert.match(composer, /if \(!serverValidation\.ok\)/);
+  assert.match(
+    composer,
+    /onAnswer\(serverValidation\.normalizedValue, serverValidation\.receipt\)/,
+  );
 });
