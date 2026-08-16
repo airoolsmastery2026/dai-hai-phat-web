@@ -11,14 +11,23 @@ const projectsSectionPath = new URL(
   import.meta.url,
 );
 
-test("homepage service links use the public slug helper", async () => {
+test("homepage service choices open consultation while project proof keeps canonical service links", async () => {
   const [servicesSection, projectsSection] = await Promise.all([
     readFile(servicesSectionPath, "utf8"),
     readFile(projectsSectionPath, "utf8"),
   ]);
 
-  for (const source of [servicesSection, projectsSection]) {
-    assert.match(source, /getPublicRouteSlug/);
-    assert.doesNotMatch(source, /href=\{`\/services\/\$\{service\.slug\}`\}/);
-  }
+  assert.match(servicesSection, /encodeURIComponent\(service\.aiService\)/);
+  assert.match(servicesSection, /\/ai-tu-van\?service=/);
+  assert.match(servicesSection, /href="\/services"/);
+  assert.doesNotMatch(
+    servicesSection,
+    /href=\{`\/services\/\$\{service\.slug\}`\}/,
+  );
+
+  assert.match(projectsSection, /getPublicRouteSlug/);
+  assert.doesNotMatch(
+    projectsSection,
+    /href=\{`\/services\/\$\{service\.slug\}`\}/,
+  );
 });
