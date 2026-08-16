@@ -27,8 +27,24 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
         eyebrow="Liên hệ kỹ thuật"
-        title="Gửi hiện trạng, kỹ sư sẽ tiếp nhận"
-        description="Gửi ảnh, kích thước dự kiến và vị trí qua Zalo; hoặc gọi trực tiếp khi cần trao đổi nhanh trước khảo sát."
+        title="Gửi hiện trạng — trao đổi trực tiếp với đúng người"
+        description="Gửi ảnh, kích thước dự kiến và vị trí công trình qua Zalo; hoặc gọi trực tiếp khi cần kỹ sư tiếp nhận nhanh trước bước khảo sát."
+        imageSrc="/images/factory/factory01.webp"
+        imageAlt="Không gian xưởng và đội ngũ kỹ thuật Đại Hải Phát"
+        imagePosition="65% center"
+        highlights={["Zalo nhận ảnh hiện trạng", "Hotline trao đổi nhanh", "Kỹ sư tiếp nhận trực tiếp"]}
+        actions={
+          <>
+            <Button href={COMPANY_CONFIG.socials.zalo1} external>
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              Gửi nhu cầu qua Zalo
+            </Button>
+            <Button href={`tel:${COMPANY_CONFIG.phones[0].raw}`} variant="secondary">
+              <PhoneCall className="h-4 w-4" aria-hidden="true" />
+              Gọi {COMPANY_CONFIG.phones[0].display}
+            </Button>
+          </>
+        }
       />
 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
@@ -71,13 +87,11 @@ export default function ContactPage() {
               Zalo phù hợp để gửi ảnh hiện trạng. Hotline dành cho trường hợp cần trao đổi ngay về phạm vi công việc.
             </p>
             <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-2)] sm:flex-row">
-              <Button href={COMPANY_CONFIG.socials.zalo1} external>
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                Gửi nhu cầu qua Zalo
+              <Button href="/ai-tu-van?ai=1">
+                Tư vấn AI trước
               </Button>
-              <Button href={`tel:${COMPANY_CONFIG.phones[0].raw}`} variant="secondary">
-                <PhoneCall className="h-4 w-4" aria-hidden="true" />
-                Gọi {COMPANY_CONFIG.phones[0].display}
+              <Button href="/bao-gia" variant="secondary">
+                Chuẩn bị báo giá
               </Button>
             </div>
             <p className="mt-[var(--space-3)] text-xs leading-5 text-[var(--color-text-subtle)]">
