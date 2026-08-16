@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bot, FileText, ImageIcon, MessageSquareText, Ruler, Sparkles } from "lucide-react";
 
+import { AIOfficeRouteEntry } from "@/components/sections/AIOfficeRouteEntry";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -40,6 +41,8 @@ const capabilities = [
 ] as const;
 
 export default function AITuVanPage() {
+  const liveVoiceEnabled = Boolean(process.env.GEMINI_API_KEY?.trim());
+
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
@@ -63,6 +66,8 @@ export default function AITuVanPage() {
           </>
         }
       />
+
+      <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
