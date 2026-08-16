@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bot, FileText, ImageIcon, MessageSquareText, Ruler, Sparkles } from "lucide-react";
+import { Suspense } from "react";
 
+import { AIOfficeLoadingState } from "@/components/sections/AIOfficeLoadingState";
 import { AIOfficeRouteEntry } from "@/components/sections/AIOfficeRouteEntry";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -67,7 +69,9 @@ export default function AITuVanPage() {
         }
       />
 
-      <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
+      <Suspense fallback={<AIOfficeLoadingState />}>
+        <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
+      </Suspense>
 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
