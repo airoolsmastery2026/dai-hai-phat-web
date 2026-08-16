@@ -12,6 +12,7 @@ import {
 import { apiJsonResponse } from "@/lib/server/api-json-response";
 import { dispatchLeadAutomation } from "@/lib/server/automation";
 import { CRMDeliveryError, deliverLeadToCRM } from "@/lib/server/crm";
+import { verifyEmailDomain } from "@/lib/server/email-domain-verification";
 import { verifyPhoneWithAPILayer } from "@/lib/server/phone-verification";
 import {
   ATTRIBUTION_COOKIE_NAME,
@@ -77,6 +78,31 @@ export async function POST(request: NextRequest) {
     }
 
     const phoneVerification = await verifyPhoneWithAPILayer(lead.contact.phone);
+    if (phoneVerification.status === "invalid") {
+      return apiJsonResponse(
+        {
+          error: "Số điện thoại không vượt qua bước xác minh. Vui lòng kiểm tra lại trước khi gửi hồ sơ.",
+          code: "PHONE_INVALID",
+          requestId,
+        },
+        400,
+      );
+    }
+
+    const emailVerification = lead.contact.email
+      ? await verifyEmailDomain(lead.contact.email)
+      : null;
+    if (emailVerification?.status === "invalid") {
+      return apiJsonResponse(
+        {
+          error: "Tên miền email không thể nhận thư hoặc không tồn tại. Vui lòng kiểm tra lại email.",
+          code: "EMAIL_DOMAIN_INVALID",
+          requestId,
+        },
+        400,
+      );
+    }
+
     const result = await deliverLeadToCRM(lead, requestId, {
       phone: phoneVerification,
     });
@@ -104,6 +130,7 @@ export async function POST(request: NextRequest) {
       sessionId: lead.sessionId,
       leadId: result.leadId,
       phoneVerification: phoneVerification.status,
+      emailDomainVerification: emailVerification?.status ?? "not_provided",
       attributionSource: lead.attribution?.utmSource ?? null,
     });
     return apiJsonResponse({ requestId, handoff: result }, 201);
