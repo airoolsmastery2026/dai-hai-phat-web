@@ -7,18 +7,14 @@ import {
   resolveConversationChoice,
   type ConversationQuestion,
 } from "@/lib/ai";
+import {
+  isContactVerificationCompatible,
+  isContactVerificationField,
+  isContactVerificationLevel,
+  type ContactVerificationLevel,
+  type ContactVerificationReceipt,
+} from "@/lib/ai/contact-verification";
 import { validateCustomerAnswer } from "@/lib/ai/customer-input";
-
-export type ContactVerificationLevel =
-  | "format_only"
-  | "network_valid"
-  | "domain_valid";
-
-export interface ContactVerificationReceipt {
-  field: "phone" | "email" | "zalo";
-  verification: ContactVerificationLevel;
-  message: string;
-}
 
 interface AIChatAnswerComposerProps {
   question: ConversationQuestion;
@@ -46,29 +42,6 @@ function getAutocomplete(question: ConversationQuestion): string {
   return "off";
 }
 
-function isContactField(
-  question: ConversationQuestion,
-): question is ConversationQuestion & {
-  field: "phone" | "email" | "zalo";
-} {
-  return question.field === "phone" || question.field === "email" || question.field === "zalo";
-}
-
-function isContactVerificationLevel(
-  value: ContactValidationResponse["verification"],
-): value is ContactVerificationLevel {
-  return value === "format_only" || value === "network_valid" || value === "domain_valid";
-}
-
-function isReceiptCompatible(
-  field: "phone" | "email" | "zalo",
-  verification: ContactVerificationLevel,
-): boolean {
-  if (verification === "format_only") return true;
-  if (field === "email") return verification === "domain_valid";
-  return verification === "network_valid";
-}
-
 async function validateContactOnServer(
   question: ConversationQuestion,
   value: string,
@@ -80,7 +53,7 @@ async function validateContactOnServer(
     }
   | { ok: false; error: string }
 > {
-  if (!isContactField(question)) {
+  if (!isContactVerificationField(question.field)) {
     return { ok: true, normalizedValue: value, receipt: null };
   }
 
@@ -97,7 +70,7 @@ async function validateContactOnServer(
       !response.ok ||
       payload.valid !== true ||
       !isContactVerificationLevel(payload.verification) ||
-      !isReceiptCompatible(question.field, payload.verification)
+      !isContactVerificationCompatible(question.field, payload.verification)
     ) {
       return {
         ok: false,
@@ -260,7 +233,7 @@ export function AIChatAnswerComposer({
         </p>
       ) : null}
 
-      {isContactField(question) ? (
+      {isContactVerificationField(question.field) ? (
         <p className="mt-1 text-[11px] leading-4 text-[var(--color-text-muted)]">
           Định dạng được kiểm tra ở thiết bị và server. Mạng/domain được đối chiếu khi dịch vụ khả dụng; quyền sở hữu vẫn cần OTP hoặc xác nhận liên hệ thực tế.
         </p>
