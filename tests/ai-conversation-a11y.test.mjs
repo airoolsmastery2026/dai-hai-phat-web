@@ -45,3 +45,35 @@ test("mobile consultation uses one compact, accessible chat surface", async () =
   assert.match(office, /aria-label="Gửi câu trả lời"/);
   assert.match(live, /className="hidden[^"\n]*lg:block"/);
 });
+
+test("floating consultation keeps mobile boundaries and customer-safe handoff copy", async () => {
+  const floating = await readFile(
+    new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
+    "utf8",
+  );
+  const drawer = await readFile(
+    new URL("../src/components/ai/AIChatDrawerPanel.tsx", import.meta.url),
+    "utf8",
+  );
+  const crmRoute = await readFile(
+    new URL("../src/app/api/crm/handoff/route.ts", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(floating, /w-screen max-w-\[100vw\]/);
+  assert.match(floating, /overflow-x-hidden/);
+  assert.match(floating, /min-w-0 flex-1/);
+  assert.match(floating, /break-words/);
+
+  assert.match(drawer, /Hồ sơ của bạn đã sẵn sàng/);
+  assert.match(drawer, /Tôi đồng ý gửi thông tin liên hệ/);
+  assert.match(drawer, /Gửi hồ sơ cho kỹ sư/);
+  assert.match(drawer, /Kênh gửi tự động đang tạm gián đoạn/);
+  assert.doesNotMatch(drawer, /Mã hỗ trợ:/);
+  assert.doesNotMatch(drawer, /Kênh CRM chưa được cấu hình/);
+
+  assert.doesNotMatch(crmRoute, /formatSupportReference/);
+  assert.doesNotMatch(crmRoute, /Mã hỗ trợ:/);
+  assert.doesNotMatch(crmRoute, /Kênh CRM chưa được cấu hình/);
+  assert.match(crmRoute, /Kênh gửi tự động đang tạm gián đoạn/);
+});
