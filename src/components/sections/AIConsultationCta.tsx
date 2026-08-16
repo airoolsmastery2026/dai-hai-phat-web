@@ -42,7 +42,7 @@ export function AIConsultationCta({
           <div className="flex w-full flex-shrink-0 flex-col gap-[var(--space-2)] sm:w-auto sm:flex-row">
             <Button href={aiHref} className="w-full sm:w-auto">
               <Bot className="h-4 w-4" aria-hidden="true" />
-              Bắt đầu với trợ lý AI
+              Bắt đầu tư vấn
             </Button>
             <Button
               href={secondaryHref}
