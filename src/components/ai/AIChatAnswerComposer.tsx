@@ -17,7 +17,10 @@ interface AIChatAnswerComposerProps {
 
 interface ContactValidationResponse {
   valid?: boolean;
+  normalizedValue?: string;
+  verification?: "invalid" | "format_only" | "network_valid" | "domain_valid";
   message?: string;
+  error?: string;
 }
 
 function publicCopy(value: string): string {
@@ -39,8 +42,13 @@ function needsServerContactCheck(question: ConversationQuestion): boolean {
 async function validateContactOnServer(
   question: ConversationQuestion,
   value: string,
-): Promise<{ ok: true } | { ok: false; error: string }> {
-  if (!needsServerContactCheck(question)) return { ok: true };
+): Promise<
+  | { ok: true; normalizedValue: string }
+  | { ok: false; error: string }
+> {
+  if (!needsServerContactCheck(question)) {
+    return { ok: true, normalizedValue: value };
+  }
 
   try {
     const response = await fetch("/api/validation/contact", {
@@ -49,20 +57,28 @@ async function validateContactOnServer(
       cache: "no-store",
       body: JSON.stringify({ field: question.field, value }),
     });
-    const payload = (await response.json()) as ContactValidationResponse;
+    const payload = (await response.json().catch(() => ({}))) as ContactValidationResponse;
 
-    if (payload.valid === false || response.status === 422) {
+    if (!response.ok || payload.valid !== true) {
       return {
         ok: false,
-        error: payload.message || "Thông tin liên hệ không vượt qua bước kiểm tra. Vui lòng kiểm tra lại.",
+        error:
+          payload.message ||
+          payload.error ||
+          "Thông tin liên hệ không vượt qua bước kiểm tra. Vui lòng kiểm tra lại.",
       };
     }
 
-    // External verification is a second gate after deterministic local validation.
-    // Provider outages stay "unverified" and must never be promoted to "verified".
-    return { ok: true };
+    return {
+      ok: true,
+      normalizedValue: payload.normalizedValue?.trim() || value,
+    };
   } catch {
-    return { ok: true };
+    return {
+      ok: false,
+      error:
+        "Không thể kiểm tra thông tin liên hệ ở phía máy chủ lúc này. Vui lòng thử lại trước khi tiếp tục.",
+    };
   }
 }
 
@@ -103,7 +119,7 @@ export function AIChatAnswerComposer({
       return;
     }
 
-    onAnswer(validation.value);
+    onAnswer(serverValidation.normalizedValue);
     setDraft("");
     setInputError(null);
   };
@@ -120,6 +136,7 @@ export function AIChatAnswerComposer({
   };
 
   const skip = () => {
+    if (isChecking) return;
     onAnswer("");
     setDraft("");
     setInputError(null);
@@ -134,7 +151,8 @@ export function AIChatAnswerComposer({
               key={option.value}
               type="button"
               onClick={() => selectChoice(option.value)}
-              className="min-h-9 max-w-full rounded-full border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-1.5 text-xs font-semibold transition hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
+              disabled={isChecking}
+              className="min-h-9 max-w-full rounded-full border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-1.5 text-xs font-semibold transition hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] disabled:cursor-wait disabled:opacity-60"
             >
               <span className="break-words [overflow-wrap:anywhere]">{publicCopy(option.label)}</span>
             </button>
@@ -142,7 +160,7 @@ export function AIChatAnswerComposer({
         </div>
       ) : null}
 
-      <form onSubmit={submitText} className="min-w-0">
+      <form onSubmit={(event) => void submitText(event)} className="min-w-0">
         <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_2.75rem] items-end gap-2">
           <label htmlFor="ai-drawer-answer" className="sr-only">Câu trả lời</label>
           <input
@@ -160,7 +178,7 @@ export function AIChatAnswerComposer({
             aria-invalid={Boolean(inputError || engineError)}
             aria-describedby={inputError || engineError || isChecking ? "ai-drawer-answer-feedback" : undefined}
             placeholder={question.inputType === "choice" ? "Hoặc mô tả rõ hơn…" : "Nhập câu trả lời…"}
-            className="min-h-11 min-w-0 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-base outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-soft)] disabled:opacity-70 sm:text-sm"
+            className="min-h-11 min-w-0 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-background)] px-3 text-base outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-soft)] disabled:cursor-wait disabled:opacity-70 sm:text-sm"
           />
           <button
             type="submit"
@@ -177,7 +195,7 @@ export function AIChatAnswerComposer({
             type="button"
             onClick={skip}
             disabled={isChecking}
-            className="mt-2 min-h-10 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 text-xs font-bold text-[var(--color-text-muted)] disabled:opacity-60"
+            className="mt-2 min-h-10 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] px-3 text-xs font-bold text-[var(--color-text-muted)] disabled:cursor-wait disabled:opacity-60"
           >
             Bỏ qua bước này
           </button>
@@ -198,7 +216,7 @@ export function AIChatAnswerComposer({
 
       {needsServerContactCheck(question) ? (
         <p className="mt-1 text-[11px] leading-4 text-[var(--color-text-muted)]">
-          Định dạng được kiểm tra tại thiết bị và server. Dịch vụ ngoài chỉ bổ sung tín hiệu hợp lệ; quyền sở hữu vẫn cần OTP hoặc xác nhận liên hệ thực tế.
+          Định dạng được kiểm tra ở thiết bị và server. Mạng/domain được đối chiếu khi dịch vụ khả dụng; quyền sở hữu vẫn cần OTP hoặc xác nhận liên hệ thực tế.
         </p>
       ) : null}
     </div>
