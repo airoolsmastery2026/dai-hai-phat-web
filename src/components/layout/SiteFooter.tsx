@@ -1,13 +1,9 @@
 import Link from "next/link";
 
 import { COMPANY_CONFIG } from "@/content/company";
+import { NAV_ITEMS } from "@/lib/theme";
 
-const quickLinks = [
-  { label: "Dịch vụ", href: "/services" },
-  { label: "Công trình", href: "/gallery" },
-  { label: "Checklist", href: "/blog" },
-  { label: "Liên hệ", href: "/contact" },
-];
+const quickLinks = NAV_ITEMS.filter((item) => item.href !== "/");
 
 export function SiteFooter() {
   return (
@@ -21,7 +17,7 @@ export function SiteFooter() {
             Nội thất &amp; cơ khí dân dụng
           </h2>
           <p className="mt-[var(--space-1)] max-w-md text-sm leading-6 text-[var(--color-text-dark-subtle)]">
-            Thiết kế và thi công theo hiện trạng nhà ở, có kỹ sư kiểm tra phương án trước báo giá.
+            Thiết kế và thi công theo hiện trạng nhà ở, có AI tiếp nhận nhu cầu và kỹ sư kiểm tra phương án trước báo giá.
           </p>
         </div>
 
