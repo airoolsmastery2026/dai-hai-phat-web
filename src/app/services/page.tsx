@@ -18,7 +18,11 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Dịch vụ cho nhà ở"
         title="Nội thất và cơ khí dân dụng theo từng hạng mục"
-        description="Chọn hạng mục cần làm, xem phạm vi và vật liệu chính. Kỹ sư sẽ xác nhận hiện trạng trước khi chốt phương án và báo giá."
+        description="Từ nội thất gỗ đến cửa cổng, cầu thang, lan can và mái che — mỗi hạng mục đều được làm rõ hiện trạng, vật liệu và phương án trước khi chốt báo giá."
+        imageSrc="/images/interior/interior01.webp"
+        imageAlt="Không gian nội thất hoàn thiện Đại Hải Phát"
+        imagePosition="68% center"
+        highlights={["Thiết kế theo hiện trạng", "Vật liệu rõ quy cách", "Kỹ sư kiểm tra trước báo giá"]}
       />
 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
