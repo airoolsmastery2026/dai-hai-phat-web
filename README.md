@@ -108,6 +108,8 @@ Trước khi merge vào `main`, batch phải vượt qua:
 
 Vercel là deployment platform. GitHub Actions `Quality` là gate kiểm chứng mã độc lập khi Vercel gặp giới hạn build hoặc lỗi hạ tầng.
 
+**Production deployment invariant:** `main` là source branch của production. Sau mỗi merge, Vercel phải tạo deployment `target=production` có `githubCommitSha` bằng `main` HEAD và các alias `dai-hai-phat-web.vercel.app`, `dai-hai-phat-web-nguyen-huu-huongs-projects-5a8e872f.vercel.app` cùng branch alias `main` phải trỏ vào deployment đó. Preview `READY` không được coi là hoàn tất nếu production alias vẫn ở commit cũ.
+
 ## Repository
 
 Repository này là nguồn sự thật duy nhất cho mã nguồn, contract API, logic AI, CRM handoff và quy tắc vận hành sản phẩm.
