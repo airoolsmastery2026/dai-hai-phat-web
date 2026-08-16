@@ -78,9 +78,25 @@ export default function QuotePage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
-        eyebrow="Báo giá"
-        title="Chuẩn bị đủ dữ liệu để báo giá nhanh và đúng hơn"
-        description="Bạn không cần biết hết thuật ngữ kỹ thuật. Hãy gửi những gì đang có; Đại Hải Phát sẽ giúp bổ sung dữ liệu còn thiếu trước khi kỹ sư xác nhận phương án và giá chính thức."
+        eyebrow="Báo giá kỹ thuật"
+        title="Đủ dữ liệu trước — báo giá đúng hơn"
+        description="Gửi hiện trạng, kích thước, vật liệu và vị trí công trình. Đại Hải Phát sẽ làm rõ phần còn thiếu trước khi kỹ sư xác nhận phương án và phát hành báo giá chính thức."
+        imageSrc="/images/materials/material01.webp"
+        imageAlt="Vật liệu và mẫu hoàn thiện phục vụ lập báo giá Đại Hải Phát"
+        imagePosition="68% center"
+        highlights={["Không báo giá mơ hồ", "Có căn cứ vật liệu", "Kỹ sư xác nhận trước khi chốt"]}
+        actions={
+          <>
+            <Button href="/ai-tu-van?ai=1">
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+              Chuẩn bị với AI
+            </Button>
+            <Button href="/contact?intent=quote" variant="secondary">
+              <FileText className="h-4 w-4" aria-hidden="true" />
+              Gửi yêu cầu báo giá
+            </Button>
+          </>
+        }
       />
 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
@@ -109,17 +125,6 @@ export default function QuotePage() {
                 </p>
               </article>
             ))}
-          </div>
-
-          <div className="mt-[var(--space-6)] flex flex-col gap-[var(--space-3)] sm:flex-row">
-            <Button href="/ai-tu-van?ai=1">
-              <Sparkles className="h-4 w-4" aria-hidden="true" />
-              Chuẩn bị với AI
-            </Button>
-            <Button href="/contact?intent=quote" variant="secondary">
-              <FileText className="h-4 w-4" aria-hidden="true" />
-              Gửi yêu cầu báo giá
-            </Button>
           </div>
         </Container>
       </section>
