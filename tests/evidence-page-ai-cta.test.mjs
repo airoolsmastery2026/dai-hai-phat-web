@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("keeps evidence pages connected to the public AI consultation flow", async () => {
+test("keeps evidence pages connected to the public consultation flow", async () => {
   const cta = await readFile(
     new URL("../src/components/sections/AIConsultationCta.tsx", import.meta.url),
     "utf8",
@@ -18,8 +18,8 @@ test("keeps evidence pages connected to the public AI consultation flow", async 
 
   assert.match(cta, /export function AIConsultationCta/);
   assert.match(cta, /encodeURIComponent\(servicePreset\)/);
-  assert.match(cta, /#ai-office/);
-  assert.match(cta, /Bắt đầu với trợ lý AI/);
+  assert.match(cta, /\/ai-tu-van\?service=/);
+  assert.match(cta, /Bắt đầu tư vấn/);
   assert.match(cta, /w-full sm:w-auto/);
 
   assert.match(gallery, /<AIConsultationCta/);
