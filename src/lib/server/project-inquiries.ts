@@ -16,6 +16,28 @@ interface ProjectInquiryRow {
   updated_at: string;
 }
 
+export interface ProjectInquiryRecord {
+  request_id: string;
+  full_name: string;
+  phone: string;
+  zalo_contact: string | null;
+  project_area: string;
+  service: string;
+  dimensions: string;
+  budget: string | null;
+  timeline: string | null;
+  purpose: "build" | "renovate" | "reference";
+  readiness_score: number;
+  readiness_decision: "not_ready" | "ready_for_follow_up";
+  readiness_missing?: string[];
+  notes?: string | null;
+  description?: string;
+  has_site_image?: boolean;
+  has_reference_image?: boolean;
+  consented_at?: string;
+  updated_at?: string;
+}
+
 export class ProjectInquiryDeliveryError extends Error {
   constructor(
     message: string,
@@ -27,7 +49,32 @@ export class ProjectInquiryDeliveryError extends Error {
   }
 }
 
-function inquiryPurpose(lead: CRMHandoffRequest): "build" | "renovate" | "reference" {
+export async function persistProjectInquiryRecord(
+  record: ProjectInquiryRecord,
+  options: {
+    duplicateStrategy?: "ignore" | "merge";
+    signal?: AbortSignal;
+  } = {},
+): Promise<ProjectInquiryRow | null> {
+  const duplicateStrategy = options.duplicateStrategy ?? "ignore";
+  const query = new URLSearchParams({ on_conflict: "request_id" });
+  const prefer =
+    duplicateStrategy === "merge"
+      ? "resolution=merge-duplicates,return=representation"
+      : "resolution=ignore-duplicates,return=representation";
+
+  const rows = await supabaseRestRequest<ProjectInquiryRow[]>("project_inquiries", {
+    method: "POST",
+    query,
+    prefer,
+    signal: options.signal,
+    body: record,
+  });
+
+  return rows[0] ?? null;
+}
+
+function inquiryPurpose(lead: CRMHandoffRequest): ProjectInquiryRecord["purpose"] {
   const context = `${lead.project.intent} ${lead.project.service}`.toLocaleLowerCase("vi-VN");
   if (/cải tạo|sửa chữa|sau thi công|bảo trì/.test(context)) return "renovate";
   if (/tham khảo|hợp tác|khác/.test(context)) return "reference";
@@ -55,13 +102,9 @@ export async function persistProjectInquiry(
   const timeout = setTimeout(() => controller.abort(), INQUIRY_TIMEOUT_MS);
 
   try {
-    const query = new URLSearchParams({ on_conflict: "request_id" });
-    const rows = await supabaseRestRequest<ProjectInquiryRow[]>("project_inquiries", {
-      method: "POST",
-      query,
-      prefer: "resolution=merge-duplicates,return=representation",
-      signal: controller.signal,
-      body: {
+    const now = new Date().toISOString();
+    const row = await persistProjectInquiryRecord(
+      {
         request_id: lead.sessionId,
         full_name: lead.contact.name,
         phone: lead.contact.phone,
@@ -76,11 +119,12 @@ export async function persistProjectInquiry(
         readiness_decision: "ready_for_follow_up",
         readiness_missing: [],
         notes: inquiryNotes(lead),
-        updated_at: new Date().toISOString(),
+        consented_at: now,
+        updated_at: now,
       },
-    });
+      { duplicateStrategy: "merge", signal: controller.signal },
+    );
 
-    const row = rows[0];
     if (!row?.id) {
       throw new ProjectInquiryDeliveryError(
         "Kho hồ sơ không trả về mã tiếp nhận.",
@@ -90,7 +134,7 @@ export async function persistProjectInquiry(
 
     return {
       leadId: row.id,
-      receivedAt: row.updated_at || row.created_at || new Date().toISOString(),
+      receivedAt: row.updated_at || row.created_at || now,
     };
   } catch (error) {
     if (error instanceof ProjectInquiryDeliveryError) throw error;
