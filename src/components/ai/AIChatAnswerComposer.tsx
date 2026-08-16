@@ -9,16 +9,27 @@ import {
 } from "@/lib/ai";
 import { validateCustomerAnswer } from "@/lib/ai/customer-input";
 
+export type ContactVerificationLevel =
+  | "format_only"
+  | "network_valid"
+  | "domain_valid";
+
+export interface ContactVerificationReceipt {
+  field: "phone" | "email" | "zalo";
+  verification: ContactVerificationLevel;
+  message: string;
+}
+
 interface AIChatAnswerComposerProps {
   question: ConversationQuestion;
   engineError?: string | null;
-  onAnswer: (value: string) => void;
+  onAnswer: (value: string, receipt?: ContactVerificationReceipt | null) => void;
 }
 
 interface ContactValidationResponse {
   valid?: boolean;
   normalizedValue?: string;
-  verification?: "invalid" | "format_only" | "network_valid" | "domain_valid";
+  verification?: "invalid" | ContactVerificationLevel;
   message?: string;
   error?: string;
 }
@@ -35,19 +46,33 @@ function getAutocomplete(question: ConversationQuestion): string {
   return "off";
 }
 
-function needsServerContactCheck(question: ConversationQuestion): boolean {
+function isContactField(
+  question: ConversationQuestion,
+): question is ConversationQuestion & {
+  field: "phone" | "email" | "zalo";
+} {
   return question.field === "phone" || question.field === "email" || question.field === "zalo";
+}
+
+function isContactVerificationLevel(
+  value: ContactValidationResponse["verification"],
+): value is ContactVerificationLevel {
+  return value === "format_only" || value === "network_valid" || value === "domain_valid";
 }
 
 async function validateContactOnServer(
   question: ConversationQuestion,
   value: string,
 ): Promise<
-  | { ok: true; normalizedValue: string }
+  | {
+      ok: true;
+      normalizedValue: string;
+      receipt: ContactVerificationReceipt | null;
+    }
   | { ok: false; error: string }
 > {
-  if (!needsServerContactCheck(question)) {
-    return { ok: true, normalizedValue: value };
+  if (!isContactField(question)) {
+    return { ok: true, normalizedValue: value, receipt: null };
   }
 
   try {
@@ -59,7 +84,11 @@ async function validateContactOnServer(
     });
     const payload = (await response.json().catch(() => ({}))) as ContactValidationResponse;
 
-    if (!response.ok || payload.valid !== true) {
+    if (
+      !response.ok ||
+      payload.valid !== true ||
+      !isContactVerificationLevel(payload.verification)
+    ) {
       return {
         ok: false,
         error:
@@ -72,6 +101,13 @@ async function validateContactOnServer(
     return {
       ok: true,
       normalizedValue: payload.normalizedValue?.trim() || value,
+      receipt: {
+        field: question.field,
+        verification: payload.verification,
+        message:
+          payload.message?.trim() ||
+          "Thông tin liên hệ đã vượt qua bước kiểm tra hiện có nhưng chưa xác minh quyền sở hữu.",
+      },
     };
   } catch {
     return {
@@ -119,7 +155,7 @@ export function AIChatAnswerComposer({
       return;
     }
 
-    onAnswer(serverValidation.normalizedValue);
+    onAnswer(serverValidation.normalizedValue, serverValidation.receipt);
     setDraft("");
     setInputError(null);
   };
@@ -130,14 +166,14 @@ export function AIChatAnswerComposer({
       setInputError(validation.error);
       return;
     }
-    onAnswer(validation.value);
+    onAnswer(validation.value, null);
     setDraft("");
     setInputError(null);
   };
 
   const skip = () => {
     if (isChecking) return;
-    onAnswer("");
+    onAnswer("", null);
     setDraft("");
     setInputError(null);
   };
@@ -214,7 +250,7 @@ export function AIChatAnswerComposer({
         </p>
       ) : null}
 
-      {needsServerContactCheck(question) ? (
+      {isContactField(question) ? (
         <p className="mt-1 text-[11px] leading-4 text-[var(--color-text-muted)]">
           Định dạng được kiểm tra ở thiết bị và server. Mạng/domain được đối chiếu khi dịch vụ khả dụng; quyền sở hữu vẫn cần OTP hoặc xác nhận liên hệ thực tế.
         </p>
