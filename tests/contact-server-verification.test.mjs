@@ -55,8 +55,13 @@ test("temporary phone provider failures remain explicitly unverified rather than
   const verifier = await readFile(phoneVerifierPath, "utf8");
   const route = await readFile(routePath, "utf8");
 
-  assert.match(verifier, /reason: "timeout"/);
-  assert.match(verifier, /reason: "upstream"/);
+  assert.match(
+    verifier,
+    /reason\?: "not_configured" \| "timeout" \| "upstream" \| "invalid_response"/,
+  );
+  assert.match(verifier, /error\.name === "AbortError"/);
+  assert.match(verifier, /\? "timeout"/);
+  assert.match(verifier, /: "upstream"/);
   assert.match(verifier, /reason: "invalid_response"/);
   assert.match(route, /verification: "format_only"/);
   assert.match(route, /tạm thời chưa xác nhận được/);
