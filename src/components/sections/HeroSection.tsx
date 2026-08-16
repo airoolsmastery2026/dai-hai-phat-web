@@ -11,7 +11,7 @@ import { COMPANY_CONFIG } from "@/content/company";
 const HERO_SCENES = [
   {
     image: "/images/brand/hero-luxury-materials-v1.webp",
-    headline: "AI đang tiếp nhận nhu cầu của bạn.",
+    headline: "Trợ lý đang tiếp nhận nhu cầu của bạn.",
     label: "Tiếp nhận yêu cầu",
     detail: "Mô tả nhu cầu · ảnh hiện trạng · kích thước",
   },
@@ -90,7 +90,7 @@ export function HeroSection() {
             </p>
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] font-bold text-[var(--color-text-muted)] sm:text-xs">
-            <span>AI: Sẵn sàng</span>
+            <span>Tư vấn: Sẵn sàng</span>
             <span>Dữ liệu: Đã kết nối</span>
             <span>Kỹ sư: Trực tuyến</span>
           </div>
@@ -124,7 +124,7 @@ export function HeroSection() {
             </div>
 
             <p className="mt-[var(--space-4)] max-w-xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
-              Gửi nhu cầu hoặc ảnh hiện trạng. AI lập hồ sơ từng bước và chuyển kỹ sư xác nhận trước khảo sát, phương án và báo giá.
+              Gửi nhu cầu hoặc ảnh hiện trạng. Trợ lý sắp xếp hồ sơ từng bước và chuyển kỹ sư xác nhận trước khảo sát, phương án và báo giá.
             </p>
 
             <div className="mt-[var(--space-5)] flex flex-wrap gap-[var(--space-2)]">
