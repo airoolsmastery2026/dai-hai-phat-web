@@ -101,7 +101,7 @@ function validateName(value: string): CustomerInputValidation {
   if (normalized.length < 2 || normalized.length > 80) {
     return { ok: false, error: "Vui lòng nhập tên hoặc cách xưng hô thực tế (2–80 ký tự)." };
   }
-  if (!/^[\p{L}\p{M}][\p{L}\p{M}\s'.-]*$/u.test(normalized)) {
+  if (!/^[A-Za-zÀ-ỹĐđ][A-Za-zÀ-ỹĐđ\s'.-]*$/.test(normalized)) {
     return { ok: false, error: "Tên chỉ nên gồm chữ cái, khoảng trắng và dấu tên thông dụng." };
   }
   const ascii = normalizeAscii(normalized);
@@ -161,7 +161,7 @@ function validateEmail(value: string): CustomerInputValidation {
   const labels = domain.split(".");
   if (
     labels.some((label) => !label || label.startsWith("-") || label.endsWith("-")) ||
-    !/^[a-z]{2,24}$/i.test(labels.at(-1) ?? "")
+    !/^[a-z]{2,24}$/i.test(labels[labels.length - 1] ?? "")
   ) {
     return { ok: false, error: "Tên miền email chưa hợp lệ." };
   }
