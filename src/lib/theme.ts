@@ -23,7 +23,8 @@ export const theme = {
 export const NAV_ITEMS = [
   { label: "Trang chủ", href: "/" },
   { label: "Dịch vụ", href: "/services" },
-  { label: "Công trình", href: "/gallery" },
-  { label: "Checklist", href: "/blog" },
+  { label: "Dự án", href: "/gallery" },
+  { label: "AI Tư Vấn", href: "/ai-tu-van" },
+  { label: "Báo giá", href: "/bao-gia" },
   { label: "Liên hệ", href: "/contact" },
 ] as const;
