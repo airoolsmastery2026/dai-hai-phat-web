@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import type { ServiceItem } from "@/types/content";
 
 export function ServiceCTA({ service }: { service: ServiceItem }) {
-  const aiHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+  const consultationHref = `/ai-tu-van?service=${encodeURIComponent(service.aiService)}&ai=1`;
 
   return (
     <section className="relative overflow-hidden bg-[var(--color-surface-dark)] py-[var(--space-8)] text-white lg:py-[var(--space-10)]">
@@ -16,15 +16,15 @@ export function ServiceCTA({ service }: { service: ServiceItem }) {
               Bước tiếp theo
             </p>
             <h2 className="mt-[var(--space-2)] text-xl font-bold leading-tight sm:text-2xl">
-              Lập hồ sơ {service.title.toLowerCase()} với trợ lý AI
+              Lập hồ sơ {service.title.toLowerCase()} cùng trợ lý tư vấn
             </h2>
             <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
               Gửi vị trí, kích thước dự kiến, ảnh hiện trạng và nhu cầu. Trợ lý giữ ngữ cảnh để kỹ sư tiếp tục xác minh mà không phải hỏi lại từ đầu.
             </p>
           </div>
-          <Button href={aiHref} className="w-full flex-shrink-0 sm:w-auto">
+          <Button href={consultationHref} className="w-full flex-shrink-0 sm:w-auto">
             <Bot className="h-4 w-4" aria-hidden="true" />
-            Mở trợ lý AI
+            Mở trợ lý tư vấn
           </Button>
         </div>
       </Container>
