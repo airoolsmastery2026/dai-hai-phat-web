@@ -29,13 +29,14 @@ test("hosted video source only accepts same-origin or https video files", () => 
 test("homepage video showcase is lazy, accessible and positioned before contact", async () => {
   const page = await readFile(new URL("../src/app/page.tsx", import.meta.url), "utf8");
   const player = await readFile(new URL("../src/components/video/VideoPlayer.tsx", import.meta.url), "utf8");
+  const source = await readFile(new URL("../src/lib/video/source.ts", import.meta.url), "utf8");
   const section = await readFile(new URL("../src/components/sections/VideoShowcaseSection.tsx", import.meta.url), "utf8");
   const admin = await readFile(new URL("../src/components/admin/AdminVideoManager.tsx", import.meta.url), "utf8");
 
   assert.ok(page.indexOf("<ProjectsSection />") < page.indexOf("<VideoShowcaseSection />"));
   assert.ok(page.indexOf("<VideoShowcaseSection />") < page.indexOf("<ContactSection />"));
   assert.match(player, /loading="lazy"/);
-  assert.match(player, /youtube-nocookie/);
+  assert.match(source, /youtube-nocookie/);
   assert.match(player, /controls/);
   assert.match(player, /playsInline/);
   assert.match(player, /preload="metadata"/);
