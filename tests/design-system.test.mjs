@@ -175,19 +175,21 @@ test("fake and duplicate surfaces stay removed", () => {
   );
 });
 
-test("homepage conversion surfaces preserve accessibility and the public AI Office", () => {
+test("homepage conversion surfaces stay compact while consultation remains fully accessible", () => {
   const hero = read("src/components/sections/HeroSection.tsx");
   const home = read("src/app/page.tsx");
+  const consultation = read("src/app/ai-tu-van/page.tsx");
   const button = read("src/components/ui/Button.tsx");
   const aiOffice = read("src/components/sections/AIOfficeSection.tsx");
   const aiOfficeLoading = read("src/components/sections/AIOfficeLoadingState.tsx");
 
-  assert.match(hero, /<Button href="#ai-office">/);
-  assert.match(hero, /Thiết kế &amp; thi công nhà ở/);
+  assert.match(hero, /<Button href="\/ai-tu-van\?ai=1">/);
+  assert.match(hero, /Thiết kế &amp; thi công/);
   assert.match(hero, /hero-luxury-materials-v1\.webp/);
   assert.doesNotMatch(hero, /min-h-\[calc\(100svh/);
-  assert.match(home, /AIOfficeRouteEntry/);
-  assert.match(home, /AIOfficeLoadingState/);
+  assert.doesNotMatch(home, /AIOfficeRouteEntry|AIOfficeLoadingState/);
+  assert.match(consultation, /AIOfficeRouteEntry/);
+  assert.match(consultation, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
   assert.match(aiOfficeLoading, /id="ai-office"/);
   assert.match(aiOfficeLoading, /aria-live="polite"/);
   assert.match(button, /touch-manipulation/);
