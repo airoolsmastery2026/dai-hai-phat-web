@@ -24,10 +24,13 @@ test("evidence failures include a support reference", () => {
   assert.match(proposalEvidence, /Không thể đối chiếu Knowledge Base lúc này/);
 });
 
-test("CRM failures include a support reference", () => {
-  assert.match(crmHandoff, /formatSupportReference/);
-  assert.match(crmHandoff, /Kênh CRM chưa được cấu hình/);
-  assert.match(crmHandoff, /Chưa thể bàn giao hồ sơ/);
+test("CRM failures keep tracing IDs separate from customer-facing errors", () => {
+  assert.doesNotMatch(crmHandoff, /formatSupportReference/);
+  assert.match(crmHandoff, /requestId/);
+  assert.match(crmHandoff, /Kênh gửi tự động đang tạm gián đoạn/);
+  assert.match(crmHandoff, /Hồ sơ vẫn được giữ trên thiết bị/);
+  assert.doesNotMatch(crmHandoff, /Kênh CRM chưa được cấu hình/);
+  assert.doesNotMatch(crmHandoff, /Mã hỗ trợ:/);
 });
 
 test("client validation errors stay concise", () => {
