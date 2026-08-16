@@ -25,7 +25,7 @@ export function ServicesSection() {
             </p>
           </div>
           <Link
-            href="/#ai-office"
+            href="/ai-tu-van?ai=1"
             className="inline-flex min-h-11 w-fit items-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary)] transition-colors hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
@@ -35,7 +35,7 @@ export function ServicesSection() {
 
         <div className="mt-[var(--space-5)] grid gap-[var(--space-3)] sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.slice(0, 4).map((service) => {
-            const aiHref = `/?service=${encodeURIComponent(service.aiService)}#ai-office`;
+            const aiHref = `/ai-tu-van?service=${encodeURIComponent(service.aiService)}&ai=1`;
             const serviceHref = `/services/${getPublicRouteSlug(service.slug)}`;
             const ServiceIcon = service.icon;
 
