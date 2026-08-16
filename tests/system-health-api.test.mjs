@@ -1,29 +1,62 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
+import ts from "typescript";
 
 const healthSource = await readFile("src/lib/server/system-health.ts", "utf8");
 const routeSource = await readFile(
   "src/app/api/v1/integrations/system/health/route.ts",
   "utf8",
 );
+const healthModule = ts.transpileModule(healthSource, {
+  compilerOptions: {
+    module: ts.ModuleKind.ESNext,
+    target: ts.ScriptTarget.ES2022,
+  },
+});
+const health = await import(
+  `data:text/javascript;base64,${Buffer.from(healthModule.outputText).toString("base64")}`
+);
+
+const completeEnv = {
+  GEMINI_API_KEY: "gemini-secret",
+  CRM_WEBHOOK_URL: "https://crm.example.com/webhooks/lead",
+  CRM_WEBHOOK_TOKEN: "crm-secret",
+  APILAYER_API_KEY: "apilayer-secret",
+  ECOSYSTEM_SERVICE_API_KEY: "ecosystem-secret",
+};
 
 test("health snapshot checks configuration without exposing secret values", () => {
-  assert.match(healthSource, /GEMINI_API_KEY/);
-  assert.match(healthSource, /CRM_WEBHOOK_URL/);
-  assert.match(healthSource, /APILAYER_API_KEY/);
-  assert.match(healthSource, /ECOSYSTEM_SERVICE_API_KEY/);
-  assert.doesNotMatch(healthSource, /return env\./);
-  assert.match(healthSource, /\?\s*"operational"\s*:\s*"degraded"/);
+  const snapshot = health.createSystemHealthSnapshot(completeEnv);
+  const serialized = JSON.stringify(snapshot);
+
+  assert.equal(snapshot.state, "operational");
+  assert.equal(snapshot.services.ai, "configured");
+  assert.equal(snapshot.services.crm, "configured");
+  assert.equal(snapshot.services.phoneVerification, "configured");
+  assert.doesNotMatch(serialized, /gemini-secret|crm-secret|apilayer-secret|ecosystem-secret/);
 });
 
-test("phone verification is required before protected health reports operational", () => {
-  assert.match(healthSource, /services\.ai === "configured"/);
-  assert.match(healthSource, /services\.crm === "configured"/);
-  assert.match(
-    healthSource,
-    /services\.phoneVerification === "configured"/,
-  );
+test("critical sales dependencies degrade protected health when not ready", () => {
+  const missingPhoneProvider = health.createSystemHealthSnapshot({
+    ...completeEnv,
+    APILAYER_API_KEY: "",
+  });
+  const missingCrmToken = health.createSystemHealthSnapshot({
+    ...completeEnv,
+    CRM_WEBHOOK_TOKEN: "",
+  });
+  const insecureCrmUrl = health.createSystemHealthSnapshot({
+    ...completeEnv,
+    CRM_WEBHOOK_URL: "http://crm.example.com/webhooks/lead",
+  });
+
+  assert.equal(missingPhoneProvider.state, "degraded");
+  assert.equal(missingPhoneProvider.services.phoneVerification, "not-configured");
+  assert.equal(missingCrmToken.state, "degraded");
+  assert.equal(missingCrmToken.services.crm, "not-configured");
+  assert.equal(insecureCrmUrl.state, "degraded");
+  assert.equal(insecureCrmUrl.services.crm, "not-configured");
 });
 
 test("health endpoint is restricted to control and monitoring services", () => {

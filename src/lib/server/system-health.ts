@@ -1,19 +1,38 @@
 export type HealthState = "operational" | "degraded";
 
+type ConfigurationState = "configured" | "not-configured";
+
 export interface SystemHealthSnapshot {
   state: HealthState;
   checkedAt: string;
   services: {
     website: "operational";
-    ai: "configured" | "not-configured";
-    crm: "configured" | "not-configured";
-    phoneVerification: "configured" | "not-configured";
-    ecosystemApi: "configured" | "not-configured";
+    ai: ConfigurationState;
+    crm: ConfigurationState;
+    phoneVerification: ConfigurationState;
+    ecosystemApi: ConfigurationState;
   };
 }
 
-function configured(value: string | undefined): "configured" | "not-configured" {
+function configured(value: string | undefined): ConfigurationState {
   return value?.trim() ? "configured" : "not-configured";
+}
+
+function configuredHttpsWebhook(
+  url: string | undefined,
+  token: string | undefined,
+): ConfigurationState {
+  const normalizedUrl = url?.trim();
+  const normalizedToken = token?.trim();
+  if (!normalizedUrl || !normalizedToken) return "not-configured";
+
+  try {
+    return new URL(normalizedUrl).protocol === "https:"
+      ? "configured"
+      : "not-configured";
+  } catch {
+    return "not-configured";
+  }
 }
 
 export function createSystemHealthSnapshot(
@@ -23,7 +42,7 @@ export function createSystemHealthSnapshot(
   const services = {
     website: "operational" as const,
     ai: configured(env.GEMINI_API_KEY),
-    crm: configured(env.CRM_WEBHOOK_URL),
+    crm: configuredHttpsWebhook(env.CRM_WEBHOOK_URL, env.CRM_WEBHOOK_TOKEN),
     phoneVerification: configured(env.APILAYER_API_KEY),
     ecosystemApi: configured(env.ECOSYSTEM_SERVICE_API_KEY),
   };
