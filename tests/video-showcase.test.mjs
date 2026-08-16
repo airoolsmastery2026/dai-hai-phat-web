@@ -30,6 +30,7 @@ test("homepage video showcase is lazy, accessible and positioned before contact"
   const page = await readFile(new URL("../src/app/page.tsx", import.meta.url), "utf8");
   const player = await readFile(new URL("../src/components/video/VideoPlayer.tsx", import.meta.url), "utf8");
   const source = await readFile(new URL("../src/lib/video/source.ts", import.meta.url), "utf8");
+  const storage = await readFile(new URL("../src/lib/video/storage.ts", import.meta.url), "utf8");
   const section = await readFile(new URL("../src/components/sections/VideoShowcaseSection.tsx", import.meta.url), "utf8");
   const admin = await readFile(new URL("../src/components/admin/AdminVideoManager.tsx", import.meta.url), "utf8");
 
@@ -42,6 +43,7 @@ test("homepage video showcase is lazy, accessible and positioned before contact"
   assert.match(player, /preload="metadata"/);
   assert.match(section, /aspect-video|Video công trình/);
   assert.doesNotMatch(section, /\bAI\b/);
-  assert.match(admin, /Kho lưu trữ video chưa được kết nối/);
+  assert.match(storage, /Kho lưu trữ video chưa được kết nối/);
+  assert.match(admin, /VIDEO_STORAGE_STATUS\.message/);
   assert.match(admin, /Chọn video để xem thử/);
 });
