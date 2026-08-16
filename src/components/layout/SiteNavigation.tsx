@@ -117,11 +117,11 @@ export function SiteNavigation() {
             {COMPANY_CONFIG.phones[0].display}
           </a>
           <Link
-            href="/#ai-office"
+            href="/ai-tu-van?ai=1"
             className="inline-flex min-h-11 items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
-            Trợ lý AI 24/7
+            Tư vấn ngay
           </Link>
         </div>
 
@@ -164,7 +164,7 @@ export function SiteNavigation() {
           </nav>
           <div className="grid grid-cols-2 gap-[var(--space-2)] pt-[var(--space-2)]">
             <Link
-              href="/#ai-office"
+              href="/ai-tu-van?ai=1"
               onClick={() => closeMenu()}
               className="flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-3)] text-center text-sm font-bold text-[var(--color-primary-contrast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
