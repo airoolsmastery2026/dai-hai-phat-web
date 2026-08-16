@@ -1,6 +1,7 @@
 "use client";
 
 import { Bot, CheckCircle2, ImagePlus, RotateCcw, SendHorizontal } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 
 import { useAI } from "@/hooks/useAI";
@@ -37,6 +38,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
   } = useAI();
   const [draft, setDraft] = useState("");
   const [inputError, setInputError] = useState<string | null>(null);
+  const [handoffConsent, setHandoffConsent] = useState(false);
   const history = useMemo(() => getConversationHistory(session).slice(-6), [session]);
 
   useEffect(() => {
@@ -49,6 +51,17 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
       answer(servicePreset);
     }
   }, [answer, question, servicePreset, session.memory.service]);
+
+  useEffect(() => {
+    setHandoffConsent(false);
+  }, [session.id]);
+
+  const handleReset = () => {
+    setDraft("");
+    setInputError(null);
+    setHandoffConsent(false);
+    reset();
+  };
 
   const submitText = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -75,37 +88,66 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
     return (
       <div className="flex h-full flex-col bg-[var(--color-background)] text-[var(--color-text)]">
         <div className="flex-1 overflow-y-auto p-[var(--space-4)] sm:p-[var(--space-5)]">
-          <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-5)] shadow-[var(--shadow-sm)]">
+          <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-[var(--space-4)] shadow-[var(--shadow-sm)] sm:p-[var(--space-5)]">
             <CheckCircle2 className="h-8 w-8 text-[var(--color-success)]" aria-hidden="true" />
-            <h2 className="mt-[var(--space-3)] text-xl font-black">Hồ sơ tư vấn đã sẵn sàng</h2>
+            <h2 className="mt-[var(--space-3)] text-xl font-black">Hồ sơ của bạn đã sẵn sàng</h2>
             <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)]">
-              Dữ liệu đã được lưu trên thiết bị. Kỹ sư chỉ nhận hồ sơ khi bạn chủ động bàn giao.
+              Thông tin đang được lưu trên thiết bị. Chỉ khi bạn chọn gửi, đội ngũ kỹ thuật mới tiếp nhận để liên hệ và xác nhận bước tiếp theo.
             </p>
+
             {handoff ? (
-              <p className="mt-[var(--space-4)] rounded-[var(--radius-md)] bg-[var(--color-success-soft)] p-[var(--space-3)] text-sm font-semibold text-[var(--color-success-text)]">
-                Đã bàn giao hồ sơ #{handoff.leadId}.
-              </p>
-            ) : (
-              <button
-                type="button"
-                onClick={submitHandoff}
-                disabled={handoffStatus === "submitting"}
-                className="mt-[var(--space-4)] min-h-11 w-full rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] text-sm font-bold text-[var(--color-primary-contrast)] disabled:opacity-60"
+              <div
+                className="mt-[var(--space-4)] rounded-[var(--radius-md)] border border-[var(--color-success)] bg-[var(--color-success-soft)] p-[var(--space-3)] text-sm text-[var(--color-success)]"
+                role="status"
               >
-                {handoffStatus === "submitting" ? "Đang bàn giao…" : "Bàn giao cho kỹ sư"}
-              </button>
+                <p className="font-bold">Hồ sơ đã được gửi tới đội ngũ kỹ thuật.</p>
+                <p className="mt-1 leading-5">Đại Hải Phát sẽ liên hệ để xác nhận bước tiếp theo.</p>
+              </div>
+            ) : (
+              <>
+                <label className="mt-[var(--space-4)] flex cursor-pointer items-start gap-3 rounded-[var(--radius-md)] bg-[var(--color-surface-muted)] p-[var(--space-3)] text-xs leading-5 text-[var(--color-text-muted)]">
+                  <input
+                    type="checkbox"
+                    checked={handoffConsent}
+                    onChange={(event) => setHandoffConsent(event.target.checked)}
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--color-primary)]"
+                  />
+                  <span>
+                    Tôi đồng ý gửi thông tin liên hệ và dữ liệu dự án đã nhập cho Đại Hải Phát để tư vấn kỹ thuật. {" "}
+                    <Link href="/privacy" className="font-bold text-[var(--color-primary)] underline underline-offset-2">
+                      Xem cách dữ liệu được xử lý
+                    </Link>
+                  </span>
+                </label>
+                <button
+                  type="button"
+                  onClick={submitHandoff}
+                  disabled={!handoffConsent || handoffStatus === "submitting"}
+                  className="mt-[var(--space-3)] min-h-11 w-full rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors hover:bg-[var(--color-primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {handoffStatus === "submitting" ? "Đang gửi hồ sơ…" : "Gửi hồ sơ cho kỹ sư"}
+                </button>
+              </>
             )}
+
             {handoffError ? (
-              <p className="mt-[var(--space-3)] text-sm text-[var(--color-danger-text)]" role="alert">
-                {humanizePublicCopy(handoffError)}
-              </p>
+              <div
+                className="mt-[var(--space-3)] rounded-[var(--radius-md)] border border-[var(--color-warning)] bg-[var(--color-warning-soft)] p-[var(--space-3)] text-sm leading-6 text-[var(--color-text)]"
+                role="alert"
+              >
+                <p className="font-bold">Kênh gửi tự động đang tạm gián đoạn.</p>
+                <p className="mt-1 text-[var(--color-text-muted)]">
+                  Hồ sơ vẫn được giữ trên thiết bị. Bạn có thể dùng Zalo hoặc gọi kỹ sư ở thanh phía dưới để tiếp tục ngay.
+                </p>
+              </div>
             ) : null}
+
             <button
               type="button"
-              onClick={reset}
+              onClick={handleReset}
               className="mt-[var(--space-3)] min-h-11 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-4)] text-sm font-bold"
             >
-              Bắt đầu hồ sơ mới
+              Bắt đầu yêu cầu mới
             </button>
           </div>
         </div>
@@ -128,7 +170,7 @@ export function AIChatDrawerPanel({ servicePreset = null }: AIChatDrawerPanelPro
           </div>
           <button
             type="button"
-            onClick={reset}
+            onClick={handleReset}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] text-[var(--color-text-muted)]"
             aria-label="Bắt đầu lại hồ sơ tư vấn"
           >
