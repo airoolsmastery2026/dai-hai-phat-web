@@ -18,6 +18,10 @@ const adapterPath = new URL(
   "../src/lib/server/supabase-rest.ts",
   import.meta.url,
 );
+const storePath = new URL(
+  "../src/lib/server/project-inquiries.ts",
+  import.meta.url,
+);
 
 test("project inquiry schema stays minimal and consent-aware", async () => {
   const sql = await readFile(migrationPath, "utf8");
@@ -33,15 +37,19 @@ test("project inquiry schema stays minimal and consent-aware", async () => {
 test("project inquiry API validates, rate limits, persists and optionally notifies", async () => {
   const route = await readFile(routePath, "utf8");
   const adapter = await readFile(adapterPath, "utf8");
+  const store = await readFile(storePath, "utf8");
 
   assert.match(route, /isSameOriginRequest/);
   assert.match(route, /consumeRateLimit/);
   assert.match(route, /evaluateConceptReadiness/);
-  assert.match(route, /supabaseRestRequest\("project_inquiries"/);
+  assert.match(route, /persistProjectInquiryRecord/);
+  assert.match(route, /duplicateStrategy:\s*"ignore"/);
   assert.match(route, /TELEGRAM_BOT_TOKEN/);
   assert.match(route, /AbortSignal\.timeout/);
+  assert.match(store, /supabaseRestRequest<ProjectInquiryRow\[]>\("project_inquiries"/);
   assert.match(adapter, /"project_inquiries"/);
   assert.doesNotMatch(route, /NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY/);
+  assert.doesNotMatch(store, /NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY/);
 });
 
 test("concept readiness gate saves the project before granting access", async () => {
