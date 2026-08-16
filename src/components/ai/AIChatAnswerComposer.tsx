@@ -58,8 +58,8 @@ async function validateContactOnServer(
       };
     }
 
-    // External verification is an additional signal, not the only gate. A provider
-    // outage must not convert format-valid data into a false "verified" claim.
+    // External verification is a second gate after deterministic local validation.
+    // Provider outages stay "unverified" and must never be promoted to "verified".
     return { ok: true };
   } catch {
     return { ok: true };
