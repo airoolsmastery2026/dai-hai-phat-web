@@ -30,7 +30,9 @@ export function createSystemHealthSnapshot(
 
   return {
     state:
-      services.ai === "configured" && services.crm === "configured"
+      services.ai === "configured" &&
+      services.crm === "configured" &&
+      services.phoneVerification === "configured"
         ? "operational"
         : "degraded",
     checkedAt: now.toISOString(),

@@ -17,6 +17,15 @@ test("health snapshot checks configuration without exposing secret values", () =
   assert.match(healthSource, /\?\s*"operational"\s*:\s*"degraded"/);
 });
 
+test("phone verification is required before protected health reports operational", () => {
+  assert.match(healthSource, /services\.ai === "configured"/);
+  assert.match(healthSource, /services\.crm === "configured"/);
+  assert.match(
+    healthSource,
+    /services\.phoneVerification === "configured"/,
+  );
+});
+
 test("health endpoint is restricted to control and monitoring services", () => {
   assert.match(routeSource, /"telegram-control"/);
   assert.match(routeSource, /"monitoring"/);
