@@ -1,160 +1,63 @@
 # Video Showcase Integration Plan
 
-Status: **Planned only — do not implement until explicit approval.**
+Status: **Baseline implementation approved and implemented. Persistent object-storage upload remains intentionally unconfigured until a real storage provider is connected.**
 
-## 1. Goal
+## Goal
 
-Add a calm, lightweight video area that can display:
+Provide one source-neutral video system for:
 
-- uploaded project videos;
-- external YouTube links;
-- future approved providers through the same adapter boundary.
+- validated YouTube links;
+- direct video URLs from approved object storage;
+- local admin preview before a future storage upload;
+- future approved providers behind the same data contract.
 
-Public wording must remain human-first and must not expose machine-first terminology.
+Public wording remains human-first.
 
-## 2. Recommended placement
+## Implemented baseline
 
-Homepage order after approval:
+- Homepage placement: Hero → Services → Projects → Video → Contact.
+- `VideoRecord` contract supports `youtube` and `upload` sources, draft/published/archived state, poster, captions, featured ordering and optional project link.
+- YouTube URLs are normalized to IDs and embedded only through `youtube-nocookie.com`.
+- YouTube iframe loads only after explicit Play intent, preventing player JavaScript from loading on initial page render.
+- Hosted file URLs accept same-origin or HTTPS MP4/WebM/MOV sources only.
+- Native video uses controls, `playsInline`, reserved 16:9 layout and metadata preload.
+- Homepage shows at most four published records. When none are published, it shows a calm project-video empty state instead of fake media.
+- `/admin/media/videos` is protected by the existing `/admin` Basic Auth boundary and can preview YouTube links, hosted video URLs and local MP4/WebM/MOV files.
+- Local files are explicitly preview-only while storage is unconfigured. The interface never reports a successful server upload.
+- Large video binaries are not committed to Git.
 
-1. Hero
-2. Service navigation
-3. Project proof
-4. **Video showcase**
-5. Contact
+## Storage status
 
-Keep the homepage preview small: 3–4 featured videos maximum, with a dedicated page later if the library grows.
+The repository and current Vercel project expose no configured object-storage credential or existing upload backend. The existing `/admin/media` image manager is also staging-only.
 
-## 3. UX pattern
+Therefore this implementation does not invent a storage provider, secret, paid dependency or fake persistence layer. The next storage step is to connect a real bucket/provider, then replace the current `VIDEO_STORAGE_STATUS` boundary with a direct-to-storage upload adapter and store only normalized public URLs in the video records.
 
-### Mobile
+## Publishing workflow
 
-- one large featured card or horizontal snap list;
-- 16:9 media ratio;
-- tap-to-play only;
-- visible title and short project/context label;
-- no sound or autoplay on page load;
-- minimum 44–48 px touch targets.
+1. Add or inspect a source in `/admin/media/videos`.
+2. Confirm title, source URL and optional poster.
+3. Keep the record `draft` until media and rights are verified.
+4. Add approved metadata to `src/data/video-showcase.ts` with `status: "published"`.
+5. Homepage renders published records automatically, ordered by featured flag and order.
 
-### Desktop
+## Guardrails
 
-- featured video + compact supporting grid, or a 3-column grid;
-- keyboard-accessible play controls;
-- clear focus state;
-- lightweight hover motion only;
-- no layout shift when the player loads.
+- Never render arbitrary iframe URLs.
+- Never commit large video files to the Git repository.
+- No autoplay on initial page load.
+- Keep media 16:9 to avoid layout shift.
+- Provide captions when available.
+- Preserve visible keyboard focus and touch targets.
+- Use project design tokens and no additional runtime package.
+- Do not expose storage secrets to the browser.
 
-## 4. Data contract
+## Next storage milestone
 
-Use one source-neutral record shape:
+Only after a real object-storage provider is selected/configured:
 
-```ts
-type VideoSource = "upload" | "youtube";
-
-type VideoRecord = {
-  id: string;
-  source: VideoSource;
-  title: string;
-  description?: string;
-  sourceUrl: string;
-  posterUrl?: string;
-  projectSlug?: string;
-  featured: boolean;
-  order: number;
-  status: "draft" | "published" | "archived";
-};
-```
-
-Do not couple public components directly to YouTube or one storage vendor.
-
-## 5. Component boundary
-
-Planned components:
-
-- `VideoShowcaseSection` — homepage composition only;
-- `VideoCard` — reusable preview/navigation card;
-- `VideoPlayer` — source-neutral player boundary;
-- `YouTubeEmbed` — validated YouTube adapter;
-- `UploadedVideoPlayer` — uploaded-file adapter;
-- `VideoPoster` — optimized poster/loading state.
-
-No component should exceed the project component-size rule.
-
-## 6. YouTube handling
-
-- accept only validated `youtube.com` and `youtu.be` URLs;
-- normalize URLs to a video ID before rendering;
-- prefer privacy-enhanced embedding where practical;
-- lazy-load the iframe only after user intent or when near the viewport;
-- do not require a YouTube API key for basic embeds;
-- never render arbitrary iframe URLs from user input.
-
-## 7. Uploaded video handling
-
-Do **not** commit large uploaded videos into the Git repository.
-
-Use a storage adapter. Preferred order at implementation time:
-
-1. existing project object storage if already configured and within quota;
-2. Supabase Storage if it fits the current project deployment and quota;
-3. another approved object-storage adapter only when required.
-
-The web application should store only normalized metadata and public asset URLs.
-
-Recommended upload limits and formats must be confirmed at implementation time after checking current hosting/storage limits.
-
-## 8. Performance requirements
-
-- poster image first, video/player second;
-- `preload="metadata"` or `preload="none"` depending placement;
-- no autoplay with sound;
-- lazy-load offscreen players;
-- reserve aspect ratio to prevent CLS;
-- use responsive poster images;
-- avoid loading YouTube iframe JavaScript until needed;
-- keep homepage video count deliberately small.
-
-## 9. Accessibility requirements
-
-- descriptive title for each video;
-- keyboard-operable play/navigation controls;
-- visible focus state;
-- captions/subtitles when available;
-- respect `prefers-reduced-motion`;
-- no essential information conveyed only through motion/audio.
-
-## 10. Publishing and security
-
-- draft/published state is explicit;
-- external URLs are validated server-side before publication;
-- uploaded file MIME/type and size are validated server-side;
-- no arbitrary HTML or iframe injection;
-- admin/upload controls remain separate from the public rendering surface;
-- preserve rollback and removal paths.
-
-## 11. UMS mapping
-
-Implementation should route through the existing Universal Master Skills packs:
-
-- Frontend Architecture — component/source boundaries;
-- Responsive Implementation — mobile-first layout;
-- Web Accessibility — keyboard/focus/captions;
-- Web Performance — lazy loading and Core Web Vitals;
-- Information Architecture — video placement and hierarchy;
-- Interaction Design — play/load/error states;
-- Design System — token-only styling and reusable variants;
-- Usability Review — cognitive load and task clarity;
-- Testing/QA and Security/Privacy — provider validation and regression checks.
-
-## 12. Implementation sequence after approval
-
-1. confirm exact homepage placement and content count;
-2. define `VideoRecord` and provider adapter;
-3. implement validated YouTube embed first;
-4. add uploaded-video storage adapter;
-5. build responsive public components;
-6. add loading/error/empty/caption states;
-7. add admin/publishing path only if requested;
-8. run typecheck, lint, unit tests, build and mobile visual QA;
-9. publish only after production verification.
-
-No implementation is authorized by this plan alone.
+1. create signed/direct upload flow;
+2. validate MIME and provider limits server-side;
+3. upload directly from browser to storage rather than proxying large files through the app server;
+4. persist normalized metadata;
+5. add deletion/rollback and quota monitoring;
+6. run security, mobile and performance QA before enabling production upload.

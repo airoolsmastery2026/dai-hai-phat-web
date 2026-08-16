@@ -4,6 +4,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
+import { VideoShowcaseSection } from "@/components/sections/VideoShowcaseSection";
 
 const HOME_TITLE = "Nội thất & cơ khí dân dụng cho nhà ở";
 const HOME_DESCRIPTION =
@@ -36,6 +37,7 @@ export default function HomePage() {
       <HeroSection />
       <ServicesSection />
       <ProjectsSection />
+      <VideoShowcaseSection />
       <ContactSection />
     </main>
   );
