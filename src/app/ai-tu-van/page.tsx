@@ -42,6 +42,8 @@ const capabilities = [
 ] as const;
 
 export default function AITuVanPage() {
+  const liveVoiceEnabled = Boolean(process.env.GEMINI_API_KEY?.trim());
+
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <PageHero
@@ -86,13 +88,15 @@ export default function AITuVanPage() {
         </Container>
       </section>
 
-      <Suspense
-        fallback={
-          <section className="min-h-[720px] bg-[var(--color-background)]" aria-label="Đang chuẩn bị trợ lý AI" />
-        }
-      >
-        <AIOfficeRouteEntry ids={["ai-office", "studio"]} />
-      </Suspense>
+      <section id="ai-office" className="scroll-mt-20">
+        <Suspense
+          fallback={
+            <div className="min-h-[720px] bg-[var(--color-background)]" aria-label="Đang chuẩn bị trợ lý AI" />
+          }
+        >
+          <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
+        </Suspense>
+      </section>
     </main>
   );
 }
