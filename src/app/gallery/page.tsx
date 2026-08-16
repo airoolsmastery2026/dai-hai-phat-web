@@ -5,6 +5,7 @@ import { VerifiedGallery } from "@/components/gallery/VerifiedGallery";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AIConsultationCta } from "@/components/sections/AIConsultationCta";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { COMPANY_CONFIG } from "@/content/company";
 import { listPublicResidentialGallery } from "@/lib/ai/public-gallery";
 
@@ -59,19 +60,15 @@ export default function GalleryPage() {
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
       <JsonLd data={collectionSchema} />
-      <section className="border-b border-[var(--color-border)] bg-[linear-gradient(125deg,var(--color-surface)_0%,var(--color-primary-soft)_78%,var(--color-metal-soft)_100%)] py-[var(--space-8)] text-[var(--color-text)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
-        <Container>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-metal-strong)]">
-            Công trình đã xác minh
-          </p>
-          <h1 className="mt-[var(--space-3)] max-w-4xl text-[length:var(--font-h1)] font-extrabold leading-tight">
-            Tìm mẫu phù hợp với nhu cầu thực tế
-          </h1>
-          <p className="mt-[var(--space-3)] max-w-3xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
-            {initialGallery.total} ảnh được phân loại theo hạng mục, vật liệu và phong cách để đối chiếu nhanh trước khi trao đổi với kỹ sư.
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Dự án & công trình"
+        title="Xem công trình thật trước khi chọn phương án"
+        description={`${initialGallery.total} hình ảnh đã được phân loại theo hạng mục, vật liệu và phong cách để anh/chị đối chiếu nhanh trước khi trao đổi với kỹ sư.`}
+        imageSrc="/images/gates/gate01.webp"
+        imageAlt="Công trình cửa cổng Đại Hải Phát"
+        imagePosition="72% center"
+        highlights={["Ảnh đã phân loại", "Có metadata hạng mục", "Dùng làm mẫu tham khảo kỹ thuật"]}
+      />
 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
