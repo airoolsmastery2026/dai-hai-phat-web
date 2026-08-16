@@ -49,7 +49,23 @@ export default function AITuVanPage() {
       <PageHero
         eyebrow="AI Tư Vấn 24/7"
         title="Từ nhu cầu ban đầu đến hồ sơ sẵn sàng cho kỹ sư"
-        description="Trợ lý AI Đại Hải Phát giúp bạn mô tả công việc rõ hơn, tập hợp hình ảnh và thông tin kỹ thuật, sau đó chuyển tiếp sang quy trình khảo sát và báo giá."
+        description="Trợ lý AI Đại Hải Phát giúp mô tả công việc rõ hơn, tập hợp hình ảnh và thông tin kỹ thuật, sau đó chuyển tiếp sang quy trình khảo sát và báo giá."
+        imageSrc="/images/brand/hero-luxury-materials-v1.webp"
+        imageAlt="Không gian vật liệu cao cấp đại diện cho trợ lý AI Đại Hải Phát"
+        imagePosition="72% center"
+        highlights={["Tiếp nhận 24/7", "Phân tích ảnh & hồ sơ", "Chuyển kỹ sư xác nhận"]}
+        actions={
+          <>
+            <Button href="#ai-office">
+              <Bot className="h-4 w-4" aria-hidden="true" />
+              Bắt đầu tư vấn AI
+            </Button>
+            <Button href="/bao-gia" variant="secondary">
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+              Chuẩn bị báo giá
+            </Button>
+          </>
+        }
       />
 
       <section className="border-b border-[var(--color-border)] py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
@@ -71,18 +87,7 @@ export default function AITuVanPage() {
             ))}
           </div>
 
-          <div className="mt-[var(--space-6)] flex flex-col gap-[var(--space-3)] sm:flex-row">
-            <Button href="#ai-office">
-              <Bot className="h-4 w-4" aria-hidden="true" />
-              Bắt đầu tư vấn AI
-            </Button>
-            <Button href="/bao-gia" variant="secondary">
-              <Sparkles className="h-4 w-4" aria-hidden="true" />
-              Chuẩn bị báo giá
-            </Button>
-          </div>
-
-          <p className="mt-[var(--space-4)] max-w-3xl text-xs leading-5 text-[var(--color-text-muted)]">
+          <p className="mt-[var(--space-5)] max-w-3xl text-xs leading-5 text-[var(--color-text-muted)]">
             AI hỗ trợ thu thập và sắp xếp thông tin. Kích thước, vật liệu, biện pháp thi công và giá trị hợp đồng được kỹ sư Đại Hải Phát xác nhận trước khi chốt.
           </p>
         </Container>
