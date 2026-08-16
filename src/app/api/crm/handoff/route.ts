@@ -88,6 +88,19 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
+    if (
+      phoneVerification.status === "unverified" &&
+      phoneVerification.reason === "not_configured"
+    ) {
+      return apiJsonResponse(
+        {
+          error: "Kênh kiểm tra số điện thoại chưa được cấu hình trên máy chủ. Hồ sơ chưa được gửi để tránh tiếp nhận dữ liệu chưa qua kiểm tra bắt buộc.",
+          code: "PHONE_VERIFICATION_NOT_CONFIGURED",
+          requestId,
+        },
+        503,
+      );
+    }
 
     const emailVerification = lead.contact.email
       ? await verifyEmailDomain(lead.contact.email)

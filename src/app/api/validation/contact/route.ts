@@ -179,13 +179,24 @@ export async function POST(request: NextRequest) {
         200,
       );
     }
+    if (result.reason === "not_configured") {
+      return apiJsonResponse(
+        {
+          valid: false,
+          error: "Kênh kiểm tra số điện thoại chưa được cấu hình trên máy chủ. Vui lòng dùng email hoặc thử lại sau khi hệ thống được cấu hình.",
+          code: "PHONE_VERIFICATION_NOT_CONFIGURED",
+          requestId,
+        },
+        503,
+      );
+    }
 
     return apiJsonResponse(
       {
         valid: true,
         verification: "format_only",
         normalizedValue: normalizedPhone,
-        message: "Số điện thoại đúng định dạng nhưng dịch vụ kiểm tra ngoài chưa xác nhận được. Quyền sở hữu số chưa được xác minh.",
+        message: "Số điện thoại đúng định dạng nhưng dịch vụ kiểm tra ngoài tạm thời chưa xác nhận được. Quyền sở hữu số chưa được xác minh.",
         requestId,
       },
       200,
