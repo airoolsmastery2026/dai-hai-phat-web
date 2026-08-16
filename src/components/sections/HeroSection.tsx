@@ -148,26 +148,26 @@ export function HeroSection() {
             </ul>
           </div>
 
-          <aside className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark)]/95 text-white shadow-[var(--shadow-lg)] backdrop-blur-md">
-            <div className="flex items-center justify-between gap-4 border-b border-white/15 px-[var(--space-4)] py-[var(--space-3)] sm:px-[var(--space-5)]">
+          <aside className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] text-white shadow-[var(--shadow-lg)]">
+            <div className="flex items-center justify-between gap-4 border-b border-white/20 px-[var(--space-4)] py-[var(--space-3)] sm:px-[var(--space-5)]">
               <div>
-                <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-text-dark-muted)]">
+                <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
                   <Radio className="h-4 w-4" aria-hidden="true" /> Live workflow
                 </p>
                 <p className="mt-1 text-sm font-black text-white">Luồng xử lý đang chạy</p>
               </div>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-black text-white">
+              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-black text-white">
                 ONLINE
               </span>
             </div>
 
             <div className="p-[var(--space-4)] sm:p-[var(--space-5)]">
-              <div className="rounded-[var(--radius-lg)] border border-white/15 bg-white/10 p-[var(--space-4)]" aria-live="polite">
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--color-text-dark-muted)]">
+              <div className="rounded-[var(--radius-lg)] border border-white/20 bg-white/10 p-[var(--space-4)]" aria-live="polite">
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/65">
                   Đang xử lý
                 </p>
-                <p className="mt-2 text-base font-black text-white">{activeScene.label}</p>
-                <p className="mt-1 text-xs leading-5 text-[var(--color-text-dark-muted)]">{activeScene.detail}</p>
+                <p className="mt-2 text-lg font-black text-white">{activeScene.label}</p>
+                <p className="mt-1 text-sm leading-5 text-white/75">{activeScene.detail}</p>
               </div>
 
               <div className="mt-[var(--space-3)] flex gap-2" aria-label="Trạng thái hero">
@@ -185,14 +185,18 @@ export function HeroSection() {
                 ))}
               </div>
 
-              <ol className="mt-[var(--space-4)] grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
+              <p className="mt-[var(--space-3)] text-xs font-semibold leading-5 text-white/70 sm:hidden">
+                AI → dữ liệu → hồ sơ → kỹ sư xác nhận
+              </p>
+
+              <ol className="mt-[var(--space-4)] hidden gap-2 sm:grid sm:grid-cols-2 lg:grid-cols-1">
                 {DELIVERY_STEPS.map((item, index) => {
                   const active = index === sceneIndex || (sceneIndex === 2 && index === 3);
                   return (
                     <li
                       key={item}
                       className={`flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2 text-xs font-semibold transition-colors duration-500 ${
-                        active ? "bg-white/12 text-white" : "text-[var(--color-text-dark-muted)]"
+                        active ? "bg-white/15 text-white" : "text-white/70"
                       }`}
                     >
                       <span
@@ -210,7 +214,7 @@ export function HeroSection() {
 
               <a
                 href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-                className="mt-[var(--space-4)] flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border border-white/20 bg-white/10 px-[var(--space-4)] text-center text-sm font-bold text-white transition hover:bg-white/15"
+                className="mt-[var(--space-4)] hidden min-h-11 items-center justify-center rounded-[var(--radius-md)] border border-white/20 bg-white/10 px-[var(--space-4)] text-center text-sm font-bold text-white transition hover:bg-white/15 sm:flex"
               >
                 Cần gấp? Gọi kỹ sư {COMPANY_CONFIG.phones[0].display}
               </a>
