@@ -69,7 +69,7 @@ export function FloatingCta() {
   return (
     <>
       {open ? (
-        <div className="fixed inset-0 z-[90] flex items-end justify-center bg-black/45 backdrop-blur-[2px] sm:items-stretch sm:justify-end">
+        <div className="fixed inset-0 z-[90] flex items-end justify-center overflow-x-hidden bg-black/45 backdrop-blur-[2px] sm:items-stretch sm:justify-end">
           <button
             type="button"
             className="absolute inset-0 cursor-default"
@@ -80,15 +80,15 @@ export function FloatingCta() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="ai-chat-drawer-title"
-            className="relative z-10 flex h-[min(86dvh,760px)] w-full flex-col overflow-hidden rounded-t-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] sm:h-full sm:max-w-[28rem] sm:rounded-none sm:border-y-0 sm:border-r-0"
+            className="relative z-10 flex h-[min(86dvh,760px)] w-screen max-w-[100vw] flex-col overflow-x-hidden overflow-y-hidden rounded-t-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] sm:h-full sm:w-full sm:max-w-[28rem] sm:rounded-none sm:border-y-0 sm:border-r-0"
           >
-            <header className="flex items-center justify-between gap-3 border-b border-[var(--color-border)] bg-[var(--color-surface-dark)] px-4 py-3 text-white">
-              <div className="min-w-0">
+            <header className="flex min-w-0 items-center justify-between gap-3 border-b border-[var(--color-border)] bg-[var(--color-surface-dark)] px-4 py-3 text-white">
+              <div className="min-w-0 flex-1">
                 <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-primary-soft-text)]">
-                  <span className="h-2 w-2 rounded-full bg-[var(--color-success)] motion-safe:animate-pulse" aria-hidden="true" />
-                  Sẵn sàng 24/7
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-success)] motion-safe:animate-pulse" aria-hidden="true" />
+                  <span>Sẵn sàng 24/7</span>
                 </p>
-                <h2 id="ai-chat-drawer-title" className="mt-1 truncate text-base font-black">
+                <h2 id="ai-chat-drawer-title" className="mt-1 break-words text-base font-black leading-5">
                   Trợ lý tư vấn Đại Hải Phát
                 </h2>
               </div>
@@ -103,26 +103,26 @@ export function FloatingCta() {
               </button>
             </header>
 
-            <div className="min-h-0 flex-1">
+            <div className="min-h-0 min-w-0 flex-1 overflow-x-hidden">
               <AIChatDrawerPanel servicePreset={servicePreset} />
             </div>
 
             <footer className="grid grid-cols-2 gap-2 border-t border-[var(--color-border)] bg-[var(--color-surface)] p-3">
               <a
                 href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
-                className="flex min-h-10 items-center justify-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] text-xs font-bold text-[var(--color-text)]"
+                className="flex min-h-10 min-w-0 items-center justify-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] px-2 text-xs font-bold text-[var(--color-text)]"
               >
-                <Phone className="h-4 w-4" aria-hidden="true" />
-                Gọi kỹ sư
+                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span className="truncate">Gọi kỹ sư</span>
               </a>
               <a
                 href={COMPANY_CONFIG.socials.zalo1}
                 target="_blank"
                 rel="noreferrer"
-                className="flex min-h-10 items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-channel-zalo)] text-xs font-bold text-white"
+                className="flex min-h-10 min-w-0 items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-channel-zalo)] px-2 text-xs font-bold text-white"
               >
-                <Send className="h-4 w-4" aria-hidden="true" />
-                Zalo
+                <Send className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span>Zalo</span>
               </a>
             </footer>
           </aside>
