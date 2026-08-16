@@ -1,7 +1,7 @@
 "use client";
 
 import { ExternalLink, LockKeyhole, ShieldCheck } from "lucide-react";
-import type { DragEvent, MouseEvent } from "react";
+import { useEffect, useRef, useState, type DragEvent, type MouseEvent } from "react";
 
 import { AIConceptStudio } from "@/components/ai/AIConceptStudio";
 import { ConceptReadinessGate } from "@/components/ai/ConceptReadinessGate";
@@ -13,7 +13,50 @@ interface ProtectedConceptStudioProps {
   enabled: boolean;
 }
 
+function humanizeElement(root: HTMLElement) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node = walker.nextNode();
+
+  while (node) {
+    if (node.textContent?.includes("AI")) {
+      node.textContent = node.textContent.replace(/\bAI\b/g, "trợ lý");
+    }
+    node = walker.nextNode();
+  }
+
+  root.querySelectorAll<HTMLElement>("[aria-label], [title], [placeholder], img[alt]").forEach((element) => {
+    for (const attribute of ["aria-label", "title", "placeholder", "alt"] as const) {
+      const value = element.getAttribute(attribute);
+      if (value?.includes("AI")) {
+        element.setAttribute(attribute, value.replace(/\bAI\b/g, "trợ lý"));
+      }
+    }
+  });
+}
+
 export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps) {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const [copyReady, setCopyReady] = useState(false);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    humanizeElement(root);
+    setCopyReady(true);
+
+    const observer = new MutationObserver(() => humanizeElement(root));
+    observer.observe(root, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["aria-label", "title", "placeholder", "alt"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const blockImageAction = (
     event: DragEvent<HTMLDivElement> | MouseEvent<HTMLDivElement>,
   ) => {
@@ -23,7 +66,8 @@ export function ProtectedConceptStudio({ enabled }: ProtectedConceptStudioProps)
 
   return (
     <div
-      className="protected-concept-studio space-y-[var(--space-6)]"
+      ref={rootRef}
+      className={`protected-concept-studio space-y-[var(--space-6)] transition-opacity duration-150 ${copyReady ? "opacity-100" : "opacity-0"}`}
       onContextMenu={blockImageAction}
       onDragStart={blockImageAction}
     >
