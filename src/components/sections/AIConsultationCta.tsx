@@ -21,8 +21,8 @@ export function AIConsultationCta({
   servicePreset,
 }: AIConsultationCtaProps) {
   const aiHref = servicePreset
-    ? `/?service=${encodeURIComponent(servicePreset)}#ai-office`
-    : "/#ai-office";
+    ? `/ai-tu-van?service=${encodeURIComponent(servicePreset)}&ai=1`
+    : "/ai-tu-van?ai=1";
 
   return (
     <section className="bg-[var(--color-surface-dark)] py-[var(--space-8)] text-white lg:py-[var(--space-10)]">
