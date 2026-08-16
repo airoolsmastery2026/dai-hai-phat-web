@@ -31,12 +31,16 @@ Website Next.js
 
 Trợ lý AI/chatbot công khai là **năng lực cốt lõi bắt buộc và là điểm vào chính của DHP-AIOS**, không phải block marketing tùy chọn.
 
-- Homepage phải luôn mount luồng AI consultation thực tại `#ai-office`.
-- Header/điểm chuyển đổi chính phải luôn có đường vào trực tiếp tới chatbot.
+- Website phải luôn có entry point trực tiếp tới chatbot và mở drawer tư vấn tức thì từ CTA có `ai=1`; không được buộc khách cuộn tới một section cố định hoặc chuyển qua `/contact` để bắt đầu tư vấn.
+- Route `/ai-tu-van` vẫn là trang đích thông tin; CTA tư vấn có `ai=1` phải mở đúng drawer toàn cục và giữ `service` preset khi có.
 - Các hạng mục dịch vụ phải có thể truyền `service` preset vào AI intake để không mất ngữ cảnh.
-- Có thể tối ưu copy, layout, lazy-loading và hiệu năng, nhưng không được xóa, ẩn, thay thế chatbot bằng `/contact`, hoặc chỉ giữ engine nội bộ mà làm mất public entry.
-- Mọi thay đổi có nguy cơ làm mất public chatbot phải bị regression test chặn và chỉ được thực hiện khi chủ sở hữu sản phẩm yêu cầu rõ ràng.
-- Mọi thay đổi vị trí, entry point hoặc composition của chatbot phải vượt qua audit, lint, typecheck, unit tests, production build và kiểm tra public preview trước khi merge.
+- Dữ liệu khách hàng chỉ được ghi nhận khi vượt qua quality gate phù hợp với từng trường. Tên, số điện thoại, email, địa chỉ khảo sát, kích thước và nội dung tự do không được phép đi tiếp chỉ vì đủ số ký tự.
+- `Đúng định dạng` không đồng nghĩa với `đã xác minh`. Không được tuyên bố số điện thoại hoặc email đã xác minh quyền sở hữu nếu chưa có dịch vụ xác minh thực sự trả kết quả thành công.
+- CRM handoff phải kiểm tra lại dữ liệu quan trọng ở boundary server để phiên cũ hoặc dữ liệu localStorage không thể bỏ qua quality gate phía client.
+- Chat drawer phải mobile-first: không dùng layout có thể vượt chiều rộng viewport, phải hỗ trợ `dvh`, safe-area, nội dung dài và bàn phím iOS mà không tạo horizontal overflow.
+- Có thể tối ưu copy, layout, lazy-loading và hiệu năng, nhưng không được xóa, ẩn hoặc thay thế chatbot bằng kênh liên hệ thụ động.
+- Mọi thay đổi có nguy cơ làm mất public chatbot, làm yếu validation hoặc phá mobile boundaries phải bị regression test chặn và chỉ được thực hiện khi chủ sở hữu sản phẩm yêu cầu rõ ràng.
+- Mọi thay đổi entry point, composition, validation hoặc CRM handoff của chatbot phải vượt qua audit, lint, typecheck, unit tests và production build trước khi merge.
 
 Bốn năng lực bắt buộc của v1:
 
