@@ -14,7 +14,7 @@ const AIChatDrawerPanel = dynamic(
   {
     loading: () => (
       <div className="flex h-full items-center justify-center bg-[var(--color-background)] px-6 text-center text-sm text-[var(--color-text-muted)]">
-        Đang mở trợ lý AI…
+        Đang mở kênh tư vấn…
       </div>
     ),
   },
@@ -73,7 +73,7 @@ export function FloatingCta() {
           <button
             type="button"
             className="absolute inset-0 cursor-default"
-            aria-label="Đóng cửa sổ tư vấn AI"
+            aria-label="Đóng cửa sổ tư vấn"
             onClick={() => setOpen(false)}
           />
           <aside
@@ -89,7 +89,7 @@ export function FloatingCta() {
                   Sẵn sàng 24/7
                 </p>
                 <h2 id="ai-chat-drawer-title" className="mt-1 truncate text-base font-black">
-                  Trợ lý AI Đại Hải Phát
+                  Trợ lý tư vấn Đại Hải Phát
                 </h2>
               </div>
               <button
@@ -97,7 +97,7 @@ export function FloatingCta() {
                 type="button"
                 onClick={() => setOpen(false)}
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-white/15 text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                aria-label="Đóng tư vấn AI"
+                aria-label="Đóng cửa sổ tư vấn"
               >
                 <X className="h-5 w-5" aria-hidden="true" />
               </button>
@@ -136,10 +136,10 @@ export function FloatingCta() {
           setOpen(true);
         }}
         className="fixed bottom-[max(var(--space-4),env(safe-area-inset-bottom))] right-[var(--space-4)] z-50 flex min-h-12 items-center gap-2 rounded-full bg-[var(--color-primary)] px-4 text-sm font-black text-[var(--color-primary-contrast)] shadow-[var(--shadow-lg)] ring-2 ring-[var(--color-primary-soft)] transition-transform duration-[var(--duration-fast)] hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 sm:right-[var(--space-6)] lg:bottom-[var(--space-8)] lg:right-[var(--space-8)]"
-        aria-label="Mở trợ lý AI Đại Hải Phát"
+        aria-label="Mở trợ lý tư vấn Đại Hải Phát"
       >
         <Bot className="h-5 w-5" aria-hidden="true" />
-        <span>Chat AI</span>
+        <span>Tư vấn ngay</span>
         <span className="h-2 w-2 rounded-full bg-[var(--color-success)] motion-safe:animate-pulse" aria-hidden="true" />
       </button>
     </>
