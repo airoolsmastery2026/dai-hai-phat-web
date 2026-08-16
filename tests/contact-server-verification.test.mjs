@@ -10,6 +10,10 @@ const emailVerifierPath = new URL(
   "../src/lib/server/email-domain-verification.ts",
   import.meta.url,
 );
+const phoneVerifierPath = new URL(
+  "../src/lib/server/phone-verification.ts",
+  import.meta.url,
+);
 const composerPath = new URL(
   "../src/components/ai/AIChatAnswerComposer.tsx",
   import.meta.url,
@@ -18,6 +22,7 @@ const crmRoutePath = new URL(
   "../src/app/api/crm/handoff/route.ts",
   import.meta.url,
 );
+const envExamplePath = new URL("../.env.example", import.meta.url);
 
 test("contact validation route is same-origin, rate-limited and distinguishes verification levels", async () => {
   const source = await readFile(routePath, "utf8");
@@ -31,6 +36,30 @@ test("contact validation route is same-origin, rate-limited and distinguishes ve
   assert.match(source, /verification: "format_only"/);
   assert.match(source, /verification: "invalid"/);
   assert.match(source, /OTP hoặc xác nhận liên hệ thực tế/);
+});
+
+test("phone verifier configuration is mandatory instead of silently becoming format-only", async () => {
+  const route = await readFile(routePath, "utf8");
+  const verifier = await readFile(phoneVerifierPath, "utf8");
+  const envExample = await readFile(envExamplePath, "utf8");
+
+  assert.match(verifier, /process\.env\.APILAYER_API_KEY/);
+  assert.match(verifier, /reason: "not_configured"/);
+  assert.match(route, /result\.reason === "not_configured"/);
+  assert.match(route, /code: "PHONE_VERIFICATION_NOT_CONFIGURED"/);
+  assert.match(route, /503/);
+  assert.match(envExample, /^APILAYER_API_KEY=$/m);
+});
+
+test("temporary phone provider failures remain explicitly unverified rather than invalid", async () => {
+  const verifier = await readFile(phoneVerifierPath, "utf8");
+  const route = await readFile(routePath, "utf8");
+
+  assert.match(verifier, /reason: "timeout"/);
+  assert.match(verifier, /reason: "upstream"/);
+  assert.match(verifier, /reason: "invalid_response"/);
+  assert.match(route, /verification: "format_only"/);
+  assert.match(route, /tạm thời chưa xác nhận được/);
 });
 
 test("email verification checks mail routing without pretending to verify mailbox ownership", async () => {
@@ -64,6 +93,9 @@ test("CRM repeats phone and email-domain checks before delivery", async () => {
 
   assert.match(source, /phoneVerification\.status === "invalid"/);
   assert.match(source, /code: "PHONE_INVALID"/);
+  assert.match(source, /phoneVerification\.reason === "not_configured"/);
+  assert.match(source, /code: "PHONE_VERIFICATION_NOT_CONFIGURED"/);
+  assert.match(source, /503/);
   assert.match(source, /verifyEmailDomain\(lead\.contact\.email\)/);
   assert.match(source, /emailVerification\?\.status === "invalid"/);
   assert.match(source, /code: "EMAIL_DOMAIN_INVALID"/);
