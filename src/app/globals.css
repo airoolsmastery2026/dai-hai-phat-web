@@ -180,6 +180,31 @@ textarea {
   --color-border-dark: #c8dad7;
 }
 
+.service-ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: service-ticker 15s linear infinite;
+}
+
+.service-ticker-copy {
+  display: inline-flex;
+  flex: none;
+  padding-right: var(--space-6);
+  white-space: nowrap;
+}
+
+.service-choice:hover .service-ticker-track,
+.service-choice:focus-visible .service-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes service-ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes mobile-ai-attention {
   0%,
   45%,
@@ -218,7 +243,8 @@ textarea {
     transition-duration: 0.01ms !important;
   }
 
-  .mobile-ai-attention {
+  .mobile-ai-attention,
+  .service-ticker-track {
     animation: none !important;
   }
 }
