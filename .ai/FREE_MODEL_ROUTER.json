@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "mode": "free-cloud-only",
   "purpose": "Contributor/coding-agent policy aligned with DHP runtime: official cloud providers only, free entitlement first, no local runtime.",
   "hardLocks": {
@@ -13,6 +13,7 @@
   },
   "routing": {
     "strategy": "capability-quota-health",
+    "preferredGateway": "dhp-free",
     "autoUpgrade": true,
     "autoDowngrade": true,
     "autoRotate": true,
@@ -30,6 +31,7 @@
       "DISABLED"
     ],
     "fallbackOrder": [
+      "dhp-free",
       "verified-free-cloud",
       "verified-free-cloud-alternate",
       "stop-metered-execution"
@@ -46,6 +48,18 @@
   },
   "providers": [
     {
+      "id": "dhp-free",
+      "class": "verified-free-cloud",
+      "enabledWhenConfigured": true,
+      "protocol": "openai-compatible",
+      "baseUrl": "https://dai-hai-phat-web.vercel.app/api/v1/llm",
+      "apiKeyEnv": "DHP_LLM_API_KEY",
+      "models": ["dhp-free"],
+      "capabilities": ["reasoning", "coding", "long-context"],
+      "quotaSource": "dhp-capability-gateway",
+      "notes": "Preferred stable virtual provider for DSH/UMS. Upstream selection must remain verified zero-cost, freeOnly=true and allowPaid=false. v1 chat completions are non-streaming."
+    },
+    {
       "id": "zai-free",
       "class": "verified-free-cloud",
       "enabledWhenConfigured": true,
@@ -61,7 +75,7 @@
       "models": ["openrouter/free"],
       "capabilities": ["reasoning", "coding", "vision", "tool-use"],
       "quotaSource": "provider-rate-limit",
-      "notes": "Dynamic free pool; availability and selected underlying model may change."
+      "notes": "Dynamic free pool; availability and selected underlying model may change. Prefer routing through dhp-free when available."
     },
     {
       "id": "gemini-free-tier",
@@ -83,6 +97,7 @@
     }
   ],
   "rotationRules": [
+    "Prefer dhp-free when it is configured so upstream routing remains centralized behind the DHP Capability Gateway.",
     "Never start a request on a provider that is known to require payment for the selected model.",
     "At NEAR_LIMIT, preserve the strongest remaining free quota for hard reasoning/debugging and route routine work elsewhere.",
     "On RATE_LIMITED or QUOTA_EXHAUSTED, rotate to the next compatible zero-cost cloud provider without changing task state, spec, or repository context.",

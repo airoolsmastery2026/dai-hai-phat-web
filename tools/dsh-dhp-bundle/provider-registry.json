@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.1",
+  "policySource": "../../.ai/FREE_MODEL_ROUTER.json",
+  "mode": "free-cloud-only",
+  "selection": "capability-quota-health",
+  "preferredProvider": "dhp-free",
+  "providers": [
+    {
+      "id": "dhp-free",
+      "status": "preferred-when-configured",
+      "protocol": "openai-compatible",
+      "baseUrl": "https://dai-hai-phat-web.vercel.app/api/v1/llm",
+      "apiKeyEnv": "DHP_LLM_API_KEY",
+      "model": "dhp-free",
+      "costPolicy": "verified-free-only",
+      "streaming": false,
+      "notes": "Stable DHP virtual model. Upstream free-cloud selection and quota failover stay behind the DHP model-runtime capability gateway. Fail closed when no verified zero-cost route is available."
+    },
+    {
+      "id": "openrouter-free",
+      "status": "direct-alternate-when-configured",
+      "model": "openrouter/free",
+      "costPolicy": "free-only",
+      "notes": "Direct provider path is an alternate only; prefer dhp-free so upstream selection remains centralized."
+    },
+    {
+      "id": "gemini-free-tier",
+      "status": "eligible-when-configured",
+      "model": "resolve-current-free-tier-at-runtime",
+      "costPolicy": "free-only",
+      "notes": "Use only models currently eligible for the Gemini API Free Tier. Do not enable billing automatically."
+    },
+    {
+      "id": "zai-free",
+      "status": "eligible-only-after-current-zero-cost-verification",
+      "model": "resolve-from-project-router",
+      "costPolicy": "free-only",
+      "notes": "Model availability/free entitlement is volatile and must be verified before routing."
+    },
+    {
+      "id": "cloudflare-workers-ai-free",
+      "status": "alternate-when-configured",
+      "model": "resolve-current-free-plan-model",
+      "costPolicy": "free-allocation-only",
+      "notes": "Stop or rotate before usage would require a paid Workers plan."
+    }
+  ],
+  "hardLocks": {
+    "paidFallback": false,
+    "meteredFallback": false,
+    "localLlmFallback": false,
+    "ollamaFallback": false
+  },
+  "genericOpenAICompatibleSlot": {
+    "id": "openai-compatible-free-candidate",
+    "enabled": false,
+    "purpose": "Attach future OpenAI-compatible cloud providers without changing DHP skills or orchestration.",
+    "activationRequirements": [
+      "official API/base URL verified",
+      "authentication method verified",
+      "model IDs verified",
+      "current zero-cost quota or free-tier terms verified",
+      "DSH protocol compatibility verified",
+      "no automatic paid fallback"
+    ]
+  }
+}
