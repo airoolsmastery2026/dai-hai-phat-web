@@ -14,9 +14,9 @@ import {
 } from "@/lib/server/api-security";
 import { apiJsonResponse } from "@/lib/server/api-json-response";
 import {
-  analyzeProjectWithGemini,
-  GeminiProjectAnalysisError,
-} from "@/lib/server/gemini";
+  analyzeProjectWithCloudRouter,
+  CloudAiRouterError,
+} from "@/lib/server/cloud-ai-router";
 import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
@@ -109,19 +109,29 @@ export async function POST(request: NextRequest) {
       materials: evidence.materials,
       pricingRule: evidence.pricingRule,
     };
-    const analysis = await analyzeProjectWithGemini(
+    const routed = await analyzeProjectWithCloudRouter(
       analysisRequest,
       evidenceContext,
     );
 
-    console.info("DHP Gemini project analysis generated", {
+    console.info("DHP cloud AI project analysis generated", {
       requestId,
       service: analysisRequest.service,
-      model: analysis.model,
-      evidenceCount: analysis.evidenceCount,
+      provider: routed.analysis.provider,
+      model: routed.analysis.model,
+      evidenceCount: routed.analysis.evidenceCount,
+      cache: routed.cache,
     });
 
-    return apiJsonResponse({ requestId, analysis }, 200);
+    return apiJsonResponse(
+      { requestId, analysis: routed.analysis },
+      200,
+      {
+        "X-DHP-AI-Cache": routed.cache,
+        "X-DHP-AI-Provider": routed.analysis.provider,
+        "X-DHP-AI-Model": routed.analysis.model,
+      },
+    );
   } catch (error) {
     if (error instanceof RequestBodyTooLargeError) {
       return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
@@ -142,10 +152,10 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
-    if (error instanceof GeminiProjectAnalysisError) {
+    if (error instanceof CloudAiRouterError) {
       const rateLimited = error.code === "rate_limit";
       const timedOut = error.code === "timeout";
-      console.warn("DHP Gemini project analysis unavailable", {
+      console.warn("DHP cloud AI project analysis unavailable", {
         requestId,
         code: error.code,
         upstreamHttpStatus: error.upstreamHttpStatus,
@@ -155,10 +165,10 @@ export async function POST(request: NextRequest) {
         {
           error: formatSupportReference(
             rateLimited
-              ? "Dịch vụ phân tích AI đang bận. Hồ sơ vẫn được giữ nguyên."
+              ? "Các quota AI miễn phí khả dụng đang bận hoặc đã chạm giới hạn. Hồ sơ vẫn được giữ nguyên."
               : timedOut
-                ? "Phân tích AI phản hồi quá lâu. Hồ sơ vẫn được giữ nguyên để anh/chị thử lại."
-                : "Phân tích AI tạm thời chưa khả dụng. Hồ sơ vẫn được giữ nguyên.",
+                ? "Phân tích AI phản hồi quá lâu. Hệ thống đã thử các dịch vụ cloud khả dụng; Hồ sơ vẫn được giữ nguyên để thử lại."
+                : "Phân tích AI tạm thời chưa khả dụng. Hệ thống cloud đã thử các provider khả dụng; Hồ sơ vẫn được giữ nguyên.",
             requestId,
           ),
           code: rateLimited
@@ -173,7 +183,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.error("DHP Gemini project analysis failed", {
+    console.error("DHP cloud AI project analysis failed", {
       requestId,
       error: error instanceof Error ? error.message : "Unknown error",
     });
