@@ -121,16 +121,17 @@ test("rejects generic option labels that make the answer feel templated", () => 
   );
 });
 
-test("Gemini applies the language gate before returning analysis", async () => {
-  const geminiSource = await readFile(
-    new URL("../src/lib/server/gemini.ts", import.meta.url),
+test("free model runtime applies the language gate before returning project analysis", async () => {
+  const runtimeSource = await readFile(
+    new URL("../src/lib/server/model-runtime-capability.ts", import.meta.url),
     "utf8",
   );
-  assert.match(geminiSource, /assertProjectAnalysisLanguageQuality/);
+  assert.match(runtimeSource, /assertProjectAnalysisLanguageQuality/);
   assert.match(
-    geminiSource,
+    runtimeSource,
     /assertProjectAnalysisLanguageQuality\(\s*parseProjectAnalysisOutput/,
   );
+  assert.match(runtimeSource, /data\.verifiedFree !== true/);
 });
 
 test("chat drawer stays inside iPhone visual viewport and safe areas", async () => {

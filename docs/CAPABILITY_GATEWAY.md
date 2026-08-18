@@ -36,7 +36,7 @@ The production website must not gain provider SDKs, provider URLs, provider toke
 | `knowledge` | Knowledge retrieval / enrichment | Dify or a future adapter |
 | `model-runtime` | Cloud-only zero-cost model routing and quota failover | OpenRouter free router first; additional verified-free cloud adapters may be added behind the gateway |
 | `media` | Media workflow / media library | Immich; existing `/v1/media` remains native |
-| `notifications` | Email/SMS/push/in-app orchestration | Novu |
+| `notifications` | Email/SMS/push/in-app notification orchestration | Novu |
 | `analytics` | Privacy-friendly product analytics | Plausible |
 | `internal-tools` | Back-office dashboards/tools | ToolJet |
 | `content` | Optional headless content service | Strapi |
@@ -79,9 +79,9 @@ Execution requires the existing project-scoped DHP key and the `admin` role. Pro
 
 The gateway does not expose an arbitrary URL proxy. Capability IDs and route segments are allowlisted, request bodies are size-limited, outbound requests have a timeout, and provider failures are isolated from the public web.
 
-### `model-runtime` project-analysis envelope
+### `model-runtime` core text envelope
 
-Website input is constrained to a known task and must explicitly declare the zero-cost lock:
+Website input is constrained to the allowlisted core text tasks `project-analysis` and `sales-engineer`. Every request must explicitly declare the zero-cost lock:
 
 ```json
 {
@@ -93,7 +93,11 @@ Website input is constrained to a known task and must explicitly declare the zer
 }
 ```
 
-A successful backend response must include `tier: "free"` and `verifiedFree: true` together with provider/model metadata and the generated text. The Website rejects output that cannot prove those flags.
+The same envelope is used for `sales-engineer` by changing only `task`. A successful backend response must include `tier: "free"` and `verifiedFree: true` together with provider/model metadata and the generated text. The Website rejects output that cannot prove those flags.
+
+Project Analysis and Sales Engineer are cache-first and have no direct Gemini fallback. If the zero-cost backend is not configured, exhausted or unavailable, those routes fail closed while preserving the project state instead of silently using a provider whose billing status cannot be proven. Sales Engineer provider prompts exclude direct customer identity/contact fields; handoff readiness is derived from trusted server-side tool results.
+
+Specialized image generation and Gemini Live remain separate capabilities until a verified-free backend entitlement exists for them. They must not be described as covered by the core text zero-cost hard-lock.
 
 ## Web integration
 

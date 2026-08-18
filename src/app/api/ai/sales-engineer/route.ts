@@ -11,15 +11,13 @@ import {
 import { buildResidentialProposalEvidenceResponse } from "@/lib/ai/public-evidence";
 import { getAIService } from "@/lib/ai/service-domain";
 import {
-  runSalesEngineerWithGemini,
-  GeminiSalesEngineerError,
-} from "@/lib/server/gemini-sales-engineer";
-import {
   consumeRateLimit,
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
 import { apiJsonResponse } from "@/lib/server/api-json-response";
+import { ModelRuntimeCapabilityError } from "@/lib/server/model-runtime-capability";
+import { runSalesEngineerWithCloudRouter } from "@/lib/server/sales-engineer-cloud-router";
 import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
@@ -122,16 +120,27 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const agent = await runSalesEngineerWithGemini(agentRequest, tools);
+    const routed = await runSalesEngineerWithCloudRouter(agentRequest, tools);
+    const agent = routed.agent;
 
     console.info("DHP sales engineer agent generated", {
       requestId,
+      provider: agent.provider,
       model: agent.model,
       toolsUsed: agent.toolsUsed,
+      cache: routed.cache,
       service: service ?? agentRequest.memory.service ?? null,
     });
 
-    return apiJsonResponse({ requestId, agent }, 200);
+    return apiJsonResponse(
+      { requestId, agent },
+      200,
+      {
+        "X-DHP-AI-Cache": routed.cache,
+        "X-DHP-AI-Provider": agent.provider,
+        "X-DHP-AI-Model": agent.model,
+      },
+    );
   } catch (error) {
     if (error instanceof RequestBodyTooLargeError) {
       return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
@@ -148,7 +157,7 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
-    if (error instanceof GeminiSalesEngineerError) {
+    if (error instanceof ModelRuntimeCapabilityError) {
       const rateLimited = error.code === "rate_limit";
       const timedOut = error.code === "timeout";
       console.warn("DHP sales engineer agent unavailable", {
@@ -161,10 +170,10 @@ export async function POST(request: NextRequest) {
         {
           error: formatSupportReference(
             rateLimited
-              ? "Trợ lý AI đang bận. Hồ sơ dự án vẫn được giữ nguyên."
+              ? "Trợ lý AI miễn phí đang bận hoặc đã chạm quota. Hồ sơ dự án vẫn được giữ nguyên."
               : timedOut
-                ? "Trợ lý AI phản hồi quá lâu. Hồ sơ vẫn được giữ nguyên để thử lại."
-                : "Trợ lý AI tạm thời chưa khả dụng. Hồ sơ dự án vẫn được giữ nguyên.",
+                ? "Trợ lý AI miễn phí phản hồi quá lâu. Hồ sơ vẫn được giữ nguyên để thử lại."
+                : "Trợ lý AI miễn phí tạm thời chưa khả dụng. Hồ sơ dự án vẫn được giữ nguyên.",
             requestId,
           ),
           code: rateLimited

@@ -129,6 +129,7 @@ const DEFAULT_TIMEOUT_MS = 30_000;
 const OPENROUTER_CHAT_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const OPENROUTER_MODELS_URL = 'https://openrouter.ai/api/v1/models?sort=newest';
 const MODEL_PROMPT_LIMIT = 64_000;
+const MODEL_RUNTIME_TASKS = new Set(['project-analysis', 'sales-engineer']);
 
 function serviceKey(): string {
   const modern = Deno.env.get('SUPABASE_SECRET_KEYS');
@@ -305,7 +306,8 @@ async function discoverOpenRouterFreeModels(): Promise<Array<Record<string, unkn
 
 async function executeModelRuntime(input: Record<string, unknown>): Promise<Response> {
   if (
-    input.task !== 'project-analysis' ||
+    typeof input.task !== 'string' ||
+    !MODEL_RUNTIME_TASKS.has(input.task) ||
     input.schemaVersion !== '1.0' ||
     input.freeOnly !== true ||
     input.allowPaid !== false ||
@@ -373,6 +375,7 @@ async function executeModelRuntime(input: Record<string, unknown>): Promise<Resp
       tier: 'free',
       verifiedFree: true,
       discoverySource: 'openrouter-free-router',
+      task: input.task,
     },
   });
 }
@@ -455,6 +458,7 @@ Deno.serve(async (request: Request) => {
         capabilityCount: CAPABILITIES.length,
         providerCoupling: 'backend-only',
         modelRuntimePolicy: 'free-cloud-only',
+        modelRuntimeTasks: Array.from(MODEL_RUNTIME_TASKS),
       });
     }
 

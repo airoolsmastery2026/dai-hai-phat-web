@@ -7,6 +7,14 @@ import {
   type ProjectEvidenceContext,
 } from "@/lib/ai/analysis";
 import { assertProjectAnalysisLanguageQuality } from "@/lib/ai/analysis-output-quality";
+import {
+  buildSalesEngineerPrompt,
+  parseSalesEngineerAgentOutput,
+  SALES_ENGINEER_AGENT_SCHEMA,
+  type SalesEngineerAgentRequest,
+  type SalesEngineerAgentResponse,
+  type SalesEngineerToolResult,
+} from "@/lib/ai/sales-engineer-agent";
 import { requestDhpCapability } from "@/lib/server/capability-gateway";
 
 const MAX_GATEWAY_RESPONSE_BYTES = 128 * 1024;
@@ -17,6 +25,8 @@ type ModelRuntimeFailureCode =
   | "timeout"
   | "upstream"
   | "invalid_output";
+
+type ModelRuntimeTask = "project-analysis" | "sales-engineer";
 
 export class ModelRuntimeCapabilityError extends Error {
   constructor(
@@ -46,6 +56,12 @@ interface ModelRuntimeData {
 interface GatewaySuccessPayload {
   capability?: unknown;
   data?: ModelRuntimeData;
+}
+
+interface FreeModelRuntimeOutput {
+  outputText: string;
+  provider: string;
+  model: string;
 }
 
 function safeJson(text: string): unknown {
@@ -92,23 +108,16 @@ function mapGatewayFailure(status: number, payload: unknown): ModelRuntimeCapabi
   );
 }
 
-export async function analyzeProjectWithModelRuntimeCapability(
-  request: ProjectAnalysisRequest,
-  evidence: ProjectEvidenceContext,
-): Promise<ProjectAnalysisResponse> {
-  const prompt = [
-    buildProjectAnalysisPrompt(request, evidence),
-    "JSON_SCHEMA:",
-    JSON.stringify(PROJECT_ANALYSIS_SCHEMA),
-    "Chỉ trả về một JSON object hợp lệ, không Markdown.",
-  ].join("\n");
-
+async function executeFreeModelRuntime(
+  task: ModelRuntimeTask,
+  prompt: string,
+): Promise<FreeModelRuntimeOutput> {
   let response: Response;
   try {
     response = await requestDhpCapability("model-runtime", ["execute"], {
       method: "POST",
       body: JSON.stringify({
-        task: "project-analysis",
+        task,
         schemaVersion: "1.0",
         freeOnly: true,
         allowPaid: false,
@@ -163,14 +172,53 @@ export async function analyzeProjectWithModelRuntimeCapability(
     );
   }
 
+  return {
+    outputText: data.outputText,
+    provider: data.provider,
+    model: data.model,
+  };
+}
+
+export async function analyzeProjectWithModelRuntimeCapability(
+  request: ProjectAnalysisRequest,
+  evidence: ProjectEvidenceContext,
+): Promise<ProjectAnalysisResponse> {
+  const prompt = [
+    buildProjectAnalysisPrompt(request, evidence),
+    "JSON_SCHEMA:",
+    JSON.stringify(PROJECT_ANALYSIS_SCHEMA),
+    "Chỉ trả về một JSON object hợp lệ, không Markdown.",
+  ].join("\n");
+  const result = await executeFreeModelRuntime("project-analysis", prompt);
   const analysis = assertProjectAnalysisLanguageQuality(
-    parseProjectAnalysisOutput(data.outputText),
+    parseProjectAnalysisOutput(result.outputText),
   );
   return {
     ...analysis,
-    provider: data.provider,
-    model: data.model,
+    provider: result.provider,
+    model: result.model,
     generatedAt: new Date().toISOString(),
     evidenceCount: evidence.projects.length,
+  };
+}
+
+export async function runSalesEngineerWithModelRuntimeCapability(
+  request: SalesEngineerAgentRequest,
+  tools: SalesEngineerToolResult[],
+): Promise<SalesEngineerAgentResponse> {
+  const prompt = [
+    buildSalesEngineerPrompt(request, tools),
+    "JSON_SCHEMA:",
+    JSON.stringify(SALES_ENGINEER_AGENT_SCHEMA),
+    "Chỉ trả về một JSON object hợp lệ, không Markdown.",
+  ].join("\n");
+  const result = await executeFreeModelRuntime("sales-engineer", prompt);
+  const content = parseSalesEngineerAgentOutput(result.outputText);
+  return {
+    ...content,
+    provider: result.provider,
+    model: result.model,
+    generatedAt: new Date().toISOString(),
+    toolsUsed: tools.map((tool) => tool.name),
   };
 }
