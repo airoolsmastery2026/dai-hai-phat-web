@@ -206,7 +206,7 @@ async function authenticate(request: Request): Promise<Principal> {
     keyId,
     projectId: String(data.project_id),
     actorId: String(data.actor_id),
-    roles: Array.isArray(data.roles) ? data.roles.map((role) => String(role).toLowerCase()) : [],
+    roles: Array.isArray(data.roles) ? data.roles.map((role: unknown) => String(role).toLowerCase()) : [],
   };
 }
 
@@ -443,7 +443,7 @@ async function executeCapability(
   });
 }
 
-Deno.serve(async (request) => {
+Deno.serve(async (request: Request) => {
   const url = new URL(request.url);
   const path = relativePath(url);
 
