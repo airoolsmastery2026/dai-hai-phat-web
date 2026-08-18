@@ -66,15 +66,19 @@ export default function DhpWorkspace() {
   const [runtime, setRuntime] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(DRAFT_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as Partial<LocalDraft>;
-      if (typeof parsed.title === 'string' && parsed.title.trim()) setTitle(parsed.title);
-      if (typeof parsed.body === 'string') setBody(parsed.body);
-    } catch {
-      // A damaged browser-local draft should never block the workspace.
-    }
+    const timer = window.setTimeout(() => {
+      try {
+        const raw = window.localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw) as Partial<LocalDraft>;
+        if (typeof parsed.title === 'string' && parsed.title.trim()) setTitle(parsed.title);
+        if (typeof parsed.body === 'string') setBody(parsed.body);
+      } catch {
+        // A damaged browser-local draft should never block the workspace.
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   const saveDraft = () => {
