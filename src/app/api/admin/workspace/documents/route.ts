@@ -1,3 +1,4 @@
+import { isSameOriginRequest } from "@/lib/server/api-security";
 import {
   ingestWorkspaceDocument,
   listWorkspaceDocuments,
@@ -60,6 +61,11 @@ export async function GET(): Promise<Response> {
 }
 
 export async function POST(request: Request): Promise<Response> {
+  const requestHost = new URL(request.url).host;
+  if (!isSameOriginRequest(request.headers, requestHost)) {
+    return errorResponse("Nguồn upload không hợp lệ.", 403);
+  }
+
   const declaredLength = Number(request.headers.get("content-length") ?? "0");
   if (Number.isFinite(declaredLength) && declaredLength > MAX_REQUEST_BYTES) {
     return errorResponse("Tệp upload vượt giới hạn của Workspace Document Inbox.", 413);
