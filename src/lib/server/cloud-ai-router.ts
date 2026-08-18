@@ -32,6 +32,8 @@ export class CloudAiRouterError extends Error {
   constructor(
     message: string,
     readonly code: CloudAiFailureCode,
+    readonly upstreamHttpStatus: number | null = null,
+    readonly upstreamStatus: string | null = null,
   ) {
     super(message);
     this.name = "CloudAiRouterError";
@@ -258,12 +260,24 @@ async function callOpenAiCompatible(
 
     if (!response.ok) {
       if (response.status === 429) {
-        throw new CloudAiRouterError("Provider đang giới hạn quota.", "rate_limit");
+        throw new CloudAiRouterError(
+          "Provider đang giới hạn quota.",
+          "rate_limit",
+          response.status,
+        );
       }
       if (response.status === 401 || response.status === 403) {
-        throw new CloudAiRouterError("Provider từ chối cấu hình xác thực.", "configuration");
+        throw new CloudAiRouterError(
+          "Provider từ chối cấu hình xác thực.",
+          "configuration",
+          response.status,
+        );
       }
-      throw new CloudAiRouterError("Provider cloud tạm thời không phản hồi.", "upstream");
+      throw new CloudAiRouterError(
+        "Provider cloud tạm thời không phản hồi.",
+        "upstream",
+        response.status,
+      );
     }
 
     const serialized = await response.text();
@@ -293,7 +307,12 @@ async function callOpenAiCompatible(
 }
 
 function mapGeminiError(error: GeminiProjectAnalysisError): CloudAiRouterError {
-  return new CloudAiRouterError(error.message, error.code);
+  return new CloudAiRouterError(
+    error.message,
+    error.code,
+    error.upstreamHttpStatus,
+    error.upstreamStatus,
+  );
 }
 
 export interface RoutedProjectAnalysis {
