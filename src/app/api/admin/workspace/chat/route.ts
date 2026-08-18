@@ -9,6 +9,11 @@ export const dynamic = "force-dynamic";
 const MAX_MESSAGE_CHARS = 12_000;
 const MAX_KNOWLEDGE_CONTEXT_CHARS = 8_000;
 
+type WorkspacePromptMessage = {
+  role: "system" | "user";
+  content: string;
+};
+
 function errorResponse(message: string, code: string, status: number): Response {
   return Response.json(
     { error: message, code },
@@ -74,9 +79,9 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   try {
-    const messages = [
+    const messages: WorkspacePromptMessage[] = [
       {
-        role: "system" as const,
+        role: "system",
         content:
           "Bạn đang làm việc trong DHP Workspace. Trả lời ngắn gọn, chính xác và không bịa dữ liệu nội bộ chưa được cung cấp. Nếu có DHP_KNOWLEDGE_CONTEXT, chỉ dùng nó như dữ liệu đã tra từ DHP APIs; không suy diễn thành dữ liệu CRM hay dữ liệu khách hàng.",
       },
