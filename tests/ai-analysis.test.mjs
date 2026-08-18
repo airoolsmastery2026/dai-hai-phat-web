@@ -198,9 +198,13 @@ test("accepts bounded structured analysis and rejects generated cost claims", ()
   );
 });
 
-test("uses the stateless current Gemini Interactions API contract", async () => {
-  const providerSource = await readFile(
-    new URL("../src/lib/server/gemini.ts", import.meta.url),
+test("routes project analysis only through the verified free model-runtime capability", async () => {
+  const capabilitySource = await readFile(
+    new URL("../src/lib/server/model-runtime-capability.ts", import.meta.url),
+    "utf8",
+  );
+  const routerSource = await readFile(
+    new URL("../src/lib/server/cloud-ai-router.ts", import.meta.url),
     "utf8",
   );
   const routeSource = await readFile(
@@ -208,19 +212,13 @@ test("uses the stateless current Gemini Interactions API contract", async () => 
     "utf8",
   );
 
-  assert.match(
-    providerSource,
-    /generativelanguage\.googleapis\.com\/v1beta\/interactions/,
-  );
-  assert.match(providerSource, /DEFAULT_GEMINI_MODEL = "gemini-3\.6-flash"/);
-  assert.match(providerSource, /store: false/);
-  assert.match(providerSource, /"x-goog-api-key": apiKey/);
-  assert.match(providerSource, /mime_type: "application\/json"/);
-  assert.match(providerSource, /MAX_ERROR_RESPONSE_BYTES = 8 \* 1024/);
-  assert.match(providerSource, /UPSTREAM_STATUS_PATTERN/);
-  assert.match(providerSource, /upstreamHttpStatus/);
-  assert.match(providerSource, /upstreamStatus/);
+  assert.match(capabilitySource, /requestDhpCapability\("model-runtime", \["execute"\]/);
+  assert.match(capabilitySource, /freeOnly: true/);
+  assert.match(capabilitySource, /allowPaid: false/);
+  assert.match(capabilitySource, /data\.tier !== "free"/);
+  assert.match(capabilitySource, /data\.verifiedFree !== true/);
+  assert.match(routerSource, /analyzeProjectWithModelRuntimeCapability/);
+  assert.doesNotMatch(routerSource, /analyzeProjectWithGemini|GEMINI_API_KEY|generativelanguage\.googleapis/);
   assert.match(routeSource, /upstreamHttpStatus: error\.upstreamHttpStatus/);
   assert.match(routeSource, /upstreamStatus: error\.upstreamStatus/);
-  assert.equal(providerSource.includes("console.log(apiKey"), false);
 });
