@@ -7,6 +7,12 @@ import {
 export const dynamic = "force-dynamic";
 
 const MAX_MESSAGE_CHARS = 12_000;
+const MAX_KNOWLEDGE_CONTEXT_CHARS = 8_000;
+
+type WorkspacePromptMessage = {
+  role: "system" | "user";
+  content: string;
+};
 
 function errorResponse(message: string, code: string, status: number): Response {
   return Response.json(
@@ -48,7 +54,8 @@ export async function POST(request: Request): Promise<Response> {
     return errorResponse("Dữ liệu hội thoại không hợp lệ.", "invalid_request", 400);
   }
 
-  const message = (body as Record<string, unknown>).message;
+  const record = body as Record<string, unknown>;
+  const message = record.message;
   if (typeof message !== "string" || !message.trim()) {
     return errorResponse("Hãy nhập nội dung cần hỏi.", "invalid_request", 400);
   }
@@ -60,15 +67,34 @@ export async function POST(request: Request): Promise<Response> {
     );
   }
 
+  const knowledgeContext = typeof record.knowledgeContext === "string"
+    ? record.knowledgeContext.trim()
+    : "";
+  if (knowledgeContext.length > MAX_KNOWLEDGE_CONTEXT_CHARS) {
+    return errorResponse(
+      `Knowledge context vượt giới hạn ${MAX_KNOWLEDGE_CONTEXT_CHARS} ký tự.`,
+      "request_too_large",
+      413,
+    );
+  }
+
   try {
-    const prompt = buildWorkspaceChatPrompt([
+    const messages: WorkspacePromptMessage[] = [
       {
         role: "system",
         content:
-          "Bạn đang làm việc trong DHP Workspace. Trả lời ngắn gọn, chính xác và không bịa dữ liệu nội bộ chưa được cung cấp.",
+          "Bạn đang làm việc trong DHP Workspace. Trả lời ngắn gọn, chính xác và không bịa dữ liệu nội bộ chưa được cung cấp. Nếu có DHP_KNOWLEDGE_CONTEXT, chỉ dùng nó như dữ liệu đã tra từ DHP APIs; không suy diễn thành dữ liệu CRM hay dữ liệu khách hàng.",
       },
-      { role: "user", content: message.trim() },
-    ]);
+    ];
+    if (knowledgeContext) {
+      messages.push({
+        role: "system",
+        content: `DHP_KNOWLEDGE_CONTEXT:\n${knowledgeContext}`,
+      });
+    }
+    messages.push({ role: "user", content: message.trim() });
+
+    const prompt = buildWorkspaceChatPrompt(messages);
     const result = await runWorkspaceChatWithModelRuntimeCapability(prompt);
 
     return Response.json(
@@ -78,6 +104,7 @@ export async function POST(request: Request): Promise<Response> {
         model: result.model,
         tier: "free",
         verifiedFree: true,
+        usedKnowledgeContext: Boolean(knowledgeContext),
       },
       {
         headers: {

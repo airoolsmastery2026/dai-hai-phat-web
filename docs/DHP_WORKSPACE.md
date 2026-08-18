@@ -1,22 +1,68 @@
-# DHP Workspace v1
+# DHP Workspace v2
 
 ## Purpose
 
 DHP Workspace is the internal work surface for Đại Hải Phát AI OS. It borrows familiar document-workspace interaction patterns without copying Notion branding, proprietary assets, or making Notion a runtime dependency.
 
-The workspace has two responsibilities:
+Workspace v2 has four responsibilities:
 
-1. provide a calm internal note/work surface under `/admin/workspace`; and
-2. expose the existing DHP zero-cost model runtime through a narrow OpenAI-compatible facade for trusted clients such as DSH Desktop and Universal Master Skills.
+1. provide a protected internal page/block work surface under `/admin/workspace`;
+2. expose the existing DHP zero-cost model runtime through a narrow OpenAI-compatible facade for trusted clients such as DSH Desktop and Universal Master Skills;
+3. search verified Đại Hải Phát proposal evidence through existing DHP APIs instead of duplicating product/price/knowledge data; and
+4. import small local TXT/MD/CSV/JSON files into browser-local draft pages without treating them as official business knowledge.
 
 ## Ownership boundary
 
 DHP Workspace is **not** a second business system of record.
 
 - Products, services, prices, project evidence, quotes, CRM and durable business knowledge remain owned by the DHP Website APIs and backend stores.
-- The v1 editor stores only a personal browser-local draft under `dhp-workspace-draft-v1`.
-- The workspace must use DHP APIs when durable business data is connected in later slices.
+- Workspace pages and blocks are browser-local drafts under `dhp-workspace-v2` in this slice.
+- DHP Knowledge lookup calls the existing residential proposal-evidence implementation on the server.
+- Imported local files create draft page content only; they do not overwrite PRODUCT_DB, PRICE_DB, CRM_DB or project records.
 - Provider credentials never enter browser code.
+
+## Page/block editor
+
+Route: `/admin/workspace`
+
+Workspace v2 supports:
+
+- multiple local pages;
+- paragraph blocks;
+- heading blocks;
+- checklist blocks;
+- add/delete pages and blocks;
+- manual browser-local save;
+- local import for TXT, Markdown, CSV and JSON up to 2 MB.
+
+PDF, Excel workbook and image ingestion are deliberately not faked in the browser. Those formats require the later server-side ingestion/parser pipeline so provenance, file limits, extraction quality and persistence can be controlled centrally.
+
+## DHP Knowledge lookup
+
+Protected endpoint:
+
+`POST /api/admin/workspace/knowledge`
+
+The endpoint validates the query and calls `buildResidentialProposalEvidenceResponse`. It returns verified materials, price references and image references from the same DHP evidence sources already used by proposal workflows.
+
+The browser may pass a bounded JSON summary of this verified result into the Workspace AI request. Page drafts are **not** automatically sent to the model.
+
+## Workspace AI
+
+Protected endpoint:
+
+`POST /api/admin/workspace/chat`
+
+Request:
+
+```json
+{
+  "message": "Tóm tắt vật liệu phù hợp",
+  "knowledgeContext": "{...bounded verified DHP evidence...}"
+}
+```
+
+`knowledgeContext` is optional and limited to 8,000 characters. It is intended only for structured evidence already returned by the DHP Knowledge endpoint. The current page body is intentionally not auto-attached, reducing accidental disclosure of customer or internal notes to external model providers.
 
 ## Zero-cost LLM policy
 
@@ -42,29 +88,11 @@ The successful gateway envelope must still prove:
 
 If no verified zero-cost cloud route is configured or quota is unavailable, the request fails closed. DHP Workspace does not automatically enable a paid provider and does not add a local-model fallback.
 
-## Admin workspace
-
-Route: `/admin/workspace`
-
-The existing `/admin/*` protection applies. The right-hand assistant calls the same-origin protected endpoint:
-
-`POST /api/admin/workspace/chat`
-
-Request:
-
-```json
-{
-  "message": "Tóm tắt kế hoạch này"
-}
-```
-
-The response reports the actual routed provider/model together with the free-tier verification flag. The browser never receives provider credentials.
-
 ## OpenAI-compatible facade
 
 Base URL:
 
-`https://<your-dhp-domain>/api/v1/llm`
+`https://dai-hai-phat-web.vercel.app/api/v1/llm`
 
 Authentication:
 
@@ -75,26 +103,18 @@ Endpoints:
 - `GET /models`
 - `POST /chat/completions`
 
-The facade advertises one stable virtual model: `dhp-free`. Clients should request this virtual model instead of pinning a volatile free upstream model. The backend remains responsible for selecting an eligible zero-cost cloud route.
+The facade advertises one stable virtual model: `dhp-free`. DSH/UMS should request this virtual model instead of pinning a volatile free upstream model. The backend remains responsible for selecting an eligible zero-cost cloud route.
 
-### Example client configuration
+## Production configuration still required
 
-```text
-Provider type: OpenAI-compatible
-Base URL: https://<your-dhp-domain>/api/v1/llm
-API key: <DHP_LLM_API_KEY>
-Model: dhp-free
-```
+The Vercel production project must have these server-side variables before the protected workspace and external LLM facade are operational:
 
-This is the intended integration point for DSH Desktop / UMS provider registries once the endpoint is deployed and verified.
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
+- `DHP_LLM_API_KEY`
 
-## v1 limitations
+The values must be configured in Vercel, never committed to Git.
 
-- text chat only;
-- non-streaming chat completions (`stream: true` is rejected);
-- no fake token-usage accounting;
-- browser editor drafts are local only;
-- no claim of unlimited free usage: upstream zero-cost quotas and availability remain finite and volatile;
-- no direct CRM/product/price reads are implied by the assistant unless those records are explicitly supplied through future DHP API context tools.
+## Next ingestion slice
 
-These limits keep the first slice small, reversible, and aligned with the accepted Capability Gateway boundary.
+The next safe server-side ingestion increment should add PDF, XLS/XLSX and image intake with explicit file limits, content-type validation, provenance metadata and a durable workspace-document store. Extracted content must remain workspace material until a separate reviewed workflow promotes it into official DHP knowledge.
