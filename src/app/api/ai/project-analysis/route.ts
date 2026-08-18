@@ -158,6 +158,8 @@ export async function POST(request: NextRequest) {
       console.warn("DHP cloud AI project analysis unavailable", {
         requestId,
         code: error.code,
+        upstreamHttpStatus: error.upstreamHttpStatus,
+        upstreamStatus: error.upstreamStatus,
       });
       return apiJsonResponse(
         {
@@ -165,8 +167,8 @@ export async function POST(request: NextRequest) {
             rateLimited
               ? "Các quota AI miễn phí khả dụng đang bận hoặc đã chạm giới hạn. Hồ sơ vẫn được giữ nguyên."
               : timedOut
-                ? "Các dịch vụ AI cloud phản hồi quá lâu. Hồ sơ vẫn được giữ nguyên để thử lại."
-                : "Phân tích AI cloud tạm thời chưa khả dụng. Hồ sơ vẫn được giữ nguyên.",
+                ? "Phân tích AI phản hồi quá lâu. Hệ thống đã thử các dịch vụ cloud khả dụng; Hồ sơ vẫn được giữ nguyên để thử lại."
+                : "Phân tích AI tạm thời chưa khả dụng. Hệ thống cloud đã thử các provider khả dụng; Hồ sơ vẫn được giữ nguyên.",
             requestId,
           ),
           code: rateLimited
