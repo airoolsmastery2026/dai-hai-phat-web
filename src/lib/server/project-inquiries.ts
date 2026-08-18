@@ -2,6 +2,7 @@ import type {
   CRMHandoffRequest,
   CRMHandoffResponse,
 } from "@/lib/ai/handoff";
+import { rememberBrainFacts } from "@/lib/server/brain-memory";
 import {
   SupabaseRestError,
   SupabaseServerConfigurationError,
@@ -95,6 +96,34 @@ function inquiryNotes(lead: CRMHandoffRequest): string {
   });
 }
 
+async function rememberProjectFacts(lead: CRMHandoffRequest): Promise<void> {
+  try {
+    await rememberBrainFacts({
+      namespace: "project-intake",
+      sourceKey: lead.sessionId,
+      kind: "project-facts",
+      sourceVersion: "1",
+      facts: {
+        intent: lead.project.intent,
+        service: lead.project.service,
+        projectType: lead.project.projectType,
+        location: lead.project.location,
+        dimensions: lead.project.dimensions,
+        style: lead.project.style,
+        material: lead.project.material,
+        budget: lead.project.budget,
+        timeline: lead.project.timeline,
+        priority: lead.project.priority,
+        surveyWindow: lead.project.surveyWindow,
+        quoteRequest: lead.project.quoteRequest,
+        imageCount: lead.project.imageCount,
+      },
+    });
+  } catch {
+    // Brain memory is an optimization layer and must never block CRM handoff.
+  }
+}
+
 export async function persistProjectInquiry(
   lead: CRMHandoffRequest,
 ): Promise<CRMHandoffResponse> {
@@ -132,6 +161,7 @@ export async function persistProjectInquiry(
       );
     }
 
+    await rememberProjectFacts(lead);
     return {
       leadId: row.id,
       receivedAt: row.updated_at || row.created_at || now,
