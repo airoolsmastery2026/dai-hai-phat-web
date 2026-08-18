@@ -30,7 +30,8 @@ test("DHP Workspace is protected, original, and keeps browser secrets out", asyn
   assert.match(workspace, /dhp-workspace-draft-v1/);
   assert.match(adminChat, /runWorkspaceChatWithModelRuntimeCapability/);
   assert.match(proxy, /\/admin\/:path\*/);
-  assert.match(proxy, /\/api\/admin\/:path\*/);
+  assert.match(proxy, /\/api\/admin\/workspace\/:path\*/);
+  assert.match(proxy, /ADMIN_WORKSPACE_API_PREFIX/);
   assert.doesNotMatch(workspace, /DHP_LLM_API_KEY|OPENROUTER_API_KEY|DHP_CONTROL_PLANE_SECRET/);
   assert.doesNotMatch(workspace, /notion\.so|notion\.com/i);
 });
