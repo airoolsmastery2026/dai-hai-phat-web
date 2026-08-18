@@ -52,13 +52,15 @@ The product serves residential gates, doors, stairs, railings, awnings, interior
 
 AI coding agents are execution backends, not architectural authorities. The repository workflow, contracts, tests, and review rules remain authoritative regardless of which model or coding environment executes the task.
 
+`.ai/FREE_MODEL_ROUTER.json` is the canonical execution-routing policy for coding agents and DSH integrations.
+
 Approved provider posture:
 
-- Codex/ChatGPT, Claude Code, Gemini CLI, Z.ai/GLM-5.2/ZCode, OpenCode, and local model runtimes may be used when available and appropriate.
-- Z.ai/GLM-5.2/ZCode is an optional high-capability coding provider; it does not replace the repository workflow or become a production dependency merely by being used for development.
+- Codex/ChatGPT, Claude Code, Gemini CLI, Z.ai/GLM/ZCode, OpenCode, DSH, and other approved **cloud** model runtimes may be used when available and appropriate.
+- Z.ai/GLM/ZCode is an optional high-capability coding provider; it does not replace the repository workflow or become a production dependency merely by being used for development.
 - Do not introduce provider-specific business logic, source-of-truth documents, or duplicated workflows solely to accommodate one coding model.
 - Do not automatically activate a paid API, paid credit path, or metered provider on behalf of the project. Paid-provider usage requires an already configured operator-owned entitlement or an explicit project decision.
-- Prefer existing/free quota or operator-provided subscriptions when they satisfy the task; local execution may be used as a fallback where practical.
+- Prefer currently verified free cloud quota/free tiers when they satisfy the task. Do not use a local LLM or Ollama as a fallback.
 - Never commit provider API keys, session tokens, browser credentials, subscription data, or private endpoints.
 - Switching coding providers must not change acceptance criteria, code-review requirements, security rules, or the canonical `npm run quality` gate.
 - A provider claim such as "free", "unlimited", or "zero-token" is not an architectural assumption. Verify current terms before relying on it operationally.
@@ -66,14 +68,13 @@ Approved provider posture:
 
 ### Free-only execution mode
 
-When the project or operator requests a free-only path, the coding-agent router must treat zero-cost execution as a hard constraint rather than a preference.
+When the project or operator requests a free-only path, the coding-agent router must treat zero-cost cloud execution as a hard constraint rather than a preference.
 
 Routing order:
 
-1. currently valid provider trial/free quota already available to the operator
-2. currently valid free quota from another approved coding provider
-3. local model/runtime when it can perform the task safely and adequately
-4. stop provider execution and continue with non-metered repository work where possible
+1. currently valid provider trial/free cloud quota already available to the operator
+2. currently valid free cloud quota from another approved coding provider
+3. stop provider execution and continue with non-metered repository work where possible
 
 Free-only invariants:
 
@@ -81,12 +82,13 @@ Free-only invariants:
 - `AUTO_TOP_UP = false`
 - `METERED_FALLBACK = false`
 - `FREE_QUOTA_FIRST = true`
-- `LOCAL_FALLBACK_ALLOWED = true`
-- a depleted or expired free quota must never trigger automatic billing, subscription purchase, prepaid-balance use, or a paid API fallback
+- `LOCAL_FALLBACK_ALLOWED = false`
+- `LOCAL_LLM_ENABLED = false`
+- a depleted or expired free quota must never trigger automatic billing, subscription purchase, prepaid-balance use, a paid API fallback, or a local-model fallback
 - do not configure a general prepaid/balance endpoint as a fallback for a free-only workflow
 - free trials are temporary capabilities, not permanent infrastructure assumptions; verify expiry and remaining quota before assigning long-running work
-- when a free provider cannot complete the task within its available quota, split the task, switch to another verified zero-cost provider, use a capable local runtime, or stop that provider path without incurring cost
-- provider selection must remain capability-based: planning, implementation, debugging, review, and verification may use different zero-cost providers while preserving one repository workflow and one source of truth
+- when a free provider cannot complete the task within its available quota, split the task, switch to another verified zero-cost cloud provider, or stop that provider path without incurring cost
+- provider selection must remain capability-based: planning, implementation, debugging, review, and verification may use different zero-cost cloud providers while preserving one repository workflow and one source of truth
 - all free-only providers remain subject to the same security, review, and `npm run quality` requirements
 
 ## Senior-agent workflow
