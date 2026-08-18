@@ -1,0 +1,13 @@
+- insert:
+    - id: dhp-project-policy
+      name: dsh-dhp-bundle
+      config:
+        project: dai-hai-phat
+        routingMode: free-cloud-only
+        routerSource: .ai/FREE_MODEL_ROUTER.json
+        providerRegistry: tools/dsh-dhp-bundle/provider-registry.json
+        preferredProvider: dhp-free
+        skillsSource: .dsh/skills
+        paidFallback: false
+        localLlmFallback: false
+        qualityGate: npm run quality
