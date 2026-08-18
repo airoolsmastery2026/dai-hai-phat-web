@@ -4,10 +4,6 @@ import type {
   ProjectEvidenceContext,
 } from "@/lib/ai/analysis";
 import {
-  analyzeProjectWithGemini,
-  GeminiProjectAnalysisError,
-} from "@/lib/server/gemini";
-import {
   analyzeProjectWithModelRuntimeCapability,
   ModelRuntimeCapabilityError,
 } from "@/lib/server/model-runtime-capability";
@@ -39,15 +35,6 @@ export class CloudAiRouterError extends Error {
 }
 
 function mapCapabilityError(error: ModelRuntimeCapabilityError): CloudAiRouterError {
-  return new CloudAiRouterError(
-    error.message,
-    error.code,
-    error.upstreamHttpStatus,
-    error.upstreamStatus,
-  );
-}
-
-function mapGeminiError(error: GeminiProjectAnalysisError): CloudAiRouterError {
   return new CloudAiRouterError(
     error.message,
     error.code,
@@ -93,36 +80,27 @@ export async function analyzeProjectWithCloudRouter(
     return { analysis: memory.analysis, cache: "HIT", fingerprint: memory.fingerprint };
   }
 
-  let lastError: CloudAiRouterError | null = null;
-  if (capabilityEligible()) {
-    try {
-      const analysis = await analyzeProjectWithModelRuntimeCapability(request, evidence);
-      return persistAndReturn(memory.fingerprint, analysis);
-    } catch (error) {
-      if (error instanceof ModelRuntimeCapabilityError) {
-        lastError = mapCapabilityError(error);
-        coolDownCapability(lastError);
-      } else {
-        lastError = new CloudAiRouterError(
-          "Model runtime capability tạm thời không khả dụng.",
-          "upstream",
-        );
-        coolDownCapability(lastError);
-      }
-    }
+  if (!capabilityEligible()) {
+    throw new CloudAiRouterError(
+      "Các model cloud miễn phí đang trong thời gian cooldown.",
+      "rate_limit",
+    );
   }
 
   try {
-    const analysis = await analyzeProjectWithGemini(request, evidence);
+    const analysis = await analyzeProjectWithModelRuntimeCapability(request, evidence);
     return persistAndReturn(memory.fingerprint, analysis);
   } catch (error) {
-    if (error instanceof GeminiProjectAnalysisError) {
-      lastError = mapGeminiError(error);
+    if (error instanceof ModelRuntimeCapabilityError) {
+      const routed = mapCapabilityError(error);
+      coolDownCapability(routed);
+      throw routed;
     }
+    const routed = new CloudAiRouterError(
+      "Model runtime capability tạm thời không khả dụng.",
+      "upstream",
+    );
+    coolDownCapability(routed);
+    throw routed;
   }
-
-  throw lastError ?? new CloudAiRouterError(
-    "Không có provider cloud miễn phí khả dụng.",
-    "configuration",
-  );
 }
