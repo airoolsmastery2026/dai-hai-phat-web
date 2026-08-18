@@ -86,3 +86,5 @@ Before claiming the DSH integration is operational:
 5. A non-streaming `POST /api/v1/llm/chat/completions` succeeds with model `dhp-free`.
 6. Quota/rate-limit failure never activates paid or local inference.
 7. Substantial repository code changes pass `npm run quality`.
+
+Repository contract coverage lives in `tests/dsh-dhp-bundle.test.mjs`; credentialed DSH Desktop runtime verification still requires operator-side access to the DHP LLM key.
