@@ -129,7 +129,7 @@ const DEFAULT_TIMEOUT_MS = 30_000;
 const OPENROUTER_CHAT_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const OPENROUTER_MODELS_URL = 'https://openrouter.ai/api/v1/models?sort=newest';
 const MODEL_PROMPT_LIMIT = 64_000;
-const MODEL_RUNTIME_TASKS = new Set(['project-analysis', 'sales-engineer']);
+const MODEL_RUNTIME_TASKS = new Set(['project-analysis', 'sales-engineer', 'workspace-chat']);
 
 function serviceKey(): string {
   const modern = Deno.env.get('SUPABASE_SECRET_KEYS');
@@ -326,6 +326,14 @@ async function executeModelRuntime(input: Record<string, unknown>): Promise<Resp
     }, 409);
   }
 
+  const structuredOutput = input.task !== 'workspace-chat';
+  const providerBody = {
+    model: 'openrouter/free',
+    messages: [{ role: 'user', content: input.prompt }],
+    temperature: input.task === 'workspace-chat' ? 0.3 : 0.2,
+    ...(structuredOutput ? { response_format: { type: 'json_object' } } : {}),
+  };
+
   const response = await fetch(OPENROUTER_CHAT_URL, {
     method: 'POST',
     headers: {
@@ -334,12 +342,7 @@ async function executeModelRuntime(input: Record<string, unknown>): Promise<Resp
     },
     cache: 'no-store',
     signal: AbortSignal.timeout(providerTimeout()),
-    body: JSON.stringify({
-      model: 'openrouter/free',
-      messages: [{ role: 'user', content: input.prompt }],
-      temperature: 0.2,
-      response_format: { type: 'json_object' },
-    }),
+    body: JSON.stringify(providerBody),
   });
 
   const text = await response.text();

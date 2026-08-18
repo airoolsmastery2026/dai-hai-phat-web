@@ -26,7 +26,7 @@ type ModelRuntimeFailureCode =
   | "upstream"
   | "invalid_output";
 
-type ModelRuntimeTask = "project-analysis" | "sales-engineer";
+type ModelRuntimeTask = "project-analysis" | "sales-engineer" | "workspace-chat";
 
 export class ModelRuntimeCapabilityError extends Error {
   constructor(
@@ -58,7 +58,7 @@ interface GatewaySuccessPayload {
   data?: ModelRuntimeData;
 }
 
-interface FreeModelRuntimeOutput {
+export interface FreeModelRuntimeOutput {
   outputText: string;
   provider: string;
   model: string;
@@ -177,6 +177,12 @@ async function executeFreeModelRuntime(
     provider: data.provider,
     model: data.model,
   };
+}
+
+export async function runWorkspaceChatWithModelRuntimeCapability(
+  prompt: string,
+): Promise<FreeModelRuntimeOutput> {
+  return executeFreeModelRuntime("workspace-chat", prompt);
 }
 
 export async function analyzeProjectWithModelRuntimeCapability(

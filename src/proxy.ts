@@ -4,6 +4,7 @@ const ADMIN_PATH_PREFIX = "/admin";
 const CONTROL_PLANE_API_PREFIX = "/api/ai/control-plane";
 const ADMIN_PUBLISHING_API_PREFIX = "/api/admin/publishing";
 const ADMIN_TELEGRAM_API_PREFIX = "/api/admin/telegram-control";
+const ADMIN_WORKSPACE_API_PREFIX = "/api/admin/workspace";
 
 function unauthorized(): NextResponse {
   return new NextResponse("Yêu cầu xác thực quản trị.", {
@@ -33,7 +34,8 @@ export function proxy(request: NextRequest): NextResponse {
     pathname.startsWith(ADMIN_PATH_PREFIX) ||
     pathname.startsWith(CONTROL_PLANE_API_PREFIX) ||
     pathname.startsWith(ADMIN_PUBLISHING_API_PREFIX) ||
-    pathname.startsWith(ADMIN_TELEGRAM_API_PREFIX);
+    pathname.startsWith(ADMIN_TELEGRAM_API_PREFIX) ||
+    pathname.startsWith(ADMIN_WORKSPACE_API_PREFIX);
   if (!protectedRoute) return NextResponse.next();
 
   const expectedUsername = process.env.ADMIN_USERNAME;
@@ -64,5 +66,6 @@ export const config = {
     "/api/ai/control-plane/:path*",
     "/api/admin/publishing/:path*",
     "/api/admin/telegram-control/:path*",
+    "/api/admin/workspace/:path*",
   ],
 };
