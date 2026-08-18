@@ -202,7 +202,7 @@ async function candidates(): Promise<Candidate[]> {
     result.set(`${candidate.provider}:${candidate.model}`, candidate);
   }
 
-  return [...result.values()].sort((a, b) => {
+  return Array.from(result.values()).sort((a, b) => {
     if (a.tier !== b.tier) return a.tier === "free" ? -1 : 1;
     return a.priority - b.priority;
   });
