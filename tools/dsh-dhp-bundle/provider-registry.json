@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "policySource": "../../.ai/FREE_MODEL_ROUTER.json",
+  "mode": "free-cloud-only",
+  "selection": "capability-quota-health",
+  "providers": [
+    {
+      "id": "openrouter-free",
+      "status": "eligible-when-configured",
+      "model": "openrouter/free",
+      "costPolicy": "free-only",
+      "notes": "Use the provider's dynamic free-model router; rotate on provider rate-limit or availability failure."
+    },
+    {
+      "id": "gemini-free-tier",
+      "status": "eligible-when-configured",
+      "model": "resolve-current-free-tier-at-runtime",
+      "costPolicy": "free-only",
+      "notes": "Use only models currently eligible for the Gemini API Free Tier. Do not enable billing automatically."
+    },
+    {
+      "id": "zai-free",
+      "status": "eligible-only-after-current-zero-cost-verification",
+      "model": "resolve-from-project-router",
+      "costPolicy": "free-only",
+      "notes": "Model availability/free entitlement is treated as volatile and must be verified before routing."
+    },
+    {
+      "id": "cloudflare-workers-ai-free",
+      "status": "alternate-when-configured",
+      "model": "resolve-current-free-plan-model",
+      "costPolicy": "free-allocation-only",
+      "notes": "Stop/rotate before usage would require a paid Workers plan."
+    }
+  ],
+  "genericOpenAICompatibleSlot": {
+    "id": "openai-compatible-free-candidate",
+    "enabled": false,
+    "purpose": "Attach future OpenAI-compatible cloud providers without changing DHP skills or orchestration.",
+    "activationRequirements": [
+      "official API/base URL verified",
+      "authentication method verified",
+      "model IDs verified",
+      "current zero-cost quota or free-tier terms verified",
+      "DSH streaming/tool protocol compatibility verified",
+      "no automatic paid fallback"
+    ]
+  },
+  "unverifiedCandidates": [
+    {
+      "label": "Antenna AI (name supplied by operator)",
+      "status": "unverified-provider-identity",
+      "enabled": false,
+      "action": "Keep disabled until an official provider/API source can be identified and its free quota verified."
+    }
+  ]
+}
