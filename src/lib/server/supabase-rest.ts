@@ -19,6 +19,12 @@ type SupabaseRpcName =
   | "dhp_telegram_admin_status"
   | "dhp_telegram_store_config";
 
+type SupabaseTable =
+  | "customer_profiles"
+  | "concept_quota_ledger"
+  | "project_inquiries"
+  | "ai_analysis_memory";
+
 export class SupabaseServerConfigurationError extends Error {
   constructor(message: string) {
     super(message);
@@ -61,7 +67,7 @@ function serverHeaders(config: SupabaseServerConfig, prefer?: string): HeadersIn
 }
 
 export async function supabaseRestRequest<T>(
-  table: "customer_profiles" | "concept_quota_ledger" | "project_inquiries",
+  table: SupabaseTable,
   options: SupabaseRestRequestOptions = {},
   config: SupabaseServerConfig = getSupabaseServerConfig(),
 ): Promise<T> {
