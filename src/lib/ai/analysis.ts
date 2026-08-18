@@ -44,7 +44,7 @@ export interface ProjectAnalysisContent {
 }
 
 export interface ProjectAnalysisResponse extends ProjectAnalysisContent {
-  provider: "gemini";
+  provider: string;
   model: string;
   generatedAt: string;
   evidenceCount: number;
@@ -247,12 +247,12 @@ export function parseProjectAnalysisOutput(
     value = JSON.parse(serialized);
   } catch {
     throw new ProjectAnalysisValidationError(
-      "Gemini trả về dữ liệu không đúng định dạng.",
+      "AI trả về dữ liệu không đúng định dạng.",
     );
   }
   if (!isRecord(value)) {
     throw new ProjectAnalysisValidationError(
-      "Gemini trả về dữ liệu không đúng định dạng.",
+      "AI trả về dữ liệu không đúng định dạng.",
     );
   }
 
