@@ -1,12 +1,13 @@
 {
-  "schemaVersion": "1.0",
-  "mode": "free-only",
-  "purpose": "Contributor/coding-agent routing only. This file does not control the public DHP customer chatbot runtime.",
+  "schemaVersion": "1.1",
+  "mode": "free-cloud-only",
+  "purpose": "Contributor/coding-agent policy aligned with DHP runtime: official cloud providers only, free entitlement first, no local runtime.",
   "hardLocks": {
     "paidApiAutoUse": false,
     "autoTopUp": false,
     "meteredFallback": false,
     "providerLockIn": false,
+    "localRuntime": false,
     "preserveRepositoryWorkflow": true,
     "preserveQualityGate": "npm run quality"
   },
@@ -31,7 +32,6 @@
     "fallbackOrder": [
       "verified-free-cloud",
       "verified-free-cloud-alternate",
-      "local-runtime",
       "stop-metered-execution"
     ]
   },
@@ -42,7 +42,7 @@
     "review": ["reasoning", "provider-diversity"],
     "vision": ["vision"],
     "quick-task": ["fast", "quota-efficient"],
-    "fallback": ["local"]
+    "fallback": ["verified-free-cloud-alternate"]
   },
   "providers": [
     {
@@ -52,7 +52,7 @@
       "models": ["glm-4.7-flash", "glm-4.5-flash", "glm-4.6v-flash"],
       "capabilities": ["reasoning", "coding", "vision"],
       "quotaSource": "provider-reported-or-operator-configured",
-      "notes": "Use only while the selected model is currently verified as zero-cost. Do not substitute GLM-5.2 unless a current free entitlement is verified."
+      "notes": "Use only while the selected model is currently verified as zero-cost. Do not substitute a paid model unless explicit paid policy is enabled."
     },
     {
       "id": "openrouter-free",
@@ -76,28 +76,19 @@
       "id": "cloudflare-workers-ai-free",
       "class": "verified-free-cloud-alternate",
       "enabledWhenConfigured": true,
-      "models": ["@cf/zai-org/glm-4.7-flash", "free-plan-current"],
+      "models": ["free-plan-current"],
       "capabilities": ["reasoning", "coding"],
       "quotaSource": "daily-free-allocation",
-      "notes": "Do not route to models that require Workers Paid. Treat HTTP 403 paid-plan-required and 429 quota exhaustion as non-billable rotation signals."
-    },
-    {
-      "id": "ollama-local",
-      "class": "local-runtime",
-      "enabledWhenConfigured": true,
-      "models": ["operator-installed-local-model"],
-      "capabilities": ["local", "reasoning", "coding"],
-      "quotaSource": "local-compute",
-      "notes": "Preferred terminal fallback when cloud free quota is unavailable and the local model is capable enough for the task."
+      "notes": "Do not route to models that require a paid plan. Treat paid-plan-required and quota exhaustion as rotation signals."
     }
   ],
   "rotationRules": [
     "Never start a request on a provider that is known to require payment for the selected model.",
     "At NEAR_LIMIT, preserve the strongest remaining free quota for hard reasoning/debugging and route routine work elsewhere.",
-    "On RATE_LIMITED or QUOTA_EXHAUSTED, rotate to the next compatible zero-cost provider without changing task state, spec, or repository context.",
+    "On RATE_LIMITED or QUOTA_EXHAUSTED, rotate to the next compatible zero-cost cloud provider without changing task state, spec, or repository context.",
     "On RECOVERED after a quota reset or cooldown, return the provider to the eligible pool automatically.",
     "Use a different provider for review when practical to reduce correlated implementation/review errors.",
-    "If no compatible zero-cost provider or capable local runtime is available, stop metered execution instead of incurring cost."
+    "If no compatible zero-cost cloud provider is available, stop metered execution instead of incurring cost."
   ],
   "verification": {
     "providerTermsMustBeCurrent": true,
