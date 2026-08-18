@@ -23,7 +23,8 @@ type SupabaseTable =
   | "customer_profiles"
   | "concept_quota_ledger"
   | "project_inquiries"
-  | "ai_analysis_memory";
+  | "ai_analysis_memory"
+  | "ai_memory_objects";
 
 export class SupabaseServerConfigurationError extends Error {
   constructor(message: string) {
