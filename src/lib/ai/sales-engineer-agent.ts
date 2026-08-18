@@ -30,7 +30,7 @@ export interface SalesEngineerAgentContent {
 }
 
 export interface SalesEngineerAgentResponse extends SalesEngineerAgentContent {
-  provider: "gemini";
+  provider: string;
   model: string;
   generatedAt: string;
   toolsUsed: SalesEngineerToolName[];
@@ -219,20 +219,27 @@ export function buildSalesEngineerPrompt(
 export function parseSalesEngineerAgentOutput(serialized: string): SalesEngineerAgentContent {
   let value: unknown;
   try {
-    value = JSON.parse(serialized);
+    value = JSON.parse(serialized) as unknown;
   } catch {
-    throw new SalesEngineerAgentValidationError("Gemini trả về dữ liệu agent không hợp lệ.");
+    throw new SalesEngineerAgentValidationError("Agent trả về JSON không hợp lệ.");
   }
   if (!isRecord(value)) {
-    throw new SalesEngineerAgentValidationError("Gemini trả về dữ liệu agent không hợp lệ.");
+    throw new SalesEngineerAgentValidationError("Agent trả về dữ liệu không hợp lệ.");
   }
+
   const nextAction = value.nextAction;
-  if (!(["ask", "analyze", "survey", "handover"] as const).includes(nextAction as never)) {
-    throw new SalesEngineerAgentValidationError("Hành động tiếp theo không hợp lệ.");
+  if (
+    nextAction !== "ask" &&
+    nextAction !== "analyze" &&
+    nextAction !== "survey" &&
+    nextAction !== "handover"
+  ) {
+    throw new SalesEngineerAgentValidationError("nextAction không hợp lệ.");
   }
+
   return {
     reply: normalizeText(value.reply, "reply", 1_200),
-    nextAction: nextAction as SalesEngineerAgentContent["nextAction"],
+    nextAction,
     missingFields: normalizeStringArray(value.missingFields, "missingFields", 8),
     toolNotes: normalizeStringArray(value.toolNotes, "toolNotes", 5),
   };
