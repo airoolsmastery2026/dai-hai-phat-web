@@ -35,7 +35,8 @@ test("core text model routing stays behind the DHP capability boundary", async (
   assert.match(salesRouter, /runSalesEngineerWithModelRuntimeCapability/);
   assert.match(salesRoute, /runSalesEngineerWithCloudRouter/);
   assert.match(capability, /requestDhpCapability\("model-runtime", \["execute"\]/);
-  assert.match(capability, /"project-analysis" \| "sales-engineer"/);
+  assert.match(capability, /"project-analysis" \| "sales-engineer" \| "workspace-chat"/);
+  assert.match(capability, /runWorkspaceChatWithModelRuntimeCapability/);
   assert.doesNotMatch(router, /Gemini|generativelanguage\.googleapis|GEMINI_API_KEY/);
   assert.doesNotMatch(salesRouter, /Gemini|generativelanguage\.googleapis|GEMINI_API_KEY/);
   assert.doesNotMatch(salesRoute, /runSalesEngineerWithGemini|GeminiSalesEngineerError/);
@@ -54,6 +55,8 @@ test("backend model runtime is cloud-only and zero-cost locked", async () => {
   assert.match(gateway, /openrouter-models-api/);
   assert.match(gateway, /project-analysis/);
   assert.match(gateway, /sales-engineer/);
+  assert.match(gateway, /workspace-chat/);
+  assert.match(gateway, /input\.task !== 'workspace-chat'/);
   assert.doesNotMatch(gateway, /ollama|local-runtime|allowPaid:\s*true/i);
 });
 
