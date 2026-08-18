@@ -24,7 +24,8 @@ type SupabaseTable =
   | "concept_quota_ledger"
   | "project_inquiries"
   | "ai_analysis_memory"
-  | "ai_memory_objects";
+  | "ai_memory_objects"
+  | "dhp_workspace_documents";
 
 export class SupabaseServerConfigurationError extends Error {
   constructor(message: string) {
