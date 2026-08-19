@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 
 import { apiJsonResponse } from "@/lib/server/api-json-response";
+import { requestDhpCapability } from "@/lib/server/capability-gateway";
 import {
   authenticateService,
   ServiceAuthenticationError,
@@ -10,6 +11,13 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 const NO_STORE_HEADERS = { "Cache-Control": "private, no-store" } as const;
+
+type CapabilityStatusPayload = {
+  data?: {
+    state?: unknown;
+    adapter?: { configured?: unknown };
+  };
+};
 
 function errorResponse(
   requestId: string,
@@ -28,22 +36,38 @@ function errorResponse(
   );
 }
 
-export function GET(request: NextRequest) {
+async function modelRuntimeConfigured(): Promise<boolean> {
+  try {
+    const response = await requestDhpCapability("model-runtime");
+    if (!response.ok) return false;
+
+    const payload = (await response.json()) as CapabilityStatusPayload;
+    return (
+      payload.data?.state === "configured" &&
+      payload.data?.adapter?.configured === true
+    );
+  } catch {
+    return false;
+  }
+}
+
+export async function GET(request: NextRequest) {
   const requestId = globalThis.crypto.randomUUID();
 
   try {
     authenticateService(request.headers, ["monitoring", "telegram-control"]);
 
-    const geminiConfigured = Boolean(process.env.GEMINI_API_KEY?.trim());
+    const configured = await modelRuntimeConfigured();
 
     return apiJsonResponse(
       {
         schemaVersion: "1.0",
         requestId,
         data: {
-          status: geminiConfigured ? "available" : "degraded",
-          provider: "gemini",
-          configured: geminiConfigured,
+          status: configured ? "available" : "degraded",
+          provider: "model-runtime",
+          configured,
+          policy: "verified-free-only",
           checkedAt: new Date().toISOString(),
         },
       },
