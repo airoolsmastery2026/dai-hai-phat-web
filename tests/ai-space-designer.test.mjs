@@ -95,6 +95,22 @@ test("Space Model rejects duplicate canonical IDs and degenerate room geometry",
   assert.ok(issueCodes(report).includes("DEGENERATE_POLYGON"));
 });
 
+test("Space Model rejects self-intersecting room polygons", () => {
+  const model = createSpaceModel();
+  model.rooms[0].polygon = [
+    { x: 0, y: 0 },
+    { x: 4_000, y: 4_000 },
+    { x: 0, y: 4_000 },
+    { x: 4_000, y: 0 },
+    { x: 5_000, y: 2_000 },
+  ];
+
+  const report = validateSpaceModel(model);
+
+  assert.equal(report.valid, false);
+  assert.ok(issueCodes(report).includes("NON_SIMPLE_POLYGON"));
+});
+
 test("proposal must target the exact current geometry revision", () => {
   const proposal = createValidProposal();
   proposal.baseRevision = "space-rev-stale";
@@ -148,6 +164,39 @@ test("placement cannot leave its room polygon, including requested clearance", (
   ];
 
   const report = evaluateSpaceProposal(createSpaceModel(), proposal);
+
+  assert.equal(report.valid, false);
+  assert.ok(issueCodes(report).includes("OUTSIDE_ROOM"));
+});
+
+test("placement cannot bridge across a concave room notch even when all corners are inside", () => {
+  const model = createSpaceModel();
+  model.structuralElements = [];
+  model.rooms[0].polygon = [
+    { x: 0, y: 0 },
+    { x: 10_000, y: 0 },
+    { x: 10_000, y: 8_000 },
+    { x: 7_000, y: 8_000 },
+    { x: 7_000, y: 3_000 },
+    { x: 3_000, y: 3_000 },
+    { x: 3_000, y: 8_000 },
+    { x: 0, y: 8_000 },
+  ];
+
+  const proposal = {
+    baseRevision: model.revision,
+    structuralEdits: [],
+    placements: [
+      {
+        id: "bridge-01",
+        roomId: "room-living",
+        kind: "cabinet",
+        bounds: { x: 2_000, y: 5_000, width: 6_000, depth: 1_000 },
+      },
+    ],
+  };
+
+  const report = evaluateSpaceProposal(model, proposal);
 
   assert.equal(report.valid, false);
   assert.ok(issueCodes(report).includes("OUTSIDE_ROOM"));
