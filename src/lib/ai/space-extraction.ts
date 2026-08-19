@@ -40,22 +40,22 @@ export type SpaceExtractionOutputCode =
   | "INVALID_SPACE_MODEL";
 
 export class SpaceExtractionValidationError extends Error {
-  constructor(
-    message: string,
-    readonly code: SpaceExtractionValidationCode,
-  ) {
+  readonly code: SpaceExtractionValidationCode;
+
+  constructor(message: string, code: SpaceExtractionValidationCode) {
     super(message);
     this.name = "SpaceExtractionValidationError";
+    this.code = code;
   }
 }
 
 export class SpaceExtractionOutputError extends Error {
-  constructor(
-    message: string,
-    readonly code: SpaceExtractionOutputCode,
-  ) {
+  readonly code: SpaceExtractionOutputCode;
+
+  constructor(message: string, code: SpaceExtractionOutputCode) {
     super(message);
     this.name = "SpaceExtractionOutputError";
+    this.code = code;
   }
 }
 
@@ -241,7 +241,11 @@ function readStructuralElements(value: unknown): SpaceStructuralElement[] {
         "INVALID_AI_OUTPUT",
       );
     }
-    if ("lock" in element || "blocksPlacement" in element || "approved" in element) {
+    if (
+      "lock" in element ||
+      "blocksPlacement" in element ||
+      "approved" in element
+    ) {
       throw new SpaceExtractionOutputError(
         "AI không được điều khiển geometry lock hoặc approval.",
         "UNTRUSTED_CONTROL_FIELD",
@@ -313,7 +317,9 @@ function readDimensionEvidence(value: unknown): SpaceDimensionEvidence[] {
   });
 }
 
-export function parseSpaceExtractionRequest(input: unknown): SpaceExtractionRequest {
+export function parseSpaceExtractionRequest(
+  input: unknown,
+): SpaceExtractionRequest {
   const request = asRecord(input);
   const image = asRecord(request?.image);
   if (!request || !image) {
@@ -329,7 +335,10 @@ export function parseSpaceExtractionRequest(input: unknown): SpaceExtractionRequ
       "INVALID_IMAGE_TYPE",
     );
   }
-  if (typeof image.dataBase64 !== "string" || !isStrictBase64(image.dataBase64)) {
+  if (
+    typeof image.dataBase64 !== "string" ||
+    !isStrictBase64(image.dataBase64)
+  ) {
     throw new SpaceExtractionValidationError(
       "Dữ liệu ảnh base64 không hợp lệ.",
       "INVALID_IMAGE_DATA",
@@ -381,8 +390,8 @@ export function buildSpaceExtractionPrompt(context = ""): string {
     "Không báo giá, không suy đoán vật liệu/nhà cung cấp, không tạo BOQ và không đưa ra quyết định kết cấu.",
     "Tọa độ candidate dùng mm và chỉ được suy ra khi nhãn kích thước nhìn thấy đủ để thiết lập tỷ lệ. Giữ hình học đơn giản, nhất quán và không tự cắt.",
     "Chỉ trả về một JSON object hợp lệ, không Markdown, theo một trong hai dạng:",
-    '{"status":"candidate","unit":"mm","rooms":[{"id":"room-...","type":"...","polygon":[{"x":0,"y":0}]}],"structuralElements":[{"id":"wall-...","roomId":"room-...","kind":"wall","bounds":{"x":0,"y":0,"width":1000,"depth":100}}],"dimensionEvidence":[{"label":"4200","valueMm":4200,"source":"visible-label"}],"assumptions":[]}',
-    'HOẶC {"status":"insufficient-evidence","reasons":["..."],"assumptions":[]}',
+    '{"status":"candidate","unit":"mm","rooms":[{"id":"room-...","type":"...","polygon":[{"x":0,"y":0},{"x":4200,"y":0},{"x":4200,"y":3600},{"x":0,"y":3600}]}],"structuralElements":[{"id":"wall-...","roomId":"room-...","kind":"wall","bounds":{"x":0,"y":0,"width":4200,"depth":100}}],"dimensionEvidence":[{"label":"4200","valueMm":4200,"source":"visible-label"},{"label":"3600","valueMm":3600,"source":"visible-label"}],"assumptions":[]}',
+    'HOẶC {"status":"insufficient-evidence","reasons":["Không thấy đủ nhãn kích thước để thiết lập geometry theo mm."],"assumptions":[]}',
     supplemental,
   ].join("\n");
 }
@@ -417,9 +426,20 @@ export function parseSpaceExtractionOutput(
   }
 
   if (payload.status === "insufficient-evidence") {
+    const reasons = readStringList(
+      payload.reasons,
+      "reasons",
+      MAX_REASON_ITEMS,
+    );
+    if (reasons.length === 0) {
+      throw new SpaceExtractionOutputError(
+        "insufficient-evidence phải nêu ít nhất một lý do.",
+        "INVALID_AI_OUTPUT",
+      );
+    }
     return {
       status: "insufficient-evidence",
-      reasons: readStringList(payload.reasons, "reasons", MAX_REASON_ITEMS),
+      reasons,
       assumptions: readStringList(
         payload.assumptions ?? [],
         "assumptions",
