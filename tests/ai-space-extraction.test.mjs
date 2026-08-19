@@ -1,14 +1,58 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { pathToFileURL } from "node:url";
+import test, { after, before } from "node:test";
 
-import {
-  buildSpaceExtractionPrompt,
-  parseSpaceExtractionOutput,
-  parseSpaceExtractionRequest,
-  SPACE_EXTRACTION_MAX_IMAGE_BYTES,
-  SpaceExtractionOutputError,
-  SpaceExtractionValidationError,
-} from "../src/lib/ai/space-extraction.ts";
+let api;
+let fixtureDir;
+
+before(async () => {
+  fixtureDir = await mkdtemp(join(tmpdir(), "dhp-space-extraction-"));
+  const extractionPath = new URL(
+    "../src/lib/ai/space-extraction.ts",
+    import.meta.url,
+  );
+  const imageUploadPath = new URL(
+    "../src/lib/ai/image-upload.ts",
+    import.meta.url,
+  );
+  const spaceDesignerPath = new URL(
+    "../src/lib/ai/space-designer.ts",
+    import.meta.url,
+  );
+
+  const [extraction, imageUpload, spaceDesigner] = await Promise.all([
+    readFile(extractionPath, "utf8"),
+    readFile(imageUploadPath, "utf8"),
+    readFile(spaceDesignerPath, "utf8"),
+  ]);
+
+  const portableExtraction = extraction
+    .replace(
+      'from "@/lib/ai/image-upload";',
+      'from "./image-upload.ts";',
+    )
+    .replace(
+      'from "@/lib/ai/space-designer";',
+      'from "./space-designer.ts";',
+    );
+
+  await Promise.all([
+    writeFile(join(fixtureDir, "space-extraction.ts"), portableExtraction),
+    writeFile(join(fixtureDir, "image-upload.ts"), imageUpload),
+    writeFile(join(fixtureDir, "space-designer.ts"), spaceDesigner),
+  ]);
+
+  api = await import(
+    `${pathToFileURL(join(fixtureDir, "space-extraction.ts")).href}?v=${Date.now()}`
+  );
+});
+
+after(async () => {
+  if (fixtureDir) await rm(fixtureDir, { recursive: true, force: true });
+});
 
 function validRequest() {
   return {
@@ -73,7 +117,7 @@ function candidateOutput() {
 }
 
 test("Space extraction accepts one bounded canonical project image", () => {
-  const parsed = parseSpaceExtractionRequest(validRequest());
+  const parsed = api.parseSpaceExtractionRequest(validRequest());
 
   assert.equal(parsed.image.mimeType, "image/png");
   assert.equal(parsed.image.dataBase64, validRequest().image.dataBase64);
@@ -85,9 +129,9 @@ test("Space extraction rejects unsupported image MIME types", () => {
   request.image.mimeType = "image/gif";
 
   assert.throws(
-    () => parseSpaceExtractionRequest(request),
+    () => api.parseSpaceExtractionRequest(request),
     (error) =>
-      error instanceof SpaceExtractionValidationError &&
+      error instanceof api.SpaceExtractionValidationError &&
       error.code === "INVALID_IMAGE_TYPE",
   );
 });
@@ -97,9 +141,9 @@ test("Space extraction rejects malformed base64", () => {
   request.image.dataBase64 = "not@@base64";
 
   assert.throws(
-    () => parseSpaceExtractionRequest(request),
+    () => api.parseSpaceExtractionRequest(request),
     (error) =>
-      error instanceof SpaceExtractionValidationError &&
+      error instanceof api.SpaceExtractionValidationError &&
       error.code === "INVALID_IMAGE_DATA",
   );
 });
@@ -107,13 +151,13 @@ test("Space extraction rejects malformed base64", () => {
 test("Space extraction rejects decoded image bytes above the v1 limit", () => {
   const request = validRequest();
   request.image.dataBase64 = Buffer.alloc(
-    SPACE_EXTRACTION_MAX_IMAGE_BYTES + 1,
+    api.SPACE_EXTRACTION_MAX_IMAGE_BYTES + 1,
   ).toString("base64");
 
   assert.throws(
-    () => parseSpaceExtractionRequest(request),
+    () => api.parseSpaceExtractionRequest(request),
     (error) =>
-      error instanceof SpaceExtractionValidationError &&
+      error instanceof api.SpaceExtractionValidationError &&
       error.code === "IMAGE_TOO_LARGE",
   );
 });
@@ -123,15 +167,15 @@ test("Space extraction rejects overlong supplemental context", () => {
   request.context = "x".repeat(2001);
 
   assert.throws(
-    () => parseSpaceExtractionRequest(request),
+    () => api.parseSpaceExtractionRequest(request),
     (error) =>
-      error instanceof SpaceExtractionValidationError &&
+      error instanceof api.SpaceExtractionValidationError &&
       error.code === "CONTEXT_TOO_LONG",
   );
 });
 
 test("Space extraction prompt forbids invented geometry and authoritative claims", () => {
-  const prompt = buildSpaceExtractionPrompt(validRequest().context);
+  const prompt = api.buildSpaceExtractionPrompt(validRequest().context);
 
   assert.match(prompt, /không được tự bịa/i);
   assert.match(prompt, /visible-label/i);
@@ -142,19 +186,31 @@ test("Space extraction prompt forbids invented geometry and authoritative claims
 });
 
 test("candidate extraction is converted into a server-owned unverified Space Model", () => {
-  const parsed = parseSpaceExtractionOutput(candidateOutput(), "space-candidate-001");
+  const parsed = api.parseSpaceExtractionOutput(
+    candidateOutput(),
+    "space-candidate-001",
+  );
 
   assert.equal(parsed.status, "candidate");
   assert.equal(parsed.candidate.model.schemaVersion, "1.0");
   assert.equal(parsed.candidate.model.unit, "mm");
   assert.equal(parsed.candidate.model.revision, "space-candidate-001");
   assert.equal(parsed.candidate.verification.geometryStatus, "candidate-unverified");
-  assert.equal(parsed.candidate.verification.dimensionStatus, "unverified-ai-extraction");
+  assert.equal(
+    parsed.candidate.verification.dimensionStatus,
+    "unverified-ai-extraction",
+  );
   assert.equal(parsed.candidate.model.structuralElements[0].lock, "hard");
   assert.equal(parsed.candidate.model.structuralElements[1].lock, "controlled");
   assert.equal(parsed.candidate.model.structuralElements[2].lock, "controlled");
-  assert.equal(parsed.candidate.model.structuralElements[0].blocksPlacement, true);
-  assert.equal(parsed.candidate.model.structuralElements[2].blocksPlacement, false);
+  assert.equal(
+    parsed.candidate.model.structuralElements[0].blocksPlacement,
+    true,
+  );
+  assert.equal(
+    parsed.candidate.model.structuralElements[2].blocksPlacement,
+    false,
+  );
 });
 
 test("AI cannot supply or relax geometry locks", () => {
@@ -163,9 +219,13 @@ test("AI cannot supply or relax geometry locks", () => {
   payload.structuralElements[0].blocksPlacement = false;
 
   assert.throws(
-    () => parseSpaceExtractionOutput(JSON.stringify(payload), "space-candidate-002"),
+    () =>
+      api.parseSpaceExtractionOutput(
+        JSON.stringify(payload),
+        "space-candidate-002",
+      ),
     (error) =>
-      error instanceof SpaceExtractionOutputError &&
+      error instanceof api.SpaceExtractionOutputError &&
       error.code === "UNTRUSTED_CONTROL_FIELD",
   );
 });
@@ -175,9 +235,13 @@ test("candidate extraction requires visible dimension evidence", () => {
   payload.dimensionEvidence = [];
 
   assert.throws(
-    () => parseSpaceExtractionOutput(JSON.stringify(payload), "space-candidate-003"),
+    () =>
+      api.parseSpaceExtractionOutput(
+        JSON.stringify(payload),
+        "space-candidate-003",
+      ),
     (error) =>
-      error instanceof SpaceExtractionOutputError &&
+      error instanceof api.SpaceExtractionOutputError &&
       error.code === "MISSING_DIMENSION_EVIDENCE",
   );
 });
@@ -192,15 +256,19 @@ test("invalid candidate geometry is rejected by the deterministic G1 validator",
   ];
 
   assert.throws(
-    () => parseSpaceExtractionOutput(JSON.stringify(payload), "space-candidate-004"),
+    () =>
+      api.parseSpaceExtractionOutput(
+        JSON.stringify(payload),
+        "space-candidate-004",
+      ),
     (error) =>
-      error instanceof SpaceExtractionOutputError &&
+      error instanceof api.SpaceExtractionOutputError &&
       error.code === "INVALID_SPACE_MODEL",
   );
 });
 
 test("insufficient evidence is fail-closed and creates no Space Model", () => {
-  const parsed = parseSpaceExtractionOutput(
+  const parsed = api.parseSpaceExtractionOutput(
     JSON.stringify({
       status: "insufficient-evidence",
       reasons: ["Không thấy kích thước hoặc tỷ lệ đủ tin cậy."],
@@ -218,9 +286,9 @@ test("insufficient evidence is fail-closed and creates no Space Model", () => {
 
 test("malformed AI JSON is rejected", () => {
   assert.throws(
-    () => parseSpaceExtractionOutput("not-json", "space-candidate-006"),
+    () => api.parseSpaceExtractionOutput("not-json", "space-candidate-006"),
     (error) =>
-      error instanceof SpaceExtractionOutputError &&
+      error instanceof api.SpaceExtractionOutputError &&
       error.code === "INVALID_AI_OUTPUT",
   );
 });
