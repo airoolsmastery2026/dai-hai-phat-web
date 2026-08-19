@@ -7,6 +7,12 @@ import {
 
 type UnknownRecord = Record<string, unknown>;
 
+interface StrictLayoutProposal extends UnknownRecord {
+  baseRevision: string;
+  structuralEdits: unknown[];
+  placements: unknown[];
+}
+
 export type SpaceLayoutGateErrorCode =
   | "INVALID_LAYOUT_REQUEST"
   | "INVALID_LAYOUT_PROPOSAL";
@@ -59,7 +65,7 @@ function hasStrictPlacementShape(value: unknown): boolean {
   );
 }
 
-function assertStrictProposalShape(value: unknown): UnknownRecord {
+function assertStrictProposalShape(value: unknown): StrictLayoutProposal {
   const proposal = asRecord(value);
   if (
     !proposal ||
@@ -74,7 +80,7 @@ function assertStrictProposalShape(value: unknown): UnknownRecord {
       "INVALID_LAYOUT_PROPOSAL",
     );
   }
-  return proposal;
+  return proposal as StrictLayoutProposal;
 }
 
 function structuralEditIssue(): SpaceValidationIssue {
