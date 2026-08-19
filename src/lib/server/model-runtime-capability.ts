@@ -15,6 +15,12 @@ import {
   type SalesEngineerAgentResponse,
   type SalesEngineerToolResult,
 } from "@/lib/ai/sales-engineer-agent";
+import {
+  buildSpaceExtractionPrompt,
+  parseSpaceExtractionOutput,
+  type SpaceExtractionRequest,
+  type SpaceExtractionResult,
+} from "@/lib/ai/space-extraction";
 import { requestDhpCapability } from "@/lib/server/capability-gateway";
 
 const MAX_GATEWAY_RESPONSE_BYTES = 128 * 1024;
@@ -26,7 +32,16 @@ type ModelRuntimeFailureCode =
   | "upstream"
   | "invalid_output";
 
-type ModelRuntimeTask = "project-analysis" | "sales-engineer" | "workspace-chat";
+type ModelRuntimeTask =
+  | "project-analysis"
+  | "sales-engineer"
+  | "workspace-chat"
+  | "space-extraction";
+
+interface ModelRuntimeImage {
+  mimeType: "image/jpeg" | "image/png" | "image/webp";
+  dataBase64: string;
+}
 
 export class ModelRuntimeCapabilityError extends Error {
   constructor(
@@ -64,6 +79,12 @@ export interface FreeModelRuntimeOutput {
   model: string;
 }
 
+export interface SpaceExtractionCapabilityResponse {
+  extraction: SpaceExtractionResult;
+  provider: string;
+  model: string;
+}
+
 function safeJson(text: string): unknown {
   try {
     return JSON.parse(text) as unknown;
@@ -72,13 +93,16 @@ function safeJson(text: string): unknown {
   }
 }
 
-function mapGatewayFailure(status: number, payload: unknown): ModelRuntimeCapabilityError {
-  const body = payload && typeof payload === "object"
-    ? payload as GatewayErrorPayload
-    : {};
-  const upstreamStatus = typeof body.upstreamStatus === "number"
-    ? body.upstreamStatus
-    : null;
+function mapGatewayFailure(
+  status: number,
+  payload: unknown,
+): ModelRuntimeCapabilityError {
+  const body =
+    payload && typeof payload === "object"
+      ? (payload as GatewayErrorPayload)
+      : {};
+  const upstreamStatus =
+    typeof body.upstreamStatus === "number" ? body.upstreamStatus : null;
 
   if (status === 409 || status === 401 || status === 403) {
     return new ModelRuntimeCapabilityError(
@@ -111,6 +135,7 @@ function mapGatewayFailure(status: number, payload: unknown): ModelRuntimeCapabi
 async function executeFreeModelRuntime(
   task: ModelRuntimeTask,
   prompt: string,
+  images: ModelRuntimeImage[] = [],
 ): Promise<FreeModelRuntimeOutput> {
   let response: Response;
   try {
@@ -122,10 +147,14 @@ async function executeFreeModelRuntime(
         freeOnly: true,
         allowPaid: false,
         prompt,
+        ...(images.length > 0 ? { images } : {}),
       }),
     });
   } catch (error) {
-    if (error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")) {
+    if (
+      error instanceof Error &&
+      (error.name === "TimeoutError" || error.name === "AbortError")
+    ) {
       throw new ModelRuntimeCapabilityError(
         "Model runtime capability phản hồi quá lâu.",
         "timeout",
@@ -226,5 +255,22 @@ export async function runSalesEngineerWithModelRuntimeCapability(
     model: result.model,
     generatedAt: new Date().toISOString(),
     toolsUsed: tools.map((tool) => tool.name),
+  };
+}
+
+export async function extractSpaceWithModelRuntimeCapability(
+  request: SpaceExtractionRequest,
+  revision: string,
+): Promise<SpaceExtractionCapabilityResponse> {
+  const result = await executeFreeModelRuntime(
+    "space-extraction",
+    buildSpaceExtractionPrompt(request.context),
+    [request.image],
+  );
+
+  return {
+    extraction: parseSpaceExtractionOutput(result.outputText, revision),
+    provider: result.provider,
+    model: result.model,
   };
 }

@@ -37,6 +37,11 @@ type OpenRouterChatResponse = {
   choices?: Array<{ message?: { content?: unknown } }>;
 };
 
+type ModelRuntimeImage = {
+  mimeType: 'image/jpeg' | 'image/png' | 'image/webp';
+  dataBase64: string;
+};
+
 const CAPABILITIES: CapabilityDefinition[] = [
   {
     id: 'agent-runtime',
@@ -129,7 +134,22 @@ const DEFAULT_TIMEOUT_MS = 30_000;
 const OPENROUTER_CHAT_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const OPENROUTER_MODELS_URL = 'https://openrouter.ai/api/v1/models?sort=newest';
 const MODEL_PROMPT_LIMIT = 64_000;
-const MODEL_RUNTIME_TASKS = new Set(['project-analysis', 'sales-engineer', 'workspace-chat']);
+const DEFAULT_BODY_LIMIT_BYTES = 1_000_000;
+const MODEL_RUNTIME_BODY_LIMIT_BYTES = 3_750_000;
+const MODEL_IMAGE_MAX_BYTES = 2_621_440;
+const MODEL_IMAGE_MAX_BASE64_CHARS = Math.ceil(MODEL_IMAGE_MAX_BYTES / 3) * 4;
+const MODEL_RUNTIME_TASKS = new Set([
+  'project-analysis',
+  'sales-engineer',
+  'workspace-chat',
+  'space-extraction',
+]);
+const MODEL_IMAGE_MIME_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+]);
+const STRICT_BASE64_PATTERN = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
 
 function serviceKey(): string {
   const modern = Deno.env.get('SUPABASE_SECRET_KEYS');
@@ -258,14 +278,71 @@ function providerTimeout(): number {
   return Number.isFinite(value) && value > 0 ? value : DEFAULT_TIMEOUT_MS;
 }
 
-async function parseBody(request: Request): Promise<Record<string, unknown>> {
-  const length = Number(request.headers.get('content-length') ?? '0');
-  if (length > 1_000_000) throw new Error('Request body exceeds 1 MB limit');
-  const value: unknown = await request.json();
+async function parseBody(
+  request: Request,
+  maxBytes = DEFAULT_BODY_LIMIT_BYTES,
+): Promise<Record<string, unknown>> {
+  const declaredLength = Number(request.headers.get('content-length') ?? '0');
+  if (Number.isFinite(declaredLength) && declaredLength > maxBytes) {
+    throw new Error(`Request body exceeds ${maxBytes} byte limit`);
+  }
+
+  const text = await request.text();
+  const actualBytes = new TextEncoder().encode(text).byteLength;
+  if (actualBytes > maxBytes) {
+    throw new Error(`Request body exceeds ${maxBytes} byte limit`);
+  }
+
+  let value: unknown;
+  try {
+    value = JSON.parse(text) as unknown;
+  } catch {
+    throw new Error('Invalid JSON object');
+  }
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new Error('Invalid JSON object');
   }
   return value as Record<string, unknown>;
+}
+
+function decodedBase64Bytes(value: string): number {
+  const padding = value.endsWith('==') ? 2 : value.endsWith('=') ? 1 : 0;
+  return (value.length / 4) * 3 - padding;
+}
+
+function isStrictBase64(value: string): boolean {
+  return value.length > 0 &&
+    value.length <= MODEL_IMAGE_MAX_BASE64_CHARS &&
+    value.length % 4 === 0 &&
+    STRICT_BASE64_PATTERN.test(value);
+}
+
+function readModelRuntimeImages(
+  task: string,
+  value: unknown,
+): ModelRuntimeImage[] | null {
+  if (task !== 'space-extraction') {
+    return value === undefined ? [] : null;
+  }
+  if (!Array.isArray(value) || value.length !== 1) return null;
+
+  const image = value[0];
+  if (!image || typeof image !== 'object' || Array.isArray(image)) return null;
+  const record = image as Record<string, unknown>;
+  if (
+    typeof record.mimeType !== 'string' ||
+    !MODEL_IMAGE_MIME_TYPES.has(record.mimeType) ||
+    typeof record.dataBase64 !== 'string' ||
+    !isStrictBase64(record.dataBase64) ||
+    decodedBase64Bytes(record.dataBase64) > MODEL_IMAGE_MAX_BYTES
+  ) {
+    return null;
+  }
+
+  return [{
+    mimeType: record.mimeType as ModelRuntimeImage['mimeType'],
+    dataBase64: record.dataBase64,
+  }];
 }
 
 function isZeroPrice(value: unknown): boolean {
@@ -318,6 +395,11 @@ async function executeModelRuntime(input: Record<string, unknown>): Promise<Resp
     return json({ error: 'Invalid zero-cost model-runtime request' }, 400);
   }
 
+  const images = readModelRuntimeImages(input.task, input.images);
+  if (!images) {
+    return json({ error: 'Invalid zero-cost model-runtime image payload' }, 400);
+  }
+
   const apiKey = Deno.env.get('OPENROUTER_API_KEY')?.trim();
   if (!apiKey) {
     return json({
@@ -327,9 +409,20 @@ async function executeModelRuntime(input: Record<string, unknown>): Promise<Resp
   }
 
   const structuredOutput = input.task !== 'workspace-chat';
+  const messageContent = input.task === 'space-extraction'
+    ? [
+      { type: 'text', text: input.prompt },
+      ...images.map((image) => ({
+        type: 'image_url',
+        image_url: {
+          url: `data:${image.mimeType};base64,${image.dataBase64}`,
+        },
+      })),
+    ]
+    : input.prompt;
   const providerBody = {
     model: 'openrouter/free',
-    messages: [{ role: 'user', content: input.prompt }],
+    messages: [{ role: 'user', content: messageContent }],
     temperature: input.task === 'workspace-chat' ? 0.3 : 0.2,
     ...(structuredOutput ? { response_format: { type: 'json_object' } } : {}),
   };
@@ -498,7 +591,12 @@ Deno.serve(async (request: Request) => {
     if (request.method === 'POST' && executeMatch) {
       const definition = CAPABILITY_BY_ID.get(executeMatch[1]);
       if (!definition) return json({ error: 'Unknown capability' }, 404);
-      const input = await parseBody(request);
+      const input = await parseBody(
+        request,
+        definition.id === 'model-runtime'
+          ? MODEL_RUNTIME_BODY_LIMIT_BYTES
+          : DEFAULT_BODY_LIMIT_BYTES,
+      );
       if (definition.id === 'model-runtime') return executeModelRuntime(input);
       return executeCapability(definition, principal, input);
     }
@@ -510,7 +608,11 @@ Deno.serve(async (request: Request) => {
       return json({ error: message }, 401);
     }
     if (message.startsWith('Forbidden:')) return json({ error: message }, 403);
-    if (message.includes('required') || message.includes('Invalid JSON') || message.includes('1 MB')) {
+    if (
+      message.includes('required') ||
+      message.includes('Invalid JSON') ||
+      message.includes('Request body exceeds')
+    ) {
       return json({ error: message }, 400);
     }
     if (message.toLowerCase().includes('timeout')) {

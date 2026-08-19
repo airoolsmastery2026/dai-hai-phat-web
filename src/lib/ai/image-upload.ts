@@ -2,11 +2,21 @@ export const MAX_PROJECT_IMAGES = 5;
 export const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 export const MAX_TOTAL_IMAGE_BYTES = 24 * 1024 * 1024;
 
-const ALLOWED_IMAGE_TYPES = new Set([
+export const PROJECT_IMAGE_MIME_TYPES = [
   "image/jpeg",
   "image/png",
   "image/webp",
-]);
+] as const;
+
+export type ProjectImageMimeType = (typeof PROJECT_IMAGE_MIME_TYPES)[number];
+
+const ALLOWED_IMAGE_TYPES = new Set<string>(PROJECT_IMAGE_MIME_TYPES);
+
+export function isAllowedProjectImageMimeType(
+  value: unknown,
+): value is ProjectImageMimeType {
+  return typeof value === "string" && ALLOWED_IMAGE_TYPES.has(value);
+}
 
 export class ImageUploadValidationError extends Error {}
 
@@ -22,7 +32,7 @@ export function validateProjectImageFiles(files: readonly File[]): File[] {
 
   let totalBytes = 0;
   for (const file of files) {
-    if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
+    if (!isAllowedProjectImageMimeType(file.type)) {
       throw new ImageUploadValidationError(
         `Ảnh “${file.name}” không đúng định dạng JPG, PNG hoặc WebP.`,
       );
