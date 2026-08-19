@@ -28,7 +28,8 @@ test("G4 derives an authenticated seal key from server-only trust material", asy
   assert.match(source, /sha256Hex\(`\$\{SEAL_KEY_DOMAIN\}\\u0000\$\{trustRoot\}`\)/);
   assert.match(source, /trustRoot\.length < 32/);
   assert.match(source, /SPACE_CONFIRMATION_NOT_CONFIGURED/);
-  assert.match(source, /confirmSpaceCandidate\(payload, sealKey\)/);
+  assert.match(source, /confirmSpaceCandidateAtBoundary\(payload, sealKey\)/);
+  assert.match(source, /space-confirmation-boundary/);
   assert.doesNotMatch(source, /NEXT_PUBLIC_(?:DHP_SPACE_CONFIRMATION_SECRET|DHP_CONTROL_PLANE_SECRET)/);
   assert.doesNotMatch(source, /console\.(?:info|warn|error)[\s\S]{0,200}(?:sealKey|trustRoot|DHP_CONTROL_PLANE_SECRET)/);
 });
