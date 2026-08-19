@@ -1,9 +1,7 @@
 import { NextRequest } from "next/server";
 
-import {
-  confirmSpaceCandidate,
-  SpaceConfirmationError,
-} from "@/lib/ai/space-confirmation";
+import { confirmSpaceCandidateAtBoundary } from "@/lib/ai/space-confirmation-boundary";
+import { SpaceConfirmationError } from "@/lib/ai/space-confirmation";
 import { apiJsonResponse } from "@/lib/server/api-json-response";
 import {
   consumeRateLimit,
@@ -147,7 +145,7 @@ export async function POST(request: NextRequest) {
   try {
     const rawBody = await readLimitedBody(request);
     const payload = JSON.parse(rawBody) as unknown;
-    const confirmed = await confirmSpaceCandidate(payload, sealKey);
+    const confirmed = await confirmSpaceCandidateAtBoundary(payload, sealKey);
 
     console.info("DHP Space Designer geometry confirmed", {
       requestId,
