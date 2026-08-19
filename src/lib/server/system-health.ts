@@ -53,13 +53,35 @@ function configuredSupabase(
   }
 }
 
+function configuredModelRuntimeGateway(env: NodeJS.ProcessEnv): ConfigurationState {
+  const keyId = env.DHP_CONTROL_PLANE_KEY_ID?.trim();
+  const secret = env.DHP_CONTROL_PLANE_SECRET?.trim();
+  if (!keyId || !secret) return "not-configured";
+
+  const explicitGateway = env.DHP_CAPABILITY_GATEWAY_URL?.trim();
+  const controlPlane = env.DHP_CONTROL_PLANE_URL?.trim();
+  const candidateUrl = explicitGateway || controlPlane;
+  if (!candidateUrl) return "not-configured";
+
+  try {
+    const parsed = new URL(candidateUrl);
+    if (parsed.protocol !== "https:") return "not-configured";
+    if (explicitGateway) return "configured";
+    return parsed.pathname.match(/\/dhp-control-plane-cloud\/?$/)
+      ? "configured"
+      : "not-configured";
+  } catch {
+    return "not-configured";
+  }
+}
+
 export function createSystemHealthSnapshot(
   env: NodeJS.ProcessEnv = process.env,
   now = new Date(),
 ): SystemHealthSnapshot {
   const services = {
     website: "operational" as const,
-    ai: configured(env.GEMINI_API_KEY),
+    ai: configuredModelRuntimeGateway(env),
     leadStore: configuredSupabase(
       env.SUPABASE_URL,
       env.SUPABASE_SERVICE_ROLE_KEY,
