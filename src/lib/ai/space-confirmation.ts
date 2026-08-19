@@ -10,6 +10,7 @@ import type {
 } from "@/lib/ai/space-extraction";
 
 const MAX_REVIEW_NOTE_CHARS = 500;
+const MIN_SEAL_KEY_CHARS = 32;
 const SHA256_HEX_PATTERN = /^[a-f0-9]{64}$/;
 const ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/;
 
@@ -46,6 +47,7 @@ export interface ConfirmedSpaceEnvelope {
   sourceRevision: string;
   geometryDigest: `sha256:${string}`;
   confirmationDigest: `sha256:${string}`;
+  confirmationSeal: `hmac-sha256:${string}`;
   confirmedRevision: string;
   model: SpaceModel;
   verification: ConfirmedSpaceVerification;
@@ -59,8 +61,10 @@ export type SpaceConfirmationErrorCode =
   | "LOCK_POLICY_VIOLATION"
   | "CLIENT_AUTHORITY_FIELD"
   | "INVALID_CONFIRMED_ENVELOPE"
+  | "INVALID_SEAL_KEY"
   | "GEOMETRY_DIGEST_MISMATCH"
   | "CONFIRMATION_DIGEST_MISMATCH"
+  | "CONFIRMATION_SEAL_MISMATCH"
   | "CONFIRMED_REVISION_MISMATCH";
 
 export class SpaceConfirmationError extends Error {
@@ -86,6 +90,15 @@ function hasOnlyKeys(record: UnknownRecord, allowed: readonly string[]): boolean
 
 function isValidRevision(value: unknown): value is string {
   return typeof value === "string" && ID_PATTERN.test(value);
+}
+
+function assertSealKey(sealKey: string): void {
+  if (typeof sealKey !== "string" || sealKey.length < MIN_SEAL_KEY_CHARS) {
+    throw new SpaceConfirmationError(
+      "Space confirmation seal key chưa được cấu hình an toàn.",
+      "INVALID_SEAL_KEY",
+    );
+  }
 }
 
 function requiredStructuralPolicy(kind: StructuralElementKind): {
@@ -173,6 +186,34 @@ async function sha256Hex(value: string): Promise<string> {
     .join("");
 }
 
+async function hmacSha256Hex(keyValue: string, value: string): Promise<string> {
+  assertSealKey(keyValue);
+  const key = await globalThis.crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(keyValue),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signature = await globalThis.crypto.subtle.sign(
+    "HMAC",
+    key,
+    new TextEncoder().encode(value),
+  );
+  return Array.from(new Uint8Array(signature))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function secureEqual(left: string, right: string): boolean {
+  if (left.length !== right.length) return false;
+  let mismatch = 0;
+  for (let index = 0; index < left.length; index += 1) {
+    mismatch |= left.charCodeAt(index) ^ right.charCodeAt(index);
+  }
+  return mismatch === 0;
+}
+
 export async function computeSpaceGeometryDigest(
   model: SpaceModel,
   sourceRevision: string,
@@ -183,7 +224,7 @@ export async function computeSpaceGeometryDigest(
   return `sha256:${digest}`;
 }
 
-async function computeConfirmationDigest(
+export async function computeSpaceConfirmationDigest(
   geometryDigest: string,
   reviews: SpaceDimensionReview[],
   sourceAssumptions: string[],
@@ -197,6 +238,40 @@ async function computeConfirmationDigest(
     }),
   );
   return `sha256:${digest}`;
+}
+
+function sealMessage(
+  sourceRevision: string,
+  geometryDigest: string,
+  confirmationDigest: string,
+  confirmedRevision: string,
+): string {
+  return JSON.stringify({
+    status: "confirmed-for-design",
+    sourceRevision,
+    geometryDigest,
+    confirmationDigest,
+    confirmedRevision,
+  });
+}
+
+async function computeConfirmationSeal(
+  sealKey: string,
+  sourceRevision: string,
+  geometryDigest: string,
+  confirmationDigest: string,
+  confirmedRevision: string,
+): Promise<`hmac-sha256:${string}`> {
+  const signature = await hmacSha256Hex(
+    sealKey,
+    sealMessage(
+      sourceRevision,
+      geometryDigest,
+      confirmationDigest,
+      confirmedRevision,
+    ),
+  );
+  return `hmac-sha256:${signature}`;
 }
 
 function parseEvidence(value: unknown): SpaceDimensionEvidence[] {
@@ -387,9 +462,9 @@ function parseReviews(
   return reviews;
 }
 
-function digestValue(value: unknown): string | null {
-  if (typeof value !== "string" || !value.startsWith("sha256:")) return null;
-  const hex = value.slice("sha256:".length);
+function digestValue(value: unknown, prefix: "sha256:" | "hmac-sha256:"): string | null {
+  if (typeof value !== "string" || !value.startsWith(prefix)) return null;
+  const hex = value.slice(prefix.length);
   return SHA256_HEX_PATTERN.test(hex) ? hex : null;
 }
 
@@ -399,7 +474,9 @@ function confirmedRevisionFor(digestHex: string): string {
 
 export async function confirmSpaceCandidate(
   input: unknown,
+  sealKey: string,
 ): Promise<ConfirmedSpaceEnvelope> {
+  assertSealKey(sealKey);
   const request = asRecord(input);
   if (!request) {
     throw new SpaceConfirmationError(
@@ -410,11 +487,12 @@ export async function confirmSpaceCandidate(
   if (
     "geometryDigest" in request ||
     "confirmationDigest" in request ||
+    "confirmationSeal" in request ||
     "confirmedRevision" in request ||
     "status" in request
   ) {
     throw new SpaceConfirmationError(
-      "Client không được tự cấp digest, revision hoặc trạng thái xác nhận.",
+      "Client không được tự cấp digest, seal, revision hoặc trạng thái xác nhận.",
       "CLIENT_AUTHORITY_FIELD",
     );
   }
@@ -436,12 +514,12 @@ export async function confirmSpaceCandidate(
     candidate.model,
     sourceRevision,
   );
-  const confirmationDigest = await computeConfirmationDigest(
+  const confirmationDigest = await computeSpaceConfirmationDigest(
     geometryDigest,
     reviews,
     candidate.verification.assumptions,
   );
-  const digestHex = digestValue(confirmationDigest);
+  const digestHex = digestValue(confirmationDigest, "sha256:");
   if (!digestHex) {
     throw new SpaceConfirmationError(
       "Không thể tạo confirmation digest hợp lệ.",
@@ -449,6 +527,13 @@ export async function confirmSpaceCandidate(
     );
   }
   const confirmedRevision = confirmedRevisionFor(digestHex);
+  const confirmationSeal = await computeConfirmationSeal(
+    sealKey,
+    sourceRevision,
+    geometryDigest,
+    confirmationDigest,
+    confirmedRevision,
+  );
   const hasAssumptions = reviews.some((review) => review.status === "assumed");
 
   return {
@@ -456,6 +541,7 @@ export async function confirmSpaceCandidate(
     sourceRevision,
     geometryDigest,
     confirmationDigest,
+    confirmationSeal,
     confirmedRevision,
     model: {
       ...structuredClone(candidate.model),
@@ -516,7 +602,9 @@ function parseConfirmedReviews(value: unknown): SpaceDimensionReview[] {
 
 export async function verifyConfirmedSpace(
   input: unknown,
+  sealKey: string,
 ): Promise<ConfirmedSpaceEnvelope> {
+  assertSealKey(sealKey);
   const envelope = asRecord(input);
   if (
     !envelope ||
@@ -525,6 +613,7 @@ export async function verifyConfirmedSpace(
       "sourceRevision",
       "geometryDigest",
       "confirmationDigest",
+      "confirmationSeal",
       "confirmedRevision",
       "model",
       "verification",
@@ -539,11 +628,12 @@ export async function verifyConfirmedSpace(
     );
   }
 
-  const geometryHex = digestValue(envelope.geometryDigest);
-  const confirmationHex = digestValue(envelope.confirmationDigest);
-  if (!geometryHex || !confirmationHex) {
+  const geometryHex = digestValue(envelope.geometryDigest, "sha256:");
+  const confirmationHex = digestValue(envelope.confirmationDigest, "sha256:");
+  const sealHex = digestValue(envelope.confirmationSeal, "hmac-sha256:");
+  if (!geometryHex || !confirmationHex || !sealHex) {
     throw new SpaceConfirmationError(
-      "Digest của confirmed Space envelope không hợp lệ.",
+      "Digest/seal của confirmed Space envelope không hợp lệ.",
       "INVALID_CONFIRMED_ENVELOPE",
     );
   }
@@ -603,7 +693,7 @@ export async function verifyConfirmedSpace(
     );
   }
 
-  const expectedConfirmationDigest = await computeConfirmationDigest(
+  const expectedConfirmationDigest = await computeSpaceConfirmationDigest(
     expectedGeometryDigest,
     reviews,
     sourceAssumptions,
@@ -623,6 +713,20 @@ export async function verifyConfirmedSpace(
     throw new SpaceConfirmationError(
       "Confirmed revision không khớp confirmation digest.",
       "CONFIRMED_REVISION_MISMATCH",
+    );
+  }
+
+  const expectedSeal = await computeConfirmationSeal(
+    sealKey,
+    envelope.sourceRevision,
+    expectedGeometryDigest,
+    expectedConfirmationDigest,
+    expectedConfirmedRevision,
+  );
+  if (!secureEqual(expectedSeal, envelope.confirmationSeal as string)) {
+    throw new SpaceConfirmationError(
+      "Server confirmation seal không hợp lệ.",
+      "CONFIRMATION_SEAL_MISMATCH",
     );
   }
 
