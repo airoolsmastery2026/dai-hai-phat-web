@@ -27,8 +27,8 @@ test("Space Designer contract defines sequential evidence gates from G0 through 
   for (let gate = 0; gate <= 9; gate += 1) {
     assert.match(contract, new RegExp(`G${gate}\\b`), `missing G${gate}`);
   }
-  assert.match(contract, /HARD geometry/i);
-  assert.match(contract, /CONTROLLED geometry/i);
+  assert.match(contract, /### HARD\b/i);
+  assert.match(contract, /### CONTROLLED\b/i);
   assert.match(contract, /Continuous execution contract/i);
   assert.match(contract, /paid\/metred provider activation not already explicitly authorized/i);
 });
