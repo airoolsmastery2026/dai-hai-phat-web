@@ -19,7 +19,10 @@ const health = await import(
 );
 
 const completeEnv = {
-  GEMINI_API_KEY: "gemini-secret",
+  DHP_CONTROL_PLANE_URL:
+    "https://example.supabase.co/functions/v1/dhp-control-plane-cloud",
+  DHP_CONTROL_PLANE_KEY_ID: "monitoring-key",
+  DHP_CONTROL_PLANE_SECRET: "control-plane-secret",
   CRM_WEBHOOK_URL: "https://crm.example.com/webhooks/lead",
   CRM_WEBHOOK_TOKEN: "crm-secret",
   APILAYER_API_KEY: "apilayer-secret",
@@ -34,7 +37,34 @@ test("health snapshot checks configuration without exposing secret values", () =
   assert.equal(snapshot.services.ai, "configured");
   assert.equal(snapshot.services.crm, "configured");
   assert.equal(snapshot.services.phoneVerification, "configured");
-  assert.doesNotMatch(serialized, /gemini-secret|crm-secret|apilayer-secret|ecosystem-secret/);
+  assert.doesNotMatch(
+    serialized,
+    /control-plane-secret|crm-secret|apilayer-secret|ecosystem-secret/,
+  );
+});
+
+test("AI health requires an authenticated HTTPS capability gateway boundary", () => {
+  const missingGatewaySecret = health.createSystemHealthSnapshot({
+    ...completeEnv,
+    DHP_CONTROL_PLANE_SECRET: "",
+  });
+  const insecureControlPlane = health.createSystemHealthSnapshot({
+    ...completeEnv,
+    DHP_CONTROL_PLANE_URL:
+      "http://example.supabase.co/functions/v1/dhp-control-plane-cloud",
+  });
+  const unrelatedControlPlanePath = health.createSystemHealthSnapshot({
+    ...completeEnv,
+    DHP_CONTROL_PLANE_URL:
+      "https://example.supabase.co/functions/v1/not-the-control-plane",
+  });
+
+  assert.equal(missingGatewaySecret.state, "degraded");
+  assert.equal(missingGatewaySecret.services.ai, "not-configured");
+  assert.equal(insecureControlPlane.state, "degraded");
+  assert.equal(insecureControlPlane.services.ai, "not-configured");
+  assert.equal(unrelatedControlPlanePath.state, "degraded");
+  assert.equal(unrelatedControlPlanePath.services.ai, "not-configured");
 });
 
 test("critical sales dependencies degrade protected health when not ready", () => {
