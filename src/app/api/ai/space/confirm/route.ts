@@ -18,6 +18,7 @@ export const runtime = "nodejs";
 const BODY_LIMIT_BYTES = 256 * 1024;
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 20;
+const SEAL_KEY_DOMAIN = "dhp-space-confirmation-v1";
 
 class RequestBodyTooLargeError extends Error {}
 
@@ -43,9 +44,25 @@ async function readLimitedBody(request: NextRequest): Promise<string> {
   return body + decoder.decode();
 }
 
-function confirmationSealKey(): string | null {
-  const value = process.env.DHP_SPACE_CONFIRMATION_SECRET?.trim();
-  return value && value.length >= 32 ? value : null;
+async function sha256Hex(value: string): Promise<string> {
+  const digest = await globalThis.crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(value),
+  );
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function confirmationSealKey(): Promise<string | null> {
+  const dedicated = process.env.DHP_SPACE_CONFIRMATION_SECRET?.trim();
+  const trustRoot = dedicated || process.env.DHP_CONTROL_PLANE_SECRET?.trim();
+  if (!trustRoot || trustRoot.length < 32) return null;
+
+  // Domain separation prevents using the control-plane credential itself as the
+  // HMAC key. A dedicated confirmation secret can replace the fallback later
+  // without changing the confirmation contract.
+  return sha256Hex(`${SEAL_KEY_DOMAIN}\u0000${trustRoot}`);
 }
 
 function confirmationErrorStatus(error: SpaceConfirmationError): number {
@@ -109,9 +126,11 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const sealKey = confirmationSealKey();
+  const sealKey = await confirmationSealKey();
   if (!sealKey) {
-    console.error("DHP Space confirmation secret is unavailable", { requestId });
+    console.error("DHP Space confirmation trust root is unavailable", {
+      requestId,
+    });
     return apiJsonResponse(
       {
         error: formatSupportReference(
