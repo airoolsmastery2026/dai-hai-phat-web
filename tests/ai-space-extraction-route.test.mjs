@@ -6,6 +6,10 @@ const routePath = new URL(
   "../src/app/api/ai/space/extract/route.ts",
   import.meta.url,
 );
+const extractionPath = new URL(
+  "../src/lib/ai/space-extraction.ts",
+  import.meta.url,
+);
 
 test("Space extraction route is bounded, same-origin, rate limited and non-persistent", async () => {
   const source = await readFile(routePath, "utf8");
@@ -38,4 +42,15 @@ test("Space extraction route does not log or return uploaded base64 image data",
 
   assert.doesNotMatch(loggingSection, /dataBase64|extractionRequest\.image/);
   assert.doesNotMatch(source, /image:\s*extractionRequest\.image/);
+});
+
+test("G2 v1 remains image-only and does not quietly add PDF or OCR handling", async () => {
+  const [route, extraction] = await Promise.all([
+    readFile(routePath, "utf8"),
+    readFile(extractionPath, "utf8"),
+  ]);
+
+  assert.doesNotMatch(route, /application\/pdf|pdfjs|ocr/i);
+  assert.doesNotMatch(extraction, /application\/pdf|pdfjs|ocr/i);
+  assert.match(extraction, /isAllowedProjectImageMimeType/);
 });
