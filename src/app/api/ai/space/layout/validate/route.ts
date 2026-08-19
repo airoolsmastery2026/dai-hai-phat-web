@@ -1,7 +1,10 @@
 import { NextRequest } from "next/server";
 
-import { confirmSpaceCandidateAtBoundary } from "@/lib/ai/space-confirmation-boundary";
 import { SpaceConfirmationError } from "@/lib/ai/space-confirmation";
+import {
+  evaluateConfirmedLayout,
+  SpaceLayoutGateError,
+} from "@/lib/ai/space-layout-gate";
 import { apiJsonResponse } from "@/lib/server/api-json-response";
 import {
   consumeRateLimit,
@@ -14,9 +17,9 @@ import { formatSupportReference } from "@/lib/server/support-reference";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const BODY_LIMIT_BYTES = 256 * 1024;
+const BODY_LIMIT_BYTES = 512 * 1024;
 const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX_REQUESTS = 20;
+const RATE_LIMIT_MAX_REQUESTS = 30;
 
 class RequestBodyTooLargeError extends Error {}
 
@@ -43,14 +46,7 @@ async function readLimitedBody(request: NextRequest): Promise<string> {
 }
 
 function confirmationErrorStatus(error: SpaceConfirmationError): number {
-  if (error.code === "INVALID_SEAL_KEY") return 503;
-  if (
-    error.code === "INVALID_CONFIRMATION_REQUEST" ||
-    error.code === "CLIENT_AUTHORITY_FIELD"
-  ) {
-    return 400;
-  }
-  return 422;
+  return error.code === "INVALID_SEAL_KEY" ? 503 : 422;
 }
 
 export async function POST(request: NextRequest) {
@@ -76,7 +72,7 @@ export async function POST(request: NextRequest) {
   }
 
   const rateLimit = consumeRateLimit(
-    "ai-space-confirmation",
+    "ai-space-layout-validation",
     getRequestClientKey(request.headers),
     {
       maxRequests: RATE_LIMIT_MAX_REQUESTS,
@@ -86,7 +82,7 @@ export async function POST(request: NextRequest) {
   if (!rateLimit.allowed) {
     return apiJsonResponse(
       {
-        error: "Quá nhiều yêu cầu xác nhận mặt bằng. Vui lòng thử lại sau.",
+        error: "Quá nhiều yêu cầu kiểm tra layout. Vui lòng thử lại sau.",
         code: "RATE_LIMITED",
         requestId,
       },
@@ -98,20 +94,18 @@ export async function POST(request: NextRequest) {
   const declaredLength = Number(request.headers.get("content-length") ?? "0");
   if (Number.isFinite(declaredLength) && declaredLength > BODY_LIMIT_BYTES) {
     return apiJsonResponse(
-      { error: "Dữ liệu xác nhận mặt bằng vượt quá giới hạn.", requestId },
+      { error: "Dữ liệu layout vượt quá giới hạn.", requestId },
       413,
     );
   }
 
   const sealKey = await getSpaceConfirmationSealKey();
   if (!sealKey) {
-    console.error("DHP Space confirmation trust root is unavailable", {
-      requestId,
-    });
+    console.error("DHP Space layout trust root is unavailable", { requestId });
     return apiJsonResponse(
       {
         error: formatSupportReference(
-          "Chức năng khóa mặt bằng chưa được cấu hình an toàn.",
+          "Chức năng kiểm tra layout chưa được cấu hình an toàn.",
           requestId,
         ),
         code: "SPACE_CONFIRMATION_NOT_CONFIGURED",
@@ -124,27 +118,16 @@ export async function POST(request: NextRequest) {
   try {
     const rawBody = await readLimitedBody(request);
     const payload = JSON.parse(rawBody) as unknown;
-    const confirmed = await confirmSpaceCandidateAtBoundary(payload, sealKey);
-
-    console.info("DHP Space Designer geometry confirmed", {
-      requestId,
-      sourceRevision: confirmed.sourceRevision,
-      confirmedRevision: confirmed.confirmedRevision,
-      dimensionStatus: confirmed.verification.dimensionStatus,
-    });
+    const report = await evaluateConfirmedLayout(payload, sealKey);
 
     return apiJsonResponse(
-      {
-        requestId,
-        gate: "G4_GEOMETRY_CONFIRMATION",
-        confirmed,
-      },
-      200,
+      { requestId, ...report },
+      report.valid ? 200 : 422,
     );
   } catch (error) {
     if (error instanceof RequestBodyTooLargeError) {
       return apiJsonResponse(
-        { error: "Dữ liệu xác nhận mặt bằng vượt quá giới hạn.", requestId },
+        { error: "Dữ liệu layout vượt quá giới hạn.", requestId },
         413,
       );
     }
@@ -154,32 +137,34 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
+    if (error instanceof SpaceLayoutGateError) {
+      return apiJsonResponse(
+        { error: error.message, code: error.code, requestId },
+        400,
+      );
+    }
     if (error instanceof SpaceConfirmationError) {
-      console.warn("DHP Space Designer confirmation rejected", {
+      console.warn("DHP Space layout rejected untrusted confirmation", {
         requestId,
         code: error.code,
       });
       return apiJsonResponse(
-        {
-          error: error.message,
-          code: error.code,
-          requestId,
-        },
+        { error: error.message, code: error.code, requestId },
         confirmationErrorStatus(error),
       );
     }
 
-    console.error("DHP Space Designer confirmation failed", {
+    console.error("DHP Space layout validation failed", {
       requestId,
       error: error instanceof Error ? error.message : "Unknown error",
     });
     return apiJsonResponse(
       {
         error: formatSupportReference(
-          "Không thể khóa mặt bằng lúc này.",
+          "Không thể kiểm tra layout lúc này.",
           requestId,
         ),
-        code: "SPACE_CONFIRMATION_FAILED",
+        code: "SPACE_LAYOUT_VALIDATION_FAILED",
         requestId,
       },
       500,
