@@ -174,7 +174,7 @@ test("Space extraction rejects overlong supplemental context", () => {
   );
 });
 
-test("Space extraction prompt forbids invented geometry and authoritative claims", () => {
+test("Space extraction prompt forbids invented geometry and uses a valid polygon example", () => {
   const prompt = api.buildSpaceExtractionPrompt(validRequest().context);
 
   assert.match(prompt, /không được tự bịa/i);
@@ -183,6 +183,10 @@ test("Space extraction prompt forbids invented geometry and authoritative claims
   assert.match(prompt, /không.*lock/i);
   assert.match(prompt, /không.*giá/i);
   assert.match(prompt, /JSON object/i);
+  assert.match(
+    prompt,
+    /"polygon":\[\{"x":0,"y":0\},\{"x":4200,"y":0\},\{"x":4200,"y":3600\},\{"x":0,"y":3600\}\]/,
+  );
 });
 
 test("candidate extraction is converted into a server-owned unverified Space Model", () => {
@@ -284,9 +288,26 @@ test("insufficient evidence is fail-closed and creates no Space Model", () => {
   });
 });
 
+test("insufficient evidence must explain why geometry was not created", () => {
+  assert.throws(
+    () =>
+      api.parseSpaceExtractionOutput(
+        JSON.stringify({
+          status: "insufficient-evidence",
+          reasons: [],
+          assumptions: [],
+        }),
+        "space-candidate-006",
+      ),
+    (error) =>
+      error instanceof api.SpaceExtractionOutputError &&
+      error.code === "INVALID_AI_OUTPUT",
+  );
+});
+
 test("malformed AI JSON is rejected", () => {
   assert.throws(
-    () => api.parseSpaceExtractionOutput("not-json", "space-candidate-006"),
+    () => api.parseSpaceExtractionOutput("not-json", "space-candidate-007"),
     (error) =>
       error instanceof api.SpaceExtractionOutputError &&
       error.code === "INVALID_AI_OUTPUT",
