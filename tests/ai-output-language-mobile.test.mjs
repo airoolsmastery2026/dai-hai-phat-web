@@ -134,23 +134,25 @@ test("free model runtime applies the language gate before returning project anal
   assert.match(runtimeSource, /data\.verifiedFree !== true/);
 });
 
-test("chat drawer stays inside iPhone visual viewport and safe areas", async () => {
-  const drawerSource = await readFile(
-    new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
+test("consultation panel remains safe on narrow iPhone layouts", async () => {
+  const panelSource = await readFile(
+    new URL("../src/components/ai/AIChatDrawerPanel.tsx", import.meta.url),
     "utf8",
   );
   const composerSource = await readFile(
     new URL("../src/components/ai/AIChatAnswerComposer.tsx", import.meta.url),
     "utf8",
   );
+  const floatingSource = await readFile(
+    new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
+    "utf8",
+  );
 
-  assert.match(drawerSource, /h-\[100dvh\]/);
-  assert.match(drawerSource, /max-h-\[100dvh\]/);
-  assert.match(drawerSource, /max-w-\[100vw\]/);
-  assert.match(drawerSource, /overflow-x-hidden/);
-  assert.match(drawerSource, /safe-area-inset-left/);
-  assert.match(drawerSource, /safe-area-inset-right/);
-  assert.match(drawerSource, /safe-area-inset-bottom/);
-  assert.equal(drawerSource.includes("w-screen"), false);
+  assert.match(panelSource, /w-full max-w-full/);
+  assert.match(panelSource, /overflow-x-hidden/);
+  assert.match(panelSource, /min-w-0/);
+  assert.equal(panelSource.includes("w-screen"), false);
   assert.match(composerSource, /text-base/);
+  assert.match(floatingSource, /safe-area-inset-bottom/);
+  assert.match(floatingSource, /safe-area-inset-right/);
 });
