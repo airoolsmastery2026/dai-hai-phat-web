@@ -22,6 +22,10 @@ import {
   type SpaceExtractionResult,
 } from "@/lib/ai/space-extraction";
 import { requestDhpCapability } from "@/lib/server/capability-gateway";
+import {
+  executeVercelAiSdkText,
+  isVercelAiSdkTextRuntimeEnabled,
+} from "@/lib/server/vercel-ai-sdk-runtime";
 
 const MAX_GATEWAY_RESPONSE_BYTES = 128 * 1024;
 
@@ -132,7 +136,7 @@ function mapGatewayFailure(
   );
 }
 
-async function executeFreeModelRuntime(
+async function executeGatewayModelRuntime(
   task: ModelRuntimeTask,
   prompt: string,
   images: ModelRuntimeImage[] = [],
@@ -206,6 +210,26 @@ async function executeFreeModelRuntime(
     provider: data.provider,
     model: data.model,
   };
+}
+
+async function executeFreeModelRuntime(
+  task: ModelRuntimeTask,
+  prompt: string,
+  images: ModelRuntimeImage[] = [],
+): Promise<FreeModelRuntimeOutput> {
+  const canUseAiSdk =
+    images.length === 0 && isVercelAiSdkTextRuntimeEnabled();
+
+  if (canUseAiSdk) {
+    try {
+      return await executeVercelAiSdkText(prompt);
+    } catch {
+      // The canonical DHP free-only gateway remains the fail-safe. A direct
+      // AI SDK provider failure must never break the existing production path.
+    }
+  }
+
+  return executeGatewayModelRuntime(task, prompt, images);
 }
 
 export async function runWorkspaceChatWithModelRuntimeCapability(
