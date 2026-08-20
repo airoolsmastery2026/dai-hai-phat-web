@@ -5,11 +5,12 @@ import test from "node:test";
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("public CTA contract keeps one consultation entry and a separate Zalo channel", async () => {
-  const [navigation, floating, aiPage, aiExperience] = await Promise.all([
+  const [navigation, floating, aiPage, aiExperience, hero] = await Promise.all([
     read("src/components/layout/SiteNavigation.tsx"),
     read("src/components/layout/FloatingCta.tsx"),
     read("src/app/ai-tu-van/page.tsx"),
     read("src/components/sections/AIOfficeExperience.tsx"),
+    read("src/components/sections/HeroSection.tsx"),
   ]);
 
   assert.match(navigation, /Bắt đầu tư vấn/);
@@ -25,6 +26,11 @@ test("public CTA contract keeps one consultation entry and a separate Zalo chann
   assert.match(aiPage, /Bắt đầu tư vấn/);
   assert.match(aiPage, /Chuẩn bị báo giá/);
   assert.doesNotMatch(aiPage, /Mở trò chuyện|Bắt đầu trò chuyện/);
+
+  assert.match(hero, /Bắt đầu tư vấn/);
+  assert.match(hero, /Chuẩn bị báo giá/);
+  assert.match(hero, /\/ai-tu-van\?ai=1#consultation/);
+  assert.doesNotMatch(hero, /Live workflow|Mở chat ngay|Cần gấp\? Gọi kỹ sư/);
 
   const mainFlowIndex = aiExperience.indexOf("<AIOfficeSection");
   const voiceIndex = aiExperience.indexOf("<GeminiLivePanel");
