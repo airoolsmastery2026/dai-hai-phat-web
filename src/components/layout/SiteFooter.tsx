@@ -19,6 +19,9 @@ export function SiteFooter() {
           <p className="mt-[var(--space-1)] max-w-md text-sm leading-6 text-[var(--color-text-dark-subtle)]">
             Thiết kế và thi công theo hiện trạng nhà ở, có kênh tư vấn tiếp nhận nhu cầu 24/7 và kỹ sư kiểm tra phương án trước báo giá.
           </p>
+          <p className="mt-[var(--space-2)] max-w-md text-sm leading-6 text-[var(--color-text-dark-subtle)]">
+            Văn phòng / xưởng: {COMPANY_CONFIG.address}
+          </p>
         </div>
 
         <div>
@@ -57,6 +60,11 @@ export function SiteFooter() {
             <li>
               <a href={COMPANY_CONFIG.socials.zalo1} target="_blank" rel="noreferrer" className="transition hover:text-white">
                 Zalo
+              </a>
+            </li>
+            <li>
+              <a href={COMPANY_CONFIG.googleMapsUrl} target="_blank" rel="noreferrer" className="transition hover:text-white">
+                Xem bản đồ
               </a>
             </li>
           </ul>
