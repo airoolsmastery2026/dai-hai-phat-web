@@ -19,10 +19,14 @@ test("public homepage keeps human trust language and routes consultation to its 
   );
 
   assert.match(sources.navigation, /Văn phòng kỹ thuật số/);
-  assert.match(sources.navigation, /Tư vấn ngay/);
-  assert.match(sources.navigation, /href="\/ai-tu-van\?ai=1"/);
+  assert.match(sources.navigation, /Bắt đầu tư vấn/);
+  assert.match(
+    sources.navigation,
+    /const CONSULTATION_HREF = "\/ai-tu-van\?ai=1#consultation"/,
+  );
   assert.match(sources.hero, /Văn phòng kỹ thuật số 24\/7/);
-  assert.match(sources.hero, /Mở chat ngay/);
+  assert.match(sources.hero, /Bắt đầu tư vấn/);
+  assert.match(sources.hero, /Chuẩn bị báo giá/);
   assert.match(sources.services, /Chọn nhanh hạng mục bạn quan tâm/);
   assert.match(sources.services, /service-ticker-track/);
   assert.doesNotMatch(sources.page, /AIOfficeRouteEntry|GEMINI_API_KEY/);
@@ -35,6 +39,7 @@ test("public homepage keeps human trust language and routes consultation to its 
     sources.projects,
     sources.contact,
   ].join("\n");
+  assert.doesNotMatch(publicCopy, /Tư vấn ngay|Mở trò chuyện|Bắt đầu trò chuyện/);
   assert.doesNotMatch(publicCopy, />[^<]*(?:Trợ lý AI|Chat AI|Tư vấn AI|AI tiếp nhận)[^<]*</i);
 });
 
@@ -67,7 +72,7 @@ test("homepage keeps a compact human-first hierarchy before project proof", asyn
     );
   }
 
-  assert.match(sources.hero, /lg:min-h-\[24rem\]/);
+  assert.match(sources.hero, /py-\[var\(--space-8\)\]/);
   assert.match(sources.services, /SERVICES\.slice\(0, 4\)/);
   assert.match(sources.services, /grid-cols-2/);
   assert.match(sources.services, /lg:grid-cols-4/);

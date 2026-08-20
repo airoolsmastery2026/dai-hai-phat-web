@@ -25,11 +25,11 @@ export function AIOfficeExperience({
       <AIOfficeControllers service={servicePreset} />
       <AIServiceConflictNotice requestedService={servicePreset} />
       <AIOfficeErrorBoundary resetKey={sessionKey}>
+        <SalesEngineerAgentPanel />
+        <AIOfficeSection key={sessionKey} />
         {liveVoiceEnabled ? (
           <GeminiLivePanel servicePreset={servicePreset} />
         ) : null}
-        <SalesEngineerAgentPanel />
-        <AIOfficeSection key={sessionKey} />
       </AIOfficeErrorBoundary>
     </>
   );

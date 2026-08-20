@@ -10,6 +10,8 @@ import { NAV_ITEMS } from "@/lib/theme";
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+const CONSULTATION_HREF = "/ai-tu-van?ai=1#consultation";
+
 export function SiteNavigation() {
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -117,11 +119,11 @@ export function SiteNavigation() {
             {COMPANY_CONFIG.phones[0].display}
           </a>
           <Link
-            href="/ai-tu-van?ai=1"
+            href={CONSULTATION_HREF}
             className="inline-flex min-h-11 items-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-4)] py-[var(--space-2)] text-sm font-bold text-[var(--color-primary-contrast)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-primary-hover)]"
           >
             <Bot className="h-4 w-4" aria-hidden="true" />
-            Tư vấn ngay
+            Bắt đầu tư vấn
           </Link>
         </div>
 
@@ -164,12 +166,12 @@ export function SiteNavigation() {
           </nav>
           <div className="grid grid-cols-2 gap-[var(--space-2)] pt-[var(--space-2)]">
             <Link
-              href="/ai-tu-van?ai=1"
+              href={CONSULTATION_HREF}
               onClick={() => closeMenu()}
               className="flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] bg-[var(--color-primary)] px-[var(--space-3)] text-center text-sm font-bold text-[var(--color-primary-contrast)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Bot className="h-4 w-4" aria-hidden="true" />
-              Trợ lý tư vấn
+              Bắt đầu tư vấn
             </Link>
             <a
               href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
@@ -177,7 +179,7 @@ export function SiteNavigation() {
               className="flex min-h-11 items-center justify-center gap-[var(--space-2)] rounded-[var(--radius-md)] border border-[var(--color-border)] px-[var(--space-3)] text-center text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
-              Gọi ngay
+              Gọi kỹ sư
             </a>
           </div>
         </div>

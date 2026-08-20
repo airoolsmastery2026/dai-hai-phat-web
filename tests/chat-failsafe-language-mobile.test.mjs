@@ -22,7 +22,7 @@ const contactVerification = readFileSync(
   new URL("../src/lib/ai/contact-verification.ts", import.meta.url),
   "utf8",
 );
-const drawer = readFileSync(
+const floating = readFileSync(
   new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
   "utf8",
 );
@@ -70,13 +70,14 @@ test("assistant acknowledgements explain business meaning instead of repeating o
   assert.match(contactVerification, /quyền sở hữu vẫn cần OTP/i);
 });
 
-test("iPhone drawer keeps width, dynamic viewport and non-zooming inputs guarded", () => {
-  assert.match(drawer, /w-full max-w-full/);
-  assert.match(drawer, /max-h-\[100dvh\]/);
-  assert.match(drawer, /safe-area-inset-bottom/);
-  assert.doesNotMatch(drawer, /\bw-screen\b/);
+test("iPhone consultation keeps width, non-zooming inputs and Zalo safe areas guarded", () => {
+  assert.match(panel, /w-full max-w-full/);
+  assert.match(panel, /overflow-x-hidden/);
+  assert.match(panel, /min-w-0/);
+  assert.doesNotMatch(panel, /\bw-screen\b/);
+  assert.match(floating, /safe-area-inset-bottom/);
+  assert.match(floating, /safe-area-inset-right/);
   assert.match(composer, /px-3 text-base/);
   assert.match(composer, /grid-cols-\[minmax\(0,1fr\)_2\.75rem\]/);
-  assert.match(panel, /overflow-x-hidden/);
   assert.match(panel, /\[overflow-wrap:anywhere\]/);
 });

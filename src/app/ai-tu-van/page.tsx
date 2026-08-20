@@ -57,9 +57,9 @@ export default function AITuVanPage() {
         highlights={["Tiếp nhận 24/7", "Phân tích ảnh & hồ sơ", "Chuyển kỹ sư xác nhận"]}
         actions={
           <>
-            <Button href="/ai-tu-van?ai=1">
+            <Button href="#consultation">
               <Bot className="h-4 w-4" aria-hidden="true" />
-              Mở trò chuyện
+              Bắt đầu tư vấn
             </Button>
             <Button href="/bao-gia" variant="secondary">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
@@ -69,9 +69,11 @@ export default function AITuVanPage() {
         }
       />
 
-      <Suspense fallback={<AIOfficeLoadingState />}>
-        <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
-      </Suspense>
+      <section id="consultation" aria-label="Khu vực tư vấn trực tuyến" className="scroll-mt-20">
+        <Suspense fallback={<AIOfficeLoadingState />}>
+          <AIOfficeRouteEntry liveVoiceEnabled={liveVoiceEnabled} />
+        </Suspense>
+      </section>
 
       <section className="py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
         <Container>
@@ -92,14 +94,10 @@ export default function AITuVanPage() {
             ))}
           </div>
 
-          <div className="mt-[var(--space-6)] flex flex-col gap-[var(--space-3)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-5)] sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">
+          <div className="mt-[var(--space-6)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-5)]">
+            <p className="max-w-3xl text-sm leading-6 text-[var(--color-text-muted)]">
               Hệ thống hỗ trợ thu thập và sắp xếp thông tin. Kích thước, vật liệu, biện pháp thi công và giá trị hợp đồng vẫn được kỹ sư Đại Hải Phát xác nhận trước khi chốt.
             </p>
-            <Button href="/ai-tu-van?ai=1" className="shrink-0">
-              <Bot className="h-4 w-4" aria-hidden="true" />
-              Bắt đầu trò chuyện
-            </Button>
           </div>
         </Container>
       </section>

@@ -183,9 +183,12 @@ test("homepage conversion surfaces stay compact while consultation remains fully
   const aiOffice = read("src/components/sections/AIOfficeSection.tsx");
   const aiOfficeLoading = read("src/components/sections/AIOfficeLoadingState.tsx");
 
-  assert.match(hero, /<Button href="\/ai-tu-van\?ai=1">/);
+  assert.match(hero, /<Button href="\/ai-tu-van\?ai=1#consultation">/);
+  assert.match(hero, /Bắt đầu tư vấn/);
+  assert.match(hero, /Chuẩn bị báo giá/);
   assert.match(hero, /Thiết kế &amp; thi công/);
   assert.match(hero, /hero-luxury-materials-v1\.webp/);
+  assert.match(hero, /py-\[var\(--space-8\)\]/);
   assert.doesNotMatch(hero, /min-h-\[calc\(100svh/);
   assert.doesNotMatch(home, /AIOfficeRouteEntry|AIOfficeLoadingState/);
   assert.match(consultation, /AIOfficeRouteEntry/);

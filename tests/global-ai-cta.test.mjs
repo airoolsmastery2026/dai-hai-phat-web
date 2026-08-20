@@ -8,8 +8,12 @@ test("keeps the public consultation assistant reachable from global navigation",
     "utf8",
   );
 
-  assert.match(navigation, /href="\/ai-tu-van\?ai=1"/);
-  assert.match(navigation, /Tư vấn ngay/);
-  assert.match(navigation, /Trợ lý tư vấn/);
+  assert.match(
+    navigation,
+    /const CONSULTATION_HREF = "\/ai-tu-van\?ai=1#consultation"/,
+  );
+  assert.match(navigation, /href=\{CONSULTATION_HREF\}/);
+  assert.match(navigation, /Bắt đầu tư vấn/);
+  assert.doesNotMatch(navigation, /Tư vấn ngay|Mở trò chuyện|Bắt đầu trò chuyện/);
   assert.doesNotMatch(navigation, /Trợ lý AI|Chat AI|Tư vấn AI/i);
 });

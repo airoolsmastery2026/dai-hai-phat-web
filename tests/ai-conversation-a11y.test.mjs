@@ -46,7 +46,7 @@ test("mobile consultation uses one compact, accessible chat surface", async () =
   assert.match(live, /className="hidden[^"\n]*lg:block"/);
 });
 
-test("floating consultation keeps mobile boundaries and customer-safe handoff copy", async () => {
+test("floating Zalo stays accessible while chat handoff copy remains customer-safe", async () => {
   const floating = await readFile(
     new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
     "utf8",
@@ -60,14 +60,17 @@ test("floating consultation keeps mobile boundaries and customer-safe handoff co
     "utf8",
   );
 
-  assert.doesNotMatch(floating, /\bw-screen\b/);
-  assert.match(floating, /w-full max-w-full/);
-  assert.match(floating, /max-h-\[100dvh\]/);
+  assert.match(floating, /COMPANY_CONFIG\.socials\.zalo1/);
   assert.match(floating, /safe-area-inset-bottom/);
-  assert.match(floating, /overflow-hidden/);
-  assert.match(floating, /min-w-0 flex-1/);
-  assert.match(floating, /break-words/);
+  assert.match(floating, /safe-area-inset-right/);
+  assert.match(floating, /aria-label="Liên hệ Đại Hải Phát qua Zalo"/);
+  assert.match(floating, />\s*Zalo\s*</);
+  assert.doesNotMatch(floating, /AIChatDrawerPanel|Tư vấn ngay|Mở trò chuyện/);
 
+  assert.match(drawer, /w-full max-w-full/);
+  assert.match(drawer, /overflow-x-hidden/);
+  assert.match(drawer, /min-w-0/);
+  assert.match(drawer, /break-words/);
   assert.match(drawer, /Hồ sơ của bạn đã sẵn sàng/);
   assert.match(drawer, /Tôi đồng ý gửi thông tin liên hệ/);
   assert.match(drawer, /Gửi hồ sơ cho kỹ sư/);

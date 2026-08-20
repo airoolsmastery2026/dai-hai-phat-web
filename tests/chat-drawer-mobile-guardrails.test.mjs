@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
-const drawer = readFileSync(
+const floating = readFileSync(
   new URL("../src/components/layout/FloatingCta.tsx", import.meta.url),
   "utf8",
 );
@@ -15,12 +15,14 @@ const panel = readFileSync(
   "utf8",
 );
 
-test("mobile drawer never depends on viewport-width units", () => {
-  assert.doesNotMatch(drawer, /\bw-screen\b/);
-  assert.match(drawer, /w-full max-w-full/);
-  assert.match(drawer, /max-h-\[100dvh\]/);
-  assert.match(drawer, /safe-area-inset-bottom/);
-  assert.match(drawer, /overflow-hidden/);
+test("mobile consultation avoids viewport-width overflow and keeps Zalo safe-area aware", () => {
+  assert.doesNotMatch(panel, /\bw-screen\b/);
+  assert.match(panel, /w-full max-w-full/);
+  assert.match(panel, /overflow-x-hidden/);
+  assert.match(panel, /min-w-0/);
+  assert.match(floating, /safe-area-inset-bottom/);
+  assert.match(floating, /safe-area-inset-right/);
+  assert.match(floating, /aria-label="Liên hệ Đại Hải Phát qua Zalo"/);
 });
 
 test("iPhone text input stays at 16px and skip does not share its row", () => {
