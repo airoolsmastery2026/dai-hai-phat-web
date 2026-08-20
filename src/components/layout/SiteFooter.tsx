@@ -1,3 +1,4 @@
+import { ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
 import Link from "next/link";
 
 import { COMPANY_CONFIG } from "@/content/company";
@@ -7,75 +8,112 @@ const quickLinks = NAV_ITEMS.filter((item) => item.href !== "/");
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] py-[var(--space-6)] text-[var(--color-text-dark-subtle)] sm:py-[var(--space-8)]">
-      <div className="mx-auto grid max-w-[var(--container-max)] gap-[var(--space-4)] px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:grid-cols-[1.2fr_0.8fr_0.8fr] lg:gap-[var(--space-6)] lg:px-[var(--space-container-lg)]">
+    <footer className="relative overflow-hidden border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)]/95 text-[var(--color-text-inverse)] shadow-[var(--shadow-sm)] backdrop-blur-md">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[var(--color-primary-contrast)]/25"
+      />
+
+      <div className="relative mx-auto grid max-w-[var(--container-max)] gap-[var(--space-8)] px-[var(--space-container)] py-[var(--space-8)] sm:px-[var(--space-container-sm)] sm:py-[var(--space-10)] lg:grid-cols-[1.35fr_0.7fr_0.85fr] lg:gap-[var(--space-10)] lg:px-[var(--space-container-lg)]">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-primary-soft-text)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-dark-muted)]">
             Đại Hải Phát
           </p>
-          <h2 className="mt-[var(--space-1)] text-base font-bold text-white sm:text-lg">
+          <h2 className="mt-[var(--space-2)] text-xl font-bold tracking-[-0.01em] text-[var(--color-text-inverse)] sm:text-2xl">
             Nội thất &amp; cơ khí dân dụng
           </h2>
-          <p className="mt-[var(--space-1)] max-w-md text-sm leading-6 text-[var(--color-text-dark-subtle)]">
-            Thiết kế và thi công theo hiện trạng nhà ở, có kênh tư vấn tiếp nhận nhu cầu 24/7 và kỹ sư kiểm tra phương án trước báo giá.
+          <p className="mt-[var(--space-3)] max-w-lg text-[15px] leading-7 text-[var(--color-text-dark-muted)]">
+            Thiết kế và thi công theo hiện trạng nhà ở, có kênh tư vấn tiếp nhận
+            nhu cầu 24/7 và kỹ sư kiểm tra phương án trước báo giá.
           </p>
-          <p className="mt-[var(--space-2)] max-w-md text-sm leading-6 text-[var(--color-text-dark-subtle)]">
-            Văn phòng / xưởng: {COMPANY_CONFIG.address}
-          </p>
+
+          <div className="mt-[var(--space-4)] flex max-w-lg items-start gap-[var(--space-3)] rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)]/70 px-[var(--space-4)] py-[var(--space-3)] text-sm leading-6 text-[var(--color-text-dark-muted)] backdrop-blur-lg">
+            <MapPin
+              className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary-contrast)]"
+              aria-hidden="true"
+            />
+            <span>Văn phòng / xưởng: {COMPANY_CONFIG.address}</span>
+          </div>
         </div>
 
-        <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white">
+        <nav aria-label="Liên kết nhanh">
+          <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-text-inverse)]">
             Xem nhanh
           </h2>
-          <ul className="mt-[var(--space-2)] grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-2)] text-sm lg:grid-cols-1">
+          <ul className="mt-[var(--space-3)] grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-2)] text-[15px] lg:grid-cols-1">
             {quickLinks.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="transition-colors duration-[var(--duration-fast)] hover:text-white"
+                  className="inline-flex rounded-[var(--radius-sm)] text-[var(--color-text-dark-muted)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white">
+          <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-text-inverse)]">
             Liên hệ
           </h2>
-          <ul className="mt-[var(--space-2)] space-y-[var(--space-1)] text-sm">
+          <ul className="mt-[var(--space-3)] space-y-[var(--space-2)] text-[15px]">
             <li>
-              <a href={`tel:${COMPANY_CONFIG.phones[0].raw}`} className="transition hover:text-white">
+              <a
+                href={`tel:${COMPANY_CONFIG.phones[0].raw}`}
+                className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-sm)] text-[var(--color-text-dark-muted)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              >
+                <Phone className="h-4 w-4" aria-hidden="true" />
                 {COMPANY_CONFIG.phones[0].display}
               </a>
             </li>
             <li>
-              <a href={`mailto:${COMPANY_CONFIG.email}`} className="break-all transition hover:text-white">
+              <a
+                href={`mailto:${COMPANY_CONFIG.email}`}
+                className="break-all rounded-[var(--radius-sm)] text-[var(--color-text-dark-muted)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              >
                 {COMPANY_CONFIG.email}
               </a>
             </li>
             <li>
-              <a href={COMPANY_CONFIG.socials.zalo1} target="_blank" rel="noreferrer" className="transition hover:text-white">
+              <a
+                href={COMPANY_CONFIG.socials.zalo1}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-sm)] text-[var(--color-text-dark-muted)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 Zalo
               </a>
             </li>
             <li>
-              <a href={COMPANY_CONFIG.googleMapsUrl} target="_blank" rel="noreferrer" className="transition hover:text-white">
+              <a
+                href={COMPANY_CONFIG.googleMapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-sm)] text-[var(--color-text-dark-muted)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+              >
                 Xem bản đồ
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="mx-auto mt-[var(--space-4)] flex max-w-[var(--container-max)] flex-col gap-[var(--space-2)] border-t border-[var(--color-border-dark)] px-[var(--space-container)] pt-[var(--space-3)] text-xs sm:px-[var(--space-container-sm)] lg:flex-row lg:items-center lg:justify-between lg:px-[var(--space-container-lg)]">
-        <p>© {new Date().getFullYear()} {COMPANY_CONFIG.name}.</p>
-        <Link href="/privacy" className="w-fit transition hover:text-white">
-          Quyền riêng tư
-        </Link>
+      <div className="relative border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)]/40 backdrop-blur-lg">
+        <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-[var(--space-2)] px-[var(--space-container)] py-[var(--space-4)] text-xs text-[var(--color-text-dark-subtle)] sm:px-[var(--space-container-sm)] lg:flex-row lg:items-center lg:justify-between lg:px-[var(--space-container-lg)]">
+          <p>
+            © {new Date().getFullYear()} {COMPANY_CONFIG.name}.
+          </p>
+          <Link
+            href="/privacy"
+            className="w-fit rounded-[var(--radius-sm)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-text-inverse)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+          >
+            Quyền riêng tư
+          </Link>
+        </div>
       </div>
     </footer>
   );
