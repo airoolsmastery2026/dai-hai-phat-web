@@ -5,19 +5,19 @@ import test from "node:test";
 const footerPath = new URL("../src/components/layout/SiteFooter.tsx", import.meta.url);
 const ctaPath = new URL("../src/components/sections/AIConsultationCta.tsx", import.meta.url);
 
-test("footer keeps a translucent token-driven surface with stronger readable text", async () => {
+test("footer keeps a solid dark token surface with readable glass details", async () => {
   const source = await readFile(footerPath, "utf8");
 
-  assert.match(source, /bg-\[var\(--color-surface-dark\)\]\/95/);
-  assert.match(source, /backdrop-blur-md/);
-  assert.match(source, /bg-\[var\(--color-surface-dark-soft\)\]\/70/);
+  assert.match(source, /bg-\[var\(--color-surface-dark\)\]/);
+  assert.doesNotMatch(source, /bg-\[var\(--color-surface-dark\)\]\/95/);
+  assert.match(source, /bg-\[var\(--color-surface-dark-soft\)\]/);
   assert.match(source, /text-\[var\(--color-text-dark-muted\)\]/);
   assert.match(source, /Văn phòng \/ xưởng:/);
   assert.match(source, /COMPANY_CONFIG\.address/);
   assert.match(source, /COMPANY_CONFIG\.socials\.zalo1/);
 });
 
-test("consultation panel matches the glass footer and points to the canonical consultation anchor", async () => {
+test("consultation panel matches the glass visual language and points to the canonical consultation anchor", async () => {
   const source = await readFile(ctaPath, "utf8");
 
   assert.match(source, /bg-\[var\(--color-surface-dark\)\]\/95/);
