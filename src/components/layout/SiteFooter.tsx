@@ -8,7 +8,7 @@ const quickLinks = NAV_ITEMS.filter((item) => item.href !== "/");
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)]/95 text-[var(--color-text-inverse)] shadow-[var(--shadow-sm)] backdrop-blur-md">
+    <footer className="relative overflow-hidden border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark)] text-[var(--color-text-inverse)] shadow-[var(--shadow-sm)]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[var(--color-primary-contrast)]/25"
@@ -27,7 +27,7 @@ export function SiteFooter() {
             nhu cầu 24/7 và kỹ sư kiểm tra phương án trước báo giá.
           </p>
 
-          <div className="mt-[var(--space-4)] flex max-w-lg items-start gap-[var(--space-3)] rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)]/70 px-[var(--space-4)] py-[var(--space-3)] text-sm leading-6 text-[var(--color-text-dark-muted)] backdrop-blur-lg">
+          <div className="mt-[var(--space-4)] flex max-w-lg items-start gap-[var(--space-3)] rounded-[var(--radius-lg)] border border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] px-[var(--space-4)] py-[var(--space-3)] text-sm leading-6 text-[var(--color-text-dark-muted)] backdrop-blur-lg">
             <MapPin
               className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary-contrast)]"
               aria-hidden="true"
@@ -102,7 +102,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="relative border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)]/40 backdrop-blur-lg">
+      <div className="relative border-t border-[var(--color-border-dark)] bg-[var(--color-surface-dark-soft)] backdrop-blur-lg">
         <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-[var(--space-2)] px-[var(--space-container)] py-[var(--space-4)] text-xs text-[var(--color-text-dark-subtle)] sm:px-[var(--space-container-sm)] lg:flex-row lg:items-center lg:justify-between lg:px-[var(--space-container-lg)]">
           <p>
             © {new Date().getFullYear()} {COMPANY_CONFIG.name}.
