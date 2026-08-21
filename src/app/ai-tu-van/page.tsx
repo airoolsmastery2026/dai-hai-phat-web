@@ -11,7 +11,7 @@ import { PageHero } from "@/components/ui/PageHero";
 export const metadata: Metadata = {
   title: "Tư vấn trực tuyến 24/7",
   description:
-    "Trợ lý tư vấn Đại Hải Phát hỗ trợ làm rõ nhu cầu, đọc hình ảnh và hồ sơ, chuẩn bị phương án trước khảo sát và báo giá.",
+    "Trợ lý tư vấn Đại Hải Phát hỗ trợ làm rõ nhu cầu, ghi nhận hình ảnh và hồ sơ, chuẩn bị phương án trước khảo sát và báo giá.",
   alternates: { canonical: "/ai-tu-van" },
 };
 
@@ -24,15 +24,15 @@ const capabilities = [
   },
   {
     icon: ImageIcon,
-    title: "Phân tích hình ảnh",
+    title: "Ghi nhận hình ảnh",
     description:
-      "Gửi ảnh hiện trạng, mẫu tham khảo hoặc chi tiết cần thi công để chuẩn bị phương án trao đổi.",
+      "Chọn ảnh hiện trạng hoặc mẫu tham khảo để lưu cùng bản nháp trên thiết bị; ảnh gốc được gửi riêng cho kỹ sư khi anh/chị chủ động chia sẻ.",
   },
   {
     icon: FileText,
-    title: "Đọc hồ sơ",
+    title: "Tổng hợp hồ sơ",
     description:
-      "Tổng hợp thông tin từ bản vẽ và tài liệu hỗ trợ để giảm thiếu sót trước bước khảo sát thực tế.",
+      "Sắp xếp thông tin dự án và tài liệu đã nhập để giảm thiếu sót trước bước khảo sát thực tế.",
   },
   {
     icon: Ruler,
@@ -54,7 +54,7 @@ export default function AITuVanPage() {
         imageSrc="/images/brand/hero-luxury-materials-v1.webp"
         imageAlt="Không gian vật liệu cao cấp đại diện cho kênh tư vấn trực tuyến Đại Hải Phát"
         imagePosition="72% center"
-        highlights={["Tiếp nhận 24/7", "Phân tích ảnh & hồ sơ", "Chuyển kỹ sư xác nhận"]}
+        highlights={["Tiếp nhận 24/7", "Ghi nhận ảnh & hồ sơ", "Chuyển kỹ sư xác nhận"]}
         actions={
           <>
             <Button href="#consultation">
