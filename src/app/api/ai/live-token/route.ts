@@ -7,6 +7,7 @@ import {
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
+import { getGeminiLiveReadiness } from "@/lib/server/gemini-live-policy";
 import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
@@ -56,6 +57,22 @@ export async function POST(request: NextRequest) {
     return apiJsonResponse({ error: "Nguồn yêu cầu không hợp lệ.", requestId }, 403);
   }
 
+  const liveReadiness = getGeminiLiveReadiness();
+  const apiKey = process.env.GEMINI_API_KEY?.trim() ?? "";
+  if (!liveReadiness.enabled || !apiKey) {
+    return apiJsonResponse(
+      {
+        error: formatSupportReference(
+          "Trò chuyện trực tiếp tạm thời chưa được cấu hình.",
+          requestId,
+        ),
+        code: "LIVE_UNAVAILABLE",
+        requestId,
+      },
+      503,
+    );
+  }
+
   const rateLimit = consumeRateLimit(
     "gemini-live-token",
     getRequestClientKey(request.headers),
@@ -73,21 +90,6 @@ export async function POST(request: NextRequest) {
       },
       429,
       { "Retry-After": String(rateLimit.retryAfterSeconds) },
-    );
-  }
-
-  const apiKey = process.env.GEMINI_API_KEY?.trim();
-  if (!apiKey) {
-    return apiJsonResponse(
-      {
-        error: formatSupportReference(
-          "Trò chuyện trực tiếp tạm thời chưa được cấu hình.",
-          requestId,
-        ),
-        code: "LIVE_UNAVAILABLE",
-        requestId,
-      },
-      503,
     );
   }
 
