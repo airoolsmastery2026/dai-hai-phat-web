@@ -7,7 +7,7 @@ import {
 
 type UnknownRecord = Record<string, unknown>;
 
-interface StrictLayoutProposal extends UnknownRecord {
+export interface StrictLayoutProposal extends UnknownRecord {
   baseRevision: string;
   structuralEdits: unknown[];
   placements: unknown[];
@@ -65,7 +65,7 @@ function hasStrictPlacementShape(value: unknown): boolean {
   );
 }
 
-function assertStrictProposalShape(value: unknown): StrictLayoutProposal {
+export function parseStrictLayoutProposal(value: unknown): StrictLayoutProposal {
   const proposal = asRecord(value);
   if (
     !proposal ||
@@ -110,16 +110,12 @@ export async function evaluateConfirmedLayout(
     );
   }
 
-  // Authenticity/integrity is checked before proposal acceptance. A candidate,
-  // stale envelope, mutated geometry or recomputed public digest fails here.
   const confirmed = await verifyConfirmedSpaceAtBoundary(
     request.confirmed,
     sealKey,
   );
-  const proposal = assertStrictProposalShape(request.proposal);
+  const proposal = parseStrictLayoutProposal(request.proposal);
 
-  // G5 v1 deliberately does not accept structural changes from a public
-  // proposal. In particular, an `approved: true` flag cannot bypass G4.
   if (proposal.structuralEdits.length > 0) {
     return {
       gate: "G5_LAYOUT_CONSTRAINTS",

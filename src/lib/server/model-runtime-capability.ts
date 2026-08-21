@@ -40,7 +40,8 @@ type ModelRuntimeTask =
   | "project-analysis"
   | "sales-engineer"
   | "workspace-chat"
-  | "space-extraction";
+  | "space-extraction"
+  | "space-layout";
 
 interface ModelRuntimeImage {
   mimeType: "image/jpeg" | "image/png" | "image/webp";
@@ -236,6 +237,12 @@ export async function runWorkspaceChatWithModelRuntimeCapability(
   prompt: string,
 ): Promise<FreeModelRuntimeOutput> {
   return executeFreeModelRuntime("workspace-chat", prompt);
+}
+
+export async function generateSpaceLayoutWithModelRuntimeCapability(
+  prompt: string,
+): Promise<FreeModelRuntimeOutput> {
+  return executeFreeModelRuntime("space-layout", prompt);
 }
 
 export async function analyzeProjectWithModelRuntimeCapability(
