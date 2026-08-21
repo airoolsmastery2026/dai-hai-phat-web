@@ -202,14 +202,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return apiJsonResponse({
-      requestId,
-      gate: report.gate,
-      confirmedRevision: report.confirmedRevision,
-      proposal,
-      provider: generated.provider,
-      model: generated.model,
-    });
+    return apiJsonResponse(
+      {
+        requestId,
+        gate: report.gate,
+        confirmedRevision: report.confirmedRevision,
+        proposal,
+        provider: generated.provider,
+        model: generated.model,
+      },
+      200,
+    );
   } catch (error) {
     if (error instanceof RequestBodyTooLargeError) {
       return apiJsonResponse(
