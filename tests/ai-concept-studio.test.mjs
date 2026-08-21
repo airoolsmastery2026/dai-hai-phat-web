@@ -29,6 +29,10 @@ const routePath = new URL(
   "../src/app/api/ai/concept/route.ts",
   import.meta.url,
 );
+const adapterPath = new URL(
+  "../src/lib/server/concept-render-adapter.ts",
+  import.meta.url,
+);
 const configPath = new URL(
   "../src/lib/ai/concept-studio.ts",
   import.meta.url,
@@ -37,7 +41,6 @@ const themePath = new URL("../src/lib/theme.ts", import.meta.url);
 
 test("tools index forwards visitors to the available concept studio", async () => {
   const toolsIndex = await readFile(toolsIndexPath, "utf8");
-
   assert.match(toolsIndex, /redirect\("\/cong-cu\/ai-phoi-canh"\)/);
 });
 
@@ -79,15 +82,12 @@ test("native studio accepts two source images and creates four coordinated views
 
 test("AI concept view contract contains exactly four unique coordinated views", () => {
   assert.equal(AI_CONCEPT_VIEWS.length, 4);
-
   const ids = AI_CONCEPT_VIEWS.map((view) => view.id);
   const nodes = AI_CONCEPT_VIEWS.map((view) => view.node);
-
   assert.deepEqual(ids, ["front", "left", "right", "detail"]);
   assert.deepEqual(nodes, ["C1 → D", "C2 → E", "C3 → F", "C4 → G"]);
   assert.equal(new Set(ids).size, ids.length);
   assert.equal(new Set(nodes).size, nodes.length);
-
   for (const view of AI_CONCEPT_VIEWS) {
     assert.ok(view.title.trim().length > 0);
     assert.ok(view.description.trim().length > 0);
@@ -98,7 +98,6 @@ test("AI concept view guard accepts only supported view identifiers", () => {
   for (const view of AI_CONCEPT_VIEWS) {
     assert.equal(isAIConceptView(view.id), true);
   }
-
   for (const value of ["", "Front", "rear", "detail ", "C1", "__proto__"]) {
     assert.equal(isAIConceptView(value), false, `unexpected accepted value: ${value}`);
   }
@@ -125,22 +124,25 @@ test("architectural presentation transform keeps geometry locked across drawing 
   assert.match(route, /đường tụ/i);
 });
 
-test("AI image generation is server-side, constrained and rate limited", async () => {
-  const [source, config] = await Promise.all([
+test("AI image generation is server-side, constrained, shared and rate limited", async () => {
+  const [source, config, adapter] = await Promise.all([
     readFile(routePath, "utf8"),
     readFile(configPath, "utf8"),
+    readFile(adapterPath, "utf8"),
   ]);
 
-  assert.match(source, /process\.env\.GEMINI_API_KEY/);
-  assert.match(source, /AI_CONCEPT_MODEL/);
+  assert.match(source, /isConceptRenderConfigured/);
+  assert.match(source, /renderConceptPresentation/);
+  assert.match(adapter, /process\.env\.GEMINI_API_KEY/);
+  assert.match(adapter, /AI_CONCEPT_MODEL/);
   assert.match(config, /gemini-3-pro-image/);
   assert.match(source, /isSameOriginRequest/);
   assert.match(source, /consumeRateLimit/);
   assert.match(source, /MAX_IMAGE_BYTES/);
-  assert.match(source, /UPSTREAM_TIMEOUT_MS/);
-  assert.match(source, /responseModalities: \["TEXT", "IMAGE"\]/);
-  assert.match(source, /aspectRatio: "16:9"/);
-  assert.match(source, /imageSize: "1K"/);
+  assert.match(adapter, /UPSTREAM_TIMEOUT_MS/);
+  assert.match(adapter, /responseModalities: \["TEXT", "IMAGE"\]/);
+  assert.match(adapter, /aspectRatio: "16:9"/);
+  assert.match(adapter, /imageSize: "1K"/);
   assert.match(source, /baseConcept/);
   assert.doesNotMatch(source, /NEXT_PUBLIC_GEMINI/);
 });

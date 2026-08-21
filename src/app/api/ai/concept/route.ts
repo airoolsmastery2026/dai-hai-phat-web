@@ -1,32 +1,35 @@
 import { NextRequest } from "next/server";
 
 import {
-  AI_CONCEPT_MODEL,
   AI_CONCEPT_PRESENTATION_TRANSFORM,
   type AIConceptView,
   isAIConceptView,
 } from "@/lib/ai/concept-studio";
+import type { ProjectImageMimeType } from "@/lib/ai/image-upload";
 import { apiJsonResponse } from "@/lib/server/api-json-response";
 import {
   consumeRateLimit,
   getRequestClientKey,
   isSameOriginRequest,
 } from "@/lib/server/api-security";
+import {
+  ConceptRenderAdapterError,
+  isConceptRenderConfigured,
+  renderConceptPresentation,
+  type ConceptRenderImage,
+} from "@/lib/server/concept-render-adapter";
 import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
-const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1/models/${AI_CONCEPT_MODEL}:generateContent`;
 const RATE_LIMIT_WINDOW_MS = 10 * 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 8;
-const UPSTREAM_TIMEOUT_MS = 105_000;
 const MAX_IMAGE_BYTES = 2_200_000;
 const MAX_TOTAL_IMAGE_BYTES = 6_000_000;
 const MAX_BRIEF_LENGTH = 4_000;
 const MIN_BRIEF_LENGTH = 20;
-const MAX_ERROR_RESPONSE_BYTES = 8 * 1024;
 const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 const VIEW_INSTRUCTIONS: Record<AIConceptView, string> = {
@@ -40,21 +43,6 @@ const VIEW_INSTRUCTIONS: Record<AIConceptView, string> = {
     "Tạo ảnh cận cảnh của chính phương án nền. Tập trung vào vật liệu, mối nối, bản lề, tay nắm, liên kết kính, cạnh tủ, ray hoặc chi tiết cấu tạo quan trọng phù hợp với hạng mục.",
 };
 
-interface GeminiGenerateResponse {
-  candidates?: Array<{
-    content?: {
-      parts?: Array<{
-        text?: unknown;
-        inlineData?: {
-          mimeType?: unknown;
-          data?: unknown;
-        };
-      }>;
-    };
-    finishReason?: unknown;
-  }>;
-}
-
 function readFile(formData: FormData, key: string): File | null {
   const value = formData.get(key);
   return value instanceof File && value.size > 0 ? value : null;
@@ -64,21 +52,16 @@ function validateImage(file: File, label: string): string | null {
   if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
     return `${label} phải là ảnh JPG, PNG hoặc WEBP.`;
   }
-
   if (file.size > MAX_IMAGE_BYTES) {
     return `${label} vượt quá dung lượng cho phép sau khi tối ưu.`;
   }
-
   return null;
 }
 
-async function fileToInlineData(file: File) {
-  const data = Buffer.from(await file.arrayBuffer()).toString("base64");
+async function fileToRenderImage(file: File): Promise<ConceptRenderImage> {
   return {
-    inline_data: {
-      mime_type: file.type,
-      data,
-    },
+    mimeType: file.type as ProjectImageMimeType,
+    dataBase64: Buffer.from(await file.arrayBuffer()).toString("base64"),
   };
 }
 
@@ -113,18 +96,19 @@ YÊU CẦU BẮT BUỘC:
 - Ánh sáng tự nhiên, chi tiết chân thực, hình học sạch, không có bộ phận lơ lửng hoặc kết cấu bất khả thi.`;
 }
 
-async function readUpstreamError(response: Response): Promise<string | null> {
-  try {
-    const text = await response.text();
-    if (!text || text.length > MAX_ERROR_RESPONSE_BYTES) return null;
-
-    const payload = JSON.parse(text) as {
-      error?: { status?: unknown; message?: unknown };
-    };
-    const status = payload.error?.status;
-    return typeof status === "string" ? status.slice(0, 64) : null;
-  } catch {
-    return null;
+function adapterStatus(error: ConceptRenderAdapterError): number {
+  switch (error.code) {
+    case "configuration":
+      return 503;
+    case "rate_limit":
+      return 429;
+    case "timeout":
+      return 504;
+    case "invalid_input":
+      return 400;
+    case "upstream":
+    case "invalid_output":
+      return 502;
   }
 }
 
@@ -146,7 +130,6 @@ export async function POST(request: NextRequest) {
       windowMs: RATE_LIMIT_WINDOW_MS,
     },
   );
-
   if (!rateLimit.allowed) {
     return apiJsonResponse(
       {
@@ -159,8 +142,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const apiKey = process.env.GEMINI_API_KEY?.trim();
-  if (!apiKey) {
+  if (!isConceptRenderConfigured()) {
     return apiJsonResponse(
       {
         error: formatSupportReference(
@@ -196,11 +178,7 @@ export async function POST(request: NextRequest) {
       400,
     );
   }
-
-  if (
-    brief.length < MIN_BRIEF_LENGTH ||
-    brief.length > MAX_BRIEF_LENGTH
-  ) {
+  if (brief.length < MIN_BRIEF_LENGTH || brief.length > MAX_BRIEF_LENGTH) {
     return apiJsonResponse(
       {
         error: `Thông tin dự án phải có từ ${MIN_BRIEF_LENGTH} đến ${MAX_BRIEF_LENGTH} ký tự.`,
@@ -209,7 +187,6 @@ export async function POST(request: NextRequest) {
       400,
     );
   }
-
   if (!siteImage || !referenceImage) {
     return apiJsonResponse(
       { error: "Thiếu ảnh hiện trạng hoặc ảnh mẫu tham khảo.", requestId },
@@ -222,7 +199,6 @@ export async function POST(request: NextRequest) {
     validateImage(referenceImage, "Ảnh mẫu"),
     baseConcept ? validateImage(baseConcept, "Phương án nền") : null,
   ].filter((value): value is string => Boolean(value));
-
   if (imageValidationErrors.length) {
     return apiJsonResponse(
       { error: imageValidationErrors[0], requestId },
@@ -234,97 +210,27 @@ export async function POST(request: NextRequest) {
     siteImage.size + referenceImage.size + (baseConcept?.size ?? 0);
   if (totalImageBytes > MAX_TOTAL_IMAGE_BYTES) {
     return apiJsonResponse(
-      {
-        error: "Tổng dung lượng ảnh vượt quá giới hạn xử lý.",
-        requestId,
-      },
+      { error: "Tổng dung lượng ảnh vượt quá giới hạn xử lý.", requestId },
       413,
     );
   }
 
-  const parts: Array<Record<string, unknown>> = [
-    { text: buildPrompt(viewValue, brief, Boolean(baseConcept)) },
-    await fileToInlineData(siteImage),
-    await fileToInlineData(referenceImage),
-  ];
-
-  if (baseConcept) {
-    parts.push(await fileToInlineData(baseConcept));
-  }
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
-
   try {
-    const response = await fetch(GEMINI_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
-      },
-      cache: "no-store",
-      signal: controller.signal,
-      body: JSON.stringify({
-        contents: [{ role: "user", parts }],
-        generationConfig: {
-          responseModalities: ["TEXT", "IMAGE"],
-          responseFormat: {
-            image: {
-              aspectRatio: "16:9",
-              imageSize: "1K",
-            },
-          },
-        },
-      }),
+    const images = await Promise.all([
+      fileToRenderImage(siteImage),
+      fileToRenderImage(referenceImage),
+      ...(baseConcept ? [fileToRenderImage(baseConcept)] : []),
+    ]);
+    const rendered = await renderConceptPresentation({
+      prompt: buildPrompt(viewValue, brief, Boolean(baseConcept)),
+      images,
     });
-
-    if (!response.ok) {
-      const upstreamStatus = await readUpstreamError(response);
-      console.warn("DHP AI concept upstream unavailable", {
-        requestId,
-        view: viewValue,
-        upstreamHttpStatus: response.status,
-        upstreamStatus,
-      });
-
-      return apiJsonResponse(
-        {
-          error: formatSupportReference(
-            response.status === 429
-              ? "Dịch vụ tạo ảnh đang bận. Vui lòng thử lại sau."
-              : "Chưa thể tạo phối cảnh ở góc này. Vui lòng thử lại.",
-            requestId,
-          ),
-          code: response.status === 429 ? "UPSTREAM_RATE_LIMITED" : "AI_CONCEPT_FAILED",
-          requestId,
-        },
-        response.status === 429 ? 429 : 502,
-        response.status === 429 ? { "Retry-After": "30" } : undefined,
-      );
-    }
-
-    const payload = (await response.json()) as GeminiGenerateResponse;
-    const imagePart = payload.candidates
-      ?.flatMap((candidate) => candidate.content?.parts ?? [])
-      .find(
-        (part) =>
-          typeof part.inlineData?.data === "string" &&
-          typeof part.inlineData?.mimeType === "string" &&
-          part.inlineData.mimeType.startsWith("image/"),
-      );
-
-    if (
-      typeof imagePart?.inlineData?.data !== "string" ||
-      typeof imagePart.inlineData.mimeType !== "string"
-    ) {
-      throw new Error("Gemini did not return an image part.");
-    }
 
     return apiJsonResponse(
       {
-        imageBase64: imagePart.inlineData.data,
-        mimeType: imagePart.inlineData.mimeType,
-        model: AI_CONCEPT_MODEL,
+        imageBase64: rendered.imageBase64,
+        mimeType: rendered.mimeType,
+        model: rendered.model,
         view: viewValue,
         presentationGuide: AI_CONCEPT_PRESENTATION_TRANSFORM,
         requestId,
@@ -332,28 +238,46 @@ export async function POST(request: NextRequest) {
       200,
     );
   } catch (error) {
-    const timedOut = controller.signal.aborted;
+    if (error instanceof ConceptRenderAdapterError) {
+      const status = adapterStatus(error);
+      console.warn("DHP AI concept adapter unavailable", {
+        requestId,
+        view: viewValue,
+        code: error.code,
+        upstreamHttpStatus: error.upstreamHttpStatus,
+        upstreamStatus: error.upstreamStatus,
+      });
+      return apiJsonResponse(
+        {
+          error: formatSupportReference(error.message, requestId),
+          code:
+            error.code === "rate_limit"
+              ? "UPSTREAM_RATE_LIMITED"
+              : error.code === "timeout"
+                ? "AI_CONCEPT_TIMEOUT"
+                : "AI_CONCEPT_FAILED",
+          requestId,
+        },
+        status,
+        error.code === "rate_limit" ? { "Retry-After": "30" } : undefined,
+      );
+    }
+
     console.error("DHP AI concept generation failed", {
       requestId,
       view: viewValue,
-      timedOut,
       error: error instanceof Error ? error.message : "Unknown error",
     });
-
     return apiJsonResponse(
       {
         error: formatSupportReference(
-          timedOut
-            ? "Quá trình dựng phối cảnh phản hồi quá lâu. Vui lòng thử lại."
-            : "Không thể tạo phối cảnh. Vui lòng kiểm tra ảnh và thử lại.",
+          "Không thể tạo phối cảnh. Vui lòng kiểm tra ảnh và thử lại.",
           requestId,
         ),
-        code: timedOut ? "AI_CONCEPT_TIMEOUT" : "AI_CONCEPT_FAILED",
+        code: "AI_CONCEPT_FAILED",
         requestId,
       },
-      timedOut ? 504 : 502,
+      502,
     );
-  } finally {
-    clearTimeout(timeout);
   }
 }
