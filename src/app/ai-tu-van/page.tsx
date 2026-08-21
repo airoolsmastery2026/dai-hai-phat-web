@@ -7,6 +7,7 @@ import { AIOfficeRouteEntry } from "@/components/sections/AIOfficeRouteEntry";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { isGeminiLiveEnabled } from "@/lib/server/gemini-live-policy";
 
 export const metadata: Metadata = {
   title: "Tư vấn trực tuyến 24/7",
@@ -43,7 +44,7 @@ const capabilities = [
 ] as const;
 
 export default function AITuVanPage() {
-  const liveVoiceEnabled = Boolean(process.env.GEMINI_API_KEY?.trim());
+  const liveVoiceEnabled = isGeminiLiveEnabled();
 
   return (
     <main className="min-h-screen bg-[var(--color-background)]">
