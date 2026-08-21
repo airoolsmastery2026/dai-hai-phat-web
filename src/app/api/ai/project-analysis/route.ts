@@ -17,6 +17,7 @@ import {
   analyzeProjectWithCloudRouter,
   CloudAiRouterError,
 } from "@/lib/server/cloud-ai-router";
+import { buildDeterministicProjectAnalysis } from "@/lib/server/project-analysis-fallback";
 import { formatSupportReference } from "@/lib/server/support-reference";
 
 export const dynamic = "force-dynamic";
@@ -109,29 +110,64 @@ export async function POST(request: NextRequest) {
       materials: evidence.materials,
       pricingRule: evidence.pricingRule,
     };
-    const routed = await analyzeProjectWithCloudRouter(
-      analysisRequest,
-      evidenceContext,
-    );
 
-    console.info("DHP cloud AI project analysis generated", {
-      requestId,
-      service: analysisRequest.service,
-      provider: routed.analysis.provider,
-      model: routed.analysis.model,
-      evidenceCount: routed.analysis.evidenceCount,
-      cache: routed.cache,
-    });
+    try {
+      const routed = await analyzeProjectWithCloudRouter(
+        analysisRequest,
+        evidenceContext,
+      );
 
-    return apiJsonResponse(
-      { requestId, analysis: routed.analysis },
-      200,
-      {
-        "X-DHP-AI-Cache": routed.cache,
-        "X-DHP-AI-Provider": routed.analysis.provider,
-        "X-DHP-AI-Model": routed.analysis.model,
-      },
-    );
+      console.info("DHP cloud AI project analysis generated", {
+        requestId,
+        service: analysisRequest.service,
+        provider: routed.analysis.provider,
+        model: routed.analysis.model,
+        evidenceCount: routed.analysis.evidenceCount,
+        cache: routed.cache,
+      });
+
+      return apiJsonResponse(
+        { requestId, analysis: routed.analysis },
+        200,
+        {
+          "X-DHP-AI-Cache": routed.cache,
+          "X-DHP-AI-Provider": routed.analysis.provider,
+          "X-DHP-AI-Model": routed.analysis.model,
+        },
+      );
+    } catch (error) {
+      if (!(error instanceof CloudAiRouterError)) throw error;
+
+      const fallback = buildDeterministicProjectAnalysis(
+        analysisRequest,
+        evidenceContext,
+      );
+
+      console.warn("DHP project analysis using deterministic fallback", {
+        requestId,
+        code: error.code,
+        upstreamHttpStatus: error.upstreamHttpStatus,
+        upstreamStatus: error.upstreamStatus,
+        fallbackProvider: fallback.provider,
+        fallbackModel: fallback.model,
+      });
+
+      return apiJsonResponse(
+        {
+          requestId,
+          analysis: fallback,
+          degraded: true,
+          fallbackReason: error.code,
+        },
+        200,
+        {
+          "X-DHP-AI-Cache": "MISS",
+          "X-DHP-AI-Provider": fallback.provider,
+          "X-DHP-AI-Model": fallback.model,
+          "X-DHP-AI-Fallback": "deterministic",
+        },
+      );
+    }
   } catch (error) {
     if (error instanceof RequestBodyTooLargeError) {
       return apiJsonResponse({ error: "Dữ liệu yêu cầu vượt quá giới hạn.", requestId }, 413);
@@ -152,48 +188,18 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
-    if (error instanceof CloudAiRouterError) {
-      const rateLimited = error.code === "rate_limit";
-      const timedOut = error.code === "timeout";
-      console.warn("DHP cloud AI project analysis unavailable", {
-        requestId,
-        code: error.code,
-        upstreamHttpStatus: error.upstreamHttpStatus,
-        upstreamStatus: error.upstreamStatus,
-      });
-      return apiJsonResponse(
-        {
-          error: formatSupportReference(
-            rateLimited
-              ? "Các quota AI miễn phí khả dụng đang bận hoặc đã chạm giới hạn. Hồ sơ vẫn được giữ nguyên."
-              : timedOut
-                ? "Phân tích AI phản hồi quá lâu. Hệ thống đã thử các dịch vụ cloud khả dụng; Hồ sơ vẫn được giữ nguyên để thử lại."
-                : "Phân tích AI tạm thời chưa khả dụng. Hệ thống cloud đã thử các provider khả dụng; Hồ sơ vẫn được giữ nguyên.",
-            requestId,
-          ),
-          code: rateLimited
-            ? "RATE_LIMITED"
-            : timedOut
-              ? "AI_TIMEOUT"
-              : "AI_UNAVAILABLE",
-          requestId,
-        },
-        rateLimited ? 429 : timedOut ? 504 : 503,
-        rateLimited ? { "Retry-After": "30" } : undefined,
-      );
-    }
 
-    console.error("DHP cloud AI project analysis failed", {
+    console.error("DHP project analysis failed before fallback", {
       requestId,
       error: error instanceof Error ? error.message : "Unknown error",
     });
     return apiJsonResponse(
       {
         error: formatSupportReference(
-          "Không thể phân tích hồ sơ lúc này. Hồ sơ vẫn được giữ nguyên.",
+          "Không thể xử lý hồ sơ lúc này. Hồ sơ vẫn được giữ nguyên.",
           requestId,
         ),
-        code: "AI_UNAVAILABLE",
+        code: "ANALYSIS_UNAVAILABLE",
         requestId,
       },
       500,
