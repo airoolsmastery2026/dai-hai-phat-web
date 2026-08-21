@@ -49,7 +49,8 @@ test("deterministic project analysis keeps consultation usable without cloud inf
   const serialized = JSON.stringify(result);
 
   assert.equal(result.provider, "dhp-rule-engine");
-  assert.equal(result.model, "DHP kiểm tra theo quy tắc v1");
+  assert.equal(result.model, "dhp-rule-engine-v1");
+  assert.match(result.model, /^[\x20-\x7E]+$/);
   assert.equal(result.evidenceCount, 2);
   assert.equal(result.options.length, 2);
   assert.ok(result.surveyChecks.length >= 2);
