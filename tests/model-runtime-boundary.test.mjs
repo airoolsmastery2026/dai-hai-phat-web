@@ -43,11 +43,13 @@ test("core text and space model routing stay behind the DHP capability boundary"
     "sales-engineer",
     "workspace-chat",
     "space-extraction",
+    "space-layout",
   ]) {
     assert.match(capability, new RegExp(`"${task}"`));
   }
   assert.match(capability, /runWorkspaceChatWithModelRuntimeCapability/);
   assert.match(capability, /extractSpaceWithModelRuntimeCapability/);
+  assert.match(capability, /generateSpaceLayoutWithModelRuntimeCapability/);
   assert.match(capability, /images\.length > 0 \? \{ images \} : \{\}/);
   assert.doesNotMatch(router, /Gemini|generativelanguage\.googleapis|GEMINI_API_KEY/);
   assert.doesNotMatch(salesRouter, /Gemini|generativelanguage\.googleapis|GEMINI_API_KEY/);
@@ -70,6 +72,7 @@ test("backend model runtime is cloud-only, zero-cost locked and image-bounded", 
     "sales-engineer",
     "workspace-chat",
     "space-extraction",
+    "space-layout",
   ]) {
     assert.match(gateway, new RegExp(`'${task}'`));
   }

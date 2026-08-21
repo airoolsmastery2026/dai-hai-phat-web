@@ -143,6 +143,7 @@ const MODEL_RUNTIME_TASKS = new Set([
   'sales-engineer',
   'workspace-chat',
   'space-extraction',
+  'space-layout',
 ]);
 const MODEL_IMAGE_MIME_TYPES = new Set([
   'image/jpeg',
