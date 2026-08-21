@@ -13,10 +13,11 @@ test("support references only expose validated request IDs", () => {
   assert.match(formatter, /return normalizedMessage/);
 });
 
-test("Gemini failures include a support reference", () => {
+test("true project-analysis failures retain a support reference after cloud fallback", () => {
   assert.match(projectAnalysis, /formatSupportReference/);
-  assert.match(projectAnalysis, /Phân tích AI tạm thời chưa khả dụng/);
-  assert.match(projectAnalysis, /Không thể phân tích hồ sơ lúc này/);
+  assert.match(projectAnalysis, /DHP project analysis using deterministic fallback/);
+  assert.match(projectAnalysis, /Không thể xử lý hồ sơ lúc này\. Hồ sơ vẫn được giữ nguyên\./);
+  assert.match(projectAnalysis, /"ANALYSIS_UNAVAILABLE"/);
 });
 
 test("evidence failures include a support reference", () => {

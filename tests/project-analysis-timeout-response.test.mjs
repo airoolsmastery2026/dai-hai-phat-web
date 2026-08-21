@@ -7,21 +7,23 @@ const routePath = new URL(
   import.meta.url,
 );
 
-test("project analysis returns an explicit timeout response", async () => {
+test("project analysis degrades cloud timeout to deterministic output", async () => {
   const source = await readFile(routePath, "utf8");
 
-  assert.match(source, /const timedOut = error\.code === "timeout"/);
-  assert.match(source, /"AI_TIMEOUT"/);
-  assert.match(source, /timedOut \? 504 : 503/);
-  assert.match(source, /Phân tích AI phản hồi quá lâu/);
-  assert.match(source, /Hồ sơ vẫn được giữ nguyên/);
+  assert.match(source, /buildDeterministicProjectAnalysis/);
+  assert.match(source, /fallbackReason: error\.code/);
+  assert.match(source, /"X-DHP-AI-Fallback": "deterministic"/);
+  assert.match(source, /DHP project analysis using deterministic fallback/);
+  assert.match(source, /200,/);
+  assert.doesNotMatch(source, /timedOut \? 504 : 503/);
 });
 
-test("rate limiting and generic upstream failures remain distinct", async () => {
+test("public abuse rate limiting remains distinct from cloud fallback", async () => {
   const source = await readFile(routePath, "utf8");
 
   assert.match(source, /"RATE_LIMITED"/);
-  assert.match(source, /"AI_UNAVAILABLE"/);
-  assert.match(source, /rateLimited \? 429/);
-  assert.match(source, /"Retry-After": "30"/);
+  assert.match(source, /429,/);
+  assert.match(source, /"Retry-After": String\(rateLimit\.retryAfterSeconds\)/);
+  assert.match(source, /CloudAiRouterError/);
+  assert.match(source, /X-DHP-AI-Fallback/);
 });
