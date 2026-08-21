@@ -10,21 +10,48 @@ export interface VercelAiSdkRuntimeOutput {
   model: string;
 }
 
+export type VercelAiSdkRuntimeReadinessReason =
+  | "ready"
+  | "runtime-selector"
+  | "verified-free"
+  | "paid-execution-blocked"
+  | "missing-api-key";
+
+export interface VercelAiSdkRuntimeReadiness {
+  enabled: boolean;
+  reason: VercelAiSdkRuntimeReadinessReason;
+  model: string;
+}
+
 function readEnv(name: string): string {
   return process.env[name]?.trim() ?? "";
 }
 
-export function isVercelAiSdkTextRuntimeEnabled(): boolean {
-  return (
-    readEnv("DHP_AI_SDK_RUNTIME") === "google-direct" &&
-    readEnv("DHP_AI_SDK_VERIFIED_FREE") === "true" &&
-    readEnv("DHP_AI_ALLOW_PAID") !== "true" &&
-    Boolean(readEnv("GEMINI_API_KEY"))
-  );
-}
-
 export function getVercelAiSdkModel(): string {
   return readEnv("DHP_AI_SDK_MODEL") || DEFAULT_MODEL;
+}
+
+export function getVercelAiSdkRuntimeReadiness(): VercelAiSdkRuntimeReadiness {
+  const model = getVercelAiSdkModel();
+
+  if (readEnv("DHP_AI_SDK_RUNTIME") !== "google-direct") {
+    return { enabled: false, reason: "runtime-selector", model };
+  }
+  if (readEnv("DHP_AI_ALLOW_PAID") === "true") {
+    return { enabled: false, reason: "paid-execution-blocked", model };
+  }
+  if (readEnv("DHP_AI_SDK_VERIFIED_FREE") !== "true") {
+    return { enabled: false, reason: "verified-free", model };
+  }
+  if (!readEnv("GEMINI_API_KEY")) {
+    return { enabled: false, reason: "missing-api-key", model };
+  }
+
+  return { enabled: true, reason: "ready", model };
+}
+
+export function isVercelAiSdkTextRuntimeEnabled(): boolean {
+  return getVercelAiSdkRuntimeReadiness().enabled;
 }
 
 export async function executeVercelAiSdkText(

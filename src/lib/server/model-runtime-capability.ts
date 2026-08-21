@@ -24,7 +24,7 @@ import {
 import { requestDhpCapability } from "@/lib/server/capability-gateway";
 import {
   executeVercelAiSdkText,
-  isVercelAiSdkTextRuntimeEnabled,
+  getVercelAiSdkRuntimeReadiness,
 } from "@/lib/server/vercel-ai-sdk-runtime";
 
 const MAX_GATEWAY_RESPONSE_BYTES = 128 * 1024;
@@ -90,12 +90,35 @@ export interface SpaceExtractionCapabilityResponse {
   model: string;
 }
 
+interface SafeDirectFailureDiagnostic {
+  errorName: string;
+  statusCode: number | null;
+}
+
 function safeJson(text: string): unknown {
   try {
     return JSON.parse(text) as unknown;
   } catch {
     return null;
   }
+}
+
+function safeDirectFailureDiagnostic(
+  error: unknown,
+): SafeDirectFailureDiagnostic {
+  const errorName = error instanceof Error ? error.name : typeof error;
+  if (!error || typeof error !== "object") {
+    return { errorName, statusCode: null };
+  }
+
+  const candidate = error as { statusCode?: unknown; status?: unknown };
+  const rawStatus = candidate.statusCode ?? candidate.status;
+  const statusCode =
+    typeof rawStatus === "number" && Number.isInteger(rawStatus)
+      ? rawStatus
+      : null;
+
+  return { errorName, statusCode };
 }
 
 function mapGatewayFailure(
@@ -218,19 +241,36 @@ async function executeFreeModelRuntime(
   prompt: string,
   images: ModelRuntimeImage[] = [],
 ): Promise<FreeModelRuntimeOutput> {
-  const canUseAiSdk =
-    images.length === 0 && isVercelAiSdkTextRuntimeEnabled();
+  const directReadiness = getVercelAiSdkRuntimeReadiness();
+  const canUseAiSdk = images.length === 0 && directReadiness.enabled;
+  let directFailure: SafeDirectFailureDiagnostic | null = null;
 
   if (canUseAiSdk) {
     try {
       return await executeVercelAiSdkText(prompt);
-    } catch {
-      // The canonical DHP free-only gateway remains the fail-safe. A direct
-      // AI SDK provider failure must never break the existing production path.
+    } catch (error) {
+      directFailure = safeDirectFailureDiagnostic(error);
     }
   }
 
-  return executeGatewayModelRuntime(task, prompt, images);
+  try {
+    return await executeGatewayModelRuntime(task, prompt, images);
+  } catch (error) {
+    if (
+      images.length === 0 &&
+      error instanceof ModelRuntimeCapabilityError &&
+      error.code === "configuration"
+    ) {
+      console.warn("DHP model runtime configuration diagnostics", {
+        task,
+        directEnabled: directReadiness.enabled,
+        directReadinessReason: directReadiness.reason,
+        directModel: directReadiness.model,
+        directFailure,
+      });
+    }
+    throw error;
+  }
 }
 
 export async function runWorkspaceChatWithModelRuntimeCapability(

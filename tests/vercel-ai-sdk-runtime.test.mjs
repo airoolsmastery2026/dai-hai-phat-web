@@ -33,10 +33,29 @@ test("direct AI SDK execution is opt-in, verified-free, and paid-blocked", async
   assert.doesNotMatch(runtime, /NEXT_PUBLIC_/);
 });
 
+test("runtime readiness reports only safe configuration states", async () => {
+  const runtime = await readFile(runtimeUrl, "utf8");
+  const capability = await readFile(capabilityUrl, "utf8");
+
+  assert.match(runtime, /getVercelAiSdkRuntimeReadiness/);
+  assert.match(runtime, /"runtime-selector"/);
+  assert.match(runtime, /"verified-free"/);
+  assert.match(runtime, /"paid-execution-blocked"/);
+  assert.match(runtime, /"missing-api-key"/);
+  assert.match(runtime, /"ready"/);
+
+  assert.match(capability, /directReadinessReason/);
+  assert.match(capability, /directModel/);
+  assert.match(capability, /directFailure/);
+  assert.match(capability, /errorName/);
+  assert.match(capability, /statusCode/);
+  assert.doesNotMatch(capability, /error\.message/);
+});
+
 test("canonical free gateway remains the fail-safe and image path", async () => {
   const capability = await readFile(capabilityUrl, "utf8");
 
-  assert.match(capability, /isVercelAiSdkTextRuntimeEnabled/);
+  assert.match(capability, /getVercelAiSdkRuntimeReadiness/);
   assert.match(capability, /executeVercelAiSdkText/);
   assert.match(capability, /images\.length === 0/);
   assert.match(capability, /executeGatewayModelRuntime\(task, prompt, images\)/);
