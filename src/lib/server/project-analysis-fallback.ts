@@ -5,7 +5,7 @@ import type {
 } from "@/lib/ai/analysis";
 
 export const PROJECT_ANALYSIS_FALLBACK_PROVIDER = "dhp-rule-engine";
-export const PROJECT_ANALYSIS_FALLBACK_MODEL = "DHP kiểm tra theo quy tắc v1";
+export const PROJECT_ANALYSIS_FALLBACK_MODEL = "dhp-rule-engine-v1";
 
 /**
  * Builds a bounded, deterministic intake summary when cloud inference is not
