@@ -1,9 +1,5 @@
 import type { ConfirmedSpaceEnvelope } from "@/lib/ai/space-confirmation";
 import type { StrictLayoutProposal } from "@/lib/ai/space-layout-gate";
-import {
-  isAllowedProjectImageMimeType,
-  type ProjectImageMimeType,
-} from "@/lib/ai/image-upload";
 
 export const SPACE_RENDER_ARTIFACT_CLASS = "concept-presentation" as const;
 export const SPACE_RENDER_ENGINEERING_STATUS = "not-engineer-verified" as const;
@@ -13,11 +9,17 @@ export const SPACE_RENDER_MAX_STYLE_CHARS = 2_000;
 
 const MAX_RENDER_PROMPT_CHARS = 64_000;
 const STRICT_BASE64_PATTERN = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+const ALLOWED_RENDER_MIME_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+]);
 
 type UnknownRecord = Record<string, unknown>;
+type SpaceRenderMimeType = "image/jpeg" | "image/png" | "image/webp";
 
 export interface SpaceRenderImage {
-  mimeType: ProjectImageMimeType;
+  mimeType: SpaceRenderMimeType;
   dataBase64: string;
 }
 
@@ -57,6 +59,10 @@ function hasOnlyKeys(record: UnknownRecord, allowed: readonly string[]): boolean
   return Object.keys(record).every((key) => allowedSet.has(key));
 }
 
+function isAllowedRenderMimeType(value: unknown): value is SpaceRenderMimeType {
+  return typeof value === "string" && ALLOWED_RENDER_MIME_TYPES.has(value);
+}
+
 function decodedBase64Bytes(value: string): number {
   const padding = value.endsWith("==") ? 2 : value.endsWith("=") ? 1 : 0;
   return (value.length / 4) * 3 - padding;
@@ -67,7 +73,7 @@ function parseImage(value: unknown, label: string): SpaceRenderImage {
   if (
     !image ||
     !hasOnlyKeys(image, ["mimeType", "dataBase64"]) ||
-    !isAllowedProjectImageMimeType(image.mimeType) ||
+    !isAllowedRenderMimeType(image.mimeType) ||
     typeof image.dataBase64 !== "string" ||
     !image.dataBase64 ||
     image.dataBase64.length % 4 !== 0 ||
