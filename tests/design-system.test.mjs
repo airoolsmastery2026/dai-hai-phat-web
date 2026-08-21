@@ -192,7 +192,11 @@ test("homepage conversion surfaces stay compact while consultation remains fully
   assert.doesNotMatch(hero, /min-h-\[calc\(100svh/);
   assert.doesNotMatch(home, /AIOfficeRouteEntry|AIOfficeLoadingState/);
   assert.match(consultation, /AIOfficeRouteEntry/);
-  assert.match(consultation, /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/);
+  assert.match(consultation, /isGeminiLiveEnabled\(\)/);
+  assert.doesNotMatch(
+    consultation,
+    /Boolean\(process\.env\.GEMINI_API_KEY\?\.trim\(\)\)/,
+  );
   assert.match(aiOfficeLoading, /id="ai-office"/);
   assert.match(aiOfficeLoading, /aria-live="polite"/);
   assert.match(button, /touch-manipulation/);
