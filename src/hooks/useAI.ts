@@ -355,7 +355,7 @@ export function useAI() {
         const payload = (await response.json()) as AnalysisApiResponse;
         if (!response.ok || !payload.analysis) {
           throw new Error(
-            payload.error || "Không thể phân tích hồ sơ bằng Gemini.",
+            payload.error || "Không thể phân tích hồ sơ lúc này.",
           );
         }
         if (active) {
@@ -375,7 +375,7 @@ export function useAI() {
           error:
             caughtError instanceof Error
               ? caughtError.message
-              : "Không thể phân tích hồ sơ bằng Gemini.",
+              : "Không thể phân tích hồ sơ lúc này.",
         });
       }
     };

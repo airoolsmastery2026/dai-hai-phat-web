@@ -407,7 +407,7 @@ function ChatAnalysisMessage({
   return (
     <AssistantBubble>
       <p className="text-xs font-bold text-[var(--color-primary-soft-text)]">
-        Gợi ý từ Gemini
+        Gợi ý từ trợ lý AI
       </p>
       <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
         {analysis.recommendation}
@@ -1002,7 +1002,7 @@ function ProjectAnalysisPanel({
         aria-busy="true"
       >
         <p className="font-bold text-[var(--color-primary-soft-text)]">
-          Gemini đang phân tích dữ liệu hồ sơ đã xác nhận…
+          Đang phân tích dữ liệu hồ sơ đã xác nhận…
         </p>
         <p className="mt-[var(--space-control)] text-sm leading-6 text-[var(--color-text-dark-muted)]">
           Chỉ dữ liệu dự án phi nhạy cảm và bằng chứng trong thư viện dữ liệu được
@@ -1042,7 +1042,7 @@ function ProjectAnalysisPanel({
       <div className="flex flex-col gap-[var(--space-control)] sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
-            Gemini phân tích hồ sơ
+            Phân tích hồ sơ bằng AI
           </p>
           <h3
             id="project-analysis-title"
@@ -1110,7 +1110,7 @@ function ProjectAnalysisPanel({
       </div>
 
       <p className="mt-[var(--space-card-lg)] border-t border-[var(--color-border-dark)] pt-[var(--space-stack)] text-xs leading-5 text-[var(--color-text-dark-subtle)]">
-        Phân tích do Gemini tạo từ dữ liệu phi nhạy cảm, không phải kết luận kỹ
+        Phân tích sơ bộ được tạo từ dữ liệu phi nhạy cảm, không phải kết luận kỹ
         thuật hoặc báo giá. Kỹ sư Đại Hải Phát phải khảo sát trước khi xác nhận
         phương án.
       </p>
