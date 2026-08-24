@@ -2,7 +2,15 @@
 
 ## Status
 
-This document defines the first internal API boundary between the Dai Hai Phat Website and a user-controlled `goose-DHP` local execution node.
+Implemented first slice for the internal runtime link between the Dai Hai Phat Website and a user-controlled `goose-DHP` local execution node.
+
+Current implementation:
+
+- `POST /api/v1/internal/runtime/handshake`
+- service identity `goose-desktop`
+- strict `absolute-zero` cost-mode gate
+- bounded capability/provider metadata
+- no new database, queue, package, or public browser credential
 
 The Website remains the business brain and system of record. Goose is an execution runtime only.
 
