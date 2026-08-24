@@ -34,5 +34,8 @@ Thumbs.db
 # coverage
 coverage/
 
+# security scan artifacts
+strix_runs/
+
 # TypeScript
 *.tsbuildinfo
