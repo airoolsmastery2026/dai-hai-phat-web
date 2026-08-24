@@ -64,6 +64,19 @@ Chưa triển khai trong v1 nếu chưa có dữ liệu vận hành chứng minh
 
 Mọi module mới phải chứng minh ít nhất một trong các giá trị sau: tăng tỷ lệ chuyển đổi, giảm thời gian xử lý, tăng độ chính xác, tăng an toàn dữ liệu hoặc giảm chi phí vận hành.
 
+### Optional external AI integrations
+
+Các runtime/skill bên ngoài chỉ được tích hợp theo kiểu **adapter tùy chọn**, không được mặc định trở thành dependency của Website production hoặc thay đổi quyền sở hữu dữ liệu/nghiệp vụ.
+
+- Registry dự án: [`.ai/EXTERNAL_AI_INTEGRATIONS.json`](./.ai/EXTERNAL_AI_INTEGRATIONS.json)
+- Architecture contract: [`docs/EXTERNAL_AI_RUNTIME_INTEGRATIONS.md`](./docs/EXTERNAL_AI_RUNTIME_INTEGRATIONS.md)
+- OpenViking: context/memory engine tùy chọn, không thay Website source of truth.
+- Needle 2: tool router local được đăng ký nhưng tắt mặc định; không phải local coding-model fallback.
+- `ip-as-logo`: specialist creative skill chỉ bật theo yêu cầu; output là candidate asset cho đến khi được chấp thuận.
+- DeepSeek Harness Anchored Standard: development-only adapter, chỉ dùng khi provider/harness phù hợp và không được làm yếu DHP/UMS authority hoặc cost policy.
+
+Không clone/vendor toàn bộ upstream vào Website chỉ vì đã đăng ký. Mọi activation phải giữ nguyên service ownership, API boundaries, security/privacy policy, `$0`/provider policy hiện hành và quality gate.
+
 ## Nguyên tắc ưu tiên
 
 1. Mobile First
