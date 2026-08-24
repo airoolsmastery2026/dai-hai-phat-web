@@ -10,9 +10,17 @@ export interface ServicePrincipal {
   service: EcosystemService;
 }
 
+type ServiceAuthenticationErrorCode =
+  | "not_configured"
+  | "unauthorized"
+  | "forbidden";
+
 export class ServiceAuthenticationError extends Error {
-  constructor(readonly code: "not_configured" | "unauthorized" | "forbidden") {
+  readonly code: ServiceAuthenticationErrorCode;
+
+  constructor(code: ServiceAuthenticationErrorCode) {
     super(code);
+    this.code = code;
   }
 }
 
@@ -34,22 +42,34 @@ function readBearerToken(headers: Headers): string | null {
   return token || null;
 }
 
+function configuredTokenForService(service: EcosystemService): string | null {
+  const value =
+    service === "goose-desktop"
+      ? process.env.GOOSE_DESKTOP_SERVICE_API_KEY
+      : process.env.ECOSYSTEM_SERVICE_API_KEY;
+  return value?.trim() || null;
+}
+
 export function authenticateService(
   headers: Headers,
   allowedServices: readonly EcosystemService[],
 ): ServicePrincipal {
-  const configuredToken = process.env.ECOSYSTEM_SERVICE_API_KEY?.trim();
-  if (!configuredToken) {
-    throw new ServiceAuthenticationError("not_configured");
-  }
-
   const service = headers.get(SERVICE_HEADER)?.trim() as EcosystemService | undefined;
-  const token = readBearerToken(headers);
-  if (!service || !token || !safeEqual(token, configuredToken)) {
+  if (!service) {
     throw new ServiceAuthenticationError("unauthorized");
   }
   if (!allowedServices.includes(service)) {
     throw new ServiceAuthenticationError("forbidden");
+  }
+
+  const configuredToken = configuredTokenForService(service);
+  if (!configuredToken) {
+    throw new ServiceAuthenticationError("not_configured");
+  }
+
+  const token = readBearerToken(headers);
+  if (!token || !safeEqual(token, configuredToken)) {
+    throw new ServiceAuthenticationError("unauthorized");
   }
 
   return { service };
