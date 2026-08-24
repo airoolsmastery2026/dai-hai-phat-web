@@ -11,6 +11,7 @@
     "quality": "npm run typecheck && npm run lint && npm run test && npm run build",
     "architecture:check": "sentrux check .",
     "assets:build": "npm --prefix packages/dhp-asset-processor run process",
+    "security:strix": "node scripts/run-strix.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ."
   },
