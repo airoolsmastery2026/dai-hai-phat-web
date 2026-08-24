@@ -1,6 +1,10 @@
 import { timingSafeEqual } from "node:crypto";
 
-export type EcosystemService = "publishing-bot" | "telegram-control" | "monitoring";
+export type EcosystemService =
+  | "publishing-bot"
+  | "telegram-control"
+  | "monitoring"
+  | "goose-desktop";
 
 export interface ServicePrincipal {
   service: EcosystemService;
