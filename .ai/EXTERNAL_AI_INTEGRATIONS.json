@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Project-authoritative placement and hard limits for optional UMS-reviewed external AI runtimes and specialist skills. Registration does not install a runtime or make it a Website production dependency.",
+  "authority": {
+    "projectSourceOfTruth": "dai-hai-phat-web repository, code, tests and accepted architecture contracts",
+    "umsRegistry": "airoolsmastery2026/universal-master-skills",
+    "umsRuntimeContract": "runtime/EXTERNAL_RUNTIME_PROVIDER_CONTRACT.md",
+    "projectContract": "docs/EXTERNAL_AI_RUNTIME_INTEGRATIONS.md"
+  },
+  "hardLocks": {
+    "websiteRemainsBusinessSystemOfRecord": true,
+    "noDirectCrossServiceDatabaseAccess": true,
+    "noExternalRuntimeOwnsCanonicalBusinessRecords": true,
+    "noExternalRuntimeProductionDependencyByDefault": true,
+    "vendorSourceIntoWebsiteRepository": false,
+    "paidApiAutoUse": false,
+    "autoTopUp": false,
+    "meteredFallback": false,
+    "localCodingFallback": false,
+    "preservePublicChatbotCriticalPath": true,
+    "preserveQualityGate": "npm run quality"
+  },
+  "integrations": [
+    {
+      "id": "openviking",
+      "type": "context-memory-engine",
+      "upstream": "volcengine/OpenViking",
+      "reviewedCommit": "e7ab26ab24a1b113eff6ba8290bf08109f9e7c2e",
+      "reviewedDate": "2026-08-24",
+      "license": "AGPL-3.0-only",
+      "umsAdapter": "adapters/OPENVIKING.md",
+      "defaultState": "approved-opt-in",
+      "productionWebsiteDependency": false,
+      "allowedPlacement": [
+        "derived-context-index",
+        "subordinate-agent-memory",
+        "operator-or-background-workflow"
+      ],
+      "forbiddenPlacement": [
+        "canonical-products-services-pricing-quotations-leads-crm",
+        "direct-website-database-writes",
+        "public-chatbot-hard-dependency"
+      ],
+      "policy": {
+        "projectIsolationRequired": true,
+        "provenanceRequired": true,
+        "customerPiiBulkIngestionDefault": false,
+        "localModelAutoEnable": false,
+        "noSilentPaidFallback": true,
+        "fallback": "canonical Website knowledge/source files plus normal UMS Context/Memory and Knowledge/RAG routes"
+      }
+    },
+    {
+      "id": "needle",
+      "type": "local-tool-router",
+      "upstream": "cactus-compute/needle",
+      "reviewedCommit": "7bd8a635ebb977489703b3bb916c21412e8a9cdf",
+      "reviewedDate": "2026-08-23",
+      "license": "Apache-2.0",
+      "umsAdapter": "adapters/NEEDLE.md",
+      "defaultState": "registered-disabled",
+      "productionWebsiteDependency": false,
+      "allowedPlacement": [
+        "future-bounded-device-edge-operator-pilot",
+        "structured-extraction-pilot",
+        "route-only-tool-call-pilot"
+      ],
+      "forbiddenPlacement": [
+        "coding-agent-free-model-fallback",
+        "automatic-consequential-tool-execution",
+        "public-chatbot-hard-dependency"
+      ],
+      "policy": {
+        "routeOnlyDefault": true,
+        "confidenceIsNotAuthorization": true,
+        "permissionGateBeforeConsequentialExecution": true,
+        "domainValidationRequired": true,
+        "fineTuneByDefault": false,
+        "paidSyntheticDataByDefault": false,
+        "noSilentPaidFallback": true,
+        "fallback": "normal project-approved UMS AI-03/model-provider route"
+      }
+    },
+    {
+      "id": "ip-as-logo-skill",
+      "type": "external-specialist-skill",
+      "upstream": "s1dashu/ip-as-logo-skill",
+      "reviewedCommit": "acb834c717bcd0a487c49732d08397ba280d690b",
+      "reviewedDate": "2026-08-22",
+      "license": "MIT",
+      "umsAdapter": "18-media-image-video/ip-as-logo/README.md",
+      "entrySkill": "MV-02:image-generation",
+      "defaultState": "enabled-on-demand",
+      "productionWebsiteDependency": false,
+      "allowedPlacement": [
+        "candidate-mascot-ip-generation",
+        "creative-brand-exploration"
+      ],
+      "forbiddenPlacement": [
+        "automatic-dhp-logo-replacement",
+        "automatic-design-token-replacement",
+        "automatic-publishing"
+      ],
+      "policy": {
+        "projectBrandAuthorityWins": true,
+        "userRequestedOutputCountWins": true,
+        "candidateAssetsRequireAcceptance": true,
+        "paidImageProviderAutoEnable": false,
+        "noSilentPaidFallback": true,
+        "fallback": "normal DHP/UMS image-generation workflow or report provider capability gap"
+      }
+    },
+    {
+      "id": "deepseek-dsh-anchored-standard",
+      "type": "provider-specific-development-adapter",
+      "upstream": "xiaobright/dsh-anchored-standard",
+      "reviewedCommit": "bf53f30e575c164c42faa90bb3a5cc1a242e7119",
+      "reviewedDate": "2026-08-23",
+      "license": "MIT",
+      "umsAdapter": "adapters/DEEPSEEK_DSH_ANCHORED.md",
+      "defaultState": "conditional-disabled",
+      "productionWebsiteDependency": false,
+      "allowedPlacement": [
+        "compatible-deepseek-harness-development-session"
+      ],
+      "forbiddenPlacement": [
+        "public-ai-consultant-runtime",
+        "global-ums-reasoning-policy",
+        "provider-cost-policy-bypass"
+      ],
+      "policy": {
+        "requiresCompatibleDeepSeekHarness": true,
+        "providerSelectedBeforePreset": true,
+        "freeModelRouterStillAuthoritative": true,
+        "mandatoryProjectAndUmsAuthorityMustRemainResident": true,
+        "benchmarkClaimsAreNotAcceptanceEvidence": true,
+        "noSilentPaidFallback": true,
+        "fallback": "standard project-approved coding-agent harness"
+      }
+    }
+  ],
+  "activationRule": "Read current project authority -> route canonical UMS skills -> select optional integration only when it materially helps -> discover actual runtime capability/version -> enforce DHP cost/security/permission rules -> execute through owning DHP domain/API boundary -> run normal verification.",
+  "updateRule": "A reviewed commit bump requires license, behavior, adapter compatibility and relevant DHP/UMS regression review. Do not auto-track upstream main."
+}
