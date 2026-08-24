@@ -8,6 +8,7 @@ Current implementation:
 
 - `POST /api/v1/internal/runtime/handshake`
 - service identity `goose-desktop`
+- dedicated `GOOSE_DESKTOP_SERVICE_API_KEY`
 - strict `absolute-zero` cost-mode gate
 - bounded capability/provider metadata
 - no new database, queue, package, or public browser credential
@@ -32,15 +33,15 @@ The Website must continue operating when Desktop is absent or offline. A public 
 
 ## Authentication
 
-Internal runtime requests use the existing ecosystem service-auth contract:
+Internal Goose runtime requests use a dedicated least-privilege credential:
 
 ```http
-Authorization: Bearer <ECOSYSTEM_SERVICE_API_KEY>
+Authorization: Bearer <GOOSE_DESKTOP_SERVICE_API_KEY>
 X-DHP-Source-Service: goose-desktop
 Content-Type: application/json
 ```
 
-The shared credential remains server/local-runtime configuration and must never be committed or exposed to public browser JavaScript.
+`GOOSE_DESKTOP_SERVICE_API_KEY` is separate from `ECOSYSTEM_SERVICE_API_KEY`. A Desktop node must not receive the credential used by Publishing Bot, Telegram Control, or monitoring services. Both credentials remain server/local-runtime configuration and must never be committed or exposed to public browser JavaScript.
 
 ## Runtime handshake
 
@@ -132,6 +133,7 @@ Goose must use Website-owned versioned APIs for business operations. It must nev
 
 ## Security invariants
 
+- dedicated Goose credential; no reuse of the ecosystem-wide credential on Desktop;
 - no browser-facing service token;
 - no direct database access;
 - no direct production write granted by handshake;
