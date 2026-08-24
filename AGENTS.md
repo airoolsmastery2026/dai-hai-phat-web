@@ -13,6 +13,7 @@ For every non-trivial architecture, AI, API, CRM, data-flow, authentication, aut
 1. `docs/ARCHITECTURE_BLUEPRINT.md`
 2. `docs/ECOSYSTEM_ARCHITECTURE.md`
 3. `docs/ECOSYSTEM_API_CONTRACTS.md`
+4. `docs/EXTERNAL_AI_RUNTIME_INTEGRATIONS.md`
 
 For every UI change, also read these files completely:
 
@@ -54,13 +55,17 @@ AI coding agents are execution backends, not architectural authorities. The repo
 
 `.ai/FREE_MODEL_ROUTER.json` is the canonical execution-routing policy for coding agents and DSH integrations. When configured, DSH/UMS should prefer the stable DHP virtual provider `dhp-free` so upstream zero-cost routing stays behind the DHP Capability Gateway.
 
+`.ai/EXTERNAL_AI_INTEGRATIONS.json` is the canonical project registry for optional UMS-reviewed external runtimes/specialist skills. Its detailed placement contract is `docs/EXTERNAL_AI_RUNTIME_INTEGRATIONS.md`. Registration means "reviewed and bounded", not "installed in production". OpenViking remains subordinate context, Needle remains disabled as a coding-model fallback, `ip-as-logo` produces candidate creative assets only, and DSH Anchored Standard may modify only an explicitly compatible development session while all DHP/UMS authority remains resident.
+
 Approved provider posture:
 
 - Codex/ChatGPT, Claude Code, Gemini CLI, Z.ai/GLM/ZCode, OpenCode, DSH, and other approved **cloud** model runtimes may be used when available and appropriate.
 - Z.ai/GLM/ZCode is an optional high-capability coding provider; it does not replace the repository workflow or become a production dependency merely by being used for development.
 - Do not introduce provider-specific business logic, source-of-truth documents, or duplicated workflows solely to accommodate one coding model.
+- Optional external runtimes/specialist skills must stay behind their project/UMS adapter contract; do not clone/vendor the upstream repository into Website core merely because the integration is registered.
 - Do not automatically activate a paid API, paid credit path, or metered provider on behalf of the project. Paid-provider usage requires an already configured operator-owned entitlement or an explicit project decision.
 - Prefer currently verified free cloud quota/free tiers when they satisfy the task. Do not use a local LLM or Ollama as a fallback.
+- Needle is not an exception to the previous rule: it is not a local coding-model fallback and remains disabled in the free coding-provider route unless a future architecture decision explicitly changes that policy.
 - Never commit provider API keys, session tokens, browser credentials, subscription data, or private endpoints.
 - Switching coding providers must not change acceptance criteria, code-review requirements, security rules, or the canonical `npm run quality` gate.
 - A provider claim such as "free", "unlimited", or "zero-token" is not an architectural assumption. Verify current terms before relying on it operationally.
