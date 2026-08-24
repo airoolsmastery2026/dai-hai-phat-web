@@ -10,6 +10,11 @@ export const DHP_RUNTIME_CAPABILITIES = [
 
 export type DhpRuntimeCapability = (typeof DHP_RUNTIME_CAPABILITIES)[number];
 
+type DhpRuntimeHandshakeErrorCode =
+  | "INVALID_PAYLOAD"
+  | "ZERO_DOLLAR_REQUIRED"
+  | "NO_SUPPORTED_CAPABILITY";
+
 export interface DhpRuntimeHandshakeInput {
   nodeId: string;
   runtime: "goose-desktop" | "goose-cli";
@@ -33,13 +38,11 @@ export interface DhpRuntimeHandshakeResult {
 }
 
 export class DhpRuntimeHandshakeError extends Error {
-  constructor(
-    readonly code:
-      | "INVALID_PAYLOAD"
-      | "ZERO_DOLLAR_REQUIRED"
-      | "NO_SUPPORTED_CAPABILITY",
-  ) {
+  readonly code: DhpRuntimeHandshakeErrorCode;
+
+  constructor(code: DhpRuntimeHandshakeErrorCode) {
     super(code);
+    this.code = code;
   }
 }
 
