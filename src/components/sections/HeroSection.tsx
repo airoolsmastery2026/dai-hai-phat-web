@@ -68,17 +68,21 @@ export function HeroSection() {
       />
 
       <Container className="relative py-[var(--space-8)] sm:py-[var(--space-10)] lg:py-[var(--space-12)]">
-        <div className="max-w-[46rem]">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-metal-strong)]">
-            Văn phòng kỹ thuật số 24/7
-          </p>
+        <div className="max-w-[40rem]">
+          <div className="inline-flex items-center gap-[var(--space-3)]">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--color-metal-strong)] sm:text-xs">
+              Văn phòng kỹ thuật số 24/7
+            </p>
+            <span className="hidden h-px w-10 bg-[var(--color-metal)] sm:block" aria-hidden="true" />
+          </div>
 
-          <h1 className="mt-[var(--space-2)] text-[length:var(--font-display)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[var(--color-text)]">
-            Thiết kế &amp; thi công
-            <span className="block text-[var(--color-wood)]">từ nhu cầu đến hồ sơ kỹ thuật.</span>
+          <h1 className="mt-[var(--space-3)] max-w-[36rem] text-[length:var(--font-h1)] font-extrabold leading-[1.06] tracking-[-0.035em] text-[var(--color-text)]">
+            <span className="block">Thiết kế &amp; thi công</span>
+            <span className="mt-1 block text-[var(--color-wood)]">từ nhu cầu đến</span>
+            <span className="block text-[var(--color-wood)]">hồ sơ kỹ thuật.</span>
           </h1>
 
-          <p className="mt-[var(--space-4)] max-w-2xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
+          <p className="mt-[var(--space-4)] max-w-xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
             Gửi nhu cầu hoặc ảnh hiện trạng. Trợ lý sắp xếp thông tin từng bước và chuyển kỹ sư xác nhận trước khảo sát, phương án và báo giá.
           </p>
 

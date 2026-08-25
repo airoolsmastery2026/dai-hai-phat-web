@@ -1,6 +1,7 @@
 import { ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
 import Link from "next/link";
 
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { COMPANY_CONFIG } from "@/content/company";
 import { NAV_ITEMS } from "@/lib/theme";
 
@@ -16,10 +17,8 @@ export function SiteFooter() {
 
       <div className="relative mx-auto grid max-w-[var(--container-max)] gap-[var(--space-8)] px-[var(--space-container)] py-[var(--space-8)] sm:px-[var(--space-container-sm)] sm:py-[var(--space-10)] lg:grid-cols-[1.35fr_0.7fr_0.85fr] lg:gap-[var(--space-10)] lg:px-[var(--space-container-lg)]">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-dark-muted)]">
-            Đại Hải Phát
-          </p>
-          <h2 className="mt-[var(--space-2)] text-xl font-bold tracking-[-0.01em] text-[var(--color-text-inverse)] sm:text-2xl">
+          <BrandLogo inverse />
+          <h2 className="mt-[var(--space-4)] text-xl font-bold tracking-[-0.01em] text-[var(--color-text-inverse)] sm:text-2xl">
             Nội thất &amp; cơ khí dân dụng
           </h2>
           <p className="mt-[var(--space-3)] max-w-lg text-[15px] leading-7 text-[var(--color-text-dark-muted)]">

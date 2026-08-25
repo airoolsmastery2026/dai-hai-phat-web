@@ -4,6 +4,7 @@ import { Bot, Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { COMPANY_CONFIG } from "@/content/company";
 import { NAV_ITEMS } from "@/lib/theme";
 
@@ -85,15 +86,10 @@ export function SiteNavigation() {
       <div className="mx-auto flex h-14 max-w-[var(--container-max)] items-center justify-between px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:h-16 lg:px-[var(--space-container-lg)]">
         <Link
           href="/"
-          className="flex flex-col rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+          className="rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           aria-label="Đại Hải Phát — Trang chủ"
         >
-          <span className="text-base font-black uppercase tracking-[0.04em] text-[var(--color-text)] sm:text-lg">
-            ĐẠI HẢI PHÁT
-          </span>
-          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--color-metal-strong)] sm:text-[10px]">
-            Văn phòng kỹ thuật số
-          </span>
+          <BrandLogo compact className="max-w-[11.5rem] sm:max-w-none" />
         </Link>
 
         <nav
