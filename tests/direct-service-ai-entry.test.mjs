@@ -17,7 +17,7 @@ test("keeps compact homepage service choices connected to the consultation flow"
   assert.match(homepageServices, /const ServiceIcon = service\.icon/);
   assert.match(homepageServices, /grid-cols-2/);
   assert.match(homepageServices, /lg:grid-cols-4/);
-  assert.match(homepageServices, /service-ticker-track/);
+  assert.match(homepageServices, /src=\{service\.image\}/);
   assert.match(homepageServices, /\{service\.aiService\}/);
   assert.doesNotMatch(homepageServices, />\s*Tư vấn hạng mục\s*</);
 
