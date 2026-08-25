@@ -28,15 +28,25 @@ test("keeps mobile navigation keyboard accessible", async () => {
   assert.ok(closeHandlers.length >= 3, "All mobile navigation actions should close the menu");
 });
 
-test("keeps navigation text readable on its light surface", async () => {
-  const navigation = await readFile(
-    new URL("../src/components/layout/SiteNavigation.tsx", import.meta.url),
-    "utf8",
-  );
+test("keeps navigation and canonical brand text readable on the light surface", async () => {
+  const [navigation, brand] = await Promise.all([
+    readFile(
+      new URL("../src/components/layout/SiteNavigation.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../src/components/brand/BrandLogo.tsx", import.meta.url),
+      "utf8",
+    ),
+  ]);
 
   assert.match(navigation, /bg-\[var\(--color-surface\)\]\/95/);
-  assert.match(navigation, /font-black[^"]*text-\[var\(--color-text\)\]/);
-  assert.match(navigation, /font-semibold[^"]*text-\[var\(--color-text-muted\)\]/);
-  assert.match(navigation, /text-\[var\(--color-metal-strong\)\][^"]*sm:text-\[10px\]/);
+  assert.match(navigation, /<BrandLogo compact/);
+  assert.match(navigation, /font-semibold[^\"]*text-\[var\(--color-text-muted\)\]/);
   assert.match(navigation, /text-\[var\(--color-primary-contrast\)\]/);
+
+  assert.match(brand, /font-black uppercase/);
+  assert.match(brand, /"text-\[var\(--color-text\)\]"/);
+  assert.match(brand, /"text-\[var\(--color-metal-strong\)\]"/);
+  assert.match(brand, /ĐẠI HẢI PHÁT/);
 });
