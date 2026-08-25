@@ -3,13 +3,31 @@ import type { Metadata } from "next";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { COMPANY_CONFIG } from "@/content/company";
 import { SERVICES } from "@/content/services";
+
+const SERVICES_DESCRIPTION =
+  "Dịch vụ nội thất, cửa cổng, cầu thang, lan can, mái che và gia công cơ khí theo yêu cầu tại Đại Hải Phát.";
+const SERVICES_TITLE = "Dịch vụ nội thất & cơ khí dân dụng | Đại Hải Phát";
+const SERVICES_IMAGE = `${COMPANY_CONFIG.websiteUrl}/images/interior/interior01.webp`;
 
 export const metadata: Metadata = {
   title: "Dịch vụ",
-  description:
-    "Dịch vụ nội thất, cửa cổng, cầu thang, lan can, mái che và gia công cơ khí theo yêu cầu tại Đại Hải Phát.",
+  description: SERVICES_DESCRIPTION,
   alternates: { canonical: "/services" },
+  openGraph: {
+    title: SERVICES_TITLE,
+    description: SERVICES_DESCRIPTION,
+    url: `${COMPANY_CONFIG.websiteUrl}/services`,
+    type: "website",
+    images: [{ url: SERVICES_IMAGE, alt: "Dịch vụ nội thất và cơ khí dân dụng Đại Hải Phát" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SERVICES_TITLE,
+    description: SERVICES_DESCRIPTION,
+    images: [SERVICES_IMAGE],
+  },
 };
 
 export default function ServicesPage() {
