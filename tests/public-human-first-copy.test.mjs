@@ -29,8 +29,11 @@ test("public homepage keeps human trust language and routes consultation to its 
   assert.match(sources.hero, /Văn phòng kỹ thuật số 24\/7/);
   assert.match(sources.hero, /Bắt đầu tư vấn/);
   assert.match(sources.hero, /Chuẩn bị báo giá/);
+  assert.match(sources.hero, /Kho dự án/);
+  assert.match(sources.hero, /Đang đối chiếu phương án/);
+  assert.match(sources.services, /Dịch vụ nổi bật/);
   assert.match(sources.services, /Chọn nhanh hạng mục bạn quan tâm/);
-  assert.match(sources.services, /service-ticker-track/);
+  assert.match(sources.services, /src=\{service\.image\}/);
   assert.doesNotMatch(sources.page, /AIOfficeRouteEntry|GEMINI_API_KEY/);
   assert.match(sources.contact, /kỹ sư sẽ tiếp nhận/);
 
@@ -75,7 +78,8 @@ test("homepage keeps a compact human-first hierarchy before project proof", asyn
     );
   }
 
-  assert.match(sources.hero, /py-\[var\(--space-8\)\]/);
+  assert.match(sources.hero, /lg:grid-cols-\[0\.95fr_1\.15fr\]/);
+  assert.match(sources.hero, /hero-luxury-materials-v1\.webp/);
   assert.match(sources.services, /SERVICES\.slice\(0, 4\)/);
   assert.match(sources.services, /grid-cols-2/);
   assert.match(sources.services, /lg:grid-cols-4/);
