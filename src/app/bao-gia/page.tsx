@@ -13,12 +13,30 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { COMPANY_CONFIG } from "@/content/company";
+
+const QUOTE_DESCRIPTION =
+  "Chuẩn bị yêu cầu báo giá nội thất và cơ khí dân dụng tại Đại Hải Phát: hiện trạng, kích thước, vật liệu, địa điểm và quy trình xác nhận kỹ thuật.";
+const QUOTE_TITLE = "Báo giá kỹ thuật | Đại Hải Phát";
+const QUOTE_IMAGE = `${COMPANY_CONFIG.websiteUrl}/images/materials/material01.webp`;
 
 export const metadata: Metadata = {
   title: "Báo giá",
-  description:
-    "Chuẩn bị yêu cầu báo giá nội thất và cơ khí dân dụng tại Đại Hải Phát: hiện trạng, kích thước, vật liệu, địa điểm và quy trình xác nhận kỹ thuật.",
+  description: QUOTE_DESCRIPTION,
   alternates: { canonical: "/bao-gia" },
+  openGraph: {
+    title: QUOTE_TITLE,
+    description: QUOTE_DESCRIPTION,
+    url: `${COMPANY_CONFIG.websiteUrl}/bao-gia`,
+    type: "website",
+    images: [{ url: QUOTE_IMAGE, alt: "Vật liệu phục vụ lập báo giá Đại Hải Phát" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: QUOTE_TITLE,
+    description: QUOTE_DESCRIPTION,
+    images: [QUOTE_IMAGE],
+  },
 };
 
 const preparationItems = [

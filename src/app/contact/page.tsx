@@ -9,16 +9,25 @@ import { COMPANY_CONFIG } from "@/content/company";
 
 const CONTACT_DESCRIPTION =
   "Gửi nhu cầu, ảnh hiện trạng và kích thước dự kiến cho Đại Hải Phát để kỹ sư tiếp nhận và xác nhận bước khảo sát tiếp theo.";
+const CONTACT_TITLE = "Liên hệ Đại Hải Phát";
+const CONTACT_IMAGE = `${COMPANY_CONFIG.websiteUrl}/images/factory/factory01.webp`;
 
 export const metadata: Metadata = {
   title: "Liên hệ",
   description: CONTACT_DESCRIPTION,
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Liên hệ Đại Hải Phát",
+    title: CONTACT_TITLE,
     description: CONTACT_DESCRIPTION,
     url: `${COMPANY_CONFIG.websiteUrl}/contact`,
     type: "website",
+    images: [{ url: CONTACT_IMAGE, alt: "Liên hệ kỹ thuật Đại Hải Phát" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: CONTACT_TITLE,
+    description: CONTACT_DESCRIPTION,
+    images: [CONTACT_IMAGE],
   },
 };
 
