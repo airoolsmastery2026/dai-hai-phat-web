@@ -5,6 +5,7 @@ import test from "node:test";
 const files = {
   page: new URL("../src/app/page.tsx", import.meta.url),
   navigation: new URL("../src/components/layout/SiteNavigation.tsx", import.meta.url),
+  brand: new URL("../src/components/brand/BrandLogo.tsx", import.meta.url),
   hero: new URL("../src/components/sections/HeroSection.tsx", import.meta.url),
   services: new URL("../src/components/sections/ServicesSection.tsx", import.meta.url),
   projects: new URL("../src/components/sections/ProjectsSection.tsx", import.meta.url),
@@ -18,7 +19,8 @@ test("public homepage keeps human trust language and routes consultation to its 
     ),
   );
 
-  assert.match(sources.navigation, /Văn phòng kỹ thuật số/);
+  assert.match(sources.navigation, /<BrandLogo compact/);
+  assert.match(sources.brand, /VĂN PHÒNG KỸ THUẬT SỐ 24\/7/);
   assert.match(sources.navigation, /Bắt đầu tư vấn/);
   assert.match(
     sources.navigation,
@@ -34,6 +36,7 @@ test("public homepage keeps human trust language and routes consultation to its 
 
   const publicCopy = [
     sources.navigation,
+    sources.brand,
     sources.hero,
     sources.services,
     sources.projects,
