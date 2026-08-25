@@ -7,13 +7,31 @@ import { AIOfficeRouteEntry } from "@/components/sections/AIOfficeRouteEntry";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { COMPANY_CONFIG } from "@/content/company";
 import { isGeminiLiveEnabled } from "@/lib/server/gemini-live-policy";
+
+const CONSULTATION_DESCRIPTION =
+  "Trợ lý tư vấn Đại Hải Phát hỗ trợ làm rõ nhu cầu, ghi nhận hình ảnh và hồ sơ, chuẩn bị phương án trước khảo sát và báo giá.";
+const CONSULTATION_TITLE = "Tư vấn trực tuyến 24/7 | Đại Hải Phát";
+const CONSULTATION_IMAGE = `${COMPANY_CONFIG.websiteUrl}/images/brand/hero-luxury-materials-v1.webp`;
 
 export const metadata: Metadata = {
   title: "Tư vấn trực tuyến 24/7",
-  description:
-    "Trợ lý tư vấn Đại Hải Phát hỗ trợ làm rõ nhu cầu, ghi nhận hình ảnh và hồ sơ, chuẩn bị phương án trước khảo sát và báo giá.",
+  description: CONSULTATION_DESCRIPTION,
   alternates: { canonical: "/ai-tu-van" },
+  openGraph: {
+    title: CONSULTATION_TITLE,
+    description: CONSULTATION_DESCRIPTION,
+    url: `${COMPANY_CONFIG.websiteUrl}/ai-tu-van`,
+    type: "website",
+    images: [{ url: CONSULTATION_IMAGE, alt: "Tư vấn trực tuyến Đại Hải Phát" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: CONSULTATION_TITLE,
+    description: CONSULTATION_DESCRIPTION,
+    images: [CONSULTATION_IMAGE],
+  },
 };
 
 const capabilities = [
