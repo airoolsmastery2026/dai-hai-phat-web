@@ -39,6 +39,9 @@ test("conversion pages publish page-specific OpenGraph and Twitter metadata", ()
     assert.match(source, /twitter:\s*\{/);
     assert.match(source, /card:\s*"summary_large_image"/);
     assert.match(source, /images:\s*\[/);
-    assert.match(source, new RegExp(`websiteUrl\\}\\${route.replaceAll("/", "\\/")}`));
+    assert.ok(
+      source.includes(`websiteUrl}${route}`),
+      `${path} must publish an absolute page-specific social URL`,
+    );
   }
 });
