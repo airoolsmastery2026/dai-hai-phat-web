@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.0",
   "reviewedIntegrationBatch": "2026-08-27",
   "purpose": "Project-authoritative placement and hard limits for optional UMS-reviewed external AI runtimes and specialist skills. Registration does not install a runtime or make it a Website production dependency.",
   "authority": {
