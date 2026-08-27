@@ -32,9 +32,24 @@
       "umsAdapter": "adapters/OPENVIKING.md",
       "defaultState": "approved-opt-in",
       "productionWebsiteDependency": false,
-      "allowedPlacement": ["derived-context-index","subordinate-agent-memory","operator-or-background-workflow"],
-      "forbiddenPlacement": ["canonical-products-services-pricing-quotations-leads-crm","direct-website-database-writes","public-chatbot-hard-dependency"],
-      "policy": {"projectIsolationRequired":true,"provenanceRequired":true,"customerPiiBulkIngestionDefault":false,"localModelAutoEnable":false,"noSilentPaidFallback":true,"fallback":"canonical Website knowledge/source files plus normal UMS Context/Memory and Knowledge/RAG routes"}
+      "allowedPlacement": [
+        "derived-context-index",
+        "subordinate-agent-memory",
+        "operator-or-background-workflow"
+      ],
+      "forbiddenPlacement": [
+        "canonical-products-services-pricing-quotations-leads-crm",
+        "direct-website-database-writes",
+        "public-chatbot-hard-dependency"
+      ],
+      "policy": {
+        "projectIsolationRequired": true,
+        "provenanceRequired": true,
+        "customerPiiBulkIngestionDefault": false,
+        "localModelAutoEnable": false,
+        "noSilentPaidFallback": true,
+        "fallback": "canonical Website knowledge/source files plus normal UMS Context/Memory and Knowledge/RAG routes"
+      }
     },
     {
       "id": "needle",
@@ -46,9 +61,26 @@
       "umsAdapter": "adapters/NEEDLE.md",
       "defaultState": "registered-disabled",
       "productionWebsiteDependency": false,
-      "allowedPlacement": ["future-bounded-device-edge-operator-pilot","structured-extraction-pilot","route-only-tool-call-pilot"],
-      "forbiddenPlacement": ["coding-agent-free-model-fallback","automatic-consequential-tool-execution","public-chatbot-hard-dependency"],
-      "policy": {"routeOnlyDefault":true,"confidenceIsNotAuthorization":true,"permissionGateBeforeConsequentialExecution":true,"domainValidationRequired":true,"fineTuneByDefault":false,"paidSyntheticDataByDefault":false,"noSilentPaidFallback":true,"fallback":"normal project-approved UMS AI-03/model-provider route"}
+      "allowedPlacement": [
+        "future-bounded-device-edge-operator-pilot",
+        "structured-extraction-pilot",
+        "route-only-tool-call-pilot"
+      ],
+      "forbiddenPlacement": [
+        "coding-agent-free-model-fallback",
+        "automatic-consequential-tool-execution",
+        "public-chatbot-hard-dependency"
+      ],
+      "policy": {
+        "routeOnlyDefault": true,
+        "confidenceIsNotAuthorization": true,
+        "permissionGateBeforeConsequentialExecution": true,
+        "domainValidationRequired": true,
+        "fineTuneByDefault": false,
+        "paidSyntheticDataByDefault": false,
+        "noSilentPaidFallback": true,
+        "fallback": "normal project-approved UMS AI-03/model-provider route"
+      }
     },
     {
       "id": "ip-as-logo-skill",
@@ -61,9 +93,23 @@
       "entrySkill": "MV-02:image-generation",
       "defaultState": "enabled-on-demand",
       "productionWebsiteDependency": false,
-      "allowedPlacement": ["candidate-mascot-ip-generation","creative-brand-exploration"],
-      "forbiddenPlacement": ["automatic-dhp-logo-replacement","automatic-design-token-replacement","automatic-publishing"],
-      "policy": {"projectBrandAuthorityWins":true,"userRequestedOutputCountWins":true,"candidateAssetsRequireAcceptance":true,"paidImageProviderAutoEnable":false,"noSilentPaidFallback":true,"fallback":"normal DHP/UMS image-generation workflow or report provider capability gap"}
+      "allowedPlacement": [
+        "candidate-mascot-ip-generation",
+        "creative-brand-exploration"
+      ],
+      "forbiddenPlacement": [
+        "automatic-dhp-logo-replacement",
+        "automatic-design-token-replacement",
+        "automatic-publishing"
+      ],
+      "policy": {
+        "projectBrandAuthorityWins": true,
+        "userRequestedOutputCountWins": true,
+        "candidateAssetsRequireAcceptance": true,
+        "paidImageProviderAutoEnable": false,
+        "noSilentPaidFallback": true,
+        "fallback": "normal DHP/UMS image-generation workflow or report provider capability gap"
+      }
     },
     {
       "id": "deepseek-dsh-anchored-standard",
@@ -75,9 +121,23 @@
       "umsAdapter": "adapters/DEEPSEEK_DSH_ANCHORED.md",
       "defaultState": "conditional-disabled",
       "productionWebsiteDependency": false,
-      "allowedPlacement": ["compatible-deepseek-harness-development-session"],
-      "forbiddenPlacement": ["public-ai-consultant-runtime","global-ums-reasoning-policy","provider-cost-policy-bypass"],
-      "policy": {"requiresCompatibleDeepSeekHarness":true,"providerSelectedBeforePreset":true,"freeModelRouterStillAuthoritative":true,"mandatoryProjectAndUmsAuthorityMustRemainResident":true,"benchmarkClaimsAreNotAcceptanceEvidence":true,"noSilentPaidFallback":true,"fallback":"standard project-approved coding-agent harness"}
+      "allowedPlacement": [
+        "compatible-deepseek-harness-development-session"
+      ],
+      "forbiddenPlacement": [
+        "public-ai-consultant-runtime",
+        "global-ums-reasoning-policy",
+        "provider-cost-policy-bypass"
+      ],
+      "policy": {
+        "requiresCompatibleDeepSeekHarness": true,
+        "providerSelectedBeforePreset": true,
+        "freeModelRouterStillAuthoritative": true,
+        "mandatoryProjectAndUmsAuthorityMustRemainResident": true,
+        "benchmarkClaimsAreNotAcceptanceEvidence": true,
+        "noSilentPaidFallback": true,
+        "fallback": "standard project-approved coding-agent harness"
+      }
     },
     {
       "id": "aitoearn",
@@ -89,9 +149,28 @@
       "umsAdapter": "adapters/AITO_EARN.md",
       "defaultState": "approved-opt-in",
       "productionWebsiteDependency": false,
-      "allowedPlacement": ["social-publishing-bot-runtime","publishing-scheduling-and-status","social-analytics-collection","approved-social-engagement-ingestion"],
-      "forbiddenPlacement": ["canonical-website-business-records","direct-website-database-access","public-chatbot-hard-dependency","unapproved-autonomous-engagement","silent-paid-relay-or-ai-fallback"],
-      "policy": {"websiteContentAndBusinessTruthRemainCanonical":true,"crossServiceApiOnly":true,"idempotencyAndReconciliationRequired":true,"autonomousEngagementDefault":false,"providerCredentialsRemainInPublishingRuntime":true,"noSilentPaidFallback":true,"fallback":"existing Publishing Bot/manual publish-ready handoff without changing Website business state"}
+      "allowedPlacement": [
+        "social-publishing-bot-runtime",
+        "publishing-scheduling-and-status",
+        "social-analytics-collection",
+        "approved-social-engagement-ingestion"
+      ],
+      "forbiddenPlacement": [
+        "canonical-website-business-records",
+        "direct-website-database-access",
+        "public-chatbot-hard-dependency",
+        "unapproved-autonomous-engagement",
+        "silent-paid-relay-or-ai-fallback"
+      ],
+      "policy": {
+        "websiteContentAndBusinessTruthRemainCanonical": true,
+        "crossServiceApiOnly": true,
+        "idempotencyAndReconciliationRequired": true,
+        "autonomousEngagementDefault": false,
+        "providerCredentialsRemainInPublishingRuntime": true,
+        "noSilentPaidFallback": true,
+        "fallback": "existing Publishing Bot/manual publish-ready handoff without changing Website business state"
+      }
     }
   ],
   "activationRule": "Read current project authority -> route canonical UMS skills -> select optional integration only when it materially helps -> discover actual runtime capability/version -> enforce DHP cost/security/permission rules -> execute through owning DHP domain/API boundary -> run normal verification.",
