@@ -74,6 +74,7 @@ Các runtime/skill bên ngoài chỉ được tích hợp theo kiểu **adapter 
 - Needle 2: tool router local được đăng ký nhưng tắt mặc định; không phải local coding-model fallback.
 - `ip-as-logo`: specialist creative skill chỉ bật theo yêu cầu; output là candidate asset cho đến khi được chấp thuận.
 - DeepSeek Harness Anchored Standard: development-only adapter, chỉ dùng khi provider/harness phù hợp và không được làm yếu DHP/UMS authority hoặc cost policy.
+- AiToEarn: social-execution runtime tùy chọn đứng **sau** boundary Social Publishing Bot. Website vẫn giữ business truth; AiToEarn chỉ thực thi publish/schedule/status/analytics/engagement đã được phê duyệt qua API/MCP adapter và không được trở thành public Website dependency.
 
 Không clone/vendor toàn bộ upstream vào Website chỉ vì đã đăng ký. Mọi activation phải giữ nguyên service ownership, API boundaries, security/privacy policy, `$0`/provider policy hiện hành và quality gate.
 

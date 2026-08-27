@@ -17,7 +17,7 @@ Repository code, tests, and the narrower owning-domain contract remain the imple
 
 ## Decision
 
-DHP integrates four reviewed external capabilities through UMS-style adapters, not by copying their repositories into the Website or installing all of them as production dependencies:
+DHP integrates five reviewed external capabilities through UMS-style adapters, not by copying their repositories into the Website or installing all of them as production dependencies:
 
 | Capability | DHP role | Default state | Public Website dependency |
 | --- | --- | --- | --- |
@@ -25,6 +25,7 @@ DHP integrates four reviewed external capabilities through UMS-style adapters, n
 | Needle 2 | bounded local tool-call/extraction router | registered / disabled | No |
 | ip-as-logo | mascot/IP creative specialist | enabled on demand | No |
 | DSH Anchored Standard | DeepSeek Harness development modifier | conditional / disabled | No |
+| AiToEarn | optional Social Publishing Bot execution runtime | approved / opt-in | No |
 
 The machine-readable source for these placements and reviewed commits is `.ai/EXTERNAL_AI_INTEGRATIONS.json`.
 
@@ -50,6 +51,8 @@ External integrations
 ```
 
 No external integration may own or silently duplicate canonical products, services, pricing, quotations, leads, CRM, business rules, or Website knowledge. No external integration may write another DHP service's private database directly.
+
+AiToEarn does not create a fourth DHP business service. When selected, it is an implementation/runtime provider behind the existing logical **Publishing Bot** boundary and must expose or be wrapped by the existing DHP Publishing/API contracts.
 
 ## Integration pattern
 
@@ -194,6 +197,50 @@ Rules:
 - It is not part of the public AI consultant runtime.
 - Upstream benchmark/trajectory observations are not DHP acceptance evidence. DHP acceptance remains repository tests, review, security checks, and `npm run quality`.
 
+## 5. AiToEarn — Social Publishing Bot Runtime
+
+AiToEarn is approved as an optional runtime provider behind the existing Social Publishing Bot boundary. It may implement supported publishing, scheduling, publication status, social analytics, and policy-approved engagement operations without becoming the Website system of record.
+
+```text
+Website canonical content / IDs
+        |
+        v
+DHP Publishing API / job contract
+        |
+        v
+UMS social execution route
+        |
+        v
+optional AiToEarn runtime (MCP/API adapter)
+        |
+        v
+social platforms
+        |
+        v
+status / analytics / engagement events
+        |
+        v
+DHP versioned webhooks / Website-owned CRM & analytics
+```
+
+### Rules
+
+- Website content, product/service facts, pricing, leads, CRM and source analytics events remain canonical in the Website.
+- AiToEarn must never read or write Website private tables or import Website internal modules.
+- Cross-service calls must preserve DHP `requestId`/`eventId`, stable Website entity IDs and idempotency semantics.
+- Existing `/api/v1/publishing/*` and `/api/v1/webhooks/*` contracts remain the DHP-facing boundary; AiToEarn MCP/API names are provider implementation details behind an adapter.
+- Discover target platform/account capabilities before constructing a provider payload.
+- Persist provider `flowId`, `taskId` and record identifiers as operational references, not canonical Website IDs.
+- Never blind-retry a publish/comment/engagement side effect after an ambiguous result. Reconcile provider state first.
+- Autonomous engagement is disabled by default. Bulk or reputation-sensitive actions require an explicit DHP permission/allowlist policy.
+- Social OAuth credentials, Relay keys and provider tokens remain in the Publishing runtime's secret store; they must not enter the Website repository or browser bundle.
+- AiToEarn Relay or AI-provider configuration does not override DHP cost policy. No paid Relay/model fallback may be enabled silently.
+- Runtime failure must not block the public Website, chatbot, CRM intake or canonical content editing. Fallback is the existing Publishing Bot/manual publish-ready path.
+
+### Version and transport
+
+The reviewed AiToEarn commit is pinned in `.ai/EXTERNAL_AI_INTEGRATIONS.json` and the UMS adapter. Prefer the registered provider-neutral `social.*` contract rather than coupling DHP code directly to changing upstream MCP tool names.
+
 ## Security and privacy
 
 Every activated external runtime must obey the same DHP boundaries as any other provider:
@@ -226,7 +273,7 @@ When an optional provider is unavailable, fall back only within the already-auth
 
 ## Upstream version policy
 
-All four integrations are pinned to a reviewed commit in `.ai/EXTERNAL_AI_INTEGRATIONS.json`.
+All registered integrations are pinned to a reviewed commit in `.ai/EXTERNAL_AI_INTEGRATIONS.json`.
 
 Do not auto-track upstream `main`. A commit update requires checking:
 
@@ -245,6 +292,7 @@ Rollback is provider removal/disablement, not a business-data migration.
 - Needle: use the normal project-approved tool/model route.
 - ip-as-logo: use the normal DHP/UMS image-generation workflow.
 - DSH Anchored Standard: use the standard project-approved coding-agent harness.
+- AiToEarn: retain canonical Website content/state and use the existing Publishing Bot or manual publish-ready handoff.
 
 Canonical DHP data must remain usable after any optional integration is removed.
 

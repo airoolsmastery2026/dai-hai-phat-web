@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "reviewedIntegrationBatch": "2026-08-24",
+  "reviewedIntegrationBatch": "2026-08-27",
   "purpose": "Project-authoritative placement and hard limits for optional UMS-reviewed external AI runtimes and specialist skills. Registration does not install a runtime or make it a Website production dependency.",
   "authority": {
     "projectSourceOfTruth": "dai-hai-phat-web repository, code, tests and accepted architecture contracts",
@@ -137,6 +137,39 @@
         "benchmarkClaimsAreNotAcceptanceEvidence": true,
         "noSilentPaidFallback": true,
         "fallback": "standard project-approved coding-agent harness"
+      }
+    },
+    {
+      "id": "aitoearn",
+      "type": "social-execution-runtime",
+      "upstream": "airoolsmastery2026/AiToEarn",
+      "reviewedCommit": "c9eb16aaefeba5dc40332ccecf7e1b8cc5b5df96",
+      "reviewedDate": "2026-08-27",
+      "license": "MIT",
+      "umsAdapter": "adapters/AITO_EARN.md",
+      "defaultState": "approved-opt-in",
+      "productionWebsiteDependency": false,
+      "allowedPlacement": [
+        "social-publishing-bot-runtime",
+        "publishing-scheduling-and-status",
+        "social-analytics-collection",
+        "approved-social-engagement-ingestion"
+      ],
+      "forbiddenPlacement": [
+        "canonical-website-business-records",
+        "direct-website-database-access",
+        "public-chatbot-hard-dependency",
+        "unapproved-autonomous-engagement",
+        "silent-paid-relay-or-ai-fallback"
+      ],
+      "policy": {
+        "websiteContentAndBusinessTruthRemainCanonical": true,
+        "crossServiceApiOnly": true,
+        "idempotencyAndReconciliationRequired": true,
+        "autonomousEngagementDefault": false,
+        "providerCredentialsRemainInPublishingRuntime": true,
+        "noSilentPaidFallback": true,
+        "fallback": "existing Publishing Bot/manual publish-ready handoff without changing Website business state"
       }
     }
   ],

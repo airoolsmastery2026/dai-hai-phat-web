@@ -18,6 +18,7 @@ test("external AI integrations are pinned, optional, and non-production by defau
     "needle",
     "ip-as-logo-skill",
     "deepseek-dsh-anchored-standard",
+    "aitoearn",
   ];
 
   assert.equal(registry.schemaVersion, "1.0");
@@ -88,6 +89,27 @@ test("creative and DeepSeek adapters cannot silently replace DHP authority", asy
   assert.ok(anchored.forbiddenPlacement.includes("public-ai-consultant-runtime"));
 });
 
+test("AiToEarn remains a subordinate social execution runtime", async () => {
+  const registry = await readJson(registryUrl);
+  const aitoearn = registry.integrations.find(({ id }) => id === "aitoearn");
+
+  assert.ok(aitoearn);
+  assert.equal(aitoearn.type, "social-execution-runtime");
+  assert.equal(aitoearn.defaultState, "approved-opt-in");
+  assert.equal(aitoearn.productionWebsiteDependency, false);
+  assert.equal(aitoearn.policy.websiteContentAndBusinessTruthRemainCanonical, true);
+  assert.equal(aitoearn.policy.crossServiceApiOnly, true);
+  assert.equal(aitoearn.policy.idempotencyAndReconciliationRequired, true);
+  assert.equal(aitoearn.policy.autonomousEngagementDefault, false);
+  assert.equal(aitoearn.policy.providerCredentialsRemainInPublishingRuntime, true);
+  assert.equal(aitoearn.policy.noSilentPaidFallback, true);
+  assert.ok(aitoearn.allowedPlacement.includes("social-publishing-bot-runtime"));
+  assert.ok(aitoearn.forbiddenPlacement.includes("direct-website-database-access"));
+  assert.ok(aitoearn.forbiddenPlacement.includes("public-chatbot-hard-dependency"));
+  assert.ok(aitoearn.forbiddenPlacement.includes("unapproved-autonomous-engagement"));
+  assert.ok(aitoearn.forbiddenPlacement.includes("silent-paid-relay-or-ai-fallback"));
+});
+
 test("project documentation exposes the integration contract without secret material", async () => {
   const [contract, readme, registryText] = await Promise.all([
     readFile(contractUrl, "utf8"),
@@ -101,6 +123,7 @@ test("project documentation exposes the integration contract without secret mate
   assert.match(contract, /Needle 2/);
   assert.match(contract, /ip-as-logo/);
   assert.match(contract, /Anchored Standard/);
+  assert.match(contract, /AiToEarn/);
   assert.match(contract, /Website\s*= business brain \+ system of record/);
 
   const lower = registryText.toLowerCase();
