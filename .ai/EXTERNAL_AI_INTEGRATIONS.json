@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.0",
-  "reviewedIntegrationBatch": "2026-08-27",
+  "schemaVersion": "1.1",
+  "reviewedIntegrationBatch": "2026-08-28",
   "purpose": "Project-authoritative placement and hard limits for optional UMS-reviewed external AI runtimes and specialist skills. Registration does not install a runtime or make it a Website production dependency.",
   "authority": {
     "projectSourceOfTruth": "dai-hai-phat-web repository, code, tests and accepted architecture contracts",
@@ -28,28 +28,12 @@
       "upstream": "volcengine/OpenViking",
       "reviewedCommit": "e7ab26ab24a1b113eff6ba8290bf08109f9e7c2e",
       "reviewedDate": "2026-08-24",
-      "license": "AGPL-3.0-only",
       "umsAdapter": "adapters/OPENVIKING.md",
       "defaultState": "approved-opt-in",
       "productionWebsiteDependency": false,
-      "allowedPlacement": [
-        "derived-context-index",
-        "subordinate-agent-memory",
-        "operator-or-background-workflow"
-      ],
-      "forbiddenPlacement": [
-        "canonical-products-services-pricing-quotations-leads-crm",
-        "direct-website-database-writes",
-        "public-chatbot-hard-dependency"
-      ],
-      "policy": {
-        "projectIsolationRequired": true,
-        "provenanceRequired": true,
-        "customerPiiBulkIngestionDefault": false,
-        "localModelAutoEnable": false,
-        "noSilentPaidFallback": true,
-        "fallback": "canonical Website knowledge/source files plus normal UMS Context/Memory and Knowledge/RAG routes"
-      }
+      "allowedPlacement": ["derived-context-index","subordinate-agent-memory","operator-or-background-workflow"],
+      "forbiddenPlacement": ["canonical-products-services-pricing-quotations-leads-crm","direct-website-database-writes","public-chatbot-hard-dependency"],
+      "policy": {"projectIsolationRequired":true,"provenanceRequired":true,"customerPiiBulkIngestionDefault":false,"localModelAutoEnable":false,"noSilentPaidFallback":true,"fallback":"canonical Website knowledge/source files plus normal UMS Context/Memory and Knowledge/RAG routes"}
     },
     {
       "id": "needle",
@@ -57,30 +41,12 @@
       "upstream": "cactus-compute/needle",
       "reviewedCommit": "7bd8a635ebb977489703b3bb916c21412e8a9cdf",
       "reviewedDate": "2026-08-23",
-      "license": "Apache-2.0",
       "umsAdapter": "adapters/NEEDLE.md",
       "defaultState": "registered-disabled",
       "productionWebsiteDependency": false,
-      "allowedPlacement": [
-        "future-bounded-device-edge-operator-pilot",
-        "structured-extraction-pilot",
-        "route-only-tool-call-pilot"
-      ],
-      "forbiddenPlacement": [
-        "coding-agent-free-model-fallback",
-        "automatic-consequential-tool-execution",
-        "public-chatbot-hard-dependency"
-      ],
-      "policy": {
-        "routeOnlyDefault": true,
-        "confidenceIsNotAuthorization": true,
-        "permissionGateBeforeConsequentialExecution": true,
-        "domainValidationRequired": true,
-        "fineTuneByDefault": false,
-        "paidSyntheticDataByDefault": false,
-        "noSilentPaidFallback": true,
-        "fallback": "normal project-approved UMS AI-03/model-provider route"
-      }
+      "allowedPlacement": ["future-bounded-device-edge-operator-pilot","structured-extraction-pilot","route-only-tool-call-pilot"],
+      "forbiddenPlacement": ["coding-agent-free-model-fallback","automatic-consequential-tool-execution","public-chatbot-hard-dependency"],
+      "policy": {"routeOnlyDefault":true,"confidenceIsNotAuthorization":true,"permissionGateBeforeConsequentialExecution":true,"domainValidationRequired":true,"fineTuneByDefault":false,"paidSyntheticDataByDefault":false,"noSilentPaidFallback":true,"fallback":"normal project-approved UMS AI-03/model-provider route"}
     },
     {
       "id": "ip-as-logo-skill",
@@ -88,28 +54,13 @@
       "upstream": "s1dashu/ip-as-logo-skill",
       "reviewedCommit": "acb834c717bcd0a487c49732d08397ba280d690b",
       "reviewedDate": "2026-08-22",
-      "license": "MIT",
       "umsAdapter": "18-media-image-video/ip-as-logo/README.md",
       "entrySkill": "MV-02:image-generation",
       "defaultState": "enabled-on-demand",
       "productionWebsiteDependency": false,
-      "allowedPlacement": [
-        "candidate-mascot-ip-generation",
-        "creative-brand-exploration"
-      ],
-      "forbiddenPlacement": [
-        "automatic-dhp-logo-replacement",
-        "automatic-design-token-replacement",
-        "automatic-publishing"
-      ],
-      "policy": {
-        "projectBrandAuthorityWins": true,
-        "userRequestedOutputCountWins": true,
-        "candidateAssetsRequireAcceptance": true,
-        "paidImageProviderAutoEnable": false,
-        "noSilentPaidFallback": true,
-        "fallback": "normal DHP/UMS image-generation workflow or report provider capability gap"
-      }
+      "allowedPlacement": ["candidate-mascot-ip-generation","creative-brand-exploration"],
+      "forbiddenPlacement": ["automatic-dhp-logo-replacement","automatic-design-token-replacement","automatic-publishing"],
+      "policy": {"projectBrandAuthorityWins":true,"userRequestedOutputCountWins":true,"candidateAssetsRequireAcceptance":true,"paidImageProviderAutoEnable":false,"noSilentPaidFallback":true,"fallback":"normal DHP/UMS image-generation workflow or report provider capability gap"}
     },
     {
       "id": "deepseek-dsh-anchored-standard",
@@ -121,23 +72,9 @@
       "umsAdapter": "adapters/DEEPSEEK_DSH_ANCHORED.md",
       "defaultState": "conditional-disabled",
       "productionWebsiteDependency": false,
-      "allowedPlacement": [
-        "compatible-deepseek-harness-development-session"
-      ],
-      "forbiddenPlacement": [
-        "public-ai-consultant-runtime",
-        "global-ums-reasoning-policy",
-        "provider-cost-policy-bypass"
-      ],
-      "policy": {
-        "requiresCompatibleDeepSeekHarness": true,
-        "providerSelectedBeforePreset": true,
-        "freeModelRouterStillAuthoritative": true,
-        "mandatoryProjectAndUmsAuthorityMustRemainResident": true,
-        "benchmarkClaimsAreNotAcceptanceEvidence": true,
-        "noSilentPaidFallback": true,
-        "fallback": "standard project-approved coding-agent harness"
-      }
+      "allowedPlacement": ["compatible-deepseek-harness-development-session"],
+      "forbiddenPlacement": ["public-ai-consultant-runtime","global-ums-reasoning-policy","provider-cost-policy-bypass"],
+      "policy": {"requiresCompatibleDeepSeekHarness":true,"providerSelectedBeforePreset":true,"freeModelRouterStillAuthoritative":true,"mandatoryProjectAndUmsAuthorityMustRemainResident":true,"benchmarkClaimsAreNotAcceptanceEvidence":true,"noSilentPaidFallback":true,"fallback":"standard project-approved coding-agent harness"}
     },
     {
       "id": "aitoearn",
@@ -149,28 +86,26 @@
       "umsAdapter": "adapters/AITO_EARN.md",
       "defaultState": "approved-opt-in",
       "productionWebsiteDependency": false,
-      "allowedPlacement": [
-        "social-publishing-bot-runtime",
-        "publishing-scheduling-and-status",
-        "social-analytics-collection",
-        "approved-social-engagement-ingestion"
-      ],
-      "forbiddenPlacement": [
-        "canonical-website-business-records",
-        "direct-website-database-access",
-        "public-chatbot-hard-dependency",
-        "unapproved-autonomous-engagement",
-        "silent-paid-relay-or-ai-fallback"
-      ],
-      "policy": {
-        "websiteContentAndBusinessTruthRemainCanonical": true,
-        "crossServiceApiOnly": true,
-        "idempotencyAndReconciliationRequired": true,
-        "autonomousEngagementDefault": false,
-        "providerCredentialsRemainInPublishingRuntime": true,
-        "noSilentPaidFallback": true,
-        "fallback": "existing Publishing Bot/manual publish-ready handoff without changing Website business state"
-      }
+      "allowedPlacement": ["social-publishing-bot-runtime","publishing-scheduling-and-status","social-analytics-collection","approved-social-engagement-ingestion"],
+      "forbiddenPlacement": ["canonical-website-business-records","direct-website-database-access","public-chatbot-hard-dependency","unapproved-autonomous-engagement","silent-paid-relay-or-ai-fallback"],
+      "policy": {"websiteContentAndBusinessTruthRemainCanonical":true,"crossServiceApiOnly":true,"idempotencyAndReconciliationRequired":true,"autonomousEngagementDefault":false,"providerCredentialsRemainInPublishingRuntime":true,"noSilentPaidFallback":true,"fallback":"existing Publishing Bot/manual publish-ready handoff without changing Website business state"}
+    },
+    {
+      "id": "agnes-ai",
+      "type": "provider-gateway-runtime",
+      "upstream": "AgnesAI-Labs/skills",
+      "reviewedCommit": "0723eb7fb8f8c9847d428bf76256d50ca68a10a5",
+      "reviewedDate": "2026-08-28",
+      "license": "verify-upstream-at-activation",
+      "umsAdapter": "adapters/AGNES.md",
+      "defaultState": "approved-opt-in",
+      "productionWebsiteDependency": false,
+      "allowedPlacement": ["provider-routing-pilot","coding-reasoning-vision-tasks","approved-image-generation","approved-video-generation","optional-agent-workspace-integration"],
+      "forbiddenPlacement": ["public-chatbot-hard-dependency","canonical-business-data-store","direct-website-database-access","automatic-paid-fallback","quota-or-auth-bypass"],
+      "models": {"textVision":"agnes-2.5-flash","image":"agnes-image-2.1-flash","video":"agnes-video-v2.0"},
+      "endpoints": {"internationalPrimary":"https://apihub.agnes-ai.com/v1","internationalAlternate":"https://apihub.agnes-ai.cn/v1","china":"https://api.agnes-ai.cn/v1"},
+      "secrets": {"apiKeyEnv":"AGNES_API_KEY","baseUrlEnv":"AGNES_BASE_URL"},
+      "policy": {"projectSourceOfTruthWins":true,"explicitEnableRequired":true,"serverSideSecretOnly":true,"networkAlternateRouteOnlyOnConnectivityFailure":true,"doNotRotateEndpointForRequestOrAuthErrors":true,"noQuotaOrAuthBypass":true,"noSilentPaidFallback":true,"productionDependencyDefault":false,"fallback":"existing project-approved UMS/model-provider route"}
     }
   ],
   "activationRule": "Read current project authority -> route canonical UMS skills -> select optional integration only when it materially helps -> discover actual runtime capability/version -> enforce DHP cost/security/permission rules -> execute through owning DHP domain/API boundary -> run normal verification.",
