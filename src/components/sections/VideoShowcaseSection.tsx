@@ -1,47 +1,28 @@
 import { ArrowRight, Clapperboard } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
+import { ScrollScrubMedia } from "@/components/video/ScrollScrubMedia";
 import { VideoCard } from "@/components/video/VideoCard";
+import { PROJECT_VIDEO_STAGES } from "@/data/project-video-stages";
 import { getPublishedVideoShowcaseItems } from "@/data/video-showcase";
 
-function EmptyVideoShowcase() {
+function PendingVideoNotice() {
   return (
-    <div className="mt-[var(--space-5)] grid overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] lg:grid-cols-[0.9fr_1.1fr]">
-      <div className="flex flex-col justify-center p-[var(--space-5)] sm:p-[var(--space-6)]">
-        <span className="flex size-11 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
+    <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-3)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-[var(--space-4)] sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-start gap-[var(--space-3)]">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
           <Clapperboard className="size-5" aria-hidden="true" />
         </span>
-        <h3 className="mt-[var(--space-4)] text-lg font-black text-[var(--color-text)]">
-          Video thực tế sẽ được bổ sung theo từng công trình
-        </h3>
-        <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)]">
-          Chỉ nội dung đã được phép chia sẻ mới xuất hiện tại đây. Trong lúc cập nhật, bạn có thể xem thư viện công trình đã hoàn thiện.
+        <p className="text-sm leading-6 text-[var(--color-text-muted)]">
+          Video thực tế sẽ được bổ sung theo từng công trình. Hình bên dưới là tư liệu đã xác minh cho quy trình khảo sát, gia công và hoàn thiện.
         </p>
-        <Link
-          href="/gallery"
-          className="mt-[var(--space-4)] inline-flex min-h-11 w-fit items-center gap-2 rounded-[var(--radius-md)] text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
-        >
-          Xem công trình <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
       </div>
-      <div className="relative min-h-56 sm:min-h-72 lg:min-h-full">
-        <Image
-          src="/images/factory/factory01.webp"
-          alt="Xưởng và quá trình chuẩn bị thi công Đại Hải Phát"
-          fill
-          sizes="(max-width: 1023px) 100vw, 55vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,47,49,0.22),transparent_65%)]" aria-hidden="true" />
-        <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-          {["Khảo sát", "Gia công", "Hoàn thiện"].map((label) => (
-            <span key={label} className="rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-[var(--color-text)] shadow-[var(--shadow-sm)] backdrop-blur-sm">
-              {label}
-            </span>
-          ))}
-        </div>
-      </div>
+      <Link
+        href="/gallery"
+        className="inline-flex min-h-11 w-fit shrink-0 items-center gap-2 rounded-[var(--radius-md)] text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+      >
+        Xem công trình <ArrowRight className="size-4" aria-hidden="true" />
+      </Link>
     </div>
   );
 }
@@ -67,9 +48,17 @@ export function VideoShowcaseSection() {
             {videos.map((video) => <VideoCard key={video.id} video={video} />)}
           </div>
         ) : (
-          <EmptyVideoShowcase />
+          <PendingVideoNotice />
         )}
       </div>
+
+      {videos.length === 0 ? (
+        <ScrollScrubMedia
+          stages={PROJECT_VIDEO_STAGES}
+          ariaLabel="Quy trình khảo sát, gia công và hoàn thiện của Đại Hải Phát"
+          className="mt-[var(--space-6)]"
+        />
+      ) : null}
     </section>
   );
 }

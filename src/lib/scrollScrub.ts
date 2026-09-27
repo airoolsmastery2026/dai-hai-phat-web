@@ -1,6 +1,8 @@
 export type ScrollScrubStage = {
   time: number;
   label: string;
+  image?: string;
+  alt?: string;
 };
 
 export type ScrollScrubState = {
@@ -48,7 +50,21 @@ export function normalizeStages(
         typeof stage.label === "string" &&
         stage.label.trim().length > 0,
     )
-    .map((stage) => ({ time: stage.time, label: stage.label.trim() }))
+    .map((stage) => {
+      const normalized: ScrollScrubStage = {
+        time: stage.time,
+        label: stage.label.trim(),
+      };
+
+      if (typeof stage.image === "string" && stage.image.trim()) {
+        normalized.image = stage.image.trim();
+      }
+      if (typeof stage.alt === "string" && stage.alt.trim()) {
+        normalized.alt = stage.alt.trim();
+      }
+
+      return normalized;
+    })
     .sort((a, b) => a.time - b.time);
 }
 

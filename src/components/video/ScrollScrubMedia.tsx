@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import {
@@ -12,8 +13,8 @@ import {
 } from "@/lib/scrollScrub";
 
 type ScrollScrubMediaProps = {
-  src: string;
   stages: readonly ScrollScrubStage[];
+  src?: string;
   poster?: string;
   captionsSrc?: string;
   ariaLabel?: string;
@@ -23,10 +24,11 @@ type ScrollScrubMediaProps = {
 
 const MIN_SEEK_DELTA_SECONDS = 0.04;
 const MIN_PROGRESS_DELTA = 0.002;
+const MEDIA_SIZES = "(max-width: 1023px) 100vw, 55vw";
 
 export function ScrollScrubMedia({
-  src,
   stages,
+  src,
   poster,
   captionsSrc,
   ariaLabel = "Video quy trình công trình",
@@ -40,7 +42,8 @@ export function ScrollScrubMedia({
   const unlockedRef = useRef(false);
 
   const normalizedStages = useMemo(() => normalizeStages(stages), [stages]);
-  const scrubState = resolveScrubState(0, normalizedStages);
+  const hasVideo = typeof src === "string" && src.length > 0;
+  const hasImages = normalizedStages.some((stage) => Boolean(stage.image));
 
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -76,7 +79,7 @@ export function ScrollScrubMedia({
       const playAttempt = media.play();
       if (playAttempt && typeof playAttempt.then === "function") {
         playAttempt.then(() => media.pause()).catch(() => {
-          // The gesture may still be rejected; scroll scrubbing degrades to the poster.
+          // The gesture may still be rejected; scrubbing degrades to the poster.
         });
       }
     };
@@ -127,7 +130,7 @@ export function ScrollScrubMedia({
 
   useEffect(() => {
     const media = videoRef.current;
-    if (!media) return;
+    if (!media || !hasVideo) return;
 
     const target = reducedMotion ? (normalizedStages[0]?.time ?? 0) : state.mediaTime;
     const knownDuration =
@@ -142,7 +145,7 @@ export function ScrollScrubMedia({
     } catch {
       // Seeking before metadata is ready can throw; the next scroll pass retries.
     }
-  }, [normalizedStages, reducedMotion, state.mediaTime]);
+  }, [hasVideo, normalizedStages, reducedMotion, state.mediaTime]);
 
   const handleLoadedMetadata = useCallback(() => {
     const media = videoRef.current;
@@ -151,7 +154,7 @@ export function ScrollScrubMedia({
     lastSeekRef.current = -1;
   }, []);
 
-  if (scrubState.activeIndex === -1) return null;
+  if (state.activeIndex === -1 || (!hasVideo && !hasImages)) return null;
 
   return (
     <div
@@ -165,29 +168,48 @@ export function ScrollScrubMedia({
         <div className="mx-auto w-full max-w-[var(--container-max)] px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
           <div className="grid items-center gap-[var(--space-4)] lg:grid-cols-[1.1fr_0.9fr] lg:gap-[var(--space-8)]">
             <div className="relative aspect-video overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface-dark)] shadow-[var(--shadow-md)]">
-              <video
-                ref={videoRef}
-                className="h-full w-full object-cover"
-                src={src}
-                poster={poster}
-                muted
-                playsInline
-                preload="metadata"
-                onLoadedMetadata={handleLoadedMetadata}
-                tabIndex={-1}
-                aria-hidden="true"
-              >
-                {captionsSrc ? (
-                  <track kind="captions" src={captionsSrc} srcLang="vi" label="Tiếng Việt" default />
-                ) : null}
-                Trình duyệt của bạn chưa hỗ trợ phát video này.
-              </video>
+              {hasVideo ? (
+                <video
+                  ref={videoRef}
+                  className="h-full w-full object-cover"
+                  src={src}
+                  poster={poster}
+                  muted
+                  playsInline
+                  preload="metadata"
+                  onLoadedMetadata={handleLoadedMetadata}
+                  tabIndex={-1}
+                  aria-hidden="true"
+                >
+                  {captionsSrc ? (
+                    <track kind="captions" src={captionsSrc} srcLang="vi" label="Tiếng Việt" default />
+                  ) : null}
+                  Trình duyệt của bạn chưa hỗ trợ phát video này.
+                </video>
+              ) : (
+                normalizedStages.map((stage, index) =>
+                  stage.image ? (
+                    <Image
+                      key={`${index}-${stage.image}`}
+                      src={stage.image}
+                      alt={index === state.activeIndex ? (stage.alt ?? "") : ""}
+                      fill
+                      sizes={MEDIA_SIZES}
+                      className={`object-cover transition-opacity duration-[var(--duration-medium)] ease-[var(--ease-standard)] motion-reduce:transition-none ${
+                        index === state.activeIndex ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  ) : null,
+                )
+              )}
               <div
                 className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(12,47,49,0.35)_0%,transparent_45%,rgba(12,47,49,0.55)_100%)]"
                 aria-hidden="true"
               />
               <span className="pointer-events-none absolute left-[var(--space-3)] top-[var(--space-3)] rounded-[var(--radius-sm)] bg-[var(--color-surface-dark)] px-[var(--space-3)] py-[var(--space-1)] text-xs font-bold tabular-nums text-[var(--color-text-dark-muted)]">
-                {formatTimecode(state.mediaTime)} / {formatTimecode(duration)}
+                {hasVideo
+                  ? `${formatTimecode(state.mediaTime)} / ${formatTimecode(duration)}`
+                  : `${String(state.activeIndex + 1).padStart(2, "0")} / ${String(normalizedStages.length).padStart(2, "0")}`}
               </span>
               <div className="absolute inset-x-0 bottom-0 h-1 bg-white/20" aria-hidden="true">
                 <div
@@ -231,9 +253,11 @@ export function ScrollScrubMedia({
                       >
                         {stage.label}
                       </span>
-                      <span className="ml-auto text-xs font-semibold tabular-nums text-[var(--color-text-subtle)]">
-                        {formatTimecode(stage.time)}
-                      </span>
+                      {hasVideo ? (
+                        <span className="ml-auto text-xs font-semibold tabular-nums text-[var(--color-text-subtle)]">
+                          {formatTimecode(stage.time)}
+                        </span>
+                      ) : null}
                     </li>
                   );
                 })}

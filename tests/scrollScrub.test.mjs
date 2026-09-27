@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
@@ -55,6 +55,18 @@ test("normalizeStages sorts by time, trims labels and drops invalid entries", ()
   assert.deepEqual(result, [
     { time: 0, label: "Khảo sát" },
     { time: 9, label: "Hoàn thiện" },
+  ]);
+});
+
+test("normalizeStages preserves verified stage media without inventing fields", () => {
+  const result = normalizeStages([
+    { time: 0, label: "Khảo sát", image: " /images/gates/gate02.webp ", alt: " Bản vẽ kỹ thuật " },
+    { time: 4, label: "Gia công" },
+  ]);
+
+  assert.deepEqual(result, [
+    { time: 0, label: "Khảo sát", image: "/images/gates/gate02.webp", alt: "Bản vẽ kỹ thuật" },
+    { time: 4, label: "Gia công" },
   ]);
 });
 
@@ -125,8 +137,40 @@ test("scroll scrub component stays dependency-free, accessible and motion-safe",
   assert.match(component, /\bmuted\b/);
   assert.match(component, /preload="metadata"/);
   assert.match(component, /prefers-reduced-motion: reduce/);
+  assert.match(component, /from "next\/image"/);
+  assert.match(component, /opacity-100/);
+  assert.match(component, /opacity-0/);
   assert.match(component, /aria-current=/);
   assert.match(component, /role="progressbar"/);
   assert.doesNotMatch(component, /gsap|ScrollTrigger|three/i);
   assert.doesNotMatch(lib, /window\.|document\./);
+});
+
+test("project video stages are truthful verified local assets that exist on disk", async () => {
+  const data = await readFile(
+    new URL("../src/data/project-video-stages.ts", import.meta.url),
+    "utf8",
+  );
+
+  const labels = [...data.matchAll(/label:\s*"([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(labels, ["Khảo sát", "Gia công", "Hoàn thiện"]);
+
+  const images = [...data.matchAll(/image:\s*"([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(images.length, 3);
+
+  for (const image of images) {
+    assert.match(image, /^\/images\/[a-z]+\/[a-z0-9]+\.webp$/);
+    await access(new URL(`../public${image}`, import.meta.url));
+  }
+});
+
+test("homepage video section wires the scroll scrub to the verified stages", async () => {
+  const section = await readFile(
+    new URL("../src/components/sections/VideoShowcaseSection.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(section, /<ScrollScrubMedia/);
+  assert.match(section, /PROJECT_VIDEO_STAGES/);
+  assert.doesNotMatch(section, /\bAI\b/);
 });
