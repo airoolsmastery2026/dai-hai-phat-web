@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "status": "active",
+  "updatedAt": "2026-08-15",
+  "purpose": "Capability-based browser runtime routing for DHP-AIOS",
+  "defaults": {
+    "preferredRuntime": "lightpanda",
+    "fallbackRuntime": "playwright",
+    "canonicalWriteAllowed": false,
+    "paidModelAutoUse": false,
+    "blindRetry": false
+  },
+  "runtimes": {
+    "lightpanda": {
+      "enabled": true,
+      "role": "repeatable-non-visual-browser-runtime",
+      "stability": "beta",
+      "llmRequiredForReplay": false,
+      "requiresVerifiedPandaScriptForDeterministicReplay": true,
+      "ownsBusinessData": false
+    },
+    "playwright": {
+      "enabled": true,
+      "role": "visual-and-compatibility-fallback",
+      "ownsBusinessData": false
+    }
+  },
+  "routing": [
+    {
+      "when": {
+        "requiresVisual": true
+      },
+      "runtime": "playwright",
+      "reason": "Visual fidelity requires a rendering-capable browser"
+    },
+    {
+      "when": {
+        "requiresVisual": false,
+        "repeatable": true,
+        "verifiedPandaScript": true,
+        "lightpandaCompatibility": "healthy"
+      },
+      "runtime": "lightpanda",
+      "mode": "replay",
+      "llmAllowed": false,
+      "reason": "Deterministic PandaScript replay"
+    },
+    {
+      "when": {
+        "requiresVisual": false,
+        "repeatable": true,
+        "verifiedPandaScript": false
+      },
+      "runtime": "lightpanda",
+      "mode": "discovery",
+      "llmAllowed": true,
+      "constraints": [
+        "obey-free-only-provider-policy-when-active",
+        "review-before-register",
+        "verify-output-schema-before-register"
+      ]
+    },
+    {
+      "when": {
+        "lightpandaCompatibility": "failed"
+      },
+      "runtime": "playwright",
+      "reason": "Compatibility fallback"
+    }
+  ],
+  "stopConditions": [
+    "OUTPUT_SCHEMA_INVALID",
+    "AUTH_REQUIRED_UNAPPROVED",
+    "POLICY_BLOCKED",
+    "BUSINESS_VALIDATION_FAILED"
+  ],
+  "fallbackConditions": [
+    "RUNTIME_UNAVAILABLE",
+    "BROWSER_COMPATIBILITY",
+    "NAVIGATION_TIMEOUT",
+    "SOURCE_CHANGED"
+  ],
+  "approvedReadUseCases": [
+    "supplier-catalogue",
+    "public-price-watch",
+    "material-specification-extraction",
+    "public-reference-research",
+    "dynamic-knowledge-ingestion",
+    "seo-content-discovery",
+    "non-visual-browser-checks"
+  ],
+  "playwrightOnlyCapabilities": [
+    "screenshots",
+    "visual-regression",
+    "responsive-layout-verification",
+    "css-font-rendering-assertions",
+    "canvas-media-visual-verification"
+  ],
+  "dataBoundary": {
+    "browserOutputType": "candidate-observation",
+    "canonicalOwner": "website",
+    "requiredBeforeCanonicalWrite": [
+      "provenance",
+      "schema-validation",
+      "business-validation",
+      "owning-domain-api"
+    ]
+  },
+  "security": {
+    "defaultAccess": "public-read-only",
+    "allowEmbeddedSecrets": false,
+    "allowAccessControlBypass": false,
+    "allowDirectDatabaseWrites": false,
+    "allowRawCustomerPiiInLogs": false
+  },
+  "governance": {
+    "architecture": "docs/LIGHTPANDA_BROWSER_RUNTIME.md",
+    "executionSkill": ".ai/skills/lightpanda-browser/SKILL.md",
+    "contributorPolicy": "AGENTS.md",
+    "upstreamVerificationRequiredBeforeRuntimeChanges": true
+  }
+}
