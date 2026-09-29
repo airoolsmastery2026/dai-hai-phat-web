@@ -19,7 +19,8 @@
     "start:vinext": "vinext start",
     "preview:cloudflare": "npm run build:vinext && wrangler dev",
     "deploy:cloudflare": "vinext-cloudflare deploy",
-    "cf:typegen": "wrangler types"
+    "cf:typegen": "wrangler types",
+    "cloudflare:bundle-check": "wrangler deploy --outdir .wrangler-bundle --dry-run"
   },
   "dependencies": {
     "@ai-sdk/google": "4.0.44",
