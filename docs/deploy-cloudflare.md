@@ -170,3 +170,7 @@ Vercel remains the existing production platform until DNS and production cutover
 - No output: "export".
 - No Cloudflare-specific business logic in shared application modules.
 - Vercel and Cloudflare remain independently deployable until cutover.
+
+## ESM configuration note
+
+vinext requires an ESM package boundary. The repository keeps the existing Next.js CommonJS configuration semantics by using `next.config.cjs`, `postcss.config.cjs`, and `tailwind.config.cjs`; the normal `next dev` command remains the existing Next.js command.
