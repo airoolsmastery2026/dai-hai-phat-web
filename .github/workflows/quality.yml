@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   refresh-lockfile:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/chore/cloudflare-deploy'
+    if: github.event_name == 'pull_request' && github.head_ref == 'chore/cloudflare-deploy'
     name: Refresh dependency lockfile
     runs-on: ubuntu-latest
     timeout-minutes: 10
