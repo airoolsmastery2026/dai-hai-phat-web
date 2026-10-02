@@ -174,3 +174,21 @@ Vercel remains the existing production platform until DNS and production cutover
 ## ESM configuration note
 
 vinext requires an ESM package boundary. The repository keeps the existing Next.js CommonJS configuration semantics by using `next.config.cjs`, `postcss.config.cjs`, and `tailwind.config.cjs`; the normal `next dev` command remains the existing Next.js command.
+
+## Godot Web export on Cloudflare R2
+
+The Godot Web build is intentionally kept out of the Workers Static Assets collection. The exported `index.wasm` is larger than the Workers Static Assets per-file limit, so the build is stored in R2 and served by `worker/index.ts` at `/godot/gate-configurator/*`.
+
+### One-time R2 setup
+
+Create the bucket used by `wrangler.jsonc`:
+
+```bash
+npx wrangler r2 bucket create dhp-godot-gate-web
+```
+
+The bucket name is a proposed DHP-specific name; verify that it is available in the Cloudflare account before deployment.
+
+Upload the contents of the Godot Web export to the bucket root: `index.html`, `index.js`, `index.pck`, and `index.wasm`. The Worker maps the public URL path to those R2 object keys.
+
+Do not copy the export into `public/godot/gate-configurator`; `public/.assetsignore` excludes that path from Workers Static Assets.
