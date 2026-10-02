@@ -39,3 +39,8 @@ strix_runs/
 
 # TypeScript
 *.tsbuildinfo
+
+# Cloudflare Workers
+.wrangler/
+.dev.vars*
+!.dev.vars.example

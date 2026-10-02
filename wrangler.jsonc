@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dai-hai-phat-web",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "dist/client",
+    "not_found_handling": "none"
+  },
+  "r2_buckets": [
+    {
+      "binding": "DHP_GODOT_R2",
+      "bucket_name": "dhp-godot-gate-web"
+    }
+  ]
+}
