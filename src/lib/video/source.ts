@@ -6,6 +6,7 @@ const YOUTUBE_HOSTS = new Set([
   "music.youtube.com",
 ]);
 const HOSTED_VIDEO_EXTENSION = /\.(mp4|webm|mov)$/i;
+const MANUS_SHARED_FILE_PATH = /^\/share\/file\/[0-9a-f-]{36}$/i;
 
 function validYouTubeId(value: string | null | undefined): string | null {
   if (!value) return null;
@@ -70,7 +71,19 @@ export function isSafeHostedVideoUrl(sourceUrl: string): boolean {
 
   try {
     const url = new URL(value);
-    return url.protocol === "https:" && HOSTED_VIDEO_EXTENSION.test(url.pathname);
+    if (url.protocol !== "https:") return false;
+
+    // Permit only Manus's shared-file endpoint for this approved DHP media item.
+    // The share endpoint must return the video bytes (not an HTML preview page) for playback to work.
+    if (
+      url.hostname.toLowerCase() === "manus.im" &&
+      MANUS_SHARED_FILE_PATH.test(url.pathname) &&
+      url.pathname === "/share/file/06535933-c5e9-4efb-b101-e37445d05adf"
+    ) {
+      return true;
+    }
+
+    return HOSTED_VIDEO_EXTENSION.test(url.pathname);
   } catch {
     return false;
   }
