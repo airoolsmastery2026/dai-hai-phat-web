@@ -35,7 +35,7 @@ export function VideoShowcaseSection() {
       <div className="mx-auto w-full max-w-[var(--container-max)] px-[var(--space-container)] sm:px-[var(--space-container-sm)] lg:px-[var(--space-container-lg)]">
         <div className="flex flex-col gap-[var(--space-2)] sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">Video</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">Video công trình</p>
             <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold leading-tight text-[var(--color-text)]">Từ khảo sát đến hoàn thiện</h2>
             <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
               Một góc nhìn trực quan về quy trình và các hạng mục của Đại Hải Phát.
