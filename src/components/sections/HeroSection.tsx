@@ -15,8 +15,8 @@ export function HeroSection() {
             </p>
             <h1 className="mt-[var(--space-3)] max-w-[38rem] text-[length:var(--font-h1)] font-extrabold leading-[1.06] tracking-[-0.04em] text-[var(--color-text)]">
               <span className="block">Thiết kế &amp; thi công</span>
-              <span className="mt-1 block text-[var(--color-wood)]">Không gian sống đẹp,</span>
-              <span className="block text-[var(--color-wood)]">giải pháp chỉn chu.</span>
+              <span className="mt-1 block text-[var(--color-wood)]">từ nhu cầu đến</span>
+              <span className="block text-[var(--color-wood)]">hồ sơ kỹ thuật.</span>
             </h1>
             <p className="mt-[var(--space-3)] max-w-[34rem] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base sm:leading-7">
               Tư vấn, thiết kế và hoàn thiện nhà ở theo nhu cầu thực tế — từ kiến trúc, nội thất đến cửa, cổng, cầu thang, lan can và mái che.
@@ -26,13 +26,13 @@ export function HeroSection() {
                 <Bot className="h-4 w-4" aria-hidden="true" />
                 Bắt đầu tư vấn
               </Button>
-              <Button href="/gallery" variant="secondary">
-                Xem thư viện hình ảnh
+              <Button href="/ai-tu-van?ai=1#consultation" variant="secondary">
+                Chuẩn bị báo giá
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
             </div>
             <p className="mt-[var(--space-4)] text-xs font-medium text-[var(--color-text-subtle)]">
-              Tiếp nhận yêu cầu · Khảo sát hiện trạng · Kỹ sư xác nhận phương án
+              Kho dự án · Đang đối chiếu phương án · Kỹ sư xác nhận hồ sơ
             </p>
           </div>
           <div className="relative order-1 aspect-[16/10] overflow-hidden rounded-[var(--radius-xl)] bg-[var(--color-surface-muted)] lg:order-2 lg:aspect-[5/4]">
