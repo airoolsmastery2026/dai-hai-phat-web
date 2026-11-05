@@ -16,26 +16,26 @@ export function ProjectsSection() {
         <div className="flex flex-col gap-[var(--space-3)] sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary)]">
-              Công trình &amp; giải pháp
+              Thư viện tham khảo
             </p>
             <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold text-[var(--color-text)]">
-              Xem mẫu trước khi chọn phương án
+              Hình ảnh theo từng hạng mục
             </h2>
             <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
-              Một số nhóm công việc tiêu biểu để đối chiếu vật liệu và kiểu hoàn thiện.
+              Tham khảo hình ảnh và giải pháp theo nhóm công việc. Phương án thực tế được xác nhận sau khi tiếp nhận hiện trạng.
             </p>
           </div>
           <Link
             href="/gallery"
             className="inline-flex min-h-11 w-fit items-center gap-[var(--space-2)] rounded-[var(--radius-md)] px-[var(--space-3)] text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
-            Xem thư viện
+            Mở thư viện
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
-        <div className="mt-[var(--space-5)] grid grid-cols-2 gap-[var(--space-3)] lg:grid-cols-4">
-          {SERVICES.slice(0, 4).map((service) => (
+        <div className="mt-[var(--space-5)] grid grid-cols-1 gap-[var(--space-4)] sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.slice(0, 3).map((service) => (
             <Link
               key={service.slug}
               href={`/services/${getPublicRouteSlug(service.slug)}`}
