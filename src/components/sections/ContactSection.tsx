@@ -33,7 +33,7 @@ export function ContactSection() {
               <MapPin className="h-4 w-4" aria-hidden="true" /> Chỉ đường
             </a>
             <Link href="/contact" className="inline-flex items-center gap-[var(--space-2)] font-semibold text-white transition hover:text-[var(--color-primary-soft-text)]">
-              Thông tin liên hệ <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              Đầy đủ thông tin liên hệ <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
         </div>
