@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: godot-web-export-${{ github.ref }}
@@ -39,11 +39,9 @@ jobs:
         run: |
           TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
           mkdir -p "$HOME/.local/share/godot/export_templates"
-
           if [ ! -d "$TEMPLATE_DIR" ]; then
             mv "/root/.local/share/godot/export_templates/${GODOT_VERSION}.stable" "$TEMPLATE_DIR"
           fi
-
           test -d "$TEMPLATE_DIR"
 
       - name: Export Web build
@@ -57,6 +55,11 @@ jobs:
           test -s "$EXPORT_DIR/web/index.wasm"
           test -s "$EXPORT_DIR/web/index.pck"
 
+      - name: Verify export sizes
+        run: |
+          du -h build/web/*
+          test "$(stat -c%s build/web/index.wasm)" -gt 25000000
+
       - name: Upload Web artifact
         uses: actions/upload-artifact@v4
         with:
@@ -65,22 +68,6 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Publish into Next.js public assets
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          rm -rf public/godot/gate-configurator
-          mkdir -p public/godot/gate-configurator
-          cp -a build/web/. public/godot/gate-configurator/
-
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f public/godot/gate-configurator
-
-          if git diff --cached --quiet; then
-            echo "Godot Web export is already current."
-            exit 0
-          fi
-
-          git commit -m "build: refresh Godot gate Web export"
-          git push origin HEAD:main
+      # The export is deliberately not copied into public/ or committed to Git.
+      # Cloudflare Workers Assets has a per-file limit; the large WASM is served
+      # from the DHP_GODOT_R2 binding instead.

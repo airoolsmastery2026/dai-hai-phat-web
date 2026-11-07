@@ -1,0 +1,39 @@
+name: Cloudflare build verification
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.js"
+      - "vite.config.ts"
+      - "wrangler.jsonc"
+      - ".github/workflows/cloudflare-verify.yml"
+  push:
+    branches:
+      - chore/cloudflare-deploy
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx vinext check
+      - run: npm run build:vinext
+      - name: Bundle dry-run
+        run: npx wrangler deploy --outdir .wrangler-bundle --dry-run
