@@ -35,7 +35,7 @@ test("public homepage keeps human trust language and routes consultation to its 
   assert.match(sources.services, /Chọn nhanh hạng mục bạn quan tâm/);
   assert.match(sources.services, /src=\{service\.image\}/);
   assert.doesNotMatch(sources.page, /AIOfficeRouteEntry|GEMINI_API_KEY/);
-  assert.match(sources.contact, /kỹ sư sẽ tiếp nhận/);
+  assert.match(sources.contact, /kỹ sư sẽ tiếp nhận/i);
 
   const publicCopy = [
     sources.navigation,

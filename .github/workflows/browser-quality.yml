@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: dhp-browser-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   quality-and-browser:
@@ -31,12 +31,12 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci
-      - name: Run canonical DHP quality gate
-        run: npm run quality
       - name: Install Playwright and Chromium
         run: |
           npm install --no-save --no-package-lock playwright
           npx playwright install --with-deps chromium
+      - name: Run canonical DHP quality gate
+        run: npm run quality
       - name: Start production server
         env:
           PORT: 3000

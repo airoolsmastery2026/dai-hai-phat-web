@@ -14,7 +14,7 @@ export function ContactSection() {
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/75">Liên hệ</p>
               <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold leading-tight">Bắt đầu từ nhu cầu của bạn</h2>
               <p className="mt-[var(--space-2)] text-sm leading-6 text-white/80 sm:text-base">
-                Gửi ảnh hiện trạng, kích thước dự kiến và vị trí công trình để được tiếp nhận tư vấn.
+                Kỹ sư sẽ tiếp nhận thông tin khi bạn gửi ảnh hiện trạng, kích thước dự kiến và vị trí công trình.
               </p>
             </div>
             <div className="grid gap-[var(--space-2)] sm:grid-cols-2 lg:flex lg:flex-shrink-0">

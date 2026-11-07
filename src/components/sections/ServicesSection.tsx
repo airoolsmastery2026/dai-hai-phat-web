@@ -18,12 +18,12 @@ export function ServicesSection() {
       <Container>
         <div className="flex flex-col gap-[var(--space-2)] sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-wood)]">Dịch vụ</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-wood)]">Dịch vụ nổi bật</p>
             <h2 className="mt-[var(--space-2)] text-[length:var(--font-h2)] font-bold leading-tight text-[var(--color-text)]">
               Giải pháp cho ngôi nhà của bạn
             </h2>
             <p className="mt-[var(--space-2)] text-sm leading-6 text-[var(--color-text-muted)] sm:text-base">
-              Từ thiết kế, xây dựng đến nội thất và hoàn thiện.
+              Chọn nhanh hạng mục bạn quan tâm, từ thiết kế, xây dựng đến nội thất và hoàn thiện.
             </p>
           </div>
           <Link href="/services" className="inline-flex min-h-11 w-fit items-center gap-2 rounded-[var(--radius-md)] px-3 text-sm font-bold text-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]">
